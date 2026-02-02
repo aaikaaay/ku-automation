@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Automation for Engineering & Industrial | KU Automation</title>
+    <meta name="description" content="AI-powered automation solutions for engineering, oil & gas, and industrial companies. Built by engineers, for engineers.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .hero-gradient { background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #0F172A 100%); }
+        .card-hover { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .pulse-border { animation: pulse-border 2s infinite; }
+        @keyframes pulse-border { 0%, 100% { box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.5); } 50% { box-shadow: 0 0 0 8px rgba(59, 130, 246, 0); } }
+    </style>
+</head>
+<body class="bg-slate-950 text-white">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-slate-950/80 backdrop-blur-lg border-b border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-lg">KU</div>
+                <span class="font-semibold text-lg">KU Automation</span>
+            </div>
+            <a href="roi-calculator.html" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg font-medium transition-colors mr-2">
+                ROI Calculator
+            </a>
+            <a href="#contact" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 rounded-lg font-medium transition-colors">
+                Get Started →
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-screen flex items-center pt-20">
+        <div class="max-w-6xl mx-auto px-6 py-20">
+            <div class="max-w-3xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/10 border border-blue-500/30 rounded-full text-blue-400 text-sm mb-6">
+                    <span class="w-2 h-2 bg-blue-400 rounded-full animate-pulse"></span>
+                    Built by Engineers, For Engineers
+                </div>
+                
+                <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                    AI Automation for <span class="gradient-text">Engineering & Industrial</span> Companies
+                </h1>
+                
+                <p class="text-xl text-slate-300 mb-8 leading-relaxed">
+                    Cut document processing time by 80%. Automate repetitive engineering tasks. 
+                    Get AI that actually understands your industry — built by someone with 
+                    <strong class="text-white">21 years in oil & gas engineering</strong>.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                    <a href="#contact" class="px-8 py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-semibold text-lg transition-colors text-center pulse-border">
+                        Book a Free Strategy Call
+                    </a>
+                    <a href="#services" class="px-8 py-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-xl font-semibold text-lg transition-colors text-center">
+                        See Services
+                    </a>
+                </div>
+
+                <!-- Trust Badges -->
+                <div class="flex flex-wrap gap-6 items-center text-sm text-slate-400">
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        CEng, MIMechE
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        DNO, TechnipFMC, Wood Group
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                        21+ Years Experience
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 bg-slate-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">The Engineering Industry's AI Problem</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Most AI solutions are built by tech companies who don't understand engineering. The result? Tools that don't fit your workflows.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="p-6 bg-slate-800/50 rounded-2xl border border-slate-700">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Hours Lost to Documents</h3>
+                    <p class="text-slate-400">Engineers spend 30-40% of their time on documentation, data entry, and report generation instead of actual engineering.</p>
+                </div>
+                
+                <div class="p-6 bg-slate-800/50 rounded-2xl border border-slate-700">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Generic AI Doesn't Get It</h3>
+                    <p class="text-slate-400">ChatGPT doesn't know P&IDs from PDFs. Off-the-shelf AI tools weren't built for technical engineering workflows.</p>
+                </div>
+                
+                <div class="p-6 bg-slate-800/50 rounded-2xl border border-slate-700">
+                    <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    </div>
+                    <h3 class="font-semibold text-lg mb-2">Compliance Nightmares</h3>
+                    <p class="text-slate-400">HSE documentation, quality control, audits — one mistake costs thousands. Manual processes increase risk.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">AI Solutions That Actually Work</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">Custom-built automation for engineering and industrial workflows. No generic templates — everything tailored to your processes.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Service 1 -->
+                <div class="card-hover p-8 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700">
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Document Processing & Extraction</h3>
+                    <p class="text-slate-400 mb-4">AI that reads and extracts data from P&IDs, datasheets, specifications, and technical documents. Export to your preferred format automatically.</p>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> P&ID data extraction</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Equipment datasheet parsing</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Spec sheet comparison</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="card-hover p-8 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700">
+                    <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Technical Knowledge Chatbots</h3>
+                    <p class="text-slate-400 mb-4">Custom AI assistants trained on your technical manuals, standards, and procedures. Your team gets instant answers, 24/7.</p>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Trained on your documents</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Understands engineering context</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Secure & on-premise options</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="card-hover p-8 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700">
+                    <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Automated Report Generation</h3>
+                    <p class="text-slate-400 mb-4">Turn raw data into polished engineering reports automatically. Daily progress reports, HSE summaries, project status — all generated in minutes.</p>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Daily/weekly report automation</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> HSE compliance reports</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Custom templates</li>
+                    </ul>
+                </div>
+                
+                <!-- Service 4 -->
+                <div class="card-hover p-8 bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl border border-slate-700">
+                    <div class="w-14 h-14 bg-orange-500/20 rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Workflow Automation</h3>
+                    <p class="text-slate-400 mb-4">Connect your existing tools with AI. Automate approval workflows, data transfers, notifications, and cross-system updates.</p>
+                    <ul class="space-y-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> ERP/project tool integration</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Approval workflow automation</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Email/notification triggers</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About/Credibility Section -->
+    <section class="py-20 bg-slate-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Built by an Engineer Who's Been in the Trenches</h2>
+                    <p class="text-slate-300 text-lg mb-6">
+                        I'm Kingsley Uzowulu — CEng, MIMechE, with 21+ years leading engineering teams at 
+                        <strong class="text-white">DNO AS, TechnipFMC, Wood Group</strong>, and other major operators.
+                    </p>
+                    <p class="text-slate-400 mb-6">
+                        I've managed piping, civils, and structural teams. I've dealt with the same document chaos, 
+                        the same manual processes, the same compliance headaches you're dealing with now.
+                    </p>
+                    <p class="text-slate-400 mb-8">
+                        Now I'm combining that experience with cutting-edge AI to build automation that actually fits 
+                        how engineering teams work. No tech-bro nonsense — just practical solutions that save time and money.
+                    </p>
+                    
+                    <div class="grid grid-cols-3 gap-6 text-center">
+                        <div>
+                            <div class="text-3xl font-bold gradient-text">21+</div>
+                            <div class="text-sm text-slate-400">Years Engineering</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold gradient-text">CEng</div>
+                            <div class="text-sm text-slate-400">Chartered Engineer</div>
+                        </div>
+                        <div>
+                            <div class="text-3xl font-bold gradient-text">MIMechE</div>
+                            <div class="text-sm text-slate-400">Institution Member</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-slate-700">
+                    <h3 class="font-bold text-xl mb-6">Companies I've Worked With</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-4 p-3 bg-slate-800/50 rounded-lg">
+                            <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center font-bold">D</div>
+                            <div>
+                                <div class="font-medium">DNO AS</div>
+                                <div class="text-sm text-slate-400">Engineering Manager</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-3 bg-slate-800/50 rounded-lg">
+                            <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center font-bold">T</div>
+                            <div>
+                                <div class="font-medium">TechnipFMC</div>
+                                <div class="text-sm text-slate-400">Lead Engineer</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4 p-3 bg-slate-800/50 rounded-lg">
+                            <div class="w-10 h-10 bg-slate-700 rounded-lg flex items-center justify-center font-bold">W</div>
+                            <div>
+                                <div class="font-medium">Wood Group</div>
+                                <div class="text-sm text-slate-400">Senior Engineer</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="py-20 bg-slate-900">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">No hidden fees. No long-term contracts. Just results.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Starter -->
+                <div class="bg-slate-800/50 rounded-2xl border border-slate-700 p-8">
+                    <div class="text-sm text-slate-400 mb-2">STARTER</div>
+                    <div class="text-4xl font-bold mb-2">$2,500</div>
+                    <div class="text-slate-500 text-sm mb-6">one-time</div>
+                    <p class="text-slate-400 mb-6">Perfect for testing AI with a single use case</p>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> 1 custom AI automation</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> Up to 50 documents trained</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> 2 revision rounds</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> 30-day support</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 text-center border border-slate-600 rounded-xl hover:bg-slate-700 transition-colors">Get Started</a>
+                </div>
+                
+                <!-- Professional (Featured) -->
+                <div class="bg-gradient-to-b from-blue-600/20 to-slate-800/50 rounded-2xl border-2 border-blue-500/50 p-8 relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-blue-600 rounded-full text-xs font-medium">MOST POPULAR</div>
+                    <div class="text-sm text-blue-400 mb-2">PROFESSIONAL</div>
+                    <div class="text-4xl font-bold mb-2">$5,000</div>
+                    <div class="text-slate-500 text-sm mb-6">one-time</div>
+                    <p class="text-slate-400 mb-6">Complete workflow automation for your team</p>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> 2-3 connected automations</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> Technical knowledge chatbot</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> Up to 200 documents trained</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> 1 tool integration</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> 60-day support</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 text-center bg-blue-600 hover:bg-blue-500 rounded-xl transition-colors font-medium">Get Started</a>
+                </div>
+                
+                <!-- Enterprise -->
+                <div class="bg-slate-800/50 rounded-2xl border border-slate-700 p-8">
+                    <div class="text-sm text-slate-400 mb-2">ENTERPRISE</div>
+                    <div class="text-4xl font-bold mb-2">Custom</div>
+                    <div class="text-slate-500 text-sm mb-6">let's talk</div>
+                    <p class="text-slate-400 mb-6">Full department transformation</p>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> Full workflow audit</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> Unlimited automations</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> On-premise deployment</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> ERP integrations</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400 mt-0.5">✓</span> Dedicated support</li>
+                    </ul>
+                    <a href="#contact" class="block w-full py-3 text-center border border-slate-600 rounded-xl hover:bg-slate-700 transition-colors">Contact Us</a>
+                </div>
+            </div>
+            
+            <!-- ROI Note -->
+            <div class="mt-12 text-center">
+                <p class="text-slate-400">💡 Most clients see payback within 30-60 days. <a href="roi-calculator.html" class="text-blue-400 hover:text-blue-300 underline">Calculate your ROI →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Social Proof / Results Section -->
+    <section class="py-20">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Built on Real Engineering Experience</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">These aren't theoretical projections — they're based on 21 years solving real engineering problems.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Stat 1 -->
+                <div class="text-center p-8 bg-slate-800/30 rounded-2xl border border-slate-700">
+                    <div class="text-5xl font-bold gradient-text mb-2">70%</div>
+                    <div class="text-lg font-medium mb-2">Average Time Saved</div>
+                    <p class="text-slate-400 text-sm">On document processing and data extraction tasks</p>
+                </div>
+                
+                <!-- Stat 2 -->
+                <div class="text-center p-8 bg-slate-800/30 rounded-2xl border border-slate-700">
+                    <div class="text-5xl font-bold gradient-text mb-2">&lt;4wk</div>
+                    <div class="text-lg font-medium mb-2">Typical Payback</div>
+                    <p class="text-slate-400 text-sm">Most implementations pay for themselves in under a month</p>
+                </div>
+                
+                <!-- Stat 3 -->
+                <div class="text-center p-8 bg-slate-800/30 rounded-2xl border border-slate-700">
+                    <div class="text-5xl font-bold gradient-text mb-2">21+</div>
+                    <div class="text-lg font-medium mb-2">Years Engineering</div>
+                    <p class="text-slate-400 text-sm">Real industry experience building practical solutions</p>
+                </div>
+            </div>
+            
+            <!-- Industry Quote -->
+            <div class="mt-12 max-w-3xl mx-auto">
+                <blockquote class="bg-slate-800/30 rounded-2xl border border-slate-700 p-8">
+                    <p class="text-lg italic text-slate-300 mb-4">"Engineering teams spend up to 40% of their time on documentation and administrative tasks. AI automation can reclaim the majority of this time for actual engineering work."</p>
+                    <footer class="text-slate-500">— McKinsey & Company, Engineering Productivity Report</footer>
+                </blockquote>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA / Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Automate Your Engineering Workflows?</h2>
+            <p class="text-slate-400 text-lg mb-8">
+                Book a free 30-minute strategy call. We'll discuss your current processes, 
+                identify the biggest time-wasters, and show you exactly how AI can help.
+            </p>
+            
+            <!-- Contact Form -->
+            <form id="contactForm" class="bg-slate-800/50 rounded-2xl p-8 border border-slate-700 text-left">
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Your Name</label>
+                        <input type="text" name="name" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="John Smith">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-2">Company</label>
+                        <input type="text" name="company" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="Your Company">
+                    </div>
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2">Email</label>
+                    <input type="email" name="email" required class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:border-blue-500 focus:outline-none transition-colors" placeholder="john@company.com">
+                </div>
+                
+                <div class="mb-6">
+                    <label class="block text-sm font-medium mb-2">What's your biggest workflow challenge?</label>
+                    <textarea name="challenge" rows="3" class="w-full px-4 py-3 bg-slate-900 border border-slate-700 rounded-xl focus:border-blue-500 focus:outline-none transition-colors resize-none" placeholder="Tell us about the manual processes eating up your team's time..."></textarea>
+                </div>
+                
+                <button type="submit" class="w-full py-4 bg-blue-600 hover:bg-blue-500 rounded-xl font-semibold text-lg transition-colors">
+                    Book Free Strategy Call →
+                </button>
+                
+                <p class="text-center text-sm text-slate-500 mt-4">No commitment. No sales pressure. Just a conversation.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center font-bold text-sm">KU</div>
+                <span class="font-medium">KU Automation</span>
+            </div>
+            <p class="text-slate-500 text-sm">© 2026 KU Automation. Built with engineering precision.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            const data = Object.fromEntries(formData);
+            
+            // For now, just show confirmation
+            // Later: connect to email service or CRM
+            alert('Thanks! We\'ll be in touch within 24 hours to schedule your call.');
+            this.reset();
+            
+            // TODO: Send to backend/email service
+            console.log('Lead captured:', data);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU Automation - AI Solutions for Engineering Teams</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        @media print {
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .no-print { display: none; }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900 p-8 max-w-4xl mx-auto">
+    <!-- Print Button -->
+    <div class="no-print mb-4 text-center">
+        <button onclick="window.print()" class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+            📄 Save as PDF / Print
+        </button>
+    </div>
+
+    <!-- Header -->
+    <div class="flex items-center justify-between border-b-2 border-gray-200 pb-6 mb-8">
+        <div class="flex items-center gap-3">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-xl">KU</div>
+            <div>
+                <h1 class="text-2xl font-bold">KU Automation</h1>
+                <p class="text-gray-500 text-sm">AI Solutions for Engineering Teams</p>
+            </div>
+        </div>
+        <div class="text-right text-sm text-gray-500">
+            <p>Kingsley Uzowulu</p>
+            <p>CEng, MIMechE</p>
+        </div>
+    </div>
+
+    <!-- Value Prop -->
+    <div class="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
+        <h2 class="text-xl font-bold text-blue-900 mb-2">Cut Documentation Time by 70%</h2>
+        <p class="text-blue-800">Custom AI automation built specifically for engineering workflows. No generic tools — solutions designed by an engineer with 21+ years in oil & gas.</p>
+    </div>
+
+    <!-- Services Grid -->
+    <h3 class="text-lg font-bold mb-4 text-gray-700">WHAT WE BUILD</h3>
+    <div class="grid grid-cols-2 gap-4 mb-8">
+        <!-- Service 1 -->
+        <div class="border border-gray-200 rounded-xl p-5">
+            <div class="text-2xl mb-2">📄</div>
+            <h4 class="font-bold mb-2">Document Data Extraction</h4>
+            <p class="text-sm text-gray-600 mb-3">AI reads P&IDs, datasheets, and specs — extracts data into Excel/your systems automatically.</p>
+            <p class="text-xs text-gray-500"><strong>You get:</strong> Web portal for uploads + structured data exports</p>
+        </div>
+        
+        <!-- Service 2 -->
+        <div class="border border-gray-200 rounded-xl p-5">
+            <div class="text-2xl mb-2">💬</div>
+            <h4 class="font-bold mb-2">Technical Knowledge Chatbot</h4>
+            <p class="text-sm text-gray-600 mb-3">ChatGPT trained on YOUR documents. Staff ask questions, get instant accurate answers with sources.</p>
+            <p class="text-xs text-gray-500"><strong>You get:</strong> Chat interface (web, Slack, or Teams)</p>
+        </div>
+        
+        <!-- Service 3 -->
+        <div class="border border-gray-200 rounded-xl p-5">
+            <div class="text-2xl mb-2">📊</div>
+            <h4 class="font-bold mb-2">Automated Report Generation</h4>
+            <p class="text-sm text-gray-600 mb-3">Input data → AI writes report narrative → Formatted PDF/Word output. Minutes instead of hours.</p>
+            <p class="text-xs text-gray-500"><strong>You get:</strong> Input form + custom templates + auto-generation</p>
+        </div>
+        
+        <!-- Service 4 -->
+        <div class="border border-gray-200 rounded-xl p-5">
+            <div class="text-2xl mb-2">⚡</div>
+            <h4 class="font-bold mb-2">Workflow Automation</h4>
+            <p class="text-sm text-gray-600 mb-3">Connect your existing tools with AI. Automate approvals, data transfers, notifications.</p>
+            <p class="text-xs text-gray-500"><strong>You get:</strong> Automated workflows running 24/7</p>
+        </div>
+    </div>
+
+    <!-- Pricing -->
+    <h3 class="text-lg font-bold mb-4 text-gray-700">INVESTMENT</h3>
+    <div class="grid grid-cols-3 gap-4 mb-8">
+        <div class="border border-gray-200 rounded-xl p-4 text-center">
+            <div class="text-sm text-gray-500 mb-1">STARTER</div>
+            <div class="text-2xl font-bold">$2,500</div>
+            <div class="text-xs text-gray-500">1 automation • 30-day support</div>
+        </div>
+        <div class="border-2 border-blue-500 rounded-xl p-4 text-center bg-blue-50">
+            <div class="text-sm text-blue-600 mb-1">PROFESSIONAL</div>
+            <div class="text-2xl font-bold text-blue-700">$5,000</div>
+            <div class="text-xs text-blue-600">2-3 automations • 60-day support</div>
+        </div>
+        <div class="border border-gray-200 rounded-xl p-4 text-center">
+            <div class="text-sm text-gray-500 mb-1">ENTERPRISE</div>
+            <div class="text-2xl font-bold">Custom</div>
+            <div class="text-xs text-gray-500">Full transformation</div>
+        </div>
+    </div>
+
+    <!-- Process -->
+    <h3 class="text-lg font-bold mb-4 text-gray-700">HOW IT WORKS</h3>
+    <div class="flex items-center justify-between mb-8 text-sm">
+        <div class="text-center flex-1">
+            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mx-auto mb-2">1</div>
+            <p class="font-medium">Discovery Call</p>
+            <p class="text-xs text-gray-500">30 min, free</p>
+        </div>
+        <div class="text-gray-300">→</div>
+        <div class="text-center flex-1">
+            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mx-auto mb-2">2</div>
+            <p class="font-medium">Proposal</p>
+            <p class="text-xs text-gray-500">Scope + quote</p>
+        </div>
+        <div class="text-gray-300">→</div>
+        <div class="text-center flex-1">
+            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mx-auto mb-2">3</div>
+            <p class="font-medium">Build</p>
+            <p class="text-xs text-gray-500">1-4 weeks</p>
+        </div>
+        <div class="text-gray-300">→</div>
+        <div class="text-center flex-1">
+            <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center mx-auto mb-2">4</div>
+            <p class="font-medium">Deploy + Train</p>
+            <p class="text-xs text-gray-500">Go live</p>
+        </div>
+    </div>
+
+    <!-- ROI Box -->
+    <div class="bg-green-50 border border-green-200 rounded-xl p-6 mb-8">
+        <h3 class="font-bold text-green-900 mb-2">💰 Typical ROI</h3>
+        <div class="grid grid-cols-3 gap-4 text-center">
+            <div>
+                <div class="text-2xl font-bold text-green-700">70%</div>
+                <div class="text-xs text-green-600">Time saved on docs</div>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-green-700">&lt;4 wks</div>
+                <div class="text-xs text-green-600">Payback period</div>
+            </div>
+            <div>
+                <div class="text-2xl font-bold text-green-700">$6-15K</div>
+                <div class="text-xs text-green-600">Monthly savings (5-person team)</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Credibility -->
+    <div class="border-t border-gray-200 pt-6">
+        <h3 class="text-lg font-bold mb-3 text-gray-700">WHY KU AUTOMATION</h3>
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <div class="flex items-start gap-2">
+                <span class="text-green-500">✓</span>
+                <span><strong>Built by an engineer</strong> — 21 years at DNO, TechnipFMC, Wood Group</span>
+            </div>
+            <div class="flex items-start gap-2">
+                <span class="text-green-500">✓</span>
+                <span><strong>Chartered Engineer</strong> — CEng, MIMechE credentials</span>
+            </div>
+            <div class="flex items-start gap-2">
+                <span class="text-green-500">✓</span>
+                <span><strong>Industry-specific</strong> — Understands P&IDs, datasheets, HSE</span>
+            </div>
+            <div class="flex items-start gap-2">
+                <span class="text-green-500">✓</span>
+                <span><strong>No vendor lock-in</strong> — You own everything we build</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="mt-8 text-center border-t border-gray-200 pt-6">
+        <p class="text-gray-600 mb-2">Ready to automate your engineering workflows?</p>
+        <p class="font-bold text-lg">Book a free 30-minute strategy call</p>
+        <p class="text-blue-600 mt-2">📧 [your-email] • 📱 [your-phone]</p>
+    </div>
+</body>
+</html>
