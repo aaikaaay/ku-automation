@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Use Cases & Demos | KU Automation</title>
+    <meta name="description" content="See KU Automation in action. Interactive demos showing how AI transforms engineering workflows - document processing, chatbots, reports, and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-border { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .typing-cursor { animation: blink 1s infinite; }
+        @keyframes blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+        .progress-fill { transition: width 1.5s ease-out; }
+        .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .workflow-line { stroke-dasharray: 1000; stroke-dashoffset: 1000; animation: drawLine 2s ease-out forwards; }
+        @keyframes drawLine { to { stroke-dashoffset: 0; } }
+        .pulse-dot { animation: pulseDot 2s infinite; }
+        @keyframes pulseDot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.5); opacity: 0.5; } }
+        
+        /* Floating Bubbles */
+        .bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .bubble { position: absolute; border-radius: 50%; opacity: 0.3; filter: blur(1px); animation: floatBubble linear infinite; }
+        .bubble-1 { width: 60px; height: 60px; left: 8%; background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.2)); animation-duration: 28s; }
+        .bubble-2 { width: 100px; height: 100px; left: 25%; background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(139, 92, 246, 0.15)); animation-duration: 32s; animation-delay: -8s; }
+        .bubble-3 { width: 50px; height: 50px; left: 55%; background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(192, 132, 252, 0.2)); animation-duration: 24s; animation-delay: -15s; }
+        .bubble-4 { width: 80px; height: 80px; left: 75%; background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(217, 70, 239, 0.15)); animation-duration: 30s; animation-delay: -5s; }
+        .bubble-5 { width: 70px; height: 70px; left: 90%; background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(99, 102, 241, 0.2)); animation-duration: 26s; animation-delay: -12s; }
+        @keyframes floatBubble { 0% { transform: translateY(100vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.3; } 90% { opacity: 0.3; } 100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; } }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    <!-- Floating Bubbles -->
+    <div class="bubbles-container">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+        <div class="bubble bubble-5"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl gradient-border p-[2px]">
+                        <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center font-bold text-primary-600">KU</div>
+                    </div>
+                    <span class="font-semibold text-lg">KU Automation</span>
+                </a>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#services" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Services</a>
+                    <a href="use-cases.html" class="text-primary-600 font-medium">Use Cases</a>
+                    <a href="index.html#pricing" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Pricing</a>
+                    <a href="roi-calculator.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">ROI Calculator</a>
+                </div>
+                
+                <a href="index.html#contact" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                    Get Started
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-16 relative">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-medium mb-6">
+                <span class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></span>
+                Interactive Demos
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">See AI Automation <span class="gradient-text">In Action</span></h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">Explore real-world scenarios showing how our AI solutions transform engineering workflows. Click through each demo to see the magic happen.</p>
+            
+            <!-- Quick Stats -->
+            <div class="flex flex-wrap justify-center gap-8 text-sm text-gray-500">
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-primary-600">4</span> Interactive Scenarios
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-primary-600">70%</span> Average Time Saved
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-2xl font-bold text-primary-600">&lt;4wk</span> ROI Payback
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenario 1: Document Processing -->
+    <section id="document-processing" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">
+                        Scenario 1
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">P&ID Data Extraction</h2>
+                    <p class="text-gray-600 text-lg mb-6">Watch AI extract equipment data from a complex P&ID drawing in seconds — a task that typically takes engineers 2-3 hours manually.</p>
+                    
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 mb-6">
+                        <h4 class="font-semibold mb-4">The Challenge</h4>
+                        <p class="text-gray-600 text-sm mb-4">A process engineer needs to create an equipment list from a P&ID for a new offshore platform. The drawing contains 47 pieces of equipment with specifications scattered across multiple revision clouds.</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-red-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-red-600">3 hrs</div>
+                                <div class="text-sm text-gray-500">Manual Process</div>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-green-600">4 min</div>
+                                <div class="text-sm text-gray-500">With AI</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="runDocumentDemo()" id="docDemoBtn" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all hover:shadow-lg">
+                        ▶ Run Demo
+                    </button>
+                </div>
+                
+                <!-- Interactive Demo Area -->
+                <div class="bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        <span class="ml-2 text-sm text-gray-500">AI Document Processor</span>
+                    </div>
+                    
+                    <div id="docDemoArea" class="min-h-[400px] bg-gray-50 rounded-xl p-4 font-mono text-sm">
+                        <div class="text-gray-400 mb-4">// Click "Run Demo" to start extraction</div>
+                        <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
+                            <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            <p class="text-gray-500">P&ID Drawing: PLATFORM-A-PID-001-R3.pdf</p>
+                            <p class="text-xs text-gray-400 mt-2">47 equipment items • 12 revision clouds</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenario 2: Technical Chatbot -->
+    <section id="chatbot" class="py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Interactive Demo Area -->
+                <div class="order-2 lg:order-1 bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        <span class="ml-2 text-sm text-gray-500">Engineering Knowledge Bot</span>
+                    </div>
+                    
+                    <div id="chatArea" class="h-[400px] bg-gray-50 rounded-xl p-4 overflow-y-auto flex flex-col">
+                        <div class="flex-1 space-y-4" id="chatMessages">
+                            <div class="bg-primary-100 text-primary-800 rounded-2xl rounded-tl-none p-4 max-w-[80%] text-sm">
+                                👋 Hi! I'm your Engineering Knowledge Assistant. I've been trained on your company's technical manuals, ASME standards, and project specifications. Ask me anything!
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 flex gap-2">
+                            <input type="text" id="chatInput" placeholder="Ask an engineering question..." class="flex-1 px-4 py-3 bg-white border border-gray-200 rounded-xl focus:border-primary-500 focus:outline-none text-sm" onkeypress="if(event.key==='Enter')sendChatMessage()">
+                            <button onclick="sendChatMessage()" class="px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl transition-colors">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Quick Questions -->
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <button onclick="askQuestion('What is the maximum allowable stress for A106 Grade B pipe at 400°F?')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs text-gray-600 transition-colors">
+                            A106 stress limits?
+                        </button>
+                        <button onclick="askQuestion('What are the hydrostatic test requirements per ASME B31.3?')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs text-gray-600 transition-colors">
+                            Hydrotest requirements?
+                        </button>
+                        <button onclick="askQuestion('What corrosion allowance should I use for seawater service?')" class="px-3 py-1.5 bg-gray-100 hover:bg-gray-200 rounded-full text-xs text-gray-600 transition-colors">
+                            Corrosion allowance?
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 text-purple-700 rounded-full text-sm font-medium mb-4">
+                        Scenario 2
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Technical Knowledge Bot</h2>
+                    <p class="text-gray-600 text-lg mb-6">Instant answers from your company's technical standards, manuals, and project documentation. No more searching through PDFs.</p>
+                    
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 mb-6">
+                        <h4 class="font-semibold mb-4">The Challenge</h4>
+                        <p class="text-gray-600 text-sm mb-4">A junior engineer needs to verify pipe stress calculations and find the correct testing requirements for a North Sea project. Information is scattered across 200+ documents.</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-red-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-red-600">45 min</div>
+                                <div class="text-sm text-gray-500">Manual Search</div>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-green-600">30 sec</div>
+                                <div class="text-sm text-gray-500">With AI Bot</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-gray-500">👆 Try asking a question in the chat!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenario 3: Report Generation -->
+    <section id="reports" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium mb-4">
+                        Scenario 3
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Automated Report Generation</h2>
+                    <p class="text-gray-600 text-lg mb-6">Transform raw project data into polished engineering reports automatically. Daily progress reports, HSE summaries, and more.</p>
+                    
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 mb-6">
+                        <h4 class="font-semibold mb-4">The Challenge</h4>
+                        <p class="text-gray-600 text-sm mb-4">The project manager needs to compile a weekly progress report from 5 different data sources: timesheets, material tracking, RFI log, NCR register, and HSE incidents.</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-red-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-red-600">4 hrs</div>
+                                <div class="text-sm text-gray-500">Manual Compilation</div>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-green-600">5 min</div>
+                                <div class="text-sm text-gray-500">With AI</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="runReportDemo()" id="reportDemoBtn" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all hover:shadow-lg">
+                        ▶ Generate Report
+                    </button>
+                </div>
+                
+                <!-- Interactive Demo Area -->
+                <div class="bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                            <span class="ml-2 text-sm text-gray-500">Report Generator</span>
+                        </div>
+                        <span id="reportStatus" class="text-xs text-gray-400">Ready</span>
+                    </div>
+                    
+                    <div id="reportDemoArea" class="min-h-[400px]">
+                        <!-- Data Sources -->
+                        <div class="grid grid-cols-5 gap-2 mb-6" id="dataSources">
+                            <div class="bg-gray-100 rounded-lg p-3 text-center" data-source="timesheet">
+                                <svg class="w-6 h-6 text-gray-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <div class="text-xs text-gray-500">Timesheets</div>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 text-center" data-source="materials">
+                                <svg class="w-6 h-6 text-gray-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
+                                <div class="text-xs text-gray-500">Materials</div>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 text-center" data-source="rfi">
+                                <svg class="w-6 h-6 text-gray-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                <div class="text-xs text-gray-500">RFI Log</div>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 text-center" data-source="ncr">
+                                <svg class="w-6 h-6 text-gray-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                <div class="text-xs text-gray-500">NCR</div>
+                            </div>
+                            <div class="bg-gray-100 rounded-lg p-3 text-center" data-source="hse">
+                                <svg class="w-6 h-6 text-gray-400 mx-auto mb-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                                <div class="text-xs text-gray-500">HSE</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Report Preview -->
+                        <div id="reportPreview" class="bg-gray-50 rounded-xl p-6 border-2 border-dashed border-gray-200 text-center min-h-[280px] flex items-center justify-center">
+                            <div class="text-gray-400">
+                                <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                <p>Click "Generate Report" to see the magic</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scenario 4: Workflow Automation -->
+    <section id="workflow" class="py-16">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Interactive Demo Area -->
+                <div class="order-2 lg:order-1 bg-white rounded-3xl p-6 shadow-xl border border-gray-100">
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                        <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                        <span class="ml-2 text-sm text-gray-500">Workflow Automation</span>
+                    </div>
+                    
+                    <div id="workflowArea" class="min-h-[400px] bg-gray-50 rounded-xl p-6">
+                        <!-- Workflow Steps -->
+                        <div class="space-y-4">
+                            <div class="workflow-step flex items-center gap-4" data-step="1">
+                                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center" id="step1">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium text-gray-400" id="step1-title">Document Submitted</div>
+                                    <div class="text-sm text-gray-400" id="step1-desc">MOC Request #2024-0847</div>
+                                </div>
+                                <div class="text-xs text-gray-400" id="step1-time">—</div>
+                            </div>
+                            
+                            <div class="h-8 border-l-2 border-dashed border-gray-200 ml-6" id="line1"></div>
+                            
+                            <div class="workflow-step flex items-center gap-4" data-step="2">
+                                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center" id="step2">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium text-gray-400" id="step2-title">AI Classification</div>
+                                    <div class="text-sm text-gray-400" id="step2-desc">Auto-route to reviewers</div>
+                                </div>
+                                <div class="text-xs text-gray-400" id="step2-time">—</div>
+                            </div>
+                            
+                            <div class="h-8 border-l-2 border-dashed border-gray-200 ml-6" id="line2"></div>
+                            
+                            <div class="workflow-step flex items-center gap-4" data-step="3">
+                                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center" id="step3">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium text-gray-400" id="step3-title">Parallel Review</div>
+                                    <div class="text-sm text-gray-400" id="step3-desc">Engineering + HSE + Ops</div>
+                                </div>
+                                <div class="text-xs text-gray-400" id="step3-time">—</div>
+                            </div>
+                            
+                            <div class="h-8 border-l-2 border-dashed border-gray-200 ml-6" id="line3"></div>
+                            
+                            <div class="workflow-step flex items-center gap-4" data-step="4">
+                                <div class="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center" id="step4">
+                                    <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div class="flex-1">
+                                    <div class="font-medium text-gray-400" id="step4-title">Final Approval</div>
+                                    <div class="text-sm text-gray-400" id="step4-desc">Auto-notify stakeholders</div>
+                                </div>
+                                <div class="text-xs text-gray-400" id="step4-time">—</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button onclick="runWorkflowDemo()" id="workflowDemoBtn" class="mt-4 w-full px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-medium transition-all hover:shadow-lg">
+                        ▶ Simulate Approval Flow
+                    </button>
+                </div>
+                
+                <div class="order-1 lg:order-2">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-medium mb-4">
+                        Scenario 4
+                    </div>
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Smart Workflow Automation</h2>
+                    <p class="text-gray-600 text-lg mb-6">AI-powered document routing that automatically classifies submissions and sends them to the right reviewers. No more email chains or manual tracking.</p>
+                    
+                    <div class="bg-white rounded-2xl p-6 border border-gray-200 mb-6">
+                        <h4 class="font-semibold mb-4">The Challenge</h4>
+                        <p class="text-gray-600 text-sm mb-4">Management of Change (MOC) requests require review from multiple departments. Tracking who needs to approve what—and chasing signatures—wastes hours every week.</p>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div class="bg-red-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-red-600">5 days</div>
+                                <div class="text-sm text-gray-500">Manual Routing</div>
+                            </div>
+                            <div class="bg-green-50 rounded-xl p-4">
+                                <div class="text-2xl font-bold text-green-600">4 hrs</div>
+                                <div class="text-sm text-gray-500">With AI</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-sm text-gray-500">👆 Click to watch the automated approval flow!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-gradient-to-br from-primary-600 to-purple-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                
+                <div class="relative z-10">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to See These Results in Your Workflow?</h2>
+                    <p class="text-xl text-white/80 mb-8 max-w-xl mx-auto">Book a free strategy call to discuss how we can automate your specific processes.</p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="index.html#contact" class="px-8 py-4 bg-white text-primary-600 hover:bg-gray-100 rounded-full font-semibold transition-all">
+                            Book Free Strategy Call
+                        </a>
+                        <a href="roi-calculator.html" class="px-8 py-4 border-2 border-white/50 hover:border-white text-white rounded-full font-semibold transition-all">
+                            Calculate Your ROI
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl gradient-border p-[2px]">
+                        <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center font-bold text-primary-600">KU</div>
+                    </div>
+                    <span class="font-semibold text-lg">KU Automation</span>
+                </a>
+                
+                <div class="flex items-center gap-8 text-sm text-gray-500">
+                    <a href="index.html#services" class="hover:text-gray-900 transition-colors">Services</a>
+                    <a href="use-cases.html" class="hover:text-gray-900 transition-colors">Use Cases</a>
+                    <a href="index.html#pricing" class="hover:text-gray-900 transition-colors">Pricing</a>
+                    <a href="roi-calculator.html" class="hover:text-gray-900 transition-colors">ROI Calculator</a>
+                </div>
+                
+                <p class="text-sm text-gray-500">© 2026 KU Automation</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Document Processing Demo
+        function runDocumentDemo() {
+            const btn = document.getElementById('docDemoBtn');
+            const area = document.getElementById('docDemoArea');
+            btn.disabled = true;
+            btn.textContent = '⏳ Processing...';
+            
+            const steps = [
+                { text: '📄 Loading P&ID: PLATFORM-A-PID-001-R3.pdf...', delay: 500 },
+                { text: '🔍 Scanning document structure...', delay: 1000 },
+                { text: '🤖 AI analyzing drawing elements...', delay: 1500 },
+                { text: '📊 Extracting equipment data...', delay: 2000 },
+                { text: '', delay: 2500, html: `
+                    <div class="bg-green-50 border border-green-200 rounded-xl p-4 mb-4">
+                        <div class="flex items-center gap-2 text-green-700 font-medium mb-2">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Extraction Complete!
+                        </div>
+                        <div class="text-sm text-green-600">47 equipment items • 156 data points • 4.2 seconds</div>
+                    </div>
+                ` },
+                { text: '', delay: 3000, html: `
+                    <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                        <div class="bg-gray-50 px-4 py-2 border-b border-gray-200 font-medium text-sm">Equipment List Extract</div>
+                        <div class="p-4 text-xs space-y-2 max-h-[200px] overflow-y-auto">
+                            <div class="grid grid-cols-4 gap-2 font-medium text-gray-500 border-b pb-2">
+                                <span>Tag</span><span>Type</span><span>Size</span><span>Service</span>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2"><span>P-101A/B</span><span>Centrifugal Pump</span><span>150 kW</span><span>Crude Oil Transfer</span></div>
+                            <div class="grid grid-cols-4 gap-2"><span>V-201</span><span>Separator</span><span>Ø2.5m x 8m</span><span>3-Phase Sep</span></div>
+                            <div class="grid grid-cols-4 gap-2"><span>E-301</span><span>Heat Exchanger</span><span>500 m²</span><span>Oil Cooling</span></div>
+                            <div class="grid grid-cols-4 gap-2"><span>C-401</span><span>Compressor</span><span>2.5 MW</span><span>Gas Export</span></div>
+                            <div class="grid grid-cols-4 gap-2"><span>T-501</span><span>Storage Tank</span><span>5000 m³</span><span>Crude Storage</span></div>
+                            <div class="text-gray-400 text-center py-2">... and 42 more items</div>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex gap-2">
+                        <button class="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm hover:bg-primary-700">Export to Excel</button>
+                        <button class="px-4 py-2 bg-gray-200 text-gray-700 rounded-lg text-sm hover:bg-gray-300">Export to SAP</button>
+                    </div>
+                ` }
+            ];
+            
+            area.innerHTML = '<div class="font-mono text-sm space-y-2" id="docLog"></div>';
+            const log = document.getElementById('docLog');
+            
+            steps.forEach((step, i) => {
+                setTimeout(() => {
+                    if (step.html) {
+                        log.innerHTML += step.html;
+                    } else if (step.text) {
+                        log.innerHTML += `<div class="text-gray-600 fade-in">${step.text}</div>`;
+                    }
+                    if (i === steps.length - 1) {
+                        btn.disabled = false;
+                        btn.textContent = '▶ Run Demo Again';
+                    }
+                }, step.delay);
+            });
+        }
+
+        // Chatbot Demo
+        const chatResponses = {
+            'What is the maximum allowable stress for A106 Grade B pipe at 400°F?': `Per ASME B31.3-2022, Table A-1:
+
+**A106 Grade B at 400°F (204°C)**
+• Maximum Allowable Stress (S): **15,200 psi (104.8 MPa)**
+
+📋 Reference: ASME B31.3, Table A-1, Line 46
+
+Note: This value includes a design factor and temperature derating. For sustained loads, also verify compliance with Paragraph 302.3.5.`,
+            
+            'What are the hydrostatic test requirements per ASME B31.3?': `Per ASME B31.3-2022, Paragraph 345.4:
+
+**Hydrostatic Test Requirements:**
+• **Test Pressure**: Not less than 1.5× design pressure
+• **Duration**: Minimum 10 minutes
+• **Temperature**: Between 60°F and 120°F (or as specified)
+• **Pressure Gauge**: Calibrated, readable within 2% of test pressure
+
+⚠️ **Important**: If test pressure would exceed yield strength, reduce per Eq. 345.4.2.
+
+📋 Reference: ASME B31.3, Para 345.4`,
+            
+            'What corrosion allowance should I use for seawater service?': `**Recommended Corrosion Allowances for Seawater:**
+
+| Material | Corrosion Allowance |
+|----------|-------------------|
+| Carbon Steel | 3.0-6.0 mm (not recommended) |
+| 316L SS | 0.5-1.0 mm |
+| Duplex 2205 | 0-0.5 mm |
+| Super Duplex | 0 mm |
+| CuNi 90/10 | 0.5-1.0 mm |
+
+📋 Per your project spec PROJ-SPEC-001 Rev.3, Section 4.2.3:
+**Standard CA for seawater: 3.0 mm minimum for carbon steel (if approved)**
+
+⚠️ Recommendation: Use CuNi or Duplex for seawater service.`
+        };
+
+        function sendChatMessage() {
+            const input = document.getElementById('chatInput');
+            const messages = document.getElementById('chatMessages');
+            const question = input.value.trim();
+            
+            if (!question) return;
+            
+            // Add user message
+            messages.innerHTML += `
+                <div class="bg-gray-200 rounded-2xl rounded-tr-none p-4 max-w-[80%] ml-auto text-sm fade-in">
+                    ${question}
+                </div>
+            `;
+            input.value = '';
+            
+            // Find best response
+            let response = "I don't have specific information on that topic in my training data. However, I can search your document library for relevant standards. Would you like me to do that?";
+            
+            for (const [key, value] of Object.entries(chatResponses)) {
+                if (question.toLowerCase().includes(key.toLowerCase().split(' ').slice(0,3).join(' '))) {
+                    response = value;
+                    break;
+                }
+            }
+            
+            // Add typing indicator
+            messages.innerHTML += `
+                <div id="typing" class="bg-primary-100 text-primary-800 rounded-2xl rounded-tl-none p-4 max-w-[80%] text-sm">
+                    <span class="typing-cursor">●●●</span>
+                </div>
+            `;
+            messages.scrollTop = messages.scrollHeight;
+            
+            // Add response after delay
+            setTimeout(() => {
+                document.getElementById('typing').remove();
+                messages.innerHTML += `
+                    <div class="bg-primary-100 text-primary-800 rounded-2xl rounded-tl-none p-4 max-w-[80%] text-sm fade-in whitespace-pre-line">
+                        ${response}
+                    </div>
+                `;
+                messages.scrollTop = messages.scrollHeight;
+            }, 1500);
+        }
+
+        function askQuestion(q) {
+            document.getElementById('chatInput').value = q;
+            sendChatMessage();
+        }
+
+        // Report Generation Demo
+        function runReportDemo() {
+            const btn = document.getElementById('reportDemoBtn');
+            const status = document.getElementById('reportStatus');
+            const sources = document.querySelectorAll('[data-source]');
+            const preview = document.getElementById('reportPreview');
+            
+            btn.disabled = true;
+            btn.textContent = '⏳ Generating...';
+            
+            // Animate data sources
+            const sourceOrder = ['timesheet', 'materials', 'rfi', 'ncr', 'hse'];
+            sourceOrder.forEach((src, i) => {
+                setTimeout(() => {
+                    const el = document.querySelector(`[data-source="${src}"]`);
+                    el.classList.remove('bg-gray-100');
+                    el.classList.add('bg-primary-100', 'border-2', 'border-primary-500');
+                    el.querySelector('svg').classList.remove('text-gray-400');
+                    el.querySelector('svg').classList.add('text-primary-600');
+                    status.textContent = `Reading ${src}...`;
+                }, i * 600);
+            });
+            
+            // Show report
+            setTimeout(() => {
+                status.textContent = 'Compiling report...';
+            }, 3200);
+            
+            setTimeout(() => {
+                status.textContent = '✓ Complete';
+                preview.innerHTML = `
+                    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden text-left">
+                        <div class="bg-primary-600 text-white p-4">
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <h3 class="font-bold text-lg">Weekly Progress Report</h3>
+                                    <p class="text-primary-200 text-sm">Platform Alpha - Week 48</p>
+                                </div>
+                                <div class="text-right text-sm">
+                                    <div>Generated: Feb 3, 2026</div>
+                                    <div class="text-primary-200">Auto-generated by AI</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 text-sm space-y-4">
+                            <div>
+                                <h4 class="font-semibold text-gray-900 mb-2">📊 Executive Summary</h4>
+                                <p class="text-gray-600">Project is 78% complete, 2 days ahead of schedule. No safety incidents this week. Material delivery on track.</p>
+                            </div>
+                            <div class="grid grid-cols-4 gap-3 text-center">
+                                <div class="bg-green-50 rounded-lg p-3">
+                                    <div class="text-2xl font-bold text-green-600">78%</div>
+                                    <div class="text-xs text-gray-500">Complete</div>
+                                </div>
+                                <div class="bg-blue-50 rounded-lg p-3">
+                                    <div class="text-2xl font-bold text-blue-600">2,847</div>
+                                    <div class="text-xs text-gray-500">Man-hours</div>
+                                </div>
+                                <div class="bg-yellow-50 rounded-lg p-3">
+                                    <div class="text-2xl font-bold text-yellow-600">3</div>
+                                    <div class="text-xs text-gray-500">Open RFIs</div>
+                                </div>
+                                <div class="bg-green-50 rounded-lg p-3">
+                                    <div class="text-2xl font-bold text-green-600">0</div>
+                                    <div class="text-xs text-gray-500">HSE Incidents</div>
+                                </div>
+                            </div>
+                            <div class="flex gap-2 pt-2">
+                                <button class="px-3 py-1.5 bg-primary-600 text-white rounded-lg text-xs hover:bg-primary-700">Download PDF</button>
+                                <button class="px-3 py-1.5 bg-gray-200 text-gray-700 rounded-lg text-xs hover:bg-gray-300">Email to Stakeholders</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                btn.disabled = false;
+                btn.textContent = '▶ Generate Report Again';
+            }, 4000);
+        }
+
+        // Workflow Automation Demo
+        function runWorkflowDemo() {
+            const btn = document.getElementById('workflowDemoBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Running...';
+            
+            const steps = [
+                { step: 1, time: '09:14:23', color: 'blue' },
+                { step: 2, time: '09:14:25', color: 'purple' },
+                { step: 3, time: '09:14:27', color: 'orange' },
+                { step: 4, time: '09:14:31', color: 'green' }
+            ];
+            
+            steps.forEach((s, i) => {
+                setTimeout(() => {
+                    const stepEl = document.getElementById(`step${s.step}`);
+                    const titleEl = document.getElementById(`step${s.step}-title`);
+                    const descEl = document.getElementById(`step${s.step}-desc`);
+                    const timeEl = document.getElementById(`step${s.step}-time`);
+                    const lineEl = document.getElementById(`line${s.step}`);
+                    
+                    // Update step appearance
+                    stepEl.classList.remove('bg-gray-200');
+                    stepEl.classList.add(`bg-${s.color}-100`);
+                    stepEl.querySelector('svg').classList.remove('text-gray-400');
+                    stepEl.querySelector('svg').classList.add(`text-${s.color}-600`);
+                    
+                    titleEl.classList.remove('text-gray-400');
+                    titleEl.classList.add('text-gray-900');
+                    
+                    descEl.classList.remove('text-gray-400');
+                    descEl.classList.add('text-gray-600');
+                    
+                    timeEl.textContent = s.time;
+                    timeEl.classList.remove('text-gray-400');
+                    timeEl.classList.add(`text-${s.color}-600`);
+                    
+                    if (lineEl) {
+                        lineEl.classList.remove('border-gray-200');
+                        lineEl.classList.add(`border-${s.color}-300`);
+                    }
+                    
+                    if (i === steps.length - 1) {
+                        setTimeout(() => {
+                            btn.disabled = false;
+                            btn.textContent = '▶ Run Again';
+                        }, 500);
+                    }
+                }, (i + 1) * 1000);
+            });
+        }
+    </script>
+</body>
+</html>
