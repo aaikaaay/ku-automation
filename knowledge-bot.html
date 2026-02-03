@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Knowledge Bot | KU Automation</title>
+    <meta name="description" content="Chat with an AI trained on engineering standards. Get instant answers to technical questions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #8b5cf6, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .message-user { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+        .typing-dot { animation: typingDot 1.4s infinite ease-in-out; }
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typingDot { 0%, 60%, 100% { transform: translateY(0); } 30% { transform: translateY(-4px); } }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-100">
+        <div class="max-w-4xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-pink-600 p-[2px]">
+                        <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center font-bold text-purple-600">KU</div>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-lg block">Knowledge Bot</span>
+                        <span class="text-xs text-gray-500">by KU Automation</span>
+                    </div>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <a href="demos.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors text-sm">← All Demos</a>
+                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-full font-medium transition-all text-sm">
+                        Get Custom Bot
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Chat Container -->
+    <div class="flex-1 flex flex-col max-w-4xl mx-auto w-full">
+        <!-- Chat Header -->
+        <div class="p-6 text-center border-b border-gray-100 bg-white">
+            <h1 class="text-2xl font-bold mb-2">
+                Technical <span class="gradient-text">Q&A Assistant</span>
+            </h1>
+            <p class="text-gray-600">
+                Ask questions about engineering standards, specifications, or best practices. 
+                <span class="text-purple-600 font-medium">Demo trained on general engineering knowledge.</span>
+            </p>
+        </div>
+
+        <!-- Messages -->
+        <div id="chatMessages" class="flex-1 overflow-y-auto p-6 space-y-4">
+            <!-- Welcome Message -->
+            <div class="flex gap-3">
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100 max-w-xl">
+                    <p class="text-gray-800">Hello! I'm your technical assistant. I can help with questions about:</p>
+                    <ul class="mt-2 space-y-1 text-gray-600 text-sm">
+                        <li>• ASME, API, and ISO standards</li>
+                        <li>• Piping, pressure vessels, and process equipment</li>
+                        <li>• Material selection and specifications</li>
+                        <li>• Engineering calculations and conversions</li>
+                        <li>• HSE and compliance requirements</li>
+                    </ul>
+                    <p class="mt-3 text-gray-800">What would you like to know?</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Suggested Questions -->
+        <div id="suggestions" class="px-6 pb-4">
+            <p class="text-xs text-gray-500 mb-2">Try asking:</p>
+            <div class="flex flex-wrap gap-2">
+                <button onclick="askQuestion('What is the difference between ASME B31.1 and B31.3?')" class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:border-purple-400 hover:text-purple-600 transition-all">
+                    ASME B31.1 vs B31.3?
+                </button>
+                <button onclick="askQuestion('What are the typical design factors for pressure vessels?')" class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:border-purple-400 hover:text-purple-600 transition-all">
+                    Pressure vessel design factors
+                </button>
+                <button onclick="askQuestion('When should I use 316 stainless steel vs 304?')" class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:border-purple-400 hover:text-purple-600 transition-all">
+                    316 vs 304 stainless steel
+                </button>
+                <button onclick="askQuestion('What is the maximum allowable working pressure formula?')" class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-sm text-gray-700 hover:border-purple-400 hover:text-purple-600 transition-all">
+                    MAWP formula
+                </button>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="p-4 bg-white border-t border-gray-100">
+            <form onsubmit="sendMessage(event)" class="flex gap-3">
+                <input 
+                    type="text" 
+                    id="messageInput" 
+                    placeholder="Ask a technical question..." 
+                    class="flex-1 px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-500/20 focus:outline-none transition-all"
+                    autocomplete="off"
+                >
+                <button 
+                    type="submit" 
+                    id="sendBtn"
+                    class="px-6 py-3 bg-purple-600 hover:bg-purple-700 disabled:bg-gray-300 text-white rounded-xl font-medium transition-all flex items-center gap-2"
+                >
+                    <span>Send</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/>
+                    </svg>
+                </button>
+            </form>
+            <p class="text-xs text-gray-400 mt-2 text-center">
+                This is a demo with general knowledge. Custom bots are trained on your specific documents.
+            </p>
+        </div>
+    </div>
+
+    <!-- CTA Banner -->
+    <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white py-4 px-6">
+        <div class="max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <p class="text-sm">
+                <strong>Want a custom bot?</strong> We can train it on your technical manuals, specs, and standards.
+            </p>
+            <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-4 py-2 bg-white text-purple-600 rounded-full font-medium text-sm hover:bg-gray-100 transition-all whitespace-nowrap">
+                Book Free Call →
+            </a>
+        </div>
+    </div>
+
+    <script>
+        // Demo responses - In production, this would call your API
+        const demoResponses = {
+            'asme': `**ASME B31.1 vs B31.3:**
+
+**B31.1 (Power Piping):**
+- Applies to power plants, heating systems, geothermal systems
+- Generally more conservative design factors
+- Typical for steam and high-pressure water systems
+- More stringent examination requirements
+
+**B31.3 (Process Piping):**
+- Applies to refineries, chemical plants, pharmaceutical
+- Allows more flexibility in design
+- Covers a wider range of fluids and conditions
+- Categories: Normal, Category D, Category M, High Pressure
+
+**Key Differences:**
+- Allowable stress calculations differ
+- B31.3 allows higher design stresses in some cases
+- Examination requirements vary by fluid category
+- B31.1 requires more conservative weld joint factors`,
+
+            'pressure': `**Pressure Vessel Design Factors:**
+
+**ASME Section VIII Division 1 Typical Factors:**
+- **Design Pressure:** Usually 10% above max operating pressure, or 25 psi above, whichever is greater
+- **Corrosion Allowance:** Typically 1/16" to 1/8" (1.5-3mm)
+- **Joint Efficiency (E):** 0.7 to 1.0 depending on examination level
+- **Design Temperature:** Maximum expected + margin
+
+**Safety Factors:**
+- Tensile strength factor: 3.5 (Div 1)
+- Yield strength factor: 1.5 (at design temp)
+
+**Material Considerations:**
+- Material allowable stress at design temperature
+- Impact testing requirements below -20°F (-29°C)
+- Creep considerations above 700°F (371°C)`,
+
+            'stainless': `**316 vs 304 Stainless Steel:**
+
+**304 Stainless (18-8):**
+- Composition: 18% Cr, 8% Ni
+- Good general corrosion resistance
+- Lower cost
+- Best for: Food processing, architectural, general purpose
+
+**316 Stainless:**
+- Composition: 16% Cr, 10% Ni, 2% Mo
+- Superior corrosion resistance (molybdenum adds pitting resistance)
+- ~20-30% more expensive
+- Best for: Marine, chemical, chloride environments
+
+**When to Use 316:**
+✓ Chloride exposure (seawater, coastal)
+✓ Sulfuric acid environments
+✓ Chemical processing
+✓ Pharmaceutical (316L)
+✓ Temperatures above 500°F with corrosives
+
+**When 304 is Sufficient:**
+✓ Indoor/controlled environments
+✓ Freshwater applications
+✓ Food & beverage (without chlorides)
+✓ Architectural applications`,
+
+            'mawp': `**Maximum Allowable Working Pressure (MAWP) Formula:**
+
+**For Cylindrical Shells (ASME VIII Div 1):**
+
+\`\`\`
+MAWP = (S × E × t) / (R + 0.6t)
+\`\`\`
+
+**Where:**
+- **S** = Allowable stress at design temperature (psi)
+- **E** = Joint efficiency (0.7-1.0)
+- **t** = Minimum wall thickness (inches)
+- **R** = Inside radius (inches)
+
+**For Hemispherical Heads:**
+\`\`\`
+MAWP = (2 × S × E × t) / (R + 0.2t)
+\`\`\`
+
+**Important Notes:**
+- Always account for corrosion allowance
+- MAWP at top of vessel differs from bottom (hydrostatic head)
+- Must verify at highest temperature condition
+- Consider all components - weakest determines vessel MAWP`
+        };
+
+        function getResponse(question) {
+            const q = question.toLowerCase();
+            if (q.includes('b31') || q.includes('asme') && (q.includes('31.1') || q.includes('31.3'))) {
+                return demoResponses['asme'];
+            } else if (q.includes('pressure vessel') || q.includes('design factor')) {
+                return demoResponses['pressure'];
+            } else if (q.includes('316') || q.includes('304') || q.includes('stainless')) {
+                return demoResponses['stainless'];
+            } else if (q.includes('mawp') || q.includes('maximum allowable') || q.includes('working pressure')) {
+                return demoResponses['mawp'];
+            } else {
+                return `I understand you're asking about "${question}".
+
+In the full version, I would have access to your specific technical documents and standards to give you a detailed answer.
+
+**This demo has limited knowledge.** For a custom bot trained on your documents:
+- Your company procedures
+- Project specifications
+- Industry standards (ASME, API, etc.)
+- Equipment manuals
+
+[Book a call](https://calendly.com/kingsley-uzowulu/30min) to discuss a custom solution.
+
+In the meantime, try one of the suggested questions above!`;
+            }
+        }
+
+        function addMessage(content, isUser = false) {
+            const container = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `flex gap-3 ${isUser ? 'justify-end' : ''}`;
+            
+            if (isUser) {
+                messageDiv.innerHTML = `
+                    <div class="message-user rounded-2xl rounded-tr-none p-4 max-w-xl text-white">
+                        <p>${escapeHtml(content)}</p>
+                    </div>
+                `;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0">
+                        <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                        </svg>
+                    </div>
+                    <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100 max-w-xl prose prose-sm">
+                        ${formatMarkdown(content)}
+                    </div>
+                `;
+            }
+            
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+            return messageDiv;
+        }
+
+        function addTypingIndicator() {
+            const container = document.getElementById('chatMessages');
+            const typingDiv = document.createElement('div');
+            typingDiv.id = 'typingIndicator';
+            typingDiv.className = 'flex gap-3';
+            typingDiv.innerHTML = `
+                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                </div>
+                <div class="bg-white rounded-2xl rounded-tl-none p-4 shadow-sm border border-gray-100">
+                    <div class="flex gap-1">
+                        <div class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></div>
+                        <div class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></div>
+                        <div class="typing-dot w-2 h-2 bg-gray-400 rounded-full"></div>
+                    </div>
+                </div>
+            `;
+            container.appendChild(typingDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function removeTypingIndicator() {
+            const indicator = document.getElementById('typingIndicator');
+            if (indicator) indicator.remove();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function formatMarkdown(text) {
+            // Simple markdown formatting
+            return text
+                .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                .replace(/`{3}([\s\S]*?)`{3}/g, '<pre class="bg-gray-100 p-2 rounded text-xs overflow-x-auto">$1</pre>')
+                .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-1 rounded text-sm">$1</code>')
+                .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" class="text-purple-600 hover:underline">$1</a>')
+                .replace(/\n\n/g, '</p><p class="mt-2">')
+                .replace(/\n- /g, '</p><p class="mt-1">• ')
+                .replace(/\n✓ /g, '</p><p class="mt-1 text-green-600">✓ ')
+                .replace(/\n/g, '<br>');
+        }
+
+        async function sendMessage(event) {
+            event.preventDefault();
+            const input = document.getElementById('messageInput');
+            const message = input.value.trim();
+            
+            if (!message) return;
+            
+            // Hide suggestions after first message
+            document.getElementById('suggestions').classList.add('hidden');
+            
+            // Add user message
+            addMessage(message, true);
+            input.value = '';
+            
+            // Show typing indicator
+            addTypingIndicator();
+            
+            // Simulate API delay
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+            
+            // Remove typing and add response
+            removeTypingIndicator();
+            const response = getResponse(message);
+            addMessage(response, false);
+        }
+
+        function askQuestion(question) {
+            document.getElementById('messageInput').value = question;
+            sendMessage(new Event('submit'));
+        }
+    </script>
+</body>
+</html>

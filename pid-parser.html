@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P&ID Parser Demo | KU Automation</title>
+    <meta name="description" content="Upload a P&ID diagram and watch AI extract equipment, valves, instruments, and line data instantly.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .drop-zone { transition: all 0.3s ease; }
+        .drop-zone.drag-over { border-color: #6366f1; background-color: #eef2ff; transform: scale(1.01); }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-active { border-color: #6366f1; color: #4f46e5; background-color: #eef2ff; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-primary-500 to-purple-600 p-[2px]">
+                        <div class="w-full h-full bg-white rounded-[10px] flex items-center justify-center font-bold text-primary-600">KU</div>
+                    </div>
+                    <div>
+                        <span class="font-semibold text-lg block">P&ID Parser</span>
+                        <span class="text-xs text-gray-500">by KU Automation</span>
+                    </div>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <a href="demos.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">← All Demos</a>
+                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all text-sm">
+                        Get Custom Version
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Header -->
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-bold mb-3">
+                Extract Data from <span class="gradient-text">P&ID Diagrams</span>
+            </h1>
+            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                Upload your P&ID and AI extracts equipment, valves, instruments, and line data in seconds.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Left: Upload + Preview -->
+            <div>
+                <!-- Upload Zone -->
+                <div 
+                    id="dropZone" 
+                    class="drop-zone border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center bg-white cursor-pointer hover:border-primary-400"
+                    onclick="document.getElementById('fileInput').click()"
+                >
+                    <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.pdf" class="hidden" onchange="handleFileSelect(event)">
+                    
+                    <div id="uploadPrompt">
+                        <div class="w-14 h-14 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Drop your P&ID here</h3>
+                        <p class="text-gray-500 mb-2">or click to browse</p>
+                        <p class="text-sm text-gray-400">JPG, PNG, WebP, PDF (max 20MB)</p>
+                    </div>
+
+                    <!-- Image Preview -->
+                    <div id="imagePreview" class="hidden">
+                        <img id="previewImg" class="max-h-64 mx-auto rounded-lg shadow-sm" alt="P&ID Preview">
+                    </div>
+                </div>
+
+                <!-- File Info -->
+                <div id="fileInfo" class="hidden mt-4 bg-white rounded-xl p-4 border border-gray-200">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
+                                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p id="fileName" class="font-medium text-gray-900 text-sm">filename.png</p>
+                                <p id="fileSize" class="text-xs text-gray-500">2.4 MB</p>
+                            </div>
+                        </div>
+                        <button onclick="clearFile()" class="text-gray-400 hover:text-red-500 transition-colors p-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Analyze Button -->
+                <button 
+                    id="analyzeBtn" 
+                    onclick="analyzeFile()" 
+                    disabled
+                    class="w-full mt-4 py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg"
+                >
+                    <span id="btnText">🔍 Analyze P&ID</span>
+                    <span id="btnLoading" class="hidden items-center justify-center gap-2">
+                        <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Analyzing... (30-60 sec)
+                    </span>
+                </button>
+
+                <!-- How it works -->
+                <div class="mt-6 p-4 bg-gray-100 rounded-xl">
+                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">How it works</h4>
+                    <ol class="text-sm text-gray-600 space-y-1">
+                        <li>1. Upload P&ID image or PDF</li>
+                        <li>2. AI analyzes using computer vision</li>
+                        <li>3. Data extracted and structured</li>
+                        <li>4. View results or download Excel</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Right: Results -->
+            <div>
+                <!-- Results Container -->
+                <div id="resultsContainer" class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                    <!-- Empty State -->
+                    <div id="emptyState" class="p-12 text-center">
+                        <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-lg font-semibold text-gray-900 mb-2">No results yet</h3>
+                        <p class="text-gray-500">Upload a P&ID to see extracted data here</p>
+                    </div>
+
+                    <!-- Results Content -->
+                    <div id="resultsContent" class="hidden">
+                        <!-- Summary Bar -->
+                        <div class="grid grid-cols-4 gap-px bg-gray-200">
+                            <div class="bg-white p-4 text-center">
+                                <div id="countEquipment" class="text-2xl font-bold text-primary-600">0</div>
+                                <div class="text-xs text-gray-500">Equipment</div>
+                            </div>
+                            <div class="bg-white p-4 text-center">
+                                <div id="countValves" class="text-2xl font-bold text-purple-600">0</div>
+                                <div class="text-xs text-gray-500">Valves</div>
+                            </div>
+                            <div class="bg-white p-4 text-center">
+                                <div id="countInstruments" class="text-2xl font-bold text-pink-600">0</div>
+                                <div class="text-xs text-gray-500">Instruments</div>
+                            </div>
+                            <div class="bg-white p-4 text-center">
+                                <div id="countLines" class="text-2xl font-bold text-green-600">0</div>
+                                <div class="text-xs text-gray-500">Lines</div>
+                            </div>
+                        </div>
+
+                        <!-- Tabs -->
+                        <div class="flex border-b border-gray-200">
+                            <button onclick="showTab('equipment')" id="tab-equipment" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50 tab-active">Equipment</button>
+                            <button onclick="showTab('valves')" id="tab-valves" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50">Valves</button>
+                            <button onclick="showTab('instruments')" id="tab-instruments" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50">Instruments</button>
+                            <button onclick="showTab('lines')" id="tab-lines" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50">Lines</button>
+                        </div>
+
+                        <!-- Tab Content -->
+                        <div class="max-h-80 overflow-y-auto">
+                            <!-- Equipment -->
+                            <div id="panel-equipment" class="tab-panel">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-gray-50 sticky top-0">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Tag</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Type</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Description</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="equipmentTable" class="divide-y divide-gray-100"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- Valves -->
+                            <div id="panel-valves" class="tab-panel hidden">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-gray-50 sticky top-0">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Tag</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Type</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Size</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Line</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="valvesTable" class="divide-y divide-gray-100"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- Instruments -->
+                            <div id="panel-instruments" class="tab-panel hidden">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-gray-50 sticky top-0">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Tag</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Type</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Function</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="instrumentsTable" class="divide-y divide-gray-100"></tbody>
+                                </table>
+                            </div>
+
+                            <!-- Lines -->
+                            <div id="panel-lines" class="tab-panel hidden">
+                                <table class="w-full text-sm">
+                                    <thead class="bg-gray-50 sticky top-0">
+                                        <tr>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Line #</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Size</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">From</th>
+                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">To</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="linesTable" class="divide-y divide-gray-100"></tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="p-4 bg-gray-50 border-t border-gray-200 flex gap-3">
+                            <button onclick="downloadExcel()" id="downloadBtn" class="flex-1 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all flex items-center justify-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                </svg>
+                                Download Excel
+                            </button>
+                            <button onclick="copyJSON()" class="px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-all">
+                                Copy JSON
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div id="summaryBox" class="hidden mt-4 p-4 bg-primary-50 border border-primary-100 rounded-xl">
+                    <h4 class="font-semibold text-primary-900 mb-1 text-sm">AI Summary</h4>
+                    <p id="summaryText" class="text-primary-800 text-sm"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-12 text-center p-8 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl text-white">
+            <h2 class="text-2xl font-bold mb-3">Want this customized for your P&IDs?</h2>
+            <p class="text-white/80 mb-6">We can train it on your specific format and integrate it with your systems.</p>
+            <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="inline-block px-8 py-3 bg-white hover:bg-gray-100 text-primary-600 rounded-full font-semibold transition-all">
+                Book Free Strategy Call →
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-100 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
+            <p>Built by <a href="index.html" class="text-primary-600 hover:underline">KU Automation</a> — AI for Engineering</p>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration - Update this URL when you deploy the backend
+        const API_URL = 'http://localhost:8890'; // Change to your Railway/Render URL in production
+        
+        let selectedFile = null;
+        let analysisResult = null;
+        let excelData = null;
+        let excelFilename = null;
+
+        // Drag and drop
+        const dropZone = document.getElementById('dropZone');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, e => { e.preventDefault(); e.stopPropagation(); }, false);
+        });
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.add('drag-over'), false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, () => dropZone.classList.remove('drag-over'), false);
+        });
+        
+        dropZone.addEventListener('drop', e => {
+            const files = e.dataTransfer.files;
+            if (files.length > 0) handleFile(files[0]);
+        });
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) handleFile(file);
+        }
+
+        function handleFile(file) {
+            selectedFile = file;
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = formatFileSize(file.size);
+            document.getElementById('fileInfo').classList.remove('hidden');
+            document.getElementById('analyzeBtn').disabled = false;
+
+            // Show image preview
+            if (file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    document.getElementById('previewImg').src = e.target.result;
+                    document.getElementById('imagePreview').classList.remove('hidden');
+                    document.getElementById('uploadPrompt').classList.add('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function clearFile() {
+            selectedFile = null;
+            document.getElementById('fileInput').value = '';
+            document.getElementById('fileInfo').classList.add('hidden');
+            document.getElementById('imagePreview').classList.add('hidden');
+            document.getElementById('uploadPrompt').classList.remove('hidden');
+            document.getElementById('analyzeBtn').disabled = true;
+        }
+
+        async function analyzeFile() {
+            if (!selectedFile) return;
+            
+            const btn = document.getElementById('analyzeBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            btnLoading.classList.add('flex');
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            try {
+                const response = await fetch(`${API_URL}/api/analyze`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Analysis failed');
+                }
+                
+                const result = await response.json();
+                analysisResult = result.data;
+                excelData = result.excel;
+                excelFilename = result.filename;
+                
+                displayResults(result.data);
+                
+            } catch (error) {
+                alert('Error: ' + error.message + '\n\nMake sure the API server is running.');
+            } finally {
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+                btnLoading.classList.remove('flex');
+            }
+        }
+
+        function displayResults(data) {
+            // Update counts
+            document.getElementById('countEquipment').textContent = data.equipment?.length || 0;
+            document.getElementById('countValves').textContent = data.valves?.length || 0;
+            document.getElementById('countInstruments').textContent = data.instruments?.length || 0;
+            document.getElementById('countLines').textContent = data.lines?.length || 0;
+            
+            // Populate tables
+            populateTable('equipmentTable', data.equipment || [], ['tag', 'type', 'description']);
+            populateTable('valvesTable', data.valves || [], ['tag', 'type', 'size', 'line_number']);
+            populateTable('instrumentsTable', data.instruments || [], ['tag', 'type', 'function']);
+            populateTable('linesTable', data.lines || [], ['line_number', 'size', 'from', 'to']);
+            
+            // Summary
+            if (data.summary) {
+                document.getElementById('summaryText').textContent = data.summary;
+                document.getElementById('summaryBox').classList.remove('hidden');
+            }
+            
+            // Show results
+            document.getElementById('emptyState').classList.add('hidden');
+            document.getElementById('resultsContent').classList.remove('hidden');
+            
+            // Reset to first tab
+            showTab('equipment');
+        }
+
+        function populateTable(tableId, data, fields) {
+            const tbody = document.getElementById(tableId);
+            tbody.innerHTML = '';
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="${fields.length}" class="px-4 py-8 text-center text-gray-400">No items found</td></tr>`;
+                return;
+            }
+            
+            data.forEach(item => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-gray-50';
+                row.innerHTML = fields.map(field => 
+                    `<td class="px-4 py-2 text-gray-900">${item[field] || '-'}</td>`
+                ).join('');
+                tbody.appendChild(row);
+            });
+        }
+
+        function showTab(tabName) {
+            // Hide all panels
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+            // Show selected panel
+            document.getElementById(`panel-${tabName}`).classList.remove('hidden');
+            
+            // Update tab styles
+            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('tab-active'));
+            document.getElementById(`tab-${tabName}`).classList.add('tab-active');
+        }
+
+        function downloadExcel() {
+            if (!excelData) return;
+            
+            const byteCharacters = atob(excelData);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = excelFilename || 'PID_Extract.xlsx';
+            link.click();
+        }
+
+        function copyJSON() {
+            if (!analysisResult) return;
+            navigator.clipboard.writeText(JSON.stringify(analysisResult, null, 2));
+            alert('JSON copied to clipboard!');
+        }
+    </script>
+</body>
+</html>

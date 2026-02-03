@@ -39,28 +39,93 @@
         .feature-card:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
         .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
         
-        /* Floating Bubbles */
+        /* 3D Floating Bubbles */
         .bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
         .bubble {
             position: absolute;
             border-radius: 50%;
-            opacity: 0.4;
-            filter: blur(1px);
             animation: floatBubble linear infinite;
+            /* 3D bubble base */
+            box-shadow: 
+                inset -8px -8px 20px rgba(255, 255, 255, 0.6),
+                inset 4px 4px 10px rgba(0, 0, 0, 0.1),
+                0 8px 32px rgba(0, 0, 0, 0.1);
         }
-        .bubble-1 { width: 80px; height: 80px; left: 5%; background: linear-gradient(135deg, rgba(99, 102, 241, 0.3), rgba(139, 92, 246, 0.2)); animation-duration: 25s; animation-delay: 0s; }
-        .bubble-2 { width: 120px; height: 120px; left: 15%; background: linear-gradient(135deg, rgba(217, 70, 239, 0.2), rgba(139, 92, 246, 0.15)); animation-duration: 30s; animation-delay: -5s; }
-        .bubble-3 { width: 60px; height: 60px; left: 35%; background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(192, 132, 252, 0.2)); animation-duration: 22s; animation-delay: -10s; }
-        .bubble-4 { width: 100px; height: 100px; left: 50%; background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(217, 70, 239, 0.15)); animation-duration: 28s; animation-delay: -3s; }
-        .bubble-5 { width: 70px; height: 70px; left: 70%; background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(99, 102, 241, 0.2)); animation-duration: 24s; animation-delay: -8s; }
-        .bubble-6 { width: 90px; height: 90px; left: 85%; background: linear-gradient(135deg, rgba(192, 132, 252, 0.2), rgba(167, 139, 250, 0.15)); animation-duration: 26s; animation-delay: -12s; }
-        .bubble-7 { width: 50px; height: 50px; left: 25%; background: linear-gradient(135deg, rgba(99, 102, 241, 0.2), rgba(217, 70, 239, 0.15)); animation-duration: 20s; animation-delay: -15s; }
-        .bubble-8 { width: 110px; height: 110px; left: 60%; background: linear-gradient(135deg, rgba(167, 139, 250, 0.15), rgba(139, 92, 246, 0.1)); animation-duration: 32s; animation-delay: -7s; }
+        .bubble::before {
+            content: '';
+            position: absolute;
+            top: 12%;
+            left: 18%;
+            width: 25%;
+            height: 20%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+        }
+        .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: 15%;
+            right: 20%;
+            width: 15%;
+            height: 12%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+        }
+        
+        /* Indigo bubble */
+        .bubble-1 { 
+            width: 80px; height: 80px; left: 5%; 
+            background: radial-gradient(circle at 30% 30%, rgba(129, 140, 248, 0.7), rgba(99, 102, 241, 0.4) 50%, rgba(79, 70, 229, 0.3) 100%);
+            animation-duration: 25s; animation-delay: 0s; 
+        }
+        /* Purple-pink bubble */
+        .bubble-2 { 
+            width: 120px; height: 120px; left: 15%; 
+            background: radial-gradient(circle at 30% 30%, rgba(232, 121, 249, 0.6), rgba(217, 70, 239, 0.4) 50%, rgba(192, 38, 211, 0.3) 100%);
+            animation-duration: 30s; animation-delay: -5s; 
+        }
+        /* Violet bubble */
+        .bubble-3 { 
+            width: 60px; height: 60px; left: 35%; 
+            background: radial-gradient(circle at 30% 30%, rgba(196, 181, 253, 0.8), rgba(167, 139, 250, 0.5) 50%, rgba(139, 92, 246, 0.4) 100%);
+            animation-duration: 22s; animation-delay: -10s; 
+        }
+        /* Fuchsia bubble */
+        .bubble-4 { 
+            width: 100px; height: 100px; left: 50%; 
+            background: radial-gradient(circle at 30% 30%, rgba(240, 171, 252, 0.7), rgba(232, 121, 249, 0.45) 50%, rgba(217, 70, 239, 0.35) 100%);
+            animation-duration: 28s; animation-delay: -3s; 
+        }
+        /* Deep indigo bubble */
+        .bubble-5 { 
+            width: 70px; height: 70px; left: 70%; 
+            background: radial-gradient(circle at 30% 30%, rgba(165, 180, 252, 0.75), rgba(129, 140, 248, 0.5) 50%, rgba(99, 102, 241, 0.4) 100%);
+            animation-duration: 24s; animation-delay: -8s; 
+        }
+        /* Lavender bubble */
+        .bubble-6 { 
+            width: 90px; height: 90px; left: 85%; 
+            background: radial-gradient(circle at 30% 30%, rgba(221, 214, 254, 0.8), rgba(196, 181, 253, 0.5) 50%, rgba(167, 139, 250, 0.4) 100%);
+            animation-duration: 26s; animation-delay: -12s; 
+        }
+        /* Pink-purple bubble */
+        .bubble-7 { 
+            width: 50px; height: 50px; left: 25%; 
+            background: radial-gradient(circle at 30% 30%, rgba(249, 168, 212, 0.75), rgba(244, 114, 182, 0.5) 50%, rgba(236, 72, 153, 0.4) 100%);
+            animation-duration: 20s; animation-delay: -15s; 
+        }
+        /* Blue-violet bubble */
+        .bubble-8 { 
+            width: 110px; height: 110px; left: 60%; 
+            background: radial-gradient(circle at 30% 30%, rgba(199, 210, 254, 0.7), rgba(165, 180, 252, 0.45) 50%, rgba(129, 140, 248, 0.35) 100%);
+            animation-duration: 32s; animation-delay: -7s; 
+        }
         
         @keyframes floatBubble {
             0% { transform: translateY(100vh) rotate(0deg) scale(1); opacity: 0; }
-            10% { opacity: 0.4; }
-            90% { opacity: 0.4; }
+            10% { opacity: 0.85; }
+            90% { opacity: 0.85; }
             100% { transform: translateY(-100vh) rotate(360deg) scale(1.1); opacity: 0; }
         }
     </style>
@@ -94,6 +159,7 @@
                     <a href="#about" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">About</a>
                     <a href="#pricing" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Pricing</a>
                     <a href="roi-calculator.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">ROI Calculator</a>
+                    <a href="demos.html" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">Try Demos</a>
                 </div>
                 
                 <div class="flex items-center gap-3">
@@ -131,7 +197,7 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 mb-10">
-                        <a href="#contact" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-lg transition-all hover:shadow-xl hover:shadow-primary-500/30 text-center">
+                        <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-lg transition-all hover:shadow-xl hover:shadow-primary-500/30 text-center">
                             Book Free Strategy Call
                         </a>
                         <a href="#services" class="px-8 py-4 bg-white hover:bg-gray-50 border border-gray-200 rounded-full font-semibold text-lg transition-all text-center">
@@ -558,7 +624,7 @@
                     </p>
                     
                     <!-- Contact Form -->
-                    <form id="contactForm" class="bg-white rounded-2xl p-8 text-left text-gray-900 max-w-xl mx-auto">
+                    <form id="contactForm" action="https://formspree.io/f/mqelvqak" method="POST" class="bg-white rounded-2xl p-8 text-left text-gray-900 max-w-xl mx-auto">
                         <div class="grid md:grid-cols-2 gap-4 mb-4">
                             <div>
                                 <label class="block text-sm font-medium mb-2 text-gray-700">Your Name</label>
@@ -635,14 +701,45 @@
             });
         });
 
-        // Form handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        // Form handling - Submit to Formspree then redirect to Calendly
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
-            const formData = new FormData(this);
+            const form = this;
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            
+            // Show loading state
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
+            
+            const formData = new FormData(form);
             const data = Object.fromEntries(formData);
-            alert('Thanks! We\'ll be in touch within 24 hours to schedule your call.');
-            this.reset();
-            console.log('Lead captured:', data);
+            
+            try {
+                // Submit to Formspree
+                const response = await fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    // Build Calendly URL with prefilled data
+                    const calendlyUrl = new URL('https://calendly.com/kingsley-uzowulu/30min');
+                    calendlyUrl.searchParams.set('name', data.name || '');
+                    calendlyUrl.searchParams.set('email', data.email || '');
+                    
+                    // Redirect to Calendly
+                    window.location.href = calendlyUrl.toString();
+                } else {
+                    throw new Error('Form submission failed');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Something went wrong. Please try again or email us directly.');
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            }
         });
 
         // Intersection Observer for animations
