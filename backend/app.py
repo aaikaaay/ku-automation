@@ -333,12 +333,13 @@ async def analyze_pid(file: UploadFile = File(...)):
         
         # Generate Excel report
         excel_path = create_excel_report(extracted_data, file.filename)
+        print("[APP] Generated Excel report.")
         
-    print("[APP] Generated Excel report.")
         # Read Excel file for response
         with open(excel_path, "rb") as f:
             excel_base64 = base64.b64encode(f.read()).decode('utf-8')
         print("[APP] Excel file read to base64.")
+        
         # Clean up temp file
         os.unlink(excel_path)
         print(f"[APP] Cleaned up temporary Excel file: {excel_path}")
