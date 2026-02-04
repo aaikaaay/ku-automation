@@ -117,15 +117,34 @@ def encode_image_to_base64(file_content: bytes) -> str:
     return base64.b64encode(file_content).decode('utf-8')
 
 
-def analyze_pid_with_vision(image_base64: str, content_type: str) -> dict:
+def convert_pdf_to_images(pdf_bytes: bytes) -> list[bytes]:
+    """Convert PDF pages to PNG images using PyMuPDF"""
+    import fitz  # PyMuPDF
+    
+    images = []
+    pdf_doc = fitz.open(stream=pdf_bytes, filetype="pdf")
+    
+    for page_num in range(len(pdf_doc)):
+        page = pdf_doc[page_num]
+        # Render at 2x resolution for better quality
+        mat = fitz.Matrix(2.0, 2.0)
+        pix = page.get_pixmap(matrix=mat)
+        images.append(pix.tobytes("png"))
+        print(f"[APP] Converted PDF page {page_num + 1}/{len(pdf_doc)} to image")
+    
+    pdf_doc.close()
+    return images
+
+
+def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") -> dict:
     """Send image to OpenAI Vision API for P&ID analysis"""
     client = get_openai_client()
     
-    # Determine media type
+    # Determine media type (only images - PDFs should be converted first)
     if "png" in content_type:
         media_type = "image/png"
-    elif "pdf" in content_type:
-        media_type = "application/pdf"
+    elif "webp" in content_type:
+        media_type = "image/webp"
     else:
         media_type = "image/jpeg"
     
@@ -324,6 +343,21 @@ async def analyze_pid(file: UploadFile = File(...)):
         print("[APP ERROR] File too large.")
         raise HTTPException(400, "File too large. Maximum size is 20MB.")
     
+    # Handle PDF files - convert to images first
+    if file.content_type == "application/pdf":
+        print("[APP] PDF detected, converting to images...")
+        try:
+            page_images = convert_pdf_to_images(content)
+            print(f"[APP] Converted PDF to {len(page_images)} page(s)")
+            # Use first page for analysis (P&IDs are usually single page)
+            content = page_images[0]
+            content_type = "image/png"
+        except Exception as e:
+            print(f"[APP ERROR] PDF conversion failed: {e}")
+            raise HTTPException(500, f"Failed to convert PDF: {str(e)}")
+    else:
+        content_type = file.content_type
+    
     # Encode to base64
     image_base64 = encode_image_to_base64(content)
     print("[APP] Image encoded to base64.")
@@ -331,7 +365,7 @@ async def analyze_pid(file: UploadFile = File(...)):
     try:
         # Analyze with Vision API
         print("[APP] Calling OpenAI Vision API...")
-        extracted_data = analyze_pid_with_vision(image_base64, file.content_type)
+        extracted_data = analyze_pid_with_vision(image_base64, content_type)
         print("[APP] OpenAI Vision API call complete.")
         
         # Generate Excel report
