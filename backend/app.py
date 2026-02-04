@@ -149,7 +149,7 @@ def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") 
         media_type = "image/jpeg"
     
     response = client.chat.completions.create(
-        model="gpt-4o",
+        model="gpt-4-turbo",
         messages=[
             {
                 "role": "user",
