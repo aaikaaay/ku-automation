@@ -32,42 +32,51 @@ if static_path.exists():
     app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
 # Extraction prompt for P&ID analysis
-PID_EXTRACTION_PROMPT = """You are an expert P&ID (Piping and Instrumentation Diagram) analyzer with deep knowledge of oil & gas, chemical, and process engineering.
+PID_EXTRACTION_PROMPT = """You are an expert P&ID (Piping and Instrumentation Diagram) analyzer specializing in oil & gas, petrochemical, and process engineering drawings.
 
-Analyze this P&ID image and extract ALL of the following information. Be thorough and precise.
+CRITICAL: Examine the image VERY CAREFULLY. Look at ALL text labels, tag numbers, and annotations. P&IDs contain dense information - zoom in mentally on each section.
+
+## LINE NUMBER FORMAT
+Oil & Gas line numbers typically follow formats like:
+- "4"-OC-41-012-N1A1" (Size-Service-Area-Sequence-Spec)
+- "6"-HC-40-001" (Size-Service-Unit-Number)
+- "3"-PG-2001" (Size-Service-Number)
+The FIRST number before the dash is usually the pipe SIZE in inches.
 
 ## Extract These Categories:
 
 ### 1. EQUIPMENT
-For each piece of equipment found, extract:
-- Tag (e.g., V-101, P-102, E-201)
-- Type (e.g., Vessel, Pump, Heat Exchanger, Compressor, Tank, Reactor)
-- Description/Name if visible
-- Size/Capacity if shown
+For each piece of equipment (vessels, pumps, exchangers, coalescers, separators, etc.):
+- Tag: The alphanumeric identifier (e.g., 40-V-2005, P-101, E-201)
+- Type: Equipment type (Vessel, Pump, Heat Exchanger, Coalescer, Separator, Compressor)
+- Description: Full name if shown in title block or callout
+- Size: Capacity, diameter, or rating if visible
 
-### 2. VALVES
-For each valve found, extract:
-- Tag (e.g., XV-101, PV-102, HV-201)
-- Type (e.g., Gate, Globe, Ball, Check, Control, Relief, Butterfly)
-- Size if shown (e.g., 2", 4", 6")
-- Line Number it's on (if identifiable)
+### 2. VALVES  
+For EVERY valve symbol found (gate, globe, ball, check, control, butterfly, relief):
+- Tag: Full valve tag number (e.g., XV-40-20051, HV-101, PV-2001)
+- Type: Valve type based on symbol (Gate, Globe, Ball, Check, Control, Relief, Butterfly)
+- Size: Pipe size the valve is on - look at adjacent line number or valve callout
+- Line Number: The line number the valve is installed on - trace the pipe to find it
 
 ### 3. INSTRUMENTS
-For each instrument found, extract:
-- Tag (e.g., PT-101, FT-102, LT-201, TT-301)
-- Type (e.g., Pressure, Flow, Level, Temperature)
-- Function (Transmitter, Indicator, Controller, Alarm)
+For every instrument bubble/tag (PT, LT, FT, TT, PI, LI, etc.):
+- Tag: COMPLETE instrument tag including all digits (e.g., PT-41-20271-010CNS-H)
+- Type: Measurement type (Pressure, Level, Flow, Temperature)
+- Function: Device function (Transmitter, Indicator, Controller, Switch, Alarm)
 
 ### 4. LINES/PIPING
-For each line found, extract:
-- Line Number (e.g., 4"-P-101, 6"-CW-201)
-- Size (diameter)
-- Service/Fluid (if shown)
-- From (source equipment)
-- To (destination equipment)
+For EACH distinct pipe line shown:
+- Line Number: FULL line designation exactly as written (e.g., "4"-OC-41-012-N1A1")
+- Size: Pipe diameter (extract from line number or annotation)
+- Service: Fluid service code (OC=Crude Oil, HC=Hydrocarbon, CW=Cooling Water, etc.)
+- From: Source equipment or boundary
+- To: Destination equipment or boundary
 
 ### 5. NOTES
-- Any important notes, specifications, or design conditions visible
+- Design conditions, operating parameters, or special requirements visible
+
+IMPORTANT: Do NOT put "N/A" if the information exists but is hard to read - make your best attempt to read it. Only use "N/A" if truly not shown.
 
 Return your analysis as a JSON object with this exact structure:
 {
