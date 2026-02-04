@@ -171,13 +171,35 @@ def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") 
     
     # Parse the JSON response
     content = response.choices[0].message.content
+    print(f"[APP] Raw AI response length: {len(content) if content else 0} chars")
     
-    # Clean up response (remove markdown code blocks if present)
-    if content.startswith("```"):
-        content = content.split("```")[1]
-        if content.startswith("json"):
-            content = content[4:]
+    if not content or not content.strip():
+        print("[APP ERROR] Empty response from AI")
+        raise ValueError("Empty response from AI")
+    
+    # Clean up response - extract JSON from various formats
     content = content.strip()
+    
+    # Remove markdown code blocks if present
+    if "```json" in content:
+        content = content.split("```json")[1].split("```")[0]
+    elif "```" in content:
+        parts = content.split("```")
+        # Find the part that looks like JSON
+        for part in parts:
+            part = part.strip()
+            if part.startswith("{") or part.startswith("["):
+                content = part
+                break
+    
+    # Try to find JSON object if there's text before/after
+    content = content.strip()
+    if not content.startswith("{") and "{" in content:
+        content = content[content.index("{"):]
+    if not content.endswith("}") and "}" in content:
+        content = content[:content.rindex("}") + 1]
+    
+    print(f"[APP] Cleaned content preview: {content[:200]}...")
     
     return json.loads(content)
 
