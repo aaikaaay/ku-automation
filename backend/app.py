@@ -96,9 +96,17 @@ def get_openai_client():
     """Lazy initialization of OpenAI client"""
     from openai import OpenAI
     api_key = os.environ.get("OPENAI_API_KEY")
+    print(f"[APP] Initializing OpenAI client. API Key present: {bool(api_key)}")
     if not api_key:
+        print("[APP ERROR] OPENAI_API_KEY is missing!")
         raise HTTPException(500, "OPENAI_API_KEY not configured")
-    return OpenAI(api_key=api_key)
+    try:
+        client = OpenAI(api_key=api_key)
+        print("[APP] OpenAI client initialized successfully.")
+        return client
+    except Exception as e:
+        print(f"[APP ERROR] Failed to initialize OpenAI client: {e}")
+        raise HTTPException(500, f"Failed to initialize OpenAI client: {e}")
 
 
 def encode_image_to_base64(file_content: bytes) -> str:
@@ -276,15 +284,19 @@ def create_excel_report(data: dict, filename: str) -> str:
 @app.get("/", response_class=HTMLResponse)
 async def home():
     """Serve the main page"""
+    print("[APP] Attempting to serve static/index.html...")
     static_index = Path(__file__).parent / "static" / "index.html"
     if static_index.exists():
+        print(f"[APP] Serving: {static_index}")
         return FileResponse(str(static_index))
+    print("[APP] static/index.html not found. Serving default HTML.")
     return HTMLResponse("<h1>P&ID Parser API</h1><p>Use POST /api/analyze to analyze P&IDs</p>")
 
 
 @app.get("/health")
 async def health():
     """Health check endpoint"""
+    print("[APP] Health check requested.")
     return {"status": "healthy", "service": "P&ID Parser"}
 
 
@@ -292,34 +304,44 @@ async def health():
 async def analyze_pid(file: UploadFile = File(...)):
     """Analyze uploaded P&ID and return extracted data"""
     
+    print(f"[APP] /api/analyze called for file: {file.filename} (Type: {file.content_type})")
+    
     # Validate file type
     allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
     if file.content_type not in allowed_types:
+        print(f"[APP ERROR] Invalid file type: {file.content_type}")
         raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
     
     # Read file
     content = await file.read()
+    print(f"[APP] File read, size: {len(content)} bytes.")
     
     # Check file size (max 20MB)
     if len(content) > 20 * 1024 * 1024:
+        print("[APP ERROR] File too large.")
         raise HTTPException(400, "File too large. Maximum size is 20MB.")
     
     # Encode to base64
     image_base64 = encode_image_to_base64(content)
+    print("[APP] Image encoded to base64.")
     
     try:
         # Analyze with Vision API
+        print("[APP] Calling OpenAI Vision API...")
         extracted_data = analyze_pid_with_vision(image_base64, file.content_type)
+        print("[APP] OpenAI Vision API call complete.")
         
         # Generate Excel report
         excel_path = create_excel_report(extracted_data, file.filename)
         
+    print("[APP] Generated Excel report.")
         # Read Excel file for response
         with open(excel_path, "rb") as f:
             excel_base64 = base64.b64encode(f.read()).decode('utf-8')
-        
+        print("[APP] Excel file read to base64.")
         # Clean up temp file
         os.unlink(excel_path)
+        print(f"[APP] Cleaned up temporary Excel file: {excel_path}")
         
         return {
             "success": True,
@@ -335,5 +357,6 @@ async def analyze_pid(file: UploadFile = File(...)):
 
 
 if __name__ == "__main__":
+    print("[APP] Running app directly with uvicorn.")
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
