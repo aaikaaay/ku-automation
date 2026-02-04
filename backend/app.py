@@ -92,24 +92,21 @@ Be conservative - only extract what you can clearly see.
 Return ONLY the JSON, no other text."""
 
 
-def get_openai_client():
-    """Lazy initialization of OpenAI client"""
-    from openai import OpenAI
-    import httpx
-    api_key = os.environ.get("OPENAI_API_KEY")
-    print(f"[APP] Initializing OpenAI client. API Key present: {bool(api_key)}")
+def get_anthropic_client():
+    """Lazy initialization of Anthropic client"""
+    from anthropic import Anthropic
+    api_key = os.environ.get("ANTHROPIC_API_KEY")
+    print(f"[APP] Initializing Anthropic client. API Key present: {bool(api_key)}")
     if not api_key:
-        print("[APP ERROR] OPENAI_API_KEY is missing!")
-        raise HTTPException(500, "OPENAI_API_KEY not configured")
+        print("[APP ERROR] ANTHROPIC_API_KEY is missing!")
+        raise HTTPException(500, "ANTHROPIC_API_KEY not configured")
     try:
-        # Explicitly create httpx client without proxies to avoid Railway env conflicts
-        http_client = httpx.Client()
-        client = OpenAI(api_key=api_key, http_client=http_client)
-        print("[APP] OpenAI client initialized successfully.")
+        client = Anthropic(api_key=api_key)
+        print("[APP] Anthropic client initialized successfully.")
         return client
     except Exception as e:
-        print(f"[APP ERROR] Failed to initialize OpenAI client: {e}")
-        raise HTTPException(500, f"Failed to initialize OpenAI client: {e}")
+        print(f"[APP ERROR] Failed to initialize Anthropic client: {e}")
+        raise HTTPException(500, f"Failed to initialize Anthropic client: {e}")
 
 
 def encode_image_to_base64(file_content: bytes) -> str:
@@ -137,8 +134,8 @@ def convert_pdf_to_images(pdf_bytes: bytes) -> list[bytes]:
 
 
 def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") -> dict:
-    """Send image to OpenAI Vision API for P&ID analysis"""
-    client = get_openai_client()
+    """Send image to Claude Vision API for P&ID analysis"""
+    client = get_anthropic_client()
     
     # Determine media type (only images - PDFs should be converted first)
     if "png" in content_type:
@@ -148,29 +145,32 @@ def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") 
     else:
         media_type = "image/jpeg"
     
-    response = client.chat.completions.create(
-        model="gpt-4-turbo",
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=4096,
         messages=[
             {
                 "role": "user",
                 "content": [
-                    {"type": "text", "text": PID_EXTRACTION_PROMPT},
                     {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:{media_type};base64,{image_base64}",
-                            "detail": "high"
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": media_type,
+                            "data": image_base64
                         }
+                    },
+                    {
+                        "type": "text",
+                        "text": PID_EXTRACTION_PROMPT
                     }
                 ]
             }
-        ],
-        max_tokens=4096,
-        temperature=0.1
+        ]
     )
     
     # Parse the JSON response
-    content = response.choices[0].message.content
+    content = response.content[0].text
     print(f"[APP] Raw AI response length: {len(content) if content else 0} chars")
     
     if not content or not content.strip():
