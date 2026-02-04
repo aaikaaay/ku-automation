@@ -15,13 +15,10 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
-from openai import OpenAI
-from openpyxl import Workbook
-from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 
 app = FastAPI(title="P&ID Parser - KU Automation")
 
-# CORS for local development
+# CORS for frontend access
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -29,20 +26,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
-
-# OpenAI client - initialized lazily
-_client = None
-
-def get_openai_client():
-    global _client
-    if _client is None:
-        api_key = os.environ.get("OPENAI_API_KEY")
-        if not api_key:
-            raise HTTPException(500, "OPENAI_API_KEY not configured")
-        _client = OpenAI(api_key=api_key)
-    return _client
+# Check if static folder exists before mounting
+static_path = Path(__file__).parent / "static"
+if static_path.exists():
+    app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
 
 # Extraction prompt for P&ID analysis
 PID_EXTRACTION_PROMPT = """You are an expert P&ID (Piping and Instrumentation Diagram) analyzer with deep knowledge of oil & gas, chemical, and process engineering.
@@ -105,6 +92,15 @@ Be conservative - only extract what you can clearly see.
 Return ONLY the JSON, no other text."""
 
 
+def get_openai_client():
+    """Lazy initialization of OpenAI client"""
+    from openai import OpenAI
+    api_key = os.environ.get("OPENAI_API_KEY")
+    if not api_key:
+        raise HTTPException(500, "OPENAI_API_KEY not configured")
+    return OpenAI(api_key=api_key)
+
+
 def encode_image_to_base64(file_content: bytes) -> str:
     """Convert image bytes to base64 string"""
     return base64.b64encode(file_content).decode('utf-8')
@@ -112,6 +108,7 @@ def encode_image_to_base64(file_content: bytes) -> str:
 
 def analyze_pid_with_vision(image_base64: str, content_type: str) -> dict:
     """Send image to OpenAI Vision API for P&ID analysis"""
+    client = get_openai_client()
     
     # Determine media type
     if "png" in content_type:
@@ -121,7 +118,7 @@ def analyze_pid_with_vision(image_base64: str, content_type: str) -> dict:
     else:
         media_type = "image/jpeg"
     
-    response = get_openai_client().chat.completions.create(
+    response = client.chat.completions.create(
         model="gpt-4o",
         messages=[
             {
@@ -157,6 +154,8 @@ def analyze_pid_with_vision(image_base64: str, content_type: str) -> dict:
 
 def create_excel_report(data: dict, filename: str) -> str:
     """Generate Excel report from extracted P&ID data"""
+    from openpyxl import Workbook
+    from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
     
     wb = Workbook()
     
@@ -277,7 +276,16 @@ def create_excel_report(data: dict, filename: str) -> str:
 @app.get("/", response_class=HTMLResponse)
 async def home():
     """Serve the main page"""
-    return FileResponse("static/index.html")
+    static_index = Path(__file__).parent / "static" / "index.html"
+    if static_index.exists():
+        return FileResponse(str(static_index))
+    return HTMLResponse("<h1>P&ID Parser API</h1><p>Use POST /api/analyze to analyze P&IDs</p>")
+
+
+@app.get("/health")
+async def health():
+    """Health check endpoint"""
+    return {"status": "healthy", "service": "P&ID Parser"}
 
 
 @app.post("/api/analyze")
@@ -326,11 +334,6 @@ async def analyze_pid(file: UploadFile = File(...)):
         raise HTTPException(500, f"Analysis failed: {str(e)}")
 
 
-@app.get("/health")
-async def health():
-    """Health check endpoint"""
-    return {"status": "healthy", "service": "P&ID Parser"}
-
-
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8890)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
