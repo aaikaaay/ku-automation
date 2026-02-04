@@ -95,13 +95,16 @@ Return ONLY the JSON, no other text."""
 def get_openai_client():
     """Lazy initialization of OpenAI client"""
     from openai import OpenAI
+    import httpx
     api_key = os.environ.get("OPENAI_API_KEY")
     print(f"[APP] Initializing OpenAI client. API Key present: {bool(api_key)}")
     if not api_key:
         print("[APP ERROR] OPENAI_API_KEY is missing!")
         raise HTTPException(500, "OPENAI_API_KEY not configured")
     try:
-        client = OpenAI(api_key=api_key)
+        # Explicitly create httpx client without proxies to avoid Railway env conflicts
+        http_client = httpx.Client()
+        client = OpenAI(api_key=api_key, http_client=http_client)
         print("[APP] OpenAI client initialized successfully.")
         return client
     except Exception as e:
