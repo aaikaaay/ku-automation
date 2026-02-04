@@ -100,6 +100,35 @@ If you cannot identify certain fields, use "N/A" or leave empty.
 Be conservative - only extract what you can clearly see.
 Return ONLY the JSON, no other text."""
 
+# Legend extraction prompt
+LEGEND_EXTRACTION_PROMPT = """You are analyzing a P&ID (Piping and Instrumentation Diagram) LEGEND or SYMBOL SHEET.
+
+Extract and summarize ALL the symbol definitions, abbreviations, and conventions shown. This includes:
+
+1. **EQUIPMENT SYMBOLS**: What shapes/icons represent vessels, pumps, exchangers, etc.
+2. **VALVE SYMBOLS**: Gate, globe, ball, check, control, relief valve symbols
+3. **INSTRUMENT SYMBOLS**: Circles, bubbles, and their letter codes (PT=Pressure Transmitter, etc.)
+4. **LINE TYPES**: Solid, dashed, thick, thin lines and what they represent
+5. **ABBREVIATIONS**: All abbreviation definitions (e.g., OC=Oil Crude, CW=Cooling Water)
+6. **SERVICE CODES**: Fluid/service type codes and their meanings
+7. **SPEC BREAKS**: Specification change symbols
+8. **ANY OTHER SYMBOLS**: Control signals, electrical, pneumatic, etc.
+
+Return a comprehensive JSON summary:
+{
+  "equipment_symbols": [{"symbol": "description", "icon_description": "what it looks like"}],
+  "valve_symbols": [{"type": "valve type", "symbol_description": "how to identify it"}],
+  "instrument_codes": [{"code": "XX", "meaning": "description"}],
+  "line_types": [{"type": "description", "appearance": "solid/dashed/etc"}],
+  "abbreviations": {"CODE": "Full meaning"},
+  "service_codes": {"CODE": "Fluid/service type"},
+  "other_symbols": [{"symbol": "description"}],
+  "notes": ["any important notes or conventions"]
+}
+
+Be thorough - this legend will be used to interpret the actual P&ID drawings.
+Return ONLY the JSON, no other text."""
+
 
 def get_anthropic_client():
     """Lazy initialization of Anthropic client"""
@@ -142,7 +171,64 @@ def convert_pdf_to_images(pdf_bytes: bytes) -> list[bytes]:
     return images
 
 
-def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") -> dict:
+def analyze_legend(image_base64: str, media_type: str = "image/png") -> dict:
+    """Analyze a P&ID legend/symbol sheet and extract symbol definitions"""
+    client = get_anthropic_client()
+    
+    print("[APP] Analyzing legend/symbol sheet...")
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=4096,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": media_type,
+                            "data": image_base64
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "text": LEGEND_EXTRACTION_PROMPT
+                    }
+                ]
+            }
+        ]
+    )
+    
+    content = response.content[0].text
+    print(f"[APP] Legend analysis response length: {len(content) if content else 0} chars")
+    
+    # Parse JSON response
+    content = content.strip()
+    if "```json" in content:
+        content = content.split("```json")[1].split("```")[0]
+    elif "```" in content:
+        parts = content.split("```")
+        for part in parts:
+            part = part.strip()
+            if part.startswith("{"):
+                content = part
+                break
+    
+    content = content.strip()
+    if not content.startswith("{") and "{" in content:
+        content = content[content.index("{"):]
+    if not content.endswith("}") and "}" in content:
+        content = content[:content.rindex("}") + 1]
+    
+    try:
+        return json.loads(content)
+    except json.JSONDecodeError:
+        print("[APP] Could not parse legend JSON, returning raw text")
+        return {"raw_legend": content}
+
+
+def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png", legend_context: dict = None) -> dict:
     """Send image to Claude Vision API for P&ID analysis"""
     client = get_anthropic_client()
     
@@ -153,6 +239,21 @@ def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") 
         media_type = "image/webp"
     else:
         media_type = "image/jpeg"
+    
+    # Build the prompt - include legend context if available
+    prompt = PID_EXTRACTION_PROMPT
+    if legend_context:
+        legend_text = json.dumps(legend_context, indent=2)
+        prompt = f"""IMPORTANT: Use this LEGEND/SYMBOL REFERENCE when analyzing the P&ID:
+
+{legend_text}
+
+Apply these symbol definitions, abbreviations, and conventions to interpret the drawing accurately.
+
+---
+
+{PID_EXTRACTION_PROMPT}"""
+        print("[APP] Using legend context for enhanced analysis")
     
     response = client.messages.create(
         model="claude-sonnet-4-20250514",
@@ -171,7 +272,7 @@ def analyze_pid_with_vision(image_base64: str, content_type: str = "image/png") 
                     },
                     {
                         "type": "text",
-                        "text": PID_EXTRACTION_PROMPT
+                        "text": prompt
                     }
                 ]
             }
@@ -375,13 +476,31 @@ async def analyze_pid(file: UploadFile = File(...)):
         raise HTTPException(400, "File too large. Maximum size is 20MB.")
     
     # Handle PDF files - convert to images first
+    legend_context = None
     if file.content_type == "application/pdf":
         print("[APP] PDF detected, converting to images...")
         try:
             page_images = convert_pdf_to_images(content)
-            print(f"[APP] Converted PDF to {len(page_images)} page(s)")
-            # Use first page for analysis (P&IDs are usually single page)
-            content = page_images[0]
+            num_pages = len(page_images)
+            print(f"[APP] Converted PDF to {num_pages} page(s)")
+            
+            # Multi-page PDF: analyze first page as legend, use page 2+ for P&ID
+            if num_pages > 1:
+                print("[APP] Multi-page PDF detected - analyzing page 1 as legend...")
+                legend_base64 = encode_image_to_base64(page_images[0])
+                try:
+                    legend_context = analyze_legend(legend_base64, "image/png")
+                    print("[APP] Legend analysis complete")
+                except Exception as e:
+                    print(f"[APP WARNING] Legend analysis failed: {e} - continuing without legend")
+                
+                # Use page 2 for main P&ID analysis
+                content = page_images[1]
+                print(f"[APP] Using page 2 for P&ID analysis (with legend context)")
+            else:
+                # Single page - analyze directly
+                content = page_images[0]
+            
             content_type = "image/png"
         except Exception as e:
             print(f"[APP ERROR] PDF conversion failed: {e}")
@@ -395,9 +514,9 @@ async def analyze_pid(file: UploadFile = File(...)):
     
     try:
         # Analyze with Vision API
-        print("[APP] Calling OpenAI Vision API...")
-        extracted_data = analyze_pid_with_vision(image_base64, content_type)
-        print("[APP] OpenAI Vision API call complete.")
+        print("[APP] Calling Claude Vision API...")
+        extracted_data = analyze_pid_with_vision(image_base64, content_type, legend_context)
+        print("[APP] Claude Vision API call complete.")
         
         # Generate Excel report
         excel_path = create_excel_report(extracted_data, file.filename)
