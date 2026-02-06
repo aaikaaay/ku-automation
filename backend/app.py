@@ -100,6 +100,104 @@ If you cannot identify certain fields, use "N/A" or leave empty.
 Be conservative - only extract what you can clearly see.
 Return ONLY the JSON, no other text."""
 
+# Datasheet extraction prompt
+DATASHEET_EXTRACTION_PROMPT = """You are an expert engineering document analyzer specializing in equipment datasheets for oil & gas, petrochemical, and process industries.
+
+CRITICAL: Examine the datasheet VERY CAREFULLY. Extract ALL technical specifications, operating parameters, and equipment details visible.
+
+## Extract These Categories:
+
+### 1. GENERAL INFORMATION
+- Manufacturer: Company name
+- Model: Model number/name
+- Tag Number: Equipment tag if shown (e.g., P-101, V-2001)
+- Serial Number: If visible
+- Equipment Type: Pump, Valve, Vessel, Instrument, Heat Exchanger, etc.
+- Service/Application: What the equipment is used for
+
+### 2. OPERATING CONDITIONS
+- Design Pressure: Maximum design pressure with units
+- Operating Pressure: Normal operating pressure with units
+- Design Temperature: Maximum design temperature with units
+- Operating Temperature: Normal operating temperature with units
+- Flow Rate: Capacity/flow with units
+- Fluid/Medium: What fluid it handles
+
+### 3. PHYSICAL SPECIFICATIONS
+- Size/Dimensions: Overall dimensions, connection sizes
+- Weight: Dry/wet weight
+- Materials: Body material, trim, internals, seals
+- Connections: Flange ratings, sizes, types
+
+### 4. PERFORMANCE DATA
+- Efficiency: If applicable
+- Power Requirements: HP, kW, voltage
+- Speed/RPM: Rotational speed
+- Head/Differential Pressure: For pumps
+- Cv/Kv: For valves
+
+### 5. CERTIFICATIONS & STANDARDS
+- Design Code: ASME, API, etc.
+- Certifications: ATEX, CE, PED, etc.
+- Material Certificates: MTR requirements
+
+### 6. ADDITIONAL INFORMATION
+- Accessories: Included items
+- Spare Parts: Recommended spares
+- Notes: Special requirements, installation notes
+
+Return your analysis as a JSON object with this exact structure:
+{
+  "general": {
+    "manufacturer": "...",
+    "model": "...",
+    "tag_number": "...",
+    "serial_number": "...",
+    "equipment_type": "...",
+    "service": "..."
+  },
+  "operating_conditions": {
+    "design_pressure": "...",
+    "operating_pressure": "...",
+    "design_temperature": "...",
+    "operating_temperature": "...",
+    "flow_rate": "...",
+    "fluid_medium": "..."
+  },
+  "physical": {
+    "dimensions": "...",
+    "weight": "...",
+    "materials": "...",
+    "connections": "..."
+  },
+  "performance": {
+    "power": "...",
+    "speed": "...",
+    "efficiency": "...",
+    "head_dp": "...",
+    "cv_kv": "..."
+  },
+  "certifications": {
+    "design_code": "...",
+    "certifications": "...",
+    "material_certs": "..."
+  },
+  "additional": {
+    "accessories": "...",
+    "spare_parts": "...",
+    "notes": "..."
+  },
+  "all_specs": [
+    {"parameter": "...", "value": "...", "unit": "..."}
+  ],
+  "summary": "Brief description of this equipment"
+}
+
+The "all_specs" array should contain EVERY specification you can find, even if not categorized above.
+If you cannot identify certain fields, use "N/A" or leave empty.
+Return ONLY the JSON, no other text."""
+
+
 # Legend extraction prompt
 LEGEND_EXTRACTION_PROMPT = """You are analyzing a P&ID (Piping and Instrumentation Diagram) LEGEND or SYMBOL SHEET.
 
@@ -536,6 +634,260 @@ async def analyze_pid(file: UploadFile = File(...)):
             "data": extracted_data,
             "excel": excel_base64,
             "filename": f"PID_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        }
+        
+    except json.JSONDecodeError as e:
+        raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
+    except Exception as e:
+        raise HTTPException(500, f"Analysis failed: {str(e)}")
+
+
+def analyze_datasheet_with_vision(image_base64: str, content_type: str = "image/png") -> dict:
+    """Send datasheet image to Claude Vision API for analysis"""
+    client = get_anthropic_client()
+    
+    # Determine media type
+    if "png" in content_type:
+        media_type = "image/png"
+    elif "webp" in content_type:
+        media_type = "image/webp"
+    else:
+        media_type = "image/jpeg"
+    
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=4096,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": media_type,
+                            "data": image_base64
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "text": DATASHEET_EXTRACTION_PROMPT
+                    }
+                ]
+            }
+        ]
+    )
+    
+    content = response.content[0].text
+    print(f"[APP] Datasheet analysis response length: {len(content) if content else 0} chars")
+    
+    if not content or not content.strip():
+        raise ValueError("Empty response from AI")
+    
+    # Clean up response - extract JSON
+    content = content.strip()
+    if "```json" in content:
+        content = content.split("```json")[1].split("```")[0]
+    elif "```" in content:
+        parts = content.split("```")
+        for part in parts:
+            part = part.strip()
+            if part.startswith("{"):
+                content = part
+                break
+    
+    content = content.strip()
+    if not content.startswith("{") and "{" in content:
+        content = content[content.index("{"):]
+    if not content.endswith("}") and "}" in content:
+        content = content[:content.rindex("}") + 1]
+    
+    return json.loads(content)
+
+
+def create_datasheet_excel_report(data: dict, filename: str) -> str:
+    """Generate Excel report from extracted datasheet data"""
+    from openpyxl import Workbook
+    from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+    
+    wb = Workbook()
+    
+    # Styles
+    header_font = Font(bold=True, color="FFFFFF", size=11)
+    header_fill = PatternFill(start_color="059669", end_color="059669", fill_type="solid")
+    section_font = Font(bold=True, size=12)
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+    
+    # === MAIN Sheet ===
+    ws = wb.active
+    ws.title = "Datasheet Extract"
+    
+    row = 1
+    
+    # General Information
+    ws.cell(row=row, column=1, value="GENERAL INFORMATION").font = section_font
+    row += 1
+    general = data.get("general", {})
+    for key, label in [("manufacturer", "Manufacturer"), ("model", "Model"), 
+                       ("tag_number", "Tag Number"), ("serial_number", "Serial Number"),
+                       ("equipment_type", "Equipment Type"), ("service", "Service/Application")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=general.get(key, "N/A"))
+        row += 1
+    row += 1
+    
+    # Operating Conditions
+    ws.cell(row=row, column=1, value="OPERATING CONDITIONS").font = section_font
+    row += 1
+    operating = data.get("operating_conditions", {})
+    for key, label in [("design_pressure", "Design Pressure"), ("operating_pressure", "Operating Pressure"),
+                       ("design_temperature", "Design Temperature"), ("operating_temperature", "Operating Temperature"),
+                       ("flow_rate", "Flow Rate"), ("fluid_medium", "Fluid/Medium")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=operating.get(key, "N/A"))
+        row += 1
+    row += 1
+    
+    # Physical Specifications
+    ws.cell(row=row, column=1, value="PHYSICAL SPECIFICATIONS").font = section_font
+    row += 1
+    physical = data.get("physical", {})
+    for key, label in [("dimensions", "Dimensions"), ("weight", "Weight"),
+                       ("materials", "Materials"), ("connections", "Connections")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=physical.get(key, "N/A"))
+        row += 1
+    row += 1
+    
+    # Performance Data
+    ws.cell(row=row, column=1, value="PERFORMANCE DATA").font = section_font
+    row += 1
+    perf = data.get("performance", {})
+    for key, label in [("power", "Power Requirements"), ("speed", "Speed/RPM"),
+                       ("efficiency", "Efficiency"), ("head_dp", "Head/DP"), ("cv_kv", "Cv/Kv")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=perf.get(key, "N/A"))
+        row += 1
+    row += 1
+    
+    # Certifications
+    ws.cell(row=row, column=1, value="CERTIFICATIONS & STANDARDS").font = section_font
+    row += 1
+    certs = data.get("certifications", {})
+    for key, label in [("design_code", "Design Code"), ("certifications", "Certifications"),
+                       ("material_certs", "Material Certificates")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=certs.get(key, "N/A"))
+        row += 1
+    row += 1
+    
+    # Additional
+    ws.cell(row=row, column=1, value="ADDITIONAL INFORMATION").font = section_font
+    row += 1
+    additional = data.get("additional", {})
+    for key, label in [("accessories", "Accessories"), ("spare_parts", "Spare Parts"),
+                       ("notes", "Notes")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=additional.get(key, "N/A"))
+        row += 1
+    
+    ws.column_dimensions['A'].width = 25
+    ws.column_dimensions['B'].width = 50
+    
+    # === ALL SPECS Sheet ===
+    ws_specs = wb.create_sheet("All Specifications")
+    ws_specs.append(["Parameter", "Value", "Unit"])
+    ws_specs['A1'].font = header_font
+    ws_specs['A1'].fill = header_fill
+    ws_specs['B1'].font = header_font
+    ws_specs['B1'].fill = header_fill
+    ws_specs['C1'].font = header_font
+    ws_specs['C1'].fill = header_fill
+    
+    for spec in data.get("all_specs", []):
+        ws_specs.append([
+            spec.get("parameter", ""),
+            spec.get("value", ""),
+            spec.get("unit", "")
+        ])
+    
+    ws_specs.column_dimensions['A'].width = 30
+    ws_specs.column_dimensions['B'].width = 30
+    ws_specs.column_dimensions['C'].width = 15
+    
+    # Save to temp file
+    output_path = tempfile.mktemp(suffix=".xlsx")
+    wb.save(output_path)
+    
+    return output_path
+
+
+@app.post("/api/parse-datasheet")
+async def parse_datasheet(file: UploadFile = File(...)):
+    """Analyze uploaded equipment datasheet and return extracted data"""
+    
+    print(f"[APP] /api/parse-datasheet called for file: {file.filename} (Type: {file.content_type})")
+    
+    # Validate file type
+    allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if file.content_type not in allowed_types:
+        print(f"[APP ERROR] Invalid file type: {file.content_type}")
+        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
+    
+    # Read file
+    content = await file.read()
+    print(f"[APP] File read, size: {len(content)} bytes.")
+    
+    # Check file size (max 20MB)
+    if len(content) > 20 * 1024 * 1024:
+        raise HTTPException(400, "File too large. Maximum size is 20MB.")
+    
+    # Handle PDF files - convert to images first
+    if file.content_type == "application/pdf":
+        print("[APP] PDF detected, converting to images...")
+        try:
+            page_images = convert_pdf_to_images(content)
+            print(f"[APP] Converted PDF to {len(page_images)} page(s)")
+            # Use first page for datasheet analysis
+            content = page_images[0]
+            content_type = "image/png"
+        except Exception as e:
+            print(f"[APP ERROR] PDF conversion failed: {e}")
+            raise HTTPException(500, f"Failed to convert PDF: {str(e)}")
+    else:
+        content_type = file.content_type
+    
+    # Encode to base64
+    image_base64 = encode_image_to_base64(content)
+    print("[APP] Image encoded to base64.")
+    
+    try:
+        # Analyze with Vision API
+        print("[APP] Calling Claude Vision API for datasheet analysis...")
+        extracted_data = analyze_datasheet_with_vision(image_base64, content_type)
+        print("[APP] Claude Vision API call complete.")
+        
+        # Generate Excel report
+        excel_path = create_datasheet_excel_report(extracted_data, file.filename)
+        print("[APP] Generated Excel report.")
+        
+        # Read Excel file for response
+        with open(excel_path, "rb") as f:
+            excel_base64 = base64.b64encode(f.read()).decode('utf-8')
+        
+        # Clean up temp file
+        os.unlink(excel_path)
+        
+        return {
+            "success": True,
+            "data": extracted_data,
+            "excel": excel_base64,
+            "filename": f"Datasheet_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
         }
         
     except json.JSONDecodeError as e:
