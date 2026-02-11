@@ -896,6 +896,516 @@ async def parse_datasheet(file: UploadFile = File(...)):
         raise HTTPException(500, f"Analysis failed: {str(e)}")
 
 
+# RFQ/ITB Extraction Prompt
+RFQ_EXTRACTION_PROMPT = """You are an expert procurement and tender document analyzer specializing in RFQs (Request for Quotation), ITBs (Invitation to Bid), and tender documents for oil & gas, EPC, and engineering industries.
+
+CRITICAL: Examine the document VERY CAREFULLY. Extract ALL relevant commercial and technical requirements, deadlines, and scope items.
+
+## Extract These Categories:
+
+### 1. DOCUMENT OVERVIEW
+- Document Type: RFQ, ITB, RFP, Tender, EOI, etc.
+- Reference Number: Document/tender reference
+- Issue Date: When the document was issued
+- Issuing Company: The company requesting quotes
+- Project Name: Project title or name
+- Project Location: Where the work will be performed
+
+### 2. KEY DATES & DEADLINES
+- Submission Deadline: When quotes/bids are due (date AND time with timezone)
+- Validity Period: How long quotes must remain valid
+- Clarification Deadline: Last date to ask questions
+- Site Visit Date: If applicable
+- Award Date: Expected contract award date
+- Delivery/Completion Date: When goods/services are needed
+
+### 3. SCOPE OF WORK
+Extract each distinct scope item/line item:
+- Item Number: Line item reference
+- Description: What is being requested
+- Quantity: Amount needed with units
+- Specifications: Technical requirements
+- Delivery Location: Where to deliver
+
+### 4. TECHNICAL REQUIREMENTS
+- Standards: Required codes/standards (API, ASME, ISO, etc.)
+- Certifications: Required certificates (ATEX, CE, etc.)
+- Material Requirements: Specific material specs
+- Testing Requirements: FAT, SAT, inspections
+- Documentation: Required documents (MTRs, drawings, manuals)
+
+### 5. COMMERCIAL TERMS
+- Payment Terms: Payment conditions
+- Incoterms: Delivery terms (FOB, CIF, DDP, etc.)
+- Currency: Pricing currency
+- Warranty: Warranty requirements
+- Liquidated Damages: LD clauses if any
+- Insurance: Insurance requirements
+- Bond/Guarantee: Bid bond, performance guarantee requirements
+
+### 6. SUBMISSION REQUIREMENTS
+- Format: How to submit (email, portal, hardcopy)
+- Required Documents: What to include in submission
+- Pricing Format: How to structure pricing
+- Contact Person: Who to send questions to (name, email, phone)
+
+### 7. EVALUATION CRITERIA
+- Selection Method: Lowest price, best value, etc.
+- Weighted Criteria: If technical/commercial weights are specified
+- Mandatory Requirements: Must-have qualifications
+
+### 8. COMPLIANCE CHECKLIST
+Generate a checklist of all requirements the bidder must comply with.
+
+Return your analysis as a JSON object with this exact structure:
+{
+  "overview": {
+    "document_type": "...",
+    "reference_number": "...",
+    "issue_date": "...",
+    "issuing_company": "...",
+    "project_name": "...",
+    "project_location": "..."
+  },
+  "key_dates": {
+    "submission_deadline": "...",
+    "validity_period": "...",
+    "clarification_deadline": "...",
+    "site_visit": "...",
+    "award_date": "...",
+    "delivery_date": "..."
+  },
+  "scope_items": [
+    {"item_no": "...", "description": "...", "quantity": "...", "specs": "...", "delivery_location": "..."}
+  ],
+  "technical_requirements": {
+    "standards": ["..."],
+    "certifications": ["..."],
+    "materials": "...",
+    "testing": "...",
+    "documentation": ["..."]
+  },
+  "commercial_terms": {
+    "payment_terms": "...",
+    "incoterms": "...",
+    "currency": "...",
+    "warranty": "...",
+    "liquidated_damages": "...",
+    "insurance": "...",
+    "bonds": "..."
+  },
+  "submission": {
+    "format": "...",
+    "required_docs": ["..."],
+    "pricing_format": "...",
+    "contact_name": "...",
+    "contact_email": "...",
+    "contact_phone": "..."
+  },
+  "evaluation": {
+    "method": "...",
+    "criteria": ["..."],
+    "mandatory_requirements": ["..."]
+  },
+  "compliance_checklist": [
+    {"requirement": "...", "category": "..."}
+  ],
+  "summary": "Brief summary of what this RFQ is requesting"
+}
+
+If you cannot identify certain fields, use "N/A" or leave empty.
+Return ONLY the JSON, no other text."""
+
+
+def analyze_rfq_with_vision(image_base64: str, content_type: str = "image/png") -> dict:
+    """Send RFQ document image to Claude Vision API for analysis"""
+    client = get_anthropic_client()
+    
+    # Determine media type
+    if "png" in content_type:
+        media_type = "image/png"
+    elif "webp" in content_type:
+        media_type = "image/webp"
+    else:
+        media_type = "image/jpeg"
+    
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=4096,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        "source": {
+                            "type": "base64",
+                            "media_type": media_type,
+                            "data": image_base64
+                        }
+                    },
+                    {
+                        "type": "text",
+                        "text": RFQ_EXTRACTION_PROMPT
+                    }
+                ]
+            }
+        ]
+    )
+    
+    content = response.content[0].text
+    print(f"[APP] RFQ analysis response length: {len(content) if content else 0} chars")
+    
+    if not content or not content.strip():
+        raise ValueError("Empty response from AI")
+    
+    # Clean up response - extract JSON
+    content = content.strip()
+    if "```json" in content:
+        content = content.split("```json")[1].split("```")[0]
+    elif "```" in content:
+        parts = content.split("```")
+        for part in parts:
+            part = part.strip()
+            if part.startswith("{"):
+                content = part
+                break
+    
+    content = content.strip()
+    if not content.startswith("{") and "{" in content:
+        content = content[content.index("{"):]
+    if not content.endswith("}") and "}" in content:
+        content = content[:content.rindex("}") + 1]
+    
+    return json.loads(content)
+
+
+def analyze_rfq_multipage(page_images: list, content_type: str = "image/png") -> dict:
+    """Analyze multi-page RFQ document by combining all pages"""
+    client = get_anthropic_client()
+    
+    # Determine media type
+    if "png" in content_type:
+        media_type = "image/png"
+    else:
+        media_type = "image/jpeg"
+    
+    # Build content array with all page images
+    content_array = []
+    for i, page_bytes in enumerate(page_images):
+        page_base64 = encode_image_to_base64(page_bytes)
+        content_array.append({
+            "type": "image",
+            "source": {
+                "type": "base64",
+                "media_type": media_type,
+                "data": page_base64
+            }
+        })
+        print(f"[APP] Added page {i+1} to RFQ analysis request")
+    
+    # Add the prompt at the end
+    content_array.append({
+        "type": "text",
+        "text": f"This RFQ/tender document has {len(page_images)} pages. Analyze ALL pages together and extract the complete information.\n\n" + RFQ_EXTRACTION_PROMPT
+    })
+    
+    response = client.messages.create(
+        model="claude-sonnet-4-20250514",
+        max_tokens=8192,
+        messages=[
+            {
+                "role": "user",
+                "content": content_array
+            }
+        ]
+    )
+    
+    content = response.content[0].text
+    print(f"[APP] RFQ multi-page analysis response length: {len(content) if content else 0} chars")
+    
+    if not content or not content.strip():
+        raise ValueError("Empty response from AI")
+    
+    # Clean up response - extract JSON
+    content = content.strip()
+    if "```json" in content:
+        content = content.split("```json")[1].split("```")[0]
+    elif "```" in content:
+        parts = content.split("```")
+        for part in parts:
+            part = part.strip()
+            if part.startswith("{"):
+                content = part
+                break
+    
+    content = content.strip()
+    if not content.startswith("{") and "{" in content:
+        content = content[content.index("{"):]
+    if not content.endswith("}") and "}" in content:
+        content = content[:content.rindex("}") + 1]
+    
+    return json.loads(content)
+
+
+def create_rfq_excel_report(data: dict, filename: str) -> str:
+    """Generate Excel report from extracted RFQ data"""
+    from openpyxl import Workbook
+    from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
+    
+    wb = Workbook()
+    
+    # Styles
+    header_font = Font(bold=True, color="FFFFFF", size=11)
+    header_fill = PatternFill(start_color="2563EB", end_color="2563EB", fill_type="solid")
+    section_font = Font(bold=True, size=12, color="1E40AF")
+    date_fill = PatternFill(start_color="FEF3C7", end_color="FEF3C7", fill_type="solid")
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+    
+    # === OVERVIEW Sheet ===
+    ws = wb.active
+    ws.title = "RFQ Overview"
+    
+    row = 1
+    
+    # Document Overview
+    ws.cell(row=row, column=1, value="DOCUMENT OVERVIEW").font = section_font
+    row += 1
+    overview = data.get("overview", {})
+    for key, label in [("document_type", "Document Type"), ("reference_number", "Reference Number"),
+                       ("issue_date", "Issue Date"), ("issuing_company", "Issuing Company"),
+                       ("project_name", "Project Name"), ("project_location", "Project Location")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=overview.get(key, "N/A"))
+        row += 1
+    row += 1
+    
+    # Key Dates
+    ws.cell(row=row, column=1, value="KEY DATES & DEADLINES").font = section_font
+    row += 1
+    dates = data.get("key_dates", {})
+    for key, label in [("submission_deadline", "⚠️ SUBMISSION DEADLINE"), ("validity_period", "Validity Period"),
+                       ("clarification_deadline", "Clarification Deadline"), ("site_visit", "Site Visit"),
+                       ("award_date", "Expected Award Date"), ("delivery_date", "Delivery/Completion Date")]:
+        ws.cell(row=row, column=1, value=label)
+        cell = ws.cell(row=row, column=2, value=dates.get(key, "N/A"))
+        if "deadline" in key.lower():
+            cell.fill = date_fill
+        row += 1
+    row += 1
+    
+    # Commercial Terms
+    ws.cell(row=row, column=1, value="COMMERCIAL TERMS").font = section_font
+    row += 1
+    commercial = data.get("commercial_terms", {})
+    for key, label in [("payment_terms", "Payment Terms"), ("incoterms", "Incoterms"),
+                       ("currency", "Currency"), ("warranty", "Warranty"),
+                       ("liquidated_damages", "Liquidated Damages"), ("insurance", "Insurance"),
+                       ("bonds", "Bonds/Guarantees")]:
+        ws.cell(row=row, column=1, value=label)
+        ws.cell(row=row, column=2, value=commercial.get(key, "N/A"))
+        row += 1
+    row += 1
+    
+    # Submission Info
+    ws.cell(row=row, column=1, value="SUBMISSION REQUIREMENTS").font = section_font
+    row += 1
+    submission = data.get("submission", {})
+    ws.cell(row=row, column=1, value="Format")
+    ws.cell(row=row, column=2, value=submission.get("format", "N/A"))
+    row += 1
+    ws.cell(row=row, column=1, value="Contact Name")
+    ws.cell(row=row, column=2, value=submission.get("contact_name", "N/A"))
+    row += 1
+    ws.cell(row=row, column=1, value="Contact Email")
+    ws.cell(row=row, column=2, value=submission.get("contact_email", "N/A"))
+    row += 1
+    ws.cell(row=row, column=1, value="Contact Phone")
+    ws.cell(row=row, column=2, value=submission.get("contact_phone", "N/A"))
+    row += 1
+    
+    # Summary
+    row += 1
+    ws.cell(row=row, column=1, value="SUMMARY").font = section_font
+    row += 1
+    ws.cell(row=row, column=1, value=data.get("summary", "N/A"))
+    ws.merge_cells(start_row=row, start_column=1, end_row=row, end_column=2)
+    
+    ws.column_dimensions['A'].width = 28
+    ws.column_dimensions['B'].width = 55
+    
+    # === SCOPE ITEMS Sheet ===
+    ws_scope = wb.create_sheet("Scope Items")
+    ws_scope.append(["Item No", "Description", "Quantity", "Specifications", "Delivery Location"])
+    for col in ['A', 'B', 'C', 'D', 'E']:
+        ws_scope[f'{col}1'].font = header_font
+        ws_scope[f'{col}1'].fill = header_fill
+    
+    for item in data.get("scope_items", []):
+        ws_scope.append([
+            item.get("item_no", ""),
+            item.get("description", ""),
+            item.get("quantity", ""),
+            item.get("specs", ""),
+            item.get("delivery_location", "")
+        ])
+    
+    ws_scope.column_dimensions['A'].width = 12
+    ws_scope.column_dimensions['B'].width = 45
+    ws_scope.column_dimensions['C'].width = 15
+    ws_scope.column_dimensions['D'].width = 35
+    ws_scope.column_dimensions['E'].width = 25
+    
+    # === TECHNICAL REQUIREMENTS Sheet ===
+    ws_tech = wb.create_sheet("Technical Requirements")
+    row = 1
+    
+    tech = data.get("technical_requirements", {})
+    
+    ws_tech.cell(row=row, column=1, value="STANDARDS").font = section_font
+    row += 1
+    for std in tech.get("standards", []):
+        ws_tech.cell(row=row, column=1, value="•")
+        ws_tech.cell(row=row, column=2, value=std)
+        row += 1
+    row += 1
+    
+    ws_tech.cell(row=row, column=1, value="CERTIFICATIONS").font = section_font
+    row += 1
+    for cert in tech.get("certifications", []):
+        ws_tech.cell(row=row, column=1, value="•")
+        ws_tech.cell(row=row, column=2, value=cert)
+        row += 1
+    row += 1
+    
+    ws_tech.cell(row=row, column=1, value="MATERIALS").font = section_font
+    row += 1
+    ws_tech.cell(row=row, column=1, value=tech.get("materials", "N/A"))
+    row += 2
+    
+    ws_tech.cell(row=row, column=1, value="TESTING REQUIREMENTS").font = section_font
+    row += 1
+    ws_tech.cell(row=row, column=1, value=tech.get("testing", "N/A"))
+    row += 2
+    
+    ws_tech.cell(row=row, column=1, value="DOCUMENTATION REQUIRED").font = section_font
+    row += 1
+    for doc in tech.get("documentation", []):
+        ws_tech.cell(row=row, column=1, value="•")
+        ws_tech.cell(row=row, column=2, value=doc)
+        row += 1
+    
+    ws_tech.column_dimensions['A'].width = 5
+    ws_tech.column_dimensions['B'].width = 60
+    
+    # === COMPLIANCE CHECKLIST Sheet ===
+    ws_check = wb.create_sheet("Compliance Checklist")
+    ws_check.append(["✓", "Requirement", "Category"])
+    for col in ['A', 'B', 'C']:
+        ws_check[f'{col}1'].font = header_font
+        ws_check[f'{col}1'].fill = header_fill
+    
+    for item in data.get("compliance_checklist", []):
+        ws_check.append([
+            "☐",
+            item.get("requirement", ""),
+            item.get("category", "")
+        ])
+    
+    ws_check.column_dimensions['A'].width = 5
+    ws_check.column_dimensions['B'].width = 60
+    ws_check.column_dimensions['C'].width = 20
+    
+    # Save to temp file
+    output_path = tempfile.mktemp(suffix=".xlsx")
+    wb.save(output_path)
+    
+    return output_path
+
+
+@app.post("/api/parse-rfq")
+async def parse_rfq(file: UploadFile = File(...)):
+    """Analyze uploaded RFQ/ITB document and return extracted data"""
+    
+    print(f"[APP] /api/parse-rfq called for file: {file.filename} (Type: {file.content_type})")
+    
+    # Validate file type
+    allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if file.content_type not in allowed_types:
+        print(f"[APP ERROR] Invalid file type: {file.content_type}")
+        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
+    
+    # Read file
+    content = await file.read()
+    print(f"[APP] File read, size: {len(content)} bytes.")
+    
+    # Check file size (max 20MB)
+    if len(content) > 20 * 1024 * 1024:
+        raise HTTPException(400, "File too large. Maximum size is 20MB.")
+    
+    # Handle PDF files - for RFQs we want to analyze ALL pages
+    if file.content_type == "application/pdf":
+        print("[APP] PDF detected, converting to images...")
+        try:
+            page_images = convert_pdf_to_images(content)
+            num_pages = len(page_images)
+            print(f"[APP] Converted PDF to {num_pages} page(s)")
+            
+            # Limit to first 10 pages to avoid token limits
+            if num_pages > 10:
+                print(f"[APP] Limiting analysis to first 10 pages (document has {num_pages})")
+                page_images = page_images[:10]
+            
+            # For multi-page PDFs, analyze all pages together
+            if num_pages > 1:
+                print(f"[APP] Analyzing {len(page_images)} pages together...")
+                extracted_data = analyze_rfq_multipage(page_images, "image/png")
+            else:
+                # Single page
+                image_base64 = encode_image_to_base64(page_images[0])
+                extracted_data = analyze_rfq_with_vision(image_base64, "image/png")
+                
+        except Exception as e:
+            print(f"[APP ERROR] PDF processing failed: {e}")
+            raise HTTPException(500, f"Failed to process PDF: {str(e)}")
+    else:
+        # Single image
+        image_base64 = encode_image_to_base64(content)
+        print("[APP] Image encoded to base64.")
+        extracted_data = analyze_rfq_with_vision(image_base64, file.content_type)
+    
+    try:
+        print("[APP] RFQ analysis complete.")
+        
+        # Generate Excel report
+        excel_path = create_rfq_excel_report(extracted_data, file.filename)
+        print("[APP] Generated Excel report.")
+        
+        # Read Excel file for response
+        with open(excel_path, "rb") as f:
+            excel_base64 = base64.b64encode(f.read()).decode('utf-8')
+        
+        # Clean up temp file
+        os.unlink(excel_path)
+        
+        return {
+            "success": True,
+            "data": extracted_data,
+            "excel": excel_base64,
+            "filename": f"RFQ_Analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        }
+        
+    except json.JSONDecodeError as e:
+        raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
+    except Exception as e:
+        raise HTTPException(500, f"Analysis failed: {str(e)}")
+
+
 if __name__ == "__main__":
     print("[APP] Running app directly with uvicorn.")
     port = int(os.environ.get("PORT", 8000))

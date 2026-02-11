@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RFQ Analyzer Demo | KU Automation</title>
+    <meta name="description" content="Upload an RFQ, ITB, or tender document and watch AI extract scope items, deadlines, requirements, and generate a bid checklist instantly.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #2563eb, #3b82f6, #60a5fa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .drop-zone { transition: all 0.3s ease; }
+        .drop-zone.drag-over { border-color: #2563eb; background-color: #eff6ff; transform: scale(1.01); }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .tab-active { border-color: #2563eb; color: #1d4ed8; background-color: #eff6ff; }
+        .deadline-highlight { background: linear-gradient(90deg, #fef3c7, #fde68a); }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
+                    <div>
+                        <span class="font-semibold text-lg block">RFQ Analyzer</span>
+                        <span class="text-xs text-gray-500">by KU Automation</span>
+                    </div>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <a href="demos.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">← All Demos</a>
+                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all text-sm">
+                        Book a Call
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Hero -->
+        <div class="text-center mb-10">
+            <h1 class="text-3xl md:text-4xl font-bold mb-3">
+                <span class="gradient-text">RFQ / Tender Analyzer</span>
+            </h1>
+            <p class="text-gray-600 max-w-2xl mx-auto">
+                Upload an RFQ, ITB, or tender document and watch AI extract scope items, key dates, technical requirements, and generate a compliance checklist. Download as Excel.
+            </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Upload Section -->
+            <div>
+                <div id="dropZone" class="drop-zone bg-white border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center cursor-pointer hover:border-primary-400 hover:bg-primary-50/30">
+                    <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.pdf" class="hidden">
+                    
+                    <div id="uploadPrompt">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <p class="text-lg font-medium text-gray-700 mb-2">Drop your RFQ/Tender here</p>
+                        <p class="text-sm text-gray-500 mb-4">or click to browse</p>
+                        <p class="text-xs text-gray-400">Supports: JPG, PNG, WebP, PDF (max 20MB, up to 10 pages)</p>
+                    </div>
+                    
+                    <div id="filePreview" class="hidden">
+                        <div class="w-16 h-16 mx-auto mb-4 bg-primary-100 rounded-full flex items-center justify-center">
+                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <p id="fileName" class="text-sm font-medium text-gray-700"></p>
+                        <button onclick="clearFile()" class="mt-3 text-sm text-red-600 hover:text-red-700">Remove</button>
+                    </div>
+                </div>
+                
+                <!-- Analyze Button -->
+                <button id="analyzeBtn" onclick="analyzeRFQ()" disabled
+                    class="w-full mt-4 py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-semibold text-lg transition-all flex items-center justify-center gap-2">
+                    <svg id="btnIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+                    </svg>
+                    <span id="btnText">Analyze RFQ</span>
+                </button>
+                
+                <!-- Loading State -->
+                <div id="loadingState" class="hidden mt-4 p-4 bg-primary-50 border border-primary-100 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <svg class="animate-spin w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <div>
+                            <p class="font-medium text-primary-800">Analyzing RFQ document...</p>
+                            <p class="text-sm text-primary-600">AI is extracting requirements and deadlines</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Dates Alert -->
+                <div id="deadlineAlert" class="hidden mt-4 p-4 bg-amber-50 border border-amber-200 rounded-xl">
+                    <div class="flex items-start gap-3">
+                        <svg class="w-6 h-6 text-amber-600 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        <div>
+                            <p class="font-semibold text-amber-800">⚠️ Submission Deadline</p>
+                            <p id="deadlineText" class="text-amber-700 text-lg font-medium"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                    <!-- Tabs -->
+                    <div class="flex border-b border-gray-200 overflow-x-auto">
+                        <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:text-primary-600 transition-colors whitespace-nowrap tab-active">
+                            Overview
+                        </button>
+                        <button onclick="switchTab('scope')" id="tab-scope" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:text-primary-600 transition-colors whitespace-nowrap">
+                            Scope Items
+                        </button>
+                        <button onclick="switchTab('technical')" id="tab-technical" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:text-primary-600 transition-colors whitespace-nowrap">
+                            Technical
+                        </button>
+                        <button onclick="switchTab('commercial')" id="tab-commercial" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:text-primary-600 transition-colors whitespace-nowrap">
+                            Commercial
+                        </button>
+                        <button onclick="switchTab('checklist')" id="tab-checklist" class="tab-btn px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:text-primary-600 transition-colors whitespace-nowrap">
+                            Checklist
+                        </button>
+                    </div>
+                    
+                    <!-- Tab Content -->
+                    <div class="p-4 max-h-[500px] overflow-y-auto">
+                        <!-- Overview -->
+                        <div id="panel-overview" class="tab-panel">
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Document Info</h4>
+                                    <table class="w-full text-sm">
+                                        <tbody id="overviewTable" class="divide-y divide-gray-100"></tbody>
+                                    </table>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Key Dates</h4>
+                                    <table class="w-full text-sm">
+                                        <tbody id="datesTable" class="divide-y divide-gray-100"></tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Scope Items -->
+                        <div id="panel-scope" class="tab-panel hidden">
+                            <table class="w-full text-sm">
+                                <thead class="bg-gray-50 sticky top-0">
+                                    <tr>
+                                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500">#</th>
+                                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500">Description</th>
+                                        <th class="px-3 py-2 text-left text-xs font-medium text-gray-500">Qty</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="scopeTable" class="divide-y divide-gray-100"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Technical Requirements -->
+                        <div id="panel-technical" class="tab-panel hidden">
+                            <div class="space-y-4">
+                                <div>
+                                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Standards Required</h4>
+                                    <ul id="standardsList" class="list-disc list-inside text-sm text-gray-700 space-y-1"></ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Certifications</h4>
+                                    <ul id="certsList" class="list-disc list-inside text-sm text-gray-700 space-y-1"></ul>
+                                </div>
+                                <div>
+                                    <h4 class="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Documentation Required</h4>
+                                    <ul id="docsList" class="list-disc list-inside text-sm text-gray-700 space-y-1"></ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Commercial Terms -->
+                        <div id="panel-commercial" class="tab-panel hidden">
+                            <table class="w-full text-sm">
+                                <tbody id="commercialTable" class="divide-y divide-gray-100"></tbody>
+                            </table>
+                        </div>
+
+                        <!-- Compliance Checklist -->
+                        <div id="panel-checklist" class="tab-panel hidden">
+                            <div class="space-y-2" id="checklistItems"></div>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="p-4 bg-gray-50 border-t border-gray-200 flex gap-3">
+                        <button onclick="downloadExcel()" id="downloadBtn" class="flex-1 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all flex items-center justify-center gap-2">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                            Download Excel
+                        </button>
+                        <button onclick="copyJSON()" class="px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-all">
+                            Copy JSON
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div id="summaryBox" class="hidden mt-4 p-4 bg-primary-50 border border-primary-100 rounded-xl lg:col-span-2">
+                <h4 class="font-semibold text-primary-900 mb-1 text-sm">AI Summary</h4>
+                <p id="summaryText" class="text-primary-800 text-sm"></p>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-12 text-center p-8 bg-gradient-to-r from-primary-600 to-blue-600 rounded-2xl text-white">
+            <h2 class="text-2xl font-bold mb-3">Want this customized for your RFQ workflow?</h2>
+            <p class="text-white/80 mb-6">We can integrate this with your CRM, generate auto-responses, and track bid deadlines automatically.</p>
+            <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="inline-block px-8 py-3 bg-white hover:bg-gray-100 text-primary-600 rounded-full font-semibold transition-all">
+                Book Free Strategy Call →
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-100 mt-12">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
+            <p>Built by <a href="index.html" class="text-primary-600 hover:underline">KU Automation</a> — AI for Engineering</p>
+        </div>
+    </footer>
+
+    <script>
+        // Configuration - Production backend on Railway
+        const API_URL = 'https://ku-automation-production.up.railway.app';
+        
+        let selectedFile = null;
+        let extractedData = null;
+        let excelData = null;
+        let excelFilename = null;
+
+        // Drop zone handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('drag-over');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('drag-over');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('drag-over');
+            const files = e.dataTransfer.files;
+            if (files.length > 0) handleFile(files[0]);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) handleFile(e.target.files[0]);
+        });
+
+        function handleFile(file) {
+            const validTypes = ['image/jpeg', 'image/png', 'image/webp', 'application/pdf'];
+            if (!validTypes.includes(file.type)) {
+                alert('Please upload a JPG, PNG, WebP, or PDF file.');
+                return;
+            }
+            
+            if (file.size > 20 * 1024 * 1024) {
+                alert('File too large. Maximum size is 20MB.');
+                return;
+            }
+            
+            selectedFile = file;
+            document.getElementById('uploadPrompt').classList.add('hidden');
+            document.getElementById('filePreview').classList.remove('hidden');
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('analyzeBtn').disabled = false;
+        }
+
+        function clearFile() {
+            selectedFile = null;
+            fileInput.value = '';
+            document.getElementById('uploadPrompt').classList.remove('hidden');
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('summaryBox').classList.add('hidden');
+            document.getElementById('deadlineAlert').classList.add('hidden');
+        }
+
+        async function analyzeRFQ() {
+            if (!selectedFile) return;
+            
+            const btn = document.getElementById('analyzeBtn');
+            const btnText = document.getElementById('btnText');
+            const btnIcon = document.getElementById('btnIcon');
+            const loading = document.getElementById('loadingState');
+            
+            // Show loading state
+            btn.disabled = true;
+            btnText.textContent = 'Analyzing...';
+            btnIcon.classList.add('animate-spin');
+            loading.classList.remove('hidden');
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            try {
+                const response = await fetch(`${API_URL}/api/parse-rfq`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Analysis failed');
+                }
+                
+                const result = await response.json();
+                extractedData = result.data;
+                excelData = result.excel;
+                excelFilename = result.filename;
+                
+                displayResults(extractedData);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Analysis failed: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btnText.textContent = 'Analyze RFQ';
+                btnIcon.classList.remove('animate-spin');
+                loading.classList.add('hidden');
+            }
+        }
+
+        function displayResults(data) {
+            // Show results section
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('fade-in');
+            
+            // Overview table
+            const overviewTable = document.getElementById('overviewTable');
+            overviewTable.innerHTML = '';
+            const overview = data.overview || {};
+            const overviewFields = [
+                ['Document Type', overview.document_type],
+                ['Reference', overview.reference_number],
+                ['Issuing Company', overview.issuing_company],
+                ['Project', overview.project_name],
+                ['Location', overview.project_location]
+            ];
+            overviewFields.forEach(([label, value]) => {
+                if (value && value !== 'N/A') {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td class="py-2 text-gray-500 w-1/3">${label}</td><td class="py-2 font-medium">${value}</td>`;
+                    overviewTable.appendChild(row);
+                }
+            });
+            
+            // Dates table
+            const datesTable = document.getElementById('datesTable');
+            datesTable.innerHTML = '';
+            const dates = data.key_dates || {};
+            const dateFields = [
+                ['⚠️ Submission Deadline', dates.submission_deadline, true],
+                ['Validity Period', dates.validity_period],
+                ['Clarification Deadline', dates.clarification_deadline],
+                ['Site Visit', dates.site_visit],
+                ['Award Date', dates.award_date],
+                ['Delivery Date', dates.delivery_date]
+            ];
+            dateFields.forEach(([label, value, highlight]) => {
+                if (value && value !== 'N/A') {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td class="py-2 text-gray-500 w-1/3">${label}</td><td class="py-2 font-medium ${highlight ? 'deadline-highlight px-2 rounded' : ''}">${value}</td>`;
+                    datesTable.appendChild(row);
+                }
+            });
+            
+            // Show deadline alert if we have a submission deadline
+            if (dates.submission_deadline && dates.submission_deadline !== 'N/A') {
+                document.getElementById('deadlineAlert').classList.remove('hidden');
+                document.getElementById('deadlineText').textContent = dates.submission_deadline;
+            }
+            
+            // Scope items
+            const scopeTable = document.getElementById('scopeTable');
+            scopeTable.innerHTML = '';
+            (data.scope_items || []).forEach((item, i) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td class="px-3 py-2 text-gray-500">${item.item_no || i+1}</td>
+                    <td class="px-3 py-2">${item.description || ''}</td>
+                    <td class="px-3 py-2 text-gray-600">${item.quantity || ''}</td>
+                `;
+                scopeTable.appendChild(row);
+            });
+            
+            // Technical requirements
+            const tech = data.technical_requirements || {};
+            
+            const standardsList = document.getElementById('standardsList');
+            standardsList.innerHTML = '';
+            (tech.standards || []).forEach(std => {
+                const li = document.createElement('li');
+                li.textContent = std;
+                standardsList.appendChild(li);
+            });
+            
+            const certsList = document.getElementById('certsList');
+            certsList.innerHTML = '';
+            (tech.certifications || []).forEach(cert => {
+                const li = document.createElement('li');
+                li.textContent = cert;
+                certsList.appendChild(li);
+            });
+            
+            const docsList = document.getElementById('docsList');
+            docsList.innerHTML = '';
+            (tech.documentation || []).forEach(doc => {
+                const li = document.createElement('li');
+                li.textContent = doc;
+                docsList.appendChild(li);
+            });
+            
+            // Commercial terms
+            const commercialTable = document.getElementById('commercialTable');
+            commercialTable.innerHTML = '';
+            const commercial = data.commercial_terms || {};
+            const commercialFields = [
+                ['Payment Terms', commercial.payment_terms],
+                ['Incoterms', commercial.incoterms],
+                ['Currency', commercial.currency],
+                ['Warranty', commercial.warranty],
+                ['Liquidated Damages', commercial.liquidated_damages],
+                ['Insurance', commercial.insurance],
+                ['Bonds/Guarantees', commercial.bonds]
+            ];
+            commercialFields.forEach(([label, value]) => {
+                if (value && value !== 'N/A') {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `<td class="py-2 text-gray-500 w-1/3">${label}</td><td class="py-2">${value}</td>`;
+                    commercialTable.appendChild(row);
+                }
+            });
+            
+            // Compliance checklist
+            const checklistItems = document.getElementById('checklistItems');
+            checklistItems.innerHTML = '';
+            (data.compliance_checklist || []).forEach((item, i) => {
+                const div = document.createElement('div');
+                div.className = 'flex items-start gap-3 p-3 bg-gray-50 rounded-lg';
+                div.innerHTML = `
+                    <input type="checkbox" id="check-${i}" class="mt-1 w-4 h-4 text-primary-600 rounded">
+                    <label for="check-${i}" class="text-sm flex-1">
+                        <span class="font-medium">${item.requirement}</span>
+                        ${item.category ? `<span class="text-xs text-gray-500 ml-2">(${item.category})</span>` : ''}
+                    </label>
+                `;
+                checklistItems.appendChild(div);
+            });
+            
+            // Summary
+            if (data.summary) {
+                document.getElementById('summaryBox').classList.remove('hidden');
+                document.getElementById('summaryText').textContent = data.summary;
+            }
+        }
+
+        function switchTab(tabName) {
+            // Update tab buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+            });
+            document.getElementById(`tab-${tabName}`).classList.add('tab-active');
+            
+            // Update panels
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.add('hidden');
+            });
+            document.getElementById(`panel-${tabName}`).classList.remove('hidden');
+        }
+
+        function downloadExcel() {
+            if (!excelData) return;
+            
+            const byteCharacters = atob(excelData);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = excelFilename || 'RFQ_Analysis.xlsx';
+            link.click();
+        }
+
+        function copyJSON() {
+            if (!extractedData) return;
+            
+            navigator.clipboard.writeText(JSON.stringify(extractedData, null, 2))
+                .then(() => alert('JSON copied to clipboard!'))
+                .catch(err => console.error('Failed to copy:', err));
+        }
+    </script>
+</body>
+</html>
