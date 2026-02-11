@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU Automation - Legal & SOP Documents</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #1a365d 0%, #2d4a7c 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+        .logo {
+            font-size: 36pt;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .logo span { color: #f97316; }
+        .subtitle {
+            font-size: 14pt;
+            opacity: 0.9;
+        }
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .section h2 {
+            color: #1a365d;
+            font-size: 18pt;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #f97316;
+        }
+        .doc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+        .doc-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            display: block;
+        }
+        .doc-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border-color: #f97316;
+        }
+        .doc-card h3 {
+            color: #1a365d;
+            font-size: 13pt;
+            margin-bottom: 8px;
+        }
+        .doc-card p {
+            font-size: 10pt;
+            color: #666;
+            line-height: 1.4;
+        }
+        .doc-card .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 9pt;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .badge-contract { background: #e3f2fd; color: #1565c0; }
+        .badge-sop { background: #e8f5e9; color: #2e7d32; }
+        .badge-critical { background: #ffebee; color: #c62828; }
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.7);
+            margin-top: 30px;
+            font-size: 10pt;
+        }
+        .instructions {
+            background: #fffde7;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            margin-bottom: 25px;
+            border-radius: 0 8px 8px 0;
+        }
+        .instructions h3 {
+            color: #f57f17;
+            margin-bottom: 8px;
+        }
+        .instructions ol {
+            margin-left: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">KU<span>Automation</span></div>
+            <div class="subtitle">Legal Documents & Standard Operating Procedures</div>
+        </div>
+
+        <div class="instructions">
+            <h3>📋 How to Copy to Google Docs</h3>
+            <ol>
+                <li>Click any document below to open it</li>
+                <li>Press <strong>Cmd+A</strong> (Select All)</li>
+                <li>Press <strong>Cmd+C</strong> (Copy)</li>
+                <li>Paste into Google Docs with <strong>Cmd+V</strong></li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>📚 Founder Resources</h2>
+            <div class="doc-grid">
+                <a href="Founders_Technical_Whitepaper.html" class="doc-card" style="border: 2px solid #f97316;">
+                    <h3>🎯 Founder's Technical White Paper</h3>
+                    <p>Complete guide to AI automation building blocks — understand the technology to speak confidently with clients.</p>
+                    <span class="badge" style="background:#f97316; color:white;">ESSENTIAL</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📜 Legal Agreements</h2>
+            <div class="doc-grid">
+                <a href="NDA_KU_Automation.html" class="doc-card">
+                    <h3>Non-Disclosure Agreement (NDA)</h3>
+                    <p>Confidentiality agreement for protecting proprietary information between KU Automation and clients.</p>
+                    <span class="badge badge-contract">CONTRACT</span>
+                </a>
+                <a href="Master_Service_Agreement.html" class="doc-card">
+                    <h3>Master Service Agreement (MSA)</h3>
+                    <p>Primary contract governing all service engagements, including payment terms, IP rights, and liabilities.</p>
+                    <span class="badge badge-contract">CONTRACT</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📘 Standard Operating Procedures</h2>
+            <div class="doc-grid">
+                <a href="SOP_01_Client_Onboarding.html" class="doc-card">
+                    <h3>SOP-01: Client Onboarding</h3>
+                    <p>Standardized process for new client intake, from initial contact through project kickoff.</p>
+                    <span class="badge badge-sop">SOP</span>
+                </a>
+                <a href="SOP_02_Data_Handling_Security.html" class="doc-card">
+                    <h3>SOP-02: Data Handling & Security</h3>
+                    <p>Mandatory procedures for secure handling, processing, storage, and disposal of client data.</p>
+                    <span class="badge badge-critical">CRITICAL</span>
+                </a>
+                <a href="SOP_03_Service_Delivery.html" class="doc-card">
+                    <h3>SOP-03: Service Delivery</h3>
+                    <p>Project lifecycle methodology from discovery through deployment and handover.</p>
+                    <span class="badge badge-sop">SOP</span>
+                </a>
+                <a href="SOP_07_Incident_Response.html" class="doc-card">
+                    <h3>SOP-07: Incident Response</h3>
+                    <p>Emergency procedures for security incidents, data breaches, and service disruptions.</p>
+                    <span class="badge badge-critical">CRITICAL</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📗 Additional SOPs</h2>
+            <div class="doc-grid">
+                <a href="SOP_04_Quality_Assurance.html" class="doc-card">
+                    <h3>SOP-04: Quality Assurance</h3>
+                    <p>Testing standards, QA process, defect management, and acceptance criteria.</p>
+                    <span class="badge badge-sop">SOP</span>
+                </a>
+                <a href="SOP_05_Client_Communication.html" class="doc-card">
+                    <h3>SOP-05: Client Communication</h3>
+                    <p>Communication standards, response times, meeting protocols, templates.</p>
+                    <span class="badge badge-sop">SOP</span>
+                </a>
+                <a href="SOP_06_Proposal_Pricing.html" class="doc-card">
+                    <h3>SOP-06: Proposal & Pricing</h3>
+                    <p>Pricing guidelines, rate card, proposal structure, discounting rules.</p>
+                    <span class="badge badge-critical">CONFIDENTIAL</span>
+                </a>
+                <a href="SOP_08_Project_Closure.html" class="doc-card">
+                    <h3>SOP-08: Project Closure</h3>
+                    <p>Handover process, documentation, financial closure, lessons learned.</p>
+                    <span class="badge badge-sop">SOP</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>KU Automation</strong> | AI-Powered Automation for Engineering Excellence</p>
+            <p>kingsley.uzowulu@ku-automation.com | © 2026</p>
+        </div>
+    </div>
+</body>
+</html>

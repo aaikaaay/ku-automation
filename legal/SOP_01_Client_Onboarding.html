@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP-01: Client Onboarding - KU Automation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            padding: 0.75in;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid #1a365d;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .logo { font-size: 20pt; font-weight: bold; color: #1a365d; }
+        .logo span { color: #f97316; }
+        .doc-info { text-align: right; font-size: 9pt; color: #666; }
+        .doc-info strong { color: #1a365d; }
+        h1 {
+            font-size: 16pt;
+            color: #1a365d;
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f97316;
+        }
+        h2 {
+            font-size: 12pt;
+            color: #1a365d;
+            margin: 20px 0 10px 0;
+            background: #f0f4f8;
+            padding: 8px 12px;
+            border-left: 4px solid #f97316;
+        }
+        h3 { font-size: 11pt; color: #333; margin: 15px 0 8px 0; }
+        p { margin-bottom: 10px; text-align: justify; }
+        ul, ol { margin: 10px 0 15px 25px; }
+        li { margin-bottom: 6px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th { background: #1a365d; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .meta-table { margin-bottom: 25px; }
+        .meta-table td:first-child { width: 150px; font-weight: bold; background: #f0f4f8; }
+        .checklist { background: #fffde7; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .checklist h3 { margin-top: 0; }
+        .step-box {
+            background: #e8f4f8;
+            border-left: 4px solid #1a365d;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .step-number {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: #f97316;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; margin: 10px 0; }
+        .footer {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            font-size: 9pt;
+            color: #666;
+            text-align: center;
+        }
+        @media print { body { padding: 0.5in; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">KU<span>Automation</span></div>
+        <div class="doc-info">
+            <strong>SOP-01</strong><br>
+            Version: 1.0<br>
+            Effective: February 2026<br>
+            Review: Annual
+        </div>
+    </div>
+
+    <h1>Standard Operating Procedure: Client Onboarding</h1>
+
+    <table class="meta-table">
+        <tr><td>Document ID</td><td>SOP-01-ONBOARD</td></tr>
+        <tr><td>Department</td><td>Client Services</td></tr>
+        <tr><td>Owner</td><td>Principal Consultant</td></tr>
+        <tr><td>Approved By</td><td>Kingsley Uzowulu, CEng, MIMechE</td></tr>
+        <tr><td>Last Updated</td><td>February 9, 2026</td></tr>
+    </table>
+
+    <h2>1. Purpose</h2>
+    <p>This SOP establishes a standardized process for onboarding new clients to ensure consistent, professional, and efficient client intake across all engagements. It ensures all necessary information is collected, expectations are set, and the foundation for a successful project is established.</p>
+
+    <h2>2. Scope</h2>
+    <p>This procedure applies to all new client engagements for AI automation services, including:</p>
+    <ul>
+        <li>Document processing and data extraction projects</li>
+        <li>Workflow automation implementations</li>
+        <li>Chatbot and virtual assistant development</li>
+        <li>Custom AI solution development</li>
+        <li>Consulting and advisory services</li>
+    </ul>
+
+    <h2>3. Responsibilities</h2>
+    <table>
+        <tr><th>Role</th><th>Responsibilities</th></tr>
+        <tr><td>Principal Consultant</td><td>Overall client relationship, contract approval, strategic alignment</td></tr>
+        <tr><td>Project Lead</td><td>Technical assessment, project planning, resource allocation</td></tr>
+        <tr><td>Client Services</td><td>Initial intake, documentation, communication coordination</td></tr>
+    </table>
+
+    <h2>4. Onboarding Process</h2>
+
+    <div class="step-box">
+        <p><span class="step-number">1</span><strong>Initial Contact & Qualification (Day 1)</strong></p>
+        <ul>
+            <li>Receive inquiry via website, email, or referral</li>
+            <li>Respond within 4 business hours</li>
+            <li>Conduct initial qualification call (15-30 minutes)</li>
+            <li>Assess fit: industry, project scope, budget alignment</li>
+            <li>Document in CRM/project management system</li>
+        </ul>
+    </div>
+
+    <div class="step-box">
+        <p><span class="step-number">2</span><strong>Discovery Meeting (Day 2-5)</strong></p>
+        <ul>
+            <li>Schedule comprehensive discovery session (60-90 minutes)</li>
+            <li>Use Discovery Questionnaire Template</li>
+            <li>Understand current pain points and processes</li>
+            <li>Identify automation opportunities</li>
+            <li>Document technical requirements and constraints</li>
+            <li>Identify key stakeholders and decision-makers</li>
+        </ul>
+    </div>
+
+    <div class="step-box">
+        <p><span class="step-number">3</span><strong>NDA Execution (Day 3-7)</strong></p>
+        <ul>
+            <li>Send NDA for review and signature</li>
+            <li>Use DocuSign or equivalent for electronic signatures</li>
+            <li>Store executed NDA in secure client folder</li>
+            <li>Confirm receipt and countersign</li>
+        </ul>
+    </div>
+
+    <div class="step-box">
+        <p><span class="step-number">4</span><strong>Proposal Development (Day 5-10)</strong></p>
+        <ul>
+            <li>Develop detailed proposal including:
+                <ul>
+                    <li>Executive summary</li>
+                    <li>Scope of work</li>
+                    <li>Technical approach</li>
+                    <li>Timeline and milestones</li>
+                    <li>Investment and payment terms</li>
+                    <li>Assumptions and exclusions</li>
+                </ul>
+            </li>
+            <li>Internal review and approval</li>
+            <li>Present proposal to client</li>
+        </ul>
+    </div>
+
+    <div class="step-box">
+        <p><span class="step-number">5</span><strong>Contract Execution (Day 10-15)</strong></p>
+        <ul>
+            <li>Send Master Service Agreement (MSA) or Statement of Work (SOW)</li>
+            <li>Address any client questions or requested modifications</li>
+            <li>Obtain signatures from all parties</li>
+            <li>Process initial payment/deposit</li>
+            <li>Issue payment confirmation</li>
+        </ul>
+    </div>
+
+    <div class="step-box">
+        <p><span class="step-number">6</span><strong>Project Kickoff (Day 15-20)</strong></p>
+        <ul>
+            <li>Schedule kickoff meeting with all stakeholders</li>
+            <li>Create project workspace (ClickUp/shared folders)</li>
+            <li>Set up communication channels (Slack/Teams/Email)</li>
+            <li>Share project timeline and deliverables</li>
+            <li>Establish reporting schedule</li>
+            <li>Request access to necessary systems/data</li>
+        </ul>
+    </div>
+
+    <h2>5. Required Documentation Checklist</h2>
+    <div class="checklist">
+        <h3>☑️ Client Onboarding Checklist</h3>
+        <ul>
+            <li>☐ Client contact information and key stakeholders</li>
+            <li>☐ Company profile and industry information</li>
+            <li>☐ Signed NDA</li>
+            <li>☐ Completed discovery questionnaire</li>
+            <li>☐ Technical requirements document</li>
+            <li>☐ Signed proposal/contract</li>
+            <li>☐ Payment received/confirmed</li>
+            <li>☐ Project workspace created</li>
+            <li>☐ Communication channels established</li>
+            <li>☐ Kickoff meeting scheduled</li>
+            <li>☐ System access granted (where applicable)</li>
+        </ul>
+    </div>
+
+    <h2>6. Client Information to Collect</h2>
+    <table>
+        <tr><th>Category</th><th>Information Required</th></tr>
+        <tr><td>Company Details</td><td>Legal name, address, industry, company size, website</td></tr>
+        <tr><td>Primary Contact</td><td>Name, title, email, phone, preferred communication method</td></tr>
+        <tr><td>Decision Maker</td><td>Name, title, approval authority</td></tr>
+        <tr><td>Technical Contact</td><td>IT/Technical lead for system access and integration</td></tr>
+        <tr><td>Finance Contact</td><td>Accounts payable contact for invoicing</td></tr>
+        <tr><td>Project Details</td><td>Objectives, timeline expectations, budget range</td></tr>
+    </table>
+
+    <h2>7. Timeline Standards</h2>
+    <table>
+        <tr><th>Milestone</th><th>Target Timeline</th></tr>
+        <tr><td>Initial response to inquiry</td><td>Within 4 business hours</td></tr>
+        <tr><td>Qualification call</td><td>Within 2 business days</td></tr>
+        <tr><td>Discovery meeting</td><td>Within 5 business days</td></tr>
+        <tr><td>NDA execution</td><td>Within 7 business days</td></tr>
+        <tr><td>Proposal delivery</td><td>Within 10 business days</td></tr>
+        <tr><td>Contract execution</td><td>Within 15 business days</td></tr>
+        <tr><td>Project kickoff</td><td>Within 20 business days</td></tr>
+    </table>
+
+    <h2>8. Tools & Systems</h2>
+    <ul>
+        <li><strong>CRM:</strong> ClickUp / HubSpot for client tracking</li>
+        <li><strong>Documents:</strong> Google Drive / SharePoint for file storage</li>
+        <li><strong>Contracts:</strong> DocuSign for electronic signatures</li>
+        <li><strong>Communication:</strong> Email, Slack, Microsoft Teams, Zoom</li>
+        <li><strong>Invoicing:</strong> Stripe / Bank transfer</li>
+    </ul>
+
+    <h2>9. Quality Standards</h2>
+    <ul>
+        <li>All client communications must be professional and timely</li>
+        <li>All documents must use approved KU Automation templates</li>
+        <li>All sensitive information must be stored securely</li>
+        <li>Client satisfaction check after kickoff meeting</li>
+    </ul>
+
+    <div class="warning">
+        <strong>⚠️ Important:</strong> Never begin work on a project until the NDA and contract are fully executed and initial payment is received (where applicable).
+    </div>
+
+    <h2>10. Revision History</h2>
+    <table>
+        <tr><th>Version</th><th>Date</th><th>Author</th><th>Changes</th></tr>
+        <tr><td>1.0</td><td>Feb 9, 2026</td><td>K. Uzowulu</td><td>Initial release</td></tr>
+    </table>
+
+    <div class="footer">
+        <p><strong>KU Automation</strong> | SOP-01: Client Onboarding | Version 1.0</p>
+        <p>This document is confidential and for internal use only.</p>
+    </div>
+</body>
+</html>

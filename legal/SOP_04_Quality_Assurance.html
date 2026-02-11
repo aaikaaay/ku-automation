@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP-04: Quality Assurance - KU Automation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11pt; line-height: 1.6; color: #333; background: #fff; padding: 0.75in; max-width: 8.5in; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #1a365d; padding-bottom: 15px; margin-bottom: 20px; }
+        .logo { font-size: 20pt; font-weight: bold; color: #1a365d; }
+        .logo span { color: #f97316; }
+        .doc-info { text-align: right; font-size: 9pt; color: #666; }
+        h1 { font-size: 16pt; color: #1a365d; margin: 20px 0 10px 0; padding-bottom: 5px; border-bottom: 2px solid #f97316; }
+        h2 { font-size: 12pt; color: #1a365d; margin: 20px 0 10px 0; background: #f0f4f8; padding: 8px 12px; border-left: 4px solid #f97316; }
+        h3 { font-size: 11pt; color: #333; margin: 15px 0 8px 0; }
+        p { margin-bottom: 10px; text-align: justify; }
+        ul, ol { margin: 10px 0 15px 25px; }
+        li { margin-bottom: 6px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #1a365d; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .meta-table { margin-bottom: 25px; }
+        .meta-table td:first-child { width: 150px; font-weight: bold; background: #f0f4f8; }
+        .checklist { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 15px; margin: 15px 0; }
+        .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; margin: 10px 0; }
+        .footer { margin-top: 40px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 9pt; color: #666; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">KU<span>Automation</span></div>
+        <div class="doc-info"><strong>SOP-04</strong><br>Version: 1.0<br>Effective: February 2026</div>
+    </div>
+
+    <h1>Standard Operating Procedure: Quality Assurance</h1>
+
+    <table class="meta-table">
+        <tr><td>Document ID</td><td>SOP-04-QA</td></tr>
+        <tr><td>Department</td><td>Project Delivery / QA</td></tr>
+        <tr><td>Owner</td><td>Principal Consultant</td></tr>
+        <tr><td>Approved By</td><td>Kingsley Uzowulu, CEng, MIMechE</td></tr>
+    </table>
+
+    <h2>1. Purpose</h2>
+    <p>This SOP establishes quality assurance standards and testing procedures to ensure all AI automation deliverables meet client requirements, perform reliably, and are fit for purpose before deployment.</p>
+
+    <h2>2. Quality Principles</h2>
+    <ul>
+        <li><strong>Right First Time:</strong> Build quality into the process, not inspect it in afterwards</li>
+        <li><strong>Client Focus:</strong> Quality defined by meeting or exceeding client expectations</li>
+        <li><strong>Continuous Improvement:</strong> Learn from every project to improve processes</li>
+        <li><strong>Documentation:</strong> All quality activities must be documented and traceable</li>
+    </ul>
+
+    <h2>3. Testing Types</h2>
+    <table>
+        <tr><th>Test Type</th><th>Purpose</th><th>When</th><th>Responsibility</th></tr>
+        <tr>
+            <td><strong>Unit Testing</strong></td>
+            <td>Test individual components/functions</td>
+            <td>During development</td>
+            <td>Developer</td>
+        </tr>
+        <tr>
+            <td><strong>Integration Testing</strong></td>
+            <td>Test component interactions and APIs</td>
+            <td>After unit tests pass</td>
+            <td>Developer/QA</td>
+        </tr>
+        <tr>
+            <td><strong>Functional Testing</strong></td>
+            <td>Verify features work as specified</td>
+            <td>Development complete</td>
+            <td>QA Lead</td>
+        </tr>
+        <tr>
+            <td><strong>Performance Testing</strong></td>
+            <td>Test speed, scalability, stability</td>
+            <td>Before UAT</td>
+            <td>QA Lead</td>
+        </tr>
+        <tr>
+            <td><strong>Security Testing</strong></td>
+            <td>Identify vulnerabilities</td>
+            <td>Before deployment</td>
+            <td>QA Lead</td>
+        </tr>
+        <tr>
+            <td><strong>User Acceptance Testing (UAT)</strong></td>
+            <td>Client validates solution meets requirements</td>
+            <td>After internal QA</td>
+            <td>Client</td>
+        </tr>
+    </table>
+
+    <h2>4. QA Process Flow</h2>
+
+    <h3>4.1 Pre-Development Quality</h3>
+    <ol>
+        <li>Review and sign off requirements document</li>
+        <li>Create test plan based on requirements</li>
+        <li>Define acceptance criteria for each feature</li>
+        <li>Identify test data requirements</li>
+    </ol>
+
+    <h3>4.2 Development Quality</h3>
+    <ol>
+        <li>Code review for all significant changes</li>
+        <li>Developer unit testing (minimum 80% coverage target)</li>
+        <li>Automated testing where applicable</li>
+        <li>Documentation review</li>
+    </ol>
+
+    <h3>4.3 Testing Phase</h3>
+    <ol>
+        <li>Execute test plan</li>
+        <li>Log all defects in tracking system</li>
+        <li>Prioritize defects: Critical > High > Medium > Low</li>
+        <li>Retest fixed defects</li>
+        <li>Regression testing after fixes</li>
+        <li>Generate test completion report</li>
+    </ol>
+
+    <h3>4.4 UAT Process</h3>
+    <ol>
+        <li>Prepare UAT environment with production-like data</li>
+        <li>Provide UAT guide to client</li>
+        <li>Support client during testing (answer questions, clarify)</li>
+        <li>Document client feedback and issues</li>
+        <li>Address all critical/high issues before sign-off</li>
+        <li>Obtain formal UAT sign-off</li>
+    </ol>
+
+    <h2>5. Defect Classification</h2>
+    <table>
+        <tr><th>Severity</th><th>Description</th><th>Resolution Target</th></tr>
+        <tr style="background:#ffebee;">
+            <td><strong>CRITICAL</strong></td>
+            <td>System unusable, data loss, security breach</td>
+            <td>Immediate (same day)</td>
+        </tr>
+        <tr style="background:#fff3cd;">
+            <td><strong>HIGH</strong></td>
+            <td>Major feature broken, significant impact</td>
+            <td>Within 2 business days</td>
+        </tr>
+        <tr style="background:#e3f2fd;">
+            <td><strong>MEDIUM</strong></td>
+            <td>Feature partially working, workaround available</td>
+            <td>Within 5 business days</td>
+        </tr>
+        <tr>
+            <td><strong>LOW</strong></td>
+            <td>Minor issue, cosmetic, enhancement</td>
+            <td>Next release or as agreed</td>
+        </tr>
+    </table>
+
+    <h2>6. AI-Specific Quality Checks</h2>
+    <div class="checklist">
+        <h3>☑️ AI Model Quality Checklist</h3>
+        <ul>
+            <li>☐ Model accuracy meets defined threshold (e.g., >90%)</li>
+            <li>☐ Edge cases tested and handled gracefully</li>
+            <li>☐ Confidence scores calibrated appropriately</li>
+            <li>☐ Human review workflow for low-confidence outputs</li>
+            <li>☐ Model bias assessment completed</li>
+            <li>☐ Performance under load validated</li>
+            <li>☐ Error handling for API failures</li>
+            <li>☐ Data privacy compliance verified</li>
+            <li>☐ Model versioning implemented</li>
+            <li>☐ Rollback procedure documented</li>
+        </ul>
+    </div>
+
+    <h2>7. Deliverable Review Checklist</h2>
+    <div class="checklist">
+        <h3>☑️ Pre-Delivery Quality Gate</h3>
+        <ul>
+            <li>☐ All requirements implemented and tested</li>
+            <li>☐ No critical or high defects outstanding</li>
+            <li>☐ Test completion report generated</li>
+            <li>☐ User documentation complete</li>
+            <li>☐ Admin/technical documentation complete</li>
+            <li>☐ Deployment guide prepared</li>
+            <li>☐ Training materials ready</li>
+            <li>☐ UAT sign-off obtained</li>
+            <li>☐ Security review completed</li>
+            <li>☐ Performance benchmarks met</li>
+        </ul>
+    </div>
+
+    <h2>8. Quality Metrics</h2>
+    <table>
+        <tr><th>Metric</th><th>Target</th><th>Measurement</th></tr>
+        <tr><td>Defect Density</td><td>&lt; 5 defects per feature</td><td>Defects / Total features</td></tr>
+        <tr><td>Test Coverage</td><td>&gt; 80%</td><td>Tests / Requirements</td></tr>
+        <tr><td>UAT Pass Rate</td><td>&gt; 95% first attempt</td><td>Passed tests / Total tests</td></tr>
+        <tr><td>Post-Deployment Defects</td><td>&lt; 2 critical in 30 days</td><td>Production defects logged</td></tr>
+        <tr><td>Client Satisfaction</td><td>&gt; 4/5 rating</td><td>Post-project survey</td></tr>
+    </table>
+
+    <h2>9. Documentation Requirements</h2>
+    <ul>
+        <li>Test Plan (for each project)</li>
+        <li>Test Cases (linked to requirements)</li>
+        <li>Defect Log (with status tracking)</li>
+        <li>Test Completion Report</li>
+        <li>UAT Sign-off Form</li>
+    </ul>
+
+    <div class="warning">
+        <strong>⚠️ Quality Gate Rule:</strong> No deliverable may be deployed to production without passing the Pre-Delivery Quality Gate checklist and obtaining documented UAT sign-off.
+    </div>
+
+    <h2>10. Revision History</h2>
+    <table>
+        <tr><th>Version</th><th>Date</th><th>Author</th><th>Changes</th></tr>
+        <tr><td>1.0</td><td>Feb 9, 2026</td><td>K. Uzowulu</td><td>Initial release</td></tr>
+    </table>
+
+    <div class="footer">
+        <p><strong>KU Automation</strong> | SOP-04: Quality Assurance | Version 1.0</p>
+    </div>
+</body>
+</html>

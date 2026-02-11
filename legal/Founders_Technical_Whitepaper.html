@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Founder's Technical White Paper - KU Automation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            font-size: 11pt;
+            line-height: 1.8;
+            color: #333;
+            background: #fff;
+            padding: 0.75in;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+        .cover {
+            text-align: center;
+            padding: 100px 0;
+            border-bottom: 3px solid #1a365d;
+            margin-bottom: 40px;
+        }
+        .cover .logo {
+            font-family: 'Arial', sans-serif;
+            font-size: 32pt;
+            font-weight: bold;
+            color: #1a365d;
+            margin-bottom: 20px;
+        }
+        .cover .logo span { color: #f97316; }
+        .cover h1 {
+            font-size: 28pt;
+            color: #1a365d;
+            margin: 30px 0 15px 0;
+            line-height: 1.2;
+        }
+        .cover .subtitle {
+            font-size: 14pt;
+            color: #666;
+            font-style: italic;
+        }
+        .cover .meta {
+            margin-top: 40px;
+            font-size: 11pt;
+            color: #888;
+        }
+        h1 { font-size: 20pt; color: #1a365d; margin: 40px 0 20px 0; border-bottom: 2px solid #f97316; padding-bottom: 10px; }
+        h2 { font-size: 14pt; color: #1a365d; margin: 30px 0 15px 0; }
+        h3 { font-size: 12pt; color: #444; margin: 20px 0 10px 0; }
+        p { margin-bottom: 15px; text-align: justify; }
+        ul, ol { margin: 15px 0 20px 30px; }
+        li { margin-bottom: 8px; }
+        .highlight {
+            background: #f0f7ff;
+            border-left: 4px solid #1a365d;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .key-point {
+            background: #fff8e1;
+            border-left: 4px solid #f97316;
+            padding: 15px 20px;
+            margin: 20px 0;
+        }
+        .key-point strong { color: #f97316; }
+        .tech-box {
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .tech-box h4 {
+            color: #1a365d;
+            margin-bottom: 10px;
+            font-size: 12pt;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th { background: #1a365d; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .diagram {
+            background: #fafafa;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 30px;
+            margin: 25px 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        .toc {
+            background: #f8f9fa;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        .toc h2 { margin-top: 0; }
+        .toc ol { margin-bottom: 0; }
+        .toc li { margin-bottom: 5px; }
+        .footer {
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #1a365d;
+            font-size: 9pt;
+            color: #666;
+            text-align: center;
+        }
+        @media print {
+            .cover { page-break-after: always; }
+            h1 { page-break-before: always; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="cover">
+    <div class="logo">KU<span>Automation</span></div>
+    <h1>Founder's Technical White Paper</h1>
+    <div class="subtitle">Understanding the Building Blocks of AI Automation Services</div>
+    <div class="meta">
+        <p><strong>Author:</strong> Kingsley Uzowulu, CEng, MIMechE</p>
+        <p><strong>Version:</strong> 1.0 | <strong>Date:</strong> February 2026</p>
+        <p><strong>Classification:</strong> Internal Reference Document</p>
+    </div>
+</div>
+
+<div class="toc">
+    <h2>Table of Contents</h2>
+    <ol>
+        <li>Introduction: What is AI Automation?</li>
+        <li>The Four Pillars of AI Automation</li>
+        <li>Core Technologies Explained</li>
+        <li>Automation Architecture Patterns</li>
+        <li>Service Categories Deep Dive</li>
+        <li>Integration & Data Flow</li>
+        <li>The KU Automation Methodology</li>
+        <li>Talking Points for Client Conversations</li>
+        <li>Glossary of Terms</li>
+    </ol>
+</div>
+
+<h1>1. Introduction: What is AI Automation?</h1>
+
+<p>AI Automation combines <strong>Artificial Intelligence</strong> (machines that can learn and make decisions) with <strong>Process Automation</strong> (software that executes tasks without human intervention) to create intelligent systems that can handle complex, judgment-based work previously requiring human expertise.</p>
+
+<div class="highlight">
+    <strong>The Simple Explanation:</strong>
+    <p>Traditional automation follows fixed rules: "If X, then Y." AI automation can handle uncertainty: "Given these patterns, the best action is probably Y, but if conditions change, adapt to Z."</p>
+</div>
+
+<h2>1.1 Why This Matters for Engineering Companies</h2>
+<p>Engineering firms deal with:</p>
+<ul>
+    <li><strong>Complex documents:</strong> P&IDs, datasheets, specifications, reports</li>
+    <li><strong>Data-intensive decisions:</strong> Material selection, vendor comparison, compliance checking</li>
+    <li><strong>Repetitive expertise:</strong> The same experienced decisions made thousands of times</li>
+</ul>
+<p>AI automation captures this expertise and applies it at scale, 24/7, without fatigue or inconsistency.</p>
+
+<h1>2. The Four Pillars of AI Automation</h1>
+
+<div class="diagram">
+┌─────────────────────────────────────────────────────────────┐
+│                    AI AUTOMATION SYSTEM                      │
+├─────────────┬─────────────┬─────────────┬─────────────────────┤
+│   PERCEIVE  │  UNDERSTAND │   DECIDE    │       ACT          │
+│             │             │             │                     │
+│  • OCR      │  • NLP      │  • Rules    │  • API Calls       │
+│  • Vision   │  • LLMs     │  • ML       │  • Workflows       │
+│  • Sensors  │  • Context  │  • Logic    │  • Notifications   │
+└─────────────┴─────────────┴─────────────┴─────────────────────┘
+</div>
+
+<h2>2.1 PERCEIVE: Data Ingestion</h2>
+<p>The system must first "see" the inputs. This includes:</p>
+<ul>
+    <li><strong>OCR (Optical Character Recognition):</strong> Converting scanned documents and images into machine-readable text</li>
+    <li><strong>Computer Vision:</strong> Understanding images, drawings, diagrams</li>
+    <li><strong>Data Extraction:</strong> Pulling structured data from PDFs, emails, spreadsheets</li>
+    <li><strong>API Integration:</strong> Receiving data from other systems</li>
+</ul>
+
+<h2>2.2 UNDERSTAND: Intelligence Layer</h2>
+<p>Raw data becomes meaningful information:</p>
+<ul>
+    <li><strong>NLP (Natural Language Processing):</strong> Understanding human language in documents</li>
+    <li><strong>LLMs (Large Language Models):</strong> GPT-4, Claude — can understand context, nuance, and generate responses</li>
+    <li><strong>Entity Extraction:</strong> Identifying specific items (part numbers, dates, values)</li>
+    <li><strong>Classification:</strong> Categorizing documents or data points</li>
+</ul>
+
+<h2>2.3 DECIDE: Logic & Rules</h2>
+<p>The system determines what action to take:</p>
+<ul>
+    <li><strong>Business Rules:</strong> If-then logic encoded from company policies</li>
+    <li><strong>Machine Learning Models:</strong> Patterns learned from historical data</li>
+    <li><strong>Confidence Scoring:</strong> How certain is the system? Route to human if unsure</li>
+    <li><strong>Exception Handling:</strong> What to do when something unexpected occurs</li>
+</ul>
+
+<h2>2.4 ACT: Execution Layer</h2>
+<p>The system takes action:</p>
+<ul>
+    <li><strong>Workflow Automation:</strong> Moving data between systems</li>
+    <li><strong>Document Generation:</strong> Creating reports, emails, responses</li>
+    <li><strong>System Updates:</strong> Writing to databases, ERPs, CRMs</li>
+    <li><strong>Human Handoff:</strong> Escalating when human judgment needed</li>
+</ul>
+
+<h1>3. Core Technologies Explained</h1>
+
+<h2>3.1 Large Language Models (LLMs)</h2>
+
+<div class="tech-box">
+    <h4>🧠 What They Are</h4>
+    <p>LLMs (like GPT-4, Claude, Gemini) are AI models trained on vast amounts of text. They can understand context, follow instructions, and generate human-like responses.</p>
+    
+    <h4>What They're Good For:</h4>
+    <ul>
+        <li>Understanding unstructured documents</li>
+        <li>Answering questions about content</li>
+        <li>Summarizing long documents</li>
+        <li>Extracting specific information</li>
+        <li>Generating reports and responses</li>
+        <li>Translating between formats</li>
+    </ul>
+    
+    <h4>Limitations:</h4>
+    <ul>
+        <li>Can "hallucinate" (make up plausible-sounding but wrong information)</li>
+        <li>Need validation for critical decisions</li>
+        <li>Cost scales with usage (tokens processed)</li>
+        <li>May not have knowledge of recent events or proprietary data</li>
+    </ul>
+</div>
+
+<div class="key-point">
+    <strong>💡 Client Talking Point:</strong> "We use AI language models similar to ChatGPT, but configured specifically for your documents and processes, with validation layers to ensure accuracy."
+</div>
+
+<h2>3.2 OCR & Document Processing</h2>
+
+<div class="tech-box">
+    <h4>📄 How It Works</h4>
+    <ol>
+        <li><strong>Image Pre-processing:</strong> Clean up scanned documents (de-skew, enhance contrast)</li>
+        <li><strong>Text Recognition:</strong> Convert images of text to actual text characters</li>
+        <li><strong>Layout Analysis:</strong> Understand document structure (tables, columns, headers)</li>
+        <li><strong>Field Extraction:</strong> Identify specific data fields</li>
+    </ol>
+    
+    <h4>Modern OCR Capabilities:</h4>
+    <ul>
+        <li>95-99% accuracy on good quality documents</li>
+        <li>Handles handwriting (with lower accuracy)</li>
+        <li>Processes tables and forms</li>
+        <li>Multi-language support</li>
+    </ul>
+</div>
+
+<h2>3.3 Workflow Automation (RPA & Beyond)</h2>
+
+<div class="tech-box">
+    <h4>⚙️ Types of Automation</h4>
+    
+    <p><strong>RPA (Robotic Process Automation):</strong></p>
+    <ul>
+        <li>Software "robots" that mimic human actions</li>
+        <li>Click buttons, fill forms, copy/paste data</li>
+        <li>Works with existing systems without integration</li>
+        <li>Best for: Legacy systems, high-volume repetitive tasks</li>
+    </ul>
+    
+    <p><strong>API-Based Automation:</strong></p>
+    <ul>
+        <li>Direct system-to-system communication</li>
+        <li>Faster and more reliable than RPA</li>
+        <li>Requires systems with available APIs</li>
+        <li>Best for: Modern cloud systems, real-time processes</li>
+    </ul>
+    
+    <p><strong>Hybrid Automation:</strong></p>
+    <ul>
+        <li>Combines AI understanding with workflow execution</li>
+        <li>Handles exceptions intelligently</li>
+        <li>This is where KU Automation specializes</li>
+    </ul>
+</div>
+
+<h2>3.4 Machine Learning Basics</h2>
+
+<div class="tech-box">
+    <h4>🎯 Key Concepts</h4>
+    
+    <p><strong>Training:</strong> Showing the model many examples so it learns patterns</p>
+    <p><strong>Inference:</strong> Using the trained model to make predictions on new data</p>
+    <p><strong>Accuracy:</strong> How often the model gets it right</p>
+    <p><strong>Confidence Score:</strong> How certain the model is about each prediction</p>
+    
+    <h4>Common ML Applications:</h4>
+    <ul>
+        <li><strong>Classification:</strong> "Is this document a PO, Invoice, or Quote?"</li>
+        <li><strong>Extraction:</strong> "What is the total amount on this invoice?"</li>
+        <li><strong>Anomaly Detection:</strong> "Does this transaction look suspicious?"</li>
+        <li><strong>Prediction:</strong> "When will this equipment likely fail?"</li>
+    </ul>
+</div>
+
+<h1>4. Automation Architecture Patterns</h1>
+
+<h2>4.1 The Standard AI Automation Flow</h2>
+
+<div class="diagram">
+┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐    ┌──────────┐
+│  INPUT   │───▶│  PROCESS │───▶│    AI    │───▶│ VALIDATE │───▶│  OUTPUT  │
+│          │    │          │    │          │    │          │    │          │
+│ • Email  │    │ • Extract│    │ • Analyze│    │ • Rules  │    │ • Update │
+│ • Scan   │    │ • Parse  │    │ • Decide │    │ • Human  │    │ • Notify │
+│ • Upload │    │ • Clean  │    │ • Score  │    │   Check  │    │ • Report │
+└──────────┘    └──────────┘    └──────────┘    └──────────┘    └──────────┘
+</div>
+
+<h2>4.2 Human-in-the-Loop Pattern</h2>
+
+<p>Critical for enterprise adoption. The AI handles routine cases; humans handle exceptions.</p>
+
+<div class="diagram">
+                    ┌─────────────────┐
+                    │   AI Processing │
+                    │   Confidence?   │
+                    └────────┬────────┘
+                             │
+              ┌──────────────┼──────────────┐
+              │              │              │
+              ▼              ▼              ▼
+        ┌──────────┐   ┌──────────┐   ┌──────────┐
+        │  HIGH    │   │  MEDIUM  │   │   LOW    │
+        │  (>90%)  │   │ (70-90%) │   │  (<70%)  │
+        └────┬─────┘   └────┬─────┘   └────┬─────┘
+             │              │              │
+             ▼              ▼              ▼
+        ┌──────────┐   ┌──────────┐   ┌──────────┐
+        │  AUTO    │   │  REVIEW  │   │  HUMAN   │
+        │ PROCESS  │   │   QUEUE  │   │  HANDLE  │
+        └──────────┘   └──────────┘   └──────────┘
+</div>
+
+<div class="key-point">
+    <strong>💡 Client Talking Point:</strong> "Our systems include confidence scoring. High-confidence items process automatically; uncertain cases are flagged for your team to review. You stay in control while saving time on the routine work."
+</div>
+
+<h1>5. Service Categories Deep Dive</h1>
+
+<h2>5.1 Document Processing & Data Extraction</h2>
+
+<table>
+    <tr><th>Component</th><th>Technology</th><th>Example Use Case</th></tr>
+    <tr>
+        <td>Document Ingestion</td>
+        <td>OCR, PDF parsing</td>
+        <td>Convert scanned datasheets to digital</td>
+    </tr>
+    <tr>
+        <td>Data Extraction</td>
+        <td>NLP, LLMs, regex</td>
+        <td>Pull specifications from equipment catalogs</td>
+    </tr>
+    <tr>
+        <td>Validation</td>
+        <td>Rules engine, ML</td>
+        <td>Verify extracted data against standards</td>
+    </tr>
+    <tr>
+        <td>Output</td>
+        <td>API, spreadsheet, database</td>
+        <td>Populate ERP system with clean data</td>
+    </tr>
+</table>
+
+<h2>5.2 Intelligent Chatbots & Virtual Assistants</h2>
+
+<table>
+    <tr><th>Component</th><th>Technology</th><th>Purpose</th></tr>
+    <tr>
+        <td>Intent Recognition</td>
+        <td>NLP, LLM</td>
+        <td>Understand what user is asking</td>
+    </tr>
+    <tr>
+        <td>Knowledge Base</td>
+        <td>Vector DB, RAG</td>
+        <td>Store company-specific information</td>
+    </tr>
+    <tr>
+        <td>Response Generation</td>
+        <td>LLM</td>
+        <td>Create natural, accurate responses</td>
+    </tr>
+    <tr>
+        <td>Action Execution</td>
+        <td>APIs, workflows</td>
+        <td>Actually do things (book, update, retrieve)</td>
+    </tr>
+</table>
+
+<div class="tech-box">
+    <h4>🔍 RAG Explained (Retrieval-Augmented Generation)</h4>
+    <p>RAG is how we make AI chatbots knowledgeable about YOUR specific information:</p>
+    <ol>
+        <li><strong>Index:</strong> We process your documents and store them in a special database (vector database)</li>
+        <li><strong>Retrieve:</strong> When a user asks a question, we find the most relevant document chunks</li>
+        <li><strong>Generate:</strong> The AI uses those specific chunks to answer the question accurately</li>
+    </ol>
+    <p><em>Result: An AI that answers based on YOUR data, not just general knowledge.</em></p>
+</div>
+
+<h2>5.3 Workflow Automation</h2>
+
+<table>
+    <tr><th>Workflow Type</th><th>Description</th><th>Example</th></tr>
+    <tr>
+        <td>Sequential</td>
+        <td>Steps execute one after another</td>
+        <td>Invoice: Receive → Extract → Validate → Approve → Pay</td>
+    </tr>
+    <tr>
+        <td>Parallel</td>
+        <td>Multiple steps run simultaneously</td>
+        <td>Send document to 3 reviewers at once</td>
+    </tr>
+    <tr>
+        <td>Conditional</td>
+        <td>Different paths based on data</td>
+        <td>If amount > $10K, require VP approval</td>
+    </tr>
+    <tr>
+        <td>Event-Driven</td>
+        <td>Triggered by external events</td>
+        <td>When email arrives, start processing</td>
+    </tr>
+</table>
+
+<h1>6. Integration & Data Flow</h1>
+
+<h2>6.1 Common Integration Points</h2>
+
+<div class="diagram">
+┌─────────────────────────────────────────────────────────────────┐
+│                     CLIENT ECOSYSTEM                             │
+├─────────────┬─────────────┬─────────────┬─────────────┬─────────┤
+│    EMAIL    │     ERP     │     CRM     │   STORAGE   │  CUSTOM │
+│  (Outlook)  │   (SAP)     │ (Salesforce)│  (SharePt)  │  (APIs) │
+└──────┬──────┴──────┬──────┴──────┬──────┴──────┬──────┴────┬────┘
+       │             │             │             │           │
+       └─────────────┴──────┬──────┴─────────────┴───────────┘
+                            │
+                   ┌────────▼────────┐
+                   │  KU AUTOMATION  │
+                   │    PLATFORM     │
+                   └────────┬────────┘
+                            │
+       ┌────────────────────┼────────────────────┐
+       │                    │                    │
+       ▼                    ▼                    ▼
+┌─────────────┐      ┌─────────────┐      ┌─────────────┐
+│  AI MODELS  │      │  WORKFLOWS  │      │  DASHBOARDS │
+│             │      │             │      │             │
+│ • Extract   │      │ • Automate  │      │ • Monitor   │
+│ • Classify  │      │ • Route     │      │ • Report    │
+│ • Generate  │      │ • Alert     │      │ • Audit     │
+└─────────────┘      └─────────────┘      └─────────────┘
+</div>
+
+<h2>6.2 API Fundamentals</h2>
+
+<div class="tech-box">
+    <h4>🔌 What is an API?</h4>
+    <p>An API (Application Programming Interface) is a way for software systems to talk to each other. Think of it as a waiter in a restaurant: you (the client) tell the waiter what you want, the waiter communicates with the kitchen (the system), and brings back your food (the data).</p>
+    
+    <h4>Key API Concepts:</h4>
+    <ul>
+        <li><strong>Endpoint:</strong> The specific URL where requests are sent</li>
+        <li><strong>Request:</strong> What you're asking for (GET data, POST new data)</li>
+        <li><strong>Response:</strong> What comes back (usually JSON format)</li>
+        <li><strong>Authentication:</strong> Proving you're allowed to access (API keys, tokens)</li>
+    </ul>
+</div>
+
+<h1>7. The KU Automation Methodology</h1>
+
+<h2>7.1 Our Approach</h2>
+
+<div class="highlight">
+    <strong>Philosophy:</strong> We don't just implement technology; we capture and scale human expertise. Every automation should make your best practices the default, not replace human judgment.
+</div>
+
+<h2>7.2 The KU Automation Framework</h2>
+
+<table>
+    <tr><th>Phase</th><th>Focus</th><th>Deliverable</th></tr>
+    <tr>
+        <td><strong>1. Discover</strong></td>
+        <td>Understand current processes, pain points, data flows</td>
+        <td>Process Map, Opportunity Assessment</td>
+    </tr>
+    <tr>
+        <td><strong>2. Design</strong></td>
+        <td>Architecture the solution, select technologies</td>
+        <td>Solution Design, Technical Spec</td>
+    </tr>
+    <tr>
+        <td><strong>3. Develop</strong></td>
+        <td>Build the AI models, workflows, integrations</td>
+        <td>Working System</td>
+    </tr>
+    <tr>
+        <td><strong>4. Validate</strong></td>
+        <td>Test accuracy, performance, edge cases</td>
+        <td>Test Results, Refinements</td>
+    </tr>
+    <tr>
+        <td><strong>5. Deploy</strong></td>
+        <td>Production rollout, training, monitoring</td>
+        <td>Live System, Documentation</td>
+    </tr>
+    <tr>
+        <td><strong>6. Optimize</strong></td>
+        <td>Continuous improvement based on real usage</td>
+        <td>Enhanced Performance</td>
+    </tr>
+</table>
+
+<h2>7.3 Our Differentiators</h2>
+
+<ul>
+    <li><strong>Engineering Domain Expertise:</strong> We understand the context of engineering documents, not just the technology</li>
+    <li><strong>Human-Centric Design:</strong> Systems that augment your team, not replace them</li>
+    <li><strong>Practical ROI Focus:</strong> Solutions tied to measurable business outcomes</li>
+    <li><strong>Enterprise-Grade Security:</strong> Data protection built in from day one</li>
+</ul>
+
+<h1>8. Talking Points for Client Conversations</h1>
+
+<h2>8.1 Common Questions & Answers</h2>
+
+<div class="key-point">
+    <strong>"How accurate is AI?"</strong>
+    <p>"Modern AI can achieve 90-98% accuracy on well-defined tasks. We design systems with confidence thresholds — high-confidence items process automatically, while uncertain cases are flagged for human review. You get speed on the routine work while maintaining control over exceptions."</p>
+</div>
+
+<div class="key-point">
+    <strong>"Will this replace our people?"</strong>
+    <p>"Our goal is augmentation, not replacement. We automate the repetitive, time-consuming tasks so your experts can focus on high-value work — complex decisions, client relationships, innovation. The best results come from AI and humans working together."</p>
+</div>
+
+<div class="key-point">
+    <strong>"Is our data secure?"</strong>
+    <p>"Absolutely. We use enterprise-grade encryption, secure cloud infrastructure, and strict access controls. Your data is never used to train public AI models. We can also work within your existing security infrastructure if required."</p>
+</div>
+
+<div class="key-point">
+    <strong>"How long until we see ROI?"</strong>
+    <p>"Typically, clients see time savings within the first month of deployment. Full ROI — including reduced errors, faster turnaround, and freed-up expert time — usually materializes within 3-6 months. We'll help you define and track the specific metrics that matter for your business."</p>
+</div>
+
+<div class="key-point">
+    <strong>"What if the AI makes a mistake?"</strong>
+    <p>"Every system includes validation layers and audit trails. Critical decisions always have human checkpoints. We also implement monitoring to catch anomalies early and continuously improve accuracy based on real-world feedback."</p>
+</div>
+
+<h2>8.2 Value Propositions by Role</h2>
+
+<table>
+    <tr><th>Audience</th><th>Key Message</th></tr>
+    <tr>
+        <td><strong>C-Suite</strong></td>
+        <td>Competitive advantage through efficiency, scalability without proportional headcount growth, risk reduction through consistency</td>
+    </tr>
+    <tr>
+        <td><strong>Operations</strong></td>
+        <td>Faster processing, fewer errors, clear audit trails, capacity to handle volume spikes</td>
+    </tr>
+    <tr>
+        <td><strong>IT</strong></td>
+        <td>Modern architecture, secure integration, reduced manual data entry burden</td>
+    </tr>
+    <tr>
+        <td><strong>End Users</strong></td>
+        <td>Less tedious work, better tools, focus on interesting problems</td>
+    </tr>
+</table>
+
+<h1>9. Glossary of Terms</h1>
+
+<table>
+    <tr><th>Term</th><th>Definition</th></tr>
+    <tr><td><strong>AI (Artificial Intelligence)</strong></td><td>Systems that can perform tasks typically requiring human intelligence</td></tr>
+    <tr><td><strong>API</strong></td><td>Application Programming Interface — how systems communicate</td></tr>
+    <tr><td><strong>Chatbot</strong></td><td>AI that converses with users via text or voice</td></tr>
+    <tr><td><strong>Confidence Score</strong></td><td>How certain an AI model is about its prediction (0-100%)</td></tr>
+    <tr><td><strong>Data Extraction</strong></td><td>Pulling specific information from documents automatically</td></tr>
+    <tr><td><strong>Entity</strong></td><td>A specific piece of information (name, date, amount, part number)</td></tr>
+    <tr><td><strong>Hallucination</strong></td><td>When AI generates plausible but incorrect information</td></tr>
+    <tr><td><strong>LLM</strong></td><td>Large Language Model — AI trained on text (GPT-4, Claude)</td></tr>
+    <tr><td><strong>ML (Machine Learning)</strong></td><td>Systems that learn patterns from data</td></tr>
+    <tr><td><strong>NLP</strong></td><td>Natural Language Processing — AI understanding human language</td></tr>
+    <tr><td><strong>OCR</strong></td><td>Optical Character Recognition — converting images to text</td></tr>
+    <tr><td><strong>RAG</strong></td><td>Retrieval-Augmented Generation — AI that references your documents</td></tr>
+    <tr><td><strong>RPA</strong></td><td>Robotic Process Automation — bots that mimic human clicks</td></tr>
+    <tr><td><strong>Token</strong></td><td>Unit of text processed by AI (roughly 4 characters)</td></tr>
+    <tr><td><strong>Vector Database</strong></td><td>Storage optimized for AI similarity searches</td></tr>
+    <tr><td><strong>Workflow</strong></td><td>Automated sequence of steps in a process</td></tr>
+</table>
+
+<div class="footer">
+    <p><strong>KU Automation</strong></p>
+    <p>Founder's Technical White Paper | Version 1.0 | February 2026</p>
+    <p>kingsley.uzowulu@ku-automation.com</p>
+    <p style="margin-top: 10px; font-style: italic;">"Engineering Excellence Through Intelligent Automation"</p>
+</div>
+
+</body>
+</html>

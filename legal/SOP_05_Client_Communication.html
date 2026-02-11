@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOP-05: Client Communication - KU Automation</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 11pt; line-height: 1.6; color: #333; background: #fff; padding: 0.75in; max-width: 8.5in; margin: 0 auto; }
+        .header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 3px solid #1a365d; padding-bottom: 15px; margin-bottom: 20px; }
+        .logo { font-size: 20pt; font-weight: bold; color: #1a365d; }
+        .logo span { color: #f97316; }
+        .doc-info { text-align: right; font-size: 9pt; color: #666; }
+        h1 { font-size: 16pt; color: #1a365d; margin: 20px 0 10px 0; padding-bottom: 5px; border-bottom: 2px solid #f97316; }
+        h2 { font-size: 12pt; color: #1a365d; margin: 20px 0 10px 0; background: #f0f4f8; padding: 8px 12px; border-left: 4px solid #f97316; }
+        h3 { font-size: 11pt; color: #333; margin: 15px 0 8px 0; }
+        p { margin-bottom: 10px; text-align: justify; }
+        ul, ol { margin: 10px 0 15px 25px; }
+        li { margin-bottom: 6px; }
+        table { width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 10pt; }
+        th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+        th { background: #1a365d; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .meta-table { margin-bottom: 25px; }
+        .meta-table td:first-child { width: 150px; font-weight: bold; background: #f0f4f8; }
+        .template { background: #f5f5f5; border: 1px solid #ddd; padding: 15px; margin: 15px 0; font-family: 'Courier New', monospace; font-size: 10pt; white-space: pre-wrap; }
+        .tip { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 10px; margin: 10px 0; }
+        .footer { margin-top: 40px; padding-top: 15px; border-top: 1px solid #ddd; font-size: 9pt; color: #666; text-align: center; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">KU<span>Automation</span></div>
+        <div class="doc-info"><strong>SOP-05</strong><br>Version: 1.0<br>Effective: February 2026</div>
+    </div>
+
+    <h1>Standard Operating Procedure: Client Communication</h1>
+
+    <table class="meta-table">
+        <tr><td>Document ID</td><td>SOP-05-COMM</td></tr>
+        <tr><td>Department</td><td>Client Services</td></tr>
+        <tr><td>Owner</td><td>Principal Consultant</td></tr>
+        <tr><td>Approved By</td><td>Kingsley Uzowulu, CEng, MIMechE</td></tr>
+    </table>
+
+    <h2>1. Purpose</h2>
+    <p>This SOP establishes standards for professional, timely, and effective communication with clients throughout all engagements to ensure alignment, transparency, and client satisfaction.</p>
+
+    <h2>2. Communication Principles</h2>
+    <ul>
+        <li><strong>Professionalism:</strong> All communications reflect KU Automation's standards</li>
+        <li><strong>Clarity:</strong> Use clear, jargon-free language; explain technical concepts simply</li>
+        <li><strong>Timeliness:</strong> Respond promptly; never leave clients waiting</li>
+        <li><strong>Transparency:</strong> Share progress honestly, including challenges</li>
+        <li><strong>Proactivity:</strong> Anticipate questions and address them before asked</li>
+    </ul>
+
+    <h2>3. Response Time Standards</h2>
+    <table>
+        <tr><th>Communication Type</th><th>Response Target</th><th>Notes</th></tr>
+        <tr><td>Urgent issues (Critical)</td><td>Within 2 hours</td><td>Production down, security issues</td></tr>
+        <tr><td>General inquiries</td><td>Within 4 business hours</td><td>Questions, requests</td></tr>
+        <tr><td>Email (non-urgent)</td><td>Within 1 business day</td><td>Standard correspondence</td></tr>
+        <tr><td>Proposal follow-ups</td><td>Within 2 business days</td><td>After proposal sent</td></tr>
+        <tr><td>Meeting requests</td><td>Within 1 business day</td><td>Confirm or propose alternatives</td></tr>
+    </table>
+
+    <div class="tip">
+        <strong>💡 Tip:</strong> If you cannot fully respond within the target time, send an acknowledgment confirming receipt and providing an expected response time.
+    </div>
+
+    <h2>4. Regular Communication Schedule</h2>
+    <table>
+        <tr><th>Communication</th><th>Frequency</th><th>Format</th><th>Content</th></tr>
+        <tr>
+            <td>Weekly Status Update</td>
+            <td>Every Monday</td>
+            <td>Email</td>
+            <td>Progress, completed items, upcoming work, blockers</td>
+        </tr>
+        <tr>
+            <td>Progress Call</td>
+            <td>Weekly or bi-weekly</td>
+            <td>Video call</td>
+            <td>Demo progress, discuss issues, gather feedback</td>
+        </tr>
+        <tr>
+            <td>Milestone Review</td>
+            <td>End of each phase</td>
+            <td>Meeting + document</td>
+            <td>Deliverable review, sign-off, next phase planning</td>
+        </tr>
+        <tr>
+            <td>Monthly Summary</td>
+            <td>Monthly (long projects)</td>
+            <td>Report</td>
+            <td>Overall progress, budget status, risk update</td>
+        </tr>
+    </table>
+
+    <h2>5. Communication Channels</h2>
+    <table>
+        <tr><th>Channel</th><th>Use For</th><th>Not For</th></tr>
+        <tr>
+            <td><strong>Email</strong></td>
+            <td>Formal communications, documentation, status updates</td>
+            <td>Urgent issues, complex discussions</td>
+        </tr>
+        <tr>
+            <td><strong>Video Call (Zoom/Teams)</strong></td>
+            <td>Meetings, demos, complex discussions, kickoffs</td>
+            <td>Quick questions</td>
+        </tr>
+        <tr>
+            <td><strong>Slack/Teams Chat</strong></td>
+            <td>Quick questions, informal updates, file sharing</td>
+            <td>Formal sign-offs, contracts</td>
+        </tr>
+        <tr>
+            <td><strong>Phone</strong></td>
+            <td>Urgent matters, sensitive discussions</td>
+            <td>Documentation-required items</td>
+        </tr>
+        <tr>
+            <td><strong>Project Portal</strong></td>
+            <td>Task tracking, deliverables, documents</td>
+            <td>General correspondence</td>
+        </tr>
+    </table>
+
+    <h2>6. Email Standards</h2>
+    <h3>6.1 Email Structure</h3>
+    <ul>
+        <li><strong>Subject:</strong> Clear, specific, include project name if applicable</li>
+        <li><strong>Greeting:</strong> Professional salutation (Dear [Name], / Hi [Name],)</li>
+        <li><strong>Body:</strong> Purpose first, then details, keep concise</li>
+        <li><strong>Action Items:</strong> Clearly state any required actions</li>
+        <li><strong>Closing:</strong> Professional sign-off with contact details</li>
+    </ul>
+
+    <h3>6.2 Weekly Status Update Template</h3>
+    <div class="template">Subject: [Project Name] - Weekly Status Update - [Date]
+
+Dear [Client Name],
+
+Please find below the weekly status update for [Project Name].
+
+**SUMMARY**
+Overall Status: 🟢 On Track / 🟡 At Risk / 🔴 Delayed
+Progress: [X]% complete
+
+**COMPLETED THIS WEEK**
+• [Item 1]
+• [Item 2]
+• [Item 3]
+
+**IN PROGRESS**
+• [Item 1] - [X]% complete
+• [Item 2] - [X]% complete
+
+**PLANNED NEXT WEEK**
+• [Item 1]
+• [Item 2]
+
+**BLOCKERS / RISKS**
+• [None / Describe any issues requiring attention]
+
+**ACTION REQUIRED FROM CLIENT**
+• [None / List any items needing client input]
+
+Please let me know if you have any questions.
+
+Best regards,
+Kingsley Uzowulu
+KU Automation
+kingsley.uzowulu@ku-automation.com</div>
+
+    <h2>7. Meeting Standards</h2>
+    <h3>7.1 Before Meeting</h3>
+    <ul>
+        <li>Send calendar invite with clear agenda</li>
+        <li>Share relevant documents 24 hours in advance</li>
+        <li>Confirm attendees and their roles</li>
+        <li>Test technology (video, screen share) beforehand</li>
+    </ul>
+
+    <h3>7.2 During Meeting</h3>
+    <ul>
+        <li>Start on time</li>
+        <li>Begin with agenda overview</li>
+        <li>Take notes or assign note-taker</li>
+        <li>Stay on topic; park off-topic items</li>
+        <li>Summarize decisions and action items at end</li>
+        <li>End on time or agree to extend</li>
+    </ul>
+
+    <h3>7.3 After Meeting</h3>
+    <ul>
+        <li>Send meeting notes within 24 hours</li>
+        <li>Include: attendees, discussion summary, decisions, action items with owners/dates</li>
+        <li>Request confirmation of understanding if needed</li>
+    </ul>
+
+    <h2>8. Difficult Conversations</h2>
+    <h3>8.1 Delivering Bad News</h3>
+    <ol>
+        <li>Communicate early - don't wait until the last minute</li>
+        <li>Be direct and honest about the situation</li>
+        <li>Explain the cause and impact</li>
+        <li>Present a remediation plan</li>
+        <li>Take responsibility where appropriate</li>
+        <li>Follow up in writing after verbal discussion</li>
+    </ol>
+
+    <h3>8.2 Handling Complaints</h3>
+    <ol>
+        <li>Listen fully without interrupting</li>
+        <li>Acknowledge the client's concern</li>
+        <li>Apologize if appropriate (without over-apologizing)</li>
+        <li>Propose a resolution</li>
+        <li>Follow up to ensure satisfaction</li>
+        <li>Document the issue and resolution</li>
+    </ol>
+
+    <h2>9. Escalation Path</h2>
+    <table>
+        <tr><th>Level</th><th>Trigger</th><th>Contact</th></tr>
+        <tr><td>Level 1</td><td>Day-to-day project issues</td><td>Project Lead</td></tr>
+        <tr><td>Level 2</td><td>Unresolved issues, scope disputes</td><td>Principal Consultant</td></tr>
+        <tr><td>Level 3</td><td>Contract disputes, serious complaints</td><td>Principal + Legal if needed</td></tr>
+    </table>
+
+    <h2>10. Documentation</h2>
+    <ul>
+        <li>All significant client communications should be documented</li>
+        <li>Store in project folder or CRM</li>
+        <li>Verbal agreements must be confirmed in writing</li>
+        <li>Keep audit trail for key decisions</li>
+    </ul>
+
+    <h2>11. Revision History</h2>
+    <table>
+        <tr><th>Version</th><th>Date</th><th>Author</th><th>Changes</th></tr>
+        <tr><td>1.0</td><td>Feb 9, 2026</td><td>K. Uzowulu</td><td>Initial release</td></tr>
+    </table>
+
+    <div class="footer">
+        <p><strong>KU Automation</strong> | SOP-05: Client Communication | Version 1.0</p>
+    </div>
+</body>
+</html>
