@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU Automation - Application SOPs & Client Execution Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+            padding: 0.75in;
+            max-width: 8.5in;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 3px solid #1a365d;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+        .logo { font-size: 20pt; font-weight: bold; color: #1a365d; }
+        .logo span { color: #f97316; }
+        .doc-info { text-align: right; font-size: 9pt; color: #666; }
+        .doc-info strong { color: #1a365d; }
+        h1 {
+            font-size: 16pt;
+            color: #1a365d;
+            margin: 20px 0 10px 0;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #f97316;
+        }
+        h2 {
+            font-size: 12pt;
+            color: #1a365d;
+            margin: 20px 0 10px 0;
+            background: #f0f4f8;
+            padding: 8px 12px;
+            border-left: 4px solid #f97316;
+        }
+        h3 { font-size: 11pt; color: #1a365d; margin: 15px 0 8px 0; font-weight: bold; }
+        h4 { font-size: 10pt; color: #444; margin: 12px 0 6px 0; font-weight: bold; }
+        p { margin-bottom: 10px; text-align: justify; }
+        ul, ol { margin: 10px 0 15px 25px; }
+        li { margin-bottom: 6px; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 10pt;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+        th { background: #1a365d; color: white; }
+        tr:nth-child(even) { background: #f9f9f9; }
+        .meta-table { margin-bottom: 25px; }
+        .meta-table td:first-child { width: 150px; font-weight: bold; background: #f0f4f8; }
+        .app-section {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .app-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f97316;
+        }
+        .app-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 15px;
+            color: white;
+        }
+        .app-icon.pid { background: linear-gradient(135deg, #6366f1, #4f46e5); }
+        .app-icon.datasheet { background: linear-gradient(135deg, #10b981, #059669); }
+        .app-icon.rfq { background: linear-gradient(135deg, #3b82f6, #2563eb); }
+        .app-icon.knowledge { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+        .app-icon.report { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .app-title { font-size: 14pt; color: #1a365d; font-weight: bold; }
+        .step-box {
+            background: #e8f4f8;
+            border-left: 4px solid #1a365d;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .step-number {
+            display: inline-block;
+            width: 28px;
+            height: 28px;
+            background: #f97316;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: bold;
+            font-size: 10pt;
+            margin-right: 10px;
+        }
+        .checklist { background: #fffde7; padding: 15px; border-radius: 5px; margin: 15px 0; }
+        .checklist h3 { margin-top: 0; }
+        .warning { background: #fff3cd; border-left: 4px solid #ffc107; padding: 10px; margin: 10px 0; }
+        .info { background: #e3f2fd; border-left: 4px solid #2196f3; padding: 10px; margin: 10px 0; }
+        .success { background: #e8f5e9; border-left: 4px solid #4caf50; padding: 10px; margin: 10px 0; }
+        .process-flow {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 15px 0;
+        }
+        .flow-step {
+            background: #1a365d;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 9pt;
+            display: flex;
+            align-items: center;
+        }
+        .flow-step::after {
+            content: '→';
+            margin-left: 10px;
+            color: #f97316;
+        }
+        .flow-step:last-child::after { content: ''; }
+        .toc {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .toc h3 { margin-bottom: 15px; }
+        .toc ul { list-style: none; margin-left: 0; }
+        .toc li { padding: 5px 0; border-bottom: 1px dotted #ddd; }
+        .toc a { color: #1a365d; text-decoration: none; }
+        .footer {
+            margin-top: 40px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            font-size: 9pt;
+            color: #666;
+            text-align: center;
+        }
+        @media print { 
+            body { padding: 0.5in; }
+            .app-section { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">KU<span>Automation</span></div>
+        <div class="doc-info">
+            <strong>APP-SOP-001</strong><br>
+            Version: 1.0<br>
+            Effective: February 2026<br>
+            Review: Quarterly
+        </div>
+    </div>
+
+    <h1>Application Standard Operating Procedures<br><small style="font-size: 12pt; color: #666;">Complete Client Execution Guide for AI Automation Tools</small></h1>
+
+    <table class="meta-table">
+        <tr><td>Document ID</td><td>APP-SOP-001</td></tr>
+        <tr><td>Department</td><td>Technical Services</td></tr>
+        <tr><td>Owner</td><td>Principal Consultant</td></tr>
+        <tr><td>Approved By</td><td>Kingsley Uzowulu, CEng, MIMechE</td></tr>
+        <tr><td>Last Updated</td><td>February 13, 2026</td></tr>
+        <tr><td>Classification</td><td>Internal / Client Reference</td></tr>
+    </table>
+
+    <div class="toc">
+        <h3>📋 Table of Contents</h3>
+        <ul>
+            <li><a href="#section1">1. Client Onboarding Requirements</a></li>
+            <li><a href="#section2">2. Application Overview</a></li>
+            <li><a href="#section3">3. P&ID Parser - Detailed Workflow</a></li>
+            <li><a href="#section4">4. Datasheet Parser - Detailed Workflow</a></li>
+            <li><a href="#section5">5. RFQ Analyzer - Detailed Workflow</a></li>
+            <li><a href="#section6">6. Technical Knowledge Bot - Detailed Workflow</a></li>
+            <li><a href="#section7">7. Report Generator - Detailed Workflow</a></li>
+            <li><a href="#section8">8. Execution Protocols</a></li>
+            <li><a href="#section9">9. Maintenance & Support</a></li>
+            <li><a href="#section10">10. Appendices</a></li>
+        </ul>
+    </div>
+
+    <!-- SECTION 1: CLIENT ONBOARDING -->
+    <h1 id="section1">1. Client Onboarding Requirements</h1>
+    
+    <h2>1.1 Pre-Engagement Requirements</h2>
+    <p>Before any application development begins, the following must be completed:</p>
+    
+    <div class="checklist">
+        <h3>☑️ Mandatory Pre-Engagement Checklist</h3>
+        <ul>
+            <li>☐ <strong>Non-Disclosure Agreement (NDA)</strong> — Signed by both parties</li>
+            <li>☐ <strong>Data Classification Agreement</strong> — Client confirms data sensitivity levels</li>
+            <li>☐ <strong>Scope Validation Document</strong> — Signed-off requirements specification</li>
+            <li>☐ <strong>Sample Data Package</strong> — Representative samples for testing (min. 5-10 documents)</li>
+            <li>☐ <strong>Output Format Agreement</strong> — Excel, JSON, PDF, or integration specification</li>
+            <li>☐ <strong>Timeline & Milestone Agreement</strong> — Documented in project contract</li>
+        </ul>
+    </div>
+
+    <h2>1.2 Data Requirements by Application</h2>
+    <table>
+        <tr>
+            <th>Application</th>
+            <th>Required Input Data</th>
+            <th>Min. Sample Size</th>
+            <th>Accepted Formats</th>
+        </tr>
+        <tr>
+            <td>P&ID Parser</td>
+            <td>P&ID drawings, legend sheets</td>
+            <td>5-10 drawings</td>
+            <td>PDF, DWG, PNG, TIFF</td>
+        </tr>
+        <tr>
+            <td>Datasheet Parser</td>
+            <td>Equipment datasheets</td>
+            <td>10-15 datasheets</td>
+            <td>PDF, Word, scanned images</td>
+        </tr>
+        <tr>
+            <td>RFQ Analyzer</td>
+            <td>RFQ documents, bid templates</td>
+            <td>5-8 RFQs</td>
+            <td>PDF, Word, Excel</td>
+        </tr>
+        <tr>
+            <td>Knowledge Bot</td>
+            <td>Technical manuals, standards, procedures</td>
+            <td>50+ documents (500+ pages)</td>
+            <td>PDF, Word, TXT, HTML</td>
+        </tr>
+        <tr>
+            <td>Report Generator</td>
+            <td>Data sources, report templates</td>
+            <td>3+ data sources</td>
+            <td>Excel, CSV, API endpoints</td>
+        </tr>
+    </table>
+
+    <h2>1.3 Scope Validation Process</h2>
+    <div class="step-box">
+        <p><span class="step-number">1</span><strong>Discovery Call</strong> — Understand client's current workflow and pain points</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">2</span><strong>Sample Analysis</strong> — Review provided samples to assess complexity and variations</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">3</span><strong>Technical Specification</strong> — Document exact extraction fields, business rules, and edge cases</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">4</span><strong>Prototype Demo</strong> — Build and demonstrate on 2-3 sample documents</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">5</span><strong>Sign-Off</strong> — Client approves specification before full development</p>
+    </div>
+
+    <div class="warning">
+        <strong>⚠️ Critical:</strong> Never proceed to development without signed scope validation. Scope creep is the #1 cause of project delays.
+    </div>
+
+    <!-- SECTION 2: APPLICATION OVERVIEW -->
+    <h1 id="section2">2. Application Overview</h1>
+    
+    <p>KU Automation provides five core AI-powered applications for engineering workflow automation:</p>
+    
+    <table>
+        <tr>
+            <th>Application</th>
+            <th>Purpose</th>
+            <th>Typical Time Savings</th>
+            <th>Accuracy Target</th>
+        </tr>
+        <tr>
+            <td><strong>P&ID Parser</strong></td>
+            <td>Extract equipment data from P&ID drawings</td>
+            <td>70-85%</td>
+            <td>≥95%</td>
+        </tr>
+        <tr>
+            <td><strong>Datasheet Parser</strong></td>
+            <td>Extract specifications from equipment datasheets</td>
+            <td>80-90%</td>
+            <td>≥97%</td>
+        </tr>
+        <tr>
+            <td><strong>RFQ Analyzer</strong></td>
+            <td>Analyze RFQs for requirements and compliance</td>
+            <td>60-75%</td>
+            <td>≥93%</td>
+        </tr>
+        <tr>
+            <td><strong>Knowledge Bot</strong></td>
+            <td>Q&A chatbot trained on technical documents</td>
+            <td>50-70%</td>
+            <td>≥90%</td>
+        </tr>
+        <tr>
+            <td><strong>Report Generator</strong></td>
+            <td>Automated engineering reports from data sources</td>
+            <td>70-85%</td>
+            <td>≥98%</td>
+        </tr>
+    </table>
+
+    <!-- SECTION 3: P&ID PARSER -->
+    <h1 id="section3">3. P&ID Parser — Detailed Workflow</h1>
+    
+    <div class="app-section">
+        <div class="app-header">
+            <div class="app-icon pid">📐</div>
+            <div>
+                <div class="app-title">P&ID Parser</div>
+                <div style="color: #666; font-size: 10pt;">Automated Equipment Data Extraction from P&ID Drawings</div>
+            </div>
+        </div>
+
+        <h3>3.1 What It Does</h3>
+        <p>Automatically extracts equipment tags, descriptions, line numbers, and specifications from Process & Instrumentation Diagrams (P&IDs), generating structured equipment lists and line schedules.</p>
+
+        <h3>3.2 Client Workflow — Start to Finish</h3>
+        
+        <div class="process-flow">
+            <span class="flow-step">Client Uploads P&IDs</span>
+            <span class="flow-step">AI Processes Drawing</span>
+            <span class="flow-step">Data Extracted</span>
+            <span class="flow-step">Client Reviews</span>
+            <span class="flow-step">Revisions (if needed)</span>
+            <span class="flow-step">Final Delivery</span>
+        </div>
+
+        <h4>Step 1: Document Submission</h4>
+        <ul>
+            <li>Client uploads P&ID files via secure portal or email</li>
+            <li>Include legend/symbol sheets for custom symbology</li>
+            <li>Specify revision number and drawing status</li>
+            <li>Indicate priority (standard: 24-48h / urgent: 4-8h)</li>
+        </ul>
+
+        <h4>Step 2: Pre-Processing & Validation</h4>
+        <ul>
+            <li>System validates file quality (resolution, readability)</li>
+            <li>Drawing is classified (process, utility, safety systems)</li>
+            <li>AI model selection based on drawing type and client configuration</li>
+            <li>Any issues flagged for client clarification</li>
+        </ul>
+
+        <h4>Step 3: AI Extraction</h4>
+        <ul>
+            <li>Vision AI scans entire drawing for equipment symbols</li>
+            <li>OCR extracts tag numbers, descriptions, specifications</li>
+            <li>Line numbers and pipe specifications identified</li>
+            <li>Control systems and instrumentation mapped</li>
+            <li>Data cross-referenced against equipment database</li>
+        </ul>
+
+        <h4>Step 4: Output Generation</h4>
+        <ul>
+            <li>Equipment list generated in client's preferred format (Excel/CSV/JSON)</li>
+            <li>Line schedule compiled with all pipe data</li>
+            <li>Instrument index created</li>
+            <li>Confidence scores assigned to each extraction</li>
+        </ul>
+
+        <h4>Step 5: Client Review & Validation</h4>
+        <ul>
+            <li>Client reviews output against source drawing</li>
+            <li>Low-confidence items flagged for manual verification</li>
+            <li>Client submits correction requests if needed</li>
+        </ul>
+
+        <h4>Step 6: Revision & Final Delivery</h4>
+        <ul>
+            <li>Corrections incorporated (1 revision round included)</li>
+            <li>Final validated output delivered</li>
+            <li>Source files archived for future reference</li>
+        </ul>
+
+        <h3>3.3 Data Handling</h3>
+        <div class="info">
+            <strong>ℹ️ Data Protocol:</strong>
+            <ul>
+                <li>All files encrypted in transit (TLS 1.3) and at rest (AES-256)</li>
+                <li>Processing on secure cloud infrastructure (SOC 2 compliant)</li>
+                <li>Data retained for 90 days post-delivery, then purged</li>
+                <li>Client can request immediate deletion at any time</li>
+            </ul>
+        </div>
+
+        <h3>3.4 Typical Outputs</h3>
+        <table>
+            <tr><th>Output</th><th>Fields Included</th></tr>
+            <tr><td>Equipment List</td><td>Tag, Description, Type, Size, Design Pressure/Temp, Material, Service</td></tr>
+            <tr><td>Line Schedule</td><td>Line No., From/To, Size, Spec, Insulation, P&ID Ref</td></tr>
+            <tr><td>Instrument Index</td><td>Tag, Type, Function, Range, Signal, Loop</td></tr>
+        </table>
+
+        <h3>3.5 Accuracy & QA</h3>
+        <ul>
+            <li>Target accuracy: ≥95% for standard drawings</li>
+            <li>QA spot-check on 10% of extractions</li>
+            <li>Confidence threshold: Items below 85% flagged for review</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 4: DATASHEET PARSER -->
+    <h1 id="section4">4. Datasheet Parser — Detailed Workflow</h1>
+    
+    <div class="app-section">
+        <div class="app-header">
+            <div class="app-icon datasheet">📋</div>
+            <div>
+                <div class="app-title">Datasheet Parser</div>
+                <div style="color: #666; font-size: 10pt;">Automated Specification Extraction from Equipment Datasheets</div>
+            </div>
+        </div>
+
+        <h3>4.1 What It Does</h3>
+        <p>Extracts technical specifications from vendor datasheets, equipment specs, and technical documents into structured, searchable databases.</p>
+
+        <h3>4.2 Client Workflow — Start to Finish</h3>
+        
+        <div class="process-flow">
+            <span class="flow-step">Upload Datasheets</span>
+            <span class="flow-step">Template Mapping</span>
+            <span class="flow-step">AI Extraction</span>
+            <span class="flow-step">Validation</span>
+            <span class="flow-step">Export/Integration</span>
+        </div>
+
+        <h4>Step 1: Document Submission</h4>
+        <ul>
+            <li>Client uploads datasheets (batch upload supported)</li>
+            <li>Specify equipment category (pumps, valves, vessels, instruments, etc.)</li>
+            <li>Indicate required extraction fields or use standard template</li>
+        </ul>
+
+        <h4>Step 2: Template Configuration</h4>
+        <ul>
+            <li>System identifies datasheet format/layout</li>
+            <li>Extraction template mapped to client requirements</li>
+            <li>Custom fields configured if needed</li>
+            <li>Unit conversions set up (metric/imperial)</li>
+        </ul>
+
+        <h4>Step 3: AI Extraction</h4>
+        <ul>
+            <li>AI identifies all specification fields on datasheet</li>
+            <li>Values extracted with units and conditions</li>
+            <li>Tables parsed and structured</li>
+            <li>Multi-page documents handled automatically</li>
+        </ul>
+
+        <h4>Step 4: Validation & Cross-Check</h4>
+        <ul>
+            <li>Extracted data validated against engineering rules</li>
+            <li>Outliers and anomalies flagged</li>
+            <li>Missing mandatory fields identified</li>
+            <li>Client review interface provided</li>
+        </ul>
+
+        <h4>Step 5: Export & Integration</h4>
+        <ul>
+            <li>Export to Excel, CSV, JSON, or direct database</li>
+            <li>API integration available for ERP/PLM systems</li>
+            <li>Audit trail maintained for all extractions</li>
+        </ul>
+
+        <h3>4.3 Supported Equipment Types</h3>
+        <table>
+            <tr><th>Category</th><th>Equipment Types</th></tr>
+            <tr><td>Rotating</td><td>Pumps, Compressors, Blowers, Fans, Mixers</td></tr>
+            <tr><td>Static</td><td>Vessels, Tanks, Heat Exchangers, Columns</td></tr>
+            <tr><td>Valves</td><td>Control, Safety, Manual, Check</td></tr>
+            <tr><td>Instruments</td><td>Transmitters, Analyzers, Gauges, Switches</td></tr>
+            <tr><td>Electrical</td><td>Motors, Transformers, Switchgear, Cables</td></tr>
+        </table>
+
+        <h3>4.4 Sample Extraction Fields (Pump Datasheet)</h3>
+        <table>
+            <tr><th>Field</th><th>Example Value</th></tr>
+            <tr><td>Tag Number</td><td>P-101A</td></tr>
+            <tr><td>Service</td><td>Crude Oil Transfer</td></tr>
+            <tr><td>Type</td><td>Centrifugal, API 610</td></tr>
+            <tr><td>Flow Rate</td><td>500 m³/h</td></tr>
+            <tr><td>Head</td><td>120 m</td></tr>
+            <tr><td>NPSH Required</td><td>3.5 m</td></tr>
+            <tr><td>Driver</td><td>Electric Motor, 250 kW</td></tr>
+            <tr><td>Material</td><td>SS316L</td></tr>
+        </table>
+    </div>
+
+    <!-- SECTION 5: RFQ ANALYZER -->
+    <h1 id="section5">5. RFQ Analyzer — Detailed Workflow</h1>
+    
+    <div class="app-section">
+        <div class="app-header">
+            <div class="app-icon rfq">📝</div>
+            <div>
+                <div class="app-title">RFQ Analyzer</div>
+                <div style="color: #666; font-size: 10pt;">Automated RFQ Analysis & Compliance Checking</div>
+            </div>
+        </div>
+
+        <h3>5.1 What It Does</h3>
+        <p>Analyzes Request for Quotation (RFQ) documents to extract requirements, identify scope, check compliance criteria, and generate bid preparation summaries.</p>
+
+        <h3>5.2 Client Workflow — Start to Finish</h3>
+        
+        <div class="process-flow">
+            <span class="flow-step">Upload RFQ Package</span>
+            <span class="flow-step">AI Analysis</span>
+            <span class="flow-step">Requirements Matrix</span>
+            <span class="flow-step">Compliance Check</span>
+            <span class="flow-step">Bid Summary</span>
+        </div>
+
+        <h4>Step 1: RFQ Package Submission</h4>
+        <ul>
+            <li>Client uploads complete RFQ package (ITB, SOW, specs, drawings)</li>
+            <li>Indicate bid deadline and priority level</li>
+            <li>Specify focus areas (technical, commercial, HSE)</li>
+        </ul>
+
+        <h4>Step 2: Document Parsing</h4>
+        <ul>
+            <li>AI identifies document types within package</li>
+            <li>Key sections extracted (scope, specs, terms, deadlines)</li>
+            <li>Annexures and attachments catalogued</li>
+        </ul>
+
+        <h4>Step 3: Requirements Extraction</h4>
+        <ul>
+            <li>Technical requirements itemized</li>
+            <li>Commercial terms identified</li>
+            <li>Compliance/certification requirements listed</li>
+            <li>Deliverables and milestones captured</li>
+        </ul>
+
+        <h4>Step 4: Compliance Analysis</h4>
+        <ul>
+            <li>Requirements compared against client capability matrix</li>
+            <li>Gap analysis generated</li>
+            <li>Risk items flagged (impossible specs, tight timelines)</li>
+            <li>Clarification questions compiled</li>
+        </ul>
+
+        <h4>Step 5: Bid Summary Generation</h4>
+        <ul>
+            <li>Executive summary of RFQ scope</li>
+            <li>Requirements checklist for bid preparation</li>
+            <li>Recommended pricing structure</li>
+            <li>Action items and owner assignment</li>
+        </ul>
+
+        <h3>5.3 Output Documents</h3>
+        <table>
+            <tr><th>Document</th><th>Contents</th></tr>
+            <tr><td>Requirements Matrix</td><td>All requirements with section references, priority, compliance status</td></tr>
+            <tr><td>Compliance Checklist</td><td>Pass/Fail/Clarify status for each requirement</td></tr>
+            <tr><td>Risk Register</td><td>Identified risks with severity and mitigation</td></tr>
+            <tr><td>Bid Preparation Summary</td><td>Key dates, submission requirements, team actions</td></tr>
+        </table>
+
+        <h3>5.4 Turnaround Times</h3>
+        <table>
+            <tr><th>RFQ Size</th><th>Standard</th><th>Urgent</th></tr>
+            <tr><td>Small (&lt;50 pages)</td><td>24 hours</td><td>8 hours</td></tr>
+            <tr><td>Medium (50-200 pages)</td><td>48 hours</td><td>24 hours</td></tr>
+            <tr><td>Large (200+ pages)</td><td>72 hours</td><td>48 hours</td></tr>
+        </table>
+    </div>
+
+    <!-- SECTION 6: KNOWLEDGE BOT -->
+    <h1 id="section6">6. Technical Knowledge Bot — Detailed Workflow</h1>
+    
+    <div class="app-section">
+        <div class="app-header">
+            <div class="app-icon knowledge">🤖</div>
+            <div>
+                <div class="app-title">Technical Knowledge Bot</div>
+                <div style="color: #666; font-size: 10pt;">AI-Powered Q&A System Trained on Your Documentation</div>
+            </div>
+        </div>
+
+        <h3>6.1 What It Does</h3>
+        <p>Creates a custom AI chatbot trained on client's technical documentation (manuals, standards, procedures) that can answer questions, find information, and explain complex topics.</p>
+
+        <h3>6.2 Client Workflow — Start to Finish</h3>
+        
+        <div class="process-flow">
+            <span class="flow-step">Document Collection</span>
+            <span class="flow-step">Knowledge Base Build</span>
+            <span class="flow-step">Training & Testing</span>
+            <span class="flow-step">Deployment</span>
+            <span class="flow-step">Ongoing Updates</span>
+        </div>
+
+        <h4>Step 1: Document Collection</h4>
+        <ul>
+            <li>Client provides technical document library</li>
+            <li>Minimum 500+ pages recommended for effective bot</li>
+            <li>Documents organized by category (manuals, procedures, standards)</li>
+            <li>Access permissions defined (who can query what)</li>
+        </ul>
+
+        <h4>Step 2: Knowledge Base Construction</h4>
+        <ul>
+            <li>Documents processed and indexed</li>
+            <li>Content chunked into searchable segments</li>
+            <li>Embeddings generated for semantic search</li>
+            <li>Cross-references and relationships mapped</li>
+        </ul>
+
+        <h4>Step 3: Training & Configuration</h4>
+        <ul>
+            <li>AI model configured for client's domain</li>
+            <li>Response style and format defined</li>
+            <li>Test questions validated against known answers</li>
+            <li>Accuracy benchmarked (target ≥90%)</li>
+        </ul>
+
+        <h4>Step 4: Deployment</h4>
+        <ul>
+            <li>Bot deployed via web interface, Teams, Slack, or API</li>
+            <li>User authentication configured</li>
+            <li>Usage analytics enabled</li>
+            <li>Feedback mechanism implemented</li>
+        </ul>
+
+        <h4>Step 5: Ongoing Maintenance</h4>
+        <ul>
+            <li>New documents added to knowledge base</li>
+            <li>User feedback incorporated</li>
+            <li>Accuracy monitored and improved</li>
+            <li>Monthly usage reports provided</li>
+        </ul>
+
+        <h3>6.3 Example Use Cases</h3>
+        <ul>
+            <li>"What is the maintenance interval for compressor C-201?"</li>
+            <li>"Explain the startup procedure for the glycol dehydration unit"</li>
+            <li>"What are the safety requirements for hot work permits?"</li>
+            <li>"Find all references to API 610 in our pump specifications"</li>
+        </ul>
+
+        <h3>6.4 Data Security</h3>
+        <div class="info">
+            <strong>ℹ️ Knowledge Bot Security:</strong>
+            <ul>
+                <li>All documents stored in encrypted, isolated environment</li>
+                <li>No data used to train external AI models</li>
+                <li>Role-based access control supported</li>
+                <li>Audit logs for all queries maintained</li>
+                <li>Option for on-premise deployment available</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SECTION 7: REPORT GENERATOR -->
+    <h1 id="section7">7. Report Generator — Detailed Workflow</h1>
+    
+    <div class="app-section">
+        <div class="app-header">
+            <div class="app-icon report">📊</div>
+            <div>
+                <div class="app-title">Report Generator</div>
+                <div style="color: #666; font-size: 10pt;">Automated Engineering Report Generation</div>
+            </div>
+        </div>
+
+        <h3>7.1 What It Does</h3>
+        <p>Automatically generates formatted engineering reports (progress reports, HSE summaries, inspection reports) from multiple data sources.</p>
+
+        <h3>7.2 Client Workflow — Start to Finish</h3>
+        
+        <div class="process-flow">
+            <span class="flow-step">Data Source Setup</span>
+            <span class="flow-step">Template Design</span>
+            <span class="flow-step">Automation Rules</span>
+            <span class="flow-step">Schedule/Trigger</span>
+            <span class="flow-step">Review & Distribute</span>
+        </div>
+
+        <h4>Step 1: Data Source Integration</h4>
+        <ul>
+            <li>Identify all data sources (Excel, databases, APIs, forms)</li>
+            <li>Configure connections and access credentials</li>
+            <li>Map data fields to report requirements</li>
+            <li>Set up data validation rules</li>
+        </ul>
+
+        <h4>Step 2: Template Design</h4>
+        <ul>
+            <li>Design report layout with client branding</li>
+            <li>Define sections, charts, and tables</li>
+            <li>Configure conditional content (show/hide based on data)</li>
+            <li>Set up calculations and KPIs</li>
+        </ul>
+
+        <h4>Step 3: Automation Rules</h4>
+        <ul>
+            <li>Define data transformation logic</li>
+            <li>Set up AI-generated summaries and insights</li>
+            <li>Configure exception highlighting</li>
+            <li>Establish approval workflow if required</li>
+        </ul>
+
+        <h4>Step 4: Scheduling & Triggers</h4>
+        <ul>
+            <li>Set report generation schedule (daily, weekly, monthly)</li>
+            <li>Configure event-based triggers if needed</li>
+            <li>Define distribution list and delivery method</li>
+        </ul>
+
+        <h4>Step 5: Review & Distribution</h4>
+        <ul>
+            <li>Reports generated automatically per schedule</li>
+            <li>Optional human review step before distribution</li>
+            <li>Delivered via email, SharePoint, or custom portal</li>
+            <li>Archive maintained for historical reference</li>
+        </ul>
+
+        <h3>7.3 Report Types Supported</h3>
+        <table>
+            <tr><th>Report Type</th><th>Typical Frequency</th><th>Data Sources</th></tr>
+            <tr><td>Daily Progress Report</td><td>Daily</td><td>Timesheets, activity logs, milestones</td></tr>
+            <tr><td>Weekly Status Report</td><td>Weekly</td><td>Progress, issues, lookahead</td></tr>
+            <tr><td>HSE Summary</td><td>Daily/Weekly</td><td>Incident logs, observations, permits</td></tr>
+            <tr><td>Inspection Report</td><td>Per inspection</td><td>Inspection forms, photos, NCRs</td></tr>
+            <tr><td>Project Dashboard</td><td>Real-time</td><td>All project data sources</td></tr>
+        </table>
+
+        <h3>7.4 Output Formats</h3>
+        <ul>
+            <li>PDF — Polished, printable reports</li>
+            <li>Word — Editable documents</li>
+            <li>PowerPoint — Presentation-ready slides</li>
+            <li>Excel — Data-rich spreadsheets</li>
+            <li>Web Dashboard — Interactive online view</li>
+        </ul>
+    </div>
+
+    <!-- SECTION 8: EXECUTION PROTOCOLS -->
+    <h1 id="section8">8. Execution Protocols</h1>
+
+    <h2>8.1 Data Handling Standards</h2>
+    
+    <h3>Data Reception</h3>
+    <ul>
+        <li>All client data received via secure transfer (SFTP, encrypted email, or secure portal)</li>
+        <li>Files scanned for malware before processing</li>
+        <li>Receipt confirmation sent within 4 hours</li>
+        <li>Data logged in project tracking system</li>
+    </ul>
+
+    <h3>Data Processing</h3>
+    <ul>
+        <li>Processing performed on SOC 2 compliant infrastructure</li>
+        <li>No data shared with third parties without explicit consent</li>
+        <li>Processing logs maintained for audit purposes</li>
+        <li>Errors logged and reported to client</li>
+    </ul>
+
+    <h3>Data Storage & Retention</h3>
+    <table>
+        <tr><th>Data Type</th><th>Retention Period</th><th>After Retention</th></tr>
+        <tr><td>Source Files</td><td>90 days post-delivery</td><td>Secure deletion</td></tr>
+        <tr><td>Output Files</td><td>90 days post-delivery</td><td>Secure deletion</td></tr>
+        <tr><td>Processing Logs</td><td>1 year</td><td>Anonymized archive</td></tr>
+        <tr><td>Client can request</td><td>Immediate deletion</td><td>Confirmation provided</td></tr>
+    </table>
+
+    <h2>8.2 Validation & Quality Assurance</h2>
+    
+    <h3>Validation Process</h3>
+    <div class="step-box">
+        <p><span class="step-number">1</span><strong>Automated Validation</strong> — AI cross-checks extractions against rules and patterns</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">2</span><strong>Confidence Scoring</strong> — Each extraction assigned confidence score (0-100%)</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">3</span><strong>Exception Flagging</strong> — Items below threshold flagged for review</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">4</span><strong>Spot Check</strong> — Manual review of 10% sample for quality assurance</p>
+    </div>
+    <div class="step-box">
+        <p><span class="step-number">5</span><strong>Client Validation</strong> — Client reviews and confirms or requests corrections</p>
+    </div>
+
+    <h3>Accuracy Standards</h3>
+    <table>
+        <tr><th>Application</th><th>Accuracy Target</th><th>Measurement Method</th></tr>
+        <tr><td>P&ID Parser</td><td>≥95%</td><td>Fields correctly extracted / Total fields</td></tr>
+        <tr><td>Datasheet Parser</td><td>≥97%</td><td>Values correctly extracted / Total values</td></tr>
+        <tr><td>RFQ Analyzer</td><td>≥93%</td><td>Requirements correctly identified / Total requirements</td></tr>
+        <tr><td>Knowledge Bot</td><td>≥90%</td><td>Correct answers / Total queries (sampled)</td></tr>
+        <tr><td>Report Generator</td><td>≥98%</td><td>Data correctly rendered / Total data points</td></tr>
+    </table>
+
+    <h2>8.3 Revision & Correction Process</h2>
+    
+    <div class="info">
+        <strong>ℹ️ Standard Revision Policy:</strong>
+        <ul>
+            <li>1 round of revisions included in standard pricing</li>
+            <li>Revision requests must be submitted within 5 business days of delivery</li>
+            <li>Additional revisions quoted separately</li>
+            <li>Revisions due to scope changes treated as change orders</li>
+        </ul>
+    </div>
+
+    <h3>Correction Request Process</h3>
+    <ol>
+        <li>Client submits correction request via email or project portal</li>
+        <li>Each item clearly identified with reference to source document</li>
+        <li>Corrections acknowledged within 4 hours</li>
+        <li>Revised output delivered within 24 hours (standard) or 8 hours (urgent)</li>
+        <li>Client confirms acceptance of revised output</li>
+    </ol>
+
+    <h2>8.4 Delivery Standards</h2>
+    
+    <table>
+        <tr><th>Delivery Method</th><th>Security</th><th>Use Case</th></tr>
+        <tr><td>Secure Portal</td><td>Encrypted, access-controlled</td><td>Default for all deliveries</td></tr>
+        <tr><td>Encrypted Email</td><td>Password-protected attachments</td><td>Small files, quick turnaround</td></tr>
+        <tr><td>SFTP</td><td>SSH encryption</td><td>Large files, regular transfers</td></tr>
+        <tr><td>API Integration</td><td>Token-based authentication</td><td>Automated system integration</td></tr>
+    </table>
+
+    <!-- SECTION 9: MAINTENANCE & SUPPORT -->
+    <h1 id="section9">9. Maintenance & Support</h1>
+
+    <h2>9.1 Support Tiers</h2>
+    <table>
+        <tr><th>Tier</th><th>Response Time</th><th>Included In</th></tr>
+        <tr><td>Standard Support</td><td>24 hours (business days)</td><td>All engagements</td></tr>
+        <tr><td>Priority Support</td><td>4 hours (business hours)</td><td>Retainer clients</td></tr>
+        <tr><td>Emergency Support</td><td>1 hour (24/7)</td><td>Enterprise SLA</td></tr>
+    </table>
+
+    <h2>9.2 Update Cycles</h2>
+    
+    <h3>Application Updates</h3>
+    <ul>
+        <li><strong>Minor Updates:</strong> Bug fixes, performance improvements — Monthly</li>
+        <li><strong>Feature Updates:</strong> New capabilities, UI improvements — Quarterly</li>
+        <li><strong>Major Updates:</strong> Significant new functionality — Annual</li>
+    </ul>
+
+    <h3>Model Updates</h3>
+    <ul>
+        <li>AI models retrained quarterly with accumulated data</li>
+        <li>Client-specific tuning available on request</li>
+        <li>Performance benchmarks shared after each update</li>
+    </ul>
+
+    <h2>9.3 Client Training</h2>
+    
+    <div class="checklist">
+        <h3>📚 Training Package (Included with Deployment)</h3>
+        <ul>
+            <li>☐ User Guide — Written documentation</li>
+            <li>☐ Video Tutorials — Step-by-step walkthroughs</li>
+            <li>☐ Live Training Session — 1-2 hours per application</li>
+            <li>☐ Q&A Session — Post-training support call</li>
+            <li>☐ Quick Reference Card — One-page cheat sheet</li>
+        </ul>
+    </div>
+
+    <h3>Training Schedule</h3>
+    <ul>
+        <li><strong>Initial Training:</strong> Within 1 week of deployment</li>
+        <li><strong>Refresher Training:</strong> Available on request</li>
+        <li><strong>New User Onboarding:</strong> Self-paced materials + optional live session</li>
+    </ul>
+
+    <h2>9.4 Escalation Path</h2>
+    <table>
+        <tr><th>Level</th><th>Contact</th><th>Escalate When</th></tr>
+        <tr><td>Level 1</td><td>Support Email</td><td>First contact for all issues</td></tr>
+        <tr><td>Level 2</td><td>Technical Lead</td><td>Unresolved after 24 hours</td></tr>
+        <tr><td>Level 3</td><td>Principal Consultant</td><td>Critical system issues or disputes</td></tr>
+    </table>
+
+    <h2>9.5 Service Level Agreement Summary</h2>
+    <table>
+        <tr><th>Metric</th><th>Target</th></tr>
+        <tr><td>System Uptime</td><td>99.5%</td></tr>
+        <tr><td>Processing Turnaround</td><td>Per agreed timeline ± 10%</td></tr>
+        <tr><td>Support Response</td><td>Per support tier</td></tr>
+        <tr><td>Accuracy</td><td>Per application target</td></tr>
+    </table>
+
+    <!-- SECTION 10: APPENDICES -->
+    <h1 id="section10">10. Appendices</h1>
+
+    <h2>Appendix A: Glossary</h2>
+    <table>
+        <tr><th>Term</th><th>Definition</th></tr>
+        <tr><td>P&ID</td><td>Process and Instrumentation Diagram</td></tr>
+        <tr><td>RFQ</td><td>Request for Quotation</td></tr>
+        <tr><td>OCR</td><td>Optical Character Recognition</td></tr>
+        <tr><td>NDA</td><td>Non-Disclosure Agreement</td></tr>
+        <tr><td>SLA</td><td>Service Level Agreement</td></tr>
+        <tr><td>RAG</td><td>Retrieval-Augmented Generation (AI technique for knowledge bots)</td></tr>
+    </table>
+
+    <h2>Appendix B: Contact Information</h2>
+    <table>
+        <tr><td><strong>General Inquiries</strong></td><td>info@ku-automation.com</td></tr>
+        <tr><td><strong>Technical Support</strong></td><td>support@ku-automation.com</td></tr>
+        <tr><td><strong>Principal Consultant</strong></td><td>kingsley.uzowulu@ku-automation.com</td></tr>
+        <tr><td><strong>Website</strong></td><td>https://ku-automation.com</td></tr>
+    </table>
+
+    <h2>Appendix C: Related Documents</h2>
+    <ul>
+        <li>SOP-01: Client Onboarding</li>
+        <li>SOP-02: Data Handling & Security</li>
+        <li>SOP-03: Service Delivery</li>
+        <li>SOP-04: Quality Assurance</li>
+        <li>Master Service Agreement Template</li>
+        <li>Non-Disclosure Agreement Template</li>
+    </ul>
+
+    <h2>Revision History</h2>
+    <table>
+        <tr><th>Version</th><th>Date</th><th>Author</th><th>Changes</th></tr>
+        <tr><td>1.0</td><td>Feb 13, 2026</td><td>K. Uzowulu</td><td>Initial release</td></tr>
+    </table>
+
+    <div class="footer">
+        <p><strong>KU Automation</strong> | Application SOPs & Client Execution Guide | Version 1.0</p>
+        <p>This document is confidential. For internal use and authorized client reference only.</p>
+        <p>© 2026 KU Automation. All rights reserved.</p>
+    </div>
+</body>
+</html>

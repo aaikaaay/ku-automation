@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slide 4 - There's a Better Way</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            width: 1080px;
+            height: 1350px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px;
+            color: white;
+        }
+        .comparison {
+            display: flex;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+        .box {
+            width: 400px;
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+        }
+        .old {
+            background: rgba(239, 68, 68, 0.15);
+            border: 2px solid rgba(239, 68, 68, 0.3);
+        }
+        .new {
+            background: rgba(74, 222, 128, 0.15);
+            border: 2px solid rgba(74, 222, 128, 0.3);
+        }
+        .box-title {
+            font-size: 28px;
+            font-weight: 600;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+        .old .box-title {
+            color: #ef4444;
+        }
+        .new .box-title {
+            color: #4ade80;
+        }
+        .time {
+            font-size: 72px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+        .old .time {
+            color: #ef4444;
+        }
+        .new .time {
+            color: #4ade80;
+        }
+        .desc {
+            font-size: 24px;
+            color: #888;
+        }
+        .arrow {
+            font-size: 100px;
+            color: #4ade80;
+            margin-bottom: 60px;
+        }
+        .headline {
+            font-size: 64px;
+            font-weight: 700;
+            text-align: center;
+        }
+        .highlight {
+            color: #4ade80;
+        }
+        .logo {
+            position: absolute;
+            bottom: 60px;
+            left: 80px;
+            font-size: 28px;
+            font-weight: 600;
+            color: #555;
+            letter-spacing: 2px;
+        }
+        .swipe {
+            position: absolute;
+            bottom: 60px;
+            right: 80px;
+            font-size: 24px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="comparison">
+        <div class="box old">
+            <div class="box-title">Manual Process</div>
+            <div class="time">3-4 days</div>
+            <div class="desc">Per document batch</div>
+        </div>
+        <div class="box new">
+            <div class="box-title">AI Automated</div>
+            <div class="time">2-3 hrs</div>
+            <div class="desc">Same deliverable</div>
+        </div>
+    </div>
+    
+    <div class="arrow">↓</div>
+    
+    <div class="headline">
+        <span class="highlight">90%</span> less time.<br>
+        Fewer errors.
+    </div>
+    
+    <div class="logo">KU AUTOMATION</div>
+    <div class="swipe">Swipe →</div>
+</body>
+</html>
