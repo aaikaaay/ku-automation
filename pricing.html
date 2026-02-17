@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU Automation | Pricing</title>
+    <meta name="description" content="Simple, transparent pricing for AI automation solutions. Choose the plan that fits your needs.">
+    
+    <!-- Open Graph / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ai-automation-agency-gilt.vercel.app/pricing.html">
+    <meta property="og:title" content="KU Automation | Pricing">
+    <meta property="og:description" content="Simple, transparent pricing for AI automation solutions. Choose the plan that fits your needs.">
+    <meta property="og:image" content="https://ai-automation-agency-gilt.vercel.app/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="KU Automation | Pricing">
+    <meta name="twitter:description" content="Simple, transparent pricing for AI automation solutions. Choose the plan that fits your needs.">
+    <meta name="twitter:image" content="https://ai-automation-agency-gilt.vercel.app/assets/og-image.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .gradient-border { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
+        .hero-gradient { background: linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%); }
+        .card-gradient { background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); }
+        .glow { box-shadow: 0 0 60px rgba(99, 102, 241, 0.15); }
+        .float { animation: float 6s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        .slide-up { animation: slideUp 0.6s ease-out forwards; opacity: 0; }
+        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } from { transform: translateY(30px); } }
+        .counter { font-variant-numeric: tabular-nums; }
+        .blob { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+        .testimonial-card { transition: all 0.3s ease; }
+        .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .feature-card { transition: all 0.3s ease; }
+        .feature-card:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+    </style>
+</head>
+<body class="bg-white text-gray-900 antialiased">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
+                    <span class="font-semibold text-lg">KU Automation</span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html#services" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Services</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Use Cases</a>
+                    <a href="index.html#about" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">About</a>
+                    <a href="pricing.html" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">Pricing</a>
+                    <a href="roi-calculator.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">ROI Calculator</a>
+                    <a href="demos.html" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">Try Demos</a>
+                </div>
+                
+                <div class="flex items-center gap-3">
+                    <a href="index.html#contact" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Pricing Hero -->
+    <section class="hero-gradient min-h-screen flex items-center pt-24 pb-20 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-6 w-full">
+            <div class="text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-medium mb-6">
+                    Simple, Transparent Pricing
+                </div>
+                
+                <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
+                    Choose Your <span class="gradient-text">Automation</span> Plan
+                </h1>
+                
+                <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto">
+                    No hidden fees. No long-term contracts. Most clients see ROI within 30 days.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Tiers -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+                <!-- Starter Tier -->
+                <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm">
+                    <div class="text-sm font-medium text-gray-500 mb-2">STARTER</div>
+                    <div class="flex items-baseline gap-1 mb-1">
+                        <span class="text-5xl font-bold">$2,500</span>
+                    </div>
+                    <div class="text-gray-500 text-sm mb-6">one-time investment</div>
+                    <p class="text-gray-600 mb-8">Perfect for testing AI with a single workflow</p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">Single workflow automation</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">2-week delivery</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">Email support</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="index.html#contact" class="block w-full py-4 text-center border-2 border-gray-200 hover:border-primary-500 hover:text-primary-600 rounded-full font-semibold transition-all">
+                        Get Started
+                    </a>
+                </div>
+                
+                <!-- Growth Tier -->
+                <div class="bg-white rounded-3xl p-8 border-2 border-primary-500 shadow-xl relative">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1.5 bg-primary-600 text-white rounded-full text-sm font-medium">
+                        Most Popular
+                    </div>
+                    <div class="text-sm font-medium text-primary-600 mb-2">GROWTH</div>
+                    <div class="flex items-baseline gap-1 mb-1">
+                        <span class="text-5xl font-bold">$7,500</span>
+                    </div>
+                    <div class="text-gray-500 text-sm mb-6">one-time investment</div>
+                    <p class="text-gray-600 mb-8">Complete workflow automation for teams</p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">Full document suite</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">4-week delivery</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">Priority support</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">3 workflows included</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="index.html#contact" class="block w-full py-4 text-center bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                        Get Started
+                    </a>
+                </div>
+                
+                <!-- Enterprise Tier -->
+                <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-sm">
+                    <div class="text-sm font-medium text-gray-500 mb-2">ENTERPRISE</div>
+                    <div class="flex items-baseline gap-1 mb-1">
+                        <span class="text-5xl font-bold">$15,000+</span>
+                    </div>
+                    <div class="text-gray-500 text-sm mb-6">custom solutions</div>
+                    <p class="text-gray-600 mb-8">Full department transformation</p>
+                    
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">Custom AI integration</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">Dedicated support</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">Unlimited workflows</span>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            <span class="text-gray-600">API access</span>
+                        </li>
+                    </ul>
+                    
+                    <a href="index.html#contact" class="block w-full py-4 text-center border-2 border-gray-200 hover:border-primary-500 hover:text-primary-600 rounded-full font-semibold transition-all">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <p class="text-gray-500">💡 Most clients see payback within 30 days. <a href="roi-calculator.html" class="text-primary-600 hover:text-primary-700 font-medium underline">Calculate your ROI →</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Feature Comparison</h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">See how our plans stack up against each other</p>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr>
+                            <th class="pb-4 font-semibold text-gray-900">Feature</th>
+                            <th class="pb-4 font-semibold text-gray-900 text-center">Starter</th>
+                            <th class="pb-4 font-semibold text-primary-600 text-center">Growth</th>
+                            <th class="pb-4 font-semibold text-gray-900 text-center">Enterprise</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-100">
+                        <tr>
+                            <td class="py-4 pr-4">Workflow Automations</td>
+                            <td class="py-4 px-4 text-center">1</td>
+                            <td class="py-4 px-4 text-center">3</td>
+                            <td class="py-4 px-4 text-center">Unlimited</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 pr-4">Delivery Time</td>
+                            <td class="py-4 px-4 text-center">2 weeks</td>
+                            <td class="py-4 px-4 text-center">4 weeks</td>
+                            <td class="py-4 px-4 text-center">Custom</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 pr-4">Support</td>
+                            <td class="py-4 px-4 text-center">Email</td>
+                            <td class="py-4 px-4 text-center">Priority</td>
+                            <td class="py-4 px-4 text-center">Dedicated</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 pr-4">Document Processing</td>
+                            <td class="py-4 px-4 text-center">Basic</td>
+                            <td class="py-4 px-4 text-center">Full Suite</td>
+                            <td class="py-4 px-4 text-center">Advanced</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 pr-4">API Access</td>
+                            <td class="py-4 px-4 text-center">-</td>
+                            <td class="py-4 px-4 text-center">-</td>
+                            <td class="py-4 px-4 text-center">✓</td>
+                        </tr>
+                        <tr>
+                            <td class="py-4 pr-4">Custom AI Integration</td>
+                            <td class="py-4 px-4 text-center">-</td>
+                            <td class="py-4 px-4 text-center">-</td>
+                            <td class="py-4 px-4 text-center">✓</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-24 bg-gray-50">
+        <div class="max-w-3xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Frequently Asked Questions</h2>
+                <p class="text-xl text-gray-600">Everything you need to know about our automation services</p>
+            </div>
+            
+            <div class="space-y-6">
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">How quickly can I expect results?</h3>
+                    <p class="text-gray-600">Most clients see measurable time savings within the first week of implementation. Full workflow automation typically delivers ROI within 30 days.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">What industries do you specialize in?</h3>
+                    <p class="text-gray-600">Our team has deep expertise in oil & gas, EPC, and industrial engineering. We've built solutions specifically for piping, mechanical, and structural engineering workflows.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">Can I upgrade my plan later?</h3>
+                    <p class="text-gray-600">Absolutely! Many clients start with the Starter plan to test our automation and upgrade to Growth or Enterprise as they see the benefits.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">Do you offer on-premise solutions?</h3>
+                    <p class="text-gray-600">Yes, our Enterprise plan includes on-premise deployment options for clients with strict data security requirements.</p>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm">
+                    <h3 class="text-xl font-semibold mb-2">What if I need custom features?</h3>
+                    <p class="text-gray-600">Our Enterprise plan includes custom development tailored to your specific needs. Contact us to discuss your requirements.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="py-24">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Automate Your Workflows?</h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">Book a free strategy call to discuss how AI can save your team hours every week.</p>
+            <a href="index.html#contact" class="inline-block px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-lg transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                Get Started Today
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
+                    <span class="font-semibold text-lg">KU Automation</span>
+                </div>
+                
+                <div class="flex items-center gap-8 text-sm text-gray-500">
+                    <a href="index.html#services" class="hover:text-gray-900 transition-colors">Services</a>
+                    <a href="use-cases.html" class="hover:text-gray-900 transition-colors">Use Cases</a>
+                    <a href="pricing.html" class="hover:text-gray-900 transition-colors">Pricing</a>
+                    <a href="roi-calculator.html" class="hover:text-gray-900 transition-colors">ROI Calculator</a>
+                    <a href="mailto:contact@ku-automation.com" class="hover:text-gray-900 transition-colors">Contact</a>
+                </div>
+                
+                <div class="text-center md:text-right">
+                    <a href="mailto:contact@ku-automation.com" class="text-sm text-primary-600 hover:text-primary-700 font-medium">contact@ku-automation.com</a>
+                    <p class="text-sm text-gray-500 mt-1">© 2026 KU Automation. Built with engineering precision.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
