@@ -12,17 +12,14 @@
     <meta property="og:title" content="P&ID Parser Demo | KU Automation">
     <meta property="og:description" content="Upload a P&ID diagram and watch AI extract equipment, valves, instruments, and line data instantly.">
     <meta property="og:image" content="https://ai-automation-agency-gilt.vercel.app/assets/og-image.png">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
     
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="P&ID Parser Demo | KU Automation">
     <meta name="twitter:description" content="AI-powered P&ID analysis. Extract equipment tags, valves, and instruments automatically.">
-    <meta name="twitter:image" content="https://ai-automation-agency-gilt.vercel.app/assets/og-image.png">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Favicon -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
@@ -42,28 +39,35 @@
         body { font-family: 'Inter', sans-serif; }
         .gradient-text { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .drop-zone { transition: all 0.3s ease; }
-        .drop-zone.drag-over { border-color: #6366f1; background-color: #eef2ff; transform: scale(1.01); }
+        .drop-zone.drag-over { border-color: #6366f1; background-color: #eef2ff; transform: scale(1.02); }
         .fade-in { animation: fadeIn 0.5s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .tab-active { border-color: #6366f1; color: #4f46e5; background-color: #eef2ff; }
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .progress-bar { 
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #d946ef, #6366f1);
+            background-size: 300% 100%;
+            animation: shimmer 2s linear infinite;
+        }
+        @keyframes shimmer { 0% { background-position: 100% 0; } 100% { background-position: -100% 0; } }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Navigation -->
     <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="max-w-6xl mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <a href="index.html" class="flex items-center gap-3">
                     <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
                     <div>
-                        <span class="font-semibold text-lg block">P&ID Parser</span>
+                        <span class="font-bold text-lg block text-gray-900">P&ID Parser</span>
                         <span class="text-xs text-gray-500">by KU Automation</span>
                     </div>
                 </a>
                 
                 <div class="flex items-center gap-4">
                     <a href="demos.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">← All Demos</a>
-                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all text-sm">
+                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all text-sm shadow-lg shadow-primary-500/25">
                         Get Custom Version
                     </a>
                 </div>
@@ -71,244 +75,318 @@
         </div>
     </nav>
 
-    <main class="max-w-7xl mx-auto px-6 py-8">
-        <!-- Header -->
-        <div class="text-center mb-10">
-            <h1 class="text-4xl font-bold mb-3">
-                Extract Data from <span class="gradient-text">P&ID Diagrams</span>
+    <main class="max-w-6xl mx-auto px-6 py-12">
+        <!-- Hero -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium mb-6">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                Live Demo — Try It Now
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                Extract Data from <span class="gradient-text">P&ID Diagrams</span> Instantly
             </h1>
-            <p class="text-lg text-gray-600 max-w-2xl mx-auto">
-                Upload your P&ID and AI extracts equipment, valves, instruments, and line data in seconds.
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Upload your P&ID and our AI extracts equipment, valves, instruments, and line data in seconds. Download as Excel.
             </p>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-8">
-            <!-- Left: Upload + Preview -->
-            <div>
-                <!-- Upload Zone -->
-                <div 
-                    id="dropZone" 
-                    class="drop-zone border-2 border-dashed border-gray-300 rounded-2xl p-8 text-center bg-white cursor-pointer hover:border-primary-400"
-                    onclick="document.getElementById('fileInput').click()"
-                >
-                    <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.pdf" class="hidden" onchange="handleFileSelect(event)">
-                    
-                    <div id="uploadPrompt">
-                        <div class="w-14 h-14 bg-primary-100 rounded-xl flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-7 h-7 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">Drop your P&ID here</h3>
-                        <p class="text-gray-500 mb-2">or click to browse</p>
-                        <p class="text-sm text-gray-400">JPG, PNG, WebP, PDF (max 20MB)</p>
-                    </div>
-
-                    <!-- Image Preview -->
-                    <div id="imagePreview" class="hidden">
-                        <img id="previewImg" class="max-h-64 mx-auto rounded-lg shadow-sm" alt="P&ID Preview">
-                    </div>
-                </div>
-
-                <!-- File Info -->
-                <div id="fileInfo" class="hidden mt-4 bg-white rounded-xl p-4 border border-gray-200">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center">
-                                <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                </svg>
-                            </div>
-                            <div>
-                                <p id="fileName" class="font-medium text-gray-900 text-sm">filename.png</p>
-                                <p id="fileSize" class="text-xs text-gray-500">2.4 MB</p>
-                            </div>
-                        </div>
-                        <button onclick="clearFile()" class="text-gray-400 hover:text-red-500 transition-colors p-2">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Analyze Button -->
-                <button 
-                    id="analyzeBtn" 
-                    onclick="analyzeFile()" 
-                    disabled
-                    class="w-full mt-4 py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg"
-                >
-                    <span id="btnText">🔍 Analyze P&ID</span>
-                    <span id="btnLoading" class="hidden items-center justify-center gap-2">
-                        <svg class="w-5 h-5 animate-spin" fill="none" viewBox="0 0 24 24">
-                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        <!-- Upload Section -->
+        <div id="uploadSection" class="max-w-2xl mx-auto">
+            <div 
+                id="dropZone" 
+                class="drop-zone border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center bg-white cursor-pointer hover:border-primary-500 hover:bg-primary-50/30 shadow-sm"
+                onclick="document.getElementById('fileInput').click()"
+            >
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.pdf" class="hidden" onchange="handleFileSelect(event)">
+                
+                <div id="uploadPrompt">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
                         </svg>
-                        Analyzing... (30-60 sec)
-                    </span>
-                </button>
+                    </div>
+                    
+                    <h3 class="text-lg font-semibold text-gray-900 mb-2">Drop your P&ID here</h3>
+                    <p class="text-gray-500 mb-4">or click to browse</p>
+                    <p class="text-sm text-gray-400">Supports: JPG, PNG, WebP, PDF (max 20MB)</p>
+                </div>
 
-                <!-- How it works -->
-                <div class="mt-6 p-4 bg-gray-100 rounded-xl">
-                    <h4 class="font-semibold text-gray-900 mb-2 text-sm">How it works</h4>
-                    <ol class="text-sm text-gray-600 space-y-1">
-                        <li>1. Upload P&ID image or PDF</li>
-                        <li>2. AI analyzes using computer vision</li>
-                        <li>3. Data extracted and structured</li>
-                        <li>4. View results or download Excel</li>
-                    </ol>
+                <!-- Image Preview -->
+                <div id="imagePreview" class="hidden">
+                    <img id="previewImg" class="max-h-48 mx-auto rounded-lg shadow-sm" alt="P&ID Preview">
+                    <p class="text-sm text-gray-500 mt-3">Click to change file</p>
                 </div>
             </div>
 
-            <!-- Right: Results -->
-            <div>
-                <!-- Results Container -->
-                <div id="resultsContainer" class="bg-white rounded-2xl border border-gray-200 overflow-hidden">
-                    <!-- Empty State -->
-                    <div id="emptyState" class="p-12 text-center">
-                        <div class="w-16 h-16 bg-gray-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                            <svg class="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7"/>
+            <!-- File Preview -->
+            <div id="filePreview" class="hidden mt-6 bg-white rounded-xl p-4 border border-gray-200 shadow-sm">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                             </svg>
                         </div>
-                        <h3 class="text-lg font-semibold text-gray-900 mb-2">No results yet</h3>
-                        <p class="text-gray-500">Upload a P&ID to see extracted data here</p>
-                    </div>
-
-                    <!-- Results Content -->
-                    <div id="resultsContent" class="hidden">
-                        <!-- Summary Bar -->
-                        <div class="grid grid-cols-4 gap-px bg-gray-200">
-                            <div class="bg-white p-4 text-center">
-                                <div id="countEquipment" class="text-2xl font-bold text-primary-600">0</div>
-                                <div class="text-xs text-gray-500">Equipment</div>
-                            </div>
-                            <div class="bg-white p-4 text-center">
-                                <div id="countValves" class="text-2xl font-bold text-purple-600">0</div>
-                                <div class="text-xs text-gray-500">Valves</div>
-                            </div>
-                            <div class="bg-white p-4 text-center">
-                                <div id="countInstruments" class="text-2xl font-bold text-pink-600">0</div>
-                                <div class="text-xs text-gray-500">Instruments</div>
-                            </div>
-                            <div class="bg-white p-4 text-center">
-                                <div id="countLines" class="text-2xl font-bold text-green-600">0</div>
-                                <div class="text-xs text-gray-500">Lines</div>
-                            </div>
-                        </div>
-
-                        <!-- Tabs -->
-                        <div class="flex border-b border-gray-200">
-                            <button onclick="showTab('equipment')" id="tab-equipment" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50 tab-active">Equipment</button>
-                            <button onclick="showTab('valves')" id="tab-valves" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50">Valves</button>
-                            <button onclick="showTab('instruments')" id="tab-instruments" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50">Instruments</button>
-                            <button onclick="showTab('lines')" id="tab-lines" class="tab-btn flex-1 px-4 py-3 text-sm font-medium border-b-2 border-transparent hover:bg-gray-50">Lines</button>
-                        </div>
-
-                        <!-- Tab Content -->
-                        <div class="max-h-80 overflow-y-auto">
-                            <!-- Equipment -->
-                            <div id="panel-equipment" class="tab-panel">
-                                <table class="w-full text-sm">
-                                    <thead class="bg-gray-50 sticky top-0">
-                                        <tr>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Tag</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Type</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Description</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="equipmentTable" class="divide-y divide-gray-100"></tbody>
-                                </table>
-                            </div>
-
-                            <!-- Valves -->
-                            <div id="panel-valves" class="tab-panel hidden">
-                                <table class="w-full text-sm">
-                                    <thead class="bg-gray-50 sticky top-0">
-                                        <tr>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Tag</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Type</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Size</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Line</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="valvesTable" class="divide-y divide-gray-100"></tbody>
-                                </table>
-                            </div>
-
-                            <!-- Instruments -->
-                            <div id="panel-instruments" class="tab-panel hidden">
-                                <table class="w-full text-sm">
-                                    <thead class="bg-gray-50 sticky top-0">
-                                        <tr>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Tag</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Type</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Function</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="instrumentsTable" class="divide-y divide-gray-100"></tbody>
-                                </table>
-                            </div>
-
-                            <!-- Lines -->
-                            <div id="panel-lines" class="tab-panel hidden">
-                                <table class="w-full text-sm">
-                                    <thead class="bg-gray-50 sticky top-0">
-                                        <tr>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Line #</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">Size</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">From</th>
-                                            <th class="px-4 py-2 text-left text-xs font-medium text-gray-500">To</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="linesTable" class="divide-y divide-gray-100"></tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                        <!-- Actions -->
-                        <div class="p-4 bg-gray-50 border-t border-gray-200 flex gap-3">
-                            <button onclick="downloadExcel()" id="downloadBtn" class="flex-1 py-3 bg-green-600 hover:bg-green-700 text-white rounded-lg font-medium transition-all flex items-center justify-center gap-2">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                                </svg>
-                                Download Excel
-                            </button>
-                            <button onclick="copyJSON()" class="px-4 py-3 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg font-medium transition-all">
-                                Copy JSON
-                            </button>
+                        <div>
+                            <p id="fileName" class="font-medium text-gray-900">filename.png</p>
+                            <p id="fileSize" class="text-sm text-gray-500">2.4 MB</p>
                         </div>
                     </div>
+                    <button onclick="event.stopPropagation(); clearFile();" class="text-gray-400 hover:text-red-500 transition-colors p-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
                 </div>
+            </div>
 
-                <!-- Summary -->
-                <div id="summaryBox" class="hidden mt-4 p-4 bg-primary-50 border border-primary-100 rounded-xl">
-                    <h4 class="font-semibold text-primary-900 mb-1 text-sm">AI Summary</h4>
-                    <p id="summaryText" class="text-primary-800 text-sm"></p>
+            <!-- Analyze Button -->
+            <button 
+                id="analyzeBtn" 
+                onclick="analyzeFile()" 
+                disabled
+                class="w-full mt-6 py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-primary-500/25"
+            >
+                <span id="btnText">🔍 Analyze P&ID</span>
+                <span id="btnLoading" class="hidden">
+                    <svg class="inline w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Analyzing with AI... (30-60 seconds)
+                </span>
+            </button>
+
+            <!-- Progress indicator -->
+            <div id="progressSection" class="hidden mt-4">
+                <div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
+                    <div class="progress-bar h-full rounded-full" style="width: 100%"></div>
+                </div>
+                <p class="text-sm text-gray-500 text-center mt-2">AI is reading your P&ID diagram...</p>
+            </div>
+
+            <!-- How it works -->
+            <div class="mt-8 grid grid-cols-4 gap-4 text-center">
+                <div>
+                    <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-2 text-primary-600 font-bold">1</div>
+                    <p class="text-xs text-gray-600">Upload P&ID</p>
+                </div>
+                <div>
+                    <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-2 text-primary-600 font-bold">2</div>
+                    <p class="text-xs text-gray-600">AI Analysis</p>
+                </div>
+                <div>
+                    <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-2 text-primary-600 font-bold">3</div>
+                    <p class="text-xs text-gray-600">View Results</p>
+                </div>
+                <div>
+                    <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-2 text-primary-600 font-bold">4</div>
+                    <p class="text-xs text-gray-600">Download Excel</p>
                 </div>
             </div>
         </div>
 
-        <!-- CTA -->
-        <div class="mt-12 text-center p-8 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl text-white">
-            <h2 class="text-2xl font-bold mb-3">Want this customized for your P&IDs?</h2>
-            <p class="text-white/80 mb-6">We can train it on your specific format and integrate it with your systems.</p>
-            <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="inline-block px-8 py-3 bg-white hover:bg-gray-100 text-primary-600 rounded-full font-semibold transition-all">
-                Book Free Strategy Call →
-            </a>
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden mt-12 fade-in">
+            <!-- Summary Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div id="countEquipment" class="text-3xl font-bold text-primary-600">0</div>
+                    <div class="text-gray-500">Equipment</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div id="countValves" class="text-3xl font-bold text-purple-600">0</div>
+                    <div class="text-gray-500">Valves</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div id="countInstruments" class="text-3xl font-bold text-pink-600">0</div>
+                    <div class="text-gray-500">Instruments</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center shadow-sm hover:shadow-md transition-shadow">
+                    <div id="countLines" class="text-3xl font-bold text-green-600">0</div>
+                    <div class="text-gray-500">Lines</div>
+                </div>
+            </div>
+
+            <!-- Download Button -->
+            <div class="flex justify-center gap-4 mb-8">
+                <button 
+                    id="downloadBtn" 
+                    onclick="downloadExcel()"
+                    class="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg flex items-center gap-3"
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Download Excel Report
+                </button>
+                <button 
+                    onclick="copyJSON()"
+                    class="px-6 py-4 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-xl font-semibold transition-all flex items-center gap-2"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                    </svg>
+                    Copy JSON
+                </button>
+            </div>
+
+            <!-- Summary -->
+            <div id="summaryBox" class="bg-primary-50 border border-primary-100 rounded-xl p-6 mb-8">
+                <h3 class="font-semibold text-primary-900 mb-2 flex items-center gap-2">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    AI Summary
+                </h3>
+                <p id="summaryText" class="text-primary-800"></p>
+            </div>
+
+            <!-- Data Tables -->
+            <div class="space-y-8">
+                <!-- Equipment Table -->
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                    <div class="px-6 py-4 bg-gradient-to-r from-primary-500 to-primary-600 text-white flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+                        </svg>
+                        <h3 class="font-semibold">Equipment</h3>
+                        <span id="equipmentCount" class="ml-auto bg-white/20 px-2 py-0.5 rounded-full text-sm">0 items</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tag</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Description</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Size/Capacity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="equipmentTable" class="divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Valves Table -->
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                    <div class="px-6 py-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/>
+                        </svg>
+                        <h3 class="font-semibold">Valves</h3>
+                        <span id="valvesCount" class="ml-auto bg-white/20 px-2 py-0.5 rounded-full text-sm">0 items</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tag</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Size</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Line Number</th>
+                                </tr>
+                            </thead>
+                            <tbody id="valvesTable" class="divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Instruments Table -->
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                    <div class="px-6 py-4 bg-gradient-to-r from-pink-500 to-pink-600 text-white flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        <h3 class="font-semibold">Instruments</h3>
+                        <span id="instrumentsCount" class="ml-auto bg-white/20 px-2 py-0.5 rounded-full text-sm">0 items</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Tag</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Type</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Function</th>
+                                </tr>
+                            </thead>
+                            <tbody id="instrumentsTable" class="divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Lines Table -->
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                    <div class="px-6 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        <h3 class="font-semibold">Lines / Piping</h3>
+                        <span id="linesCount" class="ml-auto bg-white/20 px-2 py-0.5 rounded-full text-sm">0 items</span>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Line Number</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Size</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Service</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">From</th>
+                                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">To</th>
+                                </tr>
+                            </thead>
+                            <tbody id="linesTable" class="divide-y divide-gray-200"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Notes Section -->
+                <div id="notesSection" class="hidden bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                    <div class="px-6 py-4 bg-gradient-to-r from-amber-500 to-amber-600 text-white flex items-center gap-2">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                        </svg>
+                        <h3 class="font-semibold">Notes & Specifications</h3>
+                    </div>
+                    <div class="p-6">
+                        <ul id="notesList" class="space-y-2 text-gray-700"></ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Try Another -->
+            <div class="text-center mt-12">
+                <button onclick="resetApp()" class="px-6 py-3 border-2 border-gray-300 hover:border-primary-500 text-gray-700 hover:text-primary-600 rounded-xl font-medium transition-all">
+                    ← Analyze Another P&ID
+                </button>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="mt-16 text-center p-10 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl text-white shadow-xl">
+            <h2 class="text-2xl md:text-3xl font-bold mb-4">Want this customized for your P&IDs?</h2>
+            <p class="text-white/80 mb-6 max-w-xl mx-auto">We can train it on your specific format, integrate with your document management system, and automate your entire workflow.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="inline-block px-8 py-3 bg-white hover:bg-gray-100 text-primary-600 rounded-full font-semibold transition-all shadow-lg">
+                    Book Free Strategy Call →
+                </a>
+                <a href="mailto:kingsley.uzowulu@ku-automation.com" class="inline-block px-8 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-full font-semibold transition-all">
+                    Email Us
+                </a>
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 border-t border-gray-100 mt-12">
-        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
-            <p>Built by <a href="index.html" class="text-primary-600 hover:underline">KU Automation</a> — AI for Engineering</p>
+    <footer class="border-t border-gray-100 mt-20 py-8">
+        <div class="max-w-6xl mx-auto px-6 text-center text-gray-500">
+            <p>Powered by <a href="index.html" class="text-primary-600 hover:underline font-medium">KU Automation</a> — AI for Engineering</p>
+            <p class="text-sm mt-2">Built by a Chartered Engineer with 21+ years in Oil & Gas</p>
         </div>
     </footer>
 
     <script>
-        // Configuration - Production backend on Railway
+        // API Configuration - Production backend on Railway
         const API_URL = 'https://ku-automation-production.up.railway.app';
         
         let selectedFile = null;
@@ -316,12 +394,17 @@
         let excelData = null;
         let excelFilename = null;
 
-        // Drag and drop
+        // Drag and drop handling
         const dropZone = document.getElementById('dropZone');
         
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, e => { e.preventDefault(); e.stopPropagation(); }, false);
+            dropZone.addEventListener(eventName, preventDefaults, false);
         });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
         
         ['dragenter', 'dragover'].forEach(eventName => {
             dropZone.addEventListener(eventName, () => dropZone.classList.add('drag-over'), false);
@@ -331,9 +414,11 @@
             dropZone.addEventListener(eventName, () => dropZone.classList.remove('drag-over'), false);
         });
         
-        dropZone.addEventListener('drop', e => {
+        dropZone.addEventListener('drop', (e) => {
             const files = e.dataTransfer.files;
-            if (files.length > 0) handleFile(files[0]);
+            if (files.length > 0) {
+                handleFile(files[0]);
+            }
         });
 
         function handleFileSelect(event) {
@@ -345,10 +430,10 @@
             selectedFile = file;
             document.getElementById('fileName').textContent = file.name;
             document.getElementById('fileSize').textContent = formatFileSize(file.size);
-            document.getElementById('fileInfo').classList.remove('hidden');
+            document.getElementById('filePreview').classList.remove('hidden');
             document.getElementById('analyzeBtn').disabled = false;
 
-            // Show image preview
+            // Show image preview for image files
             if (file.type.startsWith('image/')) {
                 const reader = new FileReader();
                 reader.onload = e => {
@@ -357,6 +442,9 @@
                     document.getElementById('uploadPrompt').classList.add('hidden');
                 };
                 reader.readAsDataURL(file);
+            } else {
+                document.getElementById('imagePreview').classList.add('hidden');
+                document.getElementById('uploadPrompt').classList.remove('hidden');
             }
         }
 
@@ -369,7 +457,7 @@
         function clearFile() {
             selectedFile = null;
             document.getElementById('fileInput').value = '';
-            document.getElementById('fileInfo').classList.add('hidden');
+            document.getElementById('filePreview').classList.add('hidden');
             document.getElementById('imagePreview').classList.add('hidden');
             document.getElementById('uploadPrompt').classList.remove('hidden');
             document.getElementById('analyzeBtn').disabled = true;
@@ -381,11 +469,12 @@
             const btn = document.getElementById('analyzeBtn');
             const btnText = document.getElementById('btnText');
             const btnLoading = document.getElementById('btnLoading');
+            const progressSection = document.getElementById('progressSection');
             
             btn.disabled = true;
             btnText.classList.add('hidden');
             btnLoading.classList.remove('hidden');
-            btnLoading.classList.add('flex');
+            progressSection.classList.remove('hidden');
             
             const formData = new FormData();
             formData.append('file', selectedFile);
@@ -409,40 +498,53 @@
                 displayResults(result.data);
                 
             } catch (error) {
-                alert('Error: ' + error.message + '\n\nMake sure the API server is running.');
+                alert('Error: ' + error.message);
             } finally {
                 btn.disabled = false;
                 btnText.classList.remove('hidden');
                 btnLoading.classList.add('hidden');
-                btnLoading.classList.remove('flex');
+                progressSection.classList.add('hidden');
             }
         }
 
         function displayResults(data) {
             // Update counts
-            document.getElementById('countEquipment').textContent = data.equipment?.length || 0;
-            document.getElementById('countValves').textContent = data.valves?.length || 0;
-            document.getElementById('countInstruments').textContent = data.instruments?.length || 0;
-            document.getElementById('countLines').textContent = data.lines?.length || 0;
-            
-            // Populate tables
-            populateTable('equipmentTable', data.equipment || [], ['tag', 'type', 'description']);
-            populateTable('valvesTable', data.valves || [], ['tag', 'type', 'size', 'line_number']);
-            populateTable('instrumentsTable', data.instruments || [], ['tag', 'type', 'function']);
-            populateTable('linesTable', data.lines || [], ['line_number', 'size', 'from', 'to']);
+            const equipmentCount = data.equipment?.length || 0;
+            const valvesCount = data.valves?.length || 0;
+            const instrumentsCount = data.instruments?.length || 0;
+            const linesCount = data.lines?.length || 0;
+
+            document.getElementById('countEquipment').textContent = equipmentCount;
+            document.getElementById('countValves').textContent = valvesCount;
+            document.getElementById('countInstruments').textContent = instrumentsCount;
+            document.getElementById('countLines').textContent = linesCount;
+
+            document.getElementById('equipmentCount').textContent = `${equipmentCount} items`;
+            document.getElementById('valvesCount').textContent = `${valvesCount} items`;
+            document.getElementById('instrumentsCount').textContent = `${instrumentsCount} items`;
+            document.getElementById('linesCount').textContent = `${linesCount} items`;
             
             // Summary
-            if (data.summary) {
-                document.getElementById('summaryText').textContent = data.summary;
-                document.getElementById('summaryBox').classList.remove('hidden');
+            document.getElementById('summaryText').textContent = data.summary || 'No summary available';
+            
+            // Populate tables
+            populateTable('equipmentTable', data.equipment || [], ['tag', 'type', 'description', 'size']);
+            populateTable('valvesTable', data.valves || [], ['tag', 'type', 'size', 'line_number']);
+            populateTable('instrumentsTable', data.instruments || [], ['tag', 'type', 'function']);
+            populateTable('linesTable', data.lines || [], ['line_number', 'size', 'service', 'from', 'to']);
+
+            // Notes
+            if (data.notes && data.notes.length > 0) {
+                const notesList = document.getElementById('notesList');
+                notesList.innerHTML = data.notes.map(note => 
+                    `<li class="flex items-start gap-2"><span class="text-amber-500 mt-1">•</span> ${note}</li>`
+                ).join('');
+                document.getElementById('notesSection').classList.remove('hidden');
             }
             
             // Show results
-            document.getElementById('emptyState').classList.add('hidden');
-            document.getElementById('resultsContent').classList.remove('hidden');
-            
-            // Reset to first tab
-            showTab('equipment');
+            document.getElementById('uploadSection').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
         }
 
         function populateTable(tableId, data, fields) {
@@ -450,29 +552,18 @@
             tbody.innerHTML = '';
             
             if (data.length === 0) {
-                tbody.innerHTML = `<tr><td colspan="${fields.length}" class="px-4 py-8 text-center text-gray-400">No items found</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="${fields.length}" class="px-6 py-8 text-center text-gray-400">No items found</td></tr>`;
                 return;
             }
             
             data.forEach(item => {
                 const row = document.createElement('tr');
-                row.className = 'hover:bg-gray-50';
+                row.className = 'hover:bg-gray-50 transition-colors';
                 row.innerHTML = fields.map(field => 
-                    `<td class="px-4 py-2 text-gray-900">${item[field] || '-'}</td>`
+                    `<td class="px-6 py-4 text-sm text-gray-900">${item[field] || '-'}</td>`
                 ).join('');
                 tbody.appendChild(row);
             });
-        }
-
-        function showTab(tabName) {
-            // Hide all panels
-            document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
-            // Show selected panel
-            document.getElementById(`panel-${tabName}`).classList.remove('hidden');
-            
-            // Update tab styles
-            document.querySelectorAll('.tab-btn').forEach(t => t.classList.remove('tab-active'));
-            document.getElementById(`tab-${tabName}`).classList.add('tab-active');
         }
 
         function downloadExcel() {
@@ -495,7 +586,30 @@
         function copyJSON() {
             if (!analysisResult) return;
             navigator.clipboard.writeText(JSON.stringify(analysisResult, null, 2));
-            alert('JSON copied to clipboard!');
+            
+            // Show feedback
+            const btn = event.target.closest('button');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<svg class="w-5 h-5 inline mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> Copied!';
+            btn.classList.add('bg-green-100', 'text-green-700');
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.classList.remove('bg-green-100', 'text-green-700');
+            }, 2000);
+        }
+
+        function resetApp() {
+            selectedFile = null;
+            analysisResult = null;
+            excelData = null;
+            document.getElementById('fileInput').value = '';
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('imagePreview').classList.add('hidden');
+            document.getElementById('uploadPrompt').classList.remove('hidden');
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('uploadSection').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('notesSection').classList.add('hidden');
         }
     </script>
 </body>
