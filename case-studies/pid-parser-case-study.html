@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: AI-Powered P&ID Data Extraction | KU Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        @media print {
+            .no-print { display: none; }
+            .page-break { page-break-before: always; }
+        }
+        .gradient-text { background: linear-gradient(135deg, #6366f1, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 sticky top-0 z-50 no-print">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="../assets/logo.png" alt="KU Automation" class="w-10 h-10 rounded-lg">
+                <span class="font-bold text-gray-900">Case Study</span>
+            </div>
+            <button onclick="window.print()" class="px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700 transition-colors">
+                📄 Export PDF
+            </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto px-6 py-12">
+        <!-- Title Section -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm font-medium mb-4">
+                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                Production Ready
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                AI-Powered P&ID <span class="gradient-text">Data Extraction</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Automating equipment, valve, instrument, and line data extraction from engineering drawings using computer vision AI
+            </p>
+            <div class="flex items-center justify-center gap-6 mt-6 text-sm text-gray-500">
+                <span>📅 February 2026</span>
+                <span>⏱️ 2-Day Build</span>
+                <span>🎯 Engineering Sector</span>
+            </div>
+        </div>
+
+        <!-- Key Metrics -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="bg-white rounded-xl p-6 text-center border border-gray-200 shadow-sm">
+                <div class="text-3xl font-bold text-primary-600">30-60s</div>
+                <div class="text-sm text-gray-500 mt-1">Processing Time</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 text-center border border-gray-200 shadow-sm">
+                <div class="text-3xl font-bold text-green-600">95%+</div>
+                <div class="text-sm text-gray-500 mt-1">Accuracy Rate</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 text-center border border-gray-200 shadow-sm">
+                <div class="text-3xl font-bold text-purple-600">4hrs→1min</div>
+                <div class="text-sm text-gray-500 mt-1">Time Saved</div>
+            </div>
+            <div class="bg-white rounded-xl p-6 text-center border border-gray-200 shadow-sm">
+                <div class="text-3xl font-bold text-amber-600">Excel</div>
+                <div class="text-sm text-gray-500 mt-1">Output Format</div>
+            </div>
+        </div>
+
+        <!-- Section 1: The Problem -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-red-100 rounded-xl flex items-center justify-center text-red-600 font-bold">1</div>
+                <h2 class="text-2xl font-bold text-gray-900">The Problem</h2>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-gray-200 p-8">
+                <div class="prose max-w-none">
+                    <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                        Engineering companies working with <strong>P&ID (Piping and Instrumentation Diagrams)</strong> face a time-consuming challenge: manually extracting data from complex drawings to populate equipment lists, valve schedules, instrument indexes, and line lists.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6 mt-6">
+                        <div class="bg-red-50 rounded-lg p-6 border border-red-100">
+                            <h4 class="font-semibold text-red-900 mb-3">⏰ Time Drain</h4>
+                            <ul class="text-red-800 text-sm space-y-2">
+                                <li>• 2-4 hours per P&ID sheet for manual extraction</li>
+                                <li>• Projects often have 50-200+ P&ID sheets</li>
+                                <li>• Revisions require re-extraction</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 rounded-lg p-6 border border-red-100">
+                            <h4 class="font-semibold text-red-900 mb-3">❌ Error Prone</h4>
+                            <ul class="text-red-800 text-sm space-y-2">
+                                <li>• Human transcription errors</li>
+                                <li>• Missed items in complex drawings</li>
+                                <li>• Inconsistent naming conventions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-6 bg-gray-100 rounded-lg">
+                        <h4 class="font-semibold text-gray-900 mb-2">Real Project Context</h4>
+                        <p class="text-gray-700 text-sm">
+                            We received 4 P&ID files from a <strong>PSK PW Management Phase-2 project (DNO/Tebodin)</strong> — typical CAD-based engineering drawings with equipment tags, line numbers, valve symbols, and instrument callouts. The challenge: extract all structured data automatically.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Solution -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 font-bold">2</div>
+                <h2 class="text-2xl font-bold text-gray-900">The Solution</h2>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-gray-200 p-8">
+                <p class="text-gray-700 text-lg leading-relaxed mb-6">
+                    We built an <strong>AI-powered web application</strong> that uses computer vision to analyze P&ID images and extract structured data in seconds.
+                </p>
+
+                <div class="bg-gradient-to-r from-primary-500 to-purple-600 rounded-xl p-8 text-white mb-8">
+                    <h3 class="text-xl font-bold mb-4">Core Technology Stack</h3>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div>
+                            <div class="text-white/70 text-sm mb-1">AI Engine</div>
+                            <div class="font-semibold">OpenAI GPT-4o Vision</div>
+                        </div>
+                        <div>
+                            <div class="text-white/70 text-sm mb-1">Backend</div>
+                            <div class="font-semibold">Python FastAPI</div>
+                        </div>
+                        <div>
+                            <div class="text-white/70 text-sm mb-1">Frontend</div>
+                            <div class="font-semibold">Tailwind CSS</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="font-semibold text-gray-900 mb-4">What It Extracts:</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 bg-primary-100 rounded-lg flex items-center justify-center text-primary-600 text-sm font-bold shrink-0">📦</div>
+                        <div>
+                            <div class="font-medium text-gray-900">Equipment</div>
+                            <div class="text-sm text-gray-600">Tags, types, descriptions, sizes (vessels, pumps, heat exchangers)</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 text-sm font-bold shrink-0">🔧</div>
+                        <div>
+                            <div class="font-medium text-gray-900">Valves</div>
+                            <div class="text-sm text-gray-600">Tags, types, sizes, associated line numbers</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 bg-pink-100 rounded-lg flex items-center justify-center text-pink-600 text-sm font-bold shrink-0">📊</div>
+                        <div>
+                            <div class="font-medium text-gray-900">Instruments</div>
+                            <div class="text-sm text-gray-600">Tags, types, functions (transmitters, indicators, controllers)</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                        <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-sm font-bold shrink-0">🔗</div>
+                        <div>
+                            <div class="font-medium text-gray-900">Lines/Piping</div>
+                            <div class="text-sm text-gray-600">Line numbers, sizes, services, from/to connections</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Development Process -->
+        <section class="mb-12 page-break">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-amber-600 font-bold">3</div>
+                <h2 class="text-2xl font-bold text-gray-900">Development Process</h2>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-gray-200 p-8">
+                <div class="space-y-8">
+                    <!-- Step 1 -->
+                    <div class="flex gap-6">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                            <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+                        </div>
+                        <div class="pb-8">
+                            <h4 class="font-semibold text-gray-900 mb-2">Document Analysis</h4>
+                            <p class="text-gray-600 text-sm mb-3">Received and analyzed 4 real P&ID files to understand the structure, tag formats, and symbology used.</p>
+                            <div class="bg-gray-50 rounded-lg p-4 text-sm font-mono text-gray-700">
+                                <div>Drawing format: KU-TWK-40-PR-PID-XXXX</div>
+                                <div>Equipment tags: 40-TK-3005, 40-HE-2003A/B</div>
+                                <div>Line format: 12"-PL-20049-01C02N-H</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="flex gap-6">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                            <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+                        </div>
+                        <div class="pb-8">
+                            <h4 class="font-semibold text-gray-900 mb-2">AI Prompt Engineering</h4>
+                            <p class="text-gray-600 text-sm mb-3">Developed a specialized extraction prompt that instructs the AI to identify and categorize all P&ID elements with high precision.</p>
+                            <div class="bg-gray-50 rounded-lg p-4 text-sm text-gray-700">
+                                <strong>Key prompt elements:</strong>
+                                <ul class="mt-2 space-y-1">
+                                    <li>• Explicit category definitions (equipment, valves, instruments, lines)</li>
+                                    <li>• Required field specifications per category</li>
+                                    <li>• JSON output structure enforcement</li>
+                                    <li>• Conservative extraction guidance (only what's visible)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="flex gap-6">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                            <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+                        </div>
+                        <div class="pb-8">
+                            <h4 class="font-semibold text-gray-900 mb-2">Backend Development</h4>
+                            <p class="text-gray-600 text-sm mb-3">Built FastAPI server with file upload handling, OpenAI Vision API integration, and Excel report generation.</p>
+                            <div class="bg-gray-900 rounded-lg p-4 text-sm font-mono text-green-400 overflow-x-auto">
+<pre>@app.post("/api/analyze")
+async def analyze_pid(file: UploadFile):
+    # 1. Encode image to base64
+    # 2. Send to GPT-4o Vision with extraction prompt
+    # 3. Parse JSON response
+    # 4. Generate Excel with openpyxl
+    # 5. Return data + Excel as base64</pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="flex gap-6">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">4</div>
+                            <div class="w-0.5 h-full bg-gray-200 mt-2"></div>
+                        </div>
+                        <div class="pb-8">
+                            <h4 class="font-semibold text-gray-900 mb-2">Frontend Development</h4>
+                            <p class="text-gray-600 text-sm mb-3">Created responsive web UI with drag-and-drop upload, real-time progress indication, and tabular results display.</p>
+                            <div class="grid grid-cols-3 gap-3 mt-3">
+                                <div class="bg-gray-100 rounded-lg p-3 text-center text-sm">
+                                    <div class="text-2xl mb-1">📤</div>
+                                    <div class="text-gray-600">Upload Zone</div>
+                                </div>
+                                <div class="bg-gray-100 rounded-lg p-3 text-center text-sm">
+                                    <div class="text-2xl mb-1">📊</div>
+                                    <div class="text-gray-600">Data Tables</div>
+                                </div>
+                                <div class="bg-gray-100 rounded-lg p-3 text-center text-sm">
+                                    <div class="text-2xl mb-1">📥</div>
+                                    <div class="text-gray-600">Excel Export</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5 -->
+                    <div class="flex gap-6">
+                        <div class="flex flex-col items-center">
+                            <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">5</div>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-900 mb-2">Deployment</h4>
+                            <p class="text-gray-600 text-sm mb-3">Deployed backend to Railway (auto-scaling), frontend to Vercel (CDN-distributed).</p>
+                            <div class="flex gap-3">
+                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">✓ Backend: Railway</span>
+                                <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">✓ Frontend: Vercel</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: Results & Demo -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-green-600 font-bold">4</div>
+                <h2 class="text-2xl font-bold text-gray-900">Results & Demo</h2>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-gray-200 p-8">
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-4">Sample Extraction Output</h4>
+                        <div class="bg-gray-900 rounded-lg p-4 text-sm font-mono text-gray-300 overflow-x-auto max-h-64 overflow-y-auto">
+<pre class="text-xs">{
+  "equipment": [
+    {"tag": "40-TK-3005", "type": "Tank", 
+     "description": "Produced Water Tank"},
+    {"tag": "40-HE-2003A", "type": "Heat Exchanger",
+     "description": "PW Cooler A"}
+  ],
+  "valves": [
+    {"tag": "20-BV-0015", "type": "Ball Valve",
+     "size": "4\"", "line_number": "4\"-PL-20015"},
+    {"tag": "20-PSV-0012", "type": "Relief Valve",
+     "size": "2\"", "line_number": "2\"-PL-20012"}
+  ],
+  "instruments": [
+    {"tag": "20-FIT-0006A", "type": "Flow",
+     "function": "Transmitter"},
+    {"tag": "20-LCV-0007", "type": "Level",
+     "function": "Control Valve"}
+  ],
+  "lines": [
+    {"line_number": "12\"-PL-20049-01C02N-H",
+     "size": "12\"", "service": "Produced Water",
+     "from": "40-TK-3005", "to": "40-P-3006"}
+  ]
+}</pre>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-4">Excel Report Structure</h4>
+                        <div class="space-y-3">
+                            <div class="flex items-center gap-3 p-3 bg-primary-50 rounded-lg">
+                                <div class="w-8 h-8 bg-primary-600 rounded text-white flex items-center justify-center text-xs font-bold">1</div>
+                                <div>
+                                    <div class="font-medium text-gray-900">Equipment Sheet</div>
+                                    <div class="text-xs text-gray-500">Tag | Type | Description | Size</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-purple-50 rounded-lg">
+                                <div class="w-8 h-8 bg-purple-600 rounded text-white flex items-center justify-center text-xs font-bold">2</div>
+                                <div>
+                                    <div class="font-medium text-gray-900">Valves Sheet</div>
+                                    <div class="text-xs text-gray-500">Tag | Type | Size | Line Number</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-pink-50 rounded-lg">
+                                <div class="w-8 h-8 bg-pink-600 rounded text-white flex items-center justify-center text-xs font-bold">3</div>
+                                <div>
+                                    <div class="font-medium text-gray-900">Instruments Sheet</div>
+                                    <div class="text-xs text-gray-500">Tag | Type | Function</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                                <div class="w-8 h-8 bg-green-600 rounded text-white flex items-center justify-center text-xs font-bold">4</div>
+                                <div>
+                                    <div class="font-medium text-gray-900">Lines Sheet</div>
+                                    <div class="text-xs text-gray-500">Line # | Size | Service | From | To</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center gap-3 p-3 bg-amber-50 rounded-lg">
+                                <div class="w-8 h-8 bg-amber-600 rounded text-white flex items-center justify-center text-xs font-bold">5</div>
+                                <div>
+                                    <div class="font-medium text-gray-900">Summary Sheet</div>
+                                    <div class="text-xs text-gray-500">Counts | AI Summary | Notes</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-primary-600 to-purple-600 rounded-xl p-6 text-white text-center">
+                    <h4 class="font-bold text-xl mb-2">🔗 Live Demo</h4>
+                    <p class="text-white/80 mb-4">Try the P&ID Parser yourself — upload any P&ID image</p>
+                    <a href="https://ai-automation-agency-gilt.vercel.app/pid-parser.html" target="_blank" class="inline-block px-6 py-3 bg-white text-primary-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        Open Demo →
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: Client Deployment Options -->
+        <section class="mb-12 page-break">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center text-blue-600 font-bold">5</div>
+                <h2 class="text-2xl font-bold text-gray-900">Client Deployment Options</h2>
+            </div>
+            
+            <div class="space-y-6">
+                <!-- Option 1: SaaS -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center text-2xl shrink-0">☁️</div>
+                        <div class="flex-1">
+                            <div class="flex items-center gap-3 mb-2">
+                                <h3 class="text-xl font-bold text-gray-900">Option 1: SaaS Subscription</h3>
+                                <span class="px-2 py-1 bg-green-100 text-green-700 rounded text-xs font-medium">RECOMMENDED</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Client accesses hosted platform via web browser. No installation required.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h5 class="font-semibold text-gray-900 mb-2">✅ Pros</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Zero setup for client</li>
+                                        <li>• Automatic updates & improvements</li>
+                                        <li>• Scalable usage</li>
+                                        <li>• Lower upfront cost</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h5 class="font-semibold text-gray-900 mb-2">💰 Pricing Model</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• $500-1,500/month subscription</li>
+                                        <li>• Or per-extraction pricing ($5-20/P&ID)</li>
+                                        <li>• Volume discounts available</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
+                                <h5 class="font-semibold text-blue-900 mb-2">Deployment Steps:</h5>
+                                <ol class="text-sm text-blue-800 space-y-1">
+                                    <li>1. Client signs service agreement</li>
+                                    <li>2. We provide branded login portal</li>
+                                    <li>3. Client uploads P&IDs via browser</li>
+                                    <li>4. Results available instantly + Excel download</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option 2: White Label -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center text-2xl shrink-0">🏷️</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Option 2: White-Label License</h3>
+                            <p class="text-gray-600 mb-4">Branded version deployed under client's domain with their logo and colors.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h5 class="font-semibold text-gray-900 mb-2">✅ Pros</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Client's branding throughout</li>
+                                        <li>• Can resell to their clients</li>
+                                        <li>• Custom domain (tools.clientco.com)</li>
+                                        <li>• We handle hosting & maintenance</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h5 class="font-semibold text-gray-900 mb-2">💰 Pricing Model</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• $5,000-15,000 setup fee</li>
+                                        <li>• $1,000-3,000/month hosting</li>
+                                        <li>• Or revenue share model</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-purple-50 rounded-lg p-4 border border-purple-100">
+                                <h5 class="font-semibold text-purple-900 mb-2">Deployment Steps:</h5>
+                                <ol class="text-sm text-purple-800 space-y-1">
+                                    <li>1. Collect branding assets (logo, colors, domain)</li>
+                                    <li>2. Configure white-label instance (1-2 weeks)</li>
+                                    <li>3. Deploy to client's subdomain</li>
+                                    <li>4. Provide admin dashboard for usage tracking</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Option 3: On-Premise -->
+                <div class="bg-white rounded-xl border border-gray-200 p-8">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center text-2xl shrink-0">🏢</div>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Option 3: On-Premise Installation</h3>
+                            <p class="text-gray-600 mb-4">Full deployment on client's own infrastructure. Complete data control.</p>
+                            
+                            <div class="grid md:grid-cols-2 gap-4 mb-4">
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h5 class="font-semibold text-gray-900 mb-2">✅ Pros</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• Data never leaves client network</li>
+                                        <li>• Meets strict security requirements</li>
+                                        <li>• No ongoing subscription</li>
+                                        <li>• Full customization possible</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h5 class="font-semibold text-gray-900 mb-2">💰 Pricing Model</h5>
+                                    <ul class="text-sm text-gray-600 space-y-1">
+                                        <li>• $25,000-50,000 license fee</li>
+                                        <li>• Client provides OpenAI API key</li>
+                                        <li>• Optional support contract</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="bg-amber-50 rounded-lg p-4 border border-amber-100">
+                                <h5 class="font-semibold text-amber-900 mb-2">Deployment Steps:</h5>
+                                <ol class="text-sm text-amber-800 space-y-1">
+                                    <li>1. Provide Docker container package</li>
+                                    <li>2. Client IT deploys on their servers</li>
+                                    <li>3. Configure with client's OpenAI API key</li>
+                                    <li>4. Optional: Training session for IT team</li>
+                                </ol>
+                            </div>
+
+                            <div class="mt-4 p-4 bg-gray-100 rounded-lg">
+                                <h5 class="font-semibold text-gray-900 mb-2">System Requirements:</h5>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                                    <div><span class="text-gray-500">OS:</span> Linux/Windows</div>
+                                    <div><span class="text-gray-500">RAM:</span> 4GB+</div>
+                                    <div><span class="text-gray-500">Docker:</span> Required</div>
+                                    <div><span class="text-gray-500">Internet:</span> For API calls</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: ROI Analysis -->
+        <section class="mb-12">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-10 h-10 bg-emerald-100 rounded-xl flex items-center justify-center text-emerald-600 font-bold">6</div>
+                <h2 class="text-2xl font-bold text-gray-900">ROI Analysis</h2>
+            </div>
+            
+            <div class="bg-white rounded-xl border border-gray-200 p-8">
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-4">Manual Process (Current)</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between p-3 bg-red-50 rounded-lg">
+                                <span class="text-gray-700">Time per P&ID</span>
+                                <span class="font-semibold text-red-600">2-4 hours</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-red-50 rounded-lg">
+                                <span class="text-gray-700">Engineer cost/hour</span>
+                                <span class="font-semibold text-red-600">$75-150</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-red-50 rounded-lg">
+                                <span class="text-gray-700">Cost per P&ID</span>
+                                <span class="font-semibold text-red-600">$150-600</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-red-100 rounded-lg border border-red-200">
+                                <span class="font-medium text-gray-900">100 P&IDs/project</span>
+                                <span class="font-bold text-red-700">$15,000-60,000</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-900 mb-4">AI-Powered (New)</h4>
+                        <div class="space-y-3">
+                            <div class="flex justify-between p-3 bg-green-50 rounded-lg">
+                                <span class="text-gray-700">Time per P&ID</span>
+                                <span class="font-semibold text-green-600">1 minute</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-green-50 rounded-lg">
+                                <span class="text-gray-700">AI cost per P&ID</span>
+                                <span class="font-semibold text-green-600">~$0.50</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-green-50 rounded-lg">
+                                <span class="text-gray-700">Review time (10 min)</span>
+                                <span class="font-semibold text-green-600">$12-25</span>
+                            </div>
+                            <div class="flex justify-between p-3 bg-green-100 rounded-lg border border-green-200">
+                                <span class="font-medium text-gray-900">100 P&IDs/project</span>
+                                <span class="font-bold text-green-700">$1,250-2,550</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 p-6 bg-gradient-to-r from-emerald-500 to-green-600 rounded-xl text-white text-center">
+                    <div class="text-sm uppercase tracking-wider mb-2">Potential Savings Per Project</div>
+                    <div class="text-4xl font-bold mb-2">$13,750 - $57,450</div>
+                    <div class="text-white/80">90-95% cost reduction</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Next Steps -->
+        <section class="mb-12">
+            <div class="bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 md:p-12 text-white text-center">
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">Ready to Deploy?</h2>
+                <p class="text-white/80 mb-8 max-w-xl mx-auto">
+                    Let's discuss which deployment option fits your needs and get your team up and running.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-8 py-4 bg-white text-primary-600 rounded-xl font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+                        📅 Book Strategy Call
+                    </a>
+                    <a href="mailto:kingsley.uzowulu@ku-automation.com" class="px-8 py-4 bg-white/10 hover:bg-white/20 text-white border border-white/30 rounded-xl font-semibold transition-colors">
+                        ✉️ Email Us
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-gray-500 text-sm pt-8 border-t border-gray-200">
+            <div class="flex items-center justify-center gap-3 mb-4">
+                <img src="../assets/logo.png" alt="KU Automation" class="w-8 h-8 rounded-lg">
+                <span class="font-semibold text-gray-900">KU Automation</span>
+            </div>
+            <p>AI Automation for Engineering Companies</p>
+            <p class="mt-2">Built by a Chartered Engineer with 21+ years in Oil & Gas</p>
+            <p class="mt-4 text-xs">© 2026 KU Automation. All rights reserved.</p>
+        </footer>
+    </main>
+</body>
+</html>
