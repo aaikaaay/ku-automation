@@ -406,7 +406,7 @@
                 <p class="text-xl text-gray-600 mb-6">${post.excerpt}</p>
                 <div class="flex items-center gap-4 text-sm text-gray-500">
                     <div class="flex items-center gap-3">
-                        <img src="${post.author.avatar || 'assets/avatar-kingsley.png'}" alt="${post.author.name}" class="w-12 h-12 rounded-full">
+                        <img src="${post.author.avatar || '/assets/avatar-kingsley.png'}" alt="${post.author.name}" class="w-12 h-12 rounded-full">
                         <div>
                             <p class="font-semibold text-gray-900">${post.author.name}</p>
                             <p class="text-gray-500">${post.author.title || 'Founder & Lead Engineer'}</p>
@@ -510,7 +510,7 @@
         function renderAuthorBio(post) {
             document.getElementById('author-bio').innerHTML = `
                 <div class="flex items-start gap-4">
-                    <img src="${post.author.avatar || 'assets/avatar-kingsley.png'}" alt="${post.author.name}" class="w-16 h-16 rounded-full">
+                    <img src="${post.author.avatar || '/assets/avatar-kingsley.png'}" alt="${post.author.name}" class="w-16 h-16 rounded-full">
                     <div>
                         <h3 class="font-bold text-gray-900 text-lg">${post.author.name}</h3>
                         <p class="text-primary-600 font-medium mb-2">${post.author.title || 'Founder & Lead Engineer'}</p>
