@@ -1,0 +1,104 @@
+{
+  "posts": [
+    {
+      "slug": "ai-document-processing-engineering",
+      "title": "How AI Document Processing is Transforming Engineering Companies",
+      "excerpt": "Discover how leading engineering firms are using AI to reduce document processing time by 70% while improving accuracy. Real-world examples from oil & gas, EPC, and manufacturing sectors.",
+      "date": "2026-03-03",
+      "modified": "2026-03-03",
+      "published": true,
+      "featured": true,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-document-processing.png",
+      "tags": ["AI Automation", "Document Processing", "Engineering"],
+      "readTime": 8,
+      "wordCount": 1850,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "reduce-rfq-response-time-ai",
+      "title": "5 Ways to Cut RFQ Response Time by 50% Using AI Automation",
+      "excerpt": "Learn proven strategies for accelerating your RFQ/RFP response process with AI. From automated document parsing to intelligent pricing suggestions.",
+      "date": "2026-03-01",
+      "modified": "2026-03-01",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/rfq-automation.png",
+      "tags": ["RFQ Automation", "AI Automation", "Sales Engineering"],
+      "readTime": 6,
+      "wordCount": 1400,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "pid-diagram-ai-extraction",
+      "title": "Extracting Data from P&ID Diagrams: A Practical AI Approach",
+      "excerpt": "P&ID diagrams contain critical engineering data locked in visual formats. Learn how AI vision models can extract instrument tags, line numbers, and equipment data automatically.",
+      "date": "2026-02-27",
+      "modified": "2026-02-27",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/pid-extraction.png",
+      "tags": ["P&ID", "Document Processing", "Oil & Gas", "AI Vision"],
+      "readTime": 10,
+      "wordCount": 2200,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "engineering-knowledge-base-ai",
+      "title": "Building an AI Knowledge Base for Engineering Teams",
+      "excerpt": "Stop wasting hours searching for information. Learn how to create an AI-powered knowledge base that gives your engineering team instant access to specifications, standards, and past project data.",
+      "date": "2026-02-24",
+      "modified": "2026-02-24",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/knowledge-base.png",
+      "tags": ["Knowledge Management", "AI Automation", "Engineering"],
+      "readTime": 7,
+      "wordCount": 1600,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "roi-ai-automation-engineering",
+      "title": "Calculating ROI for AI Automation in Engineering: A Practical Guide",
+      "excerpt": "How do you justify AI investment to stakeholders? This guide walks through the real costs, time savings, and financial returns of AI automation for engineering workflows.",
+      "date": "2026-02-20",
+      "modified": "2026-02-20",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/roi-calculation.png",
+      "tags": ["ROI", "Business Case", "AI Automation"],
+      "readTime": 5,
+      "wordCount": 1200,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    }
+  ]
+}

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering AI Insights | KU Automation Blog</title>
+    <meta name="description" content="Expert insights on AI automation for engineering companies. Learn how to reduce document processing time by 70%, automate RFQ analysis, and transform engineering workflows.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://ai-automation-agency-gilt.vercel.app/blog.html">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ai-automation-agency-gilt.vercel.app/blog.html">
+    <meta property="og:title" content="Engineering AI Insights | KU Automation Blog">
+    <meta property="og:description" content="Expert insights on AI automation for engineering companies. Reduce document processing time by 70%.">
+    <meta property="og:image" content="https://ai-automation-agency-gilt.vercel.app/assets/blog-og-image.png">
+    <meta property="og:site_name" content="KU Automation">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Engineering AI Insights | KU Automation Blog">
+    <meta name="twitter:description" content="Expert insights on AI automation for engineering companies.">
+    <meta name="twitter:image" content="https://ai-automation-agency-gilt.vercel.app/assets/blog-og-image.png">
+    
+    <!-- Additional SEO -->
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Kingsley Uzowulu, KU Automation">
+    <meta name="keywords" content="AI automation, engineering AI, document processing, RFQ automation, oil and gas AI, EPC automation, engineering workflows">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(99, 102, 241, 0.15); }
+        .tag-active { background: #4f46e5; color: white; }
+    </style>
+    
+    <!-- Structured Data - Blog -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "KU Automation Blog",
+        "description": "Expert insights on AI automation for engineering companies",
+        "url": "https://ai-automation-agency-gilt.vercel.app/blog.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "KU Automation",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://ai-automation-agency-gilt.vercel.app/assets/logo.png"
+            }
+        },
+        "author": {
+            "@type": "Person",
+            "name": "Kingsley Uzowulu",
+            "jobTitle": "Founder & Lead Engineer",
+            "description": "CEng, MIMechE with 21+ years engineering experience"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 bg-gradient-to-b from-primary-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                Engineering <span class="gradient-text">AI Insights</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                Expert perspectives on AI automation for engineering companies. Practical guides, industry insights, and real-world case studies from 21+ years of engineering experience.
+            </p>
+            
+            <!-- Search -->
+            <div class="max-w-xl mx-auto mb-8">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="Search articles..." class="w-full px-5 py-3 pl-12 rounded-xl border border-gray-200 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 outline-none transition">
+                    <svg class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <!-- Tags Filter -->
+            <div class="flex flex-wrap justify-center gap-2" id="tags-filter">
+                <button class="tag-btn tag-active px-4 py-2 rounded-full text-sm font-medium transition" data-tag="all">All Posts</button>
+                <!-- Tags will be dynamically added -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Posts Grid -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Featured Post -->
+            <div id="featured-post" class="mb-16">
+                <!-- Dynamically populated -->
+            </div>
+            
+            <!-- Posts Grid -->
+            <div id="posts-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically populated -->
+            </div>
+            
+            <!-- No Results -->
+            <div id="no-results" class="hidden text-center py-16">
+                <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-gray-500 text-lg">No articles found matching your criteria.</p>
+            </div>
+            
+            <!-- Load More -->
+            <div id="load-more-container" class="text-center mt-12 hidden">
+                <button id="load-more-btn" class="px-8 py-3 border-2 border-primary-600 text-primary-600 rounded-lg font-medium hover:bg-primary-50 transition">
+                    Load More Articles
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter CTA -->
+    <section class="py-16 bg-gradient-to-r from-primary-600 to-purple-600">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold text-white mb-4">Stay Updated on Engineering AI</h2>
+            <p class="text-primary-100 mb-8 text-lg">Get weekly insights on AI automation, engineering workflows, and industry best practices.</p>
+            <form id="newsletter-form" class="flex flex-col sm:flex-row gap-4 justify-center max-w-lg mx-auto">
+                <input type="email" placeholder="Enter your email" class="flex-1 px-5 py-3 rounded-lg focus:ring-2 focus:ring-white outline-none" required>
+                <button type="submit" class="bg-white text-primary-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>kingsley.uzowulu@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">&copy; 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Blog configuration
+        const POSTS_PER_PAGE = 9;
+        let allPosts = [];
+        let filteredPosts = [];
+        let currentPage = 1;
+        let currentTag = 'all';
+        let searchQuery = '';
+
+        // Fetch posts
+        async function fetchPosts() {
+            try {
+                const response = await fetch('blog/posts.json');
+                const data = await response.json();
+                allPosts = data.posts.filter(p => p.published).sort((a, b) => new Date(b.date) - new Date(a.date));
+                initializeBlog();
+            } catch (error) {
+                console.error('Error loading posts:', error);
+                document.getElementById('posts-grid').innerHTML = '<p class="col-span-3 text-center text-gray-500">Unable to load blog posts. Please try again later.</p>';
+            }
+        }
+
+        // Initialize blog
+        function initializeBlog() {
+            renderTags();
+            filterPosts();
+        }
+
+        // Render tag filters
+        function renderTags() {
+            const tagsContainer = document.getElementById('tags-filter');
+            const allTags = [...new Set(allPosts.flatMap(p => p.tags))];
+            
+            allTags.forEach(tag => {
+                const btn = document.createElement('button');
+                btn.className = 'tag-btn px-4 py-2 rounded-full text-sm font-medium bg-gray-100 text-gray-600 hover:bg-gray-200 transition';
+                btn.dataset.tag = tag;
+                btn.textContent = tag;
+                btn.addEventListener('click', () => selectTag(tag));
+                tagsContainer.appendChild(btn);
+            });
+        }
+
+        // Select tag
+        function selectTag(tag) {
+            currentTag = tag;
+            currentPage = 1;
+            document.querySelectorAll('.tag-btn').forEach(btn => {
+                btn.classList.remove('tag-active', 'bg-gray-100', 'text-gray-600');
+                if (btn.dataset.tag === tag) {
+                    btn.classList.add('tag-active');
+                } else {
+                    btn.classList.add('bg-gray-100', 'text-gray-600');
+                }
+            });
+            filterPosts();
+        }
+
+        // Filter posts
+        function filterPosts() {
+            filteredPosts = allPosts.filter(post => {
+                const matchesTag = currentTag === 'all' || post.tags.includes(currentTag);
+                const matchesSearch = searchQuery === '' || 
+                    post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                    post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+                return matchesTag && matchesSearch;
+            });
+            renderPosts();
+        }
+
+        // Render posts
+        function renderPosts() {
+            const featuredContainer = document.getElementById('featured-post');
+            const gridContainer = document.getElementById('posts-grid');
+            const noResults = document.getElementById('no-results');
+            const loadMoreContainer = document.getElementById('load-more-container');
+
+            if (filteredPosts.length === 0) {
+                featuredContainer.innerHTML = '';
+                gridContainer.innerHTML = '';
+                noResults.classList.remove('hidden');
+                loadMoreContainer.classList.add('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+            
+            // Featured post (first post)
+            if (currentPage === 1 && currentTag === 'all' && searchQuery === '') {
+                const featured = filteredPosts[0];
+                featuredContainer.innerHTML = `
+                    <a href="blog-post.html?slug=${featured.slug}" class="block group">
+                        <div class="bg-white rounded-2xl overflow-hidden shadow-lg card-hover">
+                            <div class="md:flex">
+                                <div class="md:w-1/2">
+                                    <img src="${featured.image || 'assets/blog-default.png'}" alt="${featured.title}" class="w-full h-64 md:h-full object-cover">
+                                </div>
+                                <div class="md:w-1/2 p-8 flex flex-col justify-center">
+                                    <div class="flex items-center gap-2 mb-4">
+                                        <span class="bg-primary-100 text-primary-700 text-xs font-semibold px-3 py-1 rounded-full">Featured</span>
+                                        <span class="text-gray-400 text-sm">${formatDate(featured.date)}</span>
+                                    </div>
+                                    <h2 class="text-2xl md:text-3xl font-bold text-gray-900 mb-4 group-hover:text-primary-600 transition">${featured.title}</h2>
+                                    <p class="text-gray-600 mb-6">${featured.excerpt}</p>
+                                    <div class="flex items-center justify-between">
+                                        <div class="flex items-center gap-2">
+                                            <img src="${featured.author.avatar || 'assets/avatar-kingsley.png'}" alt="${featured.author.name}" class="w-10 h-10 rounded-full">
+                                            <div>
+                                                <p class="font-medium text-gray-900">${featured.author.name}</p>
+                                                <p class="text-sm text-gray-500">${featured.readTime} min read</p>
+                                            </div>
+                                        </div>
+                                        <span class="text-primary-600 font-medium group-hover:translate-x-1 transition-transform inline-flex items-center">
+                                            Read More
+                                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                            </svg>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                `;
+            } else {
+                featuredContainer.innerHTML = '';
+            }
+
+            // Grid posts
+            const startIndex = currentTag === 'all' && searchQuery === '' && currentPage === 1 ? 1 : 0;
+            const endIndex = currentPage * POSTS_PER_PAGE + (currentTag === 'all' && searchQuery === '' ? 0 : 1);
+            const postsToShow = filteredPosts.slice(startIndex, endIndex);
+
+            gridContainer.innerHTML = postsToShow.map(post => `
+                <article class="bg-white rounded-xl overflow-hidden shadow-md card-hover">
+                    <a href="blog-post.html?slug=${post.slug}" class="block">
+                        <img src="${post.image || 'assets/blog-default.png'}" alt="${post.title}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <div class="flex flex-wrap gap-2 mb-3">
+                                ${post.tags.slice(0, 2).map(tag => `<span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">${tag}</span>`).join('')}
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-900 mb-2 line-clamp-2 hover:text-primary-600 transition">${post.title}</h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">${post.excerpt}</p>
+                            <div class="flex items-center justify-between text-sm text-gray-500">
+                                <span>${formatDate(post.date)}</span>
+                                <span>${post.readTime} min read</span>
+                            </div>
+                        </div>
+                    </a>
+                </article>
+            `).join('');
+
+            // Load more button
+            if (endIndex < filteredPosts.length) {
+                loadMoreContainer.classList.remove('hidden');
+            } else {
+                loadMoreContainer.classList.add('hidden');
+            }
+        }
+
+        // Format date
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Event listeners
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            searchQuery = e.target.value;
+            currentPage = 1;
+            filterPosts();
+        });
+
+        document.getElementById('load-more-btn').addEventListener('click', () => {
+            currentPage++;
+            filterPosts();
+        });
+
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+
+        document.getElementById('newsletter-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thanks for subscribing! You\'ll receive our weekly engineering AI insights.');
+            e.target.reset();
+        });
+
+        // Initialize
+        fetchPosts();
+    </script>
+</body>
+</html>
