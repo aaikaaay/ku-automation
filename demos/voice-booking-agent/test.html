@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice Agent Test | KU Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .pulse { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full mx-4">
+        <div class="text-center mb-8">
+            <h1 class="text-2xl font-bold text-gray-900 mb-2">🎙️ Voice Agent Test</h1>
+            <p class="text-gray-600">Test the Appointment Booking Assistant</p>
+        </div>
+        
+        <!-- Status -->
+        <div id="status" class="mb-6 p-4 rounded-lg bg-gray-50 text-center">
+            <span class="text-gray-600">Ready to start</span>
+        </div>
+        
+        <!-- Call Button -->
+        <button id="callBtn" onclick="startCall()" 
+            class="w-full bg-blue-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-blue-700 transition flex items-center justify-center gap-2">
+            <span>🎤</span>
+            <span>Start Voice Call</span>
+        </button>
+        
+        <!-- End Call Button (hidden initially) -->
+        <button id="endBtn" onclick="endCall()" 
+            class="w-full bg-red-600 text-white py-4 rounded-xl font-semibold text-lg hover:bg-red-700 transition hidden mt-4">
+            End Call
+        </button>
+        
+        <!-- Instructions -->
+        <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+            <h3 class="font-semibold text-blue-900 mb-2">Try saying:</h3>
+            <ul class="text-sm text-blue-800 space-y-1">
+                <li>• "I'd like to book an appointment for tomorrow"</li>
+                <li>• "What times do you have on Monday?"</li>
+                <li>• "What are your business hours?"</li>
+            </ul>
+        </div>
+        
+        <!-- Agent Info -->
+        <div class="mt-6 text-center text-sm text-gray-500">
+            <p>Agent: Appointment Booking Assistant</p>
+            <p>Voice: Willa (British)</p>
+        </div>
+    </div>
+
+    <!-- Retell Web SDK -->
+    <script src="https://cdn.retellai.com/retell-web-client.js"></script>
+    <script>
+        const AGENT_ID = 'agent_cf942c3cecfb89132c45a2d9fa';
+        const API_KEY = 'key_69bc0e2201a8c96d38a28fd02480';
+        
+        let retellClient = null;
+        
+        async function startCall() {
+            const statusEl = document.getElementById('status');
+            const callBtn = document.getElementById('callBtn');
+            const endBtn = document.getElementById('endBtn');
+            
+            try {
+                statusEl.innerHTML = '<span class="text-blue-600 pulse">Connecting...</span>';
+                callBtn.disabled = true;
+                
+                // Create web call
+                const response = await fetch('https://api.retellai.com/v2/create-web-call', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${API_KEY}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ agent_id: AGENT_ID })
+                });
+                
+                const data = await response.json();
+                console.log('Web call created:', data);
+                
+                if (!data.access_token) {
+                    throw new Error('No access token received');
+                }
+                
+                // Initialize Retell client
+                retellClient = new RetellWebClient();
+                
+                // Set up event listeners
+                retellClient.on('call_started', () => {
+                    console.log('Call started');
+                    statusEl.innerHTML = '<span class="text-green-600">🟢 Connected - Speak now!</span>';
+                    callBtn.classList.add('hidden');
+                    endBtn.classList.remove('hidden');
+                });
+                
+                retellClient.on('call_ended', () => {
+                    console.log('Call ended');
+                    statusEl.innerHTML = '<span class="text-gray-600">Call ended</span>';
+                    callBtn.classList.remove('hidden');
+                    callBtn.disabled = false;
+                    endBtn.classList.add('hidden');
+                });
+                
+                retellClient.on('error', (error) => {
+                    console.error('Error:', error);
+                    statusEl.innerHTML = `<span class="text-red-600">Error: ${error.message}</span>`;
+                    callBtn.classList.remove('hidden');
+                    callBtn.disabled = false;
+                    endBtn.classList.add('hidden');
+                });
+                
+                retellClient.on('agent_start_talking', () => {
+                    statusEl.innerHTML = '<span class="text-blue-600">🗣️ Agent speaking...</span>';
+                });
+                
+                retellClient.on('agent_stop_talking', () => {
+                    statusEl.innerHTML = '<span class="text-green-600">🎤 Your turn - speak now</span>';
+                });
+                
+                // Start the call
+                await retellClient.startCall({
+                    accessToken: data.access_token
+                });
+                
+            } catch (error) {
+                console.error('Failed to start call:', error);
+                statusEl.innerHTML = `<span class="text-red-600">Failed: ${error.message}</span>`;
+                callBtn.disabled = false;
+            }
+        }
+        
+        function endCall() {
+            if (retellClient) {
+                retellClient.stopCall();
+            }
+        }
+    </script>
+</body>
+</html>
