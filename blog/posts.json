@@ -1,6 +1,55 @@
 {
   "posts": [
     {
+      "slug": "agentic-ai-for-engineering-autonomous-workflows-that-actually-work",
+      "title": "Agentic AI for Engineering: Autonomous Workflows That Actually Work",
+      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows \u2014 from document processing to procurement \u2014 without constant human oversight.",
+      "date": "2026-03-10",
+      "modified": "2026-03-10",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/agentic-ai-engineering.png",
+      "tags": [
+        "Agentic AI",
+        "Engineering",
+        "Automation",
+        "AI Workflows"
+      ],
+      "readTime": 6,
+      "wordCount": 1206,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "how-ai-voice-agents-are-revolutionizing-engineering-sales-calls",
+      "title": "How AI Voice Agents Are Revolutionizing Engineering Sales Calls",
+      "excerpt": "Discover how AI voice agents are transforming engineering sales with instant technical knowledge, 24/7 coverage, and ROI exceeding 200%. Real implementation guide for equipment suppliers.",
+      "date": "2026-03-05",
+      "modified": "2026-03-05",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-voice-agents.png",
+      "tags": [
+        "AI Voice",
+        "Sales Engineering",
+        "Automation"
+      ],
+      "readTime": 6,
+      "wordCount": 1198,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-document-processing-engineering",
       "title": "How AI Document Processing is Transforming Engineering Companies",
       "excerpt": "Discover how leading engineering firms are using AI to reduce document processing time by 70% while improving accuracy. Real-world examples from oil & gas, EPC, and manufacturing sectors.",
@@ -9,7 +58,11 @@
       "published": true,
       "featured": true,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-document-processing.png",
-      "tags": ["AI Automation", "Document Processing", "Engineering"],
+      "tags": [
+        "AI Automation",
+        "Document Processing",
+        "Engineering"
+      ],
       "readTime": 8,
       "wordCount": 1850,
       "author": {
@@ -29,7 +82,11 @@
       "published": true,
       "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/rfq-automation.png",
-      "tags": ["RFQ Automation", "AI Automation", "Sales Engineering"],
+      "tags": [
+        "RFQ Automation",
+        "AI Automation",
+        "Sales Engineering"
+      ],
       "readTime": 6,
       "wordCount": 1400,
       "author": {
@@ -49,7 +106,12 @@
       "published": true,
       "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/pid-extraction.png",
-      "tags": ["P&ID", "Document Processing", "Oil & Gas", "AI Vision"],
+      "tags": [
+        "P&ID",
+        "Document Processing",
+        "Oil & Gas",
+        "AI Vision"
+      ],
       "readTime": 10,
       "wordCount": 2200,
       "author": {
@@ -69,7 +131,11 @@
       "published": true,
       "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/knowledge-base.png",
-      "tags": ["Knowledge Management", "AI Automation", "Engineering"],
+      "tags": [
+        "Knowledge Management",
+        "AI Automation",
+        "Engineering"
+      ],
       "readTime": 7,
       "wordCount": 1600,
       "author": {
@@ -89,7 +155,11 @@
       "published": true,
       "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/roi-calculation.png",
-      "tags": ["ROI", "Business Case", "AI Automation"],
+      "tags": [
+        "ROI",
+        "Business Case",
+        "AI Automation"
+      ],
       "readTime": 5,
       "wordCount": 1200,
       "author": {
