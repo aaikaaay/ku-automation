@@ -82,9 +82,9 @@
                     <a href="index.html#services" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Services</a>
                     <a href="use-cases.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Use Cases</a>
                     <a href="index.html#about" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">About</a>
-                    <a href="pricing.html" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">Pricing</a>
-                    <a href="roi-calculator.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">ROI Calculator</a>
-                    <a href="demos.html" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">Try Demos</a>
+                    <a href="pricing.html" onclick="gtag('event', 'view_pricing', {'event_category': 'engagement'});" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">Pricing</a>
+                    <a href="roi-calculator.html" onclick="gtag('event', 'use_roi_calculator', {'event_category': 'engagement'});" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">ROI Calculator</a>
+                    <a href="demos.html" onclick="gtag('event', 'try_demos', {'event_category': 'engagement'});" class="text-primary-600 hover:text-primary-700 font-medium transition-colors">Try Demos</a>
                 </div>
                 
                 <div class="flex items-center gap-3">
@@ -219,7 +219,7 @@
             </div>
             
             <div class="mt-12 text-center">
-                <p class="text-gray-500">💡 Most clients see payback within 30 days. <a href="roi-calculator.html" class="text-primary-600 hover:text-primary-700 font-medium underline">Calculate your ROI →</a></p>
+                <p class="text-gray-500">💡 Most clients see payback within 30 days. <a href="roi-calculator.html" onclick="gtag('event', 'use_roi_calculator', {'event_category': 'engagement'});" class="text-primary-600 hover:text-primary-700 font-medium underline">Calculate your ROI →</a></p>
             </div>
         </div>
     </section>
@@ -345,13 +345,13 @@
                 <div class="flex items-center gap-8 text-sm text-gray-500">
                     <a href="index.html#services" class="hover:text-gray-900 transition-colors">Services</a>
                     <a href="use-cases.html" class="hover:text-gray-900 transition-colors">Use Cases</a>
-                    <a href="pricing.html" class="hover:text-gray-900 transition-colors">Pricing</a>
-                    <a href="roi-calculator.html" class="hover:text-gray-900 transition-colors">ROI Calculator</a>
-                    <a href="mailto:contact@ku-automation.com" class="hover:text-gray-900 transition-colors">Contact</a>
+                    <a href="pricing.html" onclick="gtag('event', 'view_pricing', {'event_category': 'engagement'});" class="hover:text-gray-900 transition-colors">Pricing</a>
+                    <a href="roi-calculator.html" onclick="gtag('event', 'use_roi_calculator', {'event_category': 'engagement'});" class="hover:text-gray-900 transition-colors">ROI Calculator</a>
+                    <a href="mailto:contact@ku-automation.com" onclick="gtag('event', 'contact_email', {'event_category': 'conversion'});" class="hover:text-gray-900 transition-colors">Contact</a>
                 </div>
                 
                 <div class="text-center md:text-right">
-                    <a href="mailto:contact@ku-automation.com" class="text-sm text-primary-600 hover:text-primary-700 font-medium">contact@ku-automation.com</a>
+                    <a href="mailto:contact@ku-automation.com" onclick="gtag('event', 'contact_email', {'event_category': 'conversion'});" class="text-sm text-primary-600 hover:text-primary-700 font-medium">contact@ku-automation.com</a>
                     <p class="text-sm text-gray-500 mt-1">© 2026 KU Automation. Built with engineering precision.</p>
                 </div>
             </div>
