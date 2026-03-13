@@ -1,9 +1,34 @@
 {
   "posts": [
     {
+      "slug": "why-engineering-companies-lose-bids-ai-solution",
+      "title": "Why Engineering Companies Are Losing Bids (And How AI Fixes It)",
+      "excerpt": "Your competitors are using AI to win contracts you should have won. Learn why traditional bid processes are failing and the three AI solutions that can turn your win rate around.",
+      "date": "2026-03-13",
+      "modified": "2026-03-13",
+      "published": true,
+      "featured": true,
+      "image": "https://ai-automation-agency-gilt.vercel.app/blog/images/2026-03-13-losing-bids-ai.png",
+      "tags": [
+        "Bid Management",
+        "AI Automation",
+        "EPC",
+        "Procurement"
+      ],
+      "readTime": 7,
+      "wordCount": 1450,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "agentic-ai-for-engineering-autonomous-workflows-that-actually-work",
       "title": "Agentic AI for Engineering: Autonomous Workflows That Actually Work",
-      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows \u2014 from document processing to procurement \u2014 without constant human oversight.",
+      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows — from document processing to procurement — without constant human oversight.",
       "date": "2026-03-10",
       "modified": "2026-03-10",
       "published": true,
@@ -56,7 +81,7 @@
       "date": "2026-03-03",
       "modified": "2026-03-03",
       "published": true,
-      "featured": true,
+      "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-document-processing.png",
       "tags": [
         "AI Automation",
