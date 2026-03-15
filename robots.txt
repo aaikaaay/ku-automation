@@ -1,11 +1,11 @@
 # Robots.txt for KU Automation
-# https://ku-automation.com
+# https://www.ku-automation.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://ku-automation.com/sitemap.xml
+Sitemap: https://www.ku-automation.com/sitemap.xml
 
 # Crawl delay (be nice to servers)
 Crawl-delay: 1
