@@ -1,16 +1,16 @@
 # Robots.txt for KU Automation
-# https://ai-automation-agency-gilt.vercel.app
+# https://ku-automation.com
 
 User-agent: *
 Allow: /
 
 # Sitemap location
-Sitemap: https://ai-automation-agency-gilt.vercel.app/sitemap.xml
+Sitemap: https://ku-automation.com/sitemap.xml
 
 # Crawl delay (be nice to servers)
 Crawl-delay: 1
 
-# Block backend/admin paths (if any)
+# Block backend/admin paths
 Disallow: /backend/
 Disallow: /api/
 Disallow: /*.json$
@@ -21,6 +21,12 @@ Allow: /blog/posts.json
 # Block draft content
 Disallow: /*draft*
 Disallow: /*backup*
+Disallow: /*.backup
+
+# Block asset internals
+Disallow: /assets/logo-v2/
+Disallow: /assets/logo-v3/
+Disallow: /assets/logo-redesign/
 
 # Allow all major search engines
 User-agent: Googlebot
@@ -35,13 +41,7 @@ Allow: /
 User-agent: DuckDuckBot
 Allow: /
 
-User-agent: Baiduspider
-Allow: /
-
-User-agent: YandexBot
-Allow: /
-
-# Block AI training scrapers (optional - remove if you want to be in AI training data)
+# Block AI training scrapers
 User-agent: GPTBot
 Disallow: /
 

@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU Automation - LinkedIn Logo Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            gap: 60px;
+        }
+        
+        h2 {
+            color: #fff;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            opacity: 0.7;
+        }
+        
+        .logo-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        /* Logo Option 1: Abstract K with circuit lines */
+        .logo-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-1::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(255,255,255,0.1) 0%, transparent 30%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 25%);
+        }
+        
+        .logo-1 .letters {
+            font-size: 120px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -8px;
+            text-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            z-index: 1;
+        }
+        
+        /* Logo Option 2: Geometric KU with automation symbol */
+        .logo-2 {
+            width: 300px;
+            height: 300px;
+            background: #0f0f23;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 3px solid #4f46e5;
+        }
+        
+        .logo-2 .inner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .logo-2 .letters {
+            font-size: 100px;
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -6px;
+        }
+        
+        .logo-2 .underline {
+            width: 140px;
+            height: 6px;
+            background: linear-gradient(90deg, #4f46e5, #a855f7, #4f46e5);
+            border-radius: 3px;
+        }
+        
+        /* Logo Option 3: Modern minimal */
+        .logo-3 {
+            width: 300px;
+            height: 300px;
+            background: white;
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(79, 70, 229, 0.3);
+        }
+        
+        .logo-3 .mark {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .logo-3 .k {
+            font-size: 140px;
+            font-weight: 900;
+            color: #4f46e5;
+            line-height: 1;
+        }
+        
+        .logo-3 .u {
+            font-size: 140px;
+            font-weight: 900;
+            color: #7c3aed;
+            line-height: 1;
+        }
+        
+        .logo-3 .dot {
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #4f46e5, #a855f7);
+            border-radius: 50%;
+            margin-left: 8px;
+            align-self: flex-end;
+            margin-bottom: 30px;
+        }
+        
+        /* Logo Option 4: Icon-based with gear/automation */
+        .logo-4 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(145deg, #1e1b4b 0%, #312e81 100%);
+            border-radius: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .logo-4 .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-4 .icon {
+            width: 80px;
+            height: 80px;
+            border: 4px solid #a855f7;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .logo-4 .icon::before {
+            content: '⚡';
+            font-size: 36px;
+        }
+        
+        .logo-4 .icon .gear {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: rotate 20s linear infinite;
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .logo-4 .text {
+            font-size: 72px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -4px;
+        }
+        
+        /* Logo Option 5: Badge style */
+        .logo-5 {
+            width: 300px;
+            height: 300px;
+            background: #4f46e5;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 
+                inset 0 -8px 20px rgba(0,0,0,0.2),
+                0 10px 40px rgba(79, 70, 229, 0.4);
+        }
+        
+        .logo-5::before {
+            content: '';
+            position: absolute;
+            width: 270px;
+            height: 270px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-radius: 50%;
+        }
+        
+        .logo-5 .letters {
+            font-size: 100px;
+            font-weight: 900;
+            color: white;
+            letter-spacing: -6px;
+        }
+        
+        .options-row {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .option-label {
+            color: #a855f7;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+        
+        .instructions {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 800px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .instructions h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .instructions code {
+            background: rgba(79, 70, 229, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #a855f7;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="color: white; font-size: 24px; margin-bottom: 20px;">KU Automation — LinkedIn Logo Options</h1>
+    
+    <div class="options-row">
+        <div class="logo-container">
+            <div class="logo-1">
+                <span class="letters">KU</span>
+            </div>
+            <span class="option-label">Option 1: Gradient Bold</span>
+        </div>
+        
+        <div class="logo-container">
+            <div class="logo-2">
+                <div class="inner">
+                    <span class="letters">KU</span>
+                    <div class="underline"></div>
+                </div>
+            </div>
+            <span class="option-label">Option 2: Dark Tech</span>
+        </div>
+        
+        <div class="logo-container">
+            <div class="logo-3">
+                <div class="mark">
+                    <span class="k">K</span>
+                    <span class="u">U</span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            <span class="option-label">Option 3: Clean Minimal</span>
+        </div>
+    </div>
+    
+    <div class="options-row">
+        <div class="logo-container">
+            <div class="logo-4">
+                <div class="content">
+                    <div class="icon"></div>
+                    <span class="text">KU</span>
+                </div>
+            </div>
+            <span class="option-label">Option 4: Automation Icon</span>
+        </div>
+        
+        <div class="logo-container">
+            <div class="logo-5">
+                <span class="letters">KU</span>
+            </div>
+            <span class="option-label">Option 5: Badge Circle</span>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>📸 How to Export as PNG</h3>
+        <p>
+            1. Open this file in Chrome/Safari<br>
+            2. Right-click on your preferred logo<br>
+            3. Select <code>Inspect Element</code><br>
+            4. In DevTools, right-click the element → <code>Capture node screenshot</code><br>
+            <br>
+            <strong>Or use a screenshot tool:</strong><br>
+            • macOS: <code>Cmd + Shift + 4</code> then drag over the logo<br>
+            • Resize to exactly 300x300px in Preview or any image editor<br>
+            <br>
+            <strong>Recommended:</strong> Option 1 (Gradient Bold) or Option 3 (Clean Minimal) for LinkedIn
+        </p>
+    </div>
+</body>
+</html>

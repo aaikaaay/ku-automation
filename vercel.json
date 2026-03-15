@@ -1,0 +1,76 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/pid-parser.html",
+      "destination": "/pid-parser",
+      "permanent": true
+    },
+    {
+      "source": "/rfq-analyzer.html",
+      "destination": "/rfq-analyzer",
+      "permanent": true
+    },
+    {
+      "source": "/knowledge-bot.html",
+      "destination": "/knowledge-bot",
+      "permanent": true
+    },
+    {
+      "source": "/datasheet-parser.html",
+      "destination": "/datasheet-parser",
+      "permanent": true
+    },
+    {
+      "source": "/demos.html",
+      "destination": "/demos",
+      "permanent": true
+    },
+    {
+      "source": "/pricing.html",
+      "destination": "/pricing",
+      "permanent": true
+    },
+    {
+      "source": "/use-cases.html",
+      "destination": "/use-cases",
+      "permanent": true
+    },
+    {
+      "source": "/roi-calculator.html",
+      "destination": "/roi-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/blog.html",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/one-pager.html",
+      "destination": "/one-pager",
+      "permanent": true
+    }
+  ]
+}

@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU Automation - LinkedIn Cover (Final)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0f0f23;
+            min-height: 100vh;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 60px;
+        }
+        
+        h1 { color: white; font-size: 24px; }
+        
+        h2 {
+            color: #f97316;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+        
+        .cover-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        /* LinkedIn Cover: 1128 x 191 px */
+        .cover {
+            width: 1128px;
+            height: 191px;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        
+        /* Option 1: Brand Colors - Dark with Orange/Blue */
+        .cover-1 {
+            background: linear-gradient(135deg, #0a1628 0%, #0f2847 40%, #1e3a5f 100%);
+        }
+        
+        .cover-1::before {
+            content: '';
+            position: absolute;
+            right: 100px;
+            top: -50px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(249, 115, 22, 0.15) 0%, transparent 60%);
+        }
+        
+        .cover-1::after {
+            content: '';
+            position: absolute;
+            left: 300px;
+            bottom: -100px;
+            width: 400px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
+        }
+        
+        .cover-1 .neural-grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+            background-image: 
+                radial-gradient(circle at 2px 2px, #3b82f6 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .cover-1 .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 60px;
+        }
+        
+        .cover-1 .left h2 {
+            font-size: 38px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        
+        .cover-1 .left .highlight {
+            color: #f97316;
+        }
+        
+        .cover-1 .left p {
+            color: rgba(255,255,255,0.6);
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        .cover-1 .right {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        
+        .cover-1 .stat {
+            text-align: center;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .cover-1 .stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: #f97316;
+        }
+        
+        .cover-1 .stat-label {
+            font-size: 10px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Option 2: Clean with Logo Space */
+        .cover-2 {
+            background: linear-gradient(135deg, #0c1929 0%, #132f4c 100%);
+        }
+        
+        .cover-2 .accent-line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #3b82f6, #f97316, #3b82f6);
+        }
+        
+        .cover-2 .content {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 60px;
+            gap: 40px;
+        }
+        
+        .cover-2 .logo-space {
+            width: 120px;
+            height: 120px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            border: 2px dashed rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255,255,255,0.3);
+            font-size: 11px;
+        }
+        
+        .cover-2 .text {
+            flex: 1;
+        }
+        
+        .cover-2 .text h2 {
+            font-size: 32px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .cover-2 .text h2 span {
+            color: #f97316;
+        }
+        
+        .cover-2 .text p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .cover-2 .features {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .cover-2 .feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            color: rgba(255,255,255,0.8);
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .cover-2 .feature-icon {
+            font-size: 16px;
+        }
+        
+        /* Option 3: Bold Statement */
+        .cover-3 {
+            background: linear-gradient(135deg, #1a365d 0%, #2c5282 100%);
+        }
+        
+        .cover-3::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 40%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(249, 115, 22, 0.2) 100%);
+        }
+        
+        .cover-3 .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .cover-3 h2 {
+            font-size: 42px;
+            font-weight: 900;
+            color: white;
+            line-height: 1.15;
+        }
+        
+        .cover-3 h2 span {
+            color: #f97316;
+        }
+        
+        .cover-3 .sub {
+            font-size: 15px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 10px;
+            font-weight: 500;
+        }
+        
+        /* Option 4: Engineering Blueprint with Orange Accent */
+        .cover-4 {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .cover-4 .blueprint {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.08;
+            background-image: 
+                linear-gradient(#3b82f6 1px, transparent 1px),
+                linear-gradient(90deg, #3b82f6 1px, transparent 1px);
+            background-size: 25px 25px;
+        }
+        
+        .cover-4 .orange-bar {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(180deg, #f97316, #ea580c);
+        }
+        
+        .cover-4 .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            padding: 0 50px 0 40px;
+            gap: 40px;
+        }
+        
+        .cover-4 .brand {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .cover-4 .brand-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+        }
+        
+        .cover-4 .brand-name span {
+            color: #f97316;
+        }
+        
+        .cover-4 .brand-sub {
+            font-size: 11px;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .cover-4 .divider {
+            width: 1px;
+            height: 80px;
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .cover-4 .message {
+            flex: 1;
+        }
+        
+        .cover-4 .message h2 {
+            font-size: 26px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 6px;
+        }
+        
+        .cover-4 .message p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.5);
+        }
+        
+        .cover-4 .stats {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .cover-4 .stat {
+            text-align: center;
+            padding: 12px 18px;
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            border-radius: 10px;
+        }
+        
+        .cover-4 .stat-value {
+            font-size: 22px;
+            font-weight: 800;
+            color: #f97316;
+        }
+        
+        .cover-4 .stat-label {
+            font-size: 9px;
+            color: rgba(255,255,255,0.5);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Option 5: Minimal Impact */
+        .cover-5 {
+            background: #0d1b2a;
+        }
+        
+        .cover-5 .glow {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+        }
+        
+        .cover-5 .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 80px;
+        }
+        
+        .cover-5 .left h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: white;
+            line-height: 1.2;
+        }
+        
+        .cover-5 .left h2 span {
+            color: #f97316;
+        }
+        
+        .cover-5 .right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .cover-5 .tagline {
+            font-size: 14px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 500;
+        }
+        
+        .cover-5 .url {
+            font-size: 16px;
+            color: #f97316;
+            font-weight: 600;
+        }
+        
+        .instructions {
+            background: rgba(255,255,255,0.05);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 1128px;
+            color: #ccc;
+            line-height: 1.8;
+        }
+        
+        .instructions h3 {
+            color: #fff;
+            margin-bottom: 15px;
+        }
+        
+        .instructions code {
+            background: rgba(249, 115, 22, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #f97316;
+        }
+        
+        .note {
+            background: rgba(249, 115, 22, 0.1);
+            border: 1px solid rgba(249, 115, 22, 0.3);
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: #f97316;
+            margin-bottom: 30px;
+            max-width: 1128px;
+        }
+    </style>
+</head>
+<body>
+    <h1>KU Automation — LinkedIn Cover (Brand Colors)</h1>
+    <p style="color: rgba(255,255,255,0.5); margin-top: -30px;">Matching the logo: Orange hard hat + Blue AI neural network</p>
+    
+    <div class="note">
+        ✅ <strong>Logo ready:</strong> <code>linkedin-logo-300x300.png</code> (resized from main logo)<br>
+        📐 <strong>Cover size:</strong> 1128 x 191 pixels — export using DevTools screenshot
+    </div>
+    
+    <div class="cover-container">
+        <h2>Option 1: Stats Focus (Recommended)</h2>
+        <div class="cover cover-1">
+            <div class="neural-grid"></div>
+            <div class="content">
+                <div class="left">
+                    <h2>AI That <span class="highlight">Understands</span><br>Engineering</h2>
+                    <p>Document automation built by engineers, for engineers</p>
+                </div>
+                <div class="right">
+                    <div class="stat">
+                        <div class="stat-value">20+</div>
+                        <div class="stat-label">Hours Saved<br>Weekly</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">70%</div>
+                        <div class="stat-label">Faster<br>Processing</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">&lt;60</div>
+                        <div class="stat-label">Day<br>Payback</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cover-container">
+        <h2>Option 2: Feature Highlights</h2>
+        <div class="cover cover-2">
+            <div class="accent-line"></div>
+            <div class="content">
+                <div class="logo-space">Logo<br>Here</div>
+                <div class="text">
+                    <h2>KU <span>Automation</span></h2>
+                    <p>AI-Powered Engineering Document Processing</p>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <span class="feature-icon">📄</span>
+                        <span>P&ID Parsing</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">🤖</span>
+                        <span>Knowledge Bots</span>
+                    </div>
+                    <div class="feature">
+                        <span class="feature-icon">⚡</span>
+                        <span>Workflow AI</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cover-container">
+        <h2>Option 3: Bold Statement</h2>
+        <div class="cover cover-3">
+            <div class="content">
+                <div>
+                    <h2>Your Engineers Are Too <span>Expensive</span><br>To Copy-Paste From PDFs</h2>
+                    <div class="sub">KU Automation — AI that handles the paperwork</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cover-container">
+        <h2>Option 4: Engineering Blueprint</h2>
+        <div class="cover cover-4">
+            <div class="blueprint"></div>
+            <div class="orange-bar"></div>
+            <div class="content">
+                <div class="brand">
+                    <div class="brand-name">KU <span>Automation</span></div>
+                    <div class="brand-sub">AI-Powered Engineering</div>
+                </div>
+                <div class="divider"></div>
+                <div class="message">
+                    <h2>Document Processing in Seconds, Not Hours</h2>
+                    <p>P&ID parsing • Datasheet extraction • Technical knowledge bots • RFQ analysis</p>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <div class="stat-value">21+</div>
+                        <div class="stat-label">Years Exp</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value">70%</div>
+                        <div class="stat-label">Time Saved</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="cover-container">
+        <h2>Option 5: Minimal Impact</h2>
+        <div class="cover cover-5">
+            <div class="glow"></div>
+            <div class="content">
+                <div class="left">
+                    <h2>Save <span>20+ Hours</span> Per Week<br>On Engineering Documents</h2>
+                </div>
+                <div class="right">
+                    <div class="tagline">AI automation for engineering teams</div>
+                    <div class="url">ku-automation.com</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="instructions">
+        <h3>📸 How to Export</h3>
+        <p>
+            <strong>Chrome DevTools method (recommended):</strong><br>
+            1. Right-click on your preferred cover → <code>Inspect</code><br>
+            2. In DevTools, right-click the <code>&lt;div class="cover cover-X"&gt;</code> element<br>
+            3. Select <code>Capture node screenshot</code><br>
+            4. Exports at exact 1128×191 dimensions<br>
+            <br>
+            <strong>Files ready:</strong><br>
+            • Logo: <code>linkedin-logo-300x300.png</code> ✅<br>
+            • Cover: Export your choice from this page<br>
+            <br>
+            <strong>Brand colors used:</strong><br>
+            • Orange: <code>#f97316</code> (hard hat)<br>
+            • Blue: <code>#3b82f6</code> (AI neural network)<br>
+            • Dark: <code>#0d1b2a</code> / <code>#1e293b</code>
+        </p>
+    </div>
+</body>
+</html>

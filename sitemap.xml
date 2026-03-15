@@ -1,199 +1,69 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-  
-  <!-- Main Pages -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/</loc>
-    <lastmod>2026-03-10</lastmod>
+    <loc>https://ku-automation.com/</loc>
+    <lastmod>2026-03-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/use-cases.html</loc>
-    <lastmod>2026-02-28</lastmod>
+    <loc>https://ku-automation.com/pid-parser</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/pricing.html</loc>
-    <lastmod>2026-02-20</lastmod>
+    <loc>https://ku-automation.com/rfq-analyzer</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/demos.html</loc>
-    <lastmod>2026-02-17</lastmod>
+    <loc>https://ku-automation.com/knowledge-bot</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/roi-calculator.html</loc>
-    <lastmod>2026-02-11</lastmod>
+    <loc>https://ku-automation.com/datasheet-parser</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.9</priority>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/rfq-analyzer.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/datasheet-parser.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/pid-parser.html</loc>
-    <lastmod>2026-02-18</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/knowledge-bot.html</loc>
-    <lastmod>2026-02-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  
-  <!-- Blog -->
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog.html</loc>
-    <lastmod>2026-03-10</lastmod>
+    <loc>https://ku-automation.com/demos</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
+    <priority>0.8</priority>
   </url>
-  
-  <!-- Blog Posts -->
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=agentic-ai-for-engineering-autonomous-workflows-that-actually-work</loc>
-    <lastmod>2026-03-10</lastmod>
+    <loc>https://ku-automation.com/pricing</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>KU Automation Blog</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-10</news:publication_date>
-      <news:title>Agentic AI for Engineering: Autonomous Workflows That Actually Work</news:title>
-    </news:news>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=how-ai-voice-agents-are-revolutionizing-engineering-sales-calls</loc>
-    <lastmod>2026-03-05</lastmod>
+    <loc>https://ku-automation.com/use-cases</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>KU Automation Blog</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-05</news:publication_date>
-      <news:title>How AI Voice Agents Are Revolutionizing Engineering Sales Calls</news:title>
-    </news:news>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=ai-document-processing-engineering</loc>
-    <lastmod>2026-03-03</lastmod>
+    <loc>https://ku-automation.com/roi-calculator</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>KU Automation Blog</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-03</news:publication_date>
-      <news:title>How AI Document Processing is Transforming Engineering Companies</news:title>
-    </news:news>
+    <priority>0.7</priority>
   </url>
-  
   <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=reduce-rfq-response-time-ai</loc>
-    <lastmod>2026-03-01</lastmod>
+    <loc>https://ku-automation.com/blog</loc>
+    <lastmod>2026-03-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://ku-automation.com/one-pager</loc>
+    <lastmod>2026-03-13</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>KU Automation Blog</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-03-01</news:publication_date>
-      <news:title>5 Ways to Cut RFQ Response Time by 50% Using AI Automation</news:title>
-    </news:news>
+    <priority>0.6</priority>
   </url>
-  
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=pid-diagram-ai-extraction</loc>
-    <lastmod>2026-02-27</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>KU Automation Blog</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-02-27</news:publication_date>
-      <news:title>Extracting Data from P&amp;ID Diagrams: A Practical AI Approach</news:title>
-    </news:news>
-  </url>
-  
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=engineering-knowledge-base-ai</loc>
-    <lastmod>2026-02-24</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>KU Automation Blog</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-02-24</news:publication_date>
-      <news:title>Building an AI Knowledge Base for Engineering Teams</news:title>
-    </news:news>
-  </url>
-  
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=roi-ai-automation-engineering</loc>
-    <lastmod>2026-02-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <news:news>
-      <news:publication>
-        <news:name>KU Automation Blog</news:name>
-        <news:language>en</news:language>
-      </news:publication>
-      <news:publication_date>2026-02-20</news:publication_date>
-      <news:title>Calculating ROI for AI Automation in Engineering: A Practical Guide</news:title>
-    </news:news>
-  </url>
-  
-  <!-- Legal Pages -->
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/legal/privacy.html</loc>
-    <lastmod>2026-02-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
-  <url>
-    <loc>https://ai-automation-agency-gilt.vercel.app/legal/terms.html</loc>
-    <lastmod>2026-02-13</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  
 </urlset>
