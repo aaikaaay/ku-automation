@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Readiness Assessment | KU Automation</title>
+    <meta name="description" content="Take our 2-minute assessment to discover how ready your engineering team is for AI automation and your potential ROI.">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="AI Readiness Assessment for Engineering Teams">
+    <meta property="og:description" content="2-minute quiz: Discover your AI automation potential and estimated ROI.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://ai-automation-agency-gilt.vercel.app/ai-readiness-quiz.html">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#1e40af',
+                        accent: '#3b82f6',
+                        dark: '#0f172a',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .progress-bar {
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .question-card {
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .option-card {
+            transition: all 0.2s ease;
+        }
+        
+        .option-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.2);
+        }
+        
+        .option-card.selected {
+            border-color: #2563eb;
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+        
+        .score-ring {
+            stroke-dasharray: 283;
+            stroke-dashoffset: 283;
+            animation: fillRing 1.5s ease-out forwards;
+        }
+        
+        @keyframes fillRing {
+            to { stroke-dashoffset: var(--offset); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .pulse-glow {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.4); }
+            50% { box-shadow: 0 0 0 15px rgba(37, 99, 235, 0); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50 min-h-screen">
+    <!-- Header -->
+    <header class="bg-white/80 backdrop-blur-sm border-b border-slate-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center">
+                    <span class="text-white font-bold text-lg">KU</span>
+                </div>
+                <span class="font-bold text-dark">KU Automation</span>
+            </a>
+            <span class="text-sm text-slate-500">AI for Engineering</span>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 py-8">
+        <!-- Intro Screen -->
+        <div id="intro-screen" class="text-center py-12">
+            <div class="inline-flex items-center gap-2 bg-blue-100 text-primary px-4 py-2 rounded-full text-sm font-medium mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Takes only 2 minutes
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-bold text-dark mb-4">
+                AI Readiness Assessment
+            </h1>
+            <p class="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+                Discover how ready your engineering team is for AI automation — and calculate your potential ROI.
+            </p>
+            
+            <div class="grid md:grid-cols-3 gap-4 mb-10 max-w-2xl mx-auto">
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
+                    <div class="text-2xl mb-2">📊</div>
+                    <div class="font-semibold text-dark">Readiness Score</div>
+                    <div class="text-sm text-slate-500">See where you stand</div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
+                    <div class="text-2xl mb-2">💰</div>
+                    <div class="font-semibold text-dark">ROI Estimate</div>
+                    <div class="text-sm text-slate-500">Potential savings</div>
+                </div>
+                <div class="bg-white rounded-xl p-4 shadow-sm border border-slate-100">
+                    <div class="text-2xl mb-2">🎯</div>
+                    <div class="font-semibold text-dark">Action Plan</div>
+                    <div class="text-sm text-slate-500">Where to start</div>
+                </div>
+            </div>
+            
+            <button onclick="startQuiz()" class="bg-gradient-to-r from-primary to-secondary text-white px-8 py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all pulse-glow">
+                Start Assessment →
+            </button>
+            
+            <p class="text-sm text-slate-400 mt-6">
+                No credit card required • Results delivered instantly
+            </p>
+        </div>
+
+        <!-- Quiz Container -->
+        <div id="quiz-container" class="hidden">
+            <!-- Progress Bar -->
+            <div class="mb-8">
+                <div class="flex justify-between text-sm text-slate-500 mb-2">
+                    <span>Question <span id="current-q">1</span> of <span id="total-q">8</span></span>
+                    <span id="progress-percent">0%</span>
+                </div>
+                <div class="h-2 bg-slate-200 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="progress-bar h-full bg-gradient-to-r from-primary to-accent rounded-full" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div id="question-card" class="question-card bg-white rounded-2xl shadow-xl p-8 border border-slate-100">
+                <h2 id="question-text" class="text-2xl font-bold text-dark mb-6"></h2>
+                <div id="options-container" class="space-y-3"></div>
+            </div>
+
+            <!-- Navigation -->
+            <div class="flex justify-between mt-6">
+                <button id="back-btn" onclick="prevQuestion()" class="hidden px-6 py-3 text-slate-600 hover:text-dark font-medium rounded-xl hover:bg-white transition-all">
+                    ← Back
+                </button>
+                <div class="flex-1"></div>
+            </div>
+        </div>
+
+        <!-- Email Capture (before results) -->
+        <div id="email-capture" class="hidden">
+            <div class="bg-white rounded-2xl shadow-xl p-8 border border-slate-100 text-center">
+                <div class="w-16 h-16 bg-gradient-to-br from-primary to-secondary rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                </div>
+                
+                <h2 class="text-2xl font-bold text-dark mb-2">Assessment Complete!</h2>
+                <p class="text-slate-600 mb-6">Enter your email to get your personalized AI Readiness Report</p>
+                
+                <form onsubmit="submitEmail(event)" class="max-w-md mx-auto">
+                    <div class="space-y-4">
+                        <input 
+                            type="text" 
+                            id="user-name" 
+                            placeholder="Your name" 
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                        >
+                        <input 
+                            type="email" 
+                            id="user-email" 
+                            placeholder="your@email.com" 
+                            required
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                        >
+                        <input 
+                            type="text" 
+                            id="user-company" 
+                            placeholder="Company name" 
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none"
+                        >
+                        <button type="submit" class="w-full bg-gradient-to-r from-primary to-secondary text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl transition-all">
+                            Get My Results →
+                        </button>
+                    </div>
+                </form>
+                
+                <p class="text-xs text-slate-400 mt-4">
+                    We respect your privacy. Unsubscribe anytime.
+                </p>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden">
+            <div class="bg-white rounded-2xl shadow-xl p-8 border border-slate-100 fade-in">
+                <!-- Score Ring -->
+                <div class="text-center mb-8">
+                    <div class="relative inline-block">
+                        <svg class="w-40 h-40" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="none" stroke="#e2e8f0" stroke-width="8"/>
+                            <circle id="score-ring" class="score-ring" cx="50" cy="50" r="45" fill="none" stroke="url(#gradient)" stroke-width="8" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#2563eb"/>
+                                    <stop offset="100%" stop-color="#3b82f6"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div>
+                                <div id="score-number" class="text-4xl font-bold text-dark">0</div>
+                                <div class="text-sm text-slate-500">out of 100</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <h2 id="score-title" class="text-2xl font-bold text-dark mt-4"></h2>
+                    <p id="score-subtitle" class="text-slate-600"></p>
+                </div>
+
+                <!-- Key Insights -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6 mb-6">
+                    <h3 class="font-bold text-dark mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                        Your AI Automation Potential
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="text-sm text-slate-500 mb-1">Estimated Annual Savings</div>
+                            <div id="roi-savings" class="text-2xl font-bold text-green-600">$0</div>
+                        </div>
+                        <div class="bg-white rounded-lg p-4">
+                            <div class="text-sm text-slate-500 mb-1">Hours Saved Per Week</div>
+                            <div id="hours-saved" class="text-2xl font-bold text-primary">0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="mb-6">
+                    <h3 class="font-bold text-dark mb-4">🎯 Recommended Next Steps</h3>
+                    <div id="recommendations" class="space-y-3"></div>
+                </div>
+
+                <!-- CTA -->
+                <div class="bg-gradient-to-r from-primary to-secondary rounded-xl p-6 text-white text-center">
+                    <h3 class="text-xl font-bold mb-2">Ready to Get Started?</h3>
+                    <p class="text-blue-100 mb-4">Book a free 30-minute consultation to discuss your AI automation roadmap.</p>
+                    <a href="https://calendly.com/kuautomation/discovery" target="_blank" class="inline-block bg-white text-primary px-6 py-3 rounded-xl font-semibold hover:bg-blue-50 transition-colors">
+                        Book Free Consultation →
+                    </a>
+                </div>
+            </div>
+
+            <!-- Share Results -->
+            <div class="text-center mt-6">
+                <button onclick="shareResults()" class="text-slate-500 hover:text-primary text-sm font-medium">
+                    📤 Share your results
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="border-t border-slate-200 mt-16 py-8 text-center text-sm text-slate-500">
+        <p>© 2026 KU Automation Engineering Ltd. All rights reserved.</p>
+        <p class="mt-2">
+            <a href="index.html" class="text-primary hover:underline">Home</a> · 
+            <a href="legal/privacy-policy.html" class="hover:underline">Privacy</a> · 
+            <a href="mailto:kingsley.uzowulu@ku-automation.com" class="hover:underline">Contact</a>
+        </p>
+    </footer>
+
+    <script>
+        // Quiz Questions
+        const questions = [
+            {
+                id: 'team_size',
+                text: 'How many engineers are on your team?',
+                options: [
+                    { text: '1-5 engineers', value: 1, icon: '👤' },
+                    { text: '6-20 engineers', value: 2, icon: '👥' },
+                    { text: '21-50 engineers', value: 3, icon: '👨‍👩‍👧‍👦' },
+                    { text: '50+ engineers', value: 4, icon: '🏢' }
+                ]
+            },
+            {
+                id: 'doc_volume',
+                text: 'How many technical documents does your team process monthly?',
+                options: [
+                    { text: 'Less than 50', value: 1, icon: '📄' },
+                    { text: '50-200 documents', value: 2, icon: '📑' },
+                    { text: '200-500 documents', value: 3, icon: '📚' },
+                    { text: '500+ documents', value: 4, icon: '🗄️' }
+                ]
+            },
+            {
+                id: 'doc_types',
+                text: 'What types of documents do you work with? (Select the most time-consuming)',
+                options: [
+                    { text: 'Equipment datasheets & specs', value: 3, icon: '📋' },
+                    { text: 'P&IDs and engineering drawings', value: 4, icon: '📐' },
+                    { text: 'RFQs and tender documents', value: 4, icon: '📝' },
+                    { text: 'Reports and calculations', value: 2, icon: '📊' }
+                ]
+            },
+            {
+                id: 'manual_hours',
+                text: 'How many hours per week does your team spend on manual document processing?',
+                options: [
+                    { text: 'Less than 10 hours', value: 1, icon: '⏱️' },
+                    { text: '10-25 hours', value: 2, icon: '⏰' },
+                    { text: '25-50 hours', value: 3, icon: '🕐' },
+                    { text: '50+ hours', value: 4, icon: '⌛' }
+                ]
+            },
+            {
+                id: 'current_tools',
+                text: 'What tools do you currently use for document management?',
+                options: [
+                    { text: 'Mostly manual (Excel, paper)', value: 4, icon: '📝' },
+                    { text: 'Basic software (SharePoint, etc)', value: 3, icon: '💻' },
+                    { text: 'Industry-specific software', value: 2, icon: '🔧' },
+                    { text: 'Already using some AI/automation', value: 1, icon: '🤖' }
+                ]
+            },
+            {
+                id: 'pain_point',
+                text: 'What\'s your biggest document-related challenge?',
+                options: [
+                    { text: 'Finding information quickly', value: 3, icon: '🔍' },
+                    { text: 'Data extraction errors', value: 4, icon: '❌' },
+                    { text: 'Meeting tender deadlines', value: 4, icon: '⏳' },
+                    { text: 'Keeping documentation updated', value: 2, icon: '🔄' }
+                ]
+            },
+            {
+                id: 'budget',
+                text: 'What\'s your approximate budget for automation tools?',
+                options: [
+                    { text: 'Exploring options ($0 currently)', value: 1, icon: '🔎' },
+                    { text: '$500-2,000/month', value: 2, icon: '💵' },
+                    { text: '$2,000-5,000/month', value: 3, icon: '💰' },
+                    { text: '$5,000+/month', value: 4, icon: '💎' }
+                ]
+            },
+            {
+                id: 'timeline',
+                text: 'When are you looking to implement automation?',
+                options: [
+                    { text: 'Just researching for now', value: 1, icon: '📖' },
+                    { text: 'Within 3-6 months', value: 2, icon: '📅' },
+                    { text: 'Within 1-3 months', value: 3, icon: '🗓️' },
+                    { text: 'ASAP - we have urgent needs', value: 4, icon: '🚀' }
+                ]
+            }
+        ];
+
+        let currentQuestion = 0;
+        let answers = {};
+        let userData = {};
+
+        function startQuiz() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('quiz-container').classList.remove('hidden');
+            document.getElementById('total-q').textContent = questions.length;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('current-q').textContent = currentQuestion + 1;
+            document.getElementById('question-text').textContent = q.text;
+            
+            // Update progress
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progress-bar').style.width = progress + '%';
+            document.getElementById('progress-percent').textContent = Math.round(progress) + '%';
+            
+            // Show/hide back button
+            document.getElementById('back-btn').classList.toggle('hidden', currentQuestion === 0);
+            
+            // Render options
+            const container = document.getElementById('options-container');
+            container.innerHTML = q.options.map((opt, idx) => `
+                <button onclick="selectOption(${idx})" class="option-card w-full text-left p-4 rounded-xl border-2 border-slate-200 hover:border-primary/50 flex items-center gap-4 ${answers[q.id] === idx ? 'selected' : ''}">
+                    <span class="text-2xl">${opt.icon}</span>
+                    <span class="font-medium text-dark">${opt.text}</span>
+                </button>
+            `).join('');
+            
+            // Animate in
+            document.getElementById('question-card').classList.remove('question-card');
+            void document.getElementById('question-card').offsetWidth;
+            document.getElementById('question-card').classList.add('question-card');
+        }
+
+        function selectOption(idx) {
+            const q = questions[currentQuestion];
+            answers[q.id] = idx;
+            
+            // Update selection visual
+            document.querySelectorAll('.option-card').forEach((card, i) => {
+                card.classList.toggle('selected', i === idx);
+            });
+            
+            // Auto-advance after brief delay
+            setTimeout(() => {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion();
+                } else {
+                    showEmailCapture();
+                }
+            }, 300);
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                showQuestion();
+            }
+        }
+
+        function showEmailCapture() {
+            document.getElementById('quiz-container').classList.add('hidden');
+            document.getElementById('email-capture').classList.remove('hidden');
+        }
+
+        function submitEmail(e) {
+            e.preventDefault();
+            userData = {
+                name: document.getElementById('user-name').value,
+                email: document.getElementById('user-email').value,
+                company: document.getElementById('user-company').value || 'Not specified'
+            };
+            
+            // Store lead data (in production, send to backend/CRM)
+            console.log('Lead captured:', userData, answers);
+            
+            // For now, store in localStorage
+            const leads = JSON.parse(localStorage.getItem('ku_leads') || '[]');
+            leads.push({
+                ...userData,
+                answers,
+                timestamp: new Date().toISOString(),
+                score: calculateScore()
+            });
+            localStorage.setItem('ku_leads', JSON.stringify(leads));
+            
+            showResults();
+        }
+
+        function calculateScore() {
+            let total = 0;
+            let max = 0;
+            
+            questions.forEach(q => {
+                const answerIdx = answers[q.id];
+                if (answerIdx !== undefined) {
+                    total += q.options[answerIdx].value;
+                    max += 4; // Max value per question
+                }
+            });
+            
+            return Math.round((total / max) * 100);
+        }
+
+        function getScoreCategory(score) {
+            if (score >= 80) return {
+                title: 'High AI Readiness! 🚀',
+                subtitle: 'Your team is primed for AI automation with significant ROI potential.',
+                color: 'green'
+            };
+            if (score >= 60) return {
+                title: 'Good AI Potential 💪',
+                subtitle: 'You have solid foundations — the right automation could transform your workflow.',
+                color: 'blue'
+            };
+            if (score >= 40) return {
+                title: 'Emerging Opportunity 📈',
+                subtitle: 'Some areas are ready for automation. Start with quick wins for fastest ROI.',
+                color: 'yellow'
+            };
+            return {
+                title: 'Building Foundations 🌱',
+                subtitle: 'Focus on process documentation first, then automate strategically.',
+                color: 'gray'
+            };
+        }
+
+        function calculateROI() {
+            const teamSizeIdx = answers['team_size'] || 0;
+            const manualHoursIdx = answers['manual_hours'] || 0;
+            const docVolumeIdx = answers['doc_volume'] || 0;
+            
+            // Base calculations
+            const teamMultipliers = [5, 15, 35, 60]; // Average team sizes
+            const hoursPerWeek = [5, 17, 37, 60]; // Average hours
+            const hourlyRate = 75; // Average engineer hourly cost
+            
+            const teamSize = teamMultipliers[teamSizeIdx];
+            const hours = hoursPerWeek[manualHoursIdx];
+            const automationSavings = 0.6; // 60% time savings with AI
+            
+            const weeklyHoursSaved = hours * automationSavings;
+            const annualSavings = weeklyHoursSaved * hourlyRate * 52;
+            
+            return {
+                hoursSaved: Math.round(weeklyHoursSaved),
+                annualSavings: Math.round(annualSavings / 1000) * 1000 // Round to nearest thousand
+            };
+        }
+
+        function getRecommendations(score, answers) {
+            const recs = [];
+            
+            // Based on document types
+            const docType = answers['doc_types'];
+            if (docType === 1 || docType === 2) { // P&IDs or datasheets
+                recs.push({
+                    icon: '📐',
+                    title: 'AI Document Parser',
+                    text: 'Automate extraction from P&IDs and datasheets with 95%+ accuracy'
+                });
+            }
+            if (docType === 2) { // RFQs
+                recs.push({
+                    icon: '📋',
+                    title: 'Smart RFQ Analyzer',
+                    text: 'Cut tender response time by 60% with AI-powered requirement extraction'
+                });
+            }
+            
+            // Based on pain point
+            const pain = answers['pain_point'];
+            if (pain === 0) { // Finding information
+                recs.push({
+                    icon: '🔍',
+                    title: 'Engineering Knowledge Bot',
+                    text: 'Instant answers from your entire document library using natural language'
+                });
+            }
+            
+            // Based on current tools
+            if (answers['current_tools'] >= 2) { // Manual or basic
+                recs.push({
+                    icon: '🔄',
+                    title: 'Process Automation Audit',
+                    text: 'Free assessment to identify your highest-impact automation opportunities'
+                });
+            }
+            
+            // Default recommendations
+            if (recs.length < 3) {
+                recs.push({
+                    icon: '🎯',
+                    title: 'Custom AI Solution Design',
+                    text: 'Tailored automation built for your specific engineering workflows'
+                });
+            }
+            
+            return recs.slice(0, 3);
+        }
+
+        function showResults() {
+            document.getElementById('email-capture').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+            
+            const score = calculateScore();
+            const category = getScoreCategory(score);
+            const roi = calculateROI();
+            const recs = getRecommendations(score, answers);
+            
+            // Animate score ring
+            const offset = 283 - (283 * score / 100);
+            document.getElementById('score-ring').style.setProperty('--offset', offset);
+            
+            // Animate score number
+            let current = 0;
+            const interval = setInterval(() => {
+                current += Math.ceil(score / 30);
+                if (current >= score) {
+                    current = score;
+                    clearInterval(interval);
+                }
+                document.getElementById('score-number').textContent = current;
+            }, 50);
+            
+            // Set category text
+            document.getElementById('score-title').textContent = category.title;
+            document.getElementById('score-subtitle').textContent = category.subtitle;
+            
+            // Set ROI
+            document.getElementById('roi-savings').textContent = '$' + roi.annualSavings.toLocaleString();
+            document.getElementById('hours-saved').textContent = roi.hoursSaved + '/week';
+            
+            // Render recommendations
+            document.getElementById('recommendations').innerHTML = recs.map(rec => `
+                <div class="flex items-start gap-3 p-4 bg-slate-50 rounded-xl">
+                    <span class="text-xl">${rec.icon}</span>
+                    <div>
+                        <div class="font-semibold text-dark">${rec.title}</div>
+                        <div class="text-sm text-slate-600">${rec.text}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function shareResults() {
+            const score = calculateScore();
+            const text = `I just took the AI Readiness Assessment for engineering teams and scored ${score}/100! Take it here:`;
+            const url = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({ title: 'My AI Readiness Score', text, url });
+            } else {
+                navigator.clipboard.writeText(`${text} ${url}`);
+                alert('Link copied to clipboard!');
+            }
+        }
+    </script>
+</body>
+</html>
