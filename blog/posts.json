@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "from-manual-datasheet-reviews-to-ai-powered-analysis-a-step-by-step-implementation-guide",
+      "title": "From Manual Datasheet Reviews to AI-Powered Analysis: A Step-by-Step Implementation Guide",
+      "excerpt": "A practical guide to implementing AI-powered datasheet analysis in engineering workflows. Learn how to reduce review time by 80% with real implementation steps, ROI calculations, and lessons from actual deployments.",
+      "date": "2026-03-20",
+      "modified": "2026-03-20",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/from-manual-datasheet-reviews-to-ai-powered-analysis-a-step-by-step-implementation-guide.png",
+      "tags": [
+        "AI Automation",
+        "Document Processing",
+        "Engineering",
+        "Oil and Gas",
+        "EPC"
+      ],
+      "readTime": 9,
+      "wordCount": 1854,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-safety-compliance-engineering",
       "title": "AI Safety and Compliance in Engineering Automation: A Practical Framework",
       "excerpt": "Learn how to implement AI automation safely in engineering workflows. A comprehensive framework covering data validation, process controls, standards compliance, and human oversight.",
