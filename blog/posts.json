@@ -27,7 +27,7 @@
     },
     {
       "slug": "from-manual-datasheet-reviews-to-ai-powered-analysis-a-step-by-step-implementation-guide",
-      "title": "From Manual Datasheet Reviews to AI-Powered Analysis: A Step-by-Step Implementation Guide",
+      "title": "From Manual Datasheet Reviews to AI Analysis: A Step-by-Step Implementation Guide",
       "excerpt": "A practical guide to implementing AI-powered datasheet analysis in engineering workflows. Learn how to reduce review time by 80% with real implementation steps, ROI calculations, and lessons from actual deployments.",
       "date": "2026-03-20",
       "modified": "2026-03-20",
@@ -118,6 +118,156 @@
       ],
       "readTime": 6,
       "wordCount": 1206,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "how-ai-voice-agents-are-revolutionizing-engineering-sales-calls",
+      "title": "How AI Voice Agents Are Revolutionizing Engineering Sales Calls",
+      "excerpt": "Discover how AI voice agents are transforming engineering sales and customer interactions. Learn about implementation strategies, best practices, and real-world success stories.",
+      "date": "2026-03-05",
+      "modified": "2026-03-05",
+      "published": true,
+      "featured": false,
+      "image": "/blog/images/ai-voice-agents.png",
+      "tags": [
+        "AI Voice Agents",
+        "Sales Automation",
+        "Engineering",
+        "Customer Service"
+      ],
+      "readTime": 7,
+      "wordCount": 1402,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "pid-diagram-ai-extraction",
+      "title": "AI-Powered P&ID Analysis: Automated Data Extraction Guide",
+      "excerpt": "Transform your P&ID workflow with AI-powered data extraction. This comprehensive guide shows how to automate tag extraction, equipment identification, and line tracing.",
+      "date": "2026-03-03",
+      "modified": "2026-03-03",
+      "published": true,
+      "featured": false,
+      "image": "/blog/images/pid-extraction.png",
+      "tags": [
+        "P&ID",
+        "AI Automation",
+        "Engineering",
+        "Data Extraction"
+      ],
+      "readTime": 6,
+      "wordCount": 1155,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "reduce-rfq-response-time-ai",
+      "title": "Slash RFQ Response Times with AI-Powered Analysis",
+      "excerpt": "Learn how to reduce RFQ response times by up to 70% using AI automation. From document parsing to automated estimation, discover the complete workflow.",
+      "date": "2026-03-03",
+      "modified": "2026-03-03",
+      "published": true,
+      "featured": false,
+      "image": "/blog/images/rfq-automation.png",
+      "tags": [
+        "RFQ Automation",
+        "AI Implementation",
+        "Engineering",
+        "Process Optimization"
+      ],
+      "readTime": 5,
+      "wordCount": 1070,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "roi-ai-automation-engineering",
+      "title": "Calculating ROI for AI Automation in Engineering",
+      "excerpt": "A practical framework for calculating and maximizing ROI on AI automation investments in engineering companies. Includes real case studies and ROI calculator.",
+      "date": "2026-03-03",
+      "modified": "2026-03-03",
+      "published": true,
+      "featured": false,
+      "image": "/blog/images/roi-calculation.png",
+      "tags": [
+        "ROI",
+        "AI Investment",
+        "Engineering",
+        "Business Case"
+      ],
+      "readTime": 6,
+      "wordCount": 1195,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-document-processing-engineering",
+      "title": "Engineering Document Processing with AI: Best Practices",
+      "excerpt": "Master AI-powered document processing for engineering applications. Learn best practices for handling technical documents, drawings, and specifications.",
+      "date": "2026-03-03",
+      "modified": "2026-03-03",
+      "published": true,
+      "featured": false,
+      "image": "/blog/images/ai-document-processing.png",
+      "tags": [
+        "Document Processing",
+        "AI Automation",
+        "Engineering",
+        "Best Practices"
+      ],
+      "readTime": 5,
+      "wordCount": 940,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "engineering-knowledge-base-ai",
+      "title": "Building an AI-Powered Engineering Knowledge Base",
+      "excerpt": "Create an intelligent knowledge management system for your engineering organization. Learn how to capture, organize, and leverage tribal knowledge with AI.",
+      "date": "2026-03-03",
+      "modified": "2026-03-03",
+      "published": true,
+      "featured": false,
+      "image": "/blog/images/knowledge-base.png",
+      "tags": [
+        "Knowledge Management",
+        "AI Implementation",
+        "Engineering",
+        "Best Practices"
+      ],
+      "readTime": 7,
+      "wordCount": 1295,
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",

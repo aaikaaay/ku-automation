@@ -102,7 +102,7 @@
         <news:language>en</news:language>
       </news:publication>
       <news:publication_date>2026-03-20</news:publication_date>
-      <news:title>From Manual Datasheet Reviews to AI-Powered Analysis: A Step-by-Step Implementation Guide</news:title>
+      <news:title>From Manual Datasheet Reviews to AI Analysis: A Step-by-Step Implementation Guide</news:title>
     </news:news>
   </url>
   
@@ -148,6 +148,96 @@
       </news:publication>
       <news:publication_date>2026-03-10</news:publication_date>
       <news:title>Agentic AI for Engineering: Autonomous Workflows That Actually Work</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=how-ai-voice-agents-are-revolutionizing-engineering-sales-calls</loc>
+    <lastmod>2026-03-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-05</news:publication_date>
+      <news:title>How AI Voice Agents Are Revolutionizing Engineering Sales Calls</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=pid-diagram-ai-extraction</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-03</news:publication_date>
+      <news:title>AI-Powered P&amp;ID Analysis: Automated Data Extraction Guide</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=reduce-rfq-response-time-ai</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-03</news:publication_date>
+      <news:title>Slash RFQ Response Times with AI-Powered Analysis</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=roi-ai-automation-engineering</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-03</news:publication_date>
+      <news:title>Calculating ROI for AI Automation in Engineering</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=ai-document-processing-engineering</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-03</news:publication_date>
+      <news:title>Engineering Document Processing with AI: Best Practices</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=engineering-knowledge-base-ai</loc>
+    <lastmod>2026-03-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-03-03</news:publication_date>
+      <news:title>Building an AI-Powered Engineering Knowledge Base</news:title>
     </news:news>
   </url>
   
