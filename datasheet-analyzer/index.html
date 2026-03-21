@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Datasheet Analyzer | KU Automation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/pdf-lib"></script>
+    <style>
+        .drop-zone {
+            border: 2px dashed #4a5568;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .drop-zone:hover {
+            border-color: #2d3748;
+            background: #f7fafc;
+        }
+        .analyzing {
+            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .5; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <div class="flex-shrink-0 flex items-center">
+                        <span class="text-2xl font-bold text-gray-800">KU Automation</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Engineering Datasheet Analyzer</h1>
+            <p class="text-lg text-gray-600">Upload any technical datasheet (pump, valve, instrument) and watch AI extract key specifications in seconds.</p>
+        </div>
+
+        <div class="bg-white rounded-lg shadow p-6 mb-8">
+            <div id="dropZone" class="drop-zone rounded-lg">
+                <input type="file" id="fileInput" class="hidden" accept=".pdf">
+                <div class="text-center">
+                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4-4m4-4h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                    <p class="mt-1 text-sm text-gray-600">Drag and drop a PDF here or click to upload</p>
+                </div>
+            </div>
+
+            <div id="analyzing" class="hidden">
+                <div class="flex items-center justify-center space-x-2 analyzing">
+                    <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+                    <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+                    <div class="w-4 h-4 bg-blue-600 rounded-full"></div>
+                </div>
+                <p class="text-center mt-4 text-gray-600">Analyzing datasheet...</p>
+            </div>
+
+            <div id="results" class="hidden mt-8">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">Analysis Results</h3>
+                <div class="bg-gray-50 p-4 rounded-lg">
+                    <div id="extractedData" class="prose max-w-none">
+                        <!-- Results will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center">
+            <h2 class="text-2xl font-bold text-gray-900 mb-4">Want to automate your entire documentation workflow?</h2>
+            <p class="text-gray-600 mb-6">Take our 2-minute assessment to see how much time and money you could save.</p>
+            <a href="/ai-readiness-quiz.html" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700">
+                Take the Assessment
+            </a>
+        </div>
+    </main>
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        const analyzing = document.getElementById('analyzing');
+        const results = document.getElementById('results');
+        const extractedData = document.getElementById('extractedData');
+
+        // Handle drag and drop
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults (e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropZone.addEventListener(eventName, highlight, false);
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropZone.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            dropZone.classList.add('border-blue-500');
+        }
+
+        function unhighlight(e) {
+            dropZone.classList.remove('border-blue-500');
+        }
+
+        dropZone.addEventListener('drop', handleDrop, false);
+        dropZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', handleFiles);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles({ target: { files } });
+        }
+
+        function handleFiles(e) {
+            const file = e.target.files[0];
+            if (file && file.type === 'application/pdf') {
+                analyzePDF(file);
+            } else {
+                alert('Please upload a PDF file');
+            }
+        }
+
+        function analyzePDF(file) {
+            dropZone.classList.add('hidden');
+            analyzing.classList.remove('hidden');
+            results.classList.add('hidden');
+
+            // Simulate analysis for demo
+            setTimeout(() => {
+                analyzing.classList.add('hidden');
+                results.classList.remove('hidden');
+                
+                // Demo results - in production this would come from API
+                extractedData.innerHTML = `
+                    <h4 class="font-medium mb-2">Equipment Type: Centrifugal Pump</h4>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h5 class="font-medium text-sm text-gray-500">Performance</h5>
+                            <ul class="list-none pl-0 space-y-1">
+                                <li>Flow Rate: 100-500 GPM</li>
+                                <li>Head: 50-150 ft</li>
+                                <li>Speed: 3600 RPM</li>
+                                <li>Efficiency: 75-82%</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h5 class="font-medium text-sm text-gray-500">Construction</h5>
+                            <ul class="list-none pl-0 space-y-1">
+                                <li>Casing: Cast Iron ASTM A48</li>
+                                <li>Impeller: Bronze ASTM B584</li>
+                                <li>Shaft: Steel AISI 1045</li>
+                                <li>Seals: Mechanical Type 21</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h5 class="font-medium text-sm text-gray-500">Operating Conditions</h5>
+                        <ul class="list-none pl-0 space-y-1">
+                            <li>Max Temperature: 250°F</li>
+                            <li>Max Pressure: 275 PSIG</li>
+                            <li>NPSH Required: 10 ft</li>
+                            <li>Motor: 25 HP, TEFC, 460V/3Ph/60Hz</li>
+                        </ul>
+                    </div>
+                    <div class="mt-4 bg-blue-50 p-4 rounded">
+                        <h5 class="font-medium">AI Insights</h5>
+                        <ul class="list-disc pl-4 space-y-1 text-sm">
+                            <li>This pump model is suitable for general water service applications</li>
+                            <li>Operating point is in the preferred efficiency range</li>
+                            <li>Materials are compatible with mild corrosives</li>
+                            <li>Mechanical seal type suggests clean fluid service</li>
+                        </ul>
+                    </div>
+                `;
+
+                // Show restart option
+                const restartButton = document.createElement('button');
+                restartButton.className = 'mt-6 px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50';
+                restartButton.textContent = 'Analyze Another Datasheet';
+                restartButton.onclick = () => {
+                    dropZone.classList.remove('hidden');
+                    results.classList.add('hidden');
+                    fileInput.value = '';
+                };
+                results.appendChild(restartButton);
+            }, 2000);
+        }
+    </script>
+
+    <!-- Tracking -->
+    <script>
+        // Track demo usage
+        function trackUsage(event) {
+            // In production: send to analytics
+            console.log('Track:', event);
+        }
+    </script>
+</body>
+</html>

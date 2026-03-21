@@ -1,6 +1,56 @@
 {
   "posts": [
     {
+      "slug": "from-weeks-to-hours-ai-powered-engineering-approval-workflows",
+      "title": "From Weeks to Hours: AI-Powered Engineering Approval Workflows",
+      "excerpt": "How modern AI is transforming traditional engineering sign-off processes while enhancing quality and compliance. Learn how to reduce approval cycles from weeks to hours with intelligent automation.",
+      "date": "2026-03-21",
+      "modified": "2026-03-21",
+      "published": true,
+      "featured": true,
+      "image": "/images/2026-03-21-engineering-approvals-ai.png",
+      "tags": [
+        "Workflow Automation",
+        "Engineering",
+        "AI Implementation",
+        "Process Optimization"
+      ],
+      "readTime": 2,
+      "wordCount": 473,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "from-weeks-to-hours-ai-powered-engineering-approval-workflows",
+      "title": "From Weeks to Hours: AI-Powered Engineering Approval Workflows",
+      "excerpt": "How modern AI is transforming traditional engineering sign-off processes while enhancing quality and compliance. Learn how to reduce approval cycles from weeks to hours with intelligent automation.",
+      "date": "2026-03-21",
+      "modified": "2026-03-21",
+      "published": true,
+      "featured": true,
+      "image": "https://ai-automation-agency-gilt.vercel.app/images/2026-03-21-engineering-approvals-ai.png",
+      "tags": [
+        "Workflow Automation",
+        "Engineering",
+        "AI Implementation",
+        "Process Optimization"
+      ],
+      "readTime": 6,
+      "wordCount": 1650,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "from-manual-datasheet-reviews-to-ai-powered-analysis-a-step-by-step-implementation-guide",
       "title": "From Manual Datasheet Reviews to AI-Powered Analysis: A Step-by-Step Implementation Guide",
       "excerpt": "A practical guide to implementing AI-powered datasheet analysis in engineering workflows. Learn how to reduce review time by 80% with real implementation steps, ROI calculations, and lessons from actual deployments.",
@@ -33,7 +83,7 @@
       "date": "2026-03-19",
       "modified": "2026-03-19",
       "published": true,
-      "featured": true,
+      "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/blog/images/2026-03-19-ai-safety-compliance.png",
       "tags": [
         "AI Safety",
