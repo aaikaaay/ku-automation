@@ -1,6 +1,31 @@
 {
   "posts": [
     {
+      "slug": "stop-vendor-document-chaos-ai-powered-document-control-for-epc-projects",
+      "title": "Stop Vendor Document Chaos: AI-Powered Document Control for EPC Projects",
+      "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control \u2014 revision comparison, checklist compliance checks, and automatic MDR updates.",
+      "date": "2026-03-25",
+      "modified": "2026-03-25",
+      "published": true,
+      "featured": false,
+      "image": "/blog/images/2026-03-25-vendor-document-control-ai.webp",
+      "tags": [
+        "Document Control",
+        "EPC",
+        "Workflow Automation",
+        "AI Implementation"
+      ],
+      "readTime": 4,
+      "wordCount": 834,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "from-weeks-to-hours-ai-powered-engineering-approval-workflows",
       "title": "From Weeks to Hours: AI-Powered Engineering Approval Workflows",
       "excerpt": "How modern AI is transforming traditional engineering sign-off processes while enhancing quality and compliance. Learn how to reduce approval cycles from weeks to hours with intelligent automation.",
@@ -104,7 +129,7 @@
     {
       "slug": "agentic-ai-for-engineering-autonomous-workflows-that-actually-work",
       "title": "Agentic AI for Engineering: Autonomous Workflows That Actually Work",
-      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows — from document processing to procurement — without constant human oversight.",
+      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows \u2014 from document processing to procurement \u2014 without constant human oversight.",
       "date": "2026-03-10",
       "modified": "2026-03-10",
       "published": true,

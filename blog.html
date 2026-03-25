@@ -305,7 +305,7 @@
         // Fetch posts
         async function fetchPosts() {
             try {
-                const response = await fetch('blog/posts.json');
+                const response = await fetch('blog/posts.json?cb=' + Date.now());
                 const data = await response.json();
                 allPosts = data.posts.filter(p => p.published).sort((a, b) => new Date(b.date) - new Date(a.date));
                 initializeBlog();
