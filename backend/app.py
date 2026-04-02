@@ -122,6 +122,119 @@ IMPORTANT:
 - Return ONLY the JSON, no other text"""
 
 
+RFQ_EXTRACTION_PROMPT = """You are an expert tender/RFQ analyst for oil & gas, EPC, and industrial projects.
+
+Analyze the uploaded RFQ/ITB/tender document and extract ALL relevant information.
+
+Return a JSON object with these sections:
+
+{
+  "overview": {
+    "document_type": "RFQ/ITB/Tender/Quote Request/etc.",
+    "reference_number": "Document reference or tender number",
+    "issuing_company": "Company issuing the RFQ",
+    "project_name": "Project name if mentioned",
+    "project_location": "Site/location"
+  },
+  "key_dates": {
+    "submission_deadline": "Final submission date/time",
+    "validity_period": "Quote validity required",
+    "clarification_deadline": "Last date for questions",
+    "site_visit": "Site visit date if applicable",
+    "award_date": "Expected award date",
+    "delivery_date": "Required delivery date"
+  },
+  "scope_items": [
+    {
+      "item_no": "1",
+      "description": "Item description",
+      "quantity": "Qty with unit",
+      "specifications": "Key specs if mentioned"
+    }
+  ],
+  "technical_requirements": {
+    "standards": ["API 610", "ASME VIII", "etc."],
+    "certifications": ["ISO 9001", "ATEX", "etc."],
+    "documentation": ["GA drawings", "Test certs", "Manuals", "etc."],
+    "special_requirements": ["Any special technical requirements"]
+  },
+  "commercial_terms": {
+    "payment_terms": "Payment conditions",
+    "incoterms": "Delivery terms (FOB, CIF, etc.)",
+    "currency": "Quotation currency",
+    "warranty": "Warranty requirements",
+    "liquidated_damages": "LD clause if present",
+    "insurance": "Insurance requirements",
+    "bonds": "Performance/bid bonds required"
+  },
+  "compliance_checklist": [
+    {"requirement": "Submit in sealed envelope", "category": "Submission"},
+    {"requirement": "Include manufacturer datasheets", "category": "Technical"},
+    {"requirement": "Provide delivery schedule", "category": "Commercial"}
+  ],
+  "summary": "Brief 2-3 sentence summary of what this RFQ is for and key points bidders should note."
+}
+
+IMPORTANT:
+- Extract EVERYTHING you can see - be thorough
+- For dates, include time and timezone if specified
+- If something is not mentioned, use "N/A"
+- For scope items, capture all line items even if details are sparse
+- Return ONLY the JSON, no other text"""
+
+
+DATASHEET_EXTRACTION_PROMPT = """You are an expert equipment datasheet analyzer for industrial equipment.
+
+Analyze the uploaded equipment datasheet and extract ALL specifications into structured data.
+
+Return a JSON object with these sections:
+
+{
+  "general": {
+    "manufacturer": "Equipment manufacturer/vendor",
+    "model": "Model number",
+    "tag_number": "Equipment tag if shown",
+    "serial_number": "Serial number if shown",
+    "equipment_type": "Pump/Valve/Exchanger/Instrument/etc.",
+    "service": "Service description or application"
+  },
+  "operating_conditions": {
+    "design_pressure": "Design pressure with unit",
+    "operating_pressure": "Operating pressure with unit",
+    "design_temperature": "Design temperature with unit",
+    "operating_temperature": "Operating temperature with unit",
+    "flow_rate": "Flow rate with unit",
+    "fluid_medium": "Process fluid or medium"
+  },
+  "physical": {
+    "dimensions": "Overall dimensions (L x W x H)",
+    "weight": "Weight (dry/operating)",
+    "materials": "Key materials of construction",
+    "connections": "Inlet/outlet connections and ratings"
+  },
+  "performance": {
+    "power": "Power requirements/consumption",
+    "speed": "RPM or speed",
+    "efficiency": "Efficiency if specified",
+    "head_dp": "Head or differential pressure",
+    "cv_kv": "Cv/Kv for valves"
+  },
+  "all_specs": [
+    {"parameter": "Parameter name", "value": "Value", "unit": "Unit"}
+  ],
+  "certifications": ["API", "ATEX", "CE", "etc."],
+  "notes": ["Any important notes or remarks from the datasheet"],
+  "summary": "Brief 2-3 sentence summary of this equipment."
+}
+
+IMPORTANT:
+- Extract EVERY specification you can see
+- Include units for all values
+- For "all_specs", capture ALL parameters in a flat list - this is the comprehensive extraction
+- If something is not visible, use "N/A"
+- Return ONLY the JSON, no other text"""
+
+
 COST_ESTIMATION_PROMPT = """You are an expert cost estimator for oil & gas and process engineering equipment. Based on the extracted P&ID data below, provide budget-level cost estimates for each item.
 
 Use your knowledge of typical market prices for industrial equipment. Consider:
@@ -517,10 +630,482 @@ async def analyze_pid(
         raise HTTPException(500, f"Analysis failed: {str(e)}")
 
 
+@app.post("/api/parse-rfq")
+async def parse_rfq(file: UploadFile = File(...)):
+    """Analyze uploaded RFQ/tender document and extract key information"""
+    
+    # Validate file type
+    allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if file.content_type not in allowed_types:
+        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
+    
+    # Read file
+    content = await file.read()
+    
+    # Check file size (max 20MB)
+    if len(content) > 20 * 1024 * 1024:
+        raise HTTPException(400, "File too large. Maximum size is 20MB.")
+    
+    # Encode to base64
+    image_base64 = encode_image_to_base64(content)
+    
+    # Determine media type
+    if "png" in file.content_type:
+        media_type = "image/png"
+    elif "pdf" in file.content_type:
+        media_type = "application/pdf"
+    else:
+        media_type = "image/jpeg"
+    
+    try:
+        # Analyze with Vision API
+        response = get_openai_client().chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": RFQ_EXTRACTION_PROMPT},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:{media_type};base64,{image_base64}",
+                                "detail": "high"
+                            }
+                        }
+                    ]
+                }
+            ],
+            max_tokens=4096,
+            temperature=0.1
+        )
+        
+        # Parse the JSON response
+        content_text = response.choices[0].message.content
+        
+        # Clean up response (remove markdown code blocks if present)
+        if content_text.startswith("```"):
+            content_text = content_text.split("```")[1]
+            if content_text.startswith("json"):
+                content_text = content_text[4:]
+        content_text = content_text.strip()
+        
+        extracted_data = json.loads(content_text)
+        
+        # Generate Excel report for RFQ
+        excel_path = create_rfq_excel_report(extracted_data, file.filename)
+        
+        # Read Excel file for response
+        with open(excel_path, "rb") as f:
+            excel_base64 = base64.b64encode(f.read()).decode('utf-8')
+        
+        # Clean up temp file
+        os.unlink(excel_path)
+        
+        return {
+            "success": True,
+            "data": extracted_data,
+            "excel": excel_base64,
+            "filename": f"RFQ_Analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        }
+        
+    except json.JSONDecodeError as e:
+        raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
+    except Exception as e:
+        raise HTTPException(500, f"Analysis failed: {str(e)}")
+
+
+@app.post("/api/parse-datasheet")
+async def parse_datasheet(file: UploadFile = File(...)):
+    """Analyze uploaded equipment datasheet and extract specifications"""
+    
+    # Validate file type
+    allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if file.content_type not in allowed_types:
+        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
+    
+    # Read file
+    content = await file.read()
+    
+    # Check file size (max 20MB)
+    if len(content) > 20 * 1024 * 1024:
+        raise HTTPException(400, "File too large. Maximum size is 20MB.")
+    
+    # Encode to base64
+    image_base64 = encode_image_to_base64(content)
+    
+    # Determine media type
+    if "png" in file.content_type:
+        media_type = "image/png"
+    elif "pdf" in file.content_type:
+        media_type = "application/pdf"
+    else:
+        media_type = "image/jpeg"
+    
+    try:
+        # Analyze with Vision API
+        response = get_openai_client().chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": DATASHEET_EXTRACTION_PROMPT},
+                        {
+                            "type": "image_url",
+                            "image_url": {
+                                "url": f"data:{media_type};base64,{image_base64}",
+                                "detail": "high"
+                            }
+                        }
+                    ]
+                }
+            ],
+            max_tokens=4096,
+            temperature=0.1
+        )
+        
+        # Parse the JSON response
+        content_text = response.choices[0].message.content
+        
+        # Clean up response (remove markdown code blocks if present)
+        if content_text.startswith("```"):
+            content_text = content_text.split("```")[1]
+            if content_text.startswith("json"):
+                content_text = content_text[4:]
+        content_text = content_text.strip()
+        
+        extracted_data = json.loads(content_text)
+        
+        # Generate Excel report for datasheet
+        excel_path = create_datasheet_excel_report(extracted_data, file.filename)
+        
+        # Read Excel file for response
+        with open(excel_path, "rb") as f:
+            excel_base64 = base64.b64encode(f.read()).decode('utf-8')
+        
+        # Clean up temp file
+        os.unlink(excel_path)
+        
+        return {
+            "success": True,
+            "data": extracted_data,
+            "excel": excel_base64,
+            "filename": f"Datasheet_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        }
+        
+    except json.JSONDecodeError as e:
+        raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
+    except Exception as e:
+        raise HTTPException(500, f"Analysis failed: {str(e)}")
+
+
+def create_rfq_excel_report(data: dict, filename: str) -> str:
+    """Generate Excel report from extracted RFQ data"""
+    
+    wb = Workbook()
+    
+    # Styles
+    header_font = Font(bold=True, color="FFFFFF", size=11)
+    header_fill = PatternFill(start_color="2563EB", end_color="2563EB", fill_type="solid")
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+    
+    def style_header(ws, row=1):
+        for cell in ws[row]:
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = Alignment(horizontal='center')
+            cell.border = border
+    
+    def style_data(ws, start_row=2):
+        for row in ws.iter_rows(min_row=start_row):
+            for cell in row:
+                cell.border = border
+                cell.alignment = Alignment(horizontal='left', wrap_text=True)
+    
+    # === OVERVIEW Sheet ===
+    ws_overview = wb.active
+    ws_overview.title = "Overview"
+    ws_overview.append(["Field", "Value"])
+    
+    overview = data.get("overview", {})
+    for field, value in [
+        ("Document Type", overview.get("document_type", "N/A")),
+        ("Reference Number", overview.get("reference_number", "N/A")),
+        ("Issuing Company", overview.get("issuing_company", "N/A")),
+        ("Project Name", overview.get("project_name", "N/A")),
+        ("Project Location", overview.get("project_location", "N/A"))
+    ]:
+        ws_overview.append([field, value])
+    
+    style_header(ws_overview)
+    style_data(ws_overview)
+    ws_overview.column_dimensions['A'].width = 20
+    ws_overview.column_dimensions['B'].width = 50
+    
+    # === KEY DATES Sheet ===
+    ws_dates = wb.create_sheet("Key Dates")
+    ws_dates.append(["Milestone", "Date/Period"])
+    
+    dates = data.get("key_dates", {})
+    for field, value in [
+        ("⚠️ SUBMISSION DEADLINE", dates.get("submission_deadline", "N/A")),
+        ("Validity Period", dates.get("validity_period", "N/A")),
+        ("Clarification Deadline", dates.get("clarification_deadline", "N/A")),
+        ("Site Visit", dates.get("site_visit", "N/A")),
+        ("Award Date", dates.get("award_date", "N/A")),
+        ("Delivery Date", dates.get("delivery_date", "N/A"))
+    ]:
+        ws_dates.append([field, value])
+    
+    style_header(ws_dates)
+    style_data(ws_dates)
+    ws_dates.column_dimensions['A'].width = 25
+    ws_dates.column_dimensions['B'].width = 40
+    
+    # === SCOPE ITEMS Sheet ===
+    ws_scope = wb.create_sheet("Scope Items")
+    ws_scope.append(["Item No", "Description", "Quantity", "Specifications"])
+    
+    for item in data.get("scope_items", []):
+        ws_scope.append([
+            item.get("item_no", ""),
+            item.get("description", ""),
+            item.get("quantity", ""),
+            item.get("specifications", "")
+        ])
+    
+    style_header(ws_scope)
+    style_data(ws_scope)
+    ws_scope.column_dimensions['A'].width = 10
+    ws_scope.column_dimensions['B'].width = 40
+    ws_scope.column_dimensions['C'].width = 15
+    ws_scope.column_dimensions['D'].width = 30
+    
+    # === TECHNICAL REQUIREMENTS Sheet ===
+    ws_tech = wb.create_sheet("Technical")
+    ws_tech.append(["Category", "Requirement"])
+    
+    tech = data.get("technical_requirements", {})
+    for std in tech.get("standards", []):
+        ws_tech.append(["Standard", std])
+    for cert in tech.get("certifications", []):
+        ws_tech.append(["Certification", cert])
+    for doc in tech.get("documentation", []):
+        ws_tech.append(["Documentation", doc])
+    for req in tech.get("special_requirements", []):
+        ws_tech.append(["Special Requirement", req])
+    
+    style_header(ws_tech)
+    style_data(ws_tech)
+    ws_tech.column_dimensions['A'].width = 20
+    ws_tech.column_dimensions['B'].width = 50
+    
+    # === COMMERCIAL TERMS Sheet ===
+    ws_comm = wb.create_sheet("Commercial")
+    ws_comm.append(["Term", "Value"])
+    
+    commercial = data.get("commercial_terms", {})
+    for field, value in [
+        ("Payment Terms", commercial.get("payment_terms", "N/A")),
+        ("Incoterms", commercial.get("incoterms", "N/A")),
+        ("Currency", commercial.get("currency", "N/A")),
+        ("Warranty", commercial.get("warranty", "N/A")),
+        ("Liquidated Damages", commercial.get("liquidated_damages", "N/A")),
+        ("Insurance", commercial.get("insurance", "N/A")),
+        ("Bonds/Guarantees", commercial.get("bonds", "N/A"))
+    ]:
+        ws_comm.append([field, value])
+    
+    style_header(ws_comm)
+    style_data(ws_comm)
+    ws_comm.column_dimensions['A'].width = 20
+    ws_comm.column_dimensions['B'].width = 50
+    
+    # === COMPLIANCE CHECKLIST Sheet ===
+    ws_checklist = wb.create_sheet("Checklist")
+    ws_checklist.append(["✓", "Category", "Requirement"])
+    
+    for item in data.get("compliance_checklist", []):
+        ws_checklist.append([
+            "☐",
+            item.get("category", ""),
+            item.get("requirement", "")
+        ])
+    
+    style_header(ws_checklist)
+    style_data(ws_checklist)
+    ws_checklist.column_dimensions['A'].width = 5
+    ws_checklist.column_dimensions['B'].width = 15
+    ws_checklist.column_dimensions['C'].width = 50
+    
+    # Save to temp file
+    output_path = tempfile.mktemp(suffix=".xlsx")
+    wb.save(output_path)
+    
+    return output_path
+
+
+def create_datasheet_excel_report(data: dict, filename: str) -> str:
+    """Generate Excel report from extracted datasheet data"""
+    
+    wb = Workbook()
+    
+    # Styles
+    header_font = Font(bold=True, color="FFFFFF", size=11)
+    header_fill = PatternFill(start_color="059669", end_color="059669", fill_type="solid")
+    border = Border(
+        left=Side(style='thin'),
+        right=Side(style='thin'),
+        top=Side(style='thin'),
+        bottom=Side(style='thin')
+    )
+    
+    def style_header(ws, row=1):
+        for cell in ws[row]:
+            cell.font = header_font
+            cell.fill = header_fill
+            cell.alignment = Alignment(horizontal='center')
+            cell.border = border
+    
+    def style_data(ws, start_row=2):
+        for row in ws.iter_rows(min_row=start_row):
+            for cell in row:
+                cell.border = border
+                cell.alignment = Alignment(horizontal='left', wrap_text=True)
+    
+    # === GENERAL INFO Sheet ===
+    ws_general = wb.active
+    ws_general.title = "General Info"
+    ws_general.append(["Field", "Value"])
+    
+    general = data.get("general", {})
+    for field, value in [
+        ("Manufacturer", general.get("manufacturer", "N/A")),
+        ("Model", general.get("model", "N/A")),
+        ("Tag Number", general.get("tag_number", "N/A")),
+        ("Serial Number", general.get("serial_number", "N/A")),
+        ("Equipment Type", general.get("equipment_type", "N/A")),
+        ("Service/Application", general.get("service", "N/A"))
+    ]:
+        ws_general.append([field, value])
+    
+    style_header(ws_general)
+    style_data(ws_general)
+    ws_general.column_dimensions['A'].width = 20
+    ws_general.column_dimensions['B'].width = 40
+    
+    # === OPERATING CONDITIONS Sheet ===
+    ws_operating = wb.create_sheet("Operating Conditions")
+    ws_operating.append(["Parameter", "Value"])
+    
+    operating = data.get("operating_conditions", {})
+    for field, value in [
+        ("Design Pressure", operating.get("design_pressure", "N/A")),
+        ("Operating Pressure", operating.get("operating_pressure", "N/A")),
+        ("Design Temperature", operating.get("design_temperature", "N/A")),
+        ("Operating Temperature", operating.get("operating_temperature", "N/A")),
+        ("Flow Rate", operating.get("flow_rate", "N/A")),
+        ("Fluid/Medium", operating.get("fluid_medium", "N/A"))
+    ]:
+        ws_operating.append([field, value])
+    
+    style_header(ws_operating)
+    style_data(ws_operating)
+    ws_operating.column_dimensions['A'].width = 22
+    ws_operating.column_dimensions['B'].width = 35
+    
+    # === PHYSICAL Sheet ===
+    ws_physical = wb.create_sheet("Physical")
+    ws_physical.append(["Parameter", "Value"])
+    
+    physical = data.get("physical", {})
+    for field, value in [
+        ("Dimensions", physical.get("dimensions", "N/A")),
+        ("Weight", physical.get("weight", "N/A")),
+        ("Materials", physical.get("materials", "N/A")),
+        ("Connections", physical.get("connections", "N/A"))
+    ]:
+        ws_physical.append([field, value])
+    
+    style_header(ws_physical)
+    style_data(ws_physical)
+    ws_physical.column_dimensions['A'].width = 15
+    ws_physical.column_dimensions['B'].width = 50
+    
+    # === PERFORMANCE Sheet ===
+    ws_perf = wb.create_sheet("Performance")
+    ws_perf.append(["Parameter", "Value"])
+    
+    perf = data.get("performance", {})
+    for field, value in [
+        ("Power Requirements", perf.get("power", "N/A")),
+        ("Speed/RPM", perf.get("speed", "N/A")),
+        ("Efficiency", perf.get("efficiency", "N/A")),
+        ("Head/DP", perf.get("head_dp", "N/A")),
+        ("Cv/Kv", perf.get("cv_kv", "N/A"))
+    ]:
+        ws_perf.append([field, value])
+    
+    style_header(ws_perf)
+    style_data(ws_perf)
+    ws_perf.column_dimensions['A'].width = 18
+    ws_perf.column_dimensions['B'].width = 35
+    
+    # === ALL SPECS Sheet ===
+    ws_specs = wb.create_sheet("All Specifications")
+    ws_specs.append(["Parameter", "Value", "Unit"])
+    
+    for spec in data.get("all_specs", []):
+        ws_specs.append([
+            spec.get("parameter", ""),
+            spec.get("value", ""),
+            spec.get("unit", "")
+        ])
+    
+    style_header(ws_specs)
+    style_data(ws_specs)
+    ws_specs.column_dimensions['A'].width = 30
+    ws_specs.column_dimensions['B'].width = 25
+    ws_specs.column_dimensions['C'].width = 15
+    
+    # === SUMMARY Sheet ===
+    ws_summary = wb.create_sheet("Summary")
+    ws_summary.append(["Datasheet Extraction Summary"])
+    ws_summary['A1'].font = Font(bold=True, size=14)
+    ws_summary.append([])
+    ws_summary.append(["Generated:", datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
+    ws_summary.append(["Source File:", filename])
+    ws_summary.append([])
+    ws_summary.append(["Summary:", data.get("summary", "N/A")])
+    ws_summary.append([])
+    ws_summary.append(["Certifications:"])
+    for cert in data.get("certifications", []):
+        ws_summary.append(["  •", cert])
+    ws_summary.append([])
+    ws_summary.append(["Notes:"])
+    for note in data.get("notes", []):
+        ws_summary.append(["  •", note])
+    
+    ws_summary.column_dimensions['A'].width = 15
+    ws_summary.column_dimensions['B'].width = 60
+    
+    # Save to temp file
+    output_path = tempfile.mktemp(suffix=".xlsx")
+    wb.save(output_path)
+    
+    return output_path
+
+
 @app.get("/health")
 async def health():
     """Health check endpoint"""
-    return {"status": "healthy", "service": "P&ID Parser", "features": ["extraction", "cost_estimation"]}
+    return {"status": "healthy", "service": "KU Automation API", "features": ["pid_parser", "rfq_analyzer", "datasheet_parser", "cost_estimation"]}
 
 
 if __name__ == "__main__":
