@@ -1105,7 +1105,14 @@ def create_datasheet_excel_report(data: dict, filename: str) -> str:
 @app.get("/health")
 async def health():
     """Health check endpoint"""
-    return {"status": "healthy", "service": "KU Automation API", "features": ["pid_parser", "rfq_analyzer", "datasheet_parser", "cost_estimation"]}
+    api_key = os.environ.get("OPENAI_API_KEY", "")
+    return {
+        "status": "healthy", 
+        "service": "KU Automation API", 
+        "features": ["pid_parser", "rfq_analyzer", "datasheet_parser", "cost_estimation"],
+        "openai_configured": bool(api_key),
+        "key_prefix": api_key[:7] + "..." if len(api_key) > 7 else "not set"
+    }
 
 
 if __name__ == "__main__":
