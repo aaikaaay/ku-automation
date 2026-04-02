@@ -5,12 +5,13 @@ Now with Cost Estimation feature!
 """
 
 import os
+import io
 import json
 import base64
 import tempfile
 from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Optional, List, Tuple
 
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.staticfiles import StaticFiles
@@ -51,76 +52,86 @@ def get_openai_client():
     return _client
 
 # Extraction prompt for P&ID analysis
-PID_EXTRACTION_PROMPT = """You are an expert P&ID (Piping and Instrumentation Diagram) analyzer specializing in oil & gas, petrochemical, and process engineering drawings.
+PID_EXTRACTION_PROMPT = """You are an expert P&ID (Piping and Instrumentation Diagram) analyzer for oil & gas and process engineering.
 
-CRITICAL: Examine the image VERY CAREFULLY. Look at ALL text labels, tag numbers, and annotations. P&IDs contain dense information - zoom in mentally on each section.
+## CRITICAL INSTRUCTION - SYSTEMATIC SCANNING
+P&IDs are DENSE. You MUST scan the ENTIRE drawing systematically:
+1. Start at TOP-LEFT corner, scan right across the top
+2. Move down row by row, scanning left-to-right
+3. Check ALL legends, title blocks, and note boxes
+4. Count EVERY valve symbol (circles with lines, triangles, etc.)
+5. Read EVERY tag number, even tiny ones
+6. Follow EVERY line and note ALL inline components
 
-## LINE NUMBER FORMAT
-Oil & Gas line numbers typically follow formats like:
-- "4"-OC-41-012-N1A1" (Size-Service-Area-Sequence-Spec)
-- "6"-HC-40-001" (Size-Service-Unit-Number)
-- "3"-PG-2001" (Size-Service-Number)
-The FIRST number before the dash is usually the pipe SIZE in inches.
+## VALVE SYMBOLS TO LOOK FOR
+- Ball valve: Circle with line through it (BV-xxxxx)
+- Gate valve: Two triangles pointing at each other
+- Globe valve: Circle with horizontal line and stem
+- Check valve: Triangle with flow direction
+- Control valve: Circle with vertical line and diaphragm top (CV, LCV, PCV, FCV)
+- Relief/Safety valve: Angle body with spring (PSV, PRV)
+- Needle valve: Small triangle symbol (NV)
+- Plug valve: Rectangle with diagonal
+- Butterfly valve: Circle with bowtie or double triangle
 
-## Extract These Categories:
+## INSTRUMENT SYMBOLS
+- Circle with horizontal line = Field mounted
+- Circle with horizontal line in box = Panel mounted
+- Circle with dashed horizontal = Behind panel
+- Diamond = Computer/DCS function
+- Hexagon = PLC function
+- First letters: P=Pressure, T=Temperature, L=Level, F=Flow, A=Analyzer, S=Speed/Safety
+- Modifier letters: I=Indicator, T=Transmitter, C=Controller, V=Valve, S=Switch, A=Alarm, H=High, L=Low
 
-### 1. EQUIPMENT
-For each piece of equipment (vessels, pumps, exchangers, coalescers, separators, etc.):
-- Tag: The alphanumeric identifier (e.g., 40-V-2005, P-101, E-201)
-- Type: Category (Vessel, Pump, Heat Exchanger, Coalescer, Filter, Tank, Compressor, etc.)
-- Description: Any name or description shown
-- Size: Capacity or dimensions if visible
+## LINE NUMBER FORMAT (Oil & Gas)
+Format: SIZE"-SERVICE-AREA-SEQUENCE-SPEC
+Examples:
+- "10"-FL-41182-01C02N" = 10" Flare line
+- "4"-DC-46181-01C02N-P" = 4" Drain/Condensate
+- "8"-PL-20224-01C02N-H" = 8" Process Liquid
+- FL=Flare, PL=Process Liquid, DC=Drain/Condensate, PW=Produced Water
 
-### 2. VALVES
-For each valve (gate, globe, ball, check, control, relief, butterfly, plug, needle):
-- Tag: Identifier (e.g., XV-101, PV-102, HV-201, or line-based like "BV on 4"-HC-001")
-- Type: Gate, Globe, Ball, Check, Control, Relief/PSV, Butterfly, Plug, Needle
-- Size: Usually matches the line size (2", 4", 6", etc.)
-- Line_Number: Which line it's installed on
+## EXTRACT THESE CATEGORIES:
 
-### 3. INSTRUMENTS
-For each instrument (transmitters, indicators, controllers, switches, analyzers):
-- Tag: The ISA tag (e.g., PT-101, FIT-102, LT-201, TIC-301, PSV-001)
-- Type: Pressure, Flow, Level, Temperature, Analyzer, etc.
-- Function: Transmitter, Indicator, Controller, Switch, Alarm, Element
+### 1. EQUIPMENT (vessels, pumps, exchangers, coalescers, motors, control panels)
+- Tag, Type, Description, Size/Dimensions
+- Include transformers, motors (M1, M2), control panels (TCP)
+
+### 2. VALVES - BE EXHAUSTIVE
+- Include ALL BV-xx-xxxx (ball valves) - there may be 50+ on complex P&IDs
+- Include ALL GLV (globe valves), CV (control valves)
+- Include ALL check valves, PSVs, manual valves
+- Tag, Type, Size, Line_Number
+
+### 3. INSTRUMENTS - CHECK LEGEND BOXES
+- Look for instrument legend/schedule on the drawing
+- Include ALL: II (current), VI (voltage), LSL/LSH (level switches), TSH (temp switches), PSH (pressure switches)
+- Include LIT, PIT, TIT (transmitters), LIC, PIC, TIC (controllers)
+- Tag, Type, Function
 
 ### 4. LINES/PIPING
-For each process line visible:
-- Line_Number: Full line designation (e.g., "4"-OC-41-012-N1A1")
-- Size: Pipe diameter in inches (first number in line designation)
-- Service: Fluid service code (OC=Oil Coalesced, HC=Hydrocarbon, PG=Process Gas, PW=Produced Water, etc.)
-- From: Source equipment or off-page reference
-- To: Destination equipment or off-page reference
+- Extract ALL visible line numbers with full designation
+- Line_Number, Size, Service, From, To
 
 ### 5. NOTES
-- Design conditions (pressure, temperature)
-- Material specifications
-- Operating notes
-- Any visible text callouts
+- Design pressure/temperature
+- Material specs (MOC: CS + CA + coating, etc.)
+- Operating conditions
+- Drawing references (40-PR-PID-xxxx)
 
-Return your analysis as a JSON object:
+Return ONLY valid JSON:
 {
-  "equipment": [
-    {"tag": "...", "type": "...", "description": "...", "size": "..."}
-  ],
-  "valves": [
-    {"tag": "...", "type": "...", "size": "...", "line_number": "..."}
-  ],
-  "instruments": [
-    {"tag": "...", "type": "...", "function": "..."}
-  ],
-  "lines": [
-    {"line_number": "...", "size": "...", "service": "...", "from": "...", "to": "..."}
-  ],
-  "notes": ["...", "..."],
-  "summary": "Brief description of what this P&ID shows (system/unit name, main function)"
+  "equipment": [{"tag": "", "type": "", "description": "", "size": ""}],
+  "valves": [{"tag": "", "type": "", "size": "", "line_number": ""}],
+  "instruments": [{"tag": "", "type": "", "function": ""}],
+  "lines": [{"line_number": "", "size": "", "service": "", "from": "", "to": ""}],
+  "notes": [],
+  "summary": "",
+  "counts": {"equipment": 0, "valves": 0, "instruments": 0, "lines": 0}
 }
 
-IMPORTANT:
-- Extract EVERY item you can see - be thorough
-- Line sizes are typically 1", 2", 3", 4", 6", 8", 10", 12", 14", 16", 18", 20", 24"
-- If uncertain about a value, make your best interpretation rather than omitting
-- Return ONLY the JSON, no other text"""
+BE THOROUGH - a complex P&ID like an Electrostatic Coalescer may have 50+ valves, 20+ instruments, 10+ lines.
+Do NOT stop early. Extract EVERYTHING visible."""
 
 
 RFQ_EXTRACTION_PROMPT = """You are an expert tender/RFQ analyst for oil & gas, EPC, and industrial projects.
@@ -286,32 +297,50 @@ def encode_image_to_base64(file_content: bytes) -> str:
     return base64.b64encode(file_content).decode('utf-8')
 
 
-def analyze_pid_with_vision(image_base64: str, content_type: str) -> dict:
-    """Send image to OpenAI Vision API for P&ID analysis"""
+def process_file_for_vision(content: bytes, content_type: str) -> List[Tuple[str, str]]:
+    """Process uploaded file and return list of (base64_image, media_type) tuples.
+    OpenAI's API now supports PDFs directly (since March 2025)."""
     
-    # Determine media type
-    if "png" in content_type:
-        media_type = "image/png"
-    elif "pdf" in content_type:
-        media_type = "application/pdf"
+    if 'pdf' in content_type.lower():
+        # OpenAI now supports PDFs directly with the file API
+        # We'll send as application/pdf
+        return [(encode_image_to_base64(content), 'application/pdf')]
     else:
-        media_type = "image/jpeg"
+        # Direct image - determine type
+        if 'png' in content_type.lower():
+            media_type = 'image/png'
+        elif 'webp' in content_type.lower():
+            media_type = 'image/webp'
+        else:
+            media_type = 'image/jpeg'
+        return [(encode_image_to_base64(content), media_type)]
+
+
+def analyze_pid_with_vision(images: List[Tuple[str, str]], prompt: str = None) -> dict:
+    """Send image(s) to OpenAI Vision API for P&ID analysis.
+    images: List of (base64_string, media_type) tuples
+    """
+    if prompt is None:
+        prompt = PID_EXTRACTION_PROMPT
+    
+    # Build content array with text prompt and all images
+    content_parts = [{"type": "text", "text": prompt}]
+    
+    for image_base64, media_type in images:
+        content_parts.append({
+            "type": "image_url",
+            "image_url": {
+                "url": f"data:{media_type};base64,{image_base64}",
+                "detail": "high"
+            }
+        })
     
     response = get_openai_client().chat.completions.create(
         model="gpt-4o",
         messages=[
             {
                 "role": "user",
-                "content": [
-                    {"type": "text", "text": PID_EXTRACTION_PROMPT},
-                    {
-                        "type": "image_url",
-                        "image_url": {
-                            "url": f"data:{media_type};base64,{image_base64}",
-                            "detail": "high"
-                        }
-                    }
-                ]
+                "content": content_parts
             }
         ],
         max_tokens=4096,
@@ -591,12 +620,12 @@ async def analyze_pid(
     if len(content) > 20 * 1024 * 1024:
         raise HTTPException(400, "File too large. Maximum size is 20MB.")
     
-    # Encode to base64
-    image_base64 = encode_image_to_base64(content)
-    
     try:
+        # Process file (converts PDF to images if needed)
+        images = process_file_for_vision(content, file.content_type)
+        
         # Analyze with Vision API
-        extracted_data = analyze_pid_with_vision(image_base64, file.content_type)
+        extracted_data = analyze_pid_with_vision(images, PID_EXTRACTION_PROMPT)
         
         # Cost estimation if requested
         cost_data = None
@@ -629,6 +658,10 @@ async def analyze_pid(
         raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
     except Exception as e:
         raise HTTPException(500, f"Analysis failed: {str(e)}")
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(500, f"Analysis failed: {str(e)}")
 
 
 @app.post("/api/parse-rfq")
@@ -647,51 +680,12 @@ async def parse_rfq(file: UploadFile = File(...)):
     if len(content) > 20 * 1024 * 1024:
         raise HTTPException(400, "File too large. Maximum size is 20MB.")
     
-    # Encode to base64
-    image_base64 = encode_image_to_base64(content)
-    
-    # Determine media type
-    if "png" in file.content_type:
-        media_type = "image/png"
-    elif "pdf" in file.content_type:
-        media_type = "application/pdf"
-    else:
-        media_type = "image/jpeg"
-    
     try:
+        # Process file (converts PDF to images if needed)
+        images = process_file_for_vision(content, file.content_type)
+        
         # Analyze with Vision API
-        response = get_openai_client().chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": RFQ_EXTRACTION_PROMPT},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:{media_type};base64,{image_base64}",
-                                "detail": "high"
-                            }
-                        }
-                    ]
-                }
-            ],
-            max_tokens=4096,
-            temperature=0.1
-        )
-        
-        # Parse the JSON response
-        content_text = response.choices[0].message.content
-        
-        # Clean up response (remove markdown code blocks if present)
-        if content_text.startswith("```"):
-            content_text = content_text.split("```")[1]
-            if content_text.startswith("json"):
-                content_text = content_text[4:]
-        content_text = content_text.strip()
-        
-        extracted_data = json.loads(content_text)
+        extracted_data = analyze_pid_with_vision(images, RFQ_EXTRACTION_PROMPT)
         
         # Generate Excel report for RFQ
         excel_path = create_rfq_excel_report(extracted_data, file.filename)
@@ -712,6 +706,8 @@ async def parse_rfq(file: UploadFile = File(...)):
         
     except json.JSONDecodeError as e:
         raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(500, f"Analysis failed: {str(e)}")
 
@@ -732,51 +728,12 @@ async def parse_datasheet(file: UploadFile = File(...)):
     if len(content) > 20 * 1024 * 1024:
         raise HTTPException(400, "File too large. Maximum size is 20MB.")
     
-    # Encode to base64
-    image_base64 = encode_image_to_base64(content)
-    
-    # Determine media type
-    if "png" in file.content_type:
-        media_type = "image/png"
-    elif "pdf" in file.content_type:
-        media_type = "application/pdf"
-    else:
-        media_type = "image/jpeg"
-    
     try:
+        # Process file (converts PDF to images if needed)
+        images = process_file_for_vision(content, file.content_type)
+        
         # Analyze with Vision API
-        response = get_openai_client().chat.completions.create(
-            model="gpt-4o",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": DATASHEET_EXTRACTION_PROMPT},
-                        {
-                            "type": "image_url",
-                            "image_url": {
-                                "url": f"data:{media_type};base64,{image_base64}",
-                                "detail": "high"
-                            }
-                        }
-                    ]
-                }
-            ],
-            max_tokens=4096,
-            temperature=0.1
-        )
-        
-        # Parse the JSON response
-        content_text = response.choices[0].message.content
-        
-        # Clean up response (remove markdown code blocks if present)
-        if content_text.startswith("```"):
-            content_text = content_text.split("```")[1]
-            if content_text.startswith("json"):
-                content_text = content_text[4:]
-        content_text = content_text.strip()
-        
-        extracted_data = json.loads(content_text)
+        extracted_data = analyze_pid_with_vision(images, DATASHEET_EXTRACTION_PROMPT)
         
         # Generate Excel report for datasheet
         excel_path = create_datasheet_excel_report(extracted_data, file.filename)

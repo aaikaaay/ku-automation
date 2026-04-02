@@ -109,7 +109,7 @@
                 class="drop-zone border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center bg-white cursor-pointer hover:border-primary-500 hover:bg-primary-50/30 shadow-sm"
                 onclick="document.getElementById('fileInput').click()"
             >
-                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.pdf" class="hidden" onchange="handleFileSelect(event)">
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp" class="hidden" onchange="handleFileSelect(event)">
                 
                 <div id="uploadPrompt">
                     <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
@@ -120,7 +120,8 @@
                     
                     <h3 class="text-lg font-semibold text-gray-900 mb-2">Drop your P&ID here</h3>
                     <p class="text-gray-500 mb-4">or click to browse</p>
-                    <p class="text-sm text-gray-400">Supports: JPG, PNG, WebP, PDF (max 20MB)</p>
+                    <p class="text-sm text-gray-400">Supports: JPG, PNG, WebP (max 20MB)</p>
+                    <p class="text-xs text-amber-600 mt-2">💡 Tip: Export your PDF as an image for best results</p>
                 </div>
 
                 <!-- Image Preview -->
