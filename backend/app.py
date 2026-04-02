@@ -44,7 +44,7 @@ def get_openai_client():
     global _client
     if _client is None:
         # Try multiple env var names (Railway shared variable workaround)
-        api_key = os.environ.get("KU_OPENAI_SECRET") or os.environ.get("OPENAI_API_KEY")
+        api_key = os.environ.get("MYKEY_XYZ123") or os.environ.get("KU_OPENAI_SECRET") or os.environ.get("OPENAI_API_KEY")
         if not api_key:
             raise HTTPException(500, "OPENAI_API_KEY not configured")
         _client = OpenAI(api_key=api_key)
@@ -1106,7 +1106,7 @@ def create_datasheet_excel_report(data: dict, filename: str) -> str:
 @app.get("/health")
 async def health():
     """Health check endpoint"""
-    api_key = os.environ.get("KU_OPENAI_SECRET") or os.environ.get("OPENAI_API_KEY", "")
+    api_key = os.environ.get("MYKEY_XYZ123") or os.environ.get("KU_OPENAI_SECRET") or os.environ.get("OPENAI_API_KEY", "")
     return {
         "status": "healthy", 
         "service": "KU Automation API", 
