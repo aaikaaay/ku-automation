@@ -293,27 +293,56 @@ IMPORTANT:
 
 
 def encode_image_to_base64(file_content: bytes) -> str:
-    """Convert image bytes to base64 string"""
+    """Convert bytes to base64 string"""
     return base64.b64encode(file_content).decode('utf-8')
 
 
+def convert_pdf_to_images(pdf_content: bytes, max_pages: int = 10, dpi: int = 150) -> List[Tuple[bytes, str]]:
+    """Convert PDF pages to PNG images. Returns list of (image_bytes, 'image/png')."""
+    try:
+        from pdf2image import convert_from_bytes
+
+        images = convert_from_bytes(
+            pdf_content,
+            dpi=dpi,
+            first_page=1,
+            last_page=max_pages,
+            fmt="png",
+        )
+
+        result: List[Tuple[bytes, str]] = []
+        for img in images:
+            buf = io.BytesIO()
+            img.save(buf, format="PNG")
+            result.append((buf.getvalue(), "image/png"))
+
+        return result
+    except ImportError:
+        raise HTTPException(500, "PDF processing not available")
+    except Exception as e:
+        raise HTTPException(400, f"Failed to process PDF: {str(e)}")
+
+
 def process_file_for_vision(content: bytes, content_type: str) -> List[Tuple[str, str]]:
-    """Process uploaded file and return list of (base64_image, media_type) tuples.
-    OpenAI's API now supports PDFs directly (since March 2025)."""
-    
-    if 'pdf' in content_type.lower():
-        # OpenAI now supports PDFs directly with the file API
-        # We'll send as application/pdf
-        return [(encode_image_to_base64(content), 'application/pdf')]
+    """Return list of (base64_image, media_type) tuples.
+
+    - Images: single item
+    - PDFs: convert up to 10 pages to images and return one item per page
+    """
+
+    if "pdf" in (content_type or "").lower():
+        pages = convert_pdf_to_images(content, max_pages=10, dpi=150)
+        return [(encode_image_to_base64(img_bytes), media_type) for img_bytes, media_type in pages]
+
+    # Direct image
+    if "png" in (content_type or "").lower():
+        media_type = "image/png"
+    elif "webp" in (content_type or "").lower():
+        media_type = "image/webp"
     else:
-        # Direct image - determine type
-        if 'png' in content_type.lower():
-            media_type = 'image/png'
-        elif 'webp' in content_type.lower():
-            media_type = 'image/webp'
-        else:
-            media_type = 'image/jpeg'
-        return [(encode_image_to_base64(content), media_type)]
+        media_type = "image/jpeg"
+
+    return [(encode_image_to_base64(content), media_type)]
 
 
 def analyze_pid_with_vision(images: List[Tuple[str, str]], prompt: str = None) -> dict:
