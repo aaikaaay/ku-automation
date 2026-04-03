@@ -343,6 +343,7 @@ def analyze_pid_with_vision(images: List[Tuple[str, str]], prompt: str = None) -
                 "content": content_parts
             }
         ],
+        response_format={"type": "json_object"},
         max_tokens=4096,
         temperature=0.1
     )
@@ -373,6 +374,7 @@ def estimate_costs(extracted_data: dict) -> dict:
                 "content": prompt
             }
         ],
+        response_format={"type": "json_object"},
         max_tokens=4096,
         temperature=0.2
     )
