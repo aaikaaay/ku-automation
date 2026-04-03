@@ -394,7 +394,14 @@ def _repair_json_via_model(bad_text: str, model: str = "gpt-4o") -> dict:
 
 
 def call_model_json(messages, model: str = "gpt-4o", temperature: float = 0.1, max_tokens: int = 4096) -> dict:
-    """Call OpenAI and return parsed JSON with a repair+retry fallback."""
+    """Call OpenAI and return parsed JSON with a repair+retry fallback.
+
+    Some generations still occasionally produce malformed JSON (e.g. unterminated strings)
+    even when requesting json_object. We do:
+    1) strict parse
+    2) repair attempt with cleaned text
+    3) repair attempt with raw text
+    """
     client = get_openai_client()
 
     resp = client.chat.completions.create(
@@ -405,14 +412,17 @@ def call_model_json(messages, model: str = "gpt-4o", temperature: float = 0.1, m
         temperature=temperature,
     )
 
-    raw = resp.choices[0].message.content
+    raw = resp.choices[0].message.content or ""
     cleaned = _clean_model_output_to_json_text(raw)
 
     try:
         return _parse_json_strict(cleaned)
     except json.JSONDecodeError:
-        # One repair attempt using the model
-        return _repair_json_via_model(cleaned, model=model)
+        try:
+            return _repair_json_via_model(cleaned, model=model)
+        except Exception:
+            # Final fallback: attempt repair from raw output
+            return _repair_json_via_model(raw, model=model)
 
 
 def analyze_pid_with_vision(images: List[Tuple[str, str]], prompt: str = None) -> dict:
