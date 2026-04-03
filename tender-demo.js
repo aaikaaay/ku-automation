@@ -61,6 +61,51 @@ We have thoroughly reviewed the requirements for the produced water handling pip
     }
 };
 
+async function extractTenderTextFromFile(file) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    // Reuse existing RFQ parser endpoint as a "document to structured JSON" extractor
+    const res = await fetch('https://ku-automation-production.up.railway.app/api/parse-rfq', {
+        method: 'POST',
+        body: formData,
+    });
+
+    if (!res.ok) {
+        const txt = await res.text();
+        throw new Error(txt || `Upload failed (${res.status})`);
+    }
+
+    const data = await res.json();
+    // Put a readable summary into the textbox. This keeps the tender-demo as a demo UI.
+    return JSON.stringify(data, null, 2);
+}
+
+function wireTenderUpload() {
+    const input = document.getElementById('tenderFile');
+    if (!input) return;
+
+    input.addEventListener('change', async (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        const status = document.getElementById('uploadStatus');
+        const textarea = document.getElementById('tenderInput');
+
+        try {
+            status.textContent = `Uploading: ${file.name}...`;
+            const extracted = await extractTenderTextFromFile(file);
+            textarea.value = extracted;
+            status.textContent = `Loaded: ${file.name} (extracted into the box)`;
+        } catch (err) {
+            console.error(err);
+            status.textContent = `Upload failed: ${err.message || err}`;
+        }
+    });
+}
+
+wireTenderUpload();
+
 function analyzeTender() {
     const input = document.getElementById('tenderInput').value;
     const outputArea = document.getElementById('outputArea');
