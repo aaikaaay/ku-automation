@@ -166,7 +166,7 @@
                         </div>
                     </div>
                     <div class="relative">
-                        <input type="checkbox" id="includeCosts" class="sr-only peer">
+                        <input type="checkbox" id="includeCosts" class="sr-only peer" checked>
                         <div class="w-14 h-7 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-green-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-green-600"></div>
                     </div>
                 </label>
@@ -501,6 +501,8 @@
             document.getElementById('fileSize').textContent = formatFileSize(file.size);
             document.getElementById('filePreview').classList.remove('hidden');
             document.getElementById('costToggleSection').classList.remove('hidden');
+            // Default to ON (restores previous demo behavior)
+            document.getElementById('includeCosts').checked = true;
             document.getElementById('analyzeBtn').disabled = false;
 
             // Show image preview for image files
