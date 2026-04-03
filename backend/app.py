@@ -345,79 +345,106 @@ def process_file_for_vision(content: bytes, content_type: str) -> List[Tuple[str
     return [(encode_image_to_base64(content), media_type)]
 
 
+def _clean_model_output_to_json_text(text: str) -> str:
+    """Best-effort cleanup of model output into raw JSON text."""
+    if not text:
+        return ""
+
+    text = text.strip()
+
+    # Remove markdown code fences if present
+    if text.startswith("```"):
+        parts = text.split("```")
+        if len(parts) >= 2:
+            text = parts[1]
+            text = text.lstrip()
+            if text.startswith("json"):
+                text = text[4:]
+
+    return text.strip()
+
+
+def _parse_json_strict(text: str) -> dict:
+    """Parse JSON strictly, raising json.JSONDecodeError on failure."""
+    return json.loads(text)
+
+
+def _repair_json_via_model(bad_text: str, model: str = "gpt-4o") -> dict:
+    """Ask the model to convert a broken JSON-ish string into valid JSON."""
+    repair_prompt = (
+        "You are a JSON repair tool. Convert the following content into VALID JSON.\n"
+        "Rules:\n"
+        "- Output ONLY valid JSON (no markdown, no commentary).\n"
+        "- Preserve all information.\n"
+        "- Fix unterminated strings, missing quotes, trailing commas, etc.\n\n"
+        "CONTENT TO REPAIR:\n"
+        f"{bad_text}"
+    )
+
+    resp = get_openai_client().chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": repair_prompt}],
+        response_format={"type": "json_object"},
+        max_tokens=4096,
+        temperature=0.0,
+    )
+
+    fixed = _clean_model_output_to_json_text(resp.choices[0].message.content)
+    return _parse_json_strict(fixed)
+
+
+def call_model_json(messages, model: str = "gpt-4o", temperature: float = 0.1, max_tokens: int = 4096) -> dict:
+    """Call OpenAI and return parsed JSON with a repair+retry fallback."""
+    client = get_openai_client()
+
+    resp = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        response_format={"type": "json_object"},
+        max_tokens=max_tokens,
+        temperature=temperature,
+    )
+
+    raw = resp.choices[0].message.content
+    cleaned = _clean_model_output_to_json_text(raw)
+
+    try:
+        return _parse_json_strict(cleaned)
+    except json.JSONDecodeError:
+        # One repair attempt using the model
+        return _repair_json_via_model(cleaned, model=model)
+
+
 def analyze_pid_with_vision(images: List[Tuple[str, str]], prompt: str = None) -> dict:
-    """Send image(s) to OpenAI Vision API for P&ID analysis.
-    images: List of (base64_string, media_type) tuples
-    """
+    """Send image(s) to OpenAI Vision API for P&ID analysis."""
     if prompt is None:
         prompt = PID_EXTRACTION_PROMPT
-    
-    # Build content array with text prompt and all images
+
     content_parts = [{"type": "text", "text": prompt}]
-    
     for image_base64, media_type in images:
         content_parts.append({
             "type": "image_url",
-            "image_url": {
-                "url": f"data:{media_type};base64,{image_base64}",
-                "detail": "high"
-            }
+            "image_url": {"url": f"data:{media_type};base64,{image_base64}", "detail": "high"}
         })
-    
-    response = get_openai_client().chat.completions.create(
+
+    return call_model_json(
+        messages=[{"role": "user", "content": content_parts}],
         model="gpt-4o",
-        messages=[
-            {
-                "role": "user",
-                "content": content_parts
-            }
-        ],
-        response_format={"type": "json_object"},
+        temperature=0.1,
         max_tokens=4096,
-        temperature=0.1
     )
-    
-    # Parse the JSON response
-    content = response.choices[0].message.content
-    
-    # Clean up response (remove markdown code blocks if present)
-    if content.startswith("```"):
-        content = content.split("```")[1]
-        if content.startswith("json"):
-            content = content[4:]
-    content = content.strip()
-    
-    return json.loads(content)
 
 
 def estimate_costs(extracted_data: dict) -> dict:
     """Use AI to estimate costs based on extracted P&ID data"""
-    
     prompt = COST_ESTIMATION_PROMPT.format(extracted_data=json.dumps(extracted_data, indent=2))
-    
-    response = get_openai_client().chat.completions.create(
+
+    return call_model_json(
+        messages=[{"role": "user", "content": prompt}],
         model="gpt-4o",
-        messages=[
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        response_format={"type": "json_object"},
+        temperature=0.2,
         max_tokens=4096,
-        temperature=0.2
     )
-    
-    content = response.choices[0].message.content
-    
-    # Clean up response
-    if content.startswith("```"):
-        content = content.split("```")[1]
-        if content.startswith("json"):
-            content = content[4:]
-    content = content.strip()
-    
-    return json.loads(content)
 
 
 def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = None) -> str:
