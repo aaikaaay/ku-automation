@@ -297,7 +297,7 @@ def encode_image_to_base64(file_content: bytes) -> str:
     return base64.b64encode(file_content).decode('utf-8')
 
 
-def convert_pdf_to_images(pdf_content: bytes, max_pages: int = 10, dpi: int = 150) -> List[Tuple[bytes, str]]:
+def convert_pdf_to_images(pdf_content: bytes, max_pages: int = 10, dpi: int = 250) -> List[Tuple[bytes, str]]:
     """Convert PDF pages to PNG images. Returns list of (image_bytes, 'image/png')."""
     try:
         from pdf2image import convert_from_bytes
@@ -331,7 +331,7 @@ def process_file_for_vision(content: bytes, content_type: str) -> List[Tuple[str
     """
 
     if "pdf" in (content_type or "").lower():
-        pages = convert_pdf_to_images(content, max_pages=10, dpi=150)
+        pages = convert_pdf_to_images(content, max_pages=10, dpi=250)
         return [(encode_image_to_base64(img_bytes), media_type) for img_bytes, media_type in pages]
 
     # Direct image
