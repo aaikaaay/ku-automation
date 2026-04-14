@@ -1,17 +1,26 @@
 """
-P&ID Parser Demo - KU Automation
+P&ID Parser Demo - KU Automation (v2.0)
 Extracts equipment, valves, and line data from P&ID diagrams using AI
-Now with Cost Estimation feature!
+
+IMPROVEMENTS in v2.0:
+- PDF support via pdf2image conversion
+- Multi-page PDF processing
+- Tiled analysis for large/detailed images
+- Improved prompts for precision extraction
+- Result deduplication and merging
+- Better error handling
 """
 
 import os
-import io
+
 import json
 import base64
 import tempfile
+import io
 from datetime import datetime
 from pathlib import Path
-from typing import Optional, List, Tuple
+from typing import Optional, List, Dict, Any, Tuple
+from collections import defaultdict
 
 from fastapi import FastAPI, UploadFile, File, HTTPException, Form
 from fastapi.staticfiles import StaticFiles
@@ -23,9 +32,21 @@ from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-app = FastAPI(title="P&ID Parser - KU Automation")
+# Image processing
+from PIL import Image
 
-# CORS for frontend access
+# PDF processing - optional, graceful fallback
+try:
+    from pdf2image import convert_from_bytes
+    PDF_SUPPORT = True
+except ImportError:
+    PDF_SUPPORT = False
+    print("⚠️  pdf2image not installed. PDF support disabled. Install with: pip install pdf2image")
+    print("   Also requires poppler: brew install poppler (macOS) or apt install poppler-utils (Linux)")
+
+app = FastAPI(title="P&ID Parser - KU Automation v2.0")
+
+# CORS for local development
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -33,10 +54,8 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Check if static folder exists before mounting
-static_path = Path(__file__).parent / "static"
-if static_path.exists():
-    app.mount("/static", StaticFiles(directory=str(static_path)), name="static")
+# Mount static files
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # OpenAI client - initialized lazily
 _client = None
@@ -51,200 +70,142 @@ def get_openai_client():
         _client = OpenAI(api_key=api_key)
     return _client
 
-# Extraction prompt for P&ID analysis
-PID_EXTRACTION_PROMPT = """You are an expert P&ID (Piping and Instrumentation Diagram) analyzer for oil & gas and process engineering.
 
-## CRITICAL INSTRUCTION - SYSTEMATIC SCANNING
-P&IDs are DENSE. You MUST scan the ENTIRE drawing systematically:
-1. Start at TOP-LEFT corner, scan right across the top
-2. Move down row by row, scanning left-to-right
-3. Check ALL legends, title blocks, and note boxes
-4. Count EVERY valve symbol (circles with lines, triangles, etc.)
-5. Read EVERY tag number, even tiny ones
-6. Follow EVERY line and note ALL inline components
+# ============================================================================
+# IMPROVED EXTRACTION PROMPTS
+# ============================================================================
 
-## VALVE SYMBOLS TO LOOK FOR
-- Ball valve: Circle with line through it (BV-xxxxx)
-- Gate valve: Two triangles pointing at each other
-- Globe valve: Circle with horizontal line and stem
-- Check valve: Triangle with flow direction
-- Control valve: Circle with vertical line and diaphragm top (CV, LCV, PCV, FCV)
-- Relief/Safety valve: Angle body with spring (PSV, PRV)
-- Needle valve: Small triangle symbol (NV)
-- Plug valve: Rectangle with diagonal
-- Butterfly valve: Circle with bowtie or double triangle
+PID_EXTRACTION_PROMPT = """You are an expert P&ID (Piping and Instrumentation Diagram) analyzer with deep knowledge of oil & gas, chemical, and process engineering standards (ISA, ISO, ANSI).
 
-## INSTRUMENT SYMBOLS
-- Circle with horizontal line = Field mounted
-- Circle with horizontal line in box = Panel mounted
-- Circle with dashed horizontal = Behind panel
-- Diamond = Computer/DCS function
-- Hexagon = PLC function
-- First letters: P=Pressure, T=Temperature, L=Level, F=Flow, A=Analyzer, S=Speed/Safety
-- Modifier letters: I=Indicator, T=Transmitter, C=Controller, V=Valve, S=Switch, A=Alarm, H=High, L=Low
+TASK: Analyze this P&ID image section and extract ALL visible components with PRECISION.
 
-## LINE NUMBER FORMAT (Oil & Gas)
-Format: SIZE"-SERVICE-AREA-SEQUENCE-SPEC
-Examples:
-- "10"-FL-41182-01C02N" = 10" Flare line
-- "4"-DC-46181-01C02N-P" = 4" Drain/Condensate
-- "8"-PL-20224-01C02N-H" = 8" Process Liquid
-- FL=Flare, PL=Process Liquid, DC=Drain/Condensate, PW=Produced Water
+## CRITICAL INSTRUCTIONS:
+1. ONLY extract what you can CLEARLY see - do not infer or guess
+2. Read ALL text labels, tags, and annotations carefully
+3. For partial/unclear text, use "[unclear]" suffix
+4. Equipment tags follow patterns: V-XXX (vessels), P-XXX (pumps), E-XXX (exchangers), C-XXX (compressors), T-XXX (tanks)
+5. Instrument tags follow ISA standards: First letter = measured variable (P=pressure, T=temp, F=flow, L=level), subsequent = function
+6. Line numbers typically: SIZE-SERVICE-NUMBER (e.g., 4"-P-101, 6"-CW-201)
 
 ## EXTRACT THESE CATEGORIES:
 
-### 1. EQUIPMENT (vessels, pumps, exchangers, coalescers, motors, control panels)
-- Tag, Type, Description, Size/Dimensions
-- Include transformers, motors (M1, M2), control panels (TCP)
+### 1. EQUIPMENT (vessels, pumps, exchangers, compressors, tanks, reactors, columns, drums, filters)
+For each:
+- tag: Exact tag as shown (e.g., "V-101", "P-102A/B")
+- type: Equipment type (Vessel, Pump, Heat Exchanger, etc.)
+- description: Name/service if labeled
+- size: Dimensions or capacity if shown
+- material: If specified (CS, SS, etc.)
 
-### 2. VALVES - BE EXHAUSTIVE
-- Include ALL BV-xx-xxxx (ball valves) - there may be 50+ on complex P&IDs
-- Include ALL GLV (globe valves), CV (control valves)
-- Include ALL check valves, PSVs, manual valves
-- Tag, Type, Size, Line_Number
+### 2. VALVES (all valve types visible)
+For each:
+- tag: Exact tag (XV, PV, HV, CV, PSV, etc.)
+- type: Gate, Globe, Ball, Check, Control, Relief, Butterfly, Plug, Needle
+- size: Pipe size if shown
+- line_number: Which line it's on
+- fail_position: FC/FO/FL if shown for control valves
 
-### 3. INSTRUMENTS - CHECK LEGEND BOXES
-- Look for instrument legend/schedule on the drawing
-- Include ALL: II (current), VI (voltage), LSL/LSH (level switches), TSH (temp switches), PSH (pressure switches)
-- Include LIT, PIT, TIT (transmitters), LIC, PIC, TIC (controllers)
-- Tag, Type, Function
+### 3. INSTRUMENTS (all instrumentation)
+For each:
+- tag: Full ISA tag (e.g., "PT-101", "FIC-102", "LSHH-201")
+- type: Measured variable (Pressure, Temperature, Flow, Level, Analytical)
+- function: Transmitter, Indicator, Controller, Switch, Alarm, Element
+- location: Field/Panel if indicated
 
 ### 4. LINES/PIPING
-- Extract ALL visible line numbers with full designation
-- Line_Number, Size, Service, From, To
+For each distinct line:
+- line_number: Full designation
+- size: Nominal diameter
+- service: Fluid/service code
+- spec: Piping spec/class if shown
+- insulation: Type/thickness if indicated
+- from_equipment: Source
+- to_equipment: Destination
 
-### 5. NOTES
-- Design pressure/temperature
-- Material specs (MOC: CS + CA + coating, etc.)
-- Operating conditions
-- Drawing references (40-PR-PID-xxxx)
+### 5. NOTES & SPECIFICATIONS
+- Design conditions (pressure, temperature)
+- Material specs
+- Hazardous area classification
+- Any other callouts
 
+## OUTPUT FORMAT:
 Return ONLY valid JSON:
 {
-  "equipment": [{"tag": "", "type": "", "description": "", "size": ""}],
-  "valves": [{"tag": "", "type": "", "size": "", "line_number": ""}],
-  "instruments": [{"tag": "", "type": "", "function": ""}],
-  "lines": [{"line_number": "", "size": "", "service": "", "from": "", "to": ""}],
-  "notes": [],
-  "summary": "",
-  "counts": {"equipment": 0, "valves": 0, "instruments": 0, "lines": 0}
+  "equipment": [...],
+  "valves": [...],
+  "instruments": [...],
+  "lines": [...],
+  "notes": [...],
+  "summary": "Brief description of this P&ID section"
 }
 
-BE THOROUGH - a complex P&ID like an Electrostatic Coalescer may have 50+ valves, 20+ instruments, 10+ lines.
-Do NOT stop early. Extract EVERYTHING visible."""
+Be thorough but conservative - quality over quantity. Missing an item is better than inventing one."""
 
 
-RFQ_EXTRACTION_PROMPT = """You are an expert tender/RFQ analyst for oil & gas, EPC, and industrial projects.
+PID_FOCUSED_EQUIPMENT_PROMPT = """Analyze this P&ID image and extract ONLY EQUIPMENT (major process equipment).
 
-Analyze the uploaded RFQ/ITB/tender document and extract ALL relevant information.
+Look for: Vessels, Pumps, Heat Exchangers, Compressors, Tanks, Reactors, Columns, Drums, Filters, Blowers, Turbines, Ejectors
 
-Return a JSON object with these sections:
+For EACH piece of equipment, extract:
+- tag: Exact tag number (e.g., "V-101", "P-102A/B", "E-201")
+- type: Equipment type
+- description: Name or service description
+- size: Dimensions, capacity, or rating
+- material: Construction material if shown
 
-{
-  "overview": {
-    "document_type": "RFQ/ITB/Tender/Quote Request/etc.",
-    "reference_number": "Document reference or tender number",
-    "issuing_company": "Company issuing the RFQ",
-    "project_name": "Project name if mentioned",
-    "project_location": "Site/location"
-  },
-  "key_dates": {
-    "submission_deadline": "Final submission date/time",
-    "validity_period": "Quote validity required",
-    "clarification_deadline": "Last date for questions",
-    "site_visit": "Site visit date if applicable",
-    "award_date": "Expected award date",
-    "delivery_date": "Required delivery date"
-  },
-  "scope_items": [
-    {
-      "item_no": "1",
-      "description": "Item description",
-      "quantity": "Qty with unit",
-      "specifications": "Key specs if mentioned"
-    }
-  ],
-  "technical_requirements": {
-    "standards": ["API 610", "ASME VIII", "etc."],
-    "certifications": ["ISO 9001", "ATEX", "etc."],
-    "documentation": ["GA drawings", "Test certs", "Manuals", "etc."],
-    "special_requirements": ["Any special technical requirements"]
-  },
-  "commercial_terms": {
-    "payment_terms": "Payment conditions",
-    "incoterms": "Delivery terms (FOB, CIF, etc.)",
-    "currency": "Quotation currency",
-    "warranty": "Warranty requirements",
-    "liquidated_damages": "LD clause if present",
-    "insurance": "Insurance requirements",
-    "bonds": "Performance/bid bonds required"
-  },
-  "compliance_checklist": [
-    {"requirement": "Submit in sealed envelope", "category": "Submission"},
-    {"requirement": "Include manufacturer datasheets", "category": "Technical"},
-    {"requirement": "Provide delivery schedule", "category": "Commercial"}
-  ],
-  "summary": "Brief 2-3 sentence summary of what this RFQ is for and key points bidders should note."
-}
-
-IMPORTANT:
-- Extract EVERYTHING you can see - be thorough
-- For dates, include time and timezone if specified
-- If something is not mentioned, use "N/A"
-- For scope items, capture all line items even if details are sparse
-- Return ONLY the JSON, no other text"""
+Return JSON: {"equipment": [...], "count": N}
+ONLY output the JSON, nothing else."""
 
 
-DATASHEET_EXTRACTION_PROMPT = """You are an expert equipment datasheet analyzer for industrial equipment.
+PID_FOCUSED_VALVES_PROMPT = """Analyze this P&ID image and extract ONLY VALVES.
 
-Analyze the uploaded equipment datasheet and extract ALL specifications into structured data.
+Look for all valve symbols: Gate, Globe, Ball, Check, Control (with actuators), Relief/Safety (PSV), Butterfly, Plug, Needle, 3-way, Isolation
 
-Return a JSON object with these sections:
+For EACH valve, extract:
+- tag: Exact tag (e.g., "XV-101", "PV-102", "PSV-103", "HV-104")
+- type: Valve type
+- size: If shown
+- line_number: Which line it's installed on
+- actuator: Manual, Pneumatic, Electric, Hydraulic
+- fail_position: FC/FO/FL for control valves
 
-{
-  "general": {
-    "manufacturer": "Equipment manufacturer/vendor",
-    "model": "Model number",
-    "tag_number": "Equipment tag if shown",
-    "serial_number": "Serial number if shown",
-    "equipment_type": "Pump/Valve/Exchanger/Instrument/etc.",
-    "service": "Service description or application"
-  },
-  "operating_conditions": {
-    "design_pressure": "Design pressure with unit",
-    "operating_pressure": "Operating pressure with unit",
-    "design_temperature": "Design temperature with unit",
-    "operating_temperature": "Operating temperature with unit",
-    "flow_rate": "Flow rate with unit",
-    "fluid_medium": "Process fluid or medium"
-  },
-  "physical": {
-    "dimensions": "Overall dimensions (L x W x H)",
-    "weight": "Weight (dry/operating)",
-    "materials": "Key materials of construction",
-    "connections": "Inlet/outlet connections and ratings"
-  },
-  "performance": {
-    "power": "Power requirements/consumption",
-    "speed": "RPM or speed",
-    "efficiency": "Efficiency if specified",
-    "head_dp": "Head or differential pressure",
-    "cv_kv": "Cv/Kv for valves"
-  },
-  "all_specs": [
-    {"parameter": "Parameter name", "value": "Value", "unit": "Unit"}
-  ],
-  "certifications": ["API", "ATEX", "CE", "etc."],
-  "notes": ["Any important notes or remarks from the datasheet"],
-  "summary": "Brief 2-3 sentence summary of this equipment."
-}
+Return JSON: {"valves": [...], "count": N}
+ONLY output the JSON, nothing else."""
 
-IMPORTANT:
-- Extract EVERY specification you can see
-- Include units for all values
-- For "all_specs", capture ALL parameters in a flat list - this is the comprehensive extraction
-- If something is not visible, use "N/A"
-- Return ONLY the JSON, no other text"""
+
+PID_FOCUSED_INSTRUMENTS_PROMPT = """Analyze this P&ID image and extract ONLY INSTRUMENTS.
+
+Look for: Transmitters, Indicators, Controllers, Switches, Alarms, Elements, Analyzers
+ISA tag patterns: PT (pressure transmitter), TT (temp), FT (flow), LT (level), AT (analyzer), PI (pressure indicator), etc.
+
+For EACH instrument, extract:
+- tag: Full ISA tag (e.g., "PT-101", "FIC-102", "LSHH-201", "TE-301")
+- type: Measured variable (Pressure, Temperature, Flow, Level, Analytical)
+- function: Transmitter, Indicator, Controller, Switch, Alarm, Element
+- location: Field or Panel/DCS if indicated
+- setpoint: If shown
+
+Return JSON: {"instruments": [...], "count": N}
+ONLY output the JSON, nothing else."""
+
+
+PID_FOCUSED_LINES_PROMPT = """Analyze this P&ID image and extract ONLY PIPING/LINES.
+
+Look for: Main process lines, utility lines, instrument air, nitrogen, steam, cooling water
+Line number format typically: SIZE"-SERVICE-NUMBER (e.g., 4"-P-101, 6"-CW-201)
+
+For EACH distinct line, extract:
+- line_number: Full line designation
+- size: Nominal pipe size
+- service: Fluid/service (Process, CW, Steam, IA, N2, etc.)
+- spec: Piping class/spec if shown
+- insulation: Type and thickness if shown
+- from_equipment: Where line originates
+- to_equipment: Where line terminates
+- traced: Heat/steam tracing if indicated
+
+Return JSON: {"lines": [...], "count": N}
+ONLY output the JSON, nothing else."""
 
 
 COST_ESTIMATION_PROMPT = """You are an expert cost estimator for oil & gas and process engineering equipment. Based on the extracted P&ID data below, provide budget-level cost estimates for each item.
@@ -292,170 +253,380 @@ IMPORTANT:
 - Return ONLY the JSON, no other text."""
 
 
-def encode_image_to_base64(file_content: bytes) -> str:
-    """Convert bytes to base64 string"""
-    return base64.b64encode(file_content).decode('utf-8')
+# ============================================================================
+# IMAGE PROCESSING UTILITIES
+# ============================================================================
 
-
-def convert_pdf_to_images(pdf_content: bytes, max_pages: int = 10, dpi: int = 250) -> List[Tuple[bytes, str]]:
-    """Convert PDF pages to PNG images. Returns list of (image_bytes, 'image/png')."""
+def pdf_to_images(pdf_bytes: bytes, dpi: int = 200) -> List[Image.Image]:
+    """Convert PDF pages to PIL Images"""
+    if not PDF_SUPPORT:
+        raise HTTPException(400, "PDF support not available. Install pdf2image and poppler.")
+    
     try:
-        from pdf2image import convert_from_bytes
-
-        images = convert_from_bytes(
-            pdf_content,
-            dpi=dpi,
-            first_page=1,
-            last_page=max_pages,
-            fmt="png",
-        )
-
-        result: List[Tuple[bytes, str]] = []
-        for img in images:
-            buf = io.BytesIO()
-            img.save(buf, format="PNG")
-            result.append((buf.getvalue(), "image/png"))
-
-        return result
-    except ImportError:
-        raise HTTPException(500, "PDF processing not available")
+        images = convert_from_bytes(pdf_bytes, dpi=dpi)
+        print(f"[PDF] Converted {len(images)} pages at {dpi} DPI")
+        return images
     except Exception as e:
-        raise HTTPException(400, f"Failed to process PDF: {str(e)}")
+        raise HTTPException(500, f"PDF conversion failed: {str(e)}")
 
 
-def process_file_for_vision(content: bytes, content_type: str) -> List[Tuple[str, str]]:
-    """Return list of (base64_image, media_type) tuples.
+def image_to_base64(img: Image.Image, format: str = "PNG") -> str:
+    """Convert PIL Image to base64 string"""
+    buffer = io.BytesIO()
+    # Convert to RGB if necessary (for RGBA images)
+    if img.mode in ('RGBA', 'LA', 'P'):
+        img = img.convert('RGB')
+        format = "JPEG"
+    img.save(buffer, format=format, quality=95)
+    return base64.b64encode(buffer.getvalue()).decode('utf-8')
 
-    - Images: single item
-    - PDFs: convert up to 10 pages to images and return one item per page
+
+def split_image_into_tiles(img: Image.Image, tiles: int = 4) -> List[Tuple[Image.Image, str]]:
     """
-
-    if "pdf" in (content_type or "").lower():
-        pages = convert_pdf_to_images(content, max_pages=10, dpi=250)
-        return [(encode_image_to_base64(img_bytes), media_type) for img_bytes, media_type in pages]
-
-    # Direct image
-    if "png" in (content_type or "").lower():
-        media_type = "image/png"
-    elif "webp" in (content_type or "").lower():
-        media_type = "image/webp"
+    Split image into tiles for detailed analysis.
+    Returns list of (tile_image, position_label) tuples.
+    
+    For tiles=4: splits into 2x2 grid (top-left, top-right, bottom-left, bottom-right)
+    For tiles=9: splits into 3x3 grid
+    """
+    width, height = img.size
+    
+    if tiles == 4:
+        grid = 2
+    elif tiles == 9:
+        grid = 3
     else:
-        media_type = "image/jpeg"
-
-    return [(encode_image_to_base64(content), media_type)]
-
-
-def _clean_model_output_to_json_text(text: str) -> str:
-    """Best-effort cleanup of model output into raw JSON text."""
-    if not text:
-        return ""
-
-    text = text.strip()
-
-    # Remove markdown code fences if present
-    if text.startswith("```"):
-        parts = text.split("```")
-        if len(parts) >= 2:
-            text = parts[1]
-            text = text.lstrip()
-            if text.startswith("json"):
-                text = text[4:]
-
-    return text.strip()
-
-
-def _parse_json_strict(text: str) -> dict:
-    """Parse JSON strictly, raising json.JSONDecodeError on failure."""
-    return json.loads(text)
-
-
-def _repair_json_via_model(bad_text: str, model: str = "gpt-4o") -> dict:
-    """Ask the model to convert a broken JSON-ish string into valid JSON."""
-    repair_prompt = (
-        "You are a JSON repair tool. Convert the following content into VALID JSON.\n"
-        "Rules:\n"
-        "- Output ONLY valid JSON (no markdown, no commentary).\n"
-        "- Preserve all information.\n"
-        "- Fix unterminated strings, missing quotes, trailing commas, etc.\n\n"
-        "CONTENT TO REPAIR:\n"
-        f"{bad_text}"
-    )
-
-    resp = get_openai_client().chat.completions.create(
-        model=model,
-        messages=[{"role": "user", "content": repair_prompt}],
-        response_format={"type": "json_object"},
-        max_tokens=4096,
-        temperature=0.0,
-    )
-
-    fixed = _clean_model_output_to_json_text(resp.choices[0].message.content)
-    return _parse_json_strict(fixed)
+        grid = 2
+    
+    tile_width = width // grid
+    tile_height = height // grid
+    
+    tiles_list = []
+    positions = {
+        (0, 0): "top-left",
+        (1, 0): "top-right" if grid == 2 else "top-center",
+        (2, 0): "top-right",
+        (0, 1): "bottom-left" if grid == 2 else "middle-left",
+        (1, 1): "bottom-right" if grid == 2 else "center",
+        (2, 1): "middle-right",
+        (0, 2): "bottom-left",
+        (1, 2): "bottom-center",
+        (2, 2): "bottom-right",
+    }
+    
+    for row in range(grid):
+        for col in range(grid):
+            left = col * tile_width
+            top = row * tile_height
+            right = left + tile_width + (width % grid if col == grid - 1 else 0)
+            bottom = top + tile_height + (height % grid if row == grid - 1 else 0)
+            
+            tile = img.crop((left, top, right, bottom))
+            pos_label = positions.get((col, row), f"section-{col}-{row}")
+            tiles_list.append((tile, pos_label))
+    
+    print(f"[TILE] Split image ({width}x{height}) into {len(tiles_list)} tiles")
+    return tiles_list
 
 
-def call_model_json(messages, model: str = "gpt-4o", temperature: float = 0.1, max_tokens: int = 4096) -> dict:
-    """Call OpenAI and return parsed JSON with a repair+retry fallback.
-
-    Some generations still occasionally produce malformed JSON (e.g. unterminated strings)
-    even when requesting json_object. We do:
-    1) strict parse
-    2) repair attempt with cleaned text
-    3) repair attempt with raw text
+def enhance_image_for_ocr(img: Image.Image) -> Image.Image:
     """
-    client = get_openai_client()
+    Enhance image for better text/symbol recognition.
+    - Increase contrast
+    - Sharpen
+    - Upscale if too small
+    """
+    from PIL import ImageEnhance, ImageFilter
+    
+    # Upscale small images
+    width, height = img.size
+    min_dimension = 1500
+    if width < min_dimension or height < min_dimension:
+        scale = max(min_dimension / width, min_dimension / height)
+        new_size = (int(width * scale), int(height * scale))
+        img = img.resize(new_size, Image.Resampling.LANCZOS)
+        print(f"[ENHANCE] Upscaled to {new_size}")
+    
+    # Enhance contrast
+    enhancer = ImageEnhance.Contrast(img)
+    img = enhancer.enhance(1.3)
+    
+    # Sharpen
+    img = img.filter(ImageFilter.SHARPEN)
+    
+    return img
 
-    resp = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        response_format={"type": "json_object"},
-        max_tokens=max_tokens,
-        temperature=temperature,
-    )
 
-    raw = resp.choices[0].message.content or ""
-    cleaned = _clean_model_output_to_json_text(raw)
-
-    try:
-        return _parse_json_strict(cleaned)
-    except json.JSONDecodeError:
-        try:
-            return _repair_json_via_model(cleaned, model=model)
-        except Exception:
-            # Final fallback: attempt repair from raw output
-            return _repair_json_via_model(raw, model=model)
+def should_use_tiling(img: Image.Image) -> bool:
+    """Determine if image should be analyzed in tiles based on size/complexity"""
+    width, height = img.size
+    # Use tiling for large images (likely detailed P&IDs)
+    return width > 2000 or height > 2000
 
 
-def analyze_pid_with_vision(images: List[Tuple[str, str]], prompt: str = None) -> dict:
-    """Send image(s) to OpenAI Vision API for P&ID analysis."""
-    if prompt is None:
-        prompt = PID_EXTRACTION_PROMPT
+# ============================================================================
+# AI ANALYSIS FUNCTIONS
+# ============================================================================
 
-    content_parts = [{"type": "text", "text": prompt}]
-    for image_base64, media_type in images:
-        content_parts.append({
-            "type": "image_url",
-            "image_url": {"url": f"data:{media_type};base64,{image_base64}", "detail": "high"}
-        })
-
-    return call_model_json(
-        messages=[{"role": "user", "content": content_parts}],
+def analyze_image_with_vision(image_base64: str, prompt: str, media_type: str = "image/png") -> dict:
+    """Send image to OpenAI Vision API with given prompt"""
+    
+    image_url = f"data:{media_type};base64,{image_base64}"
+    
+    response = get_openai_client().chat.completions.create(
         model="gpt-4o",
-        temperature=0.1,
+        messages=[
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image_url",
+                        "image_url": {
+                            "url": image_url,
+                            "detail": "high"
+                        }
+                    },
+                    {"type": "text", "text": prompt}
+                ]
+            }
+        ],
         max_tokens=4096,
+        temperature=0.1
     )
+    
+    content = response.choices[0].message.content
+    if not content:
+        raise ValueError("Empty response from OpenAI")
+    
+    return parse_json_response(content)
+
+
+def parse_json_response(content: str) -> dict:
+    """Clean and parse JSON from AI response"""
+    # Remove markdown code blocks
+    if "```" in content:
+        parts = content.split("```")
+        for part in parts:
+            part = part.strip()
+            if part.startswith("json"):
+                part = part[4:].strip()
+            if part.startswith("{"):
+                content = part
+                break
+    
+    content = content.strip()
+    
+    # Find JSON object
+    start = content.find("{")
+    end = content.rfind("}") + 1
+    if start != -1 and end > start:
+        content = content[start:end]
+    
+    return json.loads(content)
+
+
+def analyze_single_image_comprehensive(img: Image.Image) -> dict:
+    """
+    Analyze a single image comprehensively.
+    For smaller/simpler images, use single-pass.
+    For larger images, use tiled + focused extraction.
+    """
+    img = enhance_image_for_ocr(img)
+    
+    if should_use_tiling(img):
+        print("[ANALYSIS] Using tiled analysis for large image")
+        return analyze_with_tiling(img)
+    else:
+        print("[ANALYSIS] Using single-pass analysis")
+        return analyze_single_pass(img)
+
+
+def analyze_single_pass(img: Image.Image) -> dict:
+    """Single comprehensive pass for smaller images"""
+    img_b64 = image_to_base64(img)
+    return analyze_image_with_vision(img_b64, PID_EXTRACTION_PROMPT)
+
+
+def analyze_with_tiling(img: Image.Image) -> dict:
+    """
+    Analyze large image using:
+    1. Full image overview pass (gets summary, notes, and initial extraction)
+    2. Tiled detailed extraction for each category
+    3. Merge and deduplicate results
+    
+    Falls back to single-pass if tiling fails completely.
+    """
+    results = {
+        "equipment": [],
+        "valves": [],
+        "instruments": [],
+        "lines": [],
+        "notes": [],
+        "summary": ""
+    }
+    
+    success_count = 0
+    
+    # First: Overview pass on full image (resized for context)
+    # This gets the summary AND initial extraction as fallback
+    overview_img = img.copy()
+    overview_img.thumbnail((2000, 2000), Image.Resampling.LANCZOS)
+    overview_b64 = image_to_base64(overview_img)
+    
+    print("[ANALYSIS] Running overview pass...")
+    overview_data = None
+    try:
+        overview_data = analyze_image_with_vision(overview_b64, PID_EXTRACTION_PROMPT)
+        results["summary"] = overview_data.get("summary", "")
+        results["notes"] = overview_data.get("notes", [])
+        success_count += 1
+        print(f"[ANALYSIS] Overview pass succeeded")
+    except Exception as e:
+        print(f"[ANALYSIS] Overview pass failed: {e}")
+    
+    # Second: Focused extraction passes on tiles
+    tiles = split_image_into_tiles(img, tiles=4)
+    
+    focused_prompts = [
+        ("equipment", PID_FOCUSED_EQUIPMENT_PROMPT),
+        ("valves", PID_FOCUSED_VALVES_PROMPT),
+        ("instruments", PID_FOCUSED_INSTRUMENTS_PROMPT),
+        ("lines", PID_FOCUSED_LINES_PROMPT),
+    ]
+    
+    tile_success = 0
+    for tile_img, position in tiles:
+        tile_b64 = image_to_base64(tile_img)
+        
+        for category, prompt in focused_prompts:
+            print(f"[ANALYSIS] Extracting {category} from {position}...")
+            try:
+                tile_prompt = f"Analyzing the {position} section of a P&ID.\n\n{prompt}"
+                tile_result = analyze_image_with_vision(tile_b64, tile_prompt)
+                
+                items = tile_result.get(category, [])
+                for item in items:
+                    item["_source_tile"] = position  # Track source for debugging
+                results[category].extend(items)
+                tile_success += 1
+                
+            except Exception as e:
+                print(f"[ANALYSIS] {category} extraction from {position} failed: {e}")
+    
+    # If tiling completely failed but overview worked, use overview data
+    if tile_success == 0 and overview_data:
+        print("[ANALYSIS] Tiling failed, using overview extraction as fallback")
+        results["equipment"] = overview_data.get("equipment", [])
+        results["valves"] = overview_data.get("valves", [])
+        results["instruments"] = overview_data.get("instruments", [])
+        results["lines"] = overview_data.get("lines", [])
+    elif tile_success == 0 and not overview_data:
+        # Complete failure - try one more single pass
+        print("[ANALYSIS] Complete failure, attempting final single-pass...")
+        try:
+            return analyze_single_pass(img)
+        except Exception as e:
+            print(f"[ANALYSIS] Final single-pass also failed: {e}")
+            raise HTTPException(500, f"All analysis attempts failed: {e}")
+    
+    # Deduplicate results
+    results["equipment"] = deduplicate_items(results["equipment"], key_field="tag")
+    results["valves"] = deduplicate_items(results["valves"], key_field="tag")
+    results["instruments"] = deduplicate_items(results["instruments"], key_field="tag")
+    results["lines"] = deduplicate_items(results["lines"], key_field="line_number")
+    
+    # Clean up internal tracking fields
+    for category in ["equipment", "valves", "instruments", "lines"]:
+        for item in results[category]:
+            item.pop("_source_tile", None)
+    
+    print(f"[ANALYSIS] Tiling complete: {tile_success} successful extractions")
+    return results
+
+
+def deduplicate_items(items: List[dict], key_field: str) -> List[dict]:
+    """
+    Remove duplicate items based on key field.
+    Keeps the item with the most complete data.
+    """
+    if not items:
+        return []
+    
+    seen = {}
+    for item in items:
+        key = item.get(key_field, "").strip().upper()
+        if not key or key == "N/A":
+            continue
+        
+        if key not in seen:
+            seen[key] = item
+        else:
+            # Keep item with more non-empty fields
+            existing_score = sum(1 for v in seen[key].values() if v and v != "N/A")
+            new_score = sum(1 for v in item.values() if v and v != "N/A")
+            if new_score > existing_score:
+                seen[key] = item
+    
+    result = list(seen.values())
+    print(f"[DEDUP] {len(items)} items -> {len(result)} unique")
+    return result
+
+
+def merge_extraction_results(results_list: List[dict]) -> dict:
+    """Merge multiple extraction results (e.g., from multiple PDF pages)"""
+    merged = {
+        "equipment": [],
+        "valves": [],
+        "instruments": [],
+        "lines": [],
+        "notes": [],
+        "summary": ""
+    }
+    
+    summaries = []
+    
+    for result in results_list:
+        merged["equipment"].extend(result.get("equipment", []))
+        merged["valves"].extend(result.get("valves", []))
+        merged["instruments"].extend(result.get("instruments", []))
+        merged["lines"].extend(result.get("lines", []))
+        merged["notes"].extend(result.get("notes", []))
+        if result.get("summary"):
+            summaries.append(result["summary"])
+    
+    # Deduplicate across all pages
+    merged["equipment"] = deduplicate_items(merged["equipment"], "tag")
+    merged["valves"] = deduplicate_items(merged["valves"], "tag")
+    merged["instruments"] = deduplicate_items(merged["instruments"], "tag")
+    merged["lines"] = deduplicate_items(merged["lines"], "line_number")
+    merged["notes"] = list(set(merged["notes"]))  # Simple dedup for notes
+    
+    # Combine summaries
+    if summaries:
+        merged["summary"] = " | ".join(summaries)
+    
+    return merged
 
 
 def estimate_costs(extracted_data: dict) -> dict:
     """Use AI to estimate costs based on extracted P&ID data"""
+    
     prompt = COST_ESTIMATION_PROMPT.format(extracted_data=json.dumps(extracted_data, indent=2))
-
-    return call_model_json(
-        messages=[{"role": "user", "content": prompt}],
+    
+    response = get_openai_client().chat.completions.create(
         model="gpt-4o",
-        temperature=0.2,
+        messages=[{"role": "user", "content": prompt}],
         max_tokens=4096,
+        temperature=0.2
     )
+    
+    content = response.choices[0].message.content
+    return parse_json_response(content)
 
+
+# ============================================================================
+# EXCEL REPORT GENERATION
+# ============================================================================
 
 def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = None) -> str:
     """Generate Excel report from extracted P&ID data with optional cost estimates"""
@@ -466,7 +637,6 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     header_font = Font(bold=True, color="FFFFFF", size=11)
     header_fill = PatternFill(start_color="4F46E5", end_color="4F46E5", fill_type="solid")
     cost_header_fill = PatternFill(start_color="059669", end_color="059669", fill_type="solid")
-    currency_font = Font(bold=True, color="059669")
     border = Border(
         left=Side(style='thin'),
         right=Side(style='thin'),
@@ -487,25 +657,19 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
                 cell.border = border
                 cell.alignment = Alignment(horizontal='left')
     
-    def format_currency(value):
-        try:
-            return f"${value:,.0f}"
-        except:
-            return "$0"
-    
     # === EQUIPMENT Sheet ===
     ws_equip = wb.active
     ws_equip.title = "Equipment"
+    headers = ["Tag", "Type", "Description", "Size/Capacity", "Material"]
     if cost_data:
-        ws_equip.append(["Tag", "Type", "Description", "Size/Capacity", "Est. Cost (USD)", "Cost Basis"])
-    else:
-        ws_equip.append(["Tag", "Type", "Description", "Size/Capacity"])
+        headers.extend(["Est. Cost (USD)", "Cost Basis"])
+    ws_equip.append(headers)
     
     equipment_costs = {item.get("tag"): item for item in cost_data.get("equipment_costs", [])} if cost_data else {}
     
     for item in data.get("equipment", []):
         tag = item.get("tag", "")
-        row = [tag, item.get("type", ""), item.get("description", ""), item.get("size", "")]
+        row = [tag, item.get("type", ""), item.get("description", ""), item.get("size", ""), item.get("material", "")]
         if cost_data:
             cost_item = equipment_costs.get(tag, {})
             row.extend([cost_item.get("estimated_cost_usd", 0), cost_item.get("cost_basis", "")])
@@ -513,21 +677,22 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     
     style_header(ws_equip)
     style_data(ws_equip)
-    for i, width in enumerate([15, 18, 25, 15, 15, 30] if cost_data else [20, 20, 25, 20]):
+    for i, width in enumerate([12, 18, 30, 18, 10, 15, 35] if cost_data else [12, 18, 30, 18, 10]):
         ws_equip.column_dimensions[get_column_letter(i+1)].width = width
     
     # === VALVES Sheet ===
     ws_valves = wb.create_sheet("Valves")
+    headers = ["Tag", "Type", "Size", "Line Number", "Actuator", "Fail Position"]
     if cost_data:
-        ws_valves.append(["Tag", "Type", "Size", "Line Number", "Est. Cost (USD)", "Cost Basis"])
-    else:
-        ws_valves.append(["Tag", "Type", "Size", "Line Number"])
+        headers.extend(["Est. Cost (USD)", "Cost Basis"])
+    ws_valves.append(headers)
     
     valve_costs = {item.get("tag"): item for item in cost_data.get("valve_costs", [])} if cost_data else {}
     
     for item in data.get("valves", []):
         tag = item.get("tag", "")
-        row = [tag, item.get("type", ""), item.get("size", ""), item.get("line_number", "")]
+        row = [tag, item.get("type", ""), item.get("size", ""), item.get("line_number", ""),
+               item.get("actuator", ""), item.get("fail_position", "")]
         if cost_data:
             cost_item = valve_costs.get(tag, {})
             row.extend([cost_item.get("estimated_cost_usd", 0), cost_item.get("cost_basis", "")])
@@ -535,21 +700,21 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     
     style_header(ws_valves)
     style_data(ws_valves)
-    for i, width in enumerate([15, 15, 10, 18, 15, 30] if cost_data else [18, 18, 10, 18]):
+    for i, width in enumerate([12, 15, 8, 15, 12, 10, 15, 30] if cost_data else [12, 15, 8, 15, 12, 10]):
         ws_valves.column_dimensions[get_column_letter(i+1)].width = width
     
     # === INSTRUMENTS Sheet ===
     ws_inst = wb.create_sheet("Instruments")
+    headers = ["Tag", "Type", "Function", "Location", "Setpoint"]
     if cost_data:
-        ws_inst.append(["Tag", "Type", "Function", "Est. Cost (USD)", "Cost Basis"])
-    else:
-        ws_inst.append(["Tag", "Type", "Function"])
+        headers.extend(["Est. Cost (USD)", "Cost Basis"])
+    ws_inst.append(headers)
     
     instrument_costs = {item.get("tag"): item for item in cost_data.get("instrument_costs", [])} if cost_data else {}
     
     for item in data.get("instruments", []):
         tag = item.get("tag", "")
-        row = [tag, item.get("type", ""), item.get("function", "")]
+        row = [tag, item.get("type", ""), item.get("function", ""), item.get("location", ""), item.get("setpoint", "")]
         if cost_data:
             cost_item = instrument_costs.get(tag, {})
             row.extend([cost_item.get("estimated_cost_usd", 0), cost_item.get("cost_basis", "")])
@@ -557,21 +722,23 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     
     style_header(ws_inst)
     style_data(ws_inst)
-    for i, width in enumerate([15, 15, 18, 15, 30] if cost_data else [20, 20, 20]):
+    for i, width in enumerate([12, 15, 15, 10, 12, 15, 30] if cost_data else [12, 15, 15, 10, 12]):
         ws_inst.column_dimensions[get_column_letter(i+1)].width = width
     
     # === LINES Sheet ===
     ws_lines = wb.create_sheet("Lines")
+    headers = ["Line Number", "Size", "Service", "Spec", "Insulation", "From", "To"]
     if cost_data:
-        ws_lines.append(["Line Number", "Size", "Service", "From", "To", "Est. Cost/m (USD)", "Cost Basis"])
-    else:
-        ws_lines.append(["Line Number", "Size", "Service", "From", "To"])
+        headers.extend(["Est. Cost/m (USD)", "Cost Basis"])
+    ws_lines.append(headers)
     
     piping_costs = {item.get("line_number"): item for item in cost_data.get("piping_costs", [])} if cost_data else {}
     
     for item in data.get("lines", []):
         line_num = item.get("line_number", "")
-        row = [line_num, item.get("size", ""), item.get("service", ""), item.get("from", ""), item.get("to", "")]
+        row = [line_num, item.get("size", ""), item.get("service", ""), item.get("spec", ""),
+               item.get("insulation", ""), item.get("from_equipment", item.get("from", "")), 
+               item.get("to_equipment", item.get("to", ""))]
         if cost_data:
             cost_item = piping_costs.get(line_num, {})
             row.extend([cost_item.get("estimated_cost_per_meter_usd", 0), cost_item.get("cost_basis", "")])
@@ -579,10 +746,10 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     
     style_header(ws_lines)
     style_data(ws_lines)
-    for i, width in enumerate([22, 10, 15, 15, 15, 15, 30] if cost_data else [22, 10, 15, 15, 15]):
+    for i, width in enumerate([18, 8, 15, 10, 12, 15, 15, 12, 30] if cost_data else [18, 8, 15, 10, 12, 15, 15]):
         ws_lines.column_dimensions[get_column_letter(i+1)].width = width
     
-    # === COST SUMMARY Sheet (if cost estimation enabled) ===
+    # === COST SUMMARY Sheet ===
     if cost_data:
         ws_cost = wb.create_sheet("Cost Summary")
         summary = cost_data.get("summary", {})
@@ -620,7 +787,6 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
         
         ws_cost.column_dimensions['A'].width = 25
         ws_cost.column_dimensions['B'].width = 50
-        
         style_data(ws_cost, start_row=4)
     
     # === SUMMARY Sheet ===
@@ -630,6 +796,7 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     ws_summary.append([])
     ws_summary.append(["Generated:", datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
     ws_summary.append(["Source File:", filename])
+    ws_summary.append(["Parser Version:", "2.0 (Enhanced)"])
     ws_summary.append(["Cost Estimation:", "Included" if cost_data else "Not included"])
     ws_summary.append([])
     ws_summary.append(["Description:", data.get("summary", "N/A")])
@@ -642,8 +809,8 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     
     if cost_data:
         ws_summary.append([])
-        ws_summary.append(["Budget Estimate:", format_currency(cost_data.get("summary", {}).get("grand_total_estimate", 0))])
-        ws_summary['B14'].font = currency_font
+        total = cost_data.get("summary", {}).get("grand_total_estimate", 0)
+        ws_summary.append(["Budget Estimate:", f"${total:,.0f}"])
     
     ws_summary.append([])
     ws_summary.append(["Notes:"])
@@ -653,20 +820,20 @@ def create_excel_report(data: dict, filename: str, cost_data: Optional[dict] = N
     ws_summary.column_dimensions['A'].width = 18
     ws_summary.column_dimensions['B'].width = 60
     
-    # Save to temp file
+    # Save
     output_path = tempfile.mktemp(suffix=".xlsx")
     wb.save(output_path)
-    
     return output_path
 
+
+# ============================================================================
+# API ENDPOINTS
+# ============================================================================
 
 @app.get("/", response_class=HTMLResponse)
 async def home():
     """Serve the main page"""
-    html_path = Path(__file__).parent / "static" / "index.html"
-    if html_path.exists():
-        return FileResponse(str(html_path))
-    return HTMLResponse("<h1>P&ID Parser API</h1><p>Use POST /api/analyze to analyze P&ID files.</p>")
+    return FileResponse("static/index.html")
 
 
 @app.post("/api/analyze")
@@ -674,473 +841,386 @@ async def analyze_pid(
     file: UploadFile = File(...),
     include_costs: Optional[str] = Form(default="false")
 ):
-    """Analyze uploaded P&ID and return extracted data with optional cost estimates"""
+    """
+    Analyze uploaded P&ID and return extracted data.
+    
+    Supports:
+    - Images: JPG, PNG, WebP
+    - PDFs: Single or multi-page (converted to images)
+    
+    Features:
+    - Automatic tiling for large images
+    - Multi-page PDF merging
+    - Deduplication of extracted items
+    - Optional cost estimation
+    """
+    
+    # Check for demo mode
+    demo_mode = os.environ.get("DEMO_MODE", "false").lower() == "true"
     
     # Validate file type
+    content_type = file.content_type or ""
     allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
-    if file.content_type not in allowed_types:
-        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
+    
+    # Fallback detection by extension
+    filename = file.filename or ""
+    if not content_type or content_type == "application/octet-stream":
+        ext = filename.lower().split(".")[-1] if "." in filename else ""
+        content_type = {
+            "jpg": "image/jpeg",
+            "jpeg": "image/jpeg",
+            "png": "image/png",
+            "webp": "image/webp",
+            "pdf": "application/pdf"
+        }.get(ext, content_type)
+    
+    if content_type not in allowed_types:
+        raise HTTPException(400, f"Invalid file type '{content_type}'. Allowed: {', '.join(allowed_types)}")
     
     # Read file
     content = await file.read()
     
-    # Check file size (max 20MB)
-    if len(content) > 20 * 1024 * 1024:
-        raise HTTPException(400, "File too large. Maximum size is 20MB.")
+    # Check file size (max 50MB for PDFs, 20MB for images)
+    max_size = 50 * 1024 * 1024 if "pdf" in content_type else 20 * 1024 * 1024
+    if len(content) > max_size:
+        raise HTTPException(400, f"File too large. Maximum size is {max_size // (1024*1024)}MB.")
+    
+    print(f"[UPLOAD] Received {filename} ({len(content)} bytes, {content_type})")
     
     try:
-        # Process file (converts PDF to images if needed)
-        images = process_file_for_vision(content, file.content_type)
-        
-        # Analyze with Vision API
-        extracted_data = analyze_pid_with_vision(images, PID_EXTRACTION_PROMPT)
+        if demo_mode:
+            import time
+            time.sleep(3)
+            extracted_data = DEMO_MOCK_DATA
+        else:
+            # Process based on file type
+            if "pdf" in content_type:
+                # PDF: Convert to images and analyze each page
+                if not PDF_SUPPORT:
+                    raise HTTPException(400, 
+                        "PDF support not available on this server. "
+                        "Please convert your PDF to PNG/JPG and upload the image instead.")
+                
+                images = pdf_to_images(content, dpi=200)
+                
+                if len(images) == 1:
+                    # Single page PDF
+                    extracted_data = analyze_single_image_comprehensive(images[0])
+                else:
+                    # Multi-page PDF - analyze each and merge
+                    print(f"[PDF] Processing {len(images)} pages...")
+                    page_results = []
+                    for i, img in enumerate(images):
+                        print(f"[PDF] Analyzing page {i+1}/{len(images)}...")
+                        page_result = analyze_single_image_comprehensive(img)
+                        page_results.append(page_result)
+                    
+                    extracted_data = merge_extraction_results(page_results)
+            else:
+                # Image: Load and analyze
+                img = Image.open(io.BytesIO(content))
+                extracted_data = analyze_single_image_comprehensive(img)
         
         # Cost estimation if requested
         cost_data = None
         if include_costs.lower() == "true":
+            print("[COST] Running cost estimation...")
             cost_data = estimate_costs(extracted_data)
         
         # Generate Excel report
-        excel_path = create_excel_report(extracted_data, file.filename, cost_data)
+        excel_path = create_excel_report(extracted_data, filename, cost_data)
         
-        # Read Excel file for response
         with open(excel_path, "rb") as f:
             excel_base64 = base64.b64encode(f.read()).decode('utf-8')
         
-        # Clean up temp file
         os.unlink(excel_path)
         
         response_data = {
             "success": True,
             "data": extracted_data,
             "excel": excel_base64,
-            "filename": f"PID_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+            "filename": f"PID_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx",
+            "version": "2.0"
         }
         
         if cost_data:
             response_data["costs"] = cost_data
         
+        # Stats for logging
+        stats = {
+            "equipment": len(extracted_data.get("equipment", [])),
+            "valves": len(extracted_data.get("valves", [])),
+            "instruments": len(extracted_data.get("instruments", [])),
+            "lines": len(extracted_data.get("lines", []))
+        }
+        print(f"[RESULT] Extracted: {stats}")
+        
         return response_data
         
     except json.JSONDecodeError as e:
+        print(f"[ERROR] JSON parse failed: {e}")
         raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
     except Exception as e:
+        print(f"[ERROR] Analysis failed: {e}")
+        import traceback
+        traceback.print_exc()
         raise HTTPException(500, f"Analysis failed: {str(e)}")
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(500, f"Analysis failed: {str(e)}")
-
-
-@app.post("/api/parse-rfq")
-async def parse_rfq(file: UploadFile = File(...)):
-    """Analyze uploaded RFQ/tender document and extract key information"""
-    
-    # Validate file type
-    allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
-    if file.content_type not in allowed_types:
-        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
-    
-    # Read file
-    content = await file.read()
-    
-    # Check file size (max 20MB)
-    if len(content) > 20 * 1024 * 1024:
-        raise HTTPException(400, "File too large. Maximum size is 20MB.")
-    
-    try:
-        # Process file (converts PDF to images if needed)
-        images = process_file_for_vision(content, file.content_type)
-        
-        # Analyze with Vision API
-        extracted_data = analyze_pid_with_vision(images, RFQ_EXTRACTION_PROMPT)
-        
-        # Generate Excel report for RFQ
-        excel_path = create_rfq_excel_report(extracted_data, file.filename)
-        
-        # Read Excel file for response
-        with open(excel_path, "rb") as f:
-            excel_base64 = base64.b64encode(f.read()).decode('utf-8')
-        
-        # Clean up temp file
-        os.unlink(excel_path)
-        
-        return {
-            "success": True,
-            "data": extracted_data,
-            "excel": excel_base64,
-            "filename": f"RFQ_Analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
-        }
-        
-    except json.JSONDecodeError as e:
-        raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
-    except HTTPException:
-        raise
-    except Exception as e:
-        raise HTTPException(500, f"Analysis failed: {str(e)}")
-
-
-@app.post("/api/parse-datasheet")
-async def parse_datasheet(file: UploadFile = File(...)):
-    """Analyze uploaded equipment datasheet and extract specifications"""
-    
-    # Validate file type
-    allowed_types = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
-    if file.content_type not in allowed_types:
-        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed_types)}")
-    
-    # Read file
-    content = await file.read()
-    
-    # Check file size (max 20MB)
-    if len(content) > 20 * 1024 * 1024:
-        raise HTTPException(400, "File too large. Maximum size is 20MB.")
-    
-    try:
-        # Process file (converts PDF to images if needed)
-        images = process_file_for_vision(content, file.content_type)
-        
-        # Analyze with Vision API
-        extracted_data = analyze_pid_with_vision(images, DATASHEET_EXTRACTION_PROMPT)
-        
-        # Generate Excel report for datasheet
-        excel_path = create_datasheet_excel_report(extracted_data, file.filename)
-        
-        # Read Excel file for response
-        with open(excel_path, "rb") as f:
-            excel_base64 = base64.b64encode(f.read()).decode('utf-8')
-        
-        # Clean up temp file
-        os.unlink(excel_path)
-        
-        return {
-            "success": True,
-            "data": extracted_data,
-            "excel": excel_base64,
-            "filename": f"Datasheet_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
-        }
-        
-    except json.JSONDecodeError as e:
-        raise HTTPException(500, f"Failed to parse AI response: {str(e)}")
-    except Exception as e:
-        raise HTTPException(500, f"Analysis failed: {str(e)}")
-
-
-def create_rfq_excel_report(data: dict, filename: str) -> str:
-    """Generate Excel report from extracted RFQ data"""
-    
-    wb = Workbook()
-    
-    # Styles
-    header_font = Font(bold=True, color="FFFFFF", size=11)
-    header_fill = PatternFill(start_color="2563EB", end_color="2563EB", fill_type="solid")
-    border = Border(
-        left=Side(style='thin'),
-        right=Side(style='thin'),
-        top=Side(style='thin'),
-        bottom=Side(style='thin')
-    )
-    
-    def style_header(ws, row=1):
-        for cell in ws[row]:
-            cell.font = header_font
-            cell.fill = header_fill
-            cell.alignment = Alignment(horizontal='center')
-            cell.border = border
-    
-    def style_data(ws, start_row=2):
-        for row in ws.iter_rows(min_row=start_row):
-            for cell in row:
-                cell.border = border
-                cell.alignment = Alignment(horizontal='left', wrap_text=True)
-    
-    # === OVERVIEW Sheet ===
-    ws_overview = wb.active
-    ws_overview.title = "Overview"
-    ws_overview.append(["Field", "Value"])
-    
-    overview = data.get("overview", {})
-    for field, value in [
-        ("Document Type", overview.get("document_type", "N/A")),
-        ("Reference Number", overview.get("reference_number", "N/A")),
-        ("Issuing Company", overview.get("issuing_company", "N/A")),
-        ("Project Name", overview.get("project_name", "N/A")),
-        ("Project Location", overview.get("project_location", "N/A"))
-    ]:
-        ws_overview.append([field, value])
-    
-    style_header(ws_overview)
-    style_data(ws_overview)
-    ws_overview.column_dimensions['A'].width = 20
-    ws_overview.column_dimensions['B'].width = 50
-    
-    # === KEY DATES Sheet ===
-    ws_dates = wb.create_sheet("Key Dates")
-    ws_dates.append(["Milestone", "Date/Period"])
-    
-    dates = data.get("key_dates", {})
-    for field, value in [
-        ("⚠️ SUBMISSION DEADLINE", dates.get("submission_deadline", "N/A")),
-        ("Validity Period", dates.get("validity_period", "N/A")),
-        ("Clarification Deadline", dates.get("clarification_deadline", "N/A")),
-        ("Site Visit", dates.get("site_visit", "N/A")),
-        ("Award Date", dates.get("award_date", "N/A")),
-        ("Delivery Date", dates.get("delivery_date", "N/A"))
-    ]:
-        ws_dates.append([field, value])
-    
-    style_header(ws_dates)
-    style_data(ws_dates)
-    ws_dates.column_dimensions['A'].width = 25
-    ws_dates.column_dimensions['B'].width = 40
-    
-    # === SCOPE ITEMS Sheet ===
-    ws_scope = wb.create_sheet("Scope Items")
-    ws_scope.append(["Item No", "Description", "Quantity", "Specifications"])
-    
-    for item in data.get("scope_items", []):
-        ws_scope.append([
-            item.get("item_no", ""),
-            item.get("description", ""),
-            item.get("quantity", ""),
-            item.get("specifications", "")
-        ])
-    
-    style_header(ws_scope)
-    style_data(ws_scope)
-    ws_scope.column_dimensions['A'].width = 10
-    ws_scope.column_dimensions['B'].width = 40
-    ws_scope.column_dimensions['C'].width = 15
-    ws_scope.column_dimensions['D'].width = 30
-    
-    # === TECHNICAL REQUIREMENTS Sheet ===
-    ws_tech = wb.create_sheet("Technical")
-    ws_tech.append(["Category", "Requirement"])
-    
-    tech = data.get("technical_requirements", {})
-    for std in tech.get("standards", []):
-        ws_tech.append(["Standard", std])
-    for cert in tech.get("certifications", []):
-        ws_tech.append(["Certification", cert])
-    for doc in tech.get("documentation", []):
-        ws_tech.append(["Documentation", doc])
-    for req in tech.get("special_requirements", []):
-        ws_tech.append(["Special Requirement", req])
-    
-    style_header(ws_tech)
-    style_data(ws_tech)
-    ws_tech.column_dimensions['A'].width = 20
-    ws_tech.column_dimensions['B'].width = 50
-    
-    # === COMMERCIAL TERMS Sheet ===
-    ws_comm = wb.create_sheet("Commercial")
-    ws_comm.append(["Term", "Value"])
-    
-    commercial = data.get("commercial_terms", {})
-    for field, value in [
-        ("Payment Terms", commercial.get("payment_terms", "N/A")),
-        ("Incoterms", commercial.get("incoterms", "N/A")),
-        ("Currency", commercial.get("currency", "N/A")),
-        ("Warranty", commercial.get("warranty", "N/A")),
-        ("Liquidated Damages", commercial.get("liquidated_damages", "N/A")),
-        ("Insurance", commercial.get("insurance", "N/A")),
-        ("Bonds/Guarantees", commercial.get("bonds", "N/A"))
-    ]:
-        ws_comm.append([field, value])
-    
-    style_header(ws_comm)
-    style_data(ws_comm)
-    ws_comm.column_dimensions['A'].width = 20
-    ws_comm.column_dimensions['B'].width = 50
-    
-    # === COMPLIANCE CHECKLIST Sheet ===
-    ws_checklist = wb.create_sheet("Checklist")
-    ws_checklist.append(["✓", "Category", "Requirement"])
-    
-    for item in data.get("compliance_checklist", []):
-        ws_checklist.append([
-            "☐",
-            item.get("category", ""),
-            item.get("requirement", "")
-        ])
-    
-    style_header(ws_checklist)
-    style_data(ws_checklist)
-    ws_checklist.column_dimensions['A'].width = 5
-    ws_checklist.column_dimensions['B'].width = 15
-    ws_checklist.column_dimensions['C'].width = 50
-    
-    # Save to temp file
-    output_path = tempfile.mktemp(suffix=".xlsx")
-    wb.save(output_path)
-    
-    return output_path
-
-
-def create_datasheet_excel_report(data: dict, filename: str) -> str:
-    """Generate Excel report from extracted datasheet data"""
-    
-    wb = Workbook()
-    
-    # Styles
-    header_font = Font(bold=True, color="FFFFFF", size=11)
-    header_fill = PatternFill(start_color="059669", end_color="059669", fill_type="solid")
-    border = Border(
-        left=Side(style='thin'),
-        right=Side(style='thin'),
-        top=Side(style='thin'),
-        bottom=Side(style='thin')
-    )
-    
-    def style_header(ws, row=1):
-        for cell in ws[row]:
-            cell.font = header_font
-            cell.fill = header_fill
-            cell.alignment = Alignment(horizontal='center')
-            cell.border = border
-    
-    def style_data(ws, start_row=2):
-        for row in ws.iter_rows(min_row=start_row):
-            for cell in row:
-                cell.border = border
-                cell.alignment = Alignment(horizontal='left', wrap_text=True)
-    
-    # === GENERAL INFO Sheet ===
-    ws_general = wb.active
-    ws_general.title = "General Info"
-    ws_general.append(["Field", "Value"])
-    
-    general = data.get("general", {})
-    for field, value in [
-        ("Manufacturer", general.get("manufacturer", "N/A")),
-        ("Model", general.get("model", "N/A")),
-        ("Tag Number", general.get("tag_number", "N/A")),
-        ("Serial Number", general.get("serial_number", "N/A")),
-        ("Equipment Type", general.get("equipment_type", "N/A")),
-        ("Service/Application", general.get("service", "N/A"))
-    ]:
-        ws_general.append([field, value])
-    
-    style_header(ws_general)
-    style_data(ws_general)
-    ws_general.column_dimensions['A'].width = 20
-    ws_general.column_dimensions['B'].width = 40
-    
-    # === OPERATING CONDITIONS Sheet ===
-    ws_operating = wb.create_sheet("Operating Conditions")
-    ws_operating.append(["Parameter", "Value"])
-    
-    operating = data.get("operating_conditions", {})
-    for field, value in [
-        ("Design Pressure", operating.get("design_pressure", "N/A")),
-        ("Operating Pressure", operating.get("operating_pressure", "N/A")),
-        ("Design Temperature", operating.get("design_temperature", "N/A")),
-        ("Operating Temperature", operating.get("operating_temperature", "N/A")),
-        ("Flow Rate", operating.get("flow_rate", "N/A")),
-        ("Fluid/Medium", operating.get("fluid_medium", "N/A"))
-    ]:
-        ws_operating.append([field, value])
-    
-    style_header(ws_operating)
-    style_data(ws_operating)
-    ws_operating.column_dimensions['A'].width = 22
-    ws_operating.column_dimensions['B'].width = 35
-    
-    # === PHYSICAL Sheet ===
-    ws_physical = wb.create_sheet("Physical")
-    ws_physical.append(["Parameter", "Value"])
-    
-    physical = data.get("physical", {})
-    for field, value in [
-        ("Dimensions", physical.get("dimensions", "N/A")),
-        ("Weight", physical.get("weight", "N/A")),
-        ("Materials", physical.get("materials", "N/A")),
-        ("Connections", physical.get("connections", "N/A"))
-    ]:
-        ws_physical.append([field, value])
-    
-    style_header(ws_physical)
-    style_data(ws_physical)
-    ws_physical.column_dimensions['A'].width = 15
-    ws_physical.column_dimensions['B'].width = 50
-    
-    # === PERFORMANCE Sheet ===
-    ws_perf = wb.create_sheet("Performance")
-    ws_perf.append(["Parameter", "Value"])
-    
-    perf = data.get("performance", {})
-    for field, value in [
-        ("Power Requirements", perf.get("power", "N/A")),
-        ("Speed/RPM", perf.get("speed", "N/A")),
-        ("Efficiency", perf.get("efficiency", "N/A")),
-        ("Head/DP", perf.get("head_dp", "N/A")),
-        ("Cv/Kv", perf.get("cv_kv", "N/A"))
-    ]:
-        ws_perf.append([field, value])
-    
-    style_header(ws_perf)
-    style_data(ws_perf)
-    ws_perf.column_dimensions['A'].width = 18
-    ws_perf.column_dimensions['B'].width = 35
-    
-    # === ALL SPECS Sheet ===
-    ws_specs = wb.create_sheet("All Specifications")
-    ws_specs.append(["Parameter", "Value", "Unit"])
-    
-    for spec in data.get("all_specs", []):
-        ws_specs.append([
-            spec.get("parameter", ""),
-            spec.get("value", ""),
-            spec.get("unit", "")
-        ])
-    
-    style_header(ws_specs)
-    style_data(ws_specs)
-    ws_specs.column_dimensions['A'].width = 30
-    ws_specs.column_dimensions['B'].width = 25
-    ws_specs.column_dimensions['C'].width = 15
-    
-    # === SUMMARY Sheet ===
-    ws_summary = wb.create_sheet("Summary")
-    ws_summary.append(["Datasheet Extraction Summary"])
-    ws_summary['A1'].font = Font(bold=True, size=14)
-    ws_summary.append([])
-    ws_summary.append(["Generated:", datetime.now().strftime("%Y-%m-%d %H:%M:%S")])
-    ws_summary.append(["Source File:", filename])
-    ws_summary.append([])
-    ws_summary.append(["Summary:", data.get("summary", "N/A")])
-    ws_summary.append([])
-    ws_summary.append(["Certifications:"])
-    for cert in data.get("certifications", []):
-        ws_summary.append(["  •", cert])
-    ws_summary.append([])
-    ws_summary.append(["Notes:"])
-    for note in data.get("notes", []):
-        ws_summary.append(["  •", note])
-    
-    ws_summary.column_dimensions['A'].width = 15
-    ws_summary.column_dimensions['B'].width = 60
-    
-    # Save to temp file
-    output_path = tempfile.mktemp(suffix=".xlsx")
-    wb.save(output_path)
-    
-    return output_path
 
 
 @app.get("/health")
 async def health():
     """Health check endpoint"""
-    api_key = os.environ.get("MYKEY_XYZ123") or os.environ.get("KU_OPENAI_SECRET") or os.environ.get("OPENAI_API_KEY", "")
     return {
-        "status": "healthy", 
-        "service": "KU Automation API", 
-        "features": ["pid_parser", "rfq_analyzer", "datasheet_parser", "cost_estimation"],
-        "openai_configured": bool(api_key),
-        "key_prefix": api_key[:7] + "..." if len(api_key) > 7 else "not set"
+        "status": "healthy",
+        "service": "P&ID Parser",
+        "version": "2.0",
+        "features": ["extraction", "cost_estimation", "pdf_support" if PDF_SUPPORT else "images_only", "tiling"]
     }
 
 
+# Demo mock data
+DEMO_MOCK_DATA = {
+    "equipment": [
+        {"tag": "V-101", "type": "Pressure Vessel", "description": "High Pressure Separator", "size": "2400mm x 6000mm", "material": "CS"},
+        {"tag": "V-102", "type": "Pressure Vessel", "description": "Low Pressure Separator", "size": "1800mm x 4500mm", "material": "CS"},
+        {"tag": "P-101A/B", "type": "Centrifugal Pump", "description": "Crude Oil Transfer Pump", "size": "150 m³/h", "material": "CS"},
+        {"tag": "E-101", "type": "Heat Exchanger", "description": "Feed/Effluent Exchanger", "size": "500 m²", "material": "CS/SS"},
+        {"tag": "C-101", "type": "Compressor", "description": "Gas Booster Compressor", "size": "2000 kW", "material": "CS"},
+        {"tag": "T-101", "type": "Storage Tank", "description": "Crude Oil Storage Tank", "size": "5000 m³", "material": "CS"}
+    ],
+    "valves": [
+        {"tag": "XV-101", "type": "Ball Valve", "size": "6\"", "line_number": "6\"-P-101", "actuator": "Pneumatic", "fail_position": "FC"},
+        {"tag": "PV-102", "type": "Control Valve", "size": "4\"", "line_number": "4\"-P-102", "actuator": "Pneumatic", "fail_position": "FO"},
+        {"tag": "PSV-101", "type": "Relief Valve", "size": "3\"", "line_number": "3\"-P-103", "actuator": "Self-acting", "fail_position": ""},
+        {"tag": "CV-103", "type": "Check Valve", "size": "6\"", "line_number": "6\"-P-101", "actuator": "", "fail_position": ""},
+        {"tag": "HV-104", "type": "Gate Valve", "size": "8\"", "line_number": "8\"-CW-201", "actuator": "Manual", "fail_position": ""},
+        {"tag": "SDV-101", "type": "Shutdown Valve", "size": "6\"", "line_number": "6\"-P-101", "actuator": "Pneumatic", "fail_position": "FC"}
+    ],
+    "instruments": [
+        {"tag": "PT-101", "type": "Pressure", "function": "Transmitter", "location": "Field", "setpoint": ""},
+        {"tag": "LT-101", "type": "Level", "function": "Transmitter", "location": "Field", "setpoint": ""},
+        {"tag": "FT-101", "type": "Flow", "function": "Transmitter", "location": "Field", "setpoint": ""},
+        {"tag": "TT-101", "type": "Temperature", "function": "Transmitter", "location": "Field", "setpoint": ""},
+        {"tag": "PI-102", "type": "Pressure", "function": "Indicator", "location": "Field", "setpoint": ""},
+        {"tag": "LAH-101", "type": "Level", "function": "High Alarm", "location": "DCS", "setpoint": "80%"},
+        {"tag": "PSHH-101", "type": "Pressure", "function": "High-High Switch", "location": "Field", "setpoint": "25 barg"}
+    ],
+    "lines": [
+        {"line_number": "6\"-P-101", "size": "6\"", "service": "Crude Oil", "spec": "A1A", "insulation": "", "from_equipment": "V-101", "to_equipment": "P-101A/B"},
+        {"line_number": "4\"-P-102", "size": "4\"", "service": "Produced Water", "spec": "A1A", "insulation": "", "from_equipment": "V-102", "to_equipment": "T-102"},
+        {"line_number": "8\"-CW-201", "size": "8\"", "service": "Cooling Water", "spec": "B1A", "insulation": "", "from_equipment": "E-101", "to_equipment": "Utility Header"},
+        {"line_number": "3\"-FG-101", "size": "3\"", "service": "Fuel Gas", "spec": "C1A", "insulation": "", "from_equipment": "V-101", "to_equipment": "Flare"},
+        {"line_number": "10\"-P-103", "size": "10\"", "service": "Feed", "spec": "A1A", "insulation": "Hot", "from_equipment": "Header", "to_equipment": "V-101"}
+    ],
+    "notes": [
+        "Design Pressure: 25 barg",
+        "Design Temperature: 80°C",
+        "Hazardous Area Classification: Zone 1"
+    ],
+    "summary": "This P&ID shows a typical oil & gas production facility with high and low pressure separators, transfer pumps, heat exchanger, and associated instrumentation. The system handles crude oil separation with produced water and gas handling facilities."
+}
+
+
+# ============================================================================
+# RFQ AND DATASHEET ENDPOINTS
+# ============================================================================
+
+RFQ_EXTRACTION_PROMPT = """You are an expert tender/RFQ analyst for oil & gas, EPC, and industrial projects.
+
+Analyze the uploaded RFQ/ITB/tender document and extract ALL relevant information.
+
+Return a JSON object with these sections:
+{
+  "overview": {
+    "document_type": "RFQ/ITB/Tender/Quote Request/etc.",
+    "reference_number": "Document reference or tender number",
+    "issuing_company": "Company issuing the RFQ",
+    "project_name": "Project name if mentioned",
+    "project_location": "Site/location"
+  },
+  "key_dates": {
+    "submission_deadline": "Final submission date/time",
+    "validity_period": "Quote validity required",
+    "clarification_deadline": "Last date for questions",
+    "delivery_date": "Required delivery date"
+  },
+  "scope_items": [
+    {"item_no": "1", "description": "Item description", "quantity": "Qty with unit", "specifications": "Key specs"}
+  ],
+  "technical_requirements": {
+    "standards": ["API 610", "ASME VIII", "etc."],
+    "certifications": ["ISO 9001", "ATEX", "etc."],
+    "documentation": ["GA drawings", "Test certs", "Manuals"]
+  },
+  "commercial_terms": {
+    "payment_terms": "Payment conditions",
+    "incoterms": "Delivery terms (FOB, CIF, etc.)",
+    "warranty": "Warranty requirements"
+  },
+  "summary": "Brief summary of the RFQ"
+}
+
+Return ONLY the JSON."""
+
+
+DATASHEET_EXTRACTION_PROMPT = """You are an expert equipment datasheet analyzer for industrial equipment.
+
+Analyze the uploaded equipment datasheet and extract ALL specifications.
+
+Return a JSON object:
+{
+  "general": {
+    "manufacturer": "Equipment manufacturer/vendor",
+    "model": "Model number",
+    "tag_number": "Equipment tag if shown",
+    "equipment_type": "Pump/Valve/Exchanger/Instrument/etc.",
+    "service": "Service description"
+  },
+  "operating_conditions": {
+    "design_pressure": "Design pressure with unit",
+    "operating_pressure": "Operating pressure with unit",
+    "design_temperature": "Design temperature with unit",
+    "operating_temperature": "Operating temperature with unit",
+    "flow_rate": "Flow rate with unit"
+  },
+  "physical": {
+    "dimensions": "Overall dimensions",
+    "weight": "Weight",
+    "materials": "Key materials",
+    "connections": "Inlet/outlet connections"
+  },
+  "all_specs": [
+    {"parameter": "Parameter name", "value": "Value", "unit": "Unit"}
+  ],
+  "summary": "Brief summary"
+}
+
+Return ONLY the JSON."""
+
+
+def create_rfq_excel(data: dict, filename: str) -> str:
+    """Generate RFQ Excel report"""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Overview"
+    overview = data.get("overview", {})
+    ws.append(["RFQ Analysis"])
+    ws['A1'].font = Font(bold=True, size=16)
+    ws.append([])
+    for k, v in overview.items():
+        ws.append([k.replace("_", " ").title(), v])
+    
+    ws_s = wb.create_sheet("Scope Items")
+    ws_s.append(["Item No", "Description", "Quantity", "Specifications"])
+    for item in data.get("scope_items", []):
+        ws_s.append([item.get("item_no", ""), item.get("description", ""),
+                     item.get("quantity", ""), item.get("specifications", "")])
+    
+    output = tempfile.mktemp(suffix=".xlsx")
+    wb.save(output)
+    return output
+
+
+def create_datasheet_excel(data: dict, filename: str) -> str:
+    """Generate Datasheet Excel report"""
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Specifications"
+    ws.append(["Datasheet Analysis"])
+    ws['A1'].font = Font(bold=True, size=16)
+    ws.append([])
+    
+    for section in ["general", "operating_conditions", "physical"]:
+        ws.append([section.upper().replace("_", " ")])
+        for k, v in data.get(section, {}).items():
+            ws.append([k.replace("_", " ").title(), v])
+        ws.append([])
+    
+    ws_a = wb.create_sheet("All Specs")
+    ws_a.append(["Parameter", "Value", "Unit"])
+    for spec in data.get("all_specs", []):
+        ws_a.append([spec.get("parameter", ""), spec.get("value", ""), spec.get("unit", "")])
+    
+    output = tempfile.mktemp(suffix=".xlsx")
+    wb.save(output)
+    return output
+
+
+@app.post("/api/parse-rfq")
+async def parse_rfq(file: UploadFile = File(...)):
+    """RFQ/Tender Analysis"""
+    content_type = file.content_type or ""
+    allowed = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if content_type not in allowed:
+        raise HTTPException(400, f"Invalid file type")
+    
+    content = await file.read()
+    if len(content) > 20 * 1024 * 1024:
+        raise HTTPException(400, "File too large")
+    
+    try:
+        if "pdf" in content_type and PDF_SUPPORT:
+            images = pdf_to_images(content, dpi=150)
+            img_b64 = image_to_base64(images[0])
+            media = "image/png"
+        else:
+            img_b64 = base64.b64encode(content).decode('utf-8')
+            media = content_type
+        
+        extracted = analyze_image_with_vision(img_b64, RFQ_EXTRACTION_PROMPT, media)
+        
+        excel_path = create_rfq_excel(extracted, file.filename)
+        with open(excel_path, "rb") as f:
+            excel_b64 = base64.b64encode(f.read()).decode('utf-8')
+        os.unlink(excel_path)
+        
+        return {
+            "success": True,
+            "data": extracted,
+            "excel": excel_b64,
+            "filename": f"RFQ_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        }
+    except Exception as e:
+        raise HTTPException(500, f"Analysis failed: {e}")
+
+
+@app.post("/api/parse-datasheet")
+async def parse_datasheet(file: UploadFile = File(...)):
+    """Equipment Datasheet Analysis"""
+    content_type = file.content_type or ""
+    allowed = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if content_type not in allowed:
+        raise HTTPException(400, f"Invalid file type")
+    
+    content = await file.read()
+    if len(content) > 20 * 1024 * 1024:
+        raise HTTPException(400, "File too large")
+    
+    try:
+        if "pdf" in content_type and PDF_SUPPORT:
+            images = pdf_to_images(content, dpi=150)
+            img_b64 = image_to_base64(images[0])
+            media = "image/png"
+        else:
+            img_b64 = base64.b64encode(content).decode('utf-8')
+            media = content_type
+        
+        extracted = analyze_image_with_vision(img_b64, DATASHEET_EXTRACTION_PROMPT, media)
+        
+        excel_path = create_datasheet_excel(extracted, file.filename)
+        with open(excel_path, "rb") as f:
+            excel_b64 = base64.b64encode(f.read()).decode('utf-8')
+        os.unlink(excel_path)
+        
+        return {
+            "success": True,
+            "data": extracted,
+            "excel": excel_b64,
+            "filename": f"Datasheet_Extract_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        }
+    except Exception as e:
+        raise HTTPException(500, f"Analysis failed: {e}")
+
+
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    uvicorn.run(app, host="0.0.0.0", port=port)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
