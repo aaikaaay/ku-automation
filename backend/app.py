@@ -1222,5 +1222,378 @@ async def parse_datasheet(file: UploadFile = File(...)):
         raise HTTPException(500, f"Analysis failed: {e}")
 
 
+# ============================================================================
+# TENDER RESPONSE GENERATOR
+# ============================================================================
+
+TENDER_ANALYSIS_PROMPT = """You are an expert tender/RFQ analyst for oil & gas, EPC, and industrial projects.
+
+Analyze this tender/RFQ document THOROUGHLY. Read ALL text including:
+- Tables (line items, quantities, specifications)
+- Requirements sections
+- Technical specifications
+- Commercial terms
+- Deadlines and dates
+- Compliance requirements
+
+Extract EVERY detail into this JSON structure:
+
+{
+  "overview": {
+    "document_type": "RFQ/ITB/Tender/etc.",
+    "reference_number": "Document reference",
+    "issuing_company": "Company name",
+    "project_name": "Project name",
+    "project_location": "Location",
+    "issue_date": "When issued",
+    "currency": "Currency for pricing"
+  },
+  "key_dates": {
+    "submission_deadline": "Date and time",
+    "clarification_deadline": "Last date for questions",
+    "validity_period": "Quote validity required",
+    "delivery_date": "Required delivery",
+    "site_visit": "If applicable"
+  },
+  "scope_of_work": {
+    "summary": "Brief description of overall scope",
+    "line_items": [
+      {
+        "item_no": "1",
+        "description": "Detailed item description",
+        "quantity": "Qty with unit",
+        "unit": "EA/SET/LOT/m/kg",
+        "specifications": "Technical specs",
+        "material": "If specified",
+        "standard": "Applicable standard"
+      }
+    ],
+    "services_included": ["Installation", "Commissioning", "Training", "etc."],
+    "exclusions": ["What is NOT included"]
+  },
+  "technical_requirements": {
+    "standards": ["API 610", "ASME B31.3", "etc."],
+    "certifications": ["ISO 9001", "ATEX", "etc."],
+    "testing": ["FAT", "Hydro test", "etc."],
+    "documentation": ["Drawings", "MDR", "Test certs", "Manuals"],
+    "materials": ["Specific material requirements"],
+    "special_requirements": ["Any special technical needs"]
+  },
+  "commercial_terms": {
+    "payment_terms": "Payment conditions",
+    "incoterms": "FOB/CIF/DDP etc.",
+    "warranty": "Warranty period required",
+    "liquidated_damages": "LD clause details",
+    "performance_bond": "If required",
+    "insurance": "Insurance requirements",
+    "price_validity": "How long prices must be valid"
+  },
+  "submission_requirements": {
+    "format": "How to submit (email/portal/sealed)",
+    "documents_required": ["Technical proposal", "Commercial proposal", "etc."],
+    "contact_person": "Name and contact",
+    "queries_to": "Who to send questions to"
+  },
+  "evaluation_criteria": [
+    {"criterion": "Technical compliance", "weight": "40%"},
+    {"criterion": "Price", "weight": "40%"}
+  ],
+  "compliance_checklist": [
+    {"requirement": "Specific requirement from document", "mandatory": true}
+  ],
+  "risks_identified": [
+    "Potential risk or concern noted in the tender"
+  ],
+  "summary": "Comprehensive 3-4 sentence summary of this tender"
+}
+
+Be EXHAUSTIVE - extract every line item, every specification, every date. Missing details = lost bid.
+Return ONLY the JSON."""
+
+
+TENDER_RESPONSE_PROMPT = """You are an expert bid manager for an engineering company (KU Automation) responding to tenders.
+
+Based on the extracted tender requirements below, generate a PROFESSIONAL and DETAILED tender response.
+
+EXTRACTED TENDER DATA:
+{tender_data}
+
+Generate a comprehensive response with these sections:
+
+{{
+  "executive_summary": {{
+    "title": "Executive Summary",
+    "content": "2-3 paragraphs introducing the company, expressing interest, and highlighting key strengths relevant to this tender. Be specific to the requirements."
+  }},
+  "technical_proposal": {{
+    "title": "Technical Proposal",
+    "scope_understanding": "Demonstrate understanding of the scope",
+    "proposed_solution": "Detailed technical approach for each line item",
+    "methodology": "How the work will be executed",
+    "quality_assurance": "QA/QC approach",
+    "schedule": "Proposed timeline with milestones"
+  }},
+  "compliance_matrix": {{
+    "title": "Compliance Matrix",
+    "items": [
+      {{
+        "requirement": "Requirement from tender",
+        "compliance": "FULL/PARTIAL/DEVIATION",
+        "response": "How we comply or explanation of deviation"
+      }}
+    ]
+  }},
+  "commercial_summary": {{
+    "title": "Commercial Summary",
+    "pricing_notes": "Notes about pricing approach",
+    "payment_terms": "Proposed payment terms",
+    "validity": "Price validity period",
+    "delivery": "Delivery terms and timeline",
+    "exclusions": ["What is not included in price"]
+  }},
+  "company_profile": {{
+    "title": "Company Profile",
+    "about": "Brief company introduction - KU Automation specializes in AI automation for engineering",
+    "relevant_experience": ["Similar projects completed"],
+    "certifications": ["ISO 9001", "etc."],
+    "key_personnel": "Team that will execute"
+  }},
+  "risks_mitigations": {{
+    "title": "Risk Assessment",
+    "items": [
+      {{
+        "risk": "Identified risk",
+        "mitigation": "How we will address it"
+      }}
+    ]
+  }},
+  "action_items": [
+    "Clarifications needed from client",
+    "Information to be provided"
+  ]
+}}
+
+Make the response SPECIFIC to the tender requirements - not generic boilerplate.
+Return ONLY the JSON."""
+
+
+@app.post("/api/analyze-tender")
+async def analyze_tender(file: UploadFile = File(...)):
+    """Deep tender analysis - extracts all details from tender document"""
+    content_type = file.content_type or ""
+    filename = file.filename or ""
+    
+    # Fallback content type detection
+    if not content_type or content_type == "application/octet-stream":
+        ext = filename.lower().split(".")[-1] if "." in filename else ""
+        content_type = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
+                        "webp": "image/webp", "pdf": "application/pdf"}.get(ext, content_type)
+    
+    allowed = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if content_type not in allowed:
+        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed)}")
+    
+    content = await file.read()
+    if len(content) > 50 * 1024 * 1024:
+        raise HTTPException(400, "File too large. Max 50MB.")
+    
+    print(f"[TENDER] Analyzing: {filename} ({len(content)} bytes)")
+    
+    try:
+        # Process file - handle multi-page PDFs
+        if "pdf" in content_type and PDF_SUPPORT:
+            images = pdf_to_images(content, dpi=200)
+            print(f"[TENDER] PDF has {len(images)} pages")
+            
+            # For multi-page PDFs, analyze each page and merge
+            all_extractions = []
+            for i, img in enumerate(images[:10]):  # Max 10 pages
+                print(f"[TENDER] Analyzing page {i+1}...")
+                img_b64 = image_to_base64(img)
+                try:
+                    page_data = analyze_image_with_vision(img_b64, TENDER_ANALYSIS_PROMPT, "image/png")
+                    all_extractions.append(page_data)
+                except Exception as e:
+                    print(f"[TENDER] Page {i+1} failed: {e}")
+            
+            # Merge all page extractions
+            if all_extractions:
+                extracted = merge_tender_extractions(all_extractions)
+            else:
+                raise HTTPException(500, "Failed to extract from any page")
+        else:
+            img_b64 = base64.b64encode(content).decode('utf-8')
+            media = "application/pdf" if "pdf" in content_type else content_type
+            extracted = analyze_image_with_vision(img_b64, TENDER_ANALYSIS_PROMPT, media)
+        
+        print(f"[TENDER] Extraction complete")
+        
+        return {
+            "success": True,
+            "data": extracted,
+            "page_count": len(images) if "pdf" in content_type and PDF_SUPPORT else 1
+        }
+        
+    except Exception as e:
+        print(f"[TENDER ERROR] {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(500, f"Analysis failed: {e}")
+
+
+@app.post("/api/generate-tender-response")
+async def generate_tender_response(
+    file: UploadFile = File(None),
+    tender_text: str = Form(None)
+):
+    """Generate AI tender response from document or text"""
+    
+    extracted_data = None
+    
+    # If file provided, analyze it first
+    if file and file.filename:
+        content_type = file.content_type or ""
+        filename = file.filename or ""
+        
+        if not content_type or content_type == "application/octet-stream":
+            ext = filename.lower().split(".")[-1] if "." in filename else ""
+            content_type = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
+                            "webp": "image/webp", "pdf": "application/pdf"}.get(ext, content_type)
+        
+        content = await file.read()
+        print(f"[TENDER-RESP] Processing file: {filename}")
+        
+        try:
+            if "pdf" in content_type and PDF_SUPPORT:
+                images = pdf_to_images(content, dpi=200)
+                all_extractions = []
+                for i, img in enumerate(images[:10]):
+                    img_b64 = image_to_base64(img)
+                    try:
+                        page_data = analyze_image_with_vision(img_b64, TENDER_ANALYSIS_PROMPT, "image/png")
+                        all_extractions.append(page_data)
+                    except:
+                        pass
+                if all_extractions:
+                    extracted_data = merge_tender_extractions(all_extractions)
+            else:
+                img_b64 = base64.b64encode(content).decode('utf-8')
+                extracted_data = analyze_image_with_vision(img_b64, TENDER_ANALYSIS_PROMPT, content_type)
+        except Exception as e:
+            print(f"[TENDER-RESP] Extraction failed: {e}")
+    
+    # If text provided (or extraction failed), use that
+    if not extracted_data and tender_text:
+        # Try to parse as JSON first
+        try:
+            extracted_data = json.loads(tender_text)
+        except:
+            # Treat as raw text - create a simple structure
+            extracted_data = {
+                "overview": {"summary": "Tender requirements as provided"},
+                "scope_of_work": {"summary": tender_text[:2000]},
+                "raw_text": tender_text
+            }
+    
+    if not extracted_data:
+        raise HTTPException(400, "Please provide a file or tender text")
+    
+    print(f"[TENDER-RESP] Generating response...")
+    
+    # Generate the response
+    try:
+        prompt = TENDER_RESPONSE_PROMPT.format(tender_data=json.dumps(extracted_data, indent=2))
+        
+        response = get_openai_client().chat.completions.create(
+            model="gpt-4o",
+            messages=[{"role": "user", "content": prompt}],
+            max_tokens=4096,
+            temperature=0.3
+        )
+        
+        response_data = parse_json_response(response.choices[0].message.content)
+        
+        print(f"[TENDER-RESP] Response generated")
+        
+        return {
+            "success": True,
+            "extracted": extracted_data,
+            "response": response_data
+        }
+        
+    except Exception as e:
+        print(f"[TENDER-RESP ERROR] {e}")
+        raise HTTPException(500, f"Response generation failed: {e}")
+
+
+def merge_tender_extractions(extractions: List[dict]) -> dict:
+    """Merge tender extractions from multiple pages"""
+    if not extractions:
+        return {}
+    
+    if len(extractions) == 1:
+        return extractions[0]
+    
+    # Start with first page as base
+    merged = extractions[0].copy()
+    
+    # Merge line items from all pages
+    all_line_items = []
+    all_compliance = []
+    all_risks = []
+    
+    for ext in extractions:
+        # Merge scope line items
+        scope = ext.get("scope_of_work", {})
+        if isinstance(scope, dict):
+            items = scope.get("line_items", [])
+            if isinstance(items, list):
+                all_line_items.extend(items)
+        
+        # Merge compliance checklist
+        compliance = ext.get("compliance_checklist", [])
+        if isinstance(compliance, list):
+            all_compliance.extend(compliance)
+        
+        # Merge risks
+        risks = ext.get("risks_identified", [])
+        if isinstance(risks, list):
+            all_risks.extend(risks)
+        
+        # Update overview if empty in base
+        overview = ext.get("overview", {})
+        if isinstance(overview, dict):
+            base_overview = merged.get("overview", {})
+            for k, v in overview.items():
+                if v and (not base_overview.get(k) or base_overview.get(k) == "N/A"):
+                    base_overview[k] = v
+            merged["overview"] = base_overview
+        
+        # Update key dates
+        dates = ext.get("key_dates", {})
+        if isinstance(dates, dict):
+            base_dates = merged.get("key_dates", {})
+            for k, v in dates.items():
+                if v and (not base_dates.get(k) or base_dates.get(k) == "N/A"):
+                    base_dates[k] = v
+            merged["key_dates"] = base_dates
+    
+    # Deduplicate line items by item_no
+    seen_items = {}
+    for item in all_line_items:
+        key = item.get("item_no", str(len(seen_items)))
+        if key not in seen_items:
+            seen_items[key] = item
+    
+    # Update merged with combined data
+    if "scope_of_work" not in merged:
+        merged["scope_of_work"] = {}
+    merged["scope_of_work"]["line_items"] = list(seen_items.values())
+    merged["compliance_checklist"] = list({str(c): c for c in all_compliance}.values())
+    merged["risks_identified"] = list(set(all_risks))
+    
+    return merged
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

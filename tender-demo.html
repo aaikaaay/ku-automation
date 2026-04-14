@@ -1,168 +1,726 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Tender Response Demo | KU Automation</title>
+    <title>AI Tender Response Generator | KU Automation</title>
+    <meta name="description" content="Upload a tender/RFQ document and let AI generate a comprehensive, professional bid response. Extracts all requirements and creates tailored responses.">
+    
+    <link rel="canonical" href="https://www.ku-automation.com/tender-demo">
+    
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .typing-animation::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-        .fade-in {
-            animation: fadeIn 0.5s ease-in;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        .gradient-text { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .drop-zone { transition: all 0.3s ease; }
+        .drop-zone.drag-over { border-color: #6366f1; background-color: #eef2ff; }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .section-card { transition: all 0.3s ease; }
+        .section-card:hover { transform: translateY(-2px); box-shadow: 0 10px 40px -10px rgba(0,0,0,0.1); }
     </style>
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen">
+<body class="bg-gray-50 min-h-screen">
     <!-- Header -->
-    <header class="bg-gray-800 border-b border-gray-700">
-        <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <span class="text-white font-bold text-xl">KU</span>
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
+                    <div>
+                        <span class="font-bold text-lg block text-gray-900">Tender Response Generator <span class="text-xs font-normal text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full">v2.0</span></span>
+                        <span class="text-xs text-gray-500">by KU Automation</span>
+                    </div>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <a href="demos.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">← All Demos</a>
+                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all text-sm shadow-lg shadow-primary-500/25">
+                        Get Custom Version
+                    </a>
                 </div>
-                <span class="text-xl font-semibold">KU Automation</span>
             </div>
-            <a href="index.html" class="text-gray-400 hover:text-white transition">← Back to Home</a>
         </div>
-    </header>
+    </nav>
 
-    <main class="max-w-7xl mx-auto px-4 py-12">
+    <main class="max-w-7xl mx-auto px-6 py-12">
         <!-- Hero -->
         <div class="text-center mb-12">
-            <span class="inline-block px-4 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium mb-4">
-                Interactive Demo
-            </span>
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium mb-6">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                Live Demo — Try It Now
+            </div>
             <h1 class="text-4xl md:text-5xl font-bold mb-4">
-                AI-Powered <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">Tender Response</span>
+                Generate <span class="gradient-text">Tender Responses</span> with AI
             </h1>
-            <p class="text-xl text-gray-400 max-w-2xl mx-auto">
-                See how AI can analyze RFQ requirements and generate structured responses in seconds, not hours.
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                Upload your RFQ/tender document. AI extracts all requirements, line items, and deadlines — then generates a professional, tailored bid response.
             </p>
+            <div class="mt-4 flex items-center justify-center gap-4 text-sm text-gray-500">
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Multi-page PDFs
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Table Extraction
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Compliance Matrix
+                </span>
+            </div>
         </div>
 
-        <div class="grid lg:grid-cols-2 gap-8">
-            <!-- Input Panel -->
-            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                <h2 class="text-lg font-semibold mb-4 flex items-center">
-                    <span class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center mr-3 text-sm">1</span>
-                    Paste Tender Requirements (or upload PDF)
-                </h2>
-
-                <!-- Upload (optional) -->
-                <div class="mb-4">
-                    <input type="file" id="tenderFile" accept=".pdf,.jpg,.jpeg,.png,.webp" class="hidden" />
-                    <button type="button" onclick="document.getElementById('tenderFile').click()" class="w-full py-2.5 bg-gray-900 border border-gray-600 rounded-lg text-gray-200 hover:border-blue-500 hover:text-white transition flex items-center justify-center">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-                        </svg>
-                        Upload PDF (or image)
-                    </button>
-                    <div id="uploadStatus" class="mt-2 text-xs text-gray-400">Supported: PDF (up to 10 pages) + JPG/PNG/WebP (max 20MB). PDFs are converted to images server-side.</div>
-                </div>
-
-                <textarea 
-                    id="tenderInput"
-                    class="w-full h-64 bg-gray-900 border border-gray-600 rounded-lg p-4 text-gray-100 placeholder-gray-500 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none resize-none"
-                    placeholder="Paste your RFQ/tender requirements here...
-
-Tip: You can also upload a PDF above to auto-fill this box.
-
-Example:
-REQUEST FOR QUOTATION - Offshore Platform Piping Modification
-
-Scope: Design and supply of 6&quot; carbon steel piping system for produced water handling. Must comply with ASME B31.3 and client specifications. Delivery to Singapore within 12 weeks.
-
-Requirements:
-- Material: ASTM A106 Grade B
-- Design Pressure: 150 PSI
-- Design Temperature: 200°F
-- Quantity: Approximately 500 meters
-- Include all fittings, flanges, and supports"></textarea>
+        <!-- Upload Section -->
+        <div id="uploadSection" class="max-w-2xl mx-auto">
+            <div 
+                id="dropZone" 
+                class="drop-zone border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center bg-white cursor-pointer hover:border-primary-500 hover:bg-primary-50/30 shadow-sm"
+                onclick="document.getElementById('fileInput').click()"
+            >
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.pdf" class="hidden" onchange="handleFileSelect(event)">
                 
-                <button 
-                    id="analyzeBtn"
-                    onclick="analyzeTender()"
-                    class="mt-4 w-full py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition transform hover:scale-[1.02] flex items-center justify-center">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                     </svg>
-                    Analyze with AI
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Drop your Tender/RFQ here</h3>
+                <p class="text-gray-500 mb-4">or click to browse</p>
+                <p class="text-sm text-gray-400">Supports: JPG, PNG, PDF (multi-page)</p>
+            </div>
+
+            <!-- File Preview -->
+            <div id="filePreview" class="hidden mt-6 bg-white rounded-xl p-4 border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-500" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6zm-1 2l5 5h-5V4zm-3 9h2v4h2v2H8v-2h2v-2H8v-2h2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p id="fileName" class="font-medium text-gray-900">filename.pdf</p>
+                            <p id="fileSize" class="text-sm text-gray-500">2.4 MB</p>
+                        </div>
+                    </div>
+                    <button onclick="clearFile()" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Analyze Button -->
+            <button 
+                id="analyzeBtn" 
+                onclick="analyzeTender()" 
+                disabled
+                class="w-full mt-6 py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-primary-500/25"
+            >
+                <span id="btnText">Analyze & Generate Response</span>
+                <span id="btnLoading" class="hidden">
+                    <svg class="inline w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Analyzing tender...
+                </span>
+            </button>
+
+            <!-- Progress Section -->
+            <div id="progressSection" class="hidden mt-6 bg-white rounded-xl p-6 border border-gray-200">
+                <div class="space-y-3">
+                    <div id="step1" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">1</div>
+                        <span>Reading document pages</span>
+                    </div>
+                    <div id="step2" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">2</div>
+                        <span>Extracting tables & line items</span>
+                    </div>
+                    <div id="step3" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">3</div>
+                        <span>Identifying requirements & deadlines</span>
+                    </div>
+                    <div id="step4" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">4</div>
+                        <span>Generating tailored response</span>
+                    </div>
+                    <div id="step5" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">5</div>
+                        <span>Building compliance matrix</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">Multi-page tenders may take 60-120 seconds...</p>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden mt-12 fade-in">
+            <!-- Stats -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center">
+                    <div id="countItems" class="text-3xl font-bold text-primary-600">0</div>
+                    <div class="text-gray-500">Line Items</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center">
+                    <div id="countRequirements" class="text-3xl font-bold text-purple-600">0</div>
+                    <div class="text-gray-500">Requirements</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center">
+                    <div id="countCompliance" class="text-3xl font-bold text-green-600">0</div>
+                    <div class="text-gray-500">Compliance Items</div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center">
+                    <div id="countPages" class="text-3xl font-bold text-blue-600">0</div>
+                    <div class="text-gray-500">Pages Analyzed</div>
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="flex border-b border-gray-200 mb-6">
+                <button onclick="showTab('extracted')" id="tabExtracted" class="tab-btn px-6 py-3 font-medium text-primary-600 border-b-2 border-primary-600">
+                    Extracted Data
+                </button>
+                <button onclick="showTab('response')" id="tabResponse" class="tab-btn px-6 py-3 font-medium text-gray-500 hover:text-gray-700">
+                    Generated Response
                 </button>
             </div>
 
-            <!-- Output Panel -->
-            <div class="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                <h2 class="text-lg font-semibold mb-4 flex items-center">
-                    <span class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center mr-3 text-sm">2</span>
-                    AI-Generated Response
-                </h2>
-                
-                <div id="outputArea" class="space-y-4">
-                    <div class="h-64 flex items-center justify-center text-gray-500">
-                        <div class="text-center">
-                            <svg class="w-16 h-16 mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
-                            </svg>
-                            <p>Paste requirements and click "Analyze" to see AI in action</p>
-                        </div>
+            <!-- Extracted Data Tab -->
+            <div id="extractedTab" class="space-y-6">
+                <!-- Overview -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-gray-50 border-b border-gray-200">
+                        <h3 class="font-semibold text-gray-900">📋 Tender Overview</h3>
+                    </div>
+                    <div id="overviewContent" class="p-6">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Key Dates -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-yellow-50 border-b border-yellow-100">
+                        <h3 class="font-semibold text-yellow-800">📅 Key Dates & Deadlines</h3>
+                    </div>
+                    <div id="datesContent" class="p-6">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Scope / Line Items -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-blue-50 border-b border-blue-100">
+                        <h3 class="font-semibold text-blue-800">📦 Scope of Work & Line Items</h3>
+                    </div>
+                    <div id="scopeContent" class="p-6 overflow-x-auto">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Technical Requirements -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-purple-50 border-b border-purple-100">
+                        <h3 class="font-semibold text-purple-800">⚙️ Technical Requirements</h3>
+                    </div>
+                    <div id="technicalContent" class="p-6">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Commercial Terms -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-green-50 border-b border-green-100">
+                        <h3 class="font-semibold text-green-800">💰 Commercial Terms</h3>
+                    </div>
+                    <div id="commercialContent" class="p-6">
+                        <!-- Filled by JS -->
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Stats Bar -->
-        <div id="statsBar" class="hidden mt-8 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/30 rounded-xl p-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                <div>
-                    <div class="text-3xl font-bold text-blue-400" id="timeSaved">--</div>
-                    <div class="text-gray-400 text-sm">Hours Saved</div>
+            <!-- Response Tab -->
+            <div id="responseTab" class="hidden space-y-6">
+                <!-- Executive Summary -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-primary-50 border-b border-primary-100">
+                        <h3 class="font-semibold text-primary-800">📝 Executive Summary</h3>
+                    </div>
+                    <div id="execSummaryContent" class="p-6 prose max-w-none">
+                        <!-- Filled by JS -->
+                    </div>
                 </div>
-                <div>
-                    <div class="text-3xl font-bold text-purple-400" id="sectionsGen">--</div>
-                    <div class="text-gray-400 text-sm">Sections Generated</div>
+
+                <!-- Technical Proposal -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-blue-50 border-b border-blue-100">
+                        <h3 class="font-semibold text-blue-800">⚙️ Technical Proposal</h3>
+                    </div>
+                    <div id="technicalProposalContent" class="p-6 prose max-w-none">
+                        <!-- Filled by JS -->
+                    </div>
                 </div>
-                <div>
-                    <div class="text-3xl font-bold text-green-400" id="complianceItems">--</div>
-                    <div class="text-gray-400 text-sm">Compliance Items</div>
+
+                <!-- Compliance Matrix -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-green-50 border-b border-green-100">
+                        <h3 class="font-semibold text-green-800">✅ Compliance Matrix</h3>
+                    </div>
+                    <div id="complianceMatrixContent" class="p-6 overflow-x-auto">
+                        <!-- Filled by JS -->
+                    </div>
                 </div>
-                <div>
-                    <div class="text-3xl font-bold text-yellow-400" id="accuracy">--</div>
-                    <div class="text-gray-400 text-sm">Accuracy Rate</div>
+
+                <!-- Commercial Summary -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-yellow-50 border-b border-yellow-100">
+                        <h3 class="font-semibold text-yellow-800">💼 Commercial Summary</h3>
+                    </div>
+                    <div id="commercialSummaryContent" class="p-6">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Action Items -->
+                <div class="section-card bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <div class="px-6 py-4 bg-red-50 border-b border-red-100">
+                        <h3 class="font-semibold text-red-800">⚠️ Action Items & Clarifications Needed</h3>
+                    </div>
+                    <div id="actionItemsContent" class="p-6">
+                        <!-- Filled by JS -->
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- CTA -->
-        <div class="mt-12 text-center bg-gray-800 rounded-xl p-8 border border-gray-700">
-            <h2 class="text-2xl font-bold mb-4">Ready to Transform Your Tender Process?</h2>
-            <p class="text-gray-400 mb-6 max-w-xl mx-auto">
-                This is just a demo. Our full implementation integrates with your existing documents, 
-                learns your company's style, and produces submission-ready responses.
-            </p>
-            <a href="mailto:kingsley.uzowulu@ku-automation.com?subject=Tender%20AI%20Demo%20Inquiry" 
-               class="inline-flex items-center px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white font-semibold rounded-lg hover:from-blue-600 hover:to-purple-700 transition">
-                Book a Demo Call
-                <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
-                </svg>
-            </a>
+            <!-- Try Another -->
+            <div class="text-center mt-12">
+                <button onclick="resetApp()" class="px-6 py-3 border-2 border-gray-300 hover:border-primary-500 text-gray-700 hover:text-primary-600 rounded-xl font-medium transition-all">
+                    ← Analyze Another Tender
+                </button>
+            </div>
         </div>
     </main>
 
-    <script src="tender-demo.js"></script>
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 mt-20 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500">
+            <p>Powered by <a href="index.html" class="text-primary-600 hover:underline font-medium">KU Automation</a> — AI for Engineering</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://ku-automation-production.up.railway.app';
+        
+        let selectedFile = null;
+        let extractedData = null;
+        let responseData = null;
+        let progressInterval = null;
+
+        // Drag and drop
+        const dropZone = document.getElementById('dropZone');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
+            dropZone.addEventListener(e, ev => { ev.preventDefault(); ev.stopPropagation(); });
+        });
+        
+        ['dragenter', 'dragover'].forEach(e => {
+            dropZone.addEventListener(e, () => dropZone.classList.add('drag-over'));
+        });
+        
+        ['dragleave', 'drop'].forEach(e => {
+            dropZone.addEventListener(e, () => dropZone.classList.remove('drag-over'));
+        });
+        
+        dropZone.addEventListener('drop', e => {
+            if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+        });
+
+        function handleFileSelect(event) {
+            if (event.target.files[0]) handleFile(event.target.files[0]);
+        }
+
+        function handleFile(file) {
+            selectedFile = file;
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = formatSize(file.size);
+            document.getElementById('filePreview').classList.remove('hidden');
+            document.getElementById('analyzeBtn').disabled = false;
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function clearFile() {
+            selectedFile = null;
+            document.getElementById('fileInput').value = '';
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('analyzeBtn').disabled = true;
+        }
+
+        function startProgress() {
+            const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+            let current = 0;
+            
+            steps.forEach(id => {
+                document.getElementById(id).classList.remove('text-primary-600', 'text-green-600');
+                document.getElementById(id).classList.add('text-gray-400');
+            });
+            
+            document.getElementById(steps[0]).classList.remove('text-gray-400');
+            document.getElementById(steps[0]).classList.add('text-primary-600');
+            
+            progressInterval = setInterval(() => {
+                if (current > 0) {
+                    document.getElementById(steps[current - 1]).classList.remove('text-primary-600');
+                    document.getElementById(steps[current - 1]).classList.add('text-green-600');
+                }
+                current++;
+                if (current < steps.length) {
+                    document.getElementById(steps[current]).classList.remove('text-gray-400');
+                    document.getElementById(steps[current]).classList.add('text-primary-600');
+                }
+            }, 4000);
+        }
+
+        function stopProgress() {
+            if (progressInterval) {
+                clearInterval(progressInterval);
+                progressInterval = null;
+            }
+        }
+
+        async function analyzeTender() {
+            if (!selectedFile) return;
+            
+            const btn = document.getElementById('analyzeBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            const progressSection = document.getElementById('progressSection');
+            
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            progressSection.classList.remove('hidden');
+            startProgress();
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            
+            try {
+                const response = await fetch(`${API_URL}/api/generate-tender-response`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Analysis failed');
+                }
+                
+                const result = await response.json();
+                extractedData = result.extracted;
+                responseData = result.response;
+                
+                displayResults();
+                
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+                progressSection.classList.add('hidden');
+                stopProgress();
+            }
+        }
+
+        function displayResults() {
+            // Update stats
+            const scope = extractedData?.scope_of_work || {};
+            const lineItems = scope.line_items || [];
+            const compliance = extractedData?.compliance_checklist || [];
+            const technical = extractedData?.technical_requirements || {};
+            
+            document.getElementById('countItems').textContent = lineItems.length;
+            document.getElementById('countRequirements').textContent = 
+                (technical.standards?.length || 0) + (technical.certifications?.length || 0);
+            document.getElementById('countCompliance').textContent = compliance.length;
+            document.getElementById('countPages').textContent = extractedData?.page_count || 1;
+            
+            // Populate extracted data
+            populateOverview();
+            populateDates();
+            populateScope();
+            populateTechnical();
+            populateCommercial();
+            
+            // Populate response
+            populateResponse();
+            
+            // Show results
+            document.getElementById('uploadSection').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
+
+        function populateOverview() {
+            const overview = extractedData?.overview || {};
+            let html = '<div class="grid md:grid-cols-2 gap-4">';
+            
+            const fields = [
+                ['Document Type', overview.document_type],
+                ['Reference Number', overview.reference_number],
+                ['Issuing Company', overview.issuing_company],
+                ['Project Name', overview.project_name],
+                ['Location', overview.project_location],
+                ['Currency', overview.currency]
+            ];
+            
+            fields.forEach(([label, value]) => {
+                if (value && value !== 'N/A') {
+                    html += `<div><span class="text-gray-500 text-sm">${label}:</span><br><span class="font-medium">${value}</span></div>`;
+                }
+            });
+            
+            html += '</div>';
+            
+            if (extractedData?.summary) {
+                html += `<div class="mt-4 p-4 bg-gray-50 rounded-lg"><p class="text-gray-700">${extractedData.summary}</p></div>`;
+            }
+            
+            document.getElementById('overviewContent').innerHTML = html;
+        }
+
+        function populateDates() {
+            const dates = extractedData?.key_dates || {};
+            let html = '<div class="grid md:grid-cols-2 gap-4">';
+            
+            const fields = [
+                ['📅 Submission Deadline', dates.submission_deadline, 'text-red-600 font-bold'],
+                ['❓ Clarification Deadline', dates.clarification_deadline, ''],
+                ['⏳ Validity Period', dates.validity_period, ''],
+                ['🚚 Delivery Date', dates.delivery_date, ''],
+                ['🏭 Site Visit', dates.site_visit, '']
+            ];
+            
+            fields.forEach(([label, value, cls]) => {
+                if (value && value !== 'N/A') {
+                    html += `<div class="p-3 bg-yellow-50 rounded-lg"><span class="text-gray-600 text-sm">${label}:</span><br><span class="${cls || 'font-medium'}">${value}</span></div>`;
+                }
+            });
+            
+            html += '</div>';
+            document.getElementById('datesContent').innerHTML = html;
+        }
+
+        function populateScope() {
+            const scope = extractedData?.scope_of_work || {};
+            let html = '';
+            
+            if (scope.summary) {
+                html += `<p class="mb-4 text-gray-700">${scope.summary}</p>`;
+            }
+            
+            const items = scope.line_items || [];
+            if (items.length > 0) {
+                html += '<table class="w-full text-sm"><thead class="bg-gray-50"><tr>';
+                html += '<th class="px-4 py-2 text-left">Item</th>';
+                html += '<th class="px-4 py-2 text-left">Description</th>';
+                html += '<th class="px-4 py-2 text-left">Qty</th>';
+                html += '<th class="px-4 py-2 text-left">Specifications</th>';
+                html += '</tr></thead><tbody>';
+                
+                items.forEach(item => {
+                    html += '<tr class="border-t">';
+                    html += `<td class="px-4 py-2 font-medium">${item.item_no || '-'}</td>`;
+                    html += `<td class="px-4 py-2">${item.description || '-'}</td>`;
+                    html += `<td class="px-4 py-2">${item.quantity || '-'} ${item.unit || ''}</td>`;
+                    html += `<td class="px-4 py-2 text-xs">${item.specifications || item.standard || '-'}</td>`;
+                    html += '</tr>';
+                });
+                
+                html += '</tbody></table>';
+            } else {
+                html += '<p class="text-gray-500">No line items extracted</p>';
+            }
+            
+            document.getElementById('scopeContent').innerHTML = html;
+        }
+
+        function populateTechnical() {
+            const tech = extractedData?.technical_requirements || {};
+            let html = '<div class="space-y-4">';
+            
+            if (tech.standards?.length) {
+                html += '<div><span class="font-medium">Standards:</span><div class="flex flex-wrap gap-2 mt-1">';
+                tech.standards.forEach(s => html += `<span class="px-2 py-1 bg-purple-100 text-purple-700 rounded text-sm">${s}</span>`);
+                html += '</div></div>';
+            }
+            
+            if (tech.certifications?.length) {
+                html += '<div><span class="font-medium">Certifications Required:</span><div class="flex flex-wrap gap-2 mt-1">';
+                tech.certifications.forEach(c => html += `<span class="px-2 py-1 bg-blue-100 text-blue-700 rounded text-sm">${c}</span>`);
+                html += '</div></div>';
+            }
+            
+            if (tech.documentation?.length) {
+                html += '<div><span class="font-medium">Documentation Required:</span><ul class="list-disc list-inside mt-1 text-gray-600">';
+                tech.documentation.forEach(d => html += `<li>${d}</li>`);
+                html += '</ul></div>';
+            }
+            
+            html += '</div>';
+            document.getElementById('technicalContent').innerHTML = html;
+        }
+
+        function populateCommercial() {
+            const comm = extractedData?.commercial_terms || {};
+            let html = '<div class="grid md:grid-cols-2 gap-4">';
+            
+            const fields = [
+                ['Payment Terms', comm.payment_terms],
+                ['Incoterms', comm.incoterms],
+                ['Warranty', comm.warranty],
+                ['LD Clause', comm.liquidated_damages],
+                ['Performance Bond', comm.performance_bond],
+                ['Price Validity', comm.price_validity]
+            ];
+            
+            fields.forEach(([label, value]) => {
+                if (value && value !== 'N/A') {
+                    html += `<div class="p-3 bg-green-50 rounded-lg"><span class="text-gray-600 text-sm">${label}:</span><br><span class="font-medium">${value}</span></div>`;
+                }
+            });
+            
+            html += '</div>';
+            document.getElementById('commercialContent').innerHTML = html;
+        }
+
+        function populateResponse() {
+            if (!responseData) return;
+            
+            // Executive Summary
+            const exec = responseData.executive_summary || {};
+            document.getElementById('execSummaryContent').innerHTML = `<p class="whitespace-pre-line">${exec.content || 'No summary generated'}</p>`;
+            
+            // Technical Proposal
+            const tech = responseData.technical_proposal || {};
+            let techHtml = '';
+            if (tech.scope_understanding) techHtml += `<h4 class="font-semibold mt-4">Scope Understanding</h4><p>${tech.scope_understanding}</p>`;
+            if (tech.proposed_solution) techHtml += `<h4 class="font-semibold mt-4">Proposed Solution</h4><p class="whitespace-pre-line">${tech.proposed_solution}</p>`;
+            if (tech.methodology) techHtml += `<h4 class="font-semibold mt-4">Methodology</h4><p>${tech.methodology}</p>`;
+            if (tech.quality_assurance) techHtml += `<h4 class="font-semibold mt-4">Quality Assurance</h4><p>${tech.quality_assurance}</p>`;
+            if (tech.schedule) techHtml += `<h4 class="font-semibold mt-4">Proposed Schedule</h4><p>${tech.schedule}</p>`;
+            document.getElementById('technicalProposalContent').innerHTML = techHtml || '<p>No technical proposal generated</p>';
+            
+            // Compliance Matrix
+            const compliance = responseData.compliance_matrix?.items || [];
+            if (compliance.length > 0) {
+                let compHtml = '<table class="w-full text-sm"><thead class="bg-gray-50"><tr>';
+                compHtml += '<th class="px-4 py-2 text-left">Requirement</th>';
+                compHtml += '<th class="px-4 py-2 text-center">Status</th>';
+                compHtml += '<th class="px-4 py-2 text-left">Response</th>';
+                compHtml += '</tr></thead><tbody>';
+                
+                compliance.forEach(item => {
+                    const statusColor = item.compliance === 'FULL' ? 'bg-green-100 text-green-700' : 
+                                       item.compliance === 'PARTIAL' ? 'bg-yellow-100 text-yellow-700' : 'bg-red-100 text-red-700';
+                    compHtml += '<tr class="border-t">';
+                    compHtml += `<td class="px-4 py-2">${item.requirement}</td>`;
+                    compHtml += `<td class="px-4 py-2 text-center"><span class="px-2 py-1 rounded text-xs ${statusColor}">${item.compliance}</span></td>`;
+                    compHtml += `<td class="px-4 py-2 text-sm">${item.response}</td>`;
+                    compHtml += '</tr>';
+                });
+                
+                compHtml += '</tbody></table>';
+                document.getElementById('complianceMatrixContent').innerHTML = compHtml;
+            } else {
+                document.getElementById('complianceMatrixContent').innerHTML = '<p class="text-gray-500">No compliance matrix generated</p>';
+            }
+            
+            // Commercial Summary
+            const comm = responseData.commercial_summary || {};
+            let commHtml = '<div class="space-y-3">';
+            if (comm.pricing_notes) commHtml += `<p><span class="font-medium">Pricing:</span> ${comm.pricing_notes}</p>`;
+            if (comm.payment_terms) commHtml += `<p><span class="font-medium">Payment Terms:</span> ${comm.payment_terms}</p>`;
+            if (comm.validity) commHtml += `<p><span class="font-medium">Validity:</span> ${comm.validity}</p>`;
+            if (comm.delivery) commHtml += `<p><span class="font-medium">Delivery:</span> ${comm.delivery}</p>`;
+            commHtml += '</div>';
+            document.getElementById('commercialSummaryContent').innerHTML = commHtml;
+            
+            // Action Items
+            const actions = responseData.action_items || [];
+            if (actions.length > 0) {
+                let actHtml = '<ul class="space-y-2">';
+                actions.forEach(action => {
+                    actHtml += `<li class="flex items-start gap-2"><span class="text-red-500">⚠️</span>${action}</li>`;
+                });
+                actHtml += '</ul>';
+                document.getElementById('actionItemsContent').innerHTML = actHtml;
+            } else {
+                document.getElementById('actionItemsContent').innerHTML = '<p class="text-gray-500">No action items identified</p>';
+            }
+        }
+
+        function showTab(tab) {
+            document.getElementById('extractedTab').classList.add('hidden');
+            document.getElementById('responseTab').classList.add('hidden');
+            document.getElementById('tabExtracted').classList.remove('text-primary-600', 'border-primary-600');
+            document.getElementById('tabResponse').classList.remove('text-primary-600', 'border-primary-600');
+            document.getElementById('tabExtracted').classList.add('text-gray-500', 'border-transparent');
+            document.getElementById('tabResponse').classList.add('text-gray-500', 'border-transparent');
+            
+            if (tab === 'extracted') {
+                document.getElementById('extractedTab').classList.remove('hidden');
+                document.getElementById('tabExtracted').classList.remove('text-gray-500', 'border-transparent');
+                document.getElementById('tabExtracted').classList.add('text-primary-600', 'border-primary-600');
+            } else {
+                document.getElementById('responseTab').classList.remove('hidden');
+                document.getElementById('tabResponse').classList.remove('text-gray-500', 'border-transparent');
+                document.getElementById('tabResponse').classList.add('text-primary-600', 'border-primary-600');
+            }
+        }
+
+        function resetApp() {
+            selectedFile = null;
+            extractedData = null;
+            responseData = null;
+            document.getElementById('fileInput').value = '';
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('uploadSection').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+            showTab('extracted');
+        }
+    </script>
 </body>
 </html>
