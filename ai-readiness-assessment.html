@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Readiness Assessment | KU Automation</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <header class="border-b bg-white">
+    <div class="max-w-3xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div>
+        <div class="text-xs uppercase tracking-wider text-slate-500">KU Automation</div>
+        <h1 class="text-xl font-bold">AI Readiness Assessment (Engineering)</h1>
+      </div>
+      <a class="text-sm font-medium text-indigo-600 hover:text-indigo-700" href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" rel="noreferrer">Book a call</a>
+    </div>
+  </header>
+
+  <main class="max-w-3xl mx-auto px-6 py-10">
+    <section class="bg-white rounded-2xl shadow-sm border p-6 mb-6">
+      <h2 class="text-lg font-semibold">Get a clear score in 3 minutes</h2>
+      <p class="text-slate-600 mt-2">Answer 10 questions. You’ll get a maturity stage + recommended next steps tailored for EPC / Oil & Gas / Utilities engineering teams.</p>
+      <div class="mt-4 text-sm text-slate-500">No data leaves this page (demo). If you want lead capture, we’ll connect this to your CRM.</div>
+    </section>
+
+    <form id="quiz" class="space-y-4"></form>
+
+    <div class="mt-6 flex gap-3">
+      <button id="calc" type="button" class="px-5 py-3 rounded-xl bg-indigo-600 text-white font-semibold hover:bg-indigo-700">Calculate score</button>
+      <button id="reset" type="button" class="px-5 py-3 rounded-xl bg-white border font-semibold hover:bg-slate-50">Reset</button>
+    </div>
+
+    <section id="result" class="hidden mt-6 bg-white rounded-2xl shadow-sm border p-6">
+      <div class="flex items-start justify-between gap-4">
+        <div>
+          <h3 class="text-lg font-bold">Your AI Readiness</h3>
+          <p class="text-slate-600">Score: <span id="score" class="font-semibold"></span> / 100</p>
+        </div>
+        <a class="px-4 py-2 rounded-xl bg-emerald-600 text-white font-semibold hover:bg-emerald-700" href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" rel="noreferrer">Book 30-min call</a>
+      </div>
+
+      <div class="mt-4 p-4 rounded-xl bg-slate-50 border">
+        <div class="text-xs uppercase tracking-wider text-slate-500">Stage</div>
+        <div id="stage" class="text-xl font-extrabold"></div>
+        <div id="stageDesc" class="text-slate-700 mt-2"></div>
+      </div>
+
+      <div class="mt-4 grid md:grid-cols-2 gap-4">
+        <div class="p-4 rounded-xl border">
+          <div class="font-semibold">Recommended next steps</div>
+          <ul id="nextSteps" class="list-disc ml-5 mt-2 text-slate-700 space-y-1"></ul>
+        </div>
+        <div class="p-4 rounded-xl border">
+          <div class="font-semibold">Quick wins (2 weeks)</div>
+          <ul id="quickWins" class="list-disc ml-5 mt-2 text-slate-700 space-y-1"></ul>
+        </div>
+      </div>
+
+      <div class="mt-4 text-sm text-slate-600">
+        Want this branded + wired to your email/CRM? We can ship it in 48 hours.
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const QUESTIONS = [
+      {
+        q: 'Where is your engineering/project data stored?',
+        a: [
+          ['Mostly email/WhatsApp/individual laptops', 2],
+          ['Shared drive / SharePoint, inconsistent naming', 5],
+          ['Document control system, but lots of manual work', 8],
+          ['Document control + structured metadata + governance', 10],
+        ],
+      },
+      {
+        q: 'How often do you re-enter the same data across documents?',
+        a: [
+          ['Constantly', 2],
+          ['Weekly', 5],
+          ['Occasionally', 8],
+          ['Rarely', 10],
+        ],
+      },
+      {
+        q: 'Do you have standard templates for RFQs / ITPs / MDR / datasheets?',
+        a: [
+          ['No', 2],
+          ['Some', 5],
+          ['Most', 8],
+          ['Fully standardized + version controlled', 10],
+        ],
+      },
+      {
+        q: 'How do you review vendor datasheets and compliance?',
+        a: [
+          ['Manual only', 2],
+          ['Manual with checklists', 5],
+          ['Some automation (Excel macros, scripts)', 8],
+          ['Automated extraction + compliance checking', 10],
+        ],
+      },
+      {
+        q: 'How do you track action items from meetings and site queries?',
+        a: [
+          ['Notes only', 2],
+          ['Excel', 5],
+          ['Dedicated tool but not consistent', 8],
+          ['Tool + automation + reminders', 10],
+        ],
+      },
+      {
+        q: 'How do you classify and find documents?',
+        a: [
+          ['Search by file name', 2],
+          ['Folder structure', 5],
+          ['Metadata tags sometimes', 8],
+          ['Enforced metadata + search + OCR', 10],
+        ],
+      },
+      {
+        q: 'Are your key systems integrated (email, DMS, ERP, procurement)?',
+        a: [
+          ['No', 2],
+          ['Small integrations', 5],
+          ['Some APIs used', 8],
+          ['Integrated workflows', 10],
+        ],
+      },
+      {
+        q: 'Do you have an internal automation/AI champion or team?',
+        a: [
+          ['No', 2],
+          ['One person occasionally', 5],
+          ['Small team', 8],
+          ['Dedicated function', 10],
+        ],
+      },
+      {
+        q: 'What best describes leadership support for automation/AI?',
+        a: [
+          ['Not interested', 2],
+          ['Curious', 5],
+          ['Supportive', 8],
+          ['Actively funding', 10],
+        ],
+      },
+      {
+        q: 'Do you measure ROI for engineering process improvements?',
+        a: [
+          ['No', 2],
+          ['Sometimes', 5],
+          ['Usually', 8],
+          ['Always with clear KPIs', 10],
+        ],
+      },
+    ];
+
+    const STAGES = [
+      {
+        min: 0,
+        name: 'Stage 1 — Ad hoc',
+        desc: 'Work is manual and scattered. Biggest gains come from standardization + quick automation wins.',
+        next: [
+          'Standardize document naming + folder structure (or SharePoint metadata)',
+          'Pick ONE process to automate (RFQ parsing, datasheet checks, MDR updates)',
+          'Create a simple KPI baseline: hours/week spent re-entering data',
+        ],
+        wins: [
+          'Automate RFQ extraction to Excel within 24 hours',
+          'Auto-generate meeting action items + reminders',
+        ],
+      },
+      {
+        min: 26,
+        name: 'Stage 2 — Repeatable',
+        desc: 'You have repeatable processes but still rely on manual effort. Focus on integration + reducing rework.',
+        next: [
+          'Implement a lightweight document control workflow (metadata + approvals)',
+          'Connect email → DMS → task tracking so actions don’t get lost',
+          'Create an automation backlog ranked by ROI',
+        ],
+        wins: [
+          'Vendor datasheet extraction + compliance checklist automation',
+          'MDR auto-updates from email attachments',
+        ],
+      },
+      {
+        min: 51,
+        name: 'Stage 3 — Managed',
+        desc: 'You’re organized and can scale. Now optimize across teams with AI copilots and system integrations.',
+        next: [
+          'Deploy AI assistants for document review + clause extraction',
+          'Integrate DMS/ERP/procurement data into one reporting layer',
+          'Add governance: access, audit trails, prompt/version control',
+        ],
+        wins: [
+          'Bid/tender response copilot that drafts compliance matrices',
+          'Auto-create procurement line items from RFQs',
+        ],
+      },
+      {
+        min: 76,
+        name: 'Stage 4 — Optimized',
+        desc: 'You’re ready for advanced automation and agentic workflows. Focus on continuous improvement and competitive advantage.',
+        next: [
+          'Introduce agentic workflows (monitor inbox → extract → validate → route approvals)',
+          'Build a knowledge base over your engineering standards + past projects',
+          'Measure ROI monthly and reinvest into automation',
+        ],
+        wins: [
+          'Autonomous document control assistant with exception handling',
+          'End-to-end vendor compliance workflow with audit logs',
+        ],
+      },
+    ];
+
+    function render() {
+      const form = document.getElementById('quiz');
+      QUESTIONS.forEach((item, idx) => {
+        const card = document.createElement('div');
+        card.className = 'bg-white rounded-2xl shadow-sm border p-6';
+
+        const title = document.createElement('div');
+        title.className = 'font-semibold';
+        title.textContent = `${idx + 1}. ${item.q}`;
+
+        const opts = document.createElement('div');
+        opts.className = 'mt-3 space-y-2';
+
+        item.a.forEach((opt, j) => {
+          const id = `q${idx}_o${j}`;
+          const label = document.createElement('label');
+          label.className = 'flex items-center gap-3 p-3 rounded-xl border hover:bg-slate-50 cursor-pointer';
+
+          const input = document.createElement('input');
+          input.type = 'radio';
+          input.name = `q${idx}`;
+          input.value = opt[1];
+          input.id = id;
+          input.className = 'h-4 w-4';
+
+          const span = document.createElement('span');
+          span.className = 'text-slate-700';
+          span.textContent = opt[0];
+
+          label.appendChild(input);
+          label.appendChild(span);
+          opts.appendChild(label);
+        });
+
+        card.appendChild(title);
+        card.appendChild(opts);
+        form.appendChild(card);
+      });
+    }
+
+    function calcScore() {
+      let total = 0;
+      for (let i = 0; i < QUESTIONS.length; i++) {
+        const chosen = document.querySelector(`input[name="q${i}"]:checked`);
+        if (!chosen) return null;
+        total += parseInt(chosen.value, 10);
+      }
+      // Each question max 10, count = 10 => max 100
+      return total;
+    }
+
+    function stageFor(score) {
+      const sorted = [...STAGES].sort((a, b) => b.min - a.min);
+      return sorted.find(s => score >= s.min) || STAGES[0];
+    }
+
+    function fillList(id, items) {
+      const ul = document.getElementById(id);
+      ul.innerHTML = '';
+      items.forEach(t => {
+        const li = document.createElement('li');
+        li.textContent = t;
+        ul.appendChild(li);
+      });
+    }
+
+    render();
+
+    document.getElementById('calc').addEventListener('click', () => {
+      const score = calcScore();
+      if (score === null) {
+        alert('Please answer all questions.');
+        return;
+      }
+      const st = stageFor(score);
+      document.getElementById('result').classList.remove('hidden');
+      document.getElementById('score').textContent = score;
+      document.getElementById('stage').textContent = st.name;
+      document.getElementById('stageDesc').textContent = st.desc;
+      fillList('nextSteps', st.next);
+      fillList('quickWins', st.wins);
+      window.scrollTo({ top: document.getElementById('result').offsetTop - 20, behavior: 'smooth' });
+    });
+
+    document.getElementById('reset').addEventListener('click', () => {
+      document.getElementById('quiz').reset();
+      document.getElementById('result').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>

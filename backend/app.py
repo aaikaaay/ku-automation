@@ -1595,5 +1595,298 @@ def merge_tender_extractions(extractions: List[dict]) -> dict:
     return merged
 
 
+# ============================================================================
+# PIPING DOCUMENT REVIEW
+# ============================================================================
+
+from piping_review import (
+    PIPING_REVIEW_SYSTEM_PROMPT,
+    get_review_prompt,
+    PID_REVIEW_PROMPT,
+    ISOMETRIC_REVIEW_PROMPT,
+    PIPING_GA_REVIEW_PROMPT,
+    LINE_LIST_REVIEW_PROMPT,
+    GENERAL_PIPING_REVIEW_PROMPT
+)
+
+
+def create_review_excel(review_data: dict, filename: str) -> str:
+    """Generate Excel comment register from review data"""
+    
+    wb = Workbook()
+    
+    # Styles
+    header_font = Font(bold=True, color="FFFFFF", size=11)
+    header_fill = PatternFill(start_color="2563EB", end_color="2563EB", fill_type="solid")
+    hold_fill = PatternFill(start_color="FEE2E2", end_color="FEE2E2", fill_type="solid")
+    comment_fill = PatternFill(start_color="FEF3C7", end_color="FEF3C7", fill_type="solid")
+    note_fill = PatternFill(start_color="D1FAE5", end_color="D1FAE5", fill_type="solid")
+    border = Border(
+        left=Side(style='thin'), right=Side(style='thin'),
+        top=Side(style='thin'), bottom=Side(style='thin')
+    )
+    wrap_align = Alignment(wrap_text=True, vertical='top')
+    
+    # === COMMENTS Sheet ===
+    ws = wb.active
+    ws.title = "Review Comments"
+    
+    # Headers
+    headers = ["No.", "Location", "Comment", "Code Reference", "Severity", "Category", "Contractor Response", "Status"]
+    ws.append(headers)
+    
+    for col, header in enumerate(headers, 1):
+        cell = ws.cell(row=1, column=col)
+        cell.font = header_font
+        cell.fill = header_fill
+        cell.border = border
+        cell.alignment = Alignment(horizontal='center')
+    
+    # Comments
+    comments = review_data.get("comments", [])
+    for i, comment in enumerate(comments, 2):
+        row_data = [
+            comment.get("no", i-1),
+            comment.get("location", ""),
+            comment.get("comment", ""),
+            comment.get("code_reference", ""),
+            comment.get("severity", ""),
+            comment.get("category", ""),
+            "",  # Contractor Response (blank for them to fill)
+            "OPEN"  # Status
+        ]
+        ws.append(row_data)
+        
+        # Apply severity highlighting
+        severity = comment.get("severity", "").upper()
+        fill = None
+        if "HOLD" in severity:
+            fill = hold_fill
+        elif "COMMENT" in severity:
+            fill = comment_fill
+        elif "NOTE" in severity:
+            fill = note_fill
+        
+        for col in range(1, 9):
+            cell = ws.cell(row=i, column=col)
+            cell.border = border
+            cell.alignment = wrap_align
+            if fill and col == 5:  # Severity column
+                cell.fill = fill
+    
+    # Column widths
+    widths = [6, 20, 50, 25, 12, 15, 30, 10]
+    for i, width in enumerate(widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = width
+    
+    # === SUMMARY Sheet ===
+    ws_sum = wb.create_sheet("Summary")
+    doc_info = review_data.get("document_info", {})
+    
+    ws_sum.append(["DOCUMENT REVIEW SUMMARY"])
+    ws_sum['A1'].font = Font(bold=True, size=16)
+    ws_sum.append([])
+    ws_sum.append(["Document Type:", doc_info.get("type", "N/A")])
+    ws_sum.append(["Drawing Number:", doc_info.get("drawing_number", "N/A")])
+    ws_sum.append(["Revision:", doc_info.get("revision", "N/A")])
+    ws_sum.append(["Title:", doc_info.get("title", doc_info.get("line_number", "N/A"))])
+    ws_sum.append([])
+    ws_sum.append(["Review Date:", datetime.now().strftime("%Y-%m-%d")])
+    ws_sum.append(["Reviewer:", "KU Automation AI Review"])
+    ws_sum.append([])
+    
+    # Comment statistics
+    hold_count = sum(1 for c in comments if "HOLD" in c.get("severity", "").upper())
+    comment_count = sum(1 for c in comments if "COMMENT" in c.get("severity", "").upper())
+    note_count = sum(1 for c in comments if "NOTE" in c.get("severity", "").upper())
+    
+    ws_sum.append(["COMMENT STATISTICS"])
+    ws_sum['A11'].font = Font(bold=True)
+    ws_sum.append(["Total Comments:", len(comments)])
+    ws_sum.append(["🔴 HOLD:", hold_count])
+    ws_sum.append(["🟡 COMMENT:", comment_count])
+    ws_sum.append(["🟢 NOTE:", note_count])
+    ws_sum.append([])
+    
+    ws_sum.append(["APPROVAL STATUS:", review_data.get("approval_status", "N/A")])
+    ws_sum['B17'].font = Font(bold=True, size=12)
+    
+    ws_sum.append([])
+    ws_sum.append(["SUMMARY:"])
+    ws_sum.append([review_data.get("summary", "N/A")])
+    
+    ws_sum.append([])
+    ws_sum.append(["RECOMMENDATIONS:"])
+    for rec in review_data.get("recommendations", []):
+        ws_sum.append(["•", rec])
+    
+    ws_sum.column_dimensions['A'].width = 20
+    ws_sum.column_dimensions['B'].width = 60
+    
+    # Save
+    output = tempfile.mktemp(suffix=".xlsx")
+    wb.save(output)
+    return output
+
+
+@app.post("/api/review-piping")
+async def review_piping_document(
+    file: UploadFile = File(...),
+    doc_type: str = Form(default="auto"),
+    project_context: str = Form(default="")
+):
+    """
+    Review piping documents and generate engineering comments.
+    
+    doc_type options:
+    - auto: Auto-detect document type
+    - pid: P&ID
+    - isometric / iso: Piping Isometric
+    - ga / layout: Piping GA/Layout
+    - line_list: Line List/Line Designation Table
+    
+    project_context: Optional project specifications to check against
+    """
+    
+    content_type = file.content_type or ""
+    filename = file.filename or ""
+    
+    # Fallback content type detection
+    if not content_type or content_type == "application/octet-stream":
+        ext = filename.lower().split(".")[-1] if "." in filename else ""
+        content_type = {"jpg": "image/jpeg", "jpeg": "image/jpeg", "png": "image/png",
+                        "webp": "image/webp", "pdf": "application/pdf"}.get(ext, content_type)
+    
+    allowed = ["image/jpeg", "image/png", "image/webp", "application/pdf"]
+    if content_type not in allowed:
+        raise HTTPException(400, f"Invalid file type. Allowed: {', '.join(allowed)}")
+    
+    content = await file.read()
+    if len(content) > 50 * 1024 * 1024:
+        raise HTTPException(400, "File too large. Max 50MB.")
+    
+    print(f"[PIPING REVIEW] Document: {filename}, Type: {doc_type}")
+    
+    try:
+        # Get appropriate review prompt
+        if doc_type.lower() == "auto":
+            review_prompt = GENERAL_PIPING_REVIEW_PROMPT.format(project_context=project_context or "No specific context provided.")
+        else:
+            review_prompt = get_review_prompt(doc_type, project_context)
+        
+        # Process file
+        all_comments = []
+        combined_result = None
+        
+        if "pdf" in content_type and PDF_SUPPORT:
+            images = pdf_to_images(content, dpi=200)
+            print(f"[PIPING REVIEW] Processing {len(images)} pages")
+            
+            for i, img in enumerate(images[:10]):
+                print(f"[PIPING REVIEW] Analyzing page {i+1}...")
+                img_b64 = image_to_base64(img)
+                
+                try:
+                    # Build messages with system prompt
+                    messages = [
+                        {"role": "system", "content": PIPING_REVIEW_SYSTEM_PROMPT},
+                        {
+                            "role": "user",
+                            "content": [
+                                {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{img_b64}", "detail": "high"}},
+                                {"type": "text", "text": f"Page {i+1} of {len(images)}.\n\n{review_prompt}"}
+                            ]
+                        }
+                    ]
+                    
+                    response = get_openai_client().chat.completions.create(
+                        model="gpt-4o",
+                        messages=messages,
+                        max_tokens=4096,
+                        temperature=0.2
+                    )
+                    
+                    page_result = parse_json_response(response.choices[0].message.content)
+                    
+                    # Merge results
+                    if combined_result is None:
+                        combined_result = page_result
+                    else:
+                        # Add comments from this page
+                        page_comments = page_result.get("comments", [])
+                        for c in page_comments:
+                            c["location"] = f"Page {i+1}: {c.get('location', '')}"
+                        all_comments.extend(page_comments)
+                    
+                except Exception as e:
+                    print(f"[PIPING REVIEW] Page {i+1} failed: {e}")
+            
+            # Merge all comments
+            if combined_result and all_comments:
+                combined_result["comments"] = combined_result.get("comments", []) + all_comments
+                # Renumber comments
+                for i, c in enumerate(combined_result["comments"], 1):
+                    c["no"] = i
+        
+        else:
+            # Single image
+            img_b64 = base64.b64encode(content).decode('utf-8')
+            media_type = content_type
+            
+            messages = [
+                {"role": "system", "content": PIPING_REVIEW_SYSTEM_PROMPT},
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image_url", "image_url": {"url": f"data:{media_type};base64,{img_b64}", "detail": "high"}},
+                        {"type": "text", "text": review_prompt}
+                    ]
+                }
+            ]
+            
+            response = get_openai_client().chat.completions.create(
+                model="gpt-4o",
+                messages=messages,
+                max_tokens=4096,
+                temperature=0.2
+            )
+            
+            combined_result = parse_json_response(response.choices[0].message.content)
+        
+        if not combined_result:
+            raise HTTPException(500, "Failed to generate review")
+        
+        # Generate Excel
+        excel_path = create_review_excel(combined_result, filename)
+        with open(excel_path, "rb") as f:
+            excel_b64 = base64.b64encode(f.read()).decode('utf-8')
+        os.unlink(excel_path)
+        
+        # Stats
+        comments = combined_result.get("comments", [])
+        stats = {
+            "total": len(comments),
+            "hold": sum(1 for c in comments if "HOLD" in c.get("severity", "").upper()),
+            "comment": sum(1 for c in comments if "COMMENT" in c.get("severity", "").upper()),
+            "note": sum(1 for c in comments if "NOTE" in c.get("severity", "").upper())
+        }
+        
+        print(f"[PIPING REVIEW] Complete: {stats}")
+        
+        return {
+            "success": True,
+            "data": combined_result,
+            "statistics": stats,
+            "excel": excel_b64,
+            "filename": f"Review_Comments_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+        }
+        
+    except Exception as e:
+        print(f"[PIPING REVIEW ERROR] {e}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(500, f"Review failed: {e}")
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Piping Document Review Tool | KU Automation</title>
+    <meta name="description" content="AI-powered piping document review tool. Upload P&IDs, isometrics, or piping layouts and get detailed engineering comments with code references. Export to Excel.">
+    
+    <link rel="canonical" href="https://www.ku-automation.com/piping-review">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .drop-zone { transition: all 0.3s ease; }
+        .drop-zone.drag-over { border-color: #6366f1; background-color: #eef2ff; transform: scale(1.01); }
+        .fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .severity-hold { background-color: #FEE2E2; color: #991B1B; }
+        .severity-comment { background-color: #FEF3C7; color: #92400E; }
+        .severity-note { background-color: #D1FAE5; color: #065F46; }
+        .comment-row:hover { background-color: #F9FAFB; }
+        .progress-step.active { color: #4F46E5; }
+        .progress-step.complete { color: #059669; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
+                    <div>
+                        <span class="font-bold text-lg block text-gray-900">Piping Document Review <span class="text-xs font-normal text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full">v1.0</span></span>
+                        <span class="text-xs text-gray-500">by KU Automation</span>
+                    </div>
+                </a>
+                
+                <div class="flex items-center gap-4">
+                    <a href="demos.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">← All Demos</a>
+                    <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all text-sm shadow-lg shadow-primary-500/25">
+                        Get Custom Version
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <!-- Hero -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-medium mb-6">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                Live Demo — Professional Engineering Review
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                AI <span class="gradient-text">Piping Document</span> Review
+            </h1>
+            <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                Upload your P&IDs, piping isometrics, or GA drawings. Get detailed engineering comments with ASME B31.3 code references, severity ratings, and Excel export — like having a senior piping engineer on demand.
+            </p>
+            <div class="mt-6 flex items-center justify-center gap-6 text-sm text-gray-500">
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    P&IDs
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Piping Isometrics
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    GA/Layouts
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Excel Export
+                </span>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div id="uploadSection" class="max-w-3xl mx-auto">
+            <!-- Document Type Selection -->
+            <div class="bg-white rounded-xl p-6 border border-gray-200 mb-6">
+                <label class="block text-sm font-medium text-gray-700 mb-3">Document Type</label>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                    <label class="cursor-pointer">
+                        <input type="radio" name="docType" value="auto" class="sr-only peer" checked>
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                            <span class="text-2xl">🔍</span>
+                            <p class="text-sm font-medium mt-1">Auto-Detect</p>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="docType" value="pid" class="sr-only peer">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                            <span class="text-2xl">📊</span>
+                            <p class="text-sm font-medium mt-1">P&ID</p>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="docType" value="isometric" class="sr-only peer">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                            <span class="text-2xl">📐</span>
+                            <p class="text-sm font-medium mt-1">Isometric</p>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="docType" value="ga" class="sr-only peer">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                            <span class="text-2xl">🗺️</span>
+                            <p class="text-sm font-medium mt-1">GA/Layout</p>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="docType" value="line_list" class="sr-only peer">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                            <span class="text-2xl">📋</span>
+                            <p class="text-sm font-medium mt-1">Line List</p>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Project Context (Optional) -->
+            <div class="bg-white rounded-xl p-6 border border-gray-200 mb-6">
+                <div class="flex items-center justify-between mb-3">
+                    <label class="text-sm font-medium text-gray-700">Project Context (Optional)</label>
+                    <span class="text-xs text-gray-400">Paste specs for more accurate review</span>
+                </div>
+                <textarea 
+                    id="projectContext" 
+                    rows="3" 
+                    placeholder="e.g., Design Pressure: 150 barg, Design Temp: 350°C, Line Class A1A = CS ASTM A106 Gr.B, 300# RF flanges, ASME B31.3..."
+                    class="w-full px-4 py-3 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all"
+                ></textarea>
+            </div>
+
+            <!-- Drop Zone -->
+            <div 
+                id="dropZone" 
+                class="drop-zone border-2 border-dashed border-gray-300 rounded-2xl p-12 text-center bg-white cursor-pointer hover:border-primary-500 hover:bg-primary-50/30 shadow-sm"
+                onclick="document.getElementById('fileInput').click()"
+            >
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp,.pdf" class="hidden" onchange="handleFileSelect(event)">
+                
+                <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-900 mb-2">Drop your piping document here</h3>
+                <p class="text-gray-500 mb-4">or click to browse</p>
+                <p class="text-sm text-gray-400">Supports: JPG, PNG, PDF (multi-page up to 10 pages)</p>
+            </div>
+
+            <!-- File Preview -->
+            <div id="filePreview" class="hidden mt-6 bg-white rounded-xl p-4 border border-gray-200">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <p id="fileName" class="font-medium text-gray-900">filename.pdf</p>
+                            <p id="fileSize" class="text-sm text-gray-500">2.4 MB</p>
+                        </div>
+                    </div>
+                    <button onclick="clearFile()" class="text-gray-400 hover:text-red-500 transition-colors">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Review Button -->
+            <button 
+                id="reviewBtn" 
+                onclick="startReview()" 
+                disabled
+                class="w-full mt-6 py-4 bg-primary-600 hover:bg-primary-700 disabled:bg-gray-300 disabled:cursor-not-allowed text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-primary-500/25"
+            >
+                <span id="btnText">🔍 Start Engineering Review</span>
+                <span id="btnLoading" class="hidden">
+                    <svg class="inline w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Reviewing document...
+                </span>
+            </button>
+
+            <!-- Progress Section -->
+            <div id="progressSection" class="hidden mt-6 bg-white rounded-xl p-6 border border-gray-200">
+                <div class="space-y-3">
+                    <div id="step1" class="progress-step flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">1</div>
+                        <span>Processing document pages</span>
+                    </div>
+                    <div id="step2" class="progress-step flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">2</div>
+                        <span>Identifying piping elements & components</span>
+                    </div>
+                    <div id="step3" class="progress-step flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">3</div>
+                        <span>Checking against ASME B31.3 & project specs</span>
+                    </div>
+                    <div id="step4" class="progress-step flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">4</div>
+                        <span>Generating engineering comments</span>
+                    </div>
+                    <div id="step5" class="progress-step flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">5</div>
+                        <span>Building Excel comment register</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">Multi-page documents may take 60-90 seconds...</p>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden fade-in">
+            <!-- Stats Bar -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8">
+                <div class="bg-white rounded-xl p-6 border border-gray-200 text-center">
+                    <div id="statTotal" class="text-3xl font-bold text-gray-900">0</div>
+                    <div class="text-gray-500 text-sm">Total Comments</div>
+                </div>
+                <div class="bg-red-50 rounded-xl p-6 border border-red-200 text-center">
+                    <div id="statHold" class="text-3xl font-bold text-red-600">0</div>
+                    <div class="text-red-700 text-sm">🔴 HOLD</div>
+                </div>
+                <div class="bg-yellow-50 rounded-xl p-6 border border-yellow-200 text-center">
+                    <div id="statComment" class="text-3xl font-bold text-yellow-600">0</div>
+                    <div class="text-yellow-700 text-sm">🟡 COMMENT</div>
+                </div>
+                <div class="bg-green-50 rounded-xl p-6 border border-green-200 text-center">
+                    <div id="statNote" class="text-3xl font-bold text-green-600">0</div>
+                    <div class="text-green-700 text-sm">🟢 NOTE</div>
+                </div>
+                <div class="bg-primary-50 rounded-xl p-6 border border-primary-200 text-center">
+                    <div id="statStatus" class="text-lg font-bold text-primary-600">—</div>
+                    <div class="text-primary-700 text-sm">Status</div>
+                </div>
+            </div>
+
+            <!-- Document Info & Actions -->
+            <div class="flex flex-col md:flex-row gap-4 mb-6">
+                <div class="flex-1 bg-white rounded-xl p-6 border border-gray-200">
+                    <h3 class="font-semibold text-gray-900 mb-3">Document Information</h3>
+                    <div id="docInfo" class="grid grid-cols-2 gap-3 text-sm">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 flex flex-col justify-center">
+                    <button 
+                        id="downloadBtn"
+                        onclick="downloadExcel()"
+                        class="px-8 py-4 bg-green-600 hover:bg-green-700 text-white rounded-xl font-semibold transition-all hover:shadow-lg flex items-center gap-2"
+                    >
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                        </svg>
+                        Download Excel
+                    </button>
+                    <p class="text-xs text-gray-500 mt-2 text-center">Complete comment register with formatting</p>
+                </div>
+            </div>
+
+            <!-- Summary -->
+            <div class="bg-white rounded-xl p-6 border border-gray-200 mb-6">
+                <h3 class="font-semibold text-gray-900 mb-3">Review Summary</h3>
+                <p id="reviewSummary" class="text-gray-700"></p>
+            </div>
+
+            <!-- Comments Table -->
+            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden mb-6">
+                <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between">
+                    <h3 class="font-semibold text-gray-900">Engineering Comments</h3>
+                    <div class="flex gap-2">
+                        <button onclick="filterComments('all')" class="filter-btn px-3 py-1 text-sm rounded-lg bg-gray-100 hover:bg-gray-200" data-filter="all">All</button>
+                        <button onclick="filterComments('hold')" class="filter-btn px-3 py-1 text-sm rounded-lg bg-red-100 text-red-700 hover:bg-red-200" data-filter="hold">Hold</button>
+                        <button onclick="filterComments('comment')" class="filter-btn px-3 py-1 text-sm rounded-lg bg-yellow-100 text-yellow-700 hover:bg-yellow-200" data-filter="comment">Comment</button>
+                        <button onclick="filterComments('note')" class="filter-btn px-3 py-1 text-sm rounded-lg bg-green-100 text-green-700 hover:bg-green-200" data-filter="note">Note</button>
+                    </div>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-sm">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-4 py-3 text-left font-medium text-gray-600 w-12">No.</th>
+                                <th class="px-4 py-3 text-left font-medium text-gray-600 w-32">Location</th>
+                                <th class="px-4 py-3 text-left font-medium text-gray-600">Comment</th>
+                                <th class="px-4 py-3 text-left font-medium text-gray-600 w-40">Code Reference</th>
+                                <th class="px-4 py-3 text-center font-medium text-gray-600 w-24">Severity</th>
+                                <th class="px-4 py-3 text-left font-medium text-gray-600 w-28">Category</th>
+                            </tr>
+                        </thead>
+                        <tbody id="commentsTable">
+                            <!-- Filled by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Recommendations -->
+            <div class="bg-blue-50 rounded-xl p-6 border border-blue-200 mb-6">
+                <h3 class="font-semibold text-blue-900 mb-3">💡 Recommendations</h3>
+                <ul id="recommendations" class="space-y-2 text-blue-800">
+                    <!-- Filled by JS -->
+                </ul>
+            </div>
+
+            <!-- Try Another -->
+            <div class="text-center mt-8">
+                <button onclick="resetApp()" class="px-6 py-3 border-2 border-gray-300 hover:border-primary-500 text-gray-700 hover:text-primary-600 rounded-xl font-medium transition-all">
+                    ← Review Another Document
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- CTA Section -->
+    <section class="bg-gradient-to-r from-primary-600 to-purple-600 py-16 mt-20">
+        <div class="max-w-4xl mx-auto px-6 text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">Need Multi-Discipline Document Review?</h2>
+            <p class="text-lg opacity-90 mb-8">
+                We can build custom review tools for your entire document workflow — piping, electrical, instrumentation, structural, and more. Integrate with your existing systems.
+            </p>
+            <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="inline-block px-8 py-4 bg-white text-primary-600 rounded-full font-semibold hover:shadow-xl transition-all">
+                Schedule a Demo →
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-100 py-8">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500">
+            <p>Powered by <a href="index.html" class="text-primary-600 hover:underline font-medium">KU Automation</a> — AI for Engineering</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = 'https://ku-automation-production.up.railway.app';
+        
+        let selectedFile = null;
+        let reviewResult = null;
+        let excelData = null;
+        let excelFilename = null;
+        let progressInterval = null;
+        let allComments = [];
+
+        // Drag and drop
+        const dropZone = document.getElementById('dropZone');
+        
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(e => {
+            dropZone.addEventListener(e, ev => { ev.preventDefault(); ev.stopPropagation(); });
+        });
+        
+        ['dragenter', 'dragover'].forEach(e => {
+            dropZone.addEventListener(e, () => dropZone.classList.add('drag-over'));
+        });
+        
+        ['dragleave', 'drop'].forEach(e => {
+            dropZone.addEventListener(e, () => dropZone.classList.remove('drag-over'));
+        });
+        
+        dropZone.addEventListener('drop', e => {
+            if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
+        });
+
+        function handleFileSelect(event) {
+            if (event.target.files[0]) handleFile(event.target.files[0]);
+        }
+
+        function handleFile(file) {
+            selectedFile = file;
+            document.getElementById('fileName').textContent = file.name;
+            document.getElementById('fileSize').textContent = formatSize(file.size);
+            document.getElementById('filePreview').classList.remove('hidden');
+            document.getElementById('reviewBtn').disabled = false;
+        }
+
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+        }
+
+        function clearFile() {
+            selectedFile = null;
+            document.getElementById('fileInput').value = '';
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('reviewBtn').disabled = true;
+        }
+
+        function startProgress() {
+            const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+            let current = 0;
+            
+            steps.forEach(id => {
+                const el = document.getElementById(id);
+                el.classList.remove('active', 'complete');
+            });
+            
+            document.getElementById(steps[0]).classList.add('active');
+            
+            progressInterval = setInterval(() => {
+                if (current > 0) {
+                    document.getElementById(steps[current - 1]).classList.remove('active');
+                    document.getElementById(steps[current - 1]).classList.add('complete');
+                }
+                current++;
+                if (current < steps.length) {
+                    document.getElementById(steps[current]).classList.add('active');
+                }
+            }, 5000);
+        }
+
+        function stopProgress() {
+            if (progressInterval) {
+                clearInterval(progressInterval);
+                progressInterval = null;
+            }
+        }
+
+        async function startReview() {
+            if (!selectedFile) return;
+            
+            const btn = document.getElementById('reviewBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            const progressSection = document.getElementById('progressSection');
+            
+            btn.disabled = true;
+            btnText.classList.add('hidden');
+            btnLoading.classList.remove('hidden');
+            progressSection.classList.remove('hidden');
+            startProgress();
+            
+            const docType = document.querySelector('input[name="docType"]:checked').value;
+            const projectContext = document.getElementById('projectContext').value;
+            
+            const formData = new FormData();
+            formData.append('file', selectedFile);
+            formData.append('doc_type', docType);
+            formData.append('project_context', projectContext);
+            
+            try {
+                const response = await fetch(`${API_URL}/api/review-piping`, {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (!response.ok) {
+                    const error = await response.json();
+                    throw new Error(error.detail || 'Review failed');
+                }
+                
+                const result = await response.json();
+                reviewResult = result.data;
+                excelData = result.excel;
+                excelFilename = result.filename;
+                allComments = reviewResult.comments || [];
+                
+                displayResults(result);
+                
+            } catch (error) {
+                alert('Error: ' + error.message);
+            } finally {
+                btn.disabled = false;
+                btnText.classList.remove('hidden');
+                btnLoading.classList.add('hidden');
+                progressSection.classList.add('hidden');
+                stopProgress();
+            }
+        }
+
+        function displayResults(result) {
+            const stats = result.statistics || {};
+            const data = result.data || {};
+            
+            // Stats
+            document.getElementById('statTotal').textContent = stats.total || 0;
+            document.getElementById('statHold').textContent = stats.hold || 0;
+            document.getElementById('statComment').textContent = stats.comment || 0;
+            document.getElementById('statNote').textContent = stats.note || 0;
+            document.getElementById('statStatus').textContent = data.approval_status || 'N/A';
+            
+            // Document info
+            const docInfo = data.document_info || {};
+            let infoHtml = '';
+            const fields = [
+                ['Type', docInfo.type],
+                ['Drawing No.', docInfo.drawing_number],
+                ['Revision', docInfo.revision],
+                ['Title', docInfo.title || docInfo.line_number],
+                ['Area', docInfo.area]
+            ];
+            fields.forEach(([label, value]) => {
+                if (value && value !== 'N/A' && value !== 'Not visible') {
+                    infoHtml += `<div><span class="text-gray-500">${label}:</span> <span class="font-medium">${value}</span></div>`;
+                }
+            });
+            document.getElementById('docInfo').innerHTML = infoHtml || '<p class="text-gray-500">Document info not extracted</p>';
+            
+            // Summary
+            document.getElementById('reviewSummary').textContent = data.summary || 'No summary available';
+            
+            // Comments
+            renderComments(allComments);
+            
+            // Recommendations
+            const recs = data.recommendations || [];
+            const recsHtml = recs.map(r => `<li>• ${r}</li>`).join('');
+            document.getElementById('recommendations').innerHTML = recsHtml || '<li>No specific recommendations</li>';
+            
+            // Show results
+            document.getElementById('uploadSection').classList.add('hidden');
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
+
+        function renderComments(comments) {
+            const tbody = document.getElementById('commentsTable');
+            
+            if (!comments.length) {
+                tbody.innerHTML = '<tr><td colspan="6" class="px-4 py-8 text-center text-gray-500">No comments generated</td></tr>';
+                return;
+            }
+            
+            let html = '';
+            comments.forEach(c => {
+                const severity = (c.severity || '').toUpperCase();
+                let severityClass = 'bg-gray-100 text-gray-600';
+                if (severity.includes('HOLD')) severityClass = 'severity-hold';
+                else if (severity.includes('COMMENT')) severityClass = 'severity-comment';
+                else if (severity.includes('NOTE')) severityClass = 'severity-note';
+                
+                html += `
+                    <tr class="comment-row border-t border-gray-100" data-severity="${severity.toLowerCase()}">
+                        <td class="px-4 py-3 font-medium">${c.no || '-'}</td>
+                        <td class="px-4 py-3 text-gray-600">${c.location || '-'}</td>
+                        <td class="px-4 py-3">${c.comment || '-'}</td>
+                        <td class="px-4 py-3 text-xs text-gray-500">${c.code_reference || '-'}</td>
+                        <td class="px-4 py-3 text-center"><span class="px-2 py-1 rounded text-xs font-medium ${severityClass}">${severity}</span></td>
+                        <td class="px-4 py-3 text-gray-600">${c.category || '-'}</td>
+                    </tr>
+                `;
+            });
+            
+            tbody.innerHTML = html;
+        }
+
+        function filterComments(filter) {
+            let filtered = allComments;
+            
+            if (filter !== 'all') {
+                filtered = allComments.filter(c => {
+                    const sev = (c.severity || '').toLowerCase();
+                    return sev.includes(filter);
+                });
+            }
+            
+            renderComments(filtered);
+            
+            // Update active filter button
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('ring-2', 'ring-offset-1');
+                if (btn.dataset.filter === filter) {
+                    btn.classList.add('ring-2', 'ring-offset-1');
+                }
+            });
+        }
+
+        function downloadExcel() {
+            if (!excelData) return;
+            
+            const byteCharacters = atob(excelData);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+            
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = excelFilename || 'Review_Comments.xlsx';
+            link.click();
+        }
+
+        function resetApp() {
+            selectedFile = null;
+            reviewResult = null;
+            excelData = null;
+            excelFilename = null;
+            allComments = [];
+            
+            document.getElementById('fileInput').value = '';
+            document.getElementById('filePreview').classList.add('hidden');
+            document.getElementById('reviewBtn').disabled = true;
+            document.getElementById('projectContext').value = '';
+            document.querySelector('input[name="docType"][value="auto"]').checked = true;
+            
+            document.getElementById('uploadSection').classList.remove('hidden');
+            document.getElementById('resultsSection').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
