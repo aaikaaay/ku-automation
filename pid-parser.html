@@ -72,7 +72,7 @@
                 <a href="index.html" class="flex items-center gap-3">
                     <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
                     <div>
-                        <span class="font-bold text-lg block text-gray-900">P&ID Parser</span>
+                        <span class="font-bold text-lg block text-gray-900">P&ID Parser <span class="text-xs font-normal text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full">v2.0</span></span>
                         <span class="text-xs text-gray-500">by KU Automation</span>
                     </div>
                 </a>
@@ -100,6 +100,20 @@
             <p class="text-xl text-gray-600 max-w-2xl mx-auto">
                 Upload your P&ID and our AI extracts equipment, valves, instruments, and line data in seconds. Download as Excel.
             </p>
+            <div class="mt-4 flex items-center justify-center gap-4 text-sm text-gray-500">
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Images (PNG, JPG)
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Multi-page PDFs
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Cost Estimation
+                </span>
+            </div>
         </div>
 
         <!-- Upload Section -->
@@ -190,11 +204,37 @@
             </button>
 
             <!-- Progress indicator -->
-            <div id="progressSection" class="hidden mt-4">
-                <div class="h-1.5 bg-gray-200 rounded-full overflow-hidden">
-                    <div class="progress-bar h-full rounded-full" style="width: 100%"></div>
+            <div id="progressSection" class="hidden mt-6 bg-white rounded-xl p-6 border border-gray-200">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-semibold text-gray-900">Analyzing P&ID...</h3>
+                    <svg class="w-5 h-5 text-primary-600 animate-spin" fill="none" viewBox="0 0 24 24">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
                 </div>
-                <p class="text-sm text-gray-500 text-center mt-2">AI is reading your P&ID diagram...</p>
+                <div class="space-y-3">
+                    <div id="step1" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">1</div>
+                        <span>Processing file</span>
+                    </div>
+                    <div id="step2" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">2</div>
+                        <span>Extracting equipment & vessels</span>
+                    </div>
+                    <div id="step3" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">3</div>
+                        <span>Identifying valves & instruments</span>
+                    </div>
+                    <div id="step4" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">4</div>
+                        <span>Mapping piping & connections</span>
+                    </div>
+                    <div id="step5" class="flex items-center gap-3 text-gray-400 transition-colors">
+                        <div class="w-6 h-6 rounded-full border-2 border-current flex items-center justify-center text-xs font-bold">5</div>
+                        <span>Generating report</span>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-500 mt-4">Large P&IDs use tiled analysis for better accuracy (30-90 seconds)...</p>
             </div>
 
             <!-- How it works -->
@@ -548,9 +588,12 @@
             btnText.classList.add('hidden');
             btnLoading.classList.remove('hidden');
             btnLoading.innerHTML = includeCosts 
-                ? '<svg class="inline w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Analyzing + Cost Estimation... (60-90 sec)'
-                : '<svg class="inline w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Analyzing with AI... (30-60 sec)';
+                ? '<svg class="inline w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Analyzing + Cost Estimation...'
+                : '<svg class="inline w-5 h-5 mr-2 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> Analyzing with AI...';
             progressSection.classList.remove('hidden');
+            
+            // Animate progress steps
+            startProgressAnimation();
             
             const formData = new FormData();
             formData.append('file', selectedFile);
@@ -582,7 +625,56 @@
                 btnText.classList.remove('hidden');
                 btnLoading.classList.add('hidden');
                 progressSection.classList.add('hidden');
+                stopProgressAnimation();
             }
+        }
+
+        let progressInterval = null;
+        
+        function startProgressAnimation() {
+            const steps = ['step1', 'step2', 'step3', 'step4', 'step5'];
+            let currentStep = 0;
+            
+            // Reset all steps
+            steps.forEach(id => {
+                const el = document.getElementById(id);
+                el.classList.remove('text-primary-600', 'text-green-600');
+                el.classList.add('text-gray-400');
+            });
+            
+            // Mark first step active
+            document.getElementById(steps[0]).classList.remove('text-gray-400');
+            document.getElementById(steps[0]).classList.add('text-primary-600');
+            
+            progressInterval = setInterval(() => {
+                if (currentStep > 0 && currentStep < steps.length) {
+                    // Mark previous as complete
+                    const prev = document.getElementById(steps[currentStep - 1]);
+                    prev.classList.remove('text-primary-600');
+                    prev.classList.add('text-green-600');
+                }
+                
+                currentStep++;
+                
+                if (currentStep < steps.length) {
+                    const curr = document.getElementById(steps[currentStep]);
+                    curr.classList.remove('text-gray-400');
+                    curr.classList.add('text-primary-600');
+                }
+            }, 3000);
+        }
+        
+        function stopProgressAnimation() {
+            if (progressInterval) {
+                clearInterval(progressInterval);
+                progressInterval = null;
+            }
+            // Reset step styles
+            ['step1', 'step2', 'step3', 'step4', 'step5'].forEach(id => {
+                const el = document.getElementById(id);
+                el.classList.remove('text-primary-600', 'text-green-600');
+                el.classList.add('text-gray-400');
+            });
         }
 
         function formatCurrency(value) {
