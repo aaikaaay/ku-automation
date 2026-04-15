@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KU Automation | Corporate Portfolio Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#1e1b4b' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .slide { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 2rem; scroll-snap-align: start; }
+        html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .card-shadow { box-shadow: 0 10px 40px rgba(0,0,0,0.08); }
+        @media print {
+            .slide { page-break-after: always; min-height: auto; padding: 2rem; }
+            .no-print { display: none; }
+        }
+        .nav-dot { transition: all 0.3s; }
+        .nav-dot.active { background: #4f46e5; transform: scale(1.3); }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900">
+    
+    <!-- Navigation Dots -->
+    <nav class="fixed right-6 top-1/2 -translate-y-1/2 z-50 no-print">
+        <div class="flex flex-col gap-3">
+            <a href="#slide-1" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Cover"></a>
+            <a href="#slide-2" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="About Us"></a>
+            <a href="#slide-3" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="The Problem"></a>
+            <a href="#slide-4" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Our Solutions"></a>
+            <a href="#slide-5" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Live Tools"></a>
+            <a href="#slide-6" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Deployment"></a>
+            <a href="#slide-7" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Security"></a>
+            <a href="#slide-8" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Support"></a>
+            <a href="#slide-9" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Engagement"></a>
+            <a href="#slide-10" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Case Study"></a>
+            <a href="#slide-11" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Pricing"></a>
+            <a href="#slide-12" class="nav-dot w-3 h-3 rounded-full bg-gray-300 hover:bg-primary-500" title="Next Steps"></a>
+        </div>
+    </nav>
+
+    <!-- ==================== SLIDE 1: COVER ==================== -->
+    <section id="slide-1" class="slide bg-gradient-to-br from-primary-900 via-primary-800 to-purple-900 text-white">
+        <div class="max-w-6xl mx-auto text-center">
+            <div class="mb-8">
+                <div class="w-20 h-20 bg-white/10 backdrop-blur rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <span class="text-4xl font-bold">KU</span>
+                </div>
+            </div>
+            <h1 class="text-5xl md:text-7xl font-bold mb-6">KU Automation</h1>
+            <p class="text-2xl md:text-3xl text-white/80 mb-8">AI-Powered Engineering Solutions</p>
+            <div class="w-24 h-1 bg-gradient-to-r from-primary-400 to-purple-400 mx-auto mb-12"></div>
+            <p class="text-xl text-white/60">Corporate Portfolio & Capabilities</p>
+            <p class="text-lg text-white/40 mt-4">April 2026</p>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 2: ABOUT US ==================== -->
+    <section id="slide-2" class="slide bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">01 — ABOUT US</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-12">Who We Are</h2>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-start">
+                <div>
+                    <div class="bg-gray-50 rounded-2xl p-8 mb-8">
+                        <h3 class="text-xl font-bold mb-4">Kingsley Uzowulu</h3>
+                        <p class="text-primary-600 font-medium mb-4">Founder & Lead Engineer</p>
+                        <p class="text-gray-600 leading-relaxed">
+                            Chartered Engineer (CEng MIMechE) with <strong>21+ years</strong> of experience in oil & gas, EPC projects, and manufacturing across the UK, Europe, and Middle East.
+                        </p>
+                        <div class="mt-6 flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">Chartered Engineer</span>
+                            <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">MIMechE</span>
+                            <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-sm">AI/ML Specialist</span>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-primary-50 rounded-2xl p-6 border-l-4 border-primary-600">
+                        <p class="text-primary-800 italic">
+                            "We bridge the gap between cutting-edge AI and practical engineering workflows. Every solution we build is designed by engineers, for engineers."
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="space-y-6">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-bold text-lg mb-3">🎯 Our Mission</h4>
+                        <p class="text-gray-600">To transform engineering productivity through AI automation that actually works in real-world project environments.</p>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-bold text-lg mb-3">🏭 Industries Served</h4>
+                        <ul class="text-gray-600 space-y-2">
+                            <li>• Oil & Gas (Upstream, Midstream, Downstream)</li>
+                            <li>• EPC Contractors & Engineering Consultancies</li>
+                            <li>• Chemical & Petrochemical</li>
+                            <li>• Power Generation & Utilities</li>
+                            <li>• Manufacturing & Industrial</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h4 class="font-bold text-lg mb-3">🌍 Geographic Coverage</h4>
+                        <p class="text-gray-600">UK • Europe • Middle East • Global Remote Support</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 3: THE PROBLEM ==================== -->
+    <section id="slide-3" class="slide bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-400 font-semibold mb-4">02 — THE CHALLENGE</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-12">The Problem We Solve</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                    <div class="text-5xl font-bold text-red-400 mb-4">60%</div>
+                    <p class="text-white/80">of senior engineer time spent on document administration instead of engineering</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                    <div class="text-5xl font-bold text-amber-400 mb-4">£50B</div>
+                    <p class="text-white/80">annual cost of unplanned downtime in UK engineering alone</p>
+                </div>
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                    <div class="text-5xl font-bold text-orange-400 mb-4">4-6 hrs</div>
+                    <p class="text-white/80">average time to manually review a single technical specification</p>
+                </div>
+            </div>
+            
+            <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                <h3 class="text-xl font-bold mb-6">Common Pain Points We Address</h3>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <ul class="space-y-3 text-white/80">
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400">✗</span>
+                            Manual document review bottlenecks
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400">✗</span>
+                            Inconsistent data extraction from drawings
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400">✗</span>
+                            Delayed RFQ responses losing contracts
+                        </li>
+                    </ul>
+                    <ul class="space-y-3 text-white/80">
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400">✗</span>
+                            Knowledge trapped in experts' heads
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400">✗</span>
+                            Contractor deliverable review backlog
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-red-400">✗</span>
+                            Compliance documentation burden
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 4: OUR SOLUTIONS ==================== -->
+    <section id="slide-4" class="slide bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">03 — OUR SOLUTIONS</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">AI Solutions Portfolio</h2>
+            <p class="text-xl text-gray-600 mb-12">End-to-end AI automation for engineering workflows</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Solution 1 -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-6 border border-blue-100">
+                    <div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white text-xl mb-4">📊</div>
+                    <h3 class="font-bold text-lg mb-2">P&ID Data Extraction</h3>
+                    <p class="text-gray-600 text-sm mb-4">Automatically extract equipment, valves, instruments, and line data from P&ID diagrams</p>
+                    <div class="text-blue-600 font-semibold text-sm">70% time reduction</div>
+                </div>
+                
+                <!-- Solution 2 -->
+                <div class="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl p-6 border border-emerald-100">
+                    <div class="w-12 h-12 bg-emerald-600 rounded-xl flex items-center justify-center text-white text-xl mb-4">📄</div>
+                    <h3 class="font-bold text-lg mb-2">Datasheet Processing</h3>
+                    <p class="text-gray-600 text-sm mb-4">Parse equipment datasheets and extract specifications into structured data</p>
+                    <div class="text-emerald-600 font-semibold text-sm">85% accuracy improvement</div>
+                </div>
+                
+                <!-- Solution 3 -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-6 border border-purple-100">
+                    <div class="w-12 h-12 bg-purple-600 rounded-xl flex items-center justify-center text-white text-xl mb-4">⚡</div>
+                    <h3 class="font-bold text-lg mb-2">RFQ/Tender Analysis</h3>
+                    <p class="text-gray-600 text-sm mb-4">AI-powered analysis of RFQs with automatic line item extraction and response generation</p>
+                    <div class="text-purple-600 font-semibold text-sm">3x faster responses</div>
+                </div>
+                
+                <!-- Solution 4 -->
+                <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-6 border border-cyan-100">
+                    <div class="w-12 h-12 bg-cyan-600 rounded-xl flex items-center justify-center text-white text-xl mb-4">🔍</div>
+                    <h3 class="font-bold text-lg mb-2">Document Review</h3>
+                    <p class="text-gray-600 text-sm mb-4">AI-generated engineering comments with code references (ASME B31.3, etc.) and Excel export</p>
+                    <div class="text-cyan-600 font-semibold text-sm">From 4 hours to 4 minutes</div>
+                </div>
+                
+                <!-- Solution 5 -->
+                <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-100">
+                    <div class="w-12 h-12 bg-amber-600 rounded-xl flex items-center justify-center text-white text-xl mb-4">🤖</div>
+                    <h3 class="font-bold text-lg mb-2">Engineering Chatbots</h3>
+                    <p class="text-gray-600 text-sm mb-4">Knowledge base chatbots trained on your standards, procedures, and project documentation</p>
+                    <div class="text-amber-600 font-semibold text-sm">24/7 instant answers</div>
+                </div>
+                
+                <!-- Solution 6 -->
+                <div class="bg-gradient-to-br from-rose-50 to-red-50 rounded-2xl p-6 border border-rose-100">
+                    <div class="w-12 h-12 bg-rose-600 rounded-xl flex items-center justify-center text-white text-xl mb-4">📞</div>
+                    <h3 class="font-bold text-lg mb-2">AI Voice Agents</h3>
+                    <p class="text-gray-600 text-sm mb-4">Automated appointment booking, lead qualification, and customer service calls</p>
+                    <div class="text-rose-600 font-semibold text-sm">Handle 100+ calls/day</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 5: LIVE TOOLS DEMO ==================== -->
+    <section id="slide-5" class="slide bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">04 — LIVE DEMONSTRATIONS</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Production-Ready Tools</h2>
+            <p class="text-xl text-gray-600 mb-12">Try our tools live — no signup required</p>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl p-8 card-shadow">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-medium">🟢 Live</span>
+                        <span class="text-gray-400">|</span>
+                        <span class="text-sm text-gray-500">www.ku-automation.com/demos</span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-6">Available Demos</h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                            <span class="text-2xl">📊</span>
+                            <div>
+                                <div class="font-semibold">P&ID Parser v2.0</div>
+                                <div class="text-sm text-gray-500">Extract equipment data in seconds</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                            <span class="text-2xl">📄</span>
+                            <div>
+                                <div class="font-semibold">Datasheet Parser v2.0</div>
+                                <div class="text-sm text-gray-500">Parse equipment specifications</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-4 p-3 bg-gray-50 rounded-lg">
+                            <span class="text-2xl">⚡</span>
+                            <div>
+                                <div class="font-semibold">RFQ Analyzer v2.0</div>
+                                <div class="text-sm text-gray-500">Analyze tender requirements</div>
+                            </div>
+                        </li>
+                        <li class="flex items-center gap-4 p-3 bg-cyan-50 rounded-lg border-2 border-cyan-200">
+                            <span class="text-2xl">🔍</span>
+                            <div>
+                                <div class="font-semibold">Piping Document Review v1.0 <span class="text-xs bg-red-100 text-red-600 px-2 py-0.5 rounded ml-2">NEW</span></div>
+                                <div class="text-sm text-gray-500">Generate engineering comments with code refs</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white rounded-2xl p-8 card-shadow">
+                    <h3 class="text-2xl font-bold mb-6">Demo Capabilities</h3>
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Input Formats</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">PDF</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">JPG/PNG</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Multi-page</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Output Formats</span>
+                            </div>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">Excel (.xlsx)</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">JSON</span>
+                                <span class="px-3 py-1 bg-gray-100 rounded-full text-sm">API</span>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Processing Speed</span>
+                            </div>
+                            <div class="bg-primary-50 rounded-lg p-4">
+                                <div class="text-3xl font-bold text-primary-600">30-90 sec</div>
+                                <div class="text-sm text-gray-600">per document (depending on complexity)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 6: DEPLOYMENT OPTIONS ==================== -->
+    <section id="slide-6" class="slide bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">05 — DEPLOYMENT</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Flexible Deployment Options</h2>
+            <p class="text-xl text-gray-600 mb-12">Choose the deployment model that fits your IT requirements</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Option 1: Cloud SaaS -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8 border-2 border-blue-200 relative">
+                    <div class="absolute -top-3 left-6 px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-full">MOST POPULAR</div>
+                    <div class="w-16 h-16 bg-blue-600 rounded-2xl flex items-center justify-center text-white text-2xl mb-6">☁️</div>
+                    <h3 class="text-2xl font-bold mb-4">Cloud SaaS</h3>
+                    <p class="text-gray-600 mb-6">Fully managed solution hosted on secure cloud infrastructure</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> No IT infrastructure required</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Automatic updates & maintenance</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Web browser access</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> API integration available</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> 99.9% uptime SLA</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-blue-200">
+                        <div class="text-sm text-gray-500">Best for:</div>
+                        <div class="font-medium">Quick deployment, minimal IT involvement</div>
+                    </div>
+                </div>
+                
+                <!-- Option 2: Private Cloud -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-8 border border-purple-100">
+                    <div class="w-16 h-16 bg-purple-600 rounded-2xl flex items-center justify-center text-white text-2xl mb-6">🔐</div>
+                    <h3 class="text-2xl font-bold mb-4">Private Cloud</h3>
+                    <p class="text-gray-600 mb-6">Dedicated instance on your cloud provider (AWS, Azure, GCP)</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Dedicated resources</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Data stays in your region</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> VPC integration</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Custom security policies</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> SSO/SAML support</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-purple-200">
+                        <div class="text-sm text-gray-500">Best for:</div>
+                        <div class="font-medium">Data residency requirements, compliance</div>
+                    </div>
+                </div>
+                
+                <!-- Option 3: On-Premise -->
+                <div class="bg-gradient-to-br from-gray-50 to-slate-50 rounded-2xl p-8 border border-gray-200">
+                    <div class="w-16 h-16 bg-gray-700 rounded-2xl flex items-center justify-center text-white text-2xl mb-6">🏢</div>
+                    <h3 class="text-2xl font-bold mb-4">On-Premise</h3>
+                    <p class="text-gray-600 mb-6">Full deployment within your corporate data center</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Complete data control</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Air-gapped option available</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Integrate with existing systems</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Custom hardware specs</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Perpetual license option</li>
+                    </ul>
+                    <div class="mt-6 pt-6 border-t border-gray-200">
+                        <div class="text-sm text-gray-500">Best for:</div>
+                        <div class="font-medium">Maximum security, regulated industries</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-primary-50 rounded-2xl p-8">
+                <h4 class="font-bold text-lg mb-4">🔌 Integration Capabilities</h4>
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div>
+                        <div class="text-2xl mb-2">📁</div>
+                        <div class="font-medium">SharePoint</div>
+                        <div class="text-sm text-gray-500">Document management</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl mb-2">📊</div>
+                        <div class="font-medium">SAP</div>
+                        <div class="text-sm text-gray-500">ERP integration</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl mb-2">🔧</div>
+                        <div class="font-medium">AVEVA/Hexagon</div>
+                        <div class="text-sm text-gray-500">Engineering tools</div>
+                    </div>
+                    <div>
+                        <div class="text-2xl mb-2">🔗</div>
+                        <div class="font-medium">REST API</div>
+                        <div class="text-sm text-gray-500">Custom integrations</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 7: SECURITY ==================== -->
+    <section id="slide-7" class="slide bg-gray-900 text-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-400 font-semibold mb-4">06 — SECURITY & COMPLIANCE</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Enterprise-Grade Security</h2>
+            <p class="text-xl text-white/70 mb-12">Your data security is our top priority</p>
+            
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- Security Features -->
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center">🔒</span>
+                        Data Protection
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">End-to-End Encryption</div>
+                                <div class="text-sm text-white/60">AES-256 encryption at rest, TLS 1.3 in transit</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">Data Isolation</div>
+                                <div class="text-sm text-white/60">Tenant-isolated databases and processing</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">No Data Retention</div>
+                                <div class="text-sm text-white/60">Documents deleted after processing (configurable)</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">Data Residency</div>
+                                <div class="text-sm text-white/60">Choose UK, EU, or regional data centers</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Access Control -->
+                <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                    <h3 class="text-xl font-bold mb-6 flex items-center gap-3">
+                        <span class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center">👤</span>
+                        Access Control
+                    </h3>
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">Single Sign-On (SSO)</div>
+                                <div class="text-sm text-white/60">SAML 2.0, OAuth 2.0, Azure AD, Okta</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">Role-Based Access (RBAC)</div>
+                                <div class="text-sm text-white/60">Granular permissions by user, team, project</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">Multi-Factor Authentication</div>
+                                <div class="text-sm text-white/60">MFA enforcement with authenticator apps</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <span class="text-green-400 mt-1">✓</span>
+                            <div>
+                                <div class="font-medium">Audit Logging</div>
+                                <div class="text-sm text-white/60">Complete activity trails for compliance</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Compliance -->
+            <div class="bg-white/5 backdrop-blur rounded-2xl p-8 border border-white/10">
+                <h3 class="text-xl font-bold mb-6">Compliance & Certifications</h3>
+                <div class="grid md:grid-cols-4 gap-6">
+                    <div class="text-center p-4 bg-white/5 rounded-xl">
+                        <div class="text-3xl mb-2">🇬🇧</div>
+                        <div class="font-semibold">UK GDPR</div>
+                        <div class="text-sm text-white/60">Data protection compliant</div>
+                    </div>
+                    <div class="text-center p-4 bg-white/5 rounded-xl">
+                        <div class="text-3xl mb-2">🔐</div>
+                        <div class="font-semibold">ISO 27001</div>
+                        <div class="text-sm text-white/60">Information security</div>
+                    </div>
+                    <div class="text-center p-4 bg-white/5 rounded-xl">
+                        <div class="text-3xl mb-2">☁️</div>
+                        <div class="font-semibold">SOC 2 Type II</div>
+                        <div class="text-sm text-white/60">Cloud security controls</div>
+                    </div>
+                    <div class="text-center p-4 bg-white/5 rounded-xl">
+                        <div class="text-3xl mb-2">🏭</div>
+                        <div class="font-semibold">Industry Standards</div>
+                        <div class="text-sm text-white/60">Oil & Gas specific</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 8: SUPPORT & MAINTENANCE ==================== -->
+    <section id="slide-8" class="slide bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">07 — SUPPORT & MAINTENANCE</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Ongoing Support Model</h2>
+            <p class="text-xl text-gray-600 mb-12">We're with you for the long term</p>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <!-- Support Tier 1 -->
+                <div class="bg-gray-50 rounded-2xl p-8 border border-gray-200">
+                    <div class="w-12 h-12 bg-gray-200 rounded-xl flex items-center justify-center text-xl mb-4">📧</div>
+                    <h3 class="text-xl font-bold mb-2">Standard Support</h3>
+                    <p class="text-gray-500 text-sm mb-4">Included with all plans</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Email support (24hr response)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Documentation & knowledge base</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Quarterly software updates</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Bug fixes & security patches</li>
+                    </ul>
+                </div>
+                
+                <!-- Support Tier 2 -->
+                <div class="bg-primary-50 rounded-2xl p-8 border-2 border-primary-200">
+                    <div class="w-12 h-12 bg-primary-600 rounded-xl flex items-center justify-center text-white text-xl mb-4">💬</div>
+                    <h3 class="text-xl font-bold mb-2">Priority Support</h3>
+                    <p class="text-primary-600 text-sm mb-4">Recommended for production</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> 4-hour response time</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Phone & video call support</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Dedicated account manager</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Monthly check-in calls</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Priority feature requests</li>
+                    </ul>
+                </div>
+                
+                <!-- Support Tier 3 -->
+                <div class="bg-gray-900 rounded-2xl p-8 text-white">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-xl mb-4">🚀</div>
+                    <h3 class="text-xl font-bold mb-2">Enterprise Support</h3>
+                    <p class="text-white/60 text-sm mb-4">For mission-critical deployments</p>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> 1-hour response (24/7)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> On-site support available</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Custom SLA agreements</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Dedicated engineering team</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Quarterly business reviews</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="bg-gradient-to-r from-primary-50 to-purple-50 rounded-2xl p-8">
+                <h4 class="font-bold text-lg mb-6">🔄 Continuous Improvement Cycle</h4>
+                <div class="grid md:grid-cols-4 gap-6 text-center">
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 text-primary-600 font-bold">1</div>
+                        <div class="font-medium">Monitor</div>
+                        <div class="text-sm text-gray-500">Usage analytics & feedback</div>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 text-primary-600 font-bold">2</div>
+                        <div class="font-medium">Optimize</div>
+                        <div class="text-sm text-gray-500">AI model tuning</div>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 text-primary-600 font-bold">3</div>
+                        <div class="font-medium">Update</div>
+                        <div class="text-sm text-gray-500">New features & fixes</div>
+                    </div>
+                    <div class="bg-white rounded-xl p-4 shadow-sm">
+                        <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-3 text-primary-600 font-bold">4</div>
+                        <div class="font-medium">Train</div>
+                        <div class="text-sm text-gray-500">Team onboarding & updates</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 9: ENGAGEMENT MODEL ==================== -->
+    <section id="slide-9" class="slide bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">08 — ENGAGEMENT MODEL</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">How We Work Together</h2>
+            <p class="text-xl text-gray-600 mb-12">A structured approach from discovery to deployment</p>
+            
+            <div class="relative">
+                <!-- Timeline -->
+                <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-primary-200 -translate-x-1/2"></div>
+                
+                <div class="space-y-12">
+                    <!-- Phase 1 -->
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="md:text-right">
+                            <div class="bg-white rounded-2xl p-6 card-shadow inline-block">
+                                <div class="text-primary-600 font-bold mb-2">Week 1-2</div>
+                                <h3 class="text-xl font-bold mb-2">Discovery & Assessment</h3>
+                                <ul class="text-gray-600 text-sm space-y-1 text-left">
+                                    <li>• Understand your workflows & pain points</li>
+                                    <li>• Review sample documents</li>
+                                    <li>• IT infrastructure assessment</li>
+                                    <li>• Security requirements review</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex justify-start">
+                            <div class="w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="hidden md:flex justify-end">
+                            <div class="w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                        </div>
+                        <div>
+                            <div class="bg-white rounded-2xl p-6 card-shadow inline-block">
+                                <div class="text-primary-600 font-bold mb-2">Week 3-4</div>
+                                <h3 class="text-xl font-bold mb-2">Proof of Concept</h3>
+                                <ul class="text-gray-600 text-sm space-y-1">
+                                    <li>• Configure system with your data</li>
+                                    <li>• Pilot with real documents</li>
+                                    <li>• Measure accuracy & time savings</li>
+                                    <li>• Gather user feedback</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="md:text-right">
+                            <div class="bg-white rounded-2xl p-6 card-shadow inline-block">
+                                <div class="text-primary-600 font-bold mb-2">Week 5-8</div>
+                                <h3 class="text-xl font-bold mb-2">Production Deployment</h3>
+                                <ul class="text-gray-600 text-sm space-y-1 text-left">
+                                    <li>• Full system deployment</li>
+                                    <li>• Integration with existing tools</li>
+                                    <li>• User training & documentation</li>
+                                    <li>• Go-live support</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="hidden md:flex justify-start">
+                            <div class="w-12 h-12 bg-primary-600 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 4 -->
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div class="hidden md:flex justify-end">
+                            <div class="w-12 h-12 bg-green-600 rounded-full flex items-center justify-center text-white font-bold">✓</div>
+                        </div>
+                        <div>
+                            <div class="bg-green-50 rounded-2xl p-6 border-2 border-green-200 inline-block">
+                                <div class="text-green-600 font-bold mb-2">Ongoing</div>
+                                <h3 class="text-xl font-bold mb-2">Continuous Support</h3>
+                                <ul class="text-gray-600 text-sm space-y-1">
+                                    <li>• Regular check-ins & optimization</li>
+                                    <li>• Feature updates & enhancements</li>
+                                    <li>• Scale to additional use cases</li>
+                                    <li>• ROI tracking & reporting</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 10: CASE STUDY ==================== -->
+    <section id="slide-10" class="slide bg-white">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">09 — RESULTS</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Typical Results</h2>
+            <p class="text-xl text-gray-600 mb-12">What our clients achieve with KU Automation</p>
+            
+            <div class="grid md:grid-cols-4 gap-6 mb-12">
+                <div class="bg-gradient-to-br from-blue-500 to-indigo-600 rounded-2xl p-6 text-white text-center">
+                    <div class="text-5xl font-bold mb-2">70%</div>
+                    <div class="text-white/80">Reduction in document processing time</div>
+                </div>
+                <div class="bg-gradient-to-br from-emerald-500 to-teal-600 rounded-2xl p-6 text-white text-center">
+                    <div class="text-5xl font-bold mb-2">85%</div>
+                    <div class="text-white/80">Improvement in data accuracy</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-pink-600 rounded-2xl p-6 text-white text-center">
+                    <div class="text-5xl font-bold mb-2">3x</div>
+                    <div class="text-white/80">Faster RFQ response times</div>
+                </div>
+                <div class="bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl p-6 text-white text-center">
+                    <div class="text-5xl font-bold mb-2">&lt;4wk</div>
+                    <div class="text-white/80">Typical ROI payback period</div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-50 rounded-2xl p-8">
+                <h3 class="text-2xl font-bold mb-6">Sample Use Case: Document Review Automation</h3>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-bold text-red-600 mb-4">❌ Before KU Automation</h4>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                50 isometrics = 25-50 engineer-hours to review
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                Inconsistent comment quality between reviewers
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                60-80% of comments missing code references
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-red-500">•</span>
+                                Contractor disputes over vague comments
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-green-600 mb-4">✓ After KU Automation</h4>
+                        <ul class="space-y-3 text-gray-600">
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                50 isometrics = 4-5 engineer-hours (90% reduction)
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                Standardized comments across all documents
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                95%+ comments include ASME B31.3 references
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-green-500">•</span>
+                                Clear severity ratings (HOLD/COMMENT/NOTE)
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 11: PRICING ==================== -->
+    <section id="slide-11" class="slide bg-gray-50">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-sm text-primary-600 font-semibold mb-4">10 — INVESTMENT</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Flexible Pricing Models</h2>
+            <p class="text-xl text-gray-600 mb-12">Choose the model that fits your needs and budget</p>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Starter -->
+                <div class="bg-white rounded-2xl p-8 border border-gray-200">
+                    <h3 class="text-xl font-bold mb-2">Pilot Project</h3>
+                    <p class="text-gray-500 text-sm mb-6">Prove the value before scaling</p>
+                    <div class="text-4xl font-bold mb-6">Custom<span class="text-lg font-normal text-gray-500">/project</span></div>
+                    <ul class="space-y-3 text-sm mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> 4-week implementation</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Single use case focus</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Up to 10 users</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> Standard support</li>
+                        <li class="flex items-center gap-2"><span class="text-green-500">✓</span> ROI measurement</li>
+                    </ul>
+                    <div class="text-sm text-gray-500">Typical range: £5,000 - £15,000</div>
+                </div>
+                
+                <!-- Professional -->
+                <div class="bg-primary-600 rounded-2xl p-8 text-white relative">
+                    <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 bg-amber-400 text-amber-900 text-xs font-bold rounded-full">MOST POPULAR</div>
+                    <h3 class="text-xl font-bold mb-2">Professional</h3>
+                    <p class="text-white/70 text-sm mb-6">Full production deployment</p>
+                    <div class="text-4xl font-bold mb-6">Custom<span class="text-lg font-normal text-white/70">/year</span></div>
+                    <ul class="space-y-3 text-sm mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-300">✓</span> 8-week implementation</li>
+                        <li class="flex items-center gap-2"><span class="text-green-300">✓</span> Multiple use cases</li>
+                        <li class="flex items-center gap-2"><span class="text-green-300">✓</span> Up to 50 users</li>
+                        <li class="flex items-center gap-2"><span class="text-green-300">✓</span> Priority support</li>
+                        <li class="flex items-center gap-2"><span class="text-green-300">✓</span> Integrations included</li>
+                        <li class="flex items-center gap-2"><span class="text-green-300">✓</span> Quarterly reviews</li>
+                    </ul>
+                    <div class="text-sm text-white/70">Typical range: £25,000 - £75,000/year</div>
+                </div>
+                
+                <!-- Enterprise -->
+                <div class="bg-gray-900 rounded-2xl p-8 text-white">
+                    <h3 class="text-xl font-bold mb-2">Enterprise</h3>
+                    <p class="text-white/70 text-sm mb-6">Full-scale transformation</p>
+                    <div class="text-4xl font-bold mb-6">Custom</div>
+                    <ul class="space-y-3 text-sm mb-8">
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Dedicated implementation team</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Unlimited use cases</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Unlimited users</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Enterprise support (24/7)</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> Custom development</li>
+                        <li class="flex items-center gap-2"><span class="text-green-400">✓</span> On-premise option</li>
+                    </ul>
+                    <div class="text-sm text-white/70">Contact for custom pricing</div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center text-gray-500">
+                <p>All pricing is indicative. Final quotes based on scope, complexity, and deployment requirements.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== SLIDE 12: NEXT STEPS ==================== -->
+    <section id="slide-12" class="slide bg-gradient-to-br from-primary-900 via-primary-800 to-purple-900 text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="text-sm text-primary-300 font-semibold mb-4">LET'S GET STARTED</div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">Next Steps</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl mx-auto mb-4">1</div>
+                    <h3 class="font-bold text-lg mb-2">Discovery Call</h3>
+                    <p class="text-white/70 text-sm">30-minute call to understand your specific needs and challenges</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl mx-auto mb-4">2</div>
+                    <h3 class="font-bold text-lg mb-2">Custom Demo</h3>
+                    <p class="text-white/70 text-sm">See our tools working with your actual documents</p>
+                </div>
+                <div class="bg-white/10 backdrop-blur rounded-2xl p-6">
+                    <div class="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center text-2xl mx-auto mb-4">3</div>
+                    <h3 class="font-bold text-lg mb-2">Proposal</h3>
+                    <p class="text-white/70 text-sm">Detailed scope, timeline, and investment proposal</p>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-2xl p-8 text-gray-900 max-w-2xl mx-auto">
+                <h3 class="text-2xl font-bold mb-4">Contact</h3>
+                <div class="space-y-3 text-left">
+                    <div class="flex items-center gap-4">
+                        <span class="w-8 text-center">👤</span>
+                        <span class="font-medium">Kingsley Uzowulu</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="w-8 text-center">📧</span>
+                        <span>kingsley.uzowulu@ku-automation.com</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="w-8 text-center">🌐</span>
+                        <span>www.ku-automation.com</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="w-8 text-center">📅</span>
+                        <a href="https://calendly.com/kingsley-uzowulu/30min" target="_blank" class="text-primary-600 hover:underline font-medium">Book a Meeting →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="mt-12 text-white/60 text-sm">Thank you for your time and consideration.</p>
+        </div>
+    </section>
+
+    <!-- Print Button -->
+    <div class="fixed bottom-6 right-6 no-print">
+        <button onclick="window.print()" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium shadow-lg flex items-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+            Export PDF
+        </button>
+    </div>
+
+    <script>
+        // Active nav dot
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    document.querySelectorAll('.nav-dot').forEach(dot => dot.classList.remove('active'));
+                    const activeId = entry.target.id;
+                    const activeDot = document.querySelector(`a[href="#${activeId}"]`);
+                    if (activeDot) activeDot.classList.add('active');
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        document.querySelectorAll('.slide').forEach(slide => observer.observe(slide));
+    </script>
+</body>
+</html>
