@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "ai-document-review-engineering-comments",
+      "title": "From 4 Hours to 4 Minutes: How AI is Revolutionizing Engineering Document Review",
+      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references—automatically.",
+      "date": "2026-04-15",
+      "modified": "2026-04-15",
+      "published": true,
+      "featured": true,
+      "image": "/blog/images/2026-04-15-ai-document-review.png",
+      "tags": [
+        "Document Review",
+        "Piping",
+        "ASME B31.3",
+        "AI Automation",
+        "Engineering"
+      ],
+      "readTime": 6,
+      "wordCount": 1350,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "stop-vendor-document-chaos-ai-powered-document-control-for-epc-projects",
       "title": "Stop Vendor Document Chaos: AI-Powered Document Control for EPC Projects",
       "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control \u2014 revision comparison, checklist compliance checks, and automatic MDR updates.",
