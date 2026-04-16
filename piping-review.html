@@ -54,7 +54,7 @@
                 <a href="index.html" class="flex items-center gap-3">
                     <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
                     <div>
-                        <span class="font-bold text-lg block text-gray-900">Piping Document Review <span class="text-xs font-normal text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full">v1.0</span></span>
+                        <span class="font-bold text-lg block text-gray-900">Piping Document Review <span class="text-xs font-normal text-primary-600 bg-primary-50 px-2 py-0.5 rounded-full">v2.0</span></span>
                         <span class="text-xs text-gray-500">by KU Automation</span>
                     </div>
                 </a>
@@ -80,20 +80,28 @@
                 AI <span class="gradient-text">Piping Document</span> Review
             </h1>
             <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                Upload your P&IDs, piping isometrics, or GA drawings. Get detailed engineering comments with ASME B31.3 code references, severity ratings, and Excel export — like having a senior piping engineer on demand.
+                Upload your piping documents for enterprise-grade review. Get detailed engineering comments with ASME B31.3 code references, severity classifications (HOLD/COMMENT/NOTE), review layer assessment, and Excel export — like having a Principal Piping Engineer on demand.
             </p>
-            <div class="mt-6 flex items-center justify-center gap-6 text-sm text-gray-500">
+            <div class="mt-6 flex flex-wrap items-center justify-center gap-4 text-sm text-gray-500">
                 <span class="flex items-center gap-1">
                     <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                     P&IDs
                 </span>
                 <span class="flex items-center gap-1">
                     <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                    Piping Isometrics
+                    Isometrics
                 </span>
                 <span class="flex items-center gap-1">
                     <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
                     GA/Layouts
+                </span>
+                <span class="flex items-center gap-1">
+                    <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Line Lists
+                </span>
+                <span class="flex items-center gap-1 bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full font-medium">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                    Stress Reports (CAESAR II) — NEW!
                 </span>
                 <span class="flex items-center gap-1">
                     <svg class="w-4 h-4 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
@@ -107,40 +115,55 @@
             <!-- Document Type Selection -->
             <div class="bg-white rounded-xl p-6 border border-gray-200 mb-6">
                 <label class="block text-sm font-medium text-gray-700 mb-3">Document Type</label>
-                <div class="grid grid-cols-2 md:grid-cols-5 gap-3">
+                <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
                     <label class="cursor-pointer">
                         <input type="radio" name="docType" value="auto" class="sr-only peer" checked>
-                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all hover:border-gray-300">
                             <span class="text-2xl">🔍</span>
-                            <p class="text-sm font-medium mt-1">Auto-Detect</p>
+                            <p class="text-xs font-medium mt-1">Auto-Detect</p>
                         </div>
                     </label>
                     <label class="cursor-pointer">
                         <input type="radio" name="docType" value="pid" class="sr-only peer">
-                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all hover:border-gray-300">
                             <span class="text-2xl">📊</span>
-                            <p class="text-sm font-medium mt-1">P&ID</p>
+                            <p class="text-xs font-medium mt-1">P&ID</p>
                         </div>
                     </label>
                     <label class="cursor-pointer">
                         <input type="radio" name="docType" value="isometric" class="sr-only peer">
-                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all hover:border-gray-300">
                             <span class="text-2xl">📐</span>
-                            <p class="text-sm font-medium mt-1">Isometric</p>
+                            <p class="text-xs font-medium mt-1">Isometric</p>
                         </div>
                     </label>
                     <label class="cursor-pointer">
                         <input type="radio" name="docType" value="ga" class="sr-only peer">
-                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all hover:border-gray-300">
                             <span class="text-2xl">🗺️</span>
-                            <p class="text-sm font-medium mt-1">GA/Layout</p>
+                            <p class="text-xs font-medium mt-1">GA/Layout</p>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="docType" value="plot_plan" class="sr-only peer">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all hover:border-gray-300">
+                            <span class="text-2xl">🏭</span>
+                            <p class="text-xs font-medium mt-1">Plot Plan</p>
                         </div>
                     </label>
                     <label class="cursor-pointer">
                         <input type="radio" name="docType" value="line_list" class="sr-only peer">
-                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all">
+                        <div class="p-3 border-2 border-gray-200 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all hover:border-gray-300">
                             <span class="text-2xl">📋</span>
-                            <p class="text-sm font-medium mt-1">Line List</p>
+                            <p class="text-xs font-medium mt-1">Line List</p>
+                        </div>
+                    </label>
+                    <label class="cursor-pointer">
+                        <input type="radio" name="docType" value="stress_report" class="sr-only peer">
+                        <div class="p-3 border-2 border-amber-300 bg-amber-50 rounded-lg text-center peer-checked:border-primary-500 peer-checked:bg-primary-50 transition-all hover:border-amber-400 relative">
+                            <span class="absolute -top-2 -right-2 text-[10px] bg-red-500 text-white px-1.5 py-0.5 rounded-full font-bold">NEW</span>
+                            <span class="text-2xl">📈</span>
+                            <p class="text-xs font-medium mt-1">Stress/CAESAR</p>
                         </div>
                     </label>
                 </div>

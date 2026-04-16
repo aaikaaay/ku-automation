@@ -1602,10 +1602,13 @@ def merge_tender_extractions(extractions: List[dict]) -> dict:
 from piping_review import (
     PIPING_REVIEW_SYSTEM_PROMPT,
     get_review_prompt,
+    get_document_types,
     PID_REVIEW_PROMPT,
     ISOMETRIC_REVIEW_PROMPT,
     PIPING_GA_REVIEW_PROMPT,
+    PLOT_PLAN_REVIEW_PROMPT,
     LINE_LIST_REVIEW_PROMPT,
+    STRESS_REPORT_REVIEW_PROMPT,
     GENERAL_PIPING_REVIEW_PROMPT
 )
 
@@ -1711,9 +1714,34 @@ def create_review_excel(review_data: dict, filename: str) -> str:
     ws_sum.append(["APPROVAL STATUS:", review_data.get("approval_status", "N/A")])
     ws_sum['B17'].font = Font(bold=True, size=12)
     
+    # Readiness Score (new in v2.0)
+    readiness = review_data.get("readiness_score", "N/A")
+    ws_sum.append(["READINESS SCORE:", f"{readiness}%" if isinstance(readiness, (int, float)) else readiness])
+    
     ws_sum.append([])
     ws_sum.append(["SUMMARY:"])
     ws_sum.append([review_data.get("summary", "N/A")])
+    
+    # Review Layers Assessment (new in v2.0)
+    review_layers = review_data.get("review_layers", {})
+    if review_layers:
+        ws_sum.append([])
+        ws_sum.append(["REVIEW LAYERS ASSESSMENT:"])
+        layer_row = ws_sum.max_row
+        ws_sum.cell(row=layer_row, column=1).font = Font(bold=True)
+        for layer, status in review_layers.items():
+            layer_name = layer.replace("_", " ").title()
+            ws_sum.append([f"  {layer_name}:", status])
+    
+    # Critical Findings (new in v2.0)
+    critical = review_data.get("critical_findings", [])
+    if critical:
+        ws_sum.append([])
+        ws_sum.append(["CRITICAL FINDINGS (HOLD):"])
+        cf_row = ws_sum.max_row
+        ws_sum.cell(row=cf_row, column=1).font = Font(bold=True, color="CC0000")
+        for finding in critical:
+            ws_sum.append(["⚠️", finding])
     
     ws_sum.append([])
     ws_sum.append(["RECOMMENDATIONS:"])
