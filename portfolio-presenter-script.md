@@ -82,7 +82,9 @@
 >
 > **RFQ and Tender Analysis** — This is a big one for business development teams. AI-powered analysis of RFQs with automatic line item extraction. We're seeing 3x faster response times.
 >
-> **Document Review** — And this is our newest tool. **[Emphasize]** AI-generated engineering comments with actual code references — ASME B31.3, API standards — with severity ratings and Excel export. What took 4 hours now takes 4 minutes.
+> **Document Review v2.0** — **[Emphasize]** This is our flagship tool. Enterprise-grade engineering review with a 6-layer assessment framework — the same methodology used by major owner's engineering organizations. AI-generated comments with ASME B31.3 code references, severity classifications, and Excel export. What took 4 hours now takes 4 minutes.
+>
+> **Stress Analysis Review** — **[This is new]** We can review CAESAR II and AutoPIPE stress reports. Not just checking if numbers are green — we validate boundary conditions, nozzle load assumptions, support practicality. The question we ask: 'Has the analyst solved the actual piping problem, or just made the software pass?' This catches issues that software alone misses.
 >
 > **Engineering Chatbots** — Knowledge base chatbots trained on YOUR standards, YOUR procedures, YOUR project documentation. Your team gets 24/7 instant answers to technical questions.
 >
@@ -101,11 +103,12 @@
 >
 > **[Point to Live badge]** Everything you see here is live on our website right now. No signup required. You can try these yourself after this meeting.
 >
-> We have four production-ready demos:
+> We have five production-ready demos:
 > - P&ID Parser v2.0
 > - Datasheet Parser v2.0
 > - RFQ Analyzer v2.0
-> - And our brand new Piping Document Review tool
+> - Piping Document Review v2.0 — our flagship 6-layer review tool
+> - And our newest: Stress Analysis Review for CAESAR II reports
 >
 > **[Point to capabilities]** These handle PDFs, images, multi-page documents. Output goes to Excel, JSON, or direct API integration. Processing time is typically 30 to 90 seconds depending on complexity.
 >
