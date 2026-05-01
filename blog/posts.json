@@ -1,9 +1,139 @@
 {
   "posts": [
     {
+      "slug": "ai-material-takeoff-mto-automation",
+      "title": "AI-Powered Material Take-Off: How Engineering Firms Cut MTO Time by 85%",
+      "excerpt": "Transform your material take-off process with AI automation. Learn how engineering companies are reducing MTO time from days to hours, eliminating errors, and winning more bids with accurate quantity estimates.",
+      "date": "2026-05-01",
+      "modified": "2026-05-01",
+      "published": true,
+      "featured": true,
+      "image": "/blog/images/2026-05-01-ai-material-takeoff-mto.jpg",
+      "tags": [
+        "Material Take-Off",
+        "MTO Automation",
+        "Quantity Surveying",
+        "AI Automation",
+        "Cost Estimation"
+      ],
+      "readTime": 8,
+      "wordCount": 1850,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-automation-in-engineering-real-world-case-studies-for-oil-gas-and-epc",
+      "title": "AI Automation in Engineering: Real-World Case Studies for Oil & Gas and EPC",
+      "excerpt": "Learn about ai automation in engineering: real-world case studies for oil & gas and epc. Expert insights for engineering professionals.",
+      "date": "2026-05-01",
+      "modified": "2026-05-01",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-in-engineering-real-world-case-studies-for-oil-gas-and-epc.png",
+      "tags": [
+        "AI automation",
+        "Engineering",
+        "document processing",
+        "oil and gas",
+        "EPC"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-automation-for-engineering-companies-practical-guide",
+      "title": "AI Automation for Engineering Companies: Practical Guide",
+      "excerpt": "Learn about ai automation for engineering companies: practical guide. Expert insights for engineering professionals.",
+      "date": "2026-04-29",
+      "modified": "2026-04-29",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-for-engineering-companies-practical-guide.png",
+      "tags": [
+        "AI automation",
+        "engineering",
+        "document processing",
+        "oil and gas",
+        "EPC"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-automation-for-engineering-real-world-document-processing-solutions-in-oil-gas",
+      "title": "AI Automation for Engineering: Real-World Document Processing Solutions in Oil & Gas",
+      "excerpt": "Learn about ai automation for engineering: real-world document processing solutions in oil & gas. Expert insights for engineering professionals.",
+      "date": "2026-04-29",
+      "modified": "2026-04-29",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-for-engineering-real-world-document-processing-solutions-in-oil-gas.png",
+      "tags": [
+        "AI automation",
+        "engineering",
+        "document processing",
+        "oil and gas",
+        "EPC"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-automation-for-engineering-companies-practical-use-cases",
+      "title": "AI Automation for Engineering Companies: Practical Use Cases",
+      "excerpt": "Learn about ai automation for engineering companies: practical use cases. Expert insights for engineering professionals.",
+      "date": "2026-04-20",
+      "modified": "2026-04-20",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-for-engineering-companies-practical-use-cases.png",
+      "tags": [
+        "AI Automation",
+        "Engineering",
+        "Document Processing",
+        "Oil and Gas",
+        "EPC"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-document-review-engineering-comments",
       "title": "From 4 Hours to 4 Minutes: How AI is Revolutionizing Engineering Document Review",
-      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references—automatically.",
+      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references\u2014automatically.",
       "date": "2026-04-15",
       "modified": "2026-04-15",
       "published": true,
