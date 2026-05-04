@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "ai-powered-document-automation-for-engineering-firms-real-world-use-cases-in-oil-gas-and-epc",
+      "title": "AI-Powered Document Automation for Engineering Firms: Real-World Use Cases in Oil & Gas and EPC",
+      "excerpt": "Learn about ai-powered document automation for engineering firms: real-world use cases in oil & gas and epc. Expert insights for engineering professionals.",
+      "date": "2026-05-04",
+      "modified": "2026-05-04",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-powered-document-automation-for-engineering-firms-real-world-use-cases-in-oil-gas-and-epc.png",
+      "tags": [
+        "AI",
+        "Engineering",
+        "Document Processing",
+        "Oil & Gas",
+        "EPC"
+      ],
+      "readTime": 4,
+      "wordCount": 838,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-material-takeoff-mto-automation",
       "title": "AI-Powered Material Take-Off: How Engineering Firms Cut MTO Time by 85%",
       "excerpt": "Transform your material take-off process with AI automation. Learn how engineering companies are reducing MTO time from days to hours, eliminating errors, and winning more bids with accurate quantity estimates.",
