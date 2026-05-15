@@ -71,6 +71,16 @@
       "source": "/one-pager.html",
       "destination": "/one-pager",
       "permanent": true
+    },
+    {
+      "source": "/document-command-station.html",
+      "destination": "/document-command-station",
+      "permanent": true
+    },
+    {
+      "source": "/blog-post-document-command-station.html",
+      "destination": "/blog-post-document-command-station",
+      "permanent": true
     }
   ]
 }

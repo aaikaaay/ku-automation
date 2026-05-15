@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client IT Interface Prep Guide | KU Automation Internal</title>
+    <style>
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #2d5a87;
+            --accent: #f59e0b;
+            --accent-light: #fef3c7;
+            --success: #10b981;
+            --success-light: #d1fae5;
+            --warning: #f97316;
+            --warning-light: #ffedd5;
+            --danger: #ef4444;
+            --danger-light: #fee2e2;
+            --info: #3b82f6;
+            --info-light: #dbeafe;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --border: #e5e7eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f9fafb;
+        }
+        
+        .document {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
+        }
+        
+        /* Header */
+        .doc-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem 3rem;
+        }
+        
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .internal-badge {
+            background: var(--accent);
+            color: var(--dark);
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .doc-header h1 {
+            font-size: 1.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .doc-header .subtitle {
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+        
+        /* Content */
+        .content {
+            padding: 2.5rem 3rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.35rem;
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        h2:first-child {
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        h4 {
+            color: var(--dark);
+            font-size: 1rem;
+            margin: 1.25rem 0 0.5rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin: 0.75rem 0 1rem 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.4rem;
+        }
+        
+        strong {
+            color: var(--primary);
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border);
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: var(--light-gray);
+        }
+        
+        /* Callout Boxes */
+        .callout {
+            padding: 1.25rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.25rem 0;
+            border-left: 5px solid;
+        }
+        
+        .callout-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .callout-tip {
+            background: var(--success-light);
+            border-color: var(--success);
+        }
+        .callout-tip .callout-title { color: #065f46; }
+        
+        .callout-warning {
+            background: var(--warning-light);
+            border-color: var(--warning);
+        }
+        .callout-warning .callout-title { color: #9a3412; }
+        
+        .callout-danger {
+            background: var(--danger-light);
+            border-color: var(--danger);
+        }
+        .callout-danger .callout-title { color: #991b1b; }
+        
+        .callout-info {
+            background: var(--info-light);
+            border-color: var(--info);
+        }
+        .callout-info .callout-title { color: #1e40af; }
+        
+        .callout-gold {
+            background: var(--accent-light);
+            border-color: var(--accent);
+        }
+        .callout-gold .callout-title { color: #92400e; }
+        
+        /* Q&A Cards */
+        .qa-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .qa-question {
+            background: var(--light-gray);
+            padding: 1rem 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+        }
+        
+        .qa-question::before {
+            content: "Q";
+            background: var(--danger);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .qa-answer {
+            padding: 1rem 1.25rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .qa-answer::before {
+            content: "Your Response:";
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--success);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Scenario Cards */
+        .scenario {
+            background: linear-gradient(135deg, var(--light-gray) 0%, white 100%);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .scenario-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .scenario-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        
+        .scenario-title {
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .scenario-subtitle {
+            font-size: 0.85rem;
+            color: var(--gray);
+        }
+        
+        /* Cheat Sheet */
+        .cheat-sheet {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .cheat-card {
+            background: var(--light-gray);
+            border-radius: 8px;
+            padding: 1.25rem;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .cheat-card h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--primary);
+            font-size: 0.95rem;
+        }
+        
+        .cheat-card p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        /* Objection Handler */
+        .objection {
+            background: white;
+            border: 2px solid var(--danger);
+            border-radius: 10px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+        
+        .objection-header {
+            background: var(--danger-light);
+            padding: 0.75rem 1.25rem;
+            font-weight: 600;
+            color: #991b1b;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .objection-body {
+            padding: 1.25rem;
+        }
+        
+        .objection-response {
+            background: var(--success-light);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-top: 0.75rem;
+        }
+        
+        .objection-response::before {
+            content: "✓ Your Response:";
+            display: block;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #065f46;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Meeting Agenda */
+        .agenda {
+            counter-reset: agenda-counter;
+        }
+        
+        .agenda-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px dashed var(--border);
+        }
+        
+        .agenda-item:last-child {
+            border-bottom: none;
+        }
+        
+        .agenda-number {
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+        
+        .agenda-content h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--primary);
+        }
+        
+        .agenda-content p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+        
+        .agenda-time {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+        
+        /* Quick Reference */
+        .quick-ref {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin: 1.5rem 0;
+        }
+        
+        .quick-ref h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+        
+        .quick-ref ul {
+            margin: 0;
+            padding-left: 1.25rem;
+        }
+        
+        .quick-ref li {
+            margin-bottom: 0.35rem;
+        }
+        
+        /* Footer */
+        .doc-footer {
+            background: var(--dark);
+            color: #9ca3af;
+            padding: 1.5rem 3rem;
+            font-size: 0.85rem;
+            text-align: center;
+        }
+        
+        /* Print */
+        @media print {
+            body { background: white; }
+            .document { box-shadow: none; }
+            .doc-header, .quick-ref, .doc-footer {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .content { padding: 1.5rem; }
+            .cheat-sheet { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document">
+    <!-- Header -->
+    <header class="doc-header">
+        <div class="header-top">
+            <div>
+                <h1>Client IT Interface Prep Guide</h1>
+                <p class="subtitle">Your playbook for navigating IT & security discussions with confidence</p>
+            </div>
+            <span class="internal-badge">🔒 Internal Use Only</span>
+        </div>
+    </header>
+    
+    <!-- Content -->
+    <div class="content">
+        
+        <h2>🎯 Purpose of This Document</h2>
+        <p>This is your personal preparation guide for engaging with client IT and security teams. It translates the client-facing IT & Security Requirements Guide into actionable talking points, anticipated questions, objection handlers, and meeting strategies.</p>
+        
+        <p><strong>Use this document to:</strong></p>
+        <ul>
+            <li>Prepare before client IT meetings</li>
+            <li>Anticipate tough questions and have answers ready</li>
+            <li>Handle security objections confidently</li>
+            <li>Guide conversations toward your preferred deployment options</li>
+            <li>Close the technical validation phase faster</li>
+        </ul>
+        
+        <div class="callout callout-gold">
+            <div class="callout-title">💡 Key Insight</div>
+            <p style="margin:0;">Client IT teams are gatekeepers, not decision-makers. Their job is to find reasons to say "no" or delay. Your job is to make "yes" the path of least resistance by being prepared, credible, and responsive.</p>
+        </div>
+        
+        <h2>🗺️ Understanding the Client IT Landscape</h2>
+        
+        <h3>Who You'll Be Talking To</h3>
+        <table>
+            <tr>
+                <th>Role</th>
+                <th>Their Concerns</th>
+                <th>What They Want to Hear</th>
+            </tr>
+            <tr>
+                <td><strong>IT Manager / Director</strong></td>
+                <td>Resource requirements, maintenance burden, integration complexity, support model</td>
+                <td>"Minimal overhead for your team. We handle the heavy lifting."</td>
+            </tr>
+            <tr>
+                <td><strong>Security Analyst / CISO</strong></td>
+                <td>Data protection, compliance, vulnerabilities, access controls, audit trails</td>
+                <td>"Security-first architecture. Full audit logging. Your data stays protected."</td>
+            </tr>
+            <tr>
+                <td><strong>Network Engineer</strong></td>
+                <td>Firewall rules, bandwidth, ports, DNS, certificates</td>
+                <td>"Standard HTTPS only. No special ports. Works with your existing infra."</td>
+            </tr>
+            <tr>
+                <td><strong>Enterprise Architect</strong></td>
+                <td>Fit with existing stack, scalability, future-proofing, vendor lock-in</td>
+                <td>"API-first. Standard protocols. No lock-in. Scales with your growth."</td>
+            </tr>
+            <tr>
+                <td><strong>Compliance Officer</strong></td>
+                <td>Regulatory alignment, certifications, data residency, DPA</td>
+                <td>"SOC 2 certified. GDPR compliant. DPA ready to sign."</td>
+            </tr>
+        </table>
+        
+        <h3>The IT Approval Journey</h3>
+        <div class="scenario">
+            <p>Most client IT teams follow a predictable evaluation path. Knowing where you are helps you guide the conversation:</p>
+            <ol>
+                <li><strong>Initial Review</strong> — IT receives your documentation, does a quick scan for red flags</li>
+                <li><strong>Technical Questions</strong> — Detailed Q&A on architecture, security, integration</li>
+                <li><strong>Security Assessment</strong> — Formal review against their policies (may include questionnaire)</li>
+                <li><strong>Proof of Concept</strong> — Sometimes requested before full approval</li>
+                <li><strong>Final Approval</strong> — Sign-off from IT leadership and/or security team</li>
+            </ol>
+            <p><strong>Your goal:</strong> Compress this timeline by being proactive with documentation and responsive to questions.</p>
+        </div>
+        
+        <h2>📋 Deployment Options — Your Positioning</h2>
+        
+        <p>You offer 4 deployment options. Here's how to position each based on the client's situation:</p>
+        
+        <div class="cheat-sheet">
+            <div class="cheat-card">
+                <h4>🌐 Option A: SaaS (Cloud)</h4>
+                <p><strong>Push when:</strong> Client wants speed, has no dedicated DevOps, or is doing a POC. Lowest friction.</p>
+                <p><strong>Margin:</strong> Highest (no deployment overhead)</p>
+            </div>
+            <div class="cheat-card">
+                <h4>☁️ Option B: Private Cloud</h4>
+                <p><strong>Push when:</strong> Client has AWS/Azure/GCP presence and compliance requirements. Wants control + cloud benefits.</p>
+                <p><strong>Margin:</strong> Good (some setup work)</p>
+            </div>
+            <div class="cheat-card">
+                <h4>🏢 Option C: On-Premises</h4>
+                <p><strong>Push when:</strong> Air-gapped environments, government/defence, or "no cloud ever" policy. Expect longer timeline.</p>
+                <p><strong>Margin:</strong> Lower (significant deployment effort)</p>
+            </div>
+            <div class="cheat-card">
+                <h4>🔀 Option D: Hybrid</h4>
+                <p><strong>Push when:</strong> Client wants AI benefits but has strict data residency. Good compromise position.</p>
+                <p><strong>Margin:</strong> Good (gateway simplifies)</p>
+            </div>
+        </div>
+        
+        <div class="callout callout-tip">
+            <div class="callout-title">💰 Commercial Tip</div>
+            <p style="margin:0;">Always start by recommending <strong>Option A (SaaS)</strong> unless you already know they have restrictions. It's faster to deploy, easier to support, and higher margin. Let them push back to other options rather than volunteering complexity.</p>
+        </div>
+        
+        <h2>🔥 Anticipated Questions & Your Responses</h2>
+        
+        <p>These are the questions that come up in almost every IT conversation. Have these answers ready:</p>
+        
+        <h3>Security & Data Protection</h3>
+        
+        <div class="qa-card">
+            <div class="qa-question">Where is our data stored? Who has access to it?</div>
+            <div class="qa-answer">
+                <p>Your data is stored in [EU Frankfurt / US Virginia — confirm based on contract]. Only your authorised users and our Tier 2+ support engineers (under strict access controls and audit logging) can access it. We operate on a least-privilege model — support access requires a ticket and is logged.</p>
+                <p>For Private Cloud or On-Prem deployments, data never leaves your infrastructure. You control all access.</p>
+            </div>
+        </div>
+        
+        <div class="qa-card">
+            <div class="qa-question">How is data encrypted?</div>
+            <div class="qa-answer">
+                <p><strong>In transit:</strong> TLS 1.2 minimum, TLS 1.3 preferred. All API calls and web traffic are encrypted.</p>
+                <p><strong>At rest:</strong> AES-256 encryption. For Private Cloud/On-Prem, you can use your own encryption keys (BYOK) — we support AWS KMS, Azure Key Vault, and HashiCorp Vault.</p>
+            </div>
+        </div>
+        
+        <div class="qa-card">
+            <div class="qa-question">What compliance certifications do you have?</div>
+            <div class="qa-answer">
+                <p>We're <strong>SOC 2 Type II certified</strong> (audit report available under NDA), <strong>ISO 27001 certified</strong>, and <strong>GDPR compliant</strong>. We can provide a Data Processing Agreement (DPA) for EU data subjects. For healthcare clients, we offer <strong>HIPAA-eligible</strong> deployment with a Business Associate Agreement (BAA).</p>
+                <p>Happy to share our SOC 2 report, pen test summary, or complete a security questionnaire (SIG, CAIQ, custom).</p>
+            </div>
+        </div>
+        
+        <div class="qa-card">
+            <div class="qa-question">Have you had any security breaches?</div>
+            <div class="qa-answer">
+                <p>No. We've had zero security breaches or data incidents. We run continuous vulnerability scanning, annual penetration tests by third-party firms, and have a responsible disclosure program. Our security posture is documented in our SOC 2 report.</p>
+            </div>
+        </div>
+        
+        <h3>Infrastructure & Integration</h3>
+        
+        <div class="qa-card">
+            <div class="qa-question">What ports and network access do you need?</div>
+            <div class="qa-answer">
+                <p>For SaaS: Just <strong>outbound HTTPS (port 443)</strong> to *.ku-automation.com. No inbound ports required. Works through standard corporate proxies.</p>
+                <p>For Private/On-Prem: You control what's exposed. Typically HTTPS (443) for the web UI, and optionally SSH (22) for admin access from your internal network only.</p>
+            </div>
+        </div>
+        
+        <div class="qa-card">
+            <div class="qa-question">Can you integrate with our SSO / identity provider?</div>
+            <div class="qa-answer">
+                <p>Yes — we support <strong>SAML 2.0</strong> and <strong>OpenID Connect (OIDC)</strong>. We've integrated with Okta, Azure AD, Google Workspace, Ping Identity, and OneLogin. Configuration typically takes 1-2 hours. We can also enforce MFA through your IdP policies.</p>
+            </div>
+        </div>
+        
+        <div class="qa-card">
+            <div class="qa-question">What's your uptime / SLA?</div>
+            <div class="qa-answer">
+                <p>Our SaaS platform has a <strong>99.9% uptime SLA</strong> (about 8.7 hours max downtime per year). We publish a status page at status.ku-automation.com. For Private Cloud/On-Prem, uptime depends on your infrastructure — we provide HA deployment guides and monitoring recommendations.</p>
+            </div>
+        </div>
+        
+        <div class="qa-card">
+            <div class="qa-question">What happens to our data if we cancel?</div>
+            <div class="qa-answer">
+                <p>You can export all your data at any time via our API or admin dashboard. Upon contract termination, we retain data for 30 days (in case you change your mind), then permanently delete it with certification available on request. For On-Prem, you control everything — just decommission the servers.</p>
+            </div>
+        </div>
+        
+        <h3>Support & Operations</h3>
+        
+        <div class="qa-card">
+            <div class="qa-question">What support do you provide?</div>
+            <div class="qa-answer">
+                <p><strong>Standard support:</strong> Email/ticket support, &lt;4 hour response during business hours, access to documentation and knowledge base.</p>
+                <p><strong>Premium support (available):</strong> 24/7 coverage, &lt;1 hour response for critical issues, dedicated success manager, quarterly business reviews.</p>
+                <p>We also provide onboarding assistance and training sessions included in the implementation.</p>
+            </div>
+        </div>
+        
+        <div class="qa-card">
+            <div class="qa-question">How do you handle updates and patches?</div>
+            <div class="qa-answer">
+                <p><strong>SaaS:</strong> We handle all updates automatically. Security patches are applied within 24-48 hours of release. Feature updates are rolled out gradually with advance notice.</p>
+                <p><strong>Private/On-Prem:</strong> We provide update packages and release notes. You control when to apply them. Critical security patches come with an advisory and recommended timeline.</p>
+            </div>
+        </div>
+        
+        <h2>🛡️ Handling Objections</h2>
+        
+        <p>These are the common objections you'll face and how to overcome them:</p>
+        
+        <div class="objection">
+            <div class="objection-header">⚠️ "We can't use cloud services — security policy prohibits it."</div>
+            <div class="objection-body">
+                <p><strong>Why they say this:</strong> Often a blanket policy that hasn't been updated, or they've had a bad experience with a cloud vendor.</p>
+                <div class="objection-response">
+                    <p>"I understand — many of our clients in [regulated industry] had similar policies. That's exactly why we offer <strong>on-premises deployment</strong> that runs entirely within your data centre with zero external connectivity. Your data never leaves your network.</p>
+                    <p>Alternatively, our <strong>Private Cloud option</strong> deploys within your own AWS/Azure VPC — you control the infrastructure, encryption keys, and network policies. Many security teams approve this because it's effectively on-prem in the cloud."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="objection">
+            <div class="objection-header">⚠️ "We need to do a full security assessment — this will take months."</div>
+            <div class="objection-body">
+                <p><strong>Why they say this:</strong> Covering themselves, or genuinely have a lengthy vendor review process.</p>
+                <div class="objection-response">
+                    <p>"Completely understand — thorough security reviews are important. To help accelerate this, I can provide:</p>
+                    <ul>
+                        <li>Our <strong>SOC 2 Type II report</strong> (covers most security questionnaire items)</li>
+                        <li>A completed <strong>SIG Lite or CAIQ</strong> questionnaire</li>
+                        <li>Our latest <strong>penetration test summary</strong></li>
+                        <li><strong>Architecture diagrams</strong> and data flow documentation</li>
+                    </ul>
+                    <p>If you share your questionnaire template, I'll prioritise getting it completed. Many clients have compressed their review to 2-3 weeks with this documentation."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="objection">
+            <div class="objection-header">⚠️ "What if you go out of business? We'd be stuck."</div>
+            <div class="objection-body">
+                <p><strong>Why they say this:</strong> Vendor lock-in fear, especially with smaller companies.</p>
+                <div class="objection-response">
+                    <p>"Valid concern. Here's how we mitigate that risk:</p>
+                    <ul>
+                        <li><strong>Data portability:</strong> Export your data anytime via API — standard formats, no proprietary lock-in</li>
+                        <li><strong>Source code escrow:</strong> Available for enterprise contracts (we can discuss)</li>
+                        <li><strong>Standard protocols:</strong> We use REST APIs, PostgreSQL, standard container formats — nothing proprietary</li>
+                        <li><strong>On-prem option:</strong> If you deploy on your infrastructure, you have the software regardless</li>
+                    </ul>
+                    <p>We're committed to building a sustainable business, but your independence is protected either way."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="objection">
+            <div class="objection-header">⚠️ "We don't have the resources to deploy and maintain this."</div>
+            <div class="objection-body">
+                <p><strong>Why they say this:</strong> IT team is stretched thin, don't want another system to babysit.</p>
+                <div class="objection-response">
+                    <p>"That's exactly why our <strong>SaaS option</strong> is popular — zero deployment, zero maintenance on your side. We handle all infrastructure, updates, backups, and monitoring. Your team just uses it.</p>
+                    <p>If you do need Private/On-Prem for policy reasons, we provide:</p>
+                    <ul>
+                        <li><strong>Managed deployment:</strong> Our team does the setup</li>
+                        <li><strong>Automated updates:</strong> One-click or scheduled update packages</li>
+                        <li><strong>Monitoring dashboards:</strong> We alert you before issues become problems</li>
+                        <li><strong>Optional managed services:</strong> We can run it for you even in your cloud</li>
+                    </ul>
+                    <p>Typical IT overhead is less than 2 hours/month once deployed."</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="objection">
+            <div class="objection-header">⚠️ "Your pricing is too high for what we're getting."</div>
+            <div class="objection-body">
+                <p><strong>Why they say this:</strong> Sometimes genuine budget constraints, often a negotiation tactic.</p>
+                <div class="objection-response">
+                    <p>"I understand budget is a factor. Let's look at the full picture:</p>
+                    <ul>
+                        <li><strong>Time savings:</strong> [X hours/week] of manual work automated — what's that worth?</li>
+                        <li><strong>Error reduction:</strong> AI catches issues humans miss — cost of one prevented mistake?</li>
+                        <li><strong>Scalability:</strong> Handle 10x the volume without hiring 10x the people</li>
+                    </ul>
+                    <p>Most clients see ROI within [3-6 months]. I can run through the ROI calculator with specific numbers for your use case.</p>
+                    <p>If budget is tight, we can explore a <strong>phased rollout</strong> or <strong>pilot program</strong> with lower upfront commitment."</p>
+                </div>
+            </div>
+        </div>
+        
+        <h2>📅 Suggested Meeting Agenda</h2>
+        
+        <p>For a 60-minute IT/Security review meeting:</p>
+        
+        <div class="agenda">
+            <div class="agenda-item">
+                <div class="agenda-number">1</div>
+                <div class="agenda-content">
+                    <h4>Introductions & Context</h4>
+                    <p>Quick intros, confirm their role, understand what they need to approve</p>
+                    <span class="agenda-time">5 minutes</span>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">2</div>
+                <div class="agenda-content">
+                    <h4>Solution Overview & Architecture</h4>
+                    <p>High-level walkthrough of the solution, show architecture diagram</p>
+                    <span class="agenda-time">10 minutes</span>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">3</div>
+                <div class="agenda-content">
+                    <h4>Deployment Options Discussion</h4>
+                    <p>Present options, recommend SaaS, discuss their constraints</p>
+                    <span class="agenda-time">10 minutes</span>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">4</div>
+                <div class="agenda-content">
+                    <h4>Security Deep-Dive</h4>
+                    <p>Encryption, access controls, compliance, audit logging — answer their questions</p>
+                    <span class="agenda-time">15 minutes</span>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">5</div>
+                <div class="agenda-content">
+                    <h4>Integration & Requirements</h4>
+                    <p>SSO, API, network requirements — what they need to do</p>
+                    <span class="agenda-time">10 minutes</span>
+                </div>
+            </div>
+            <div class="agenda-item">
+                <div class="agenda-number">6</div>
+                <div class="agenda-content">
+                    <h4>Next Steps & Timeline</h4>
+                    <p>What documentation they need, their approval process, target go-live</p>
+                    <span class="agenda-time">10 minutes</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="callout callout-tip">
+            <div class="callout-title">🎯 Meeting Goal</div>
+            <p style="margin:0;">Leave with: (1) Clear understanding of their concerns, (2) List of documentation they need, (3) Agreed next steps with dates, (4) Ideally, verbal buy-in that "this looks good pending [specific item]".</p>
+        </div>
+        
+        <h2>📝 Pre-Meeting Checklist</h2>
+        
+        <p>Before every client IT meeting, confirm you have:</p>
+        
+        <table>
+            <tr>
+                <th style="width:40px;">✓</th>
+                <th>Item</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>Client IT Guide (PDF)</strong></td>
+                <td>Send 24-48 hours before the meeting</td>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>Architecture Diagram</strong></td>
+                <td>Have both SaaS and On-Prem versions ready</td>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>SOC 2 Report (under NDA)</strong></td>
+                <td>Ready to share if they ask — don't lead with it</td>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>Sample DPA</strong></td>
+                <td>For GDPR discussions</td>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>Security Questionnaire Responses</strong></td>
+                <td>If they sent one, complete it before the meeting</td>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>Demo Environment Access</strong></td>
+                <td>In case they want to see something live</td>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>Attendee Research</strong></td>
+                <td>LinkedIn the attendees — know their roles and backgrounds</td>
+            </tr>
+            <tr>
+                <td>☐</td>
+                <td><strong>Business Sponsor Context</strong></td>
+                <td>Talk to your business contact — what's the IT team's reputation? Any known concerns?</td>
+            </tr>
+        </table>
+        
+        <h2>🚨 Red Flags to Watch For</h2>
+        
+        <div class="callout callout-danger">
+            <div class="callout-title">🚩 Warning Signs</div>
+            <ul style="margin:0;">
+                <li><strong>"We'll need to build something custom"</strong> — They're trying to redesign your product. Redirect to standard deployment.</li>
+                <li><strong>"Can you send us the source code to review?"</strong> — Unusual request. Offer SOC 2 and pen test instead. Escrow for enterprise only.</li>
+                <li><strong>"We need to involve [5+ more stakeholders]"</strong> — Scope creep / delay tactic. Ask who has final sign-off authority.</li>
+                <li><strong>No business sponsor in the room</strong> — IT can kill deals but rarely champions them. Make sure someone with budget authority is engaged.</li>
+                <li><strong>"We've never approved a cloud vendor before"</strong> — Prepare for a long process. Consider offering a limited pilot to build trust.</li>
+            </ul>
+        </div>
+        
+        <h2>⚡ Quick Reference Card</h2>
+        
+        <div class="quick-ref">
+            <h3>Key Stats to Memorise</h3>
+            <ul>
+                <li><strong>Encryption:</strong> TLS 1.3 in transit, AES-256 at rest</li>
+                <li><strong>Certifications:</strong> SOC 2 Type II, ISO 27001, GDPR compliant</li>
+                <li><strong>Uptime SLA:</strong> 99.9% (SaaS)</li>
+                <li><strong>Data Centres:</strong> EU (Frankfurt) or US (Virginia) — customer choice</li>
+                <li><strong>Network:</strong> HTTPS only (port 443), no special ports</li>
+                <li><strong>SSO:</strong> SAML 2.0 + OIDC supported</li>
+                <li><strong>Support Response:</strong> &lt;4 hours (standard), &lt;1 hour (premium)</li>
+                <li><strong>Data Export:</strong> Full export via API anytime, 30-day retention post-cancellation</li>
+                <li><strong>Deployment Time:</strong> SaaS = same day, Private = 2-3 weeks, On-Prem = 3-5 weeks</li>
+            </ul>
+        </div>
+        
+        <h2>📚 Related Documents</h2>
+        
+        <table>
+            <tr>
+                <th>Document</th>
+                <th>Audience</th>
+                <th>When to Use</th>
+            </tr>
+            <tr>
+                <td><strong>Client IT & Security Guide</strong></td>
+                <td>Client IT team</td>
+                <td>Send before IT meetings, attach to proposals</td>
+            </tr>
+            <tr>
+                <td><strong>Internal IT Security SOP</strong></td>
+                <td>KU team (DevOps, Security)</td>
+                <td>Reference for deployment procedures</td>
+            </tr>
+            <tr>
+                <td><strong>SOC 2 Type II Report</strong></td>
+                <td>Client security team</td>
+                <td>Share under NDA when requested</td>
+            </tr>
+            <tr>
+                <td><strong>Data Processing Agreement (DPA)</strong></td>
+                <td>Client legal/compliance</td>
+                <td>GDPR-covered data processing</td>
+            </tr>
+            <tr>
+                <td><strong>Architecture Diagrams</strong></td>
+                <td>Client IT/Enterprise Architecture</td>
+                <td>Technical deep-dives, documentation packages</td>
+            </tr>
+        </table>
+        
+    </div>
+    
+    <!-- Footer -->
+    <footer class="doc-footer">
+        <p><strong>KU Automation</strong> — Internal Document | Not for Client Distribution</p>
+        <p>Last Updated: May 2026 | Questions? Contact Kingsley</p>
+    </footer>
+</div>
+
+</body>
+</html>

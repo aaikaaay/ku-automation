@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-BRQ8Q6W8N8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stop Chasing Document Reviews in Email Threads: Introducing the Document Review Command Station | KU Automation</title>
+    <meta name="description" content="Engineering teams lose thousands of hours chasing document reviews through email. The Document Review Command Station uses AI to automatically assign reviewers, send reminders, track deadlines, and eliminate the chaos.">
+    <link rel="canonical" href="https://www.ku-automation.com/blog-post-document-command-station">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Stop Chasing Document Reviews in Email Threads: Introducing the Document Review Command Station">
+    <meta property="og:description" content="Engineering teams lose thousands of hours chasing document reviews through email. Learn how AI-powered document control eliminates the chaos.">
+    <meta property="og:image" content="https://www.ku-automation.com/blog/images/2026-05-05-document-command-station.svg">
+    <meta property="og:url" content="https://www.ku-automation.com/blog-post-document-command-station">
+    <meta property="article:published_time" content="2026-05-05">
+    <meta property="article:author" content="Kingsley Uzowulu">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Stop Chasing Document Reviews in Email Threads">
+    <meta name="twitter:description" content="AI-powered document review management for engineering teams. Automatic assignments, reminders, and tracking.">
+    <meta name="keywords" content="document control, document review, engineering document management, review tracking, AI automation, EPC, oil and gas, document controller, engineering manager, QA/QC">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: { 
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                        navy: { 800: '#243b53', 900: '#102a43', 950: '#0a1929' },
+                        gold: { 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-blur { backdrop-filter: blur(12px); }
+        .prose h2 { font-size: 1.5rem; font-weight: 700; margin-top: 2.5rem; margin-bottom: 1rem; color: #1f2937; }
+        .prose h3 { font-size: 1.25rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 0.75rem; color: #374151; }
+        .prose p { margin-bottom: 1.25rem; line-height: 1.8; color: #4b5563; }
+        .prose ul, .prose ol { margin-bottom: 1.25rem; padding-left: 1.5rem; }
+        .prose li { margin-bottom: 0.5rem; color: #4b5563; line-height: 1.7; }
+        .prose strong { color: #1f2937; }
+        .prose blockquote { border-left: 4px solid #f59e0b; padding-left: 1.25rem; margin: 1.5rem 0; font-style: italic; color: #6b7280; background: #fffbeb; padding: 1rem 1.25rem; border-radius: 0 8px 8px 0; }
+        .feature-box { background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%); border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+        .stat-box { background: linear-gradient(135deg, #102a43 0%, #243b53 100%); color: white; border-radius: 12px; padding: 1.5rem; text-align: center; }
+        .cta-box { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); border-radius: 16px; padding: 2rem; margin: 2rem 0; }
+    </style>
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Stop Chasing Document Reviews in Email Threads: Introducing the Document Review Command Station",
+        "description": "Engineering teams lose thousands of hours chasing document reviews through email. The Document Review Command Station uses AI to automatically assign reviewers, send reminders, and track deadlines.",
+        "image": "https://www.ku-automation.com/blog/images/2026-05-05-document-command-station.svg",
+        "author": {
+            "@type": "Person",
+            "name": "Kingsley Uzowulu",
+            "jobTitle": "Founder & Lead Engineer, CEng MIMechE"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "KU Automation",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.ku-automation.com/assets/logo.png"
+            }
+        },
+        "datePublished": "2026-05-05",
+        "dateModified": "2026-05-05",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://www.ku-automation.com/blog-post-document-command-station"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="demos.html" class="text-gray-600 hover:text-primary-600 transition">Demos</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="pt-24 pb-12 bg-gradient-to-b from-amber-50 to-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a href="blog.html" class="inline-flex items-center text-primary-600 hover:text-primary-700 mb-6 transition">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+                Back to Blog
+            </a>
+            <div class="flex flex-wrap gap-2 mb-4">
+                <span class="bg-amber-100 text-amber-700 text-sm font-medium px-3 py-1 rounded-full">Document Control</span>
+                <span class="bg-primary-100 text-primary-700 text-sm font-medium px-3 py-1 rounded-full">AI Automation</span>
+                <span class="bg-green-100 text-green-700 text-sm font-medium px-3 py-1 rounded-full">Product Launch</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">Stop Chasing Document Reviews in Email Threads: Introducing the Document Review Command Station</h1>
+            <p class="text-xl text-gray-600 mb-8">Engineering teams lose thousands of hours chasing document reviews through email. Here's how AI-powered document control eliminates the chaos and keeps projects on track.</p>
+            <div class="flex items-center gap-4 flex-wrap">
+                <div>
+                    <p class="font-semibold text-gray-900">Kingsley Uzowulu</p>
+                    <p class="text-sm text-gray-500">Founder & Lead Engineer, CEng MIMechE</p>
+                </div>
+                <span class="text-gray-300">|</span>
+                <span class="text-gray-500">May 5, 2026</span>
+                <span class="text-gray-300">|</span>
+                <span class="text-gray-500">8 min read</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Image -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 -mt-4 mb-12">
+        <div class="w-full rounded-2xl shadow-xl overflow-hidden p-8 md:p-12" style="background: linear-gradient(135deg, #102a43 0%, #243b53 50%, #d97706 100%);">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-8">
+                <div class="text-white">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-14 h-14 rounded-xl flex items-center justify-center font-bold text-2xl shadow-lg" style="background: #f59e0b; color: #102a43;">KU</div>
+                        <div>
+                            <div class="font-bold text-lg">Document Review</div>
+                            <div class="text-sm" style="color: #fcd34d;">Command Station</div>
+                        </div>
+                    </div>
+                    <div class="text-3xl md:text-4xl font-bold mb-2">Take Control.</div>
+                    <div class="text-lg" style="color: #fde68a;">Stop chasing. Start tracking.</div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="backdrop-blur rounded-xl p-4 text-center" style="background: rgba(255,255,255,0.1);">
+                        <div class="text-3xl font-bold" style="color: #fbbf24;">40%</div>
+                        <div class="text-sm" style="color: rgba(255,255,255,0.7);">Faster Reviews</div>
+                    </div>
+                    <div class="backdrop-blur rounded-xl p-4 text-center" style="background: rgba(255,255,255,0.1);">
+                        <div class="text-3xl font-bold" style="color: #4ade80;">90%</div>
+                        <div class="text-sm" style="color: rgba(255,255,255,0.7);">Less Overdue</div>
+                    </div>
+                    <div class="backdrop-blur rounded-xl p-4 text-center" style="background: rgba(255,255,255,0.1);">
+                        <div class="text-3xl font-bold" style="color: #60a5fa;">100%</div>
+                        <div class="text-sm" style="color: rgba(255,255,255,0.7);">Visibility</div>
+                    </div>
+                    <div class="backdrop-blur rounded-xl p-4 text-center" style="background: rgba(255,255,255,0.1);">
+                        <div class="text-3xl font-bold" style="color: #c084fc;">AI</div>
+                        <div class="text-sm" style="color: rgba(255,255,255,0.7);">Powered</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Article Content -->
+    <article class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="prose max-w-none">
+            
+            <p class="text-lg">If you've ever worked in engineering document control, you know the pain: a contractor submits 30 P&IDs, 50 piping isometrics, and 20 vendor datasheets—all due for review by Friday. You send emails. You CC the leads. You create a spreadsheet. And then you spend the next week chasing people who "didn't see the email."</p>
+
+            <p><strong>Sound familiar?</strong> You're not alone. Document review is one of the most critical workflows in engineering projects, yet most companies still manage it through email threads and spreadsheets—tools never designed for this purpose.</p>
+
+            <p>Today, we're launching the <strong>Document Review Command Station</strong>—a purpose-built platform that brings order to the chaos of engineering document reviews.</p>
+
+            <h2>The Real Cost of Email-Based Document Review</h2>
+
+            <p>Let's talk numbers. In a typical EPC project:</p>
+
+            <div class="grid md:grid-cols-3 gap-4 my-8">
+                <div class="stat-box">
+                    <div class="text-3xl font-bold text-amber-400 mb-2">2,000+</div>
+                    <div class="text-white/80 text-sm">Documents requiring review per project</div>
+                </div>
+                <div class="stat-box">
+                    <div class="text-3xl font-bold text-red-400 mb-2">35%</div>
+                    <div class="text-white/80 text-sm">Reviews that miss their deadline</div>
+                </div>
+                <div class="stat-box">
+                    <div class="text-3xl font-bold text-blue-400 mb-2">4 hrs/day</div>
+                    <div class="text-white/80 text-sm">Document Controller time on chasing</div>
+                </div>
+            </div>
+
+            <p>When document reviews slip, the downstream impact is massive:</p>
+
+            <ul>
+                <li><strong>Construction delays</strong> waiting for approved drawings</li>
+                <li><strong>Rework costs</strong> when issues are caught late</li>
+                <li><strong>Client relationship damage</strong> from missed milestones</li>
+                <li><strong>Senior engineer burnout</strong> from constant firefighting</li>
+            </ul>
+
+            <blockquote>
+                "We had a P&ID revision sitting in someone's inbox for 3 weeks. By the time we caught it, the piping team had already fabricated 200 meters of pipe to the wrong spec. That one missed review cost us $180,000."
+                <br><br>
+                <strong>— Engineering Manager, Major EPC Contractor</strong>
+            </blockquote>
+
+            <h2>Introducing the Document Review Command Station</h2>
+
+            <p>We built the Command Station to solve this problem once and for all. It's a centralized hub where engineering teams can:</p>
+
+            <div class="feature-box">
+                <h3 class="mt-0 text-amber-700">🎯 Register Documents in Seconds</h3>
+                <p class="mb-0">Upload or link your documents with full metadata: document number, title, project, discipline, type, revision, due date, and priority. No more hunting through email attachments.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3 class="mt-0 text-amber-700">🤖 AI-Powered Reviewer Recommendations</h3>
+                <p class="mb-0">Our AI Review Matrix automatically recommends the right reviewers based on document type, discipline, and project requirements. P&ID? It knows you need Process, Piping, Instrumentation, and HSE. Stress report? It adds Structural and Civil. No more guessing who should review what.</p>
+            </div>
+
+            <div class="feature-box">
+                <h3 class="mt-0 text-amber-700">⏰ Automated Reminders That Work</h3>
+                <p class="mb-0">The system sends reminders automatically: 3 days before deadline, 1 day before, and escalation alerts when documents go overdue. No more manual chasing. No more "I didn't see the email."</p>
+            </div>
+
+            <div class="feature-box">
+                <h3 class="mt-0 text-amber-700">📊 Real-Time Workload Visibility</h3>
+                <p class="mb-0">See exactly who's overloaded and who has capacity. Balance workloads before bottlenecks form. Green, amber, red indicators make it instantly clear where intervention is needed.</p>
+            </div>
+
+            <h2>How the AI Review Matrix Works</h2>
+
+            <p>The heart of the Command Station is our intelligent review matrix. When you register a document, the AI analyzes:</p>
+
+            <ul>
+                <li><strong>Document type</strong> — P&ID, isometric, datasheet, procedure, vendor doc</li>
+                <li><strong>Discipline</strong> — Process, piping, mechanical, electrical, instrumentation</li>
+                <li><strong>Project context</strong> — Different projects may have different review requirements</li>
+                <li><strong>Priority level</strong> — Critical documents get expedited routing</li>
+                <li><strong>Keywords in title</strong> — "Safety", "critical", "high pressure" trigger additional reviewers</li>
+            </ul>
+
+            <p>For example, when you register a <strong>Piping Stress Report</strong>, the AI automatically recommends:</p>
+
+            <div class="bg-gray-100 rounded-xl p-6 my-6">
+                <div class="font-semibold text-gray-900 mb-4">AI Recommendation for: Piping Stress Report</div>
+                <div class="space-y-3">
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center text-amber-700 font-semibold">SE</div>
+                            <div>
+                                <div class="font-medium">Stress Engineer</div>
+                                <div class="text-sm text-gray-500">Primary technical review</div>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">Required</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-semibold">PL</div>
+                            <div>
+                                <div class="font-medium">Piping Lead</div>
+                                <div class="text-sm text-gray-500">Design verification</div>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-red-100 text-red-700 px-2 py-1 rounded-full">Required</span>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-white rounded-lg">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-700 font-semibold">ST</div>
+                            <div>
+                                <div class="font-medium">Structural Engineer</div>
+                                <div class="text-sm text-gray-500">Support load verification</div>
+                            </div>
+                        </div>
+                        <span class="text-xs bg-amber-100 text-amber-700 px-2 py-1 rounded-full">Recommended</span>
+                    </div>
+                </div>
+            </div>
+
+            <p>You can accept the AI recommendations with one click, or modify them manually. Either way, reviewers are notified immediately—no email required.</p>
+
+            <h2>AI Risk Intelligence: Catch Problems Before They Escalate</h2>
+
+            <p>The Command Station doesn't just track documents—it actively monitors for risks and alerts you before small problems become big ones:</p>
+
+            <ul>
+                <li>🚨 <strong>"KUA-PID-001 is 2 days overdue with 0/3 reviewers completed."</strong> — Immediate escalation needed</li>
+                <li>⚠️ <strong>"Sarah Chen has 8 active documents and 2 overdue."</strong> — Workload rebalancing recommended</li>
+                <li>💡 <strong>"Pipeline Tie-In Project has 40% overdue rate."</strong> — Project-level intervention needed</li>
+                <li>🔴 <strong>"Critical P&ID missing HSE reviewer."</strong> — Compliance gap detected</li>
+            </ul>
+
+            <p>These aren't just alerts—the AI provides specific, actionable recommendations for each issue.</p>
+
+            <h2>Built for Engineering Teams</h2>
+
+            <p>We designed the Command Station specifically for the people who manage engineering document reviews:</p>
+
+            <div class="grid md:grid-cols-2 gap-6 my-8">
+                <div class="border border-gray-200 rounded-xl p-6 bg-white">
+                    <div class="text-2xl mb-3">📋</div>
+                    <h3 class="font-bold text-lg mb-2">Document Controllers</h3>
+                    <p class="text-gray-600 text-sm mb-0">One dashboard to track every document. No more spreadsheet hell. Automated reminders mean less chasing, more control.</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 bg-white">
+                    <div class="text-2xl mb-3">👔</div>
+                    <h3 class="font-bold text-lg mb-2">Engineering Managers</h3>
+                    <p class="text-gray-600 text-sm mb-0">Real-time visibility into review status across all projects. Identify bottlenecks before they impact schedules.</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 bg-white">
+                    <div class="text-2xl mb-3">🔧</div>
+                    <h3 class="font-bold text-lg mb-2">Lead Engineers</h3>
+                    <p class="text-gray-600 text-sm mb-0">Clear visibility of your team's workload. Know exactly what's due, what's overdue, and who needs help.</p>
+                </div>
+                <div class="border border-gray-200 rounded-xl p-6 bg-white">
+                    <div class="text-2xl mb-3">✅</div>
+                    <h3 class="font-bold text-lg mb-2">QA/QC Teams</h3>
+                    <p class="text-gray-600 text-sm mb-0">Full audit trail of review status, comments, and approvals. Downloadable reports for compliance documentation.</p>
+                </div>
+            </div>
+
+            <h2>Key Features at a Glance</h2>
+
+            <ul>
+                <li>✅ <strong>Document registration</strong> with full metadata capture</li>
+                <li>✅ <strong>AI review matrix</strong> with automatic reviewer recommendations</li>
+                <li>✅ <strong>Automated reminders</strong> at 3-day, 1-day, and overdue milestones</li>
+                <li>✅ <strong>Workload dashboard</strong> with visual health indicators</li>
+                <li>✅ <strong>Risk intelligence</strong> with proactive alerts</li>
+                <li>✅ <strong>Team management</strong> with discipline and role assignments</li>
+                <li>✅ <strong>Downloadable reports</strong> in CSV format</li>
+                <li>✅ <strong>Document detail views</strong> with full audit trail</li>
+                <li>✅ <strong>Multi-project support</strong> with project-level filtering</li>
+                <li>✅ <strong>Priority management</strong> from Low to Critical</li>
+            </ul>
+
+            <h2>See It In Action</h2>
+
+            <p>We've built a fully functional demo with realistic oil & gas project data. You can:</p>
+
+            <ul>
+                <li>Register a new document and see AI recommendations</li>
+                <li>Explore the dashboard metrics</li>
+                <li>View reviewer workloads</li>
+                <li>Generate reports</li>
+                <li>See AI risk alerts</li>
+            </ul>
+
+            <div class="cta-box text-center">
+                <h3 class="text-white text-2xl font-bold mb-3 mt-0">Ready to Take Control?</h3>
+                <p class="text-white/90 mb-6">Try the Document Review Command Station demo—no signup required.</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="document-command-station.html" class="inline-block bg-white text-amber-700 font-semibold px-8 py-3 rounded-xl hover:bg-gray-100 transition shadow-lg">
+                        Launch Demo Dashboard →
+                    </a>
+                    <a href="mailto:kingsley.uzowulu@ku-automation.com?subject=Document Command Station Demo Request" class="inline-block bg-amber-800 text-white font-semibold px-8 py-3 rounded-xl hover:bg-amber-900 transition">
+                        Request Live Demo
+                    </a>
+                </div>
+            </div>
+
+            <h2>What's Next</h2>
+
+            <p>This is version 1.0 of the Document Review Command Station. We're actively developing:</p>
+
+            <ul>
+                <li><strong>Email integration</strong> — Send real notifications via SMTP/Gmail/Outlook</li>
+                <li><strong>Database persistence</strong> — Connect to Supabase/Airtable for production use</li>
+                <li><strong>SharePoint/Google Drive integration</strong> — Direct document linking</li>
+                <li><strong>PDF report generation</strong> — Professional branded reports</li>
+                <li><strong>Slack/Teams notifications</strong> — Meet reviewers where they work</li>
+                <li><strong>Mobile app</strong> — Review status on the go</li>
+            </ul>
+
+            <p>If you're interested in a custom deployment for your organization, <a href="mailto:kingsley.uzowulu@ku-automation.com" class="text-primary-600 hover:underline">get in touch</a>. We're working with select engineering companies to tailor the platform to their specific workflows.</p>
+
+            <hr class="my-12 border-gray-200">
+
+            <p class="text-gray-500 italic">The Document Review Command Station is part of KU Automation's mission to eliminate manual, repetitive work from engineering workflows. Built by engineers, for engineers.</p>
+
+        </div>
+    </article>
+
+    <!-- Author Bio -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <div class="bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl p-8 border border-gray-200">
+            <div class="flex flex-col md:flex-row gap-6 items-start">
+                <div class="w-20 h-20 bg-gradient-to-br from-primary-500 to-purple-600 rounded-2xl flex items-center justify-center text-white font-bold text-2xl flex-shrink-0">KU</div>
+                <div>
+                    <h3 class="font-bold text-xl mb-2">Kingsley Uzowulu</h3>
+                    <p class="text-gray-600 mb-4">Founder & Lead Engineer at KU Automation. Chartered Engineer (CEng) and Member of the Institution of Mechanical Engineers (MIMechE) with 21+ years of experience in oil & gas engineering. Building AI tools that eliminate the tedious parts of engineering work.</p>
+                    <div class="flex gap-4">
+                        <a href="https://www.linkedin.com/in/kingsley-uzowulu/" target="_blank" class="text-primary-600 hover:text-primary-700 font-medium text-sm">LinkedIn →</a>
+                        <a href="mailto:kingsley.uzowulu@ku-automation.com" class="text-primary-600 hover:text-primary-700 font-medium text-sm">Email →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Related Posts -->
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16">
+        <h2 class="text-2xl font-bold mb-8">Related Articles</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+            <a href="blog-post-ai-document-review.html" class="block bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition">
+                <div class="h-32 bg-gradient-to-br from-cyan-500 to-blue-600"></div>
+                <div class="p-6">
+                    <span class="text-xs text-primary-600 font-medium">Document Review</span>
+                    <h3 class="font-bold mt-2 mb-2">From 4 Hours to 4 Minutes: How AI is Revolutionizing Engineering Document Review</h3>
+                    <p class="text-gray-600 text-sm">Learn how AI generates professional engineering comments with code references—automatically.</p>
+                </div>
+            </a>
+            <a href="blog-post-ai-document-automation-oil-gas-2026.html" class="block bg-white rounded-xl border border-gray-200 overflow-hidden hover:shadow-lg transition">
+                <div class="h-32 bg-gradient-to-br from-amber-500 to-orange-600"></div>
+                <div class="p-6">
+                    <span class="text-xs text-primary-600 font-medium">Industry Trends</span>
+                    <h3 class="font-bold mt-2 mb-2">AI Document Automation in Oil & Gas: 2026 State of the Industry</h3>
+                    <p class="text-gray-600 text-sm">How leading EPC contractors are using AI to transform document workflows.</p>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold">KU</span>
+                    </div>
+                    <span class="font-bold text-lg">KU Automation</span>
+                </div>
+                <div class="flex gap-8">
+                    <a href="index.html" class="text-gray-400 hover:text-white transition">Home</a>
+                    <a href="demos.html" class="text-gray-400 hover:text-white transition">Demos</a>
+                    <a href="blog.html" class="text-gray-400 hover:text-white transition">Blog</a>
+                    <a href="mailto:kingsley.uzowulu@ku-automation.com" class="text-gray-400 hover:text-white transition">Contact</a>
+                </div>
+                <p class="text-gray-500 text-sm">© 2026 KU Automation. Built for engineering excellence.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

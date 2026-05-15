@@ -1,0 +1,2213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Review Command Station | KU Automation</title>
+    <meta name="description" content="Stop losing document reviews in email threads. KU Automation Document Review Command Station helps engineering teams assign, track, remind, escalate, and close document reviews before deadlines are missed.">
+    
+    <!-- Open Graph -->
+    <link rel="canonical" href="https://www.ku-automation.com/document-command-station">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ku-automation.com/document-command-station">
+    <meta property="og:title" content="Document Review Command Station | KU Automation">
+    <meta property="og:description" content="AI-powered document review tracking for engineering teams. Automate assignments, reminders, and reporting.">
+    <meta property="og:image" content="https://www.ku-automation.com/assets/og-doc-command.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        navy: { 50: '#f0f4f8', 100: '#d9e2ec', 200: '#bcccdc', 300: '#9fb3c8', 400: '#829ab1', 500: '#627d98', 600: '#486581', 700: '#334e68', 800: '#243b53', 900: '#102a43', 950: '#0a1929' },
+                        gold: { 50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24', 500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f' },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-gold { background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%); }
+        .gradient-navy { background: linear-gradient(180deg, #102a43 0%, #243b53 100%); }
+        .glow-gold { box-shadow: 0 0 40px rgba(245, 158, 11, 0.3); }
+        .card-hover { transition: all 0.3s ease; }
+        .card-hover:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.15); }
+        .sidebar-link { transition: all 0.2s ease; }
+        .sidebar-link:hover, .sidebar-link.active { background: rgba(245, 158, 11, 0.1); border-left-color: #f59e0b; }
+        .status-pill { padding: 2px 10px; border-radius: 9999px; font-size: 0.75rem; font-weight: 500; }
+        .priority-critical { background: #fecaca; color: #991b1b; }
+        .priority-high { background: #fed7aa; color: #9a3412; }
+        .priority-medium { background: #fef08a; color: #854d0e; }
+        .priority-low { background: #bbf7d0; color: #166534; }
+        .status-overdue { background: #fecaca; color: #991b1b; }
+        .status-due-soon { background: #fed7aa; color: #9a3412; }
+        .status-on-track { background: #bbf7d0; color: #166534; }
+        .status-completed { background: #dbeafe; color: #1e40af; }
+        .status-pending { background: #e5e7eb; color: #374151; }
+        .table-row:hover { background: rgba(245, 158, 11, 0.05); }
+        .metric-card { background: linear-gradient(145deg, #1e3a5f 0%, #243b53 100%); }
+        .hide { display: none !important; }
+        .animate-fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .progress-bar { transition: width 0.5s ease; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1e3a5f; }
+        ::-webkit-scrollbar-thumb { background: #486581; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #627d98; }
+        .modal-backdrop { background: rgba(10, 25, 41, 0.8); backdrop-filter: blur(4px); }
+        .tooltip { position: relative; }
+        .tooltip::after { content: attr(data-tooltip); position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%); background: #102a43; color: white; padding: 4px 8px; border-radius: 4px; font-size: 12px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity 0.2s; }
+        .tooltip:hover::after { opacity: 1; }
+        input:focus, select:focus, textarea:focus { outline: none; ring: 2px; ring-color: #f59e0b; }
+        .btn-primary { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: white; font-weight: 600; padding: 10px 20px; border-radius: 8px; transition: all 0.2s; }
+        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4); }
+        .btn-secondary { background: #334e68; color: white; font-weight: 500; padding: 10px 20px; border-radius: 8px; transition: all 0.2s; }
+        .btn-secondary:hover { background: #486581; }
+        .landing-hero { background: linear-gradient(135deg, #102a43 0%, #1e3a5f 50%, #243b53 100%); }
+        .feature-icon { background: linear-gradient(135deg, rgba(245, 158, 11, 0.2) 0%, rgba(217, 119, 6, 0.1) 100%); }
+        @media print {
+            .no-print { display: none !important; }
+            .print-break { page-break-after: always; }
+        }
+    </style>
+</head>
+<body class="bg-navy-950 text-white min-h-screen">
+
+    <!-- Landing Page Section -->
+    <div id="landing-page" class="min-h-screen">
+        <!-- Navigation -->
+        <nav class="fixed top-0 left-0 right-0 z-50 bg-navy-950/90 backdrop-blur-lg border-b border-navy-800">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+                <a href="/" class="flex items-center gap-3">
+                    <div class="w-10 h-10 gradient-gold rounded-lg flex items-center justify-center font-bold text-navy-950">KU</div>
+                    <span class="font-bold text-xl">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#features" class="text-navy-300 hover:text-white transition">Features</a>
+                    <a href="#how-it-works" class="text-navy-300 hover:text-white transition">How It Works</a>
+                    <a href="#pricing" class="text-navy-300 hover:text-white transition">Pricing</a>
+                    <button onclick="launchDemo()" class="btn-primary">Launch Demo</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="landing-hero pt-32 pb-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid lg:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <div class="inline-flex items-center gap-2 bg-gold-500/10 border border-gold-500/20 rounded-full px-4 py-2 mb-6">
+                            <span class="w-2 h-2 bg-gold-500 rounded-full animate-pulse"></span>
+                            <span class="text-gold-400 text-sm font-medium">Built for Engineering Teams</span>
+                        </div>
+                        <h1 class="text-4xl lg:text-6xl font-bold leading-tight mb-6">
+                            Stop Losing Document Reviews in 
+                            <span class="text-gold-400">Email Threads</span>
+                        </h1>
+                        <p class="text-xl text-navy-300 mb-8 leading-relaxed">
+                            KU Automation Document Review Command Station helps engineering teams assign, track, remind, escalate, and close document reviews before deadlines are missed.
+                        </p>
+                        <div class="flex flex-wrap gap-4">
+                            <button onclick="launchDemo()" class="btn-primary text-lg px-8 py-4 flex items-center gap-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                Launch Demo Dashboard
+                            </button>
+                            <a href="mailto:kingsley.uzowulu@ku-automation.com?subject=Document Command Station Setup Request" class="btn-secondary text-lg px-8 py-4">
+                                Request Setup
+                            </a>
+                        </div>
+                        <div class="flex items-center gap-8 mt-10 pt-10 border-t border-navy-700">
+                            <div>
+                                <div class="text-3xl font-bold text-gold-400">40%</div>
+                                <div class="text-navy-400 text-sm">Faster Reviews</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-gold-400">90%</div>
+                                <div class="text-navy-400 text-sm">Less Overdue</div>
+                            </div>
+                            <div>
+                                <div class="text-3xl font-bold text-gold-400">100%</div>
+                                <div class="text-navy-400 text-sm">Visibility</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative">
+                        <div class="absolute inset-0 bg-gold-500/10 blur-3xl rounded-full"></div>
+                        <div class="relative bg-navy-900 rounded-2xl border border-navy-700 p-6 shadow-2xl">
+                            <div class="flex items-center gap-2 mb-4">
+                                <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                                <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            </div>
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 500'%3E%3Crect fill='%231e3a5f' width='800' height='500'/%3E%3Crect x='20' y='20' width='180' height='460' rx='8' fill='%23102a43'/%3E%3Crect x='220' y='20' width='560' height='460' rx='8' fill='%23243b53'/%3E%3Crect x='240' y='40' width='170' height='100' rx='6' fill='%23334e68'/%3E%3Crect x='420' y='40' width='170' height='100' rx='6' fill='%23334e68'/%3E%3Crect x='240' y='160' width='520' height='300' rx='6' fill='%23334e68'/%3E%3Ccircle cx='110' cy='60' r='25' fill='%23f59e0b'/%3E%3Crect x='40' y='100' width='140' height='12' rx='2' fill='%23486581'/%3E%3Crect x='40' y='130' width='100' height='8' rx='2' fill='%23627d98'/%3E%3Crect x='40' y='160' width='140' height='12' rx='2' fill='%23486581'/%3E%3Crect x='40' y='190' width='120' height='8' rx='2' fill='%23627d98'/%3E%3Crect x='40' y='220' width='140' height='12' rx='2' fill='%23486581'/%3E%3Ctext x='110' y='65' fill='%23102a43' font-family='Arial' font-weight='bold' font-size='20' text-anchor='middle'%3EKU%3C/text%3E%3Ctext x='325' y='75' fill='%23f59e0b' font-family='Arial' font-weight='bold' font-size='24'%3E24%3C/text%3E%3Ctext x='325' y='115' fill='%239fb3c8' font-family='Arial' font-size='12'%3EActive Reviews%3C/text%3E%3Ctext x='505' y='75' fill='%23ef4444' font-family='Arial' font-weight='bold' font-size='24'%3E3%3C/text%3E%3Ctext x='505' y='115' fill='%239fb3c8' font-family='Arial' font-size='12'%3EOverdue%3C/text%3E%3C/svg%3E" alt="Dashboard Preview" class="w-full rounded-lg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Problem Section -->
+        <section class="py-20 px-6 bg-navy-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4">The Document Review Problem</h2>
+                    <p class="text-navy-300 text-lg max-w-2xl mx-auto">Engineering teams waste hours chasing reviewers through email threads</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-navy-800 rounded-xl p-8 border border-navy-700">
+                        <div class="w-14 h-14 bg-red-500/10 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Lost in Email</h3>
+                        <p class="text-navy-400">Documents issued by email get buried. No central tracking. No visibility on who reviewed what.</p>
+                    </div>
+                    <div class="bg-navy-800 rounded-xl p-8 border border-navy-700">
+                        <div class="w-14 h-14 bg-orange-500/10 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Missed Deadlines</h3>
+                        <p class="text-navy-400">Manual tracking means reviews slip through. Critical documents become overdue without warning.</p>
+                    </div>
+                    <div class="bg-navy-800 rounded-xl p-8 border border-navy-700">
+                        <div class="w-14 h-14 bg-yellow-500/10 rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Reviewer Overload</h3>
+                        <p class="text-navy-400">No workload visibility. Some engineers drowning while others wait. No balancing possible.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="py-20 px-6">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4">Powerful Features for Document Control</h2>
+                    <p class="text-navy-300 text-lg max-w-2xl mx-auto">Everything you need to manage engineering document reviews</p>
+                </div>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-navy-900 rounded-xl p-8 border border-navy-800 card-hover">
+                        <div class="w-14 h-14 feature-icon rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">AI Review Matrix</h3>
+                        <p class="text-navy-400">Smart AI automatically recommends reviewers based on document type, discipline, and project requirements.</p>
+                    </div>
+                    <div class="bg-navy-900 rounded-xl p-8 border border-navy-800 card-hover">
+                        <div class="w-14 h-14 feature-icon rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Automated Reminders</h3>
+                        <p class="text-navy-400">Never chase reviewers manually. Automatic notifications at 3 days, 1 day, and overdue milestones.</p>
+                    </div>
+                    <div class="bg-navy-900 rounded-xl p-8 border border-navy-800 card-hover">
+                        <div class="w-14 h-14 feature-icon rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Real-Time Dashboard</h3>
+                        <p class="text-navy-400">Live visibility on all documents, reviewers, deadlines, and bottlenecks in one command center.</p>
+                    </div>
+                    <div class="bg-navy-900 rounded-xl p-8 border border-navy-800 card-hover">
+                        <div class="w-14 h-14 feature-icon rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Workload Balancing</h3>
+                        <p class="text-navy-400">See reviewer workloads at a glance. Identify bottlenecks. Redistribute work intelligently.</p>
+                    </div>
+                    <div class="bg-navy-900 rounded-xl p-8 border border-navy-800 card-hover">
+                        <div class="w-14 h-14 feature-icon rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Export Reports</h3>
+                        <p class="text-navy-400">Download comprehensive reports in CSV and PDF. Weekly summaries, overdue lists, workload analytics.</p>
+                    </div>
+                    <div class="bg-navy-900 rounded-xl p-8 border border-navy-800 card-hover">
+                        <div class="w-14 h-14 feature-icon rounded-xl flex items-center justify-center mb-6">
+                            <svg class="w-7 h-7 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3">Risk Intelligence</h3>
+                        <p class="text-navy-400">AI detects documents likely to miss deadlines and suggests corrective actions before problems occur.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="py-20 px-6 bg-navy-900">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-4">How It Works</h2>
+                    <p class="text-navy-300 text-lg">From document upload to completed review in 4 simple steps</p>
+                </div>
+                <div class="grid md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-6 text-navy-950 font-bold text-2xl">1</div>
+                        <h3 class="text-lg font-semibold mb-2">Register Document</h3>
+                        <p class="text-navy-400 text-sm">Upload or link your document with metadata</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-6 text-navy-950 font-bold text-2xl">2</div>
+                        <h3 class="text-lg font-semibold mb-2">AI Assigns Reviewers</h3>
+                        <p class="text-navy-400 text-sm">Smart matrix recommends the right reviewers</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-6 text-navy-950 font-bold text-2xl">3</div>
+                        <h3 class="text-lg font-semibold mb-2">Track & Remind</h3>
+                        <p class="text-navy-400 text-sm">Automated notifications keep reviews on track</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 gradient-gold rounded-2xl flex items-center justify-center mx-auto mb-6 text-navy-950 font-bold text-2xl">4</div>
+                        <h3 class="text-lg font-semibold mb-2">Report & Close</h3>
+                        <p class="text-navy-400 text-sm">Generate reports and close completed reviews</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 px-6">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl lg:text-4xl font-bold mb-6">Ready to Take Control?</h2>
+                <p class="text-navy-300 text-lg mb-8">See how the Document Review Command Station can transform your engineering workflows.</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button onclick="launchDemo()" class="btn-primary text-lg px-8 py-4">
+                        Launch Demo Dashboard
+                    </button>
+                    <a href="mailto:kingsley.uzowulu@ku-automation.com?subject=Document Command Station Demo" class="btn-secondary text-lg px-8 py-4">
+                        Schedule Live Demo
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-12 px-6 border-t border-navy-800">
+            <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 gradient-gold rounded-lg flex items-center justify-center font-bold text-navy-950">KU</div>
+                    <span class="font-semibold">KU Automation</span>
+                </div>
+                <p class="text-navy-400 text-sm">© 2026 KU Automation. Built for Engineering Excellence.</p>
+                <div class="flex items-center gap-6">
+                    <a href="/" class="text-navy-400 hover:text-white text-sm transition">Home</a>
+                    <a href="/demos" class="text-navy-400 hover:text-white text-sm transition">All Demos</a>
+                    <a href="mailto:kingsley.uzowulu@ku-automation.com" class="text-navy-400 hover:text-white text-sm transition">Contact</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Main Application (Hidden until launched) -->
+    <div id="app" class="hide">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed left-0 top-0 bottom-0 w-64 bg-navy-900 border-r border-navy-800 z-40 flex flex-col">
+            <div class="p-6 border-b border-navy-800">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 gradient-gold rounded-lg flex items-center justify-center font-bold text-navy-950">KU</div>
+                    <div>
+                        <div class="font-bold text-sm">Document Review</div>
+                        <div class="text-xs text-navy-400">Command Station</div>
+                    </div>
+                </div>
+            </div>
+            <nav class="flex-1 py-4 overflow-y-auto">
+                <div class="px-4 mb-2 text-xs font-semibold text-navy-500 uppercase tracking-wider">Main</div>
+                <a href="#" onclick="showPage('dashboard')" data-page="dashboard" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+                    Dashboard
+                </a>
+                <a href="#" onclick="showPage('register')" data-page="register" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                    Register Document
+                </a>
+                <a href="#" onclick="showPage('documents')" data-page="documents" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Document Register
+                </a>
+                <div class="px-4 mt-6 mb-2 text-xs font-semibold text-navy-500 uppercase tracking-wider">Management</div>
+                <a href="#" onclick="showPage('workload')" data-page="workload" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Reviewer Workload
+                </a>
+                <a href="#" onclick="showPage('team')" data-page="team" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+                    Team Members
+                </a>
+                <a href="#" onclick="showPage('reports')" data-page="reports" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    Reports
+                </a>
+                <a href="#" onclick="showPage('ai-insights')" data-page="ai-insights" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    AI Risk Intelligence
+                </a>
+                <div class="px-4 mt-6 mb-2 text-xs font-semibold text-navy-500 uppercase tracking-wider">Settings</div>
+                <a href="#" onclick="showPage('settings')" data-page="settings" class="sidebar-link flex items-center gap-3 px-6 py-3 text-navy-300 hover:text-white border-l-4 border-transparent">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    Settings
+                </a>
+            </nav>
+            <div class="p-4 border-t border-navy-800">
+                <button onclick="exitDemo()" class="w-full flex items-center justify-center gap-2 px-4 py-2 text-sm text-navy-400 hover:text-white transition rounded-lg hover:bg-navy-800">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                    Exit Demo
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="ml-64 min-h-screen">
+            <!-- Top Bar -->
+            <header class="sticky top-0 z-30 bg-navy-950/90 backdrop-blur-lg border-b border-navy-800 px-8 py-4">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h1 id="page-title" class="text-xl font-bold">Dashboard</h1>
+                        <p id="page-subtitle" class="text-sm text-navy-400">Overview of document review status</p>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="relative">
+                            <input type="text" id="global-search" placeholder="Search documents..." class="bg-navy-800 border border-navy-700 rounded-lg px-4 py-2 pl-10 text-sm w-64 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-navy-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                        </div>
+                        <button onclick="showNotifications()" class="relative p-2 text-navy-400 hover:text-white transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            <span id="notification-badge" class="absolute -top-1 -right-1 w-5 h-5 bg-red-500 rounded-full text-xs flex items-center justify-center font-semibold">3</span>
+                        </button>
+                        <div class="flex items-center gap-3 pl-4 border-l border-navy-700">
+                            <div class="w-9 h-9 bg-gold-500 rounded-full flex items-center justify-center font-semibold text-navy-950">DC</div>
+                            <div class="text-sm">
+                                <div class="font-medium">Doc Controller</div>
+                                <div class="text-navy-400 text-xs">Demo User</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Page Content Container -->
+            <div id="page-content" class="p-8">
+                <!-- Dashboard Page -->
+                <div id="page-dashboard" class="page-view animate-fade-in">
+                    <!-- Metrics Cards -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="metric-card rounded-xl p-6 border border-navy-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                                </div>
+                                <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-full">+12%</span>
+                            </div>
+                            <div id="metric-total" class="text-3xl font-bold mb-1">24</div>
+                            <div class="text-navy-400 text-sm">Active Reviews</div>
+                        </div>
+                        <div class="metric-card rounded-xl p-6 border border-navy-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <span class="text-xs text-orange-400 bg-orange-400/10 px-2 py-1 rounded-full">Due Soon</span>
+                            </div>
+                            <div id="metric-due-today" class="text-3xl font-bold mb-1">5</div>
+                            <div class="text-navy-400 text-sm">Due Today</div>
+                        </div>
+                        <div class="metric-card rounded-xl p-6 border border-navy-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                </div>
+                                <span class="text-xs text-red-400 bg-red-400/10 px-2 py-1 rounded-full">Alert</span>
+                            </div>
+                            <div id="metric-overdue" class="text-3xl font-bold text-red-400 mb-1">3</div>
+                            <div class="text-navy-400 text-sm">Overdue</div>
+                        </div>
+                        <div class="metric-card rounded-xl p-6 border border-navy-700">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="w-12 h-12 bg-green-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <span class="text-xs text-green-400 bg-green-400/10 px-2 py-1 rounded-full">Good</span>
+                            </div>
+                            <div id="metric-completed" class="text-3xl font-bold text-green-400 mb-1">47</div>
+                            <div class="text-navy-400 text-sm">Completed This Month</div>
+                        </div>
+                    </div>
+
+                    <!-- Secondary Metrics -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-blue-400" id="metric-awaiting">8</div>
+                            <div class="text-navy-400 text-sm">Awaiting Review</div>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-purple-400" id="metric-returned">2</div>
+                            <div class="text-navy-400 text-sm">Returned w/ Comments</div>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-gold-400" id="metric-avg-turnaround">3.2</div>
+                            <div class="text-navy-400 text-sm">Avg. Turnaround (days)</div>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-cyan-400" id="metric-reviewers">12</div>
+                            <div class="text-navy-400 text-sm">Active Reviewers</div>
+                        </div>
+                    </div>
+
+                    <div class="grid lg:grid-cols-3 gap-8">
+                        <!-- Recent Documents -->
+                        <div class="lg:col-span-2 bg-navy-900 rounded-xl border border-navy-800">
+                            <div class="px-6 py-4 border-b border-navy-800 flex items-center justify-between">
+                                <h3 class="font-semibold">Recent Documents</h3>
+                                <button onclick="showPage('documents')" class="text-gold-400 text-sm hover:underline">View All →</button>
+                            </div>
+                            <div class="p-6">
+                                <div id="recent-documents-list" class="space-y-4">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Risk Alerts -->
+                        <div class="bg-navy-900 rounded-xl border border-navy-800">
+                            <div class="px-6 py-4 border-b border-navy-800 flex items-center justify-between">
+                                <h3 class="font-semibold flex items-center gap-2">
+                                    <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                    AI Risk Alerts
+                                </h3>
+                            </div>
+                            <div class="p-6">
+                                <div id="ai-alerts-list" class="space-y-4">
+                                    <!-- Populated by JS -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Deadlines -->
+                    <div class="mt-8 bg-navy-900 rounded-xl border border-navy-800">
+                        <div class="px-6 py-4 border-b border-navy-800">
+                            <h3 class="font-semibold">Upcoming Deadlines</h3>
+                        </div>
+                        <div class="p-6">
+                            <div id="upcoming-deadlines" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Register Document Page -->
+                <div id="page-register" class="page-view hide animate-fade-in">
+                    <div class="max-w-4xl">
+                        <div class="bg-navy-900 rounded-xl border border-navy-800">
+                            <div class="px-6 py-4 border-b border-navy-800">
+                                <h3 class="font-semibold text-lg">Register New Document for Review</h3>
+                                <p class="text-navy-400 text-sm mt-1">Fill in the document details. AI will recommend reviewers automatically.</p>
+                            </div>
+                            <form id="document-form" class="p-6 space-y-6">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Document Number *</label>
+                                        <input type="text" name="docNumber" required placeholder="e.g., KUA-PID-001" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Document Title *</label>
+                                        <input type="text" name="title" required placeholder="e.g., Produced Water Treatment P&ID" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Project *</label>
+                                        <select name="project" required class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                            <option value="">Select Project</option>
+                                            <option value="Abu Dhabi Gas Compression Upgrade">Abu Dhabi Gas Compression Upgrade</option>
+                                            <option value="Offshore Platform Brownfield Modification">Offshore Platform Brownfield Modification</option>
+                                            <option value="Produced Water Treatment Package">Produced Water Treatment Package</option>
+                                            <option value="Pipeline Tie-In Project">Pipeline Tie-In Project</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Client</label>
+                                        <input type="text" name="client" placeholder="e.g., ADNOC, Aramco" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-3 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Discipline *</label>
+                                        <select name="discipline" required class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                            <option value="">Select Discipline</option>
+                                            <option value="Process">Process</option>
+                                            <option value="Piping">Piping</option>
+                                            <option value="Mechanical">Mechanical</option>
+                                            <option value="Electrical">Electrical</option>
+                                            <option value="Instrumentation">Instrumentation</option>
+                                            <option value="Civil">Civil</option>
+                                            <option value="Structural">Structural</option>
+                                            <option value="HSE">HSE</option>
+                                            <option value="QA/QC">QA/QC</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Document Type *</label>
+                                        <select name="docType" required id="doc-type-select" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                            <option value="">Select Type</option>
+                                            <option value="P&ID">P&ID</option>
+                                            <option value="Piping Isometric">Piping Isometric</option>
+                                            <option value="Piping GA / Layout">Piping GA / Layout</option>
+                                            <option value="Line List">Line List</option>
+                                            <option value="Equipment Datasheet">Equipment Datasheet</option>
+                                            <option value="Instrument Datasheet">Instrument Datasheet</option>
+                                            <option value="Piping Stress Report">Piping Stress Report</option>
+                                            <option value="Calculation Report">Calculation Report</option>
+                                            <option value="Technical Query">Technical Query</option>
+                                            <option value="Vendor Document">Vendor Document</option>
+                                            <option value="Method Statement">Method Statement</option>
+                                            <option value="Procedure">Procedure</option>
+                                            <option value="Drawing">Drawing</option>
+                                            <option value="Specification">Specification</option>
+                                            <option value="Other">Other</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Revision</label>
+                                        <input type="text" name="revision" placeholder="e.g., A, B, 01" value="A" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                    </div>
+                                </div>
+                                <div class="grid md:grid-cols-3 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Review Purpose</label>
+                                        <select name="purpose" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                            <option value="IFR">Issued for Review (IFR)</option>
+                                            <option value="IFA">Issued for Approval (IFA)</option>
+                                            <option value="IFC">Issued for Construction (IFC)</option>
+                                            <option value="AFC">Approved for Construction (AFC)</option>
+                                            <option value="As-Built">As-Built</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Due Date *</label>
+                                        <input type="date" name="dueDate" required class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Priority *</label>
+                                        <select name="priority" required class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                            <option value="Low">Low</option>
+                                            <option value="Medium" selected>Medium</option>
+                                            <option value="High">High</option>
+                                            <option value="Critical">Critical</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-navy-300 mb-2">Document Link / Upload</label>
+                                    <input type="url" name="docLink" placeholder="Paste SharePoint, Google Drive, or external link" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-navy-300 mb-2">Remarks</label>
+                                    <textarea name="remarks" rows="3" placeholder="Any additional notes for reviewers..." class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3 focus:border-gold-500 focus:ring-1 focus:ring-gold-500"></textarea>
+                                </div>
+                                <div class="flex gap-4">
+                                    <button type="submit" class="btn-primary flex items-center gap-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                        Get AI Recommendations
+                                    </button>
+                                    <button type="button" onclick="resetForm()" class="btn-secondary">Reset Form</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- AI Recommendations Panel (Hidden until form submitted) -->
+                        <div id="ai-recommendations-panel" class="hide mt-8 bg-navy-900 rounded-xl border border-gold-500/30">
+                            <div class="px-6 py-4 border-b border-navy-800 flex items-center gap-3">
+                                <div class="w-10 h-10 gradient-gold rounded-lg flex items-center justify-center">
+                                    <svg class="w-5 h-5 text-navy-950" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                </div>
+                                <div>
+                                    <h3 class="font-semibold text-lg">AI Review Matrix Recommendation</h3>
+                                    <p class="text-navy-400 text-sm">Based on document type, discipline, and project requirements</p>
+                                </div>
+                            </div>
+                            <div class="p-6">
+                                <div id="ai-recommendations-content">
+                                    <!-- Populated by JS -->
+                                </div>
+                                <div class="mt-6 pt-6 border-t border-navy-800 flex gap-4">
+                                    <button onclick="acceptRecommendations()" class="btn-primary flex items-center gap-2">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                                        Accept & Issue for Review
+                                    </button>
+                                    <button onclick="modifyRecommendations()" class="btn-secondary">Modify Reviewers</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Documents Register Page -->
+                <div id="page-documents" class="page-view hide animate-fade-in">
+                    <!-- Filters -->
+                    <div class="bg-navy-900 rounded-xl border border-navy-800 p-6 mb-6">
+                        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                            <div>
+                                <label class="block text-xs text-navy-400 mb-1">Project</label>
+                                <select id="filter-project" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-3 py-2 text-sm">
+                                    <option value="">All Projects</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-navy-400 mb-1">Discipline</label>
+                                <select id="filter-discipline" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-3 py-2 text-sm">
+                                    <option value="">All Disciplines</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-navy-400 mb-1">Document Type</label>
+                                <select id="filter-doc-type" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-3 py-2 text-sm">
+                                    <option value="">All Types</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-navy-400 mb-1">Status</label>
+                                <select id="filter-status" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-3 py-2 text-sm">
+                                    <option value="">All Statuses</option>
+                                    <option value="Issued for Review">Issued for Review</option>
+                                    <option value="Under Review">Under Review</option>
+                                    <option value="Review Completed">Review Completed</option>
+                                    <option value="Returned with Comments">Returned with Comments</option>
+                                    <option value="Overdue">Overdue</option>
+                                    <option value="Approved">Approved</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-navy-400 mb-1">Priority</label>
+                                <select id="filter-priority" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-3 py-2 text-sm">
+                                    <option value="">All Priorities</option>
+                                    <option value="Critical">Critical</option>
+                                    <option value="High">High</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Low">Low</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs text-navy-400 mb-1">&nbsp;</label>
+                                <button onclick="applyFilters()" class="w-full bg-gold-500 hover:bg-gold-600 text-navy-950 font-semibold rounded-lg px-3 py-2 text-sm transition">Apply Filters</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documents Table -->
+                    <div class="bg-navy-900 rounded-xl border border-navy-800 overflow-hidden">
+                        <div class="px-6 py-4 border-b border-navy-800 flex items-center justify-between">
+                            <div class="flex items-center gap-4">
+                                <h3 class="font-semibold">Document Register</h3>
+                                <span id="docs-count" class="text-sm text-navy-400">(24 documents)</span>
+                            </div>
+                            <div class="flex items-center gap-3">
+                                <button onclick="exportDocsCSV()" class="flex items-center gap-2 px-4 py-2 bg-navy-800 rounded-lg text-sm hover:bg-navy-700 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                    Export CSV
+                                </button>
+                                <button onclick="showPage('register')" class="btn-primary text-sm py-2">+ New Document</button>
+                            </div>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full">
+                                <thead class="bg-navy-800 text-left text-sm">
+                                    <tr>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Doc Number</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Title</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Project</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Type</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Reviewers</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Status</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Due Date</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Priority</th>
+                                        <th class="px-6 py-3 font-medium text-navy-300">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="documents-table-body" class="text-sm">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reviewer Workload Page -->
+                <div id="page-workload" class="page-view hide animate-fade-in">
+                    <div class="grid lg:grid-cols-4 gap-6 mb-8">
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-white" id="wl-total-reviewers">12</div>
+                            <div class="text-navy-400 text-sm">Total Reviewers</div>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-green-400" id="wl-healthy">7</div>
+                            <div class="text-navy-400 text-sm">Healthy Workload</div>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-orange-400" id="wl-moderate">3</div>
+                            <div class="text-navy-400 text-sm">Moderate Load</div>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl p-5 border border-navy-800">
+                            <div class="text-2xl font-bold text-red-400" id="wl-overloaded">2</div>
+                            <div class="text-navy-400 text-sm">Overloaded</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-900 rounded-xl border border-navy-800">
+                        <div class="px-6 py-4 border-b border-navy-800">
+                            <h3 class="font-semibold">Reviewer Workload Overview</h3>
+                        </div>
+                        <div class="p-6">
+                            <div id="workload-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Members Page -->
+                <div id="page-team" class="page-view hide animate-fade-in">
+                    <div class="flex items-center justify-between mb-6">
+                        <div>
+                            <h2 class="text-xl font-bold">Team Members</h2>
+                            <p class="text-navy-400 text-sm">Manage your review team and assign roles</p>
+                        </div>
+                        <button onclick="showAddMemberModal()" class="btn-primary">+ Add Team Member</button>
+                    </div>
+
+                    <div class="bg-navy-900 rounded-xl border border-navy-800 overflow-hidden">
+                        <table class="w-full">
+                            <thead class="bg-navy-800 text-left text-sm">
+                                <tr>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Name</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Email</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Discipline</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Role</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Assigned</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Overdue</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Avg. Time</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Status</th>
+                                    <th class="px-6 py-3 font-medium text-navy-300">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="team-table-body" class="text-sm">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Reports Page -->
+                <div id="page-reports" class="page-view hide animate-fade-in">
+                    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-navy-900 rounded-xl border border-navy-800 p-6 card-hover cursor-pointer" onclick="generateReport('full')">
+                            <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-4">
+                                <svg class="w-7 h-7 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Full Document Register</h3>
+                            <p class="text-navy-400 text-sm mb-4">Complete list of all documents with status, reviewers, and timeline</p>
+                            <span class="text-gold-400 text-sm font-medium">Generate Report →</span>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl border border-navy-800 p-6 card-hover cursor-pointer" onclick="generateReport('overdue')">
+                            <div class="w-14 h-14 bg-red-500/20 rounded-xl flex items-center justify-center mb-4">
+                                <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Overdue Documents</h3>
+                            <p class="text-navy-400 text-sm mb-4">Documents past due date with escalation recommendations</p>
+                            <span class="text-gold-400 text-sm font-medium">Generate Report →</span>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl border border-navy-800 p-6 card-hover cursor-pointer" onclick="generateReport('workload')">
+                            <div class="w-14 h-14 bg-purple-500/20 rounded-xl flex items-center justify-center mb-4">
+                                <svg class="w-7 h-7 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Reviewer Workload</h3>
+                            <p class="text-navy-400 text-sm mb-4">Team workload distribution and performance metrics</p>
+                            <span class="text-gold-400 text-sm font-medium">Generate Report →</span>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl border border-navy-800 p-6 card-hover cursor-pointer" onclick="generateReport('project')">
+                            <div class="w-14 h-14 bg-green-500/20 rounded-xl flex items-center justify-center mb-4">
+                                <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Project Status</h3>
+                            <p class="text-navy-400 text-sm mb-4">Review status breakdown by project</p>
+                            <span class="text-gold-400 text-sm font-medium">Generate Report →</span>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl border border-navy-800 p-6 card-hover cursor-pointer" onclick="generateReport('weekly')">
+                            <div class="w-14 h-14 bg-orange-500/20 rounded-xl flex items-center justify-center mb-4">
+                                <svg class="w-7 h-7 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Weekly Performance</h3>
+                            <p class="text-navy-400 text-sm mb-4">This week's review performance and trends</p>
+                            <span class="text-gold-400 text-sm font-medium">Generate Report →</span>
+                        </div>
+                        <div class="bg-navy-900 rounded-xl border border-navy-800 p-6 card-hover cursor-pointer" onclick="generateReport('closed')">
+                            <div class="w-14 h-14 bg-cyan-500/20 rounded-xl flex items-center justify-center mb-4">
+                                <svg class="w-7 h-7 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <h3 class="font-semibold text-lg mb-2">Closed Documents</h3>
+                            <p class="text-navy-400 text-sm mb-4">Archive of completed and approved documents</p>
+                            <span class="text-gold-400 text-sm font-medium">Generate Report →</span>
+                        </div>
+                    </div>
+
+                    <!-- Report Preview Area -->
+                    <div id="report-preview" class="hide mt-8 bg-navy-900 rounded-xl border border-navy-800">
+                        <div class="px-6 py-4 border-b border-navy-800 flex items-center justify-between">
+                            <h3 id="report-title" class="font-semibold">Report Preview</h3>
+                            <div class="flex gap-3">
+                                <button onclick="downloadReportCSV()" class="flex items-center gap-2 px-4 py-2 bg-navy-800 rounded-lg text-sm hover:bg-navy-700 transition">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                                    Download CSV
+                                </button>
+                                <button onclick="closeReportPreview()" class="text-navy-400 hover:text-white">
+                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="report-content" class="p-6">
+                            <!-- Report content populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Risk Intelligence Page -->
+                <div id="page-ai-insights" class="page-view hide animate-fade-in">
+                    <div class="grid lg:grid-cols-3 gap-6 mb-8">
+                        <div class="bg-red-500/10 border border-red-500/30 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-red-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-red-400" id="ai-critical-count">5</div>
+                                    <div class="text-navy-300 text-sm">Critical Alerts</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-orange-500/10 border border-orange-500/30 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-orange-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-orange-400" id="ai-warning-count">8</div>
+                                    <div class="text-navy-300 text-sm">Warnings</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-gold-500/10 border border-gold-500/30 rounded-xl p-6">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-12 h-12 bg-gold-500/20 rounded-xl flex items-center justify-center">
+                                    <svg class="w-6 h-6 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-gold-400" id="ai-suggestions-count">12</div>
+                                    <div class="text-navy-300 text-sm">Suggestions</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-navy-900 rounded-xl border border-navy-800">
+                        <div class="px-6 py-4 border-b border-navy-800">
+                            <h3 class="font-semibold flex items-center gap-2">
+                                <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                                AI Risk Analysis & Recommendations
+                            </h3>
+                        </div>
+                        <div id="ai-insights-list" class="p-6 space-y-4">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="page-settings" class="page-view hide animate-fade-in">
+                    <div class="max-w-4xl space-y-8">
+                        <div class="bg-navy-900 rounded-xl border border-navy-800">
+                            <div class="px-6 py-4 border-b border-navy-800">
+                                <h3 class="font-semibold">Review Deadline Rules</h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div class="grid md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Default Review Period (days)</label>
+                                        <input type="number" value="7" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3">
+                                    </div>
+                                    <div>
+                                        <label class="block text-sm font-medium text-navy-300 mb-2">Critical Document Review (days)</label>
+                                        <input type="number" value="3" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-navy-900 rounded-xl border border-navy-800">
+                            <div class="px-6 py-4 border-b border-navy-800">
+                                <h3 class="font-semibold">Reminder Configuration</h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div class="flex items-center justify-between py-3 border-b border-navy-800">
+                                    <div>
+                                        <div class="font-medium">3-Day Reminder</div>
+                                        <div class="text-navy-400 text-sm">Send reminder 3 days before due date</div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-navy-700 peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-gold-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between py-3 border-b border-navy-800">
+                                    <div>
+                                        <div class="font-medium">1-Day Reminder</div>
+                                        <div class="text-navy-400 text-sm">Send reminder 1 day before due date</div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-navy-700 peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-gold-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between py-3 border-b border-navy-800">
+                                    <div>
+                                        <div class="font-medium">Overdue Alert</div>
+                                        <div class="text-navy-400 text-sm">Send alert when document becomes overdue</div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-navy-700 peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-gold-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                    </label>
+                                </div>
+                                <div class="flex items-center justify-between py-3">
+                                    <div>
+                                        <div class="font-medium">Escalation to Manager</div>
+                                        <div class="text-navy-400 text-sm">Escalate to lead after 2 days overdue</div>
+                                    </div>
+                                    <label class="relative inline-flex items-center cursor-pointer">
+                                        <input type="checkbox" checked class="sr-only peer">
+                                        <div class="w-11 h-6 bg-navy-700 peer-focus:ring-2 peer-focus:ring-gold-500 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-gold-500 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-navy-900 rounded-xl border border-navy-800">
+                            <div class="px-6 py-4 border-b border-navy-800">
+                                <h3 class="font-semibold">Company Branding</h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-navy-300 mb-2">Company Name</label>
+                                    <input type="text" value="KU Automation Engineering" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-navy-300 mb-2">Report Header Text</label>
+                                    <input type="text" value="Document Review Command Station - Powered by KU Automation" class="w-full bg-navy-800 border border-navy-700 rounded-lg px-4 py-3">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-end">
+                            <button class="btn-primary">Save Settings</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Document Detail Modal -->
+    <div id="document-modal" class="hide fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-navy-900 rounded-2xl border border-navy-700 w-full max-w-4xl max-h-[90vh] overflow-y-auto">
+            <div class="px-6 py-4 border-b border-navy-800 flex items-center justify-between sticky top-0 bg-navy-900 z-10">
+                <h3 id="modal-doc-title" class="font-semibold text-lg">Document Details</h3>
+                <button onclick="closeModal()" class="text-navy-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div id="modal-content" class="p-6">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Panel -->
+    <div id="notification-panel" class="hide fixed right-0 top-0 bottom-0 w-96 bg-navy-900 border-l border-navy-800 z-50 shadow-2xl">
+        <div class="px-6 py-4 border-b border-navy-800 flex items-center justify-between">
+            <h3 class="font-semibold">Notifications</h3>
+            <button onclick="closeNotifications()" class="text-navy-400 hover:text-white">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+        <div id="notification-list" class="p-4 space-y-3 overflow-y-auto" style="max-height: calc(100vh - 80px);">
+            <!-- Populated by JS -->
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="hide fixed bottom-6 right-6 bg-navy-800 border border-navy-700 rounded-xl px-6 py-4 shadow-2xl z-50 flex items-center gap-3 animate-fade-in">
+        <svg id="toast-icon" class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <span id="toast-message">Document registered successfully!</span>
+    </div>
+
+    <script>
+    // ==================== DATA MODELS ====================
+    
+    const DEMO_PROJECTS = [
+        'Abu Dhabi Gas Compression Upgrade',
+        'Offshore Platform Brownfield Modification',
+        'Produced Water Treatment Package',
+        'Pipeline Tie-In Project'
+    ];
+
+    const DEMO_DISCIPLINES = [
+        'Process', 'Piping', 'Mechanical', 'Electrical', 'Instrumentation',
+        'Civil', 'Structural', 'HSE', 'QA/QC', 'Project Management',
+        'Document Control', 'Construction', 'Operations'
+    ];
+
+    const DOC_TYPES = [
+        'P&ID', 'Piping Isometric', 'Piping GA / Layout', 'Line List',
+        'Equipment Datasheet', 'Instrument Datasheet', 'Piping Stress Report',
+        'Calculation Report', 'Technical Query', 'Vendor Document',
+        'Method Statement', 'Procedure', 'Drawing', 'Specification', 'Other'
+    ];
+
+    // Review Matrix - AI Logic
+    const REVIEW_MATRIX = {
+        'P&ID': ['Process', 'Piping', 'Instrumentation', 'HSE', 'Operations'],
+        'Piping Isometric': ['Piping', 'Stress Engineer', 'Materials', 'Construction'],
+        'Piping GA / Layout': ['Piping', 'Process', 'Structural', 'HSE'],
+        'Line List': ['Piping', 'Process', 'Materials'],
+        'Equipment Datasheet': ['Mechanical', 'Process', 'Piping', 'Instrumentation'],
+        'Instrument Datasheet': ['Instrumentation', 'Process', 'Electrical'],
+        'Piping Stress Report': ['Stress Engineer', 'Piping', 'Structural', 'Civil'],
+        'Calculation Report': ['Discipline Lead', 'QA/QC', 'Process'],
+        'Technical Query': ['Discipline Lead', 'Project Manager', 'Client'],
+        'Vendor Document': ['Package Engineer', 'Discipline Lead', 'QA/QC', 'Project Engineer'],
+        'Method Statement': ['HSE', 'QA/QC', 'Construction', 'Discipline Lead'],
+        'Procedure': ['HSE', 'QA/QC', 'Discipline Lead', 'Operations'],
+        'Drawing': ['Discipline Lead', 'Checker', 'QA/QC'],
+        'Specification': ['Discipline Lead', 'Materials', 'QA/QC', 'Project Engineer'],
+        'Other': ['Project Engineer', 'Discipline Lead', 'QA/QC']
+    };
+
+    // Team Members
+    let teamMembers = [
+        { id: 1, name: 'Ahmed Al-Rashid', email: 'ahmed.rashid@company.com', discipline: 'Process', role: 'Lead Engineer', assigned: 5, overdue: 1, avgTime: 2.5, active: true },
+        { id: 2, name: 'Sarah Chen', email: 'sarah.chen@company.com', discipline: 'Piping', role: 'Senior Engineer', assigned: 8, overdue: 2, avgTime: 3.1, active: true },
+        { id: 3, name: 'Mohammed Hassan', email: 'mohammed.hassan@company.com', discipline: 'Mechanical', role: 'Lead Engineer', assigned: 4, overdue: 0, avgTime: 2.8, active: true },
+        { id: 4, name: 'David Smith', email: 'david.smith@company.com', discipline: 'Electrical', role: 'Engineer', assigned: 3, overdue: 0, avgTime: 2.2, active: true },
+        { id: 5, name: 'Fatima Al-Mansouri', email: 'fatima.mansouri@company.com', discipline: 'Instrumentation', role: 'Senior Engineer', assigned: 6, overdue: 1, avgTime: 2.9, active: true },
+        { id: 6, name: 'James Wilson', email: 'james.wilson@company.com', discipline: 'Structural', role: 'Engineer', assigned: 2, overdue: 0, avgTime: 3.5, active: true },
+        { id: 7, name: 'Priya Sharma', email: 'priya.sharma@company.com', discipline: 'HSE', role: 'HSE Engineer', assigned: 7, overdue: 1, avgTime: 2.4, active: true },
+        { id: 8, name: 'Omar Al-Farsi', email: 'omar.farsi@company.com', discipline: 'QA/QC', role: 'QA Engineer', assigned: 9, overdue: 2, avgTime: 3.2, active: true },
+        { id: 9, name: 'Lisa Thompson', email: 'lisa.thompson@company.com', discipline: 'Civil', role: 'Engineer', assigned: 2, overdue: 0, avgTime: 2.6, active: true },
+        { id: 10, name: 'Khalid Rahman', email: 'khalid.rahman@company.com', discipline: 'Construction', role: 'Construction Lead', assigned: 4, overdue: 0, avgTime: 2.1, active: true },
+        { id: 11, name: 'Emma Davis', email: 'emma.davis@company.com', discipline: 'Piping', role: 'Stress Engineer', assigned: 5, overdue: 1, avgTime: 4.2, active: true },
+        { id: 12, name: 'Ali Nasser', email: 'ali.nasser@company.com', discipline: 'Project Management', role: 'Project Engineer', assigned: 3, overdue: 0, avgTime: 1.8, active: true }
+    ];
+
+    // Documents
+    let documents = [
+        { id: 1, docNumber: 'KUA-PID-001', title: 'Produced Water Treatment P&ID', project: 'Produced Water Treatment Package', client: 'ADNOC', discipline: 'Process', docType: 'P&ID', revision: 'B', purpose: 'IFR', dueDate: getDateOffset(-2), priority: 'Critical', status: 'Overdue', reviewers: [1, 5, 7], link: '#', remarks: 'Critical path document', created: getDateOffset(-10) },
+        { id: 2, docNumber: 'KUA-ISO-014', title: '10-inch Gas Export Line Isometric', project: 'Abu Dhabi Gas Compression Upgrade', client: 'GASCO', discipline: 'Piping', docType: 'Piping Isometric', revision: 'A', purpose: 'IFR', dueDate: getDateOffset(1), priority: 'High', status: 'Under Review', reviewers: [2, 11, 10], link: '#', remarks: '', created: getDateOffset(-5) },
+        { id: 3, docNumber: 'KUA-STR-003', title: 'Pipe Rack Structural GA', project: 'Offshore Platform Brownfield Modification', client: 'ZADCO', discipline: 'Structural', docType: 'Drawing', revision: 'C', purpose: 'IFA', dueDate: getDateOffset(3), priority: 'Medium', status: 'Issued for Review', reviewers: [6, 9, 2], link: '#', remarks: '', created: getDateOffset(-3) },
+        { id: 4, docNumber: 'KUA-STRS-007', title: 'Critical Line Stress Analysis Report', project: 'Pipeline Tie-In Project', client: 'ADNOC', discipline: 'Piping', docType: 'Piping Stress Report', revision: 'A', purpose: 'IFR', dueDate: getDateOffset(0), priority: 'Critical', status: 'Under Review', reviewers: [11, 2, 6], link: '#', remarks: 'Requires Civil input for support loads', created: getDateOffset(-7) },
+        { id: 5, docNumber: 'KUA-MECH-011', title: 'API 610 Pump Datasheet', project: 'Produced Water Treatment Package', client: 'ADNOC', discipline: 'Mechanical', docType: 'Equipment Datasheet', revision: 'B', purpose: 'IFA', dueDate: getDateOffset(5), priority: 'High', status: 'Issued for Review', reviewers: [3, 1, 5], link: '#', remarks: '', created: getDateOffset(-2) },
+        { id: 6, docNumber: 'KUA-VDR-021', title: 'Vendor Valve Package Review', project: 'Abu Dhabi Gas Compression Upgrade', client: 'GASCO', discipline: 'Piping', docType: 'Vendor Document', revision: 'A', purpose: 'IFR', dueDate: getDateOffset(-1), priority: 'High', status: 'Overdue', reviewers: [2, 8, 12], link: '#', remarks: 'Safety critical valves', created: getDateOffset(-8) },
+        { id: 7, docNumber: 'KUA-HSE-005', title: 'Hot Work Procedure', project: 'Offshore Platform Brownfield Modification', client: 'ZADCO', discipline: 'HSE', docType: 'Procedure', revision: 'D', purpose: 'IFA', dueDate: getDateOffset(2), priority: 'Critical', status: 'Under Review', reviewers: [7, 8, 10], link: '#', remarks: 'Offshore specific requirements', created: getDateOffset(-4) },
+        { id: 8, docNumber: 'KUA-INST-018', title: 'Flow Transmitter Datasheet', project: 'Produced Water Treatment Package', client: 'ADNOC', discipline: 'Instrumentation', docType: 'Instrument Datasheet', revision: 'A', purpose: 'IFR', dueDate: getDateOffset(7), priority: 'Medium', status: 'Issued for Review', reviewers: [5, 1, 4], link: '#', remarks: '', created: getDateOffset(-1) },
+        { id: 9, docNumber: 'KUA-PIP-032', title: 'Piping Material Specification', project: 'Pipeline Tie-In Project', client: 'ADNOC', discipline: 'Piping', docType: 'Specification', revision: 'B', purpose: 'IFA', dueDate: getDateOffset(4), priority: 'High', status: 'Partially Reviewed', reviewers: [2, 3, 8, 12], link: '#', remarks: 'Sour service materials', created: getDateOffset(-6) },
+        { id: 10, docNumber: 'KUA-ELEC-009', title: 'Area Classification Drawing', project: 'Abu Dhabi Gas Compression Upgrade', client: 'GASCO', discipline: 'Electrical', docType: 'Drawing', revision: 'A', purpose: 'IFR', dueDate: getDateOffset(-3), priority: 'Critical', status: 'Overdue', reviewers: [4, 7, 5], link: '#', remarks: 'Impacts all disciplines', created: getDateOffset(-12) },
+        { id: 11, docNumber: 'KUA-CIV-004', title: 'Foundation Design Calculation', project: 'Produced Water Treatment Package', client: 'ADNOC', discipline: 'Civil', docType: 'Calculation Report', revision: 'A', purpose: 'IFR', dueDate: getDateOffset(6), priority: 'Medium', status: 'Issued for Review', reviewers: [9, 6, 8], link: '#', remarks: '', created: getDateOffset(-2) },
+        { id: 12, docNumber: 'KUA-MS-015', title: 'Hydrostatic Testing Method Statement', project: 'Pipeline Tie-In Project', client: 'ADNOC', discipline: 'QA/QC', docType: 'Method Statement', revision: 'C', purpose: 'IFA', dueDate: getDateOffset(1), priority: 'High', status: 'Under Review', reviewers: [8, 7, 10, 2], link: '#', remarks: 'Client witness required', created: getDateOffset(-5) }
+    ];
+
+    // Notifications
+    let notifications = [
+        { id: 1, type: 'overdue', title: 'Document Overdue', message: 'KUA-PID-001 is 2 days overdue. 0/3 reviewers completed.', time: '10 min ago', read: false },
+        { id: 2, type: 'reminder', title: 'Review Due Tomorrow', message: 'KUA-ISO-014 is due tomorrow. 1/3 reviewers completed.', time: '1 hour ago', read: false },
+        { id: 3, type: 'completed', title: 'Review Completed', message: 'Ahmed Al-Rashid completed review of KUA-MECH-011.', time: '2 hours ago', read: false },
+        { id: 4, type: 'warning', title: 'Workload Alert', message: 'Sarah Chen has 8 active documents. Consider reassignment.', time: '3 hours ago', read: true },
+        { id: 5, type: 'escalation', title: 'Escalation Triggered', message: 'KUA-ELEC-009 escalated to Discipline Lead (3 days overdue).', time: '5 hours ago', read: true }
+    ];
+
+    // AI Insights
+    const aiInsights = [
+        { severity: 'critical', icon: '🚨', title: 'KUA-ELEC-009 is 3 days overdue with no progress', recommendation: 'Escalate immediately to Engineering Manager. Area Classification impacts all downstream work.', docId: 10 },
+        { severity: 'critical', icon: '⚠️', title: 'Sarah Chen overloaded with 8 documents, 2 overdue', recommendation: 'Reassign 2-3 optional reviews to James Wilson or Lisa Thompson who have capacity.', docId: null },
+        { severity: 'critical', icon: '🔴', title: 'KUA-PID-001 (Critical P&ID) has no Process reviewer completed', recommendation: 'This blocks downstream Piping and Instrumentation. Priority chase Ahmed Al-Rashid.', docId: 1 },
+        { severity: 'warning', icon: '⏰', title: 'KUA-STRS-007 due TODAY with only 1/3 reviewers done', recommendation: 'Send immediate reminder. Consider partial approval if Stress Engineer has signed off.', docId: 4 },
+        { severity: 'warning', icon: '👥', title: 'KUA-VDR-021 missing Package Engineer review', recommendation: 'Vendor valve package needs Package Engineer sign-off before QA/QC. Add reviewer.', docId: 6 },
+        { severity: 'warning', icon: '📊', title: 'Pipeline Tie-In Project has 40% overdue rate', recommendation: 'Schedule project review meeting. Resource bottleneck detected in Piping discipline.', docId: null },
+        { severity: 'suggestion', icon: '💡', title: 'Average turnaround trending up (3.2 days vs target 2.5)', recommendation: 'Consider adding reminder at 5-day mark for complex documents.', docId: null },
+        { severity: 'suggestion', icon: '✅', title: 'HSE reviews completing 20% faster than average', recommendation: 'Priya Sharma is high performer. Consider her for complex safety reviews.', docId: null }
+    ];
+
+    // Reminder log simulation
+    let reminderLog = [
+        { docId: 1, type: 'overdue', sentTo: 'Ahmed Al-Rashid', sentAt: getDateOffset(0), template: 'overdue_alert' },
+        { docId: 2, type: '1-day', sentTo: 'Sarah Chen', sentAt: getDateOffset(0), template: 'due_tomorrow' },
+        { docId: 6, type: 'overdue', sentTo: 'Sarah Chen', sentAt: getDateOffset(0), template: 'overdue_alert' },
+        { docId: 10, type: 'escalation', sentTo: 'Discipline Lead', sentAt: getDateOffset(-1), template: 'escalation_manager' }
+    ];
+
+    // ==================== UTILITY FUNCTIONS ====================
+
+    function getDateOffset(days) {
+        const date = new Date();
+        date.setDate(date.getDate() + days);
+        return date.toISOString().split('T')[0];
+    }
+
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
+    }
+
+    function getDaysRemaining(dateStr) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const due = new Date(dateStr);
+        due.setHours(0, 0, 0, 0);
+        return Math.ceil((due - today) / (1000 * 60 * 60 * 24));
+    }
+
+    function getStatusClass(days) {
+        if (days < 0) return 'status-overdue';
+        if (days <= 2) return 'status-due-soon';
+        return 'status-on-track';
+    }
+
+    function getPriorityClass(priority) {
+        return `priority-${priority.toLowerCase()}`;
+    }
+
+    function showToast(message, type = 'success') {
+        const toast = document.getElementById('toast');
+        const toastMessage = document.getElementById('toast-message');
+        const toastIcon = document.getElementById('toast-icon');
+        
+        toastMessage.textContent = message;
+        
+        if (type === 'success') {
+            toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+            toastIcon.className = 'w-6 h-6 text-green-400';
+        } else if (type === 'error') {
+            toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+            toastIcon.className = 'w-6 h-6 text-red-400';
+        } else {
+            toastIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>';
+            toastIcon.className = 'w-6 h-6 text-gold-400';
+        }
+        
+        toast.classList.remove('hide');
+        setTimeout(() => toast.classList.add('hide'), 4000);
+    }
+
+    // ==================== PAGE NAVIGATION ====================
+
+    function launchDemo() {
+        document.getElementById('landing-page').classList.add('hide');
+        document.getElementById('app').classList.remove('hide');
+        showPage('dashboard');
+        initializeDashboard();
+    }
+
+    function exitDemo() {
+        document.getElementById('app').classList.add('hide');
+        document.getElementById('landing-page').classList.remove('hide');
+    }
+
+    function showPage(pageName) {
+        // Hide all pages
+        document.querySelectorAll('.page-view').forEach(p => p.classList.add('hide'));
+        
+        // Show selected page
+        const page = document.getElementById(`page-${pageName}`);
+        if (page) {
+            page.classList.remove('hide');
+        }
+
+        // Update sidebar active state
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            link.classList.remove('active', 'text-white', 'bg-gold-500/10');
+            link.classList.add('text-navy-300');
+        });
+        const activeLink = document.querySelector(`[data-page="${pageName}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active', 'text-white', 'bg-gold-500/10');
+            activeLink.classList.remove('text-navy-300');
+        }
+
+        // Update page title
+        const titles = {
+            'dashboard': ['Dashboard', 'Overview of document review status'],
+            'register': ['Register Document', 'Upload a new document for review'],
+            'documents': ['Document Register', 'All documents and their review status'],
+            'workload': ['Reviewer Workload', 'Team workload and capacity overview'],
+            'team': ['Team Members', 'Manage reviewers and team settings'],
+            'reports': ['Reports', 'Generate and download reports'],
+            'ai-insights': ['AI Risk Intelligence', 'AI-powered risk analysis and recommendations'],
+            'settings': ['Settings', 'Configure review rules and preferences']
+        };
+        
+        if (titles[pageName]) {
+            document.getElementById('page-title').textContent = titles[pageName][0];
+            document.getElementById('page-subtitle').textContent = titles[pageName][1];
+        }
+
+        // Initialize page content
+        switch(pageName) {
+            case 'dashboard': initializeDashboard(); break;
+            case 'documents': initializeDocumentsPage(); break;
+            case 'workload': initializeWorkloadPage(); break;
+            case 'team': initializeTeamPage(); break;
+            case 'ai-insights': initializeAIInsightsPage(); break;
+        }
+
+        return false;
+    }
+
+    // ==================== DASHBOARD ====================
+
+    function initializeDashboard() {
+        // Update metrics
+        const active = documents.filter(d => !['Approved', 'Closed'].includes(d.status)).length;
+        const dueToday = documents.filter(d => getDaysRemaining(d.dueDate) === 0).length;
+        const overdue = documents.filter(d => getDaysRemaining(d.dueDate) < 0 && !['Approved', 'Closed'].includes(d.status)).length;
+        const completed = 47; // Demo value
+
+        document.getElementById('metric-total').textContent = active;
+        document.getElementById('metric-due-today').textContent = dueToday;
+        document.getElementById('metric-overdue').textContent = overdue;
+        document.getElementById('metric-completed').textContent = completed;
+        document.getElementById('metric-awaiting').textContent = documents.filter(d => d.status === 'Issued for Review').length;
+        document.getElementById('metric-returned').textContent = documents.filter(d => d.status === 'Returned with Comments').length;
+        document.getElementById('metric-reviewers').textContent = teamMembers.filter(m => m.active).length;
+
+        // Recent documents
+        const recentDocs = [...documents].sort((a, b) => new Date(b.created) - new Date(a.created)).slice(0, 5);
+        const recentHtml = recentDocs.map(doc => {
+            const days = getDaysRemaining(doc.dueDate);
+            const daysText = days < 0 ? `${Math.abs(days)}d overdue` : days === 0 ? 'Due today' : `${days}d remaining`;
+            const statusClass = getStatusClass(days);
+            return `
+                <div class="flex items-center justify-between p-4 bg-navy-800/50 rounded-lg table-row cursor-pointer" onclick="showDocumentDetail(${doc.id})">
+                    <div class="flex-1">
+                        <div class="flex items-center gap-3">
+                            <span class="font-mono text-gold-400 text-sm">${doc.docNumber}</span>
+                            <span class="status-pill ${getPriorityClass(doc.priority)}">${doc.priority}</span>
+                        </div>
+                        <div class="text-sm text-navy-300 mt-1">${doc.title}</div>
+                    </div>
+                    <div class="text-right">
+                        <span class="status-pill ${statusClass}">${daysText}</span>
+                        <div class="text-xs text-navy-400 mt-1">${doc.reviewers.length} reviewers</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('recent-documents-list').innerHTML = recentHtml;
+
+        // AI Alerts (top 4)
+        const topAlerts = aiInsights.filter(i => i.severity !== 'suggestion').slice(0, 4);
+        const alertsHtml = topAlerts.map(alert => `
+            <div class="p-4 bg-navy-800/50 rounded-lg border-l-4 ${alert.severity === 'critical' ? 'border-red-500' : 'border-orange-500'}">
+                <div class="flex items-start gap-3">
+                    <span class="text-lg">${alert.icon}</span>
+                    <div>
+                        <div class="text-sm font-medium">${alert.title}</div>
+                        <div class="text-xs text-navy-400 mt-1">${alert.recommendation}</div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+        document.getElementById('ai-alerts-list').innerHTML = alertsHtml;
+
+        // Upcoming deadlines
+        const upcoming = documents
+            .filter(d => getDaysRemaining(d.dueDate) >= 0 && getDaysRemaining(d.dueDate) <= 7)
+            .sort((a, b) => getDaysRemaining(a.dueDate) - getDaysRemaining(b.dueDate))
+            .slice(0, 4);
+        
+        const upcomingHtml = upcoming.map(doc => {
+            const days = getDaysRemaining(doc.dueDate);
+            return `
+                <div class="bg-navy-800/50 rounded-lg p-4 cursor-pointer table-row" onclick="showDocumentDetail(${doc.id})">
+                    <div class="flex items-center justify-between mb-2">
+                        <span class="font-mono text-sm text-gold-400">${doc.docNumber}</span>
+                        <span class="status-pill ${getStatusClass(days)}">${days === 0 ? 'Today' : `${days}d`}</span>
+                    </div>
+                    <div class="text-sm text-navy-300 truncate">${doc.title}</div>
+                    <div class="text-xs text-navy-400 mt-2">${formatDate(doc.dueDate)}</div>
+                </div>
+            `;
+        }).join('');
+        document.getElementById('upcoming-deadlines').innerHTML = upcomingHtml || '<p class="text-navy-400 col-span-4">No upcoming deadlines in the next 7 days</p>';
+
+        // Update notification badge
+        const unread = notifications.filter(n => !n.read).length;
+        document.getElementById('notification-badge').textContent = unread;
+    }
+
+    // ==================== DOCUMENT REGISTRATION ====================
+
+    let currentFormData = null;
+
+    document.getElementById('document-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData(this);
+        currentFormData = Object.fromEntries(formData);
+        
+        // Show AI recommendations
+        showAIRecommendations(currentFormData);
+    });
+
+    function showAIRecommendations(data) {
+        const panel = document.getElementById('ai-recommendations-panel');
+        const content = document.getElementById('ai-recommendations-content');
+        
+        // Get recommended reviewers based on doc type
+        const recommended = REVIEW_MATRIX[data.docType] || REVIEW_MATRIX['Other'];
+        
+        // Match with actual team members
+        const matchedReviewers = [];
+        recommended.forEach(role => {
+            const match = teamMembers.find(m => 
+                m.discipline.toLowerCase().includes(role.toLowerCase()) ||
+                m.role.toLowerCase().includes(role.toLowerCase()) ||
+                role.toLowerCase().includes(m.discipline.toLowerCase())
+            );
+            if (match && !matchedReviewers.find(r => r.id === match.id)) {
+                matchedReviewers.push({ ...match, reason: `Required for ${role} review` });
+            }
+        });
+
+        // Risk assessment
+        const riskLevel = data.priority === 'Critical' ? 'High' : data.priority === 'High' ? 'Medium' : 'Low';
+        const suggestedDays = data.priority === 'Critical' ? 3 : data.priority === 'High' ? 5 : 7;
+
+        const html = `
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-semibold mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                        Recommended Reviewers
+                    </h4>
+                    <div class="space-y-3">
+                        ${matchedReviewers.map(r => `
+                            <div class="flex items-center justify-between p-3 bg-navy-800 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-gold-500/20 rounded-full flex items-center justify-center text-gold-400 font-semibold text-sm">
+                                        ${r.name.split(' ').map(n => n[0]).join('')}
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-sm">${r.name}</div>
+                                        <div class="text-xs text-navy-400">${r.discipline} • ${r.role}</div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xs text-navy-400">${r.assigned} active</div>
+                                    <div class="text-xs text-green-400">${r.reason}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ${matchedReviewers.length < 3 ? `
+                        <div class="mt-4 p-3 bg-orange-500/10 border border-orange-500/30 rounded-lg text-sm text-orange-300">
+                            ⚠️ Consider adding more reviewers. ${data.docType} typically requires ${recommended.join(', ')} review.
+                        </div>
+                    ` : ''}
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4 flex items-center gap-2">
+                        <svg class="w-5 h-5 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        AI Analysis
+                    </h4>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-navy-800 rounded-lg">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-navy-400">Risk Rating</span>
+                                <span class="status-pill ${riskLevel === 'High' ? 'bg-red-500/20 text-red-400' : riskLevel === 'Medium' ? 'bg-orange-500/20 text-orange-400' : 'bg-green-500/20 text-green-400'}">${riskLevel}</span>
+                            </div>
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-sm text-navy-400">Suggested Review Period</span>
+                                <span class="text-sm font-medium">${suggestedDays} days</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm text-navy-400">Estimated Completion</span>
+                                <span class="text-sm font-medium">${formatDate(getDateOffset(suggestedDays))}</span>
+                            </div>
+                        </div>
+                        <div class="p-4 bg-navy-800 rounded-lg">
+                            <div class="text-sm font-medium mb-2">Review Requirements</div>
+                            <ul class="text-sm text-navy-300 space-y-1">
+                                ${recommended.map(r => `<li class="flex items-center gap-2"><svg class="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg> ${r}</li>`).join('')}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        content.innerHTML = html;
+        panel.classList.remove('hide');
+        panel.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function acceptRecommendations() {
+        if (!currentFormData) return;
+        
+        // Create new document
+        const newId = documents.length + 1;
+        const recommended = REVIEW_MATRIX[currentFormData.docType] || REVIEW_MATRIX['Other'];
+        const reviewerIds = [];
+        
+        recommended.forEach(role => {
+            const match = teamMembers.find(m => 
+                m.discipline.toLowerCase().includes(role.toLowerCase()) ||
+                m.role.toLowerCase().includes(role.toLowerCase())
+            );
+            if (match && !reviewerIds.includes(match.id)) {
+                reviewerIds.push(match.id);
+            }
+        });
+
+        const newDoc = {
+            id: newId,
+            docNumber: currentFormData.docNumber,
+            title: currentFormData.title,
+            project: currentFormData.project,
+            client: currentFormData.client || '',
+            discipline: currentFormData.discipline,
+            docType: currentFormData.docType,
+            revision: currentFormData.revision || 'A',
+            purpose: currentFormData.purpose || 'IFR',
+            dueDate: currentFormData.dueDate,
+            priority: currentFormData.priority,
+            status: 'Issued for Review',
+            reviewers: reviewerIds.slice(0, 4),
+            link: currentFormData.docLink || '#',
+            remarks: currentFormData.remarks || '',
+            created: new Date().toISOString().split('T')[0]
+        };
+
+        documents.unshift(newDoc);
+        
+        // Update reviewer assignments
+        reviewerIds.forEach(id => {
+            const member = teamMembers.find(m => m.id === id);
+            if (member) member.assigned++;
+        });
+
+        // Add notification
+        notifications.unshift({
+            id: notifications.length + 1,
+            type: 'issued',
+            title: 'Document Issued for Review',
+            message: `${newDoc.docNumber} issued to ${reviewerIds.length} reviewers.`,
+            time: 'Just now',
+            read: false
+        });
+
+        // Reset form
+        document.getElementById('document-form').reset();
+        document.getElementById('ai-recommendations-panel').classList.add('hide');
+        currentFormData = null;
+
+        showToast(`${newDoc.docNumber} registered and issued for review!`);
+        
+        // Go to documents page
+        setTimeout(() => showPage('documents'), 1500);
+    }
+
+    function modifyRecommendations() {
+        showToast('Manual reviewer selection would open here. Using demo mode.', 'info');
+    }
+
+    function resetForm() {
+        document.getElementById('document-form').reset();
+        document.getElementById('ai-recommendations-panel').classList.add('hide');
+        currentFormData = null;
+    }
+
+    // ==================== DOCUMENTS PAGE ====================
+
+    function initializeDocumentsPage() {
+        populateFilters();
+        renderDocumentsTable();
+    }
+
+    function populateFilters() {
+        // Projects
+        const projectSelect = document.getElementById('filter-project');
+        projectSelect.innerHTML = '<option value="">All Projects</option>' + 
+            DEMO_PROJECTS.map(p => `<option value="${p}">${p}</option>`).join('');
+
+        // Disciplines
+        const disciplineSelect = document.getElementById('filter-discipline');
+        disciplineSelect.innerHTML = '<option value="">All Disciplines</option>' + 
+            DEMO_DISCIPLINES.map(d => `<option value="${d}">${d}</option>`).join('');
+
+        // Doc types
+        const typeSelect = document.getElementById('filter-doc-type');
+        typeSelect.innerHTML = '<option value="">All Types</option>' + 
+            DOC_TYPES.map(t => `<option value="${t}">${t}</option>`).join('');
+    }
+
+    function applyFilters() {
+        renderDocumentsTable();
+    }
+
+    function renderDocumentsTable() {
+        let filtered = [...documents];
+        
+        const project = document.getElementById('filter-project')?.value;
+        const discipline = document.getElementById('filter-discipline')?.value;
+        const docType = document.getElementById('filter-doc-type')?.value;
+        const status = document.getElementById('filter-status')?.value;
+        const priority = document.getElementById('filter-priority')?.value;
+
+        if (project) filtered = filtered.filter(d => d.project === project);
+        if (discipline) filtered = filtered.filter(d => d.discipline === discipline);
+        if (docType) filtered = filtered.filter(d => d.docType === docType);
+        if (status) filtered = filtered.filter(d => d.status === status || (status === 'Overdue' && getDaysRemaining(d.dueDate) < 0));
+        if (priority) filtered = filtered.filter(d => d.priority === priority);
+
+        document.getElementById('docs-count').textContent = `(${filtered.length} documents)`;
+
+        const tbody = document.getElementById('documents-table-body');
+        tbody.innerHTML = filtered.map(doc => {
+            const days = getDaysRemaining(doc.dueDate);
+            const daysText = days < 0 ? `${Math.abs(days)}d overdue` : days === 0 ? 'Due today' : `${days}d left`;
+            const reviewerNames = doc.reviewers.map(id => {
+                const m = teamMembers.find(t => t.id === id);
+                return m ? m.name.split(' ')[0] : 'Unknown';
+            }).join(', ');
+
+            return `
+                <tr class="border-b border-navy-800 table-row">
+                    <td class="px-6 py-4 font-mono text-gold-400">${doc.docNumber}</td>
+                    <td class="px-6 py-4">
+                        <div class="max-w-xs truncate" title="${doc.title}">${doc.title}</div>
+                    </td>
+                    <td class="px-6 py-4 text-navy-300">${doc.project.split(' ').slice(0, 2).join(' ')}...</td>
+                    <td class="px-6 py-4">${doc.docType}</td>
+                    <td class="px-6 py-4 text-navy-300 text-xs">${reviewerNames}</td>
+                    <td class="px-6 py-4"><span class="status-pill ${days < 0 ? 'status-overdue' : doc.status === 'Review Completed' ? 'status-completed' : 'status-pending'}">${days < 0 && !['Approved', 'Closed'].includes(doc.status) ? 'Overdue' : doc.status}</span></td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <span>${formatDate(doc.dueDate)}</span>
+                            <span class="status-pill ${getStatusClass(days)}">${daysText}</span>
+                        </div>
+                    </td>
+                    <td class="px-6 py-4"><span class="status-pill ${getPriorityClass(doc.priority)}">${doc.priority}</span></td>
+                    <td class="px-6 py-4">
+                        <div class="flex items-center gap-2">
+                            <button onclick="showDocumentDetail(${doc.id})" class="p-2 hover:bg-navy-700 rounded-lg transition" title="View Details">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/></svg>
+                            </button>
+                            <button onclick="sendReminder(${doc.id})" class="p-2 hover:bg-navy-700 rounded-lg transition" title="Send Reminder">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    function showDocumentDetail(docId) {
+        const doc = documents.find(d => d.id === docId);
+        if (!doc) return;
+
+        const modal = document.getElementById('document-modal');
+        const modalTitle = document.getElementById('modal-doc-title');
+        const modalContent = document.getElementById('modal-content');
+
+        modalTitle.textContent = `${doc.docNumber} - ${doc.title}`;
+
+        const days = getDaysRemaining(doc.dueDate);
+        const reviewerDetails = doc.reviewers.map(id => {
+            const m = teamMembers.find(t => t.id === id);
+            return m || { name: 'Unknown', discipline: '-', email: '-' };
+        });
+
+        modalContent.innerHTML = `
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <h4 class="font-semibold mb-4">Document Information</h4>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Document Number</span>
+                            <span class="font-mono text-gold-400">${doc.docNumber}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Title</span>
+                            <span>${doc.title}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Project</span>
+                            <span>${doc.project}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Discipline</span>
+                            <span>${doc.discipline}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Document Type</span>
+                            <span>${doc.docType}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Revision</span>
+                            <span>${doc.revision}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Purpose</span>
+                            <span>${doc.purpose}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Due Date</span>
+                            <span class="flex items-center gap-2">${formatDate(doc.dueDate)} <span class="status-pill ${getStatusClass(days)}">${days < 0 ? Math.abs(days) + 'd overdue' : days === 0 ? 'Today' : days + 'd left'}</span></span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Priority</span>
+                            <span class="status-pill ${getPriorityClass(doc.priority)}">${doc.priority}</span>
+                        </div>
+                        <div class="flex justify-between py-2 border-b border-navy-800">
+                            <span class="text-navy-400">Status</span>
+                            <span class="status-pill ${days < 0 ? 'status-overdue' : 'status-pending'}">${days < 0 ? 'Overdue' : doc.status}</span>
+                        </div>
+                        ${doc.remarks ? `<div class="mt-4 p-3 bg-navy-800 rounded-lg"><div class="text-xs text-navy-400 mb-1">Remarks</div><div class="text-sm">${doc.remarks}</div></div>` : ''}
+                    </div>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Assigned Reviewers</h4>
+                    <div class="space-y-3">
+                        ${reviewerDetails.map((r, i) => `
+                            <div class="flex items-center justify-between p-3 bg-navy-800 rounded-lg">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 bg-gold-500/20 rounded-full flex items-center justify-center text-gold-400 font-semibold text-sm">
+                                        ${r.name.split(' ').map(n => n[0]).join('')}
+                                    </div>
+                                    <div>
+                                        <div class="font-medium text-sm">${r.name}</div>
+                                        <div class="text-xs text-navy-400">${r.discipline} • ${r.role || 'Reviewer'}</div>
+                                    </div>
+                                </div>
+                                <span class="status-pill ${i === 0 ? 'status-completed' : 'status-pending'}">${i === 0 ? 'Reviewed' : 'Pending'}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="mt-6">
+                        <h4 class="font-semibold mb-4">Reminder History</h4>
+                        <div class="space-y-2 text-sm">
+                            ${reminderLog.filter(r => r.docId === doc.id).map(r => `
+                                <div class="flex items-center justify-between py-2 border-b border-navy-800">
+                                    <span class="text-navy-300">${r.type} reminder to ${r.sentTo}</span>
+                                    <span class="text-navy-400 text-xs">${formatDate(r.sentAt)}</span>
+                                </div>
+                            `).join('') || '<div class="text-navy-400">No reminders sent yet</div>'}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-6 pt-6 border-t border-navy-800 flex gap-4">
+                <button onclick="sendReminder(${doc.id}); closeModal();" class="btn-primary">Send Reminder</button>
+                <button onclick="markReviewComplete(${doc.id})" class="btn-secondary">Mark Review Complete</button>
+                <button onclick="closeModal()" class="btn-secondary">Close</button>
+            </div>
+        `;
+
+        modal.classList.remove('hide');
+    }
+
+    function closeModal() {
+        document.getElementById('document-modal').classList.add('hide');
+    }
+
+    function sendReminder(docId) {
+        const doc = documents.find(d => d.id === docId);
+        if (doc) {
+            showToast(`Reminder sent to ${doc.reviewers.length} reviewers for ${doc.docNumber}`);
+            reminderLog.push({ docId, type: 'manual', sentTo: 'All reviewers', sentAt: new Date().toISOString().split('T')[0], template: 'manual_reminder' });
+        }
+    }
+
+    function markReviewComplete(docId) {
+        const doc = documents.find(d => d.id === docId);
+        if (doc) {
+            doc.status = 'Review Completed';
+            showToast(`${doc.docNumber} marked as Review Completed`);
+            closeModal();
+            initializeDocumentsPage();
+        }
+    }
+
+    function exportDocsCSV() {
+        const headers = ['Doc Number', 'Title', 'Project', 'Discipline', 'Type', 'Revision', 'Status', 'Due Date', 'Priority', 'Reviewers'];
+        const rows = documents.map(d => [
+            d.docNumber, d.title, d.project, d.discipline, d.docType, d.revision, d.status,
+            d.dueDate, d.priority, d.reviewers.map(id => teamMembers.find(m => m.id === id)?.name || 'Unknown').join('; ')
+        ]);
+        
+        const csv = [headers.join(','), ...rows.map(r => r.map(c => `"${c}"`).join(','))].join('\n');
+        downloadFile(csv, 'document-register.csv', 'text/csv');
+        showToast('Document register exported to CSV');
+    }
+
+    function downloadFile(content, filename, type) {
+        const blob = new Blob([content], { type });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(url);
+    }
+
+    // ==================== WORKLOAD PAGE ====================
+
+    function initializeWorkloadPage() {
+        const healthy = teamMembers.filter(m => m.assigned <= 4 && m.overdue === 0).length;
+        const moderate = teamMembers.filter(m => (m.assigned > 4 && m.assigned <= 7) || m.overdue === 1).length;
+        const overloaded = teamMembers.filter(m => m.assigned > 7 || m.overdue > 1).length;
+
+        document.getElementById('wl-total-reviewers').textContent = teamMembers.length;
+        document.getElementById('wl-healthy').textContent = healthy;
+        document.getElementById('wl-moderate').textContent = moderate;
+        document.getElementById('wl-overloaded').textContent = overloaded;
+
+        const grid = document.getElementById('workload-grid');
+        grid.innerHTML = teamMembers.map(m => {
+            const load = m.assigned > 7 ? 'overloaded' : m.assigned > 4 ? 'moderate' : 'healthy';
+            const loadColor = load === 'overloaded' ? 'red' : load === 'moderate' ? 'orange' : 'green';
+            const barWidth = Math.min((m.assigned / 10) * 100, 100);
+
+            return `
+                <div class="bg-navy-800 rounded-xl p-5 border border-navy-700">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-${loadColor}-500/20 rounded-full flex items-center justify-center text-${loadColor}-400 font-semibold">
+                            ${m.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <div>
+                            <div class="font-medium">${m.name}</div>
+                            <div class="text-xs text-navy-400">${m.discipline} • ${m.role}</div>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-navy-400">Assigned</span>
+                            <span class="font-medium">${m.assigned}</span>
+                        </div>
+                        <div class="w-full bg-navy-700 rounded-full h-2">
+                            <div class="bg-${loadColor}-500 h-2 rounded-full progress-bar" style="width: ${barWidth}%"></div>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-navy-400">Overdue</span>
+                            <span class="${m.overdue > 0 ? 'text-red-400 font-medium' : 'text-navy-300'}">${m.overdue}</span>
+                        </div>
+                        <div class="flex justify-between text-sm">
+                            <span class="text-navy-400">Avg Time</span>
+                            <span class="text-navy-300">${m.avgTime} days</span>
+                        </div>
+                    </div>
+                    ${m.overdue > 0 || m.assigned > 7 ? `
+                        <div class="mt-4 pt-4 border-t border-navy-700">
+                            <span class="text-xs text-${loadColor}-400">⚠️ ${m.overdue > 0 ? `${m.overdue} overdue documents` : 'High workload - consider reassignment'}</span>
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
+    // ==================== TEAM PAGE ====================
+
+    function initializeTeamPage() {
+        const tbody = document.getElementById('team-table-body');
+        tbody.innerHTML = teamMembers.map(m => `
+            <tr class="border-b border-navy-800 table-row">
+                <td class="px-6 py-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 bg-gold-500/20 rounded-full flex items-center justify-center text-gold-400 font-semibold text-sm">
+                            ${m.name.split(' ').map(n => n[0]).join('')}
+                        </div>
+                        <span class="font-medium">${m.name}</span>
+                    </div>
+                </td>
+                <td class="px-6 py-4 text-navy-300">${m.email}</td>
+                <td class="px-6 py-4">${m.discipline}</td>
+                <td class="px-6 py-4">${m.role}</td>
+                <td class="px-6 py-4 font-medium">${m.assigned}</td>
+                <td class="px-6 py-4 ${m.overdue > 0 ? 'text-red-400 font-medium' : 'text-navy-300'}">${m.overdue}</td>
+                <td class="px-6 py-4 text-navy-300">${m.avgTime} days</td>
+                <td class="px-6 py-4"><span class="status-pill ${m.active ? 'status-on-track' : 'status-pending'}">${m.active ? 'Active' : 'Inactive'}</span></td>
+                <td class="px-6 py-4">
+                    <button class="p-2 hover:bg-navy-700 rounded-lg transition" title="Edit">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                    </button>
+                </td>
+            </tr>
+        `).join('');
+    }
+
+    function showAddMemberModal() {
+        showToast('Add Team Member modal would open here. Demo mode.', 'info');
+    }
+
+    // ==================== AI INSIGHTS PAGE ====================
+
+    function initializeAIInsightsPage() {
+        const critical = aiInsights.filter(i => i.severity === 'critical').length;
+        const warnings = aiInsights.filter(i => i.severity === 'warning').length;
+        const suggestions = aiInsights.filter(i => i.severity === 'suggestion').length;
+
+        document.getElementById('ai-critical-count').textContent = critical;
+        document.getElementById('ai-warning-count').textContent = warnings;
+        document.getElementById('ai-suggestions-count').textContent = suggestions;
+
+        const list = document.getElementById('ai-insights-list');
+        list.innerHTML = aiInsights.map(insight => {
+            const borderColor = insight.severity === 'critical' ? 'red' : insight.severity === 'warning' ? 'orange' : 'gold';
+            return `
+                <div class="p-5 bg-navy-800/50 rounded-lg border-l-4 border-${borderColor}-500">
+                    <div class="flex items-start gap-4">
+                        <span class="text-2xl">${insight.icon}</span>
+                        <div class="flex-1">
+                            <div class="font-medium mb-1">${insight.title}</div>
+                            <div class="text-sm text-navy-300 mb-3">${insight.recommendation}</div>
+                            ${insight.docId ? `<button onclick="showDocumentDetail(${insight.docId})" class="text-gold-400 text-sm hover:underline">View Document →</button>` : ''}
+                        </div>
+                        <span class="status-pill ${insight.severity === 'critical' ? 'status-overdue' : insight.severity === 'warning' ? 'status-due-soon' : 'bg-gold-500/20 text-gold-400'}">
+                            ${insight.severity.charAt(0).toUpperCase() + insight.severity.slice(1)}
+                        </span>
+                    </div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // ==================== REPORTS ====================
+
+    let currentReportData = null;
+    let currentReportType = null;
+
+    function generateReport(type) {
+        currentReportType = type;
+        const preview = document.getElementById('report-preview');
+        const title = document.getElementById('report-title');
+        const content = document.getElementById('report-content');
+
+        let reportTitle = '';
+        let reportHtml = '';
+        let data = [];
+
+        switch(type) {
+            case 'full':
+                reportTitle = 'Full Document Register Report';
+                data = documents;
+                reportHtml = generateTableReport(data, ['docNumber', 'title', 'project', 'discipline', 'docType', 'status', 'dueDate', 'priority']);
+                break;
+            case 'overdue':
+                reportTitle = 'Overdue Documents Report';
+                data = documents.filter(d => getDaysRemaining(d.dueDate) < 0);
+                reportHtml = generateTableReport(data, ['docNumber', 'title', 'project', 'dueDate', 'priority'], true);
+                break;
+            case 'workload':
+                reportTitle = 'Reviewer Workload Report';
+                reportHtml = generateWorkloadReport();
+                break;
+            case 'project':
+                reportTitle = 'Project Status Report';
+                reportHtml = generateProjectReport();
+                break;
+            case 'weekly':
+                reportTitle = 'Weekly Performance Report';
+                reportHtml = generateWeeklyReport();
+                break;
+            case 'closed':
+                reportTitle = 'Closed Documents Report';
+                data = documents.filter(d => ['Approved', 'Review Completed'].includes(d.status));
+                reportHtml = data.length ? generateTableReport(data, ['docNumber', 'title', 'project', 'discipline', 'status']) : '<p class="text-navy-400">No closed documents in the current dataset.</p>';
+                break;
+        }
+
+        currentReportData = data;
+        title.textContent = reportTitle;
+        content.innerHTML = `
+            <div class="mb-6 flex items-center justify-between">
+                <div>
+                    <div class="text-sm text-navy-400">KU Automation Engineering</div>
+                    <div class="text-xs text-navy-500">Generated: ${new Date().toLocaleString()}</div>
+                </div>
+                <div class="text-right">
+                    <div class="text-sm text-navy-400">Document Review Command Station</div>
+                    <div class="text-xs text-navy-500">Report Period: All Time</div>
+                </div>
+            </div>
+            ${reportHtml}
+        `;
+
+        preview.classList.remove('hide');
+        preview.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function generateTableReport(data, fields, showOverdue = false) {
+        const headers = {
+            docNumber: 'Doc Number',
+            title: 'Title',
+            project: 'Project',
+            discipline: 'Discipline',
+            docType: 'Type',
+            status: 'Status',
+            dueDate: 'Due Date',
+            priority: 'Priority'
+        };
+
+        return `
+            <div class="mb-4 text-sm text-navy-300">Total: ${data.length} documents</div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-navy-800">
+                        <tr>
+                            ${fields.map(f => `<th class="px-4 py-3 text-left font-medium text-navy-300">${headers[f]}</th>`).join('')}
+                            ${showOverdue ? '<th class="px-4 py-3 text-left font-medium text-navy-300">Days Overdue</th>' : ''}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${data.map(d => `
+                            <tr class="border-b border-navy-800">
+                                ${fields.map(f => {
+                                    let val = d[f];
+                                    if (f === 'dueDate') val = formatDate(val);
+                                    if (f === 'docNumber') return `<td class="px-4 py-3 font-mono text-gold-400">${val}</td>`;
+                                    return `<td class="px-4 py-3">${val}</td>`;
+                                }).join('')}
+                                ${showOverdue ? `<td class="px-4 py-3 text-red-400 font-medium">${Math.abs(getDaysRemaining(d.dueDate))} days</td>` : ''}
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    function generateWorkloadReport() {
+        return `
+            <div class="mb-4 text-sm text-navy-300">Total Reviewers: ${teamMembers.length}</div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-navy-800">
+                        <tr>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Name</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Discipline</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Role</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Assigned</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Overdue</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Avg Time</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${teamMembers.map(m => `
+                            <tr class="border-b border-navy-800">
+                                <td class="px-4 py-3 font-medium">${m.name}</td>
+                                <td class="px-4 py-3">${m.discipline}</td>
+                                <td class="px-4 py-3">${m.role}</td>
+                                <td class="px-4 py-3">${m.assigned}</td>
+                                <td class="px-4 py-3 ${m.overdue > 0 ? 'text-red-400' : ''}">${m.overdue}</td>
+                                <td class="px-4 py-3">${m.avgTime} days</td>
+                                <td class="px-4 py-3"><span class="status-pill ${m.assigned > 7 ? 'status-overdue' : m.assigned > 4 ? 'status-due-soon' : 'status-on-track'}">${m.assigned > 7 ? 'Overloaded' : m.assigned > 4 ? 'Moderate' : 'Healthy'}</span></td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    function generateProjectReport() {
+        const projectStats = DEMO_PROJECTS.map(p => {
+            const docs = documents.filter(d => d.project === p);
+            const overdue = docs.filter(d => getDaysRemaining(d.dueDate) < 0).length;
+            const completed = docs.filter(d => ['Approved', 'Review Completed'].includes(d.status)).length;
+            return { project: p, total: docs.length, overdue, completed, inProgress: docs.length - completed };
+        });
+
+        return `
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-navy-800">
+                        <tr>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Project</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Total Docs</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">In Progress</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Completed</th>
+                            <th class="px-4 py-3 text-left font-medium text-navy-300">Overdue</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${projectStats.map(p => `
+                            <tr class="border-b border-navy-800">
+                                <td class="px-4 py-3 font-medium">${p.project}</td>
+                                <td class="px-4 py-3">${p.total}</td>
+                                <td class="px-4 py-3">${p.inProgress}</td>
+                                <td class="px-4 py-3 text-green-400">${p.completed}</td>
+                                <td class="px-4 py-3 ${p.overdue > 0 ? 'text-red-400' : ''}">${p.overdue}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    }
+
+    function generateWeeklyReport() {
+        const thisWeek = documents.filter(d => {
+            const days = getDaysRemaining(d.dueDate);
+            return days >= -7 && days <= 7;
+        });
+        const completed = 12;
+        const issued = 8;
+        const avgTurnaround = 3.2;
+
+        return `
+            <div class="grid grid-cols-4 gap-4 mb-6">
+                <div class="bg-navy-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-gold-400">${issued}</div>
+                    <div class="text-xs text-navy-400">Issued This Week</div>
+                </div>
+                <div class="bg-navy-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-green-400">${completed}</div>
+                    <div class="text-xs text-navy-400">Completed</div>
+                </div>
+                <div class="bg-navy-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-red-400">${documents.filter(d => getDaysRemaining(d.dueDate) < 0).length}</div>
+                    <div class="text-xs text-navy-400">Currently Overdue</div>
+                </div>
+                <div class="bg-navy-800 rounded-lg p-4 text-center">
+                    <div class="text-2xl font-bold text-blue-400">${avgTurnaround}</div>
+                    <div class="text-xs text-navy-400">Avg Turnaround (days)</div>
+                </div>
+            </div>
+            <div class="text-sm text-navy-300">This Week's Documents (${thisWeek.length} total):</div>
+            ${generateTableReport(thisWeek, ['docNumber', 'title', 'status', 'dueDate', 'priority'])}
+        `;
+    }
+
+    function downloadReportCSV() {
+        if (!currentReportType) return;
+
+        let csv = '';
+        if (currentReportType === 'workload') {
+            csv = 'Name,Discipline,Role,Assigned,Overdue,Avg Time\n' +
+                teamMembers.map(m => `"${m.name}","${m.discipline}","${m.role}",${m.assigned},${m.overdue},${m.avgTime}`).join('\n');
+        } else if (currentReportData) {
+            csv = 'Doc Number,Title,Project,Discipline,Type,Status,Due Date,Priority\n' +
+                currentReportData.map(d => `"${d.docNumber}","${d.title}","${d.project}","${d.discipline}","${d.docType}","${d.status}","${d.dueDate}","${d.priority}"`).join('\n');
+        }
+
+        if (csv) {
+            downloadFile(csv, `${currentReportType}-report.csv`, 'text/csv');
+            showToast('Report downloaded as CSV');
+        }
+    }
+
+    function closeReportPreview() {
+        document.getElementById('report-preview').classList.add('hide');
+    }
+
+    // ==================== NOTIFICATIONS ====================
+
+    function showNotifications() {
+        const panel = document.getElementById('notification-panel');
+        const list = document.getElementById('notification-list');
+
+        const icons = {
+            overdue: '<svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>',
+            reminder: '<svg class="w-5 h-5 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+            completed: '<svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>',
+            warning: '<svg class="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>',
+            escalation: '<svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>',
+            issued: '<svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>'
+        };
+
+        list.innerHTML = notifications.map(n => `
+            <div class="p-4 rounded-lg ${n.read ? 'bg-navy-800/50' : 'bg-navy-800 border border-gold-500/20'}" onclick="markNotificationRead(${n.id})">
+                <div class="flex items-start gap-3">
+                    ${icons[n.type] || icons.issued}
+                    <div class="flex-1">
+                        <div class="font-medium text-sm ${n.read ? 'text-navy-300' : 'text-white'}">${n.title}</div>
+                        <div class="text-xs text-navy-400 mt-1">${n.message}</div>
+                        <div class="text-xs text-navy-500 mt-2">${n.time}</div>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+
+        panel.classList.remove('hide');
+    }
+
+    function closeNotifications() {
+        document.getElementById('notification-panel').classList.add('hide');
+    }
+
+    function markNotificationRead(id) {
+        const n = notifications.find(x => x.id === id);
+        if (n) n.read = true;
+        const unread = notifications.filter(x => !x.read).length;
+        document.getElementById('notification-badge').textContent = unread;
+        showNotifications();
+    }
+
+    // ==================== GLOBAL SEARCH ====================
+
+    document.getElementById('global-search')?.addEventListener('input', function(e) {
+        const query = e.target.value.toLowerCase();
+        if (query.length < 2) return;
+
+        const matches = documents.filter(d =>
+            d.docNumber.toLowerCase().includes(query) ||
+            d.title.toLowerCase().includes(query) ||
+            d.project.toLowerCase().includes(query)
+        );
+
+        if (matches.length === 1) {
+            showDocumentDetail(matches[0].id);
+            e.target.value = '';
+        }
+    });
+
+    // ==================== INITIALIZE ====================
+
+    // Set default due date to 7 days from now
+    document.addEventListener('DOMContentLoaded', function() {
+        const dueDateInput = document.querySelector('input[name="dueDate"]');
+        if (dueDateInput) {
+            dueDateInput.value = getDateOffset(7);
+        }
+    });
+    </script>
+</body>
+</html>

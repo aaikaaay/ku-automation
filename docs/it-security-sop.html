@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT & Security Requirements SOP | KU Automation</title>
+    <style>
+        :root {
+            --primary: #1a365d;
+            --secondary: #2c5282;
+            --accent: #3182ce;
+            --light: #ebf8ff;
+            --dark: #1a202c;
+            --gray: #718096;
+            --border: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: #f7fafc;
+        }
+        
+        .document {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        /* Header */
+        .doc-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 2rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        
+        .doc-header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        
+        .doc-header .logo span {
+            color: var(--accent);
+        }
+        
+        .doc-meta {
+            text-align: right;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+        
+        .doc-meta p {
+            margin: 0.25rem 0;
+        }
+        
+        /* Title Section */
+        .title-section {
+            background: var(--light);
+            padding: 2rem 3rem;
+            border-bottom: 3px solid var(--accent);
+        }
+        
+        .title-section h1 {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .title-section .subtitle {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+        
+        .doc-info {
+            display: flex;
+            gap: 2rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        .doc-info div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .doc-info strong {
+            color: var(--secondary);
+        }
+        
+        /* Content */
+        .content {
+            padding: 2rem 3rem;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin: 2rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        h2:first-child {
+            margin-top: 0;
+        }
+        
+        h3 {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin: 1rem 0 1rem 1.5rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0 1.5rem 0;
+            font-size: 0.9rem;
+        }
+        
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        td {
+            padding: 0.75rem;
+            border: 1px solid var(--border);
+            vertical-align: top;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        
+        tr:hover {
+            background: var(--light);
+        }
+        
+        /* Code */
+        code {
+            background: #edf2f7;
+            padding: 0.15rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.85em;
+            color: var(--secondary);
+        }
+        
+        pre {
+            background: #1a202c;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+        }
+        
+        pre code {
+            background: none;
+            color: inherit;
+            padding: 0;
+        }
+        
+        /* Callout boxes */
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 6px;
+            margin: 1rem 0;
+            border-left: 4px solid;
+        }
+        
+        .callout-info {
+            background: #ebf8ff;
+            border-color: var(--accent);
+        }
+        
+        .callout-warning {
+            background: #fffaf0;
+            border-color: #ed8936;
+        }
+        
+        .callout-success {
+            background: #f0fff4;
+            border-color: #48bb78;
+        }
+        
+        /* Status badges */
+        .badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .badge-success {
+            background: #c6f6d5;
+            color: #276749;
+        }
+        
+        .badge-warning {
+            background: #feebc8;
+            color: #c05621;
+        }
+        
+        /* Approval Section */
+        .approval-section {
+            background: var(--light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+        
+        .approval-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .approval-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+        
+        .approval-item .role {
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .approval-item .responsibility {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin: 0.25rem 0;
+        }
+        
+        .approval-item .signature {
+            margin-top: 0.75rem;
+            padding-top: 0.75rem;
+            border-top: 1px dashed var(--border);
+            font-size: 0.85rem;
+        }
+        
+        /* Footer */
+        .doc-footer {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+        }
+        
+        .doc-footer a {
+            color: var(--light);
+        }
+        
+        /* Print styles */
+        @media print {
+            body {
+                background: white;
+            }
+            .document {
+                box-shadow: none;
+            }
+            .doc-header, .doc-footer {
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .doc-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .doc-meta {
+                text-align: left;
+            }
+            .content {
+                padding: 1.5rem;
+            }
+            .approval-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="document">
+    <!-- Header -->
+    <header class="doc-header">
+        <div class="logo">KU<span>Automation</span></div>
+        <div class="doc-meta">
+            <p><strong>Document No:</strong> KUA-SOP-SEC-001</p>
+            <p><strong>Version:</strong> 1.0</p>
+            <p><strong>Classification:</strong> Internal / Client-Facing</p>
+        </div>
+    </header>
+    
+    <!-- Title Section -->
+    <div class="title-section">
+        <h1>Standard Operating Procedure</h1>
+        <p class="subtitle">IT & Security Requirements for KU Automation Demo Applications</p>
+        <div class="doc-info">
+            <div><strong>Effective Date:</strong> 08 May 2026</div>
+            <div><strong>Review Date:</strong> 08 August 2026</div>
+            <div><strong>Owner:</strong> Security & IT Operations</div>
+        </div>
+    </div>
+    
+    <!-- Content -->
+    <div class="content">
+        
+        <h2>1. Purpose & Scope</h2>
+        <p>This Standard Operating Procedure defines the technical infrastructure requirements and security controls for all deployment options of the KU Automation demo application suite. It ensures consistent, secure deployments that protect both KU Automation and client environments from security breaches, data leakage, and operational risks.</p>
+        
+        <div class="callout callout-info">
+            <strong>Applies to:</strong> Landing pages, ROI calculators, one-pagers, API mocks, document processing demos, and any internal admin interfaces provided to clients for evaluation purposes.
+        </div>
+        
+        <h2>2. Audience</h2>
+        <ul>
+            <li><strong>Developers / DevOps Engineers</strong> — Deploying and maintaining demo environments</li>
+            <li><strong>Security / IT Operations Teams</strong> — Reviewing, approving, and auditing deployments</li>
+            <li><strong>Client-Facing Consultants</strong> — Presenting demos and communicating requirements to clients</li>
+            <li><strong>Client IT Teams</strong> — Evaluating integration requirements and security posture</li>
+        </ul>
+        
+        <h2>3. Definitions</h2>
+        <table>
+            <tr>
+                <th style="width:25%">Term</th>
+                <th>Definition</th>
+            </tr>
+            <tr>
+                <td><strong>Demo App</strong></td>
+                <td>Any KU Automation showcase application provided to clients for evaluation (landing page, ROI calculator, one-pager, API mock, admin UI, document processor).</td>
+            </tr>
+            <tr>
+                <td><strong>Deployment Option</strong></td>
+                <td>The hosting method used to run the demo (static hosting, Docker container, Kubernetes, on-premises VM, or local development server).</td>
+            </tr>
+            <tr>
+                <td><strong>Security Controls</strong></td>
+                <td>Technical and procedural safeguards including network isolation, identity management, data protection, and logging.</td>
+            </tr>
+            <tr>
+                <td><strong>Client System</strong></td>
+                <td>Any hardware, software, or network infrastructure owned or managed by the client that interacts with the demo application.</td>
+            </tr>
+            <tr>
+                <td><strong>PII</strong></td>
+                <td>Personally Identifiable Information — any data that could identify an individual.</td>
+            </tr>
+        </table>
+        
+        <h2>4. Deployment Options & IT Requirements</h2>
+        
+        <h3>4.1 Option A: Static Web Hosting (Vercel / Netlify / Cloudflare Pages)</h3>
+        <table>
+            <tr>
+                <th style="width:25%">Attribute</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Components</strong></td>
+                <td>HTML/CSS/JS front-end (landing page, ROI calculator, one-pager); optional analytics scripts</td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure</strong></td>
+                <td>Git repository (GitHub/GitLab/Bitbucket); CI/CD pipeline via platform integration</td>
+            </tr>
+            <tr>
+                <td><strong>Runtime</strong></td>
+                <td>Platform-managed (Node.js 14+ for build process)</td>
+            </tr>
+            <tr>
+                <td><strong>Configuration</strong></td>
+                <td><code>vercel.json</code> or <code>netlify.toml</code> — defines redirects, security headers, cache policies</td>
+            </tr>
+            <tr>
+                <td><strong>Use Case</strong></td>
+                <td>Client-facing demos with no backend processing; rapid deployment; global CDN distribution</td>
+            </tr>
+        </table>
+        
+        <h3>4.2 Option B: Docker Container (Local, Cloud VM, or Container Service)</h3>
+        <table>
+            <tr>
+                <th style="width:25%">Attribute</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Components</strong></td>
+                <td>Node.js/Express API mock; Python Flask micro-service (PDF parser, data transformer); optional Nginx reverse proxy</td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure</strong></td>
+                <td>Docker Engine 20.10+; minimum 2 vCPU, 4 GB RAM; 20 GB storage for images and logs</td>
+            </tr>
+            <tr>
+                <td><strong>Runtime</strong></td>
+                <td>Linux (Ubuntu 22.04 LTS or Debian 12 recommended)</td>
+            </tr>
+            <tr>
+                <td><strong>Configuration</strong></td>
+                <td><code>Dockerfile</code>, <code>docker-compose.yml</code>, <code>.dockerignore</code></td>
+            </tr>
+            <tr>
+                <td><strong>Use Case</strong></td>
+                <td>Demos requiring backend processing; isolated client environments; reproducible deployments</td>
+            </tr>
+        </table>
+        
+        <h3>4.3 Option C: Kubernetes (EKS / GKE / AKS / On-Premises)</h3>
+        <table>
+            <tr>
+                <th style="width:25%">Attribute</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Components</strong></td>
+                <td>Containerised services (as per Option B); Ingress controller (NGINX/Traefik); ConfigMaps & Secrets</td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure</strong></td>
+                <td>3-node cluster minimum (2 vCPU, 4 GB RAM per node); 10 GB Persistent Volume for logs; cluster-wide network policies</td>
+            </tr>
+            <tr>
+                <td><strong>Runtime</strong></td>
+                <td>Kubernetes v1.26 or later</td>
+            </tr>
+            <tr>
+                <td><strong>Configuration</strong></td>
+                <td><code>deployment.yaml</code>, <code>service.yaml</code>, <code>ingress.yaml</code>, <code>secret.yaml</code>, <code>networkpolicy.yaml</code></td>
+            </tr>
+            <tr>
+                <td><strong>Use Case</strong></td>
+                <td>Enterprise clients requiring orchestration; high-availability demos; multi-tenant environments</td>
+            </tr>
+        </table>
+        
+        <h3>4.4 Option D: On-Premises VM / Bare-Metal</h3>
+        <table>
+            <tr>
+                <th style="width:25%">Attribute</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Components</strong></td>
+                <td>Pre-built binaries; systemd service files; optional local SQLite database</td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure</strong></td>
+                <td>2 vCPU, 4 GB RAM minimum; 30 GB disk; firewall and VPN access configured</td>
+            </tr>
+            <tr>
+                <td><strong>Runtime</strong></td>
+                <td>Ubuntu 22.04 LTS or RHEL 8/9</td>
+            </tr>
+            <tr>
+                <td><strong>Configuration</strong></td>
+                <td><code>systemd.service</code>, <code>config.yaml</code>, firewall rules</td>
+            </tr>
+            <tr>
+                <td><strong>Use Case</strong></td>
+                <td>Air-gapped environments; clients with strict data residency requirements; regulated industries</td>
+            </tr>
+        </table>
+        
+        <h3>4.5 Option E: Local Development Server</h3>
+        <table>
+            <tr>
+                <th style="width:25%">Attribute</th>
+                <th>Specification</th>
+            </tr>
+            <tr>
+                <td><strong>Components</strong></td>
+                <td>Source code with <code>npm run dev</code> or <code>python -m http.server</code></td>
+            </tr>
+            <tr>
+                <td><strong>Infrastructure</strong></td>
+                <td>Node.js 20+ or Python 3.10+; 8 GB RAM recommended; localhost only (no public exposure)</td>
+            </tr>
+            <tr>
+                <td><strong>Runtime</strong></td>
+                <td>macOS 13+ (Apple Silicon) or Windows 11</td>
+            </tr>
+            <tr>
+                <td><strong>Configuration</strong></td>
+                <td><code>.env.local</code>, <code>dev.env</code></td>
+            </tr>
+            <tr>
+                <td><strong>Use Case</strong></td>
+                <td>Internal development; client demonstrations on consultant's machine; proof-of-concept testing</td>
+            </tr>
+        </table>
+        
+        <h2>5. General IT Baseline Requirements</h2>
+        <p>The following requirements apply to <strong>all deployment options</strong> unless explicitly noted otherwise:</p>
+        
+        <table>
+            <tr>
+                <th>Requirement</th>
+                <th>Description</th>
+                <th>Verification Method</th>
+            </tr>
+            <tr>
+                <td><strong>Network Isolation</strong></td>
+                <td>Deploy demos in a dedicated subnet/VPC or isolated Docker network. Only ports 80/443 (or the designated app port) should be accessible externally.</td>
+                <td><code>nmap</code> scan of public IP; firewall rule audit</td>
+            </tr>
+            <tr>
+                <td><strong>TLS Termination</strong></td>
+                <td>All HTTP traffic must use HTTPS with a valid certificate (Let's Encrypt or corporate PKI). TLS 1.2 minimum; TLS 1.3 preferred.</td>
+                <td><code>curl -I https://demo.example.com</code> returns 200 with trusted certificate</td>
+            </tr>
+            <tr>
+                <td><strong>Least-Privilege IAM</strong></td>
+                <td>Service accounts and API tokens must have only the permissions required for operation (e.g., read-only access to static assets, no write access to storage).</td>
+                <td>IAM policy review; <code>aws iam simulate-principal-policy</code></td>
+            </tr>
+            <tr>
+                <td><strong>Secret Management</strong></td>
+                <td>API keys, database passwords, and client-specific tokens must be stored in environment variables or secrets managers (Kubernetes Secrets, AWS Secrets Manager, HashiCorp Vault). Never commit secrets to source code.</td>
+                <td><code>git grep -i "key\|secret\|password"</code> returns no matches</td>
+            </tr>
+            <tr>
+                <td><strong>Patch Management</strong></td>
+                <td>OS and container base images must be updated monthly, or immediately upon release of critical CVE patches (CVSS ≥ 7.0).</td>
+                <td>CI pipeline includes <code>docker scan</code> or <code>trivy</code>; OS runs <code>apt-get update && apt-get upgrade</code></td>
+            </tr>
+            <tr>
+                <td><strong>Logging & Monitoring</strong></td>
+                <td>Capture access logs, error logs, and audit logs. Forward to central SIEM (Elastic, Splunk, or equivalent) with minimum 30-day retention.</td>
+                <td>Verify log shipper (Filebeat, Fluent Bit) is active; sample log query successful</td>
+            </tr>
+            <tr>
+                <td><strong>Backup</strong></td>
+                <td>For any persistent state (databases, uploaded files), schedule daily incremental backups stored off-site and encrypted at rest (AES-256).</td>
+                <td>Backup job status visible in cron/scheduler; test restore successful</td>
+            </tr>
+            <tr>
+                <td><strong>Disaster Recovery</strong></td>
+                <td>Document and test a rollback procedure (previous Docker image tag, prior git commit, VM snapshot) quarterly.</td>
+                <td>DR test completed in staging environment; results documented</td>
+            </tr>
+        </table>
+        
+        <h2>6. Security Controls by Deployment Option</h2>
+        
+        <table>
+            <tr>
+                <th>Control</th>
+                <th>Static Hosting</th>
+                <th>Docker</th>
+                <th>Kubernetes</th>
+                <th>On-Prem VM</th>
+                <th>Local Dev</th>
+            </tr>
+            <tr>
+                <td><strong>Web Application Firewall (WAF)</strong></td>
+                <td>Cloudflare WAF (enabled by default)</td>
+                <td>Traefik with WAF plugin or ModSecurity sidecar</td>
+                <td>Ingress with ModSecurity or OPA Gatekeeper</td>
+                <td>Host-based WAF (ModSecurity with Apache/Nginx)</td>
+                <td>N/A (localhost only)</td>
+            </tr>
+            <tr>
+                <td><strong>Vulnerability Scanning</strong></td>
+                <td>Vercel security scans (automatic)</td>
+                <td><code>trivy image</code> or <code>docker scan</code> before push</td>
+                <td>Kube-Bench + Kube-Score in CI pipeline</td>
+                <td>OpenSCAP scans weekly</td>
+                <td><code>npm audit</code> / <code>pip-audit</code></td>
+            </tr>
+            <tr>
+                <td><strong>Content Security Policy</strong></td>
+                <td>Via <code>vercel.json</code> headers configuration</td>
+                <td>Nginx <code>add_header</code> directive</td>
+                <td>Ingress annotation</td>
+                <td>Apache/Nginx header configuration</td>
+                <td>Keep in repo for production parity</td>
+            </tr>
+            <tr>
+                <td><strong>Rate Limiting</strong></td>
+                <td>Cloudflare or Vercel edge rate limiting</td>
+                <td>Traefik <code>rateLimit</code> middleware</td>
+                <td>Istio/Envoy rate-limit filter</td>
+                <td><code>fail2ban</code> or <code>ufw limit</code></td>
+                <td>N/A</td>
+            </tr>
+            <tr>
+                <td><strong>Access Control</strong></td>
+                <td>Platform team permissions (read-only for clients)</td>
+                <td>Private registry with limited pull rights</td>
+                <td>RBAC with least-privilege ServiceAccounts</td>
+                <td>Dedicated OS user without sudo</td>
+                <td>Local user only</td>
+            </tr>
+            <tr>
+                <td><strong>Encryption at Rest</strong></td>
+                <td>N/A (static assets only)</td>
+                <td>Encrypted Docker volumes (LUKS/cryptsetup)</td>
+                <td>EncryptionProvider for PersistentVolumeClaims</td>
+                <td>Full-disk encryption (LUKS/BitLocker)</td>
+                <td>N/A (ephemeral)</td>
+            </tr>
+            <tr>
+                <td><strong>Network Segmentation</strong></td>
+                <td>CDN edge only</td>
+                <td>Expose only required port to host</td>
+                <td>NetworkPolicy for pod-to-pod restriction</td>
+                <td>Firewall rules; VPN required for admin access</td>
+                <td>Localhost binding only</td>
+            </tr>
+        </table>
+        
+        <h2>7. Security Development Practices</h2>
+        
+        <h3>7.1 Secure Coding Standards</h3>
+        <ul>
+            <li><strong>Input Validation:</strong> Validate all inputs on both client-side and server-side. Reject unexpected data types or formats.</li>
+            <li><strong>Parameterised Queries:</strong> Use parameterised queries or prepared statements for all database interactions, including SQLite.</li>
+            <li><strong>Output Encoding:</strong> Sanitise any HTML rendered from user data using libraries like DOMPurify (JavaScript) or Bleach (Python).</li>
+            <li><strong>Error Handling:</strong> Never expose stack traces or internal error details to end users. Log detailed errors server-side only.</li>
+        </ul>
+        
+        <h3>7.2 Static Analysis & Code Quality</h3>
+        <ul>
+            <li>Run <strong>ESLint</strong> with <code>eslint-plugin-security</code> for JavaScript/TypeScript projects</li>
+            <li>Run <strong>Bandit</strong> for Python code security analysis</li>
+            <li>Run <strong>Semgrep</strong> for cross-language security pattern detection</li>
+            <li>Enforce minimum 80% code coverage for security-critical modules</li>
+        </ul>
+        
+        <h3>7.3 Dependency Management</h3>
+        <ul>
+            <li>Lock all dependency versions in <code>package-lock.json</code> (Node.js) or <code>requirements.txt</code> with pinned versions (Python)</li>
+            <li>Review transitive dependencies quarterly using <code>npm ls</code> or <code>pipdeptree</code></li>
+            <li>Subscribe to security advisories for critical dependencies</li>
+        </ul>
+        
+        <h3>7.4 CI/CD Security Gates</h3>
+        <ul>
+            <li>Require at least one security-trained reviewer approval for all pull requests</li>
+            <li>Block merges if <code>trivy</code>, <code>snyk</code>, or <code>npm audit</code> reports HIGH or CRITICAL vulnerabilities</li>
+            <li>Run SAST (Static Application Security Testing) on every commit to main/production branches</li>
+        </ul>
+        
+        <h3>7.5 Secret Scanning</h3>
+        <ul>
+            <li>Enable <strong>GitHub secret scanning</strong> (or equivalent) on all repositories</li>
+            <li>Run <code>git-secrets</code> or <code>trufflehog</code> as a pre-commit hook</li>
+            <li>Rotate any accidentally committed secrets immediately</li>
+        </ul>
+        
+        <h2>8. Incident Response Procedure</h2>
+        
+        <div class="callout callout-warning">
+            <strong>Note:</strong> This procedure applies to security incidents involving demo applications. For production system incidents, refer to the main Incident Response Plan (IRP).
+        </div>
+        
+        <table>
+            <tr>
+                <th>Phase</th>
+                <th>Actions</th>
+                <th>Responsible Party</th>
+                <th>Timeline</th>
+            </tr>
+            <tr>
+                <td><strong>1. Detection</strong></td>
+                <td>
+                    <ul>
+                        <li>WAF/SIEM alert for suspicious activity</li>
+                        <li>Client report of unexpected behaviour</li>
+                        <li>Automated vulnerability scan finding</li>
+                    </ul>
+                </td>
+                <td>Security Operations / Monitoring</td>
+                <td>Immediate</td>
+            </tr>
+            <tr>
+                <td><strong>2. Containment</strong></td>
+                <td>
+                    <ul>
+                        <li>Block offending IP addresses via WAF/firewall</li>
+                        <li>Halt container deployments or rollouts</li>
+                        <li>Isolate affected systems from network</li>
+                    </ul>
+                </td>
+                <td>DevOps / Security</td>
+                <td>Within 1 hour</td>
+            </tr>
+            <tr>
+                <td><strong>3. Investigation</strong></td>
+                <td>
+                    <ul>
+                        <li>Pull access, error, and audit logs (last 24-72 hours)</li>
+                        <li>Capture container image hash and configuration</li>
+                        <li>Identify attack vector and scope of compromise</li>
+                    </ul>
+                </td>
+                <td>Incident Analyst / Security</td>
+                <td>Within 4 hours</td>
+            </tr>
+            <tr>
+                <td><strong>4. Eradication</strong></td>
+                <td>
+                    <ul>
+                        <li>Patch vulnerable library or configuration</li>
+                        <li>Rebuild container images from clean base</li>
+                        <li>Rotate any potentially compromised credentials</li>
+                    </ul>
+                </td>
+                <td>Development / DevOps</td>
+                <td>Within 24 hours</td>
+            </tr>
+            <tr>
+                <td><strong>5. Recovery</strong></td>
+                <td>
+                    <ul>
+                        <li>Redeploy patched application</li>
+                        <li>Verify functionality with smoke tests</li>
+                        <li>Monitor closely for 48 hours</li>
+                    </ul>
+                </td>
+                <td>QA / DevOps</td>
+                <td>Within 48 hours</td>
+            </tr>
+            <tr>
+                <td><strong>6. Post-Mortem</strong></td>
+                <td>
+                    <ul>
+                        <li>Document root cause, timeline, and impact</li>
+                        <li>Identify improvement actions</li>
+                        <li>Update this SOP if necessary</li>
+                        <li>Notify affected clients (if applicable)</li>
+                    </ul>
+                </td>
+                <td>All Stakeholders</td>
+                <td>Within 1 week</td>
+            </tr>
+        </table>
+        
+        <h2>9. Documentation & Change Management</h2>
+        <ul>
+            <li>Store this SOP in Git at <code>docs/sop/it-security-sop.md</code> with semantic version tags</li>
+            <li>Any change to deployment topology or security controls must trigger a <strong>Change Request</strong> in ClickUp/Jira with security team sign-off</li>
+            <li>Review this SOP <strong>quarterly</strong> or immediately after any security incident</li>
+            <li>Maintain a changelog of all SOP revisions</li>
+        </ul>
+        
+        <h2>10. Client-Facing Deliverables</h2>
+        <p>When presenting demo applications to clients, provide the following security documentation:</p>
+        
+        <ol>
+            <li><strong>Architecture Diagram</strong> — Showing network isolation zones, public endpoints, data flows, and integration points</li>
+            <li><strong>Compliance Matrix</strong> — Mapping security requirements to implemented controls (aligned to GDPR, ISO 27001, SOC 2 as applicable)</li>
+            <li><strong>Risk Assessment Summary</strong> — Top 5 identified risks with current mitigation status</li>
+            <li><strong>Data Handling Statement</strong> — Clarifying what data is processed, where it's stored, and retention periods</li>
+            <li><strong>Support & Escalation Contacts</strong> — Security incident reporting channel and response SLAs</li>
+        </ol>
+        
+        <h2>11. Approval & Sign-Off</h2>
+        
+        <div class="approval-section">
+            <h3>Document Approval</h3>
+            <div class="approval-grid">
+                <div class="approval-item">
+                    <div class="role">Security Lead</div>
+                    <div class="responsibility">Verify all security controls are implemented and documented</div>
+                    <div class="signature">
+                        <strong>Name:</strong> ________________________<br>
+                        <strong>Date:</strong> ________________________<br>
+                        <strong>Signature:</strong> ________________________
+                    </div>
+                </div>
+                <div class="approval-item">
+                    <div class="role">DevOps Engineer</div>
+                    <div class="responsibility">Confirm infrastructure specifications and deployment procedures</div>
+                    <div class="signature">
+                        <strong>Name:</strong> ________________________<br>
+                        <strong>Date:</strong> ________________________<br>
+                        <strong>Signature:</strong> ________________________
+                    </div>
+                </div>
+                <div class="approval-item">
+                    <div class="role">Client Success Manager</div>
+                    <div class="responsibility">Ensure client receives appropriate documentation and briefing</div>
+                    <div class="signature">
+                        <strong>Name:</strong> ________________________<br>
+                        <strong>Date:</strong> ________________________<br>
+                        <strong>Signature:</strong> ________________________
+                    </div>
+                </div>
+                <div class="approval-item">
+                    <div class="role">Legal / Compliance</div>
+                    <div class="responsibility">Review for regulatory alignment and contractual obligations</div>
+                    <div class="signature">
+                        <strong>Name:</strong> ________________________<br>
+                        <strong>Date:</strong> ________________________<br>
+                        <strong>Signature:</strong> ________________________
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <h2>12. Revision History</h2>
+        <table>
+            <tr>
+                <th>Version</th>
+                <th>Date</th>
+                <th>Author</th>
+                <th>Changes</th>
+            </tr>
+            <tr>
+                <td>1.0</td>
+                <td>08 May 2026</td>
+                <td>KU Automation</td>
+                <td>Initial release</td>
+            </tr>
+        </table>
+        
+    </div>
+    
+    <!-- Footer -->
+    <footer class="doc-footer">
+        <div>
+            <strong>KU Automation</strong> — AI-Powered Engineering Solutions<br>
+            <a href="mailto:kingsley.uzowulu@ku-automation.com">kingsley.uzowulu@ku-automation.com</a>
+        </div>
+        <div style="text-align:right;">
+            Document: KUA-SOP-SEC-001 v1.0<br>
+            Page 1 of 1 | Confidential
+        </div>
+    </footer>
+</div>
+
+</body>
+</html>

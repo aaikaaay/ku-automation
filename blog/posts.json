@@ -1,6 +1,85 @@
 {
   "posts": [
     {
+      "slug": "ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects",
+      "title": "AI Automation in Engineering: Transforming Document Processing for Oil & Gas EPC Projects",
+      "excerpt": "Learn about ai automation in engineering: transforming document processing for oil & gas epc projects. Expert insights for engineering professionals.",
+      "date": "2026-05-15",
+      "modified": "2026-05-15",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects.png",
+      "tags": [
+        "AI Automation",
+        "Engineering",
+        "Document Processing",
+        "Oil & Gas",
+        "EPC"
+      ],
+      "readTime": 6,
+      "wordCount": 1111,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-powered-document-processing-for-engineering-boost-efficiency-in-oil-gas-and-epc-projects",
+      "title": "AI-Powered Document Processing for Engineering: Boost Efficiency in Oil & Gas and EPC Projects",
+      "excerpt": "Learn about ai-powered document processing for engineering: boost efficiency in oil & gas and epc projects. Expert insights for engineering professionals.",
+      "date": "2026-05-06",
+      "modified": "2026-05-06",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-powered-document-processing-for-engineering-boost-efficiency-in-oil-gas-and-epc-projects.png",
+      "tags": [
+        "AI Automation",
+        "Engineering",
+        "Document Processing",
+        "Oil & Gas",
+        "EPC"
+      ],
+      "readTime": 6,
+      "wordCount": 1112,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "document-command-station",
+      "title": "Stop Chasing Document Reviews in Email Threads: Introducing the Document Review Command Station",
+      "excerpt": "Engineering teams lose thousands of hours chasing document reviews through email. The Document Review Command Station uses AI to automatically assign reviewers, send reminders, track deadlines, and eliminate the chaos.",
+      "date": "2026-05-05",
+      "modified": "2026-05-05",
+      "published": true,
+      "featured": true,
+      "image": "/blog/images/2026-05-05-document-command-station.svg",
+      "tags": [
+        "Document Control",
+        "AI Automation",
+        "Document Review",
+        "Engineering",
+        "Product Launch"
+      ],
+      "readTime": 8,
+      "wordCount": 2200,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      },
+      "url": "/blog-post-document-command-station"
+    },
+    {
       "slug": "ai-powered-document-automation-for-engineering-firms-real-world-use-cases-in-oil-gas-and-epc",
       "title": "AI-Powered Document Automation for Engineering Firms: Real-World Use Cases in Oil & Gas and EPC",
       "excerpt": "Learn about ai-powered document automation for engineering firms: real-world use cases in oil & gas and epc. Expert insights for engineering professionals.",
@@ -8,7 +87,7 @@
       "modified": "2026-05-04",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-powered-document-automation-for-engineering-firms-real-world-use-cases-in-oil-gas-and-epc.png",
+      "image": "/assets/blog/ai-document-processing.png",
       "tags": [
         "AI",
         "Engineering",

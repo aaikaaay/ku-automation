@@ -6,7 +6,7 @@
   <!-- Main Pages -->
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -70,12 +70,57 @@
   <!-- Blog -->
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/blog.html</loc>
-    <lastmod>2026-05-04</lastmod>
+    <lastmod>2026-05-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Blog Posts -->
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-15</news:publication_date>
+      <news:title>AI Automation in Engineering: Transforming Document Processing for Oil &amp; Gas EPC Projects</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=ai-powered-document-processing-for-engineering-boost-efficiency-in-oil-gas-and-epc-projects</loc>
+    <lastmod>2026-05-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-06</news:publication_date>
+      <news:title>AI-Powered Document Processing for Engineering: Boost Efficiency in Oil &amp; Gas and EPC Projects</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=document-command-station</loc>
+    <lastmod>2026-05-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-05-05</news:publication_date>
+      <news:title>Stop Chasing Document Reviews in Email Threads: Introducing the Document Review Command Station</news:title>
+    </news:news>
+  </url>
+  
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=ai-powered-document-automation-for-engineering-firms-real-world-use-cases-in-oil-gas-and-epc</loc>
     <lastmod>2026-05-04</lastmod>

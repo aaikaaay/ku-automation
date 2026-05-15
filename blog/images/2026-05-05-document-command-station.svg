@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#102a43"/>
+      <stop offset="50%" style="stop-color:#243b53"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f59e0b"/>
+      <stop offset="100%" style="stop-color:#d97706"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#334e68"/>
+      <stop offset="100%" style="stop-color:#243b53"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Grid pattern -->
+  <g opacity="0.1">
+    <line x1="0" y1="100" x2="1200" y2="100" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="200" x2="1200" y2="200" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="300" x2="1200" y2="300" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="400" x2="1200" y2="400" stroke="white" stroke-width="1"/>
+    <line x1="0" y1="500" x2="1200" y2="500" stroke="white" stroke-width="1"/>
+    <line x1="200" y1="0" x2="200" y2="630" stroke="white" stroke-width="1"/>
+    <line x1="400" y1="0" x2="400" y2="630" stroke="white" stroke-width="1"/>
+    <line x1="600" y1="0" x2="600" y2="630" stroke="white" stroke-width="1"/>
+    <line x1="800" y1="0" x2="800" y2="630" stroke="white" stroke-width="1"/>
+    <line x1="1000" y1="0" x2="1000" y2="630" stroke="white" stroke-width="1"/>
+  </g>
+  
+  <!-- Logo -->
+  <rect x="80" y="80" width="70" height="70" rx="14" fill="url(#gold)"/>
+  <text x="115" y="128" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#102a43" text-anchor="middle">KU</text>
+  
+  <!-- Title -->
+  <text x="170" y="105" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">Document Review</text>
+  <text x="170" y="130" font-family="Arial, sans-serif" font-size="14" fill="#fbbf24">Command Station</text>
+  
+  <!-- Main headline -->
+  <text x="80" y="220" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="white">Stop Chasing Reviews</text>
+  <text x="80" y="275" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="white">in Email Threads</text>
+  <text x="80" y="330" font-family="Arial, sans-serif" font-size="20" fill="#9fb3c8">AI-powered document control for engineering teams</text>
+  
+  <!-- Dashboard preview -->
+  <rect x="650" y="120" width="480" height="380" rx="16" fill="url(#card)" stroke="#486581" stroke-width="2"/>
+  
+  <!-- Dashboard header -->
+  <rect x="650" y="120" width="480" height="50" rx="16" fill="#1e3a5f"/>
+  <circle cx="680" cy="145" r="8" fill="#ef4444"/>
+  <circle cx="705" cy="145" r="8" fill="#fbbf24"/>
+  <circle cx="730" cy="145" r="8" fill="#22c55e"/>
+  
+  <!-- Metric cards -->
+  <rect x="670" y="185" width="110" height="70" rx="8" fill="#1e3a5f"/>
+  <text x="725" y="220" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#fbbf24" text-anchor="middle">24</text>
+  <text x="725" y="242" font-family="Arial, sans-serif" font-size="10" fill="#9fb3c8" text-anchor="middle">Active Reviews</text>
+  
+  <rect x="790" y="185" width="110" height="70" rx="8" fill="#1e3a5f"/>
+  <text x="845" y="220" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#ef4444" text-anchor="middle">3</text>
+  <text x="845" y="242" font-family="Arial, sans-serif" font-size="10" fill="#9fb3c8" text-anchor="middle">Overdue</text>
+  
+  <rect x="910" y="185" width="110" height="70" rx="8" fill="#1e3a5f"/>
+  <text x="965" y="220" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#22c55e" text-anchor="middle">47</text>
+  <text x="965" y="242" font-family="Arial, sans-serif" font-size="10" fill="#9fb3c8" text-anchor="middle">Completed</text>
+  
+  <!-- Document rows -->
+  <rect x="670" y="270" width="450" height="40" rx="6" fill="#243b53"/>
+  <circle cx="695" cy="290" r="12" fill="#fbbf24" opacity="0.3"/>
+  <rect x="720" y="282" width="120" height="8" rx="2" fill="#627d98"/>
+  <rect x="720" y="294" width="80" height="6" rx="2" fill="#486581"/>
+  <rect x="1050" y="282" width="50" height="16" rx="4" fill="#ef4444" opacity="0.3"/>
+  
+  <rect x="670" y="320" width="450" height="40" rx="6" fill="#243b53"/>
+  <circle cx="695" cy="340" r="12" fill="#22c55e" opacity="0.3"/>
+  <rect x="720" y="332" width="150" height="8" rx="2" fill="#627d98"/>
+  <rect x="720" y="344" width="100" height="6" rx="2" fill="#486581"/>
+  <rect x="1050" y="332" width="50" height="16" rx="4" fill="#22c55e" opacity="0.3"/>
+  
+  <rect x="670" y="370" width="450" height="40" rx="6" fill="#243b53"/>
+  <circle cx="695" cy="390" r="12" fill="#fbbf24" opacity="0.3"/>
+  <rect x="720" y="382" width="100" height="8" rx="2" fill="#627d98"/>
+  <rect x="720" y="394" width="70" height="6" rx="2" fill="#486581"/>
+  <rect x="1050" y="382" width="50" height="16" rx="4" fill="#fbbf24" opacity="0.3"/>
+  
+  <rect x="670" y="420" width="450" height="40" rx="6" fill="#243b53"/>
+  <circle cx="695" cy="440" r="12" fill="#3b82f6" opacity="0.3"/>
+  <rect x="720" y="432" width="130" height="8" rx="2" fill="#627d98"/>
+  <rect x="720" y="444" width="90" height="6" rx="2" fill="#486581"/>
+  <rect x="1050" y="432" width="50" height="16" rx="4" fill="#3b82f6" opacity="0.3"/>
+  
+  <!-- Stats at bottom -->
+  <rect x="80" y="400" width="140" height="100" rx="12" fill="rgba(255,255,255,0.1)"/>
+  <text x="150" y="450" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#fbbf24" text-anchor="middle">40%</text>
+  <text x="150" y="480" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" text-anchor="middle">Faster Reviews</text>
+  
+  <rect x="240" y="400" width="140" height="100" rx="12" fill="rgba(255,255,255,0.1)"/>
+  <text x="310" y="450" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#22c55e" text-anchor="middle">90%</text>
+  <text x="310" y="480" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" text-anchor="middle">Less Overdue</text>
+  
+  <rect x="400" y="400" width="140" height="100" rx="12" fill="rgba(255,255,255,0.1)"/>
+  <text x="470" y="450" font-family="Arial, sans-serif" font-size="32" font-weight="bold" fill="#3b82f6" text-anchor="middle">100%</text>
+  <text x="470" y="480" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" text-anchor="middle">Visibility</text>
+  
+  <!-- Footer -->
+  <text x="80" y="580" font-family="Arial, sans-serif" font-size="14" fill="#627d98">ku-automation.com/document-command-station</text>
+  
+</svg>
