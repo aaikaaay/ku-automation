@@ -1,6 +1,57 @@
 {
   "posts": [
     {
+      "slug": "ai-automation-for-engineering-companies-practical-guide-to-document-processing",
+      "title": "AI Automation for Engineering Companies: Practical Guide to Document Processing",
+      "excerpt": "Learn about ai automation for engineering companies: practical guide to document processing. Expert insights for engineering professionals.",
+      "date": "2026-05-20",
+      "modified": "2026-05-20",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-for-engineering-companies-practical-guide-to-document-processing.png",
+      "tags": [
+        "AI Automation",
+        "Engineering",
+        "Document Processing",
+        "Oil and Gas",
+        "EPC"
+      ],
+      "readTime": 5,
+      "wordCount": 904,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-document-automation-in-oil-gas-epc-projects-a-practical-guide",
+      "title": "AI Document Automation in Oil & Gas EPC Projects: A Practical Guide",
+      "excerpt": "Learn about ai document automation in oil & gas epc projects: a practical guide. Expert insights for engineering professionals.",
+      "date": "2026-05-18",
+      "modified": "2026-05-18",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-document-automation-in-oil-gas-epc-projects-a-practical-guide.png",
+      "tags": [
+        "AI Automation",
+        "Engineering",
+        "Oil & Gas",
+        "EPC"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects",
       "title": "AI Automation in Engineering: Transforming Document Processing for Oil & Gas EPC Projects",
       "excerpt": "Learn about ai automation in engineering: transforming document processing for oil & gas epc projects. Expert insights for engineering professionals.",
