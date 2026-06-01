@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "ai-automation-in-engineering-real-world-document-processing-for-oil-gas-and-epc-projects",
+      "title": "AI Automation in Engineering: Real-World Document Processing for Oil & Gas and EPC Projects",
+      "excerpt": "Learn about ai automation in engineering: real-world document processing for oil & gas and epc projects. Expert insights for engineering professionals.",
+      "date": "2026-06-01",
+      "modified": "2026-06-01",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-in-engineering-real-world-document-processing-for-oil-gas-and-epc-projects.png",
+      "tags": [
+        "AI Automation",
+        "Engineering",
+        "Document Processing",
+        "Oil & Gas",
+        "EPC"
+      ],
+      "readTime": 8,
+      "wordCount": 1537,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-automation-in-engineering-real-world-document-processing-solutions-for-oil-gas-epc-projects",
       "title": "AI Automation in Engineering: Real-World Document Processing Solutions for Oil & Gas EPC Projects",
       "excerpt": "Learn about ai automation in engineering: real-world document processing solutions for oil & gas epc projects. Expert insights for engineering professionals.",
