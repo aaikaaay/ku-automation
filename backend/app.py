@@ -1916,5 +1916,960 @@ async def review_piping_document(
         raise HTTPException(500, f"Review failed: {e}")
 
 
+# ============================================================================
+# TECHNICAL ASSISTANT — EXPENSES & INVOICE ENDPOINTS
+# ============================================================================
+
+import time
+import requests as _requests
+from io import BytesIO
+from fastapi import Request as FARequest
+from fastapi.responses import StreamingResponse
+
+# ---------- FX Rate Cache (24h TTL) ----------
+_fx_cache: Dict[str, Any] = {"rates": {}, "ts": 0}
+_FX_TTL = 86400  # 24 hours
+
+def _get_fx_rates() -> Dict[str, float]:
+    """Return USD-base exchange rates dict; falls back to empty on error."""
+    global _fx_cache
+    now = time.time()
+    if _fx_cache["ts"] and (now - _fx_cache["ts"]) < _FX_TTL and _fx_cache["rates"]:
+        return _fx_cache["rates"]
+    try:
+        resp = _requests.get(
+            "https://open.er-api.com/v6/latest/USD", timeout=5
+        )
+        data = resp.json()
+        if data.get("result") == "success":
+            _fx_cache["rates"] = data["rates"]
+            _fx_cache["ts"] = now
+            return _fx_cache["rates"]
+    except Exception:
+        pass
+    # fallback: try exchangerate.host
+    try:
+        resp = _requests.get(
+            "https://api.exchangerate.host/latest?base=USD", timeout=5
+        )
+        data = resp.json()
+        if data.get("success"):
+            _fx_cache["rates"] = data["rates"]
+            _fx_cache["ts"] = now
+            return _fx_cache["rates"]
+    except Exception:
+        pass
+    return _fx_cache.get("rates", {})
+
+
+def _usd_rate(currency: str, rates: Dict[str, float]) -> float:
+    """Return units-per-USD for given ISO currency (i.e. how many X per 1 USD).
+    To convert X -> USD: amount / rate_to_usd_denom
+    Actually: rates are already relative to USD base.
+    1 USD = rates[CUR]  =>  1 CUR = 1/rates[CUR] USD.
+    We return the rate field as displayed: 'FX Rate' = rate of the currency vs USD
+    matching the template (source_amount * fx_rate = usd_amount).
+    So fx_rate = 1/rates[CUR] when base is USD.
+    """
+    cur = currency.upper().strip()
+    if cur == "USD":
+        return 1.0
+    r = rates.get(cur)
+    if r and r != 0:
+        return round(1.0 / r, 6)
+    return 1.0
+
+
+# ---------- Expense extraction prompt ----------
+EXPENSE_EXTRACTION_PROMPT = """You are an expert at extracting expense data from receipts, invoices, and expense documents.
+
+Analyze the provided image/document and extract ALL expense items. Return ONLY valid JSON.
+
+For each expense row return:
+{
+  "date": "YYYY-MM-DD or empty string if unclear",
+  "description": "brief description of what was purchased",
+  "currency": "ISO 4217 code (e.g. USD, GBP, EUR, AED, NGN)",
+  "source_amount": numeric_float,
+  "category": one of ["Flights & Hotels", "Transport", "Meals", "Other"],
+  "vendor": "vendor/merchant name or null",
+  "notes": "any extra notes or null"
+}
+
+Rules:
+- Always output ISO 4217 currency codes (GBP not Pounds, EUR not Euro)
+- If date is ambiguous, prefer DD/MM/YYYY interpretation for European/Middle East receipts
+- Convert to YYYY-MM-DD format always
+- Categorize intelligently: flights/hotels = Flights & Hotels, taxi/bus/train/car = Transport, food/restaurant = Meals, everything else = Other
+- source_amount must be a number (no currency symbols)
+- If a single receipt has multiple items, return them as separate rows
+
+Return JSON: {"rows": [... list of expense objects ...]}
+"""
+
+
+# ---------- ReportLab PDF helpers ----------
+def _make_expense_pdf(payload: dict) -> bytes:
+    try:
+        from reportlab.lib.pagesizes import A4
+        from reportlab.lib import colors
+        from reportlab.lib.units import mm
+        from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+        from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+        from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
+    except ImportError:
+        raise HTTPException(500, "reportlab not installed")
+
+    buf = BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4,
+                            leftMargin=15*mm, rightMargin=15*mm,
+                            topMargin=15*mm, bottomMargin=15*mm)
+    styles = getSampleStyleSheet()
+    primary_blue = colors.HexColor('#1e3a5f')
+    light_blue = colors.HexColor('#dbeafe')
+    accent = colors.HexColor('#3b82f6')
+
+    title_style = ParagraphStyle('Title', parent=styles['Normal'],
+                                  fontSize=18, fontName='Helvetica-Bold',
+                                  textColor=primary_blue, alignment=TA_CENTER,
+                                  spaceAfter=8)
+    label_style = ParagraphStyle('Label', parent=styles['Normal'],
+                                  fontSize=8, fontName='Helvetica-Bold',
+                                  textColor=colors.HexColor('#6b7280'))
+    value_style = ParagraphStyle('Value', parent=styles['Normal'],
+                                  fontSize=9, fontName='Helvetica')
+    small_bold = ParagraphStyle('SB', parent=styles['Normal'],
+                                 fontSize=8, fontName='Helvetica-Bold')
+
+    meta = payload.get('metadata', {})
+    rows = payload.get('rows', [])
+    name = meta.get('name', '')
+    emp_id = meta.get('employee_id', '')
+    period = meta.get('period', '')
+    purpose = meta.get('purpose', '')
+    date_prepared = meta.get('date_prepared', datetime.now().strftime('%d/%m/%Y'))
+
+    # Categorise
+    cats = {'Flights & Hotels': 0.0, 'Transport': 0.0, 'Meals': 0.0, 'Other': 0.0}
+    for r in rows:
+        cat = r.get('category', 'Other')
+        cats[cat] = cats.get(cat, 0.0) + float(r.get('usd_amount', 0))
+    grand_total = sum(cats.values())
+
+    story = []
+    story.append(Paragraph("Expense Summary", title_style))
+    story.append(Spacer(1, 4*mm))
+
+    # Header + Summary side by side
+    header_data = [
+        [Paragraph('<b>Date Prepared</b>', label_style), Paragraph(date_prepared, value_style),
+         '', Paragraph('<b>Expenses at a glance</b>', small_bold), ''],
+        [Paragraph('<b>Name</b>', label_style), Paragraph(name, value_style),
+         '', Paragraph('Flights and Hotels', value_style), Paragraph(f"${cats['Flights & Hotels']:,.2f}", value_style)],
+        [Paragraph('<b>Employee ID</b>', label_style), Paragraph(emp_id, value_style),
+         '', Paragraph('Transport', value_style), Paragraph(f"${cats['Transport']:,.2f}", value_style)],
+        [Paragraph('<b>Period Covered</b>', label_style), Paragraph(period, value_style),
+         '', Paragraph('Meals', value_style), Paragraph(f"${cats['Meals']:,.2f}", value_style)],
+        [Paragraph('<b>Purpose</b>', label_style), Paragraph(purpose, value_style),
+         '', Paragraph('Other Expenses', value_style), Paragraph(f"${cats['Other']:,.2f}", value_style)],
+        ['', '',
+         '', Paragraph('<b>Total</b>', small_bold), Paragraph(f"<b>${grand_total:,.2f}</b>", small_bold)],
+    ]
+    header_table = Table(header_data, colWidths=[35*mm, 55*mm, 10*mm, 55*mm, 25*mm])
+    header_table.setStyle(TableStyle([
+        ('BACKGROUND', (3, 0), (4, 0), light_blue),
+        ('BACKGROUND', (3, 5), (4, 5), light_blue),
+        ('FONTNAME', (3, 5), (4, 5), 'Helvetica-Bold'),
+        ('GRID', (3, 0), (4, 5), 0.5, colors.HexColor('#93c5fd')),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+        ('TOPPADDING', (0, 0), (-1, -1), 3),
+    ]))
+    story.append(header_table)
+    story.append(Spacer(1, 6*mm))
+
+    # Main table
+    col_headers = ['Date', 'Description', 'Curr', 'Source Amt', 'FX', 'Amount',
+                   'Flights &\nHotels', 'Transport', 'Meals', 'Other', 'Total USD']
+    table_data = [col_headers]
+
+    cat_cols = {'Flights & Hotels': 6, 'Transport': 7, 'Meals': 8, 'Other': 9}
+
+    for r in rows:
+        cat = r.get('category', 'Other')
+        usd = float(r.get('usd_amount', 0))
+        row_data = [''] * 11
+        row_data[0] = str(r.get('date', ''))
+        row_data[1] = str(r.get('description', ''))
+        row_data[2] = str(r.get('currency', 'USD'))
+        row_data[3] = f"{float(r.get('source_amount', 0)):,.2f}"
+        row_data[4] = f"{float(r.get('fx_rate', 1)):,.4f}"
+        row_data[5] = f"{usd:,.2f}"
+        col_idx = cat_cols.get(cat, 9)
+        row_data[col_idx] = f"{usd:,.2f}"
+        row_data[10] = f"{usd:,.2f}"
+        table_data.append(row_data)
+
+    # Totals row
+    totals = ['', 'Total', '', '', '', '', 
+              f"{cats['Flights & Hotels']:,.2f}",
+              f"{cats['Transport']:,.2f}",
+              f"{cats['Meals']:,.2f}",
+              f"{cats['Other']:,.2f}",
+              f"{grand_total:,.2f}"]
+    table_data.append(totals)
+
+    col_widths = [18*mm, 48*mm, 11*mm, 18*mm, 16*mm, 18*mm, 18*mm, 18*mm, 14*mm, 14*mm, 18*mm]
+    main_table = Table(table_data, colWidths=col_widths, repeatRows=1)
+    main_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), primary_blue),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 7),
+        ('ALIGN', (3, 0), (-1, -1), 'RIGHT'),
+        ('ALIGN', (0, 0), (2, -1), 'LEFT'),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#e5e7eb')),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -2), [colors.white, colors.HexColor('#f9fafb')]),
+        ('BACKGROUND', (0, -1), (-1, -1), light_blue),
+        ('FONTNAME', (0, -1), (-1, -1), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 3),
+        ('TOPPADDING', (0, 0), (-1, -1), 3),
+        ('WORDWRAP', (0, 0), (-1, -1), True),
+    ]))
+    story.append(main_table)
+    story.append(Spacer(1, 8*mm))
+
+    # Approver block
+    approver_data = [
+        [Paragraph('<b>Approved by:</b>', small_bold), '', ''],
+        [Paragraph('Name:', label_style), Paragraph('_' * 30, value_style), ''],
+        [Paragraph('Position:', label_style), Paragraph('_' * 30, value_style), ''],
+        [Paragraph('Signature:', label_style), Paragraph('_' * 30, value_style), ''],
+    ]
+    appr_table = Table(approver_data, colWidths=[25*mm, 70*mm, 85*mm])
+    appr_table.setStyle(TableStyle([
+        ('FONTSIZE', (0, 0), (-1, -1), 8),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
+    ]))
+    story.append(appr_table)
+
+    doc.build(story)
+    return buf.getvalue()
+
+
+def _make_invoice_pdf(payload: dict) -> bytes:
+    try:
+        from reportlab.lib.pagesizes import A4
+        from reportlab.lib import colors
+        from reportlab.lib.units import mm
+        from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer, HRFlowable
+        from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+        from reportlab.lib.enums import TA_CENTER, TA_RIGHT, TA_LEFT
+    except ImportError:
+        raise HTTPException(500, "reportlab not installed")
+
+    buf = BytesIO()
+    doc = SimpleDocTemplate(buf, pagesize=A4,
+                            leftMargin=15*mm, rightMargin=15*mm,
+                            topMargin=15*mm, bottomMargin=15*mm)
+    styles = getSampleStyleSheet()
+    primary_blue = colors.HexColor('#1e3a5f')
+    light_blue = colors.HexColor('#dbeafe')
+
+    h1 = ParagraphStyle('H1', parent=styles['Normal'], fontSize=22, fontName='Helvetica-Bold',
+                         textColor=primary_blue, alignment=TA_CENTER, spaceAfter=6)
+    label_s = ParagraphStyle('LS', parent=styles['Normal'], fontSize=8,
+                              fontName='Helvetica-Bold', textColor=colors.HexColor('#374151'))
+    val_s = ParagraphStyle('VS', parent=styles['Normal'], fontSize=9, fontName='Helvetica')
+    small_s = ParagraphStyle('SS', parent=styles['Normal'], fontSize=7, fontName='Helvetica',
+                              textColor=colors.HexColor('#6b7280'))
+    bold_s = ParagraphStyle('BS', parent=styles['Normal'], fontSize=9, fontName='Helvetica-Bold')
+
+    consultant = payload.get('consultant', {})
+    invoice = payload.get('invoice', {})
+    line_items = payload.get('line_items', [])
+    reimbursables = payload.get('reimbursables', [])
+    payment = payload.get('payment_terms', 'Payment to be made within 30 days of receipt of invoice')
+
+    story = []
+    story.append(Paragraph("INVOICE", h1))
+    story.append(Spacer(1, 4*mm))
+
+    # Consultant block top-left / Invoice no top-right
+    consultant_text = f"""
+    <b>{consultant.get('name', '')}</b><br/>
+    {consultant.get('address', '').replace(chr(10), '<br/>')}<br/>
+    <font color='#2563eb'>{consultant.get('email', '')}</font><br/>
+    {consultant.get('phone', '')}
+    """
+    inv_no_block = [
+        [Paragraph('<b>Invoice no.</b>', label_s), Paragraph(invoice.get('invoice_no', ''), bold_s)],
+        [Paragraph('<b>Date</b>', label_s), Paragraph(invoice.get('date', ''), val_s)],
+    ]
+    inv_no_table = Table(inv_no_block, colWidths=[30*mm, 40*mm])
+    inv_no_table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#d1d5db')),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+        ('TOPPADDING', (0, 0), (-1, -1), 4),
+        ('BACKGROUND', (1, 0), (1, 0), light_blue),
+    ]))
+
+    top_data = [
+        [Paragraph(consultant_text.strip(), val_s), inv_no_table],
+    ]
+    top_table = Table(top_data, colWidths=[110*mm, 75*mm])
+    top_table.setStyle(TableStyle([
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+    ]))
+    story.append(top_table)
+    story.append(Spacer(1, 5*mm))
+
+    # Invoice to + Reference
+    client_addr = invoice.get('client_address', '').replace('\n', '<br/>')
+    billing_data = [
+        [Paragraph('<b>Invoice to</b>', label_s),
+         Paragraph(f"{invoice.get('client_name', '')}<br/>{client_addr}", val_s)],
+        [Paragraph('<b>Reference</b>', label_s),
+         Paragraph(invoice.get('reference', ''), val_s)],
+    ]
+    bill_table = Table(billing_data, colWidths=[30*mm, 148*mm])
+    bill_table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#d1d5db')),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
+        ('TOPPADDING', (0, 0), (-1, -1), 5),
+        ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#f3f4f6')),
+    ]))
+    story.append(bill_table)
+    story.append(Spacer(1, 5*mm))
+
+    # Line items table
+    li_headers = [Paragraph('<b>Description</b>', bold_s),
+                  Paragraph('<b>Units</b>', bold_s),
+                  Paragraph('<b>Daily Rate\nUSD</b>', bold_s),
+                  Paragraph('<b>Total\nUSD</b>', bold_s)]
+    li_data = [li_headers]
+    for item in line_items:
+        li_data.append([
+            str(item.get('description', '')),
+            str(item.get('units', '')),
+            f"{float(item.get('daily_rate', 0)):,.2f}",
+            f"{float(item.get('total', 0)):,.2f}",
+        ])
+    # Reimbursables header row if any
+    if reimbursables:
+        li_data.append([Paragraph('<b>Travel expenses</b>', bold_s), '', '', ''])
+        for r in reimbursables:
+            li_data.append([
+                str(r.get('description', '')),
+                str(r.get('units', '1.00')),
+                f"{float(r.get('daily_rate', 0)):,.2f}",
+                f"{float(r.get('total', 0)):,.2f}",
+            ])
+
+    grand_total = sum(float(i.get('total', 0)) for i in line_items) + \
+                  sum(float(r.get('total', 0)) for r in reimbursables)
+    li_data.append(['', '', Paragraph('<b>Total USD</b>', bold_s), Paragraph(f'<b>{grand_total:,.2f}</b>', bold_s)])
+
+    li_table = Table(li_data, colWidths=[100*mm, 20*mm, 30*mm, 30*mm], repeatRows=1)
+    li_table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), primary_blue),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+        ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ('ALIGN', (1, 0), (-1, -1), 'RIGHT'),
+        ('ALIGN', (0, 0), (0, -1), 'LEFT'),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#e5e7eb')),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -2), [colors.white, colors.HexColor('#f9fafb')]),
+        ('BACKGROUND', (0, -1), (-1, -1), light_blue),
+        ('FONTNAME', (0, -1), (-1, -1), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+        ('TOPPADDING', (0, 0), (-1, -1), 4),
+        ('SPAN', (0, -1), (1, -1)),
+    ]))
+    story.append(li_table)
+    story.append(Spacer(1, 5*mm))
+
+    # Signature
+    story.append(Paragraph('<b>Signature:</b> ___________________________', label_s))
+    story.append(Spacer(1, 6*mm))
+
+    # Payment + Banking
+    bank = consultant.get('bank', {})
+    payment_text = f"""{payment}<br/><br/>Payment to be made by bank transfer to:"""
+    bank_rows = [
+        [Paragraph('<b>Payment</b>', label_s), Paragraph(payment_text, val_s)],
+        [Paragraph('<b>Account Holder</b>', label_s), Paragraph(bank.get('account_holder', consultant.get('name', '')), val_s)],
+        [Paragraph('<b>Name of Bank</b>', label_s), Paragraph(bank.get('bank_name', ''), val_s)],
+        [Paragraph('<b>IBAN</b>', label_s), Paragraph(bank.get('iban', ''), val_s)],
+        [Paragraph('<b>Account Number</b>', label_s), Paragraph(bank.get('account_number', ''), val_s)],
+        [Paragraph('<b>SWIFT code</b>', label_s), Paragraph(bank.get('swift', ''), val_s)],
+        [Paragraph('<b>Bank Address</b>', label_s), Paragraph(bank.get('bank_address', '').replace('\n', '<br/>'), val_s)],
+    ]
+    bank_table = Table(bank_rows, colWidths=[35*mm, 145*mm])
+    bank_table.setStyle(TableStyle([
+        ('GRID', (0, 0), (-1, -1), 0.5, colors.HexColor('#d1d5db')),
+        ('BACKGROUND', (0, 0), (0, -1), colors.HexColor('#f3f4f6')),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 4),
+        ('TOPPADDING', (0, 0), (-1, -1), 4),
+        ('FONTSIZE', (0, 0), (-1, -1), 8),
+    ]))
+    story.append(bank_table)
+
+    doc.build(story)
+    return buf.getvalue()
+
+
+# ---------- Excel helpers ----------
+def _make_expense_excel(payload: dict) -> bytes:
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Expense Report"
+
+    meta = payload.get('metadata', {})
+    rows = payload.get('rows', [])
+    name = meta.get('name', '')
+    emp_id = meta.get('employee_id', '')
+    period = meta.get('period', '')
+    purpose = meta.get('purpose', '')
+    date_prepared = meta.get('date_prepared', datetime.now().strftime('%d/%m/%Y'))
+
+    # Styles
+    blue_fill = PatternFill("solid", fgColor="1e3a5f")
+    light_fill = PatternFill("solid", fgColor="dbeafe")
+    grey_fill = PatternFill("solid", fgColor="f3f4f6")
+    white_fill = PatternFill("solid", fgColor="FFFFFF")
+    alt_fill = PatternFill("solid", fgColor="f9fafb")
+    header_font = Font(name='Calibri', bold=True, color='FFFFFF', size=10)
+    label_font = Font(name='Calibri', bold=True, size=10)
+    value_font = Font(name='Calibri', size=10)
+    total_font = Font(name='Calibri', bold=True, size=10)
+    thin = Side(style='thin', color='d1d5db')
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    center = Alignment(horizontal='center', vertical='center', wrap_text=True)
+    right_align = Alignment(horizontal='right', vertical='center')
+    left_align = Alignment(horizontal='left', vertical='center', wrap_text=True)
+
+    # Title
+    ws.merge_cells('A1:K1')
+    ws['A1'] = 'Expense Summary'
+    ws['A1'].font = Font(name='Calibri', bold=True, size=16, color='1e3a5f')
+    ws['A1'].alignment = center
+    ws['A1'].fill = light_fill
+    ws.row_dimensions[1].height = 28
+
+    # Header block (left side rows 3-7)
+    header_labels = [
+        ('A3', 'Date Prepared'), ('A4', 'Name'), ('A5', 'Employee ID'),
+        ('A6', 'Period Covered'), ('A7', 'Purpose')
+    ]
+    header_values = [
+        ('B3', date_prepared), ('B4', name), ('B5', emp_id),
+        ('B6', period), ('B7', purpose)
+    ]
+    for cell, label in header_labels:
+        ws[cell] = label
+        ws[cell].font = label_font
+        ws[cell].fill = grey_fill
+        ws[cell].border = border
+        ws[cell].alignment = left_align
+    for cell, val in header_values:
+        ws[cell] = val
+        ws[cell].font = value_font
+        ws[cell].border = border
+        ws[cell].alignment = left_align
+    ws.merge_cells('B3:D3')
+    ws.merge_cells('B4:D4')
+    ws.merge_cells('B5:D5')
+    ws.merge_cells('B6:D6')
+    ws.merge_cells('B7:D7')
+
+    # Summary block (right side rows 3-8)
+    cats = {'Flights & Hotels': 0.0, 'Transport': 0.0, 'Meals': 0.0, 'Other': 0.0}
+    for r in rows:
+        cat = r.get('category', 'Other')
+        cats[cat] = cats.get(cat, 0.0) + float(r.get('usd_amount', 0))
+    grand_total = sum(cats.values())
+
+    ws.merge_cells('F3:K3')
+    ws['F3'] = 'Expenses at a glance'
+    ws['F3'].font = Font(name='Calibri', bold=True, size=11, color='1e3a5f')
+    ws['F3'].fill = light_fill
+    ws['F3'].alignment = center
+    ws['F3'].border = border
+
+    summary_rows = [
+        ('F4', 'Flights and Hotels', 'K4', cats['Flights & Hotels']),
+        ('F5', 'Transport', 'K5', cats['Transport']),
+        ('F6', 'Meals', 'K6', cats['Meals']),
+        ('F7', 'Other Expenses', 'K7', cats['Other']),
+        ('F8', 'Total', 'K8', grand_total),
+    ]
+    for lc, label, vc, val in summary_rows:
+        ws.merge_cells(f'{lc}:{chr(ord(lc[0])+4)}{lc[1:]}')
+        ws[lc] = label
+        ws[lc].font = label_font if lc != 'F8' else total_font
+        ws[lc].fill = grey_fill if lc != 'F8' else light_fill
+        ws[lc].border = border
+        ws[lc].alignment = left_align
+        ws[vc] = val
+        ws[vc].font = value_font if lc != 'F8' else total_font
+        ws[vc].number_format = '#,##0.00'
+        ws[vc].border = border
+        ws[vc].alignment = right_align
+        ws[vc].fill = light_fill if lc == 'F8' else white_fill
+
+    # Main table header (row 10)
+    col_headers = ['Date', 'Description', 'Currency', 'Source Amount', 'FX', 'Amount (USD)',
+                   'Flights & Hotels', 'Transport', 'Meals', 'Other', 'Total USD']
+    for i, h in enumerate(col_headers, 1):
+        cell = ws.cell(row=10, column=i, value=h)
+        cell.font = header_font
+        cell.fill = blue_fill
+        cell.alignment = center
+        cell.border = border
+    ws.row_dimensions[10].height = 30
+
+    # Column widths
+    col_widths = [12, 35, 10, 15, 12, 14, 16, 12, 10, 10, 12]
+    for i, w in enumerate(col_widths, 1):
+        ws.column_dimensions[get_column_letter(i)].width = w
+
+    # Data rows
+    cat_cols = {'Flights & Hotels': 7, 'Transport': 8, 'Meals': 9, 'Other': 10}
+    for ri, r in enumerate(rows):
+        row_num = 11 + ri
+        fill = white_fill if ri % 2 == 0 else alt_fill
+        cat = r.get('category', 'Other')
+        usd = float(r.get('usd_amount', 0))
+        row_vals = [
+            r.get('date', ''), r.get('description', ''), r.get('currency', 'USD'),
+            float(r.get('source_amount', 0)), float(r.get('fx_rate', 1)), usd,
+            None, None, None, None, usd
+        ]
+        cat_col_idx = cat_cols.get(cat, 10)
+        row_vals[cat_col_idx - 1] = usd
+        row_vals[10] = usd  # Total USD
+
+        for ci, val in enumerate(row_vals, 1):
+            cell = ws.cell(row=row_num, column=ci, value=val)
+            cell.font = value_font
+            cell.fill = fill
+            cell.border = border
+            cell.alignment = right_align if ci >= 4 else left_align
+            if ci >= 4 and val is not None:
+                cell.number_format = '#,##0.00'
+
+    # Totals row
+    total_row = 11 + len(rows)
+    total_vals = ['', 'Total', '', '', '', '',
+                  cats['Flights & Hotels'], cats['Transport'], cats['Meals'], cats['Other'], grand_total]
+    for ci, val in enumerate(total_vals, 1):
+        cell = ws.cell(row=total_row, column=ci, value=val)
+        cell.font = total_font
+        cell.fill = light_fill
+        cell.border = border
+        cell.alignment = right_align if ci >= 7 else left_align
+        if ci >= 7 and isinstance(val, float):
+            cell.number_format = '#,##0.00'
+
+    # Approver block
+    appr_row = total_row + 2
+    ws.cell(row=appr_row, column=1, value='Approved by:').font = label_font
+    for offset, label in enumerate([('Name', 1), ('Position', 2), ('Signature', 3)]):
+        lbl, col_off = offset if isinstance(offset, tuple) else (offset, 0)
+        r_num = appr_row + 1 + lbl
+        pass
+    for i, lbl in enumerate(['Name:', 'Position:', 'Signature:']):
+        r_num = appr_row + 1 + i
+        ws.cell(row=r_num, column=1, value=lbl).font = label_font
+        ws.cell(row=r_num, column=2, value='').border = border
+        ws.merge_cells(f'B{r_num}:E{r_num}')
+
+    buf = BytesIO()
+    wb.save(buf)
+    return buf.getvalue()
+
+
+def _make_invoice_excel(payload: dict) -> bytes:
+    wb = Workbook()
+    ws = wb.active
+    ws.title = "Invoice"
+
+    consultant = payload.get('consultant', {})
+    invoice = payload.get('invoice', {})
+    line_items = payload.get('line_items', [])
+    reimbursables = payload.get('reimbursables', [])
+    payment = payload.get('payment_terms', 'Payment to be made within 30 days of receipt of invoice')
+
+    blue_fill = PatternFill("solid", fgColor="1e3a5f")
+    light_fill = PatternFill("solid", fgColor="dbeafe")
+    grey_fill = PatternFill("solid", fgColor="f3f4f6")
+    white_fill = PatternFill("solid", fgColor="FFFFFF")
+    alt_fill = PatternFill("solid", fgColor="f9fafb")
+    header_font = Font(name='Calibri', bold=True, color='FFFFFF', size=10)
+    label_font = Font(name='Calibri', bold=True, size=10)
+    value_font = Font(name='Calibri', size=10)
+    total_font = Font(name='Calibri', bold=True, size=11)
+    thin = Side(style='thin', color='d1d5db')
+    border = Border(left=thin, right=thin, top=thin, bottom=thin)
+    center = Alignment(horizontal='center', vertical='center', wrap_text=True)
+    right_align = Alignment(horizontal='right', vertical='center')
+    left_align = Alignment(horizontal='left', vertical='center', wrap_text=True)
+
+    # Title
+    ws.merge_cells('A1:F1')
+    ws['A1'] = 'INVOICE'
+    ws['A1'].font = Font(name='Calibri', bold=True, size=20, color='1e3a5f')
+    ws['A1'].alignment = center
+    ws['A1'].fill = light_fill
+    ws.row_dimensions[1].height = 35
+
+    # Consultant block (A3:C8)
+    bank = consultant.get('bank', {})
+    cons_fields = [
+        consultant.get('name', ''),
+        consultant.get('address', ''),
+        consultant.get('email', ''),
+        consultant.get('phone', ''),
+    ]
+    ws.merge_cells('A3:C3')
+    ws['A3'] = 'Consultant'
+    ws['A3'].font = label_font
+    ws['A3'].fill = grey_fill
+    ws['A3'].border = border
+    for i, val in enumerate(cons_fields):
+        r = 4 + i
+        ws.merge_cells(f'A{r}:C{r}')
+        ws[f'A{r}'] = val
+        ws[f'A{r}'].font = value_font
+        ws[f'A{r}'].border = border
+        ws[f'A{r}'].alignment = left_align
+
+    # Invoice No + Date block (E3:F4)
+    ws['E3'] = 'Invoice no.'
+    ws['F3'] = invoice.get('invoice_no', '')
+    ws['E4'] = 'Date'
+    ws['F4'] = invoice.get('date', '')
+    for cell in ['E3', 'E4']:
+        ws[cell].font = label_font
+        ws[cell].fill = grey_fill
+        ws[cell].border = border
+    for cell in ['F3', 'F4']:
+        ws[cell].font = value_font
+        ws[cell].border = border
+        ws[cell].alignment = right_align
+    ws['F3'].fill = light_fill
+
+    # Client address (A9:C11)
+    ws['A9'] = 'Invoice to'
+    ws['A9'].font = label_font
+    ws['A9'].fill = grey_fill
+    ws['A9'].border = border
+    ws.merge_cells('B9:F11')
+    ws['B9'] = f"{invoice.get('client_name', '')}\n{invoice.get('client_address', '')}"
+    ws['B9'].font = value_font
+    ws['B9'].border = border
+    ws['B9'].alignment = Alignment(horizontal='left', vertical='top', wrap_text=True)
+    ws.merge_cells('A10:A11')
+    ws.row_dimensions[9].height = 18
+    ws.row_dimensions[10].height = 18
+    ws.row_dimensions[11].height = 18
+
+    # Reference (A12)
+    ws['A12'] = 'Reference'
+    ws['A12'].font = label_font
+    ws['A12'].fill = grey_fill
+    ws['A12'].border = border
+    ws.merge_cells('B12:F12')
+    ws['B12'] = invoice.get('reference', '')
+    ws['B12'].font = value_font
+    ws['B12'].border = border
+    ws['B12'].alignment = left_align
+    ws.row_dimensions[12].height = 18
+
+    # Line items table (row 14+)
+    li_header_row = 14
+    li_cols = ['Description', 'Units', 'Daily Rate (USD)', 'Total (USD)']
+    # Map to columns A, B, C(merged), D(merged), E, F
+    ws.merge_cells(f'A{li_header_row}:C{li_header_row}')
+    ws[f'A{li_header_row}'] = 'Description'
+    ws[f'D{li_header_row}'] = 'Units'
+    ws[f'E{li_header_row}'] = 'Daily Rate (USD)'
+    ws[f'F{li_header_row}'] = 'Total (USD)'
+    for col in ['A', 'D', 'E', 'F']:
+        cell = ws[f'{col}{li_header_row}']
+        cell.font = header_font
+        cell.fill = blue_fill
+        cell.alignment = center
+        cell.border = border
+
+    current_row = li_header_row + 1
+    for i, item in enumerate(line_items):
+        fill = white_fill if i % 2 == 0 else alt_fill
+        ws.merge_cells(f'A{current_row}:C{current_row}')
+        ws[f'A{current_row}'] = str(item.get('description', ''))
+        ws[f'A{current_row}'].font = value_font
+        ws[f'A{current_row}'].border = border
+        ws[f'A{current_row}'].fill = fill
+        ws[f'A{current_row}'].alignment = left_align
+        ws[f'D{current_row}'] = float(item.get('units', 0))
+        ws[f'D{current_row}'].number_format = '0.00'
+        ws[f'E{current_row}'] = float(item.get('daily_rate', 0))
+        ws[f'E{current_row}'].number_format = '#,##0.00'
+        ws[f'F{current_row}'] = float(item.get('total', 0))
+        ws[f'F{current_row}'].number_format = '#,##0.00'
+        for col in ['D', 'E', 'F']:
+            ws[f'{col}{current_row}'].font = value_font
+            ws[f'{col}{current_row}'].border = border
+            ws[f'{col}{current_row}'].fill = fill
+            ws[f'{col}{current_row}'].alignment = right_align
+        current_row += 1
+
+    if reimbursables:
+        ws.merge_cells(f'A{current_row}:F{current_row}')
+        ws[f'A{current_row}'] = 'Travel expenses'
+        ws[f'A{current_row}'].font = label_font
+        ws[f'A{current_row}'].fill = grey_fill
+        ws[f'A{current_row}'].border = border
+        current_row += 1
+        for i, r in enumerate(reimbursables):
+            fill = white_fill if i % 2 == 0 else alt_fill
+            ws.merge_cells(f'A{current_row}:C{current_row}')
+            ws[f'A{current_row}'] = str(r.get('description', ''))
+            ws[f'A{current_row}'].font = value_font
+            ws[f'A{current_row}'].border = border
+            ws[f'A{current_row}'].fill = fill
+            ws[f'A{current_row}'].alignment = left_align
+            ws[f'D{current_row}'] = float(r.get('units', 1))
+            ws[f'D{current_row}'].number_format = '0.00'
+            ws[f'E{current_row}'] = float(r.get('daily_rate', 0))
+            ws[f'E{current_row}'].number_format = '#,##0.00'
+            ws[f'F{current_row}'] = float(r.get('total', 0))
+            ws[f'F{current_row}'].number_format = '#,##0.00'
+            for col in ['D', 'E', 'F']:
+                ws[f'{col}{current_row}'].font = value_font
+                ws[f'{col}{current_row}'].border = border
+                ws[f'{col}{current_row}'].fill = fill
+                ws[f'{col}{current_row}'].alignment = right_align
+            current_row += 1
+
+    grand_total = sum(float(i.get('total', 0)) for i in line_items) + \
+                  sum(float(r.get('total', 0)) for r in reimbursables)
+    ws.merge_cells(f'A{current_row}:E{current_row}')
+    ws[f'A{current_row}'] = 'Total USD'
+    ws[f'A{current_row}'].font = total_font
+    ws[f'A{current_row}'].fill = light_fill
+    ws[f'A{current_row}'].border = border
+    ws[f'A{current_row}'].alignment = right_align
+    ws[f'F{current_row}'] = grand_total
+    ws[f'F{current_row}'].font = total_font
+    ws[f'F{current_row}'].number_format = '#,##0.00'
+    ws[f'F{current_row}'].fill = light_fill
+    ws[f'F{current_row}'].border = border
+    ws[f'F{current_row}'].alignment = right_align
+
+    # Signature block
+    sig_row = current_row + 2
+    ws[f'A{sig_row}'] = 'Signature:'
+    ws[f'A{sig_row}'].font = label_font
+    ws.merge_cells(f'B{sig_row}:D{sig_row}')
+    ws[f'B{sig_row}'] = ''
+    ws[f'B{sig_row}'].border = border
+
+    # Payment + bank block
+    pay_row = sig_row + 2
+    payment_fields = [
+        ('Payment Terms', payment),
+        ('Account Holder', bank.get('account_holder', consultant.get('name', ''))),
+        ('Name of Bank', bank.get('bank_name', '')),
+        ('IBAN', bank.get('iban', '')),
+        ('Account Number', bank.get('account_number', '')),
+        ('SWIFT code', bank.get('swift', '')),
+        ('Bank Address', bank.get('bank_address', '')),
+    ]
+    for i, (lbl, val) in enumerate(payment_fields):
+        r = pay_row + i
+        ws[f'A{r}'] = lbl
+        ws[f'A{r}'].font = label_font
+        ws[f'A{r}'].fill = grey_fill
+        ws[f'A{r}'].border = border
+        ws.merge_cells(f'B{r}:F{r}')
+        ws[f'B{r}'] = val
+        ws[f'B{r}'].font = value_font
+        ws[f'B{r}'].border = border
+        ws[f'B{r}'].alignment = left_align
+        ws.row_dimensions[r].height = 20
+
+    # Column widths
+    ws.column_dimensions['A'].width = 18
+    ws.column_dimensions['B'].width = 25
+    ws.column_dimensions['C'].width = 20
+    ws.column_dimensions['D'].width = 10
+    ws.column_dimensions['E'].width = 18
+    ws.column_dimensions['F'].width = 18
+
+    buf = BytesIO()
+    wb.save(buf)
+    return buf.getvalue()
+
+
+# ---------- API Endpoints ----------
+
+@app.post("/api/expenses/extract")
+async def expenses_extract(files: List[UploadFile] = File(...)):
+    """
+    Extract expense rows from one or more receipt files (PDF/JPG/PNG/WebP).
+    Returns rows with FX rates pre-populated.
+    """
+    client = get_openai_client()
+    rates = _get_fx_rates()
+    all_rows = []
+
+    for upload in files:
+        content_type = upload.content_type or ""
+        filename = upload.filename or ""
+        if not content_type or content_type == "application/octet-stream":
+            ext = filename.lower().rsplit(".", 1)[-1] if "." in filename else ""
+            content_type = {"jpg": "image/jpeg", "jpeg": "image/jpeg",
+                            "png": "image/png", "webp": "image/webp",
+                            "pdf": "application/pdf"}.get(ext, content_type)
+
+        content = await upload.read()
+
+        try:
+            # Convert PDF first page to image if possible
+            if "pdf" in content_type and PDF_SUPPORT:
+                imgs = pdf_to_images(content, dpi=150)
+                img_content = image_to_base64(imgs[0]) if imgs else None
+                media_type = "image/png"
+            elif "pdf" in content_type:
+                # No pdf2image — try text extraction best-effort
+                img_content = base64.b64encode(content).decode()
+                media_type = "application/pdf"
+            else:
+                img_content = base64.b64encode(content).decode()
+                media_type = content_type
+
+            if not img_content:
+                continue
+
+            messages = [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image_url",
+                         "image_url": {"url": f"data:{media_type};base64,{img_content}", "detail": "high"}},
+                        {"type": "text", "text": EXPENSE_EXTRACTION_PROMPT}
+                    ]
+                }
+            ]
+
+            response = client.chat.completions.create(
+                model="gpt-4o",
+                messages=messages,
+                max_tokens=2000,
+                response_format={"type": "json_object"},
+                temperature=0.1
+            )
+
+            result = json.loads(response.choices[0].message.content)
+            file_rows = result.get("rows", [])
+
+            # Enrich with FX rates
+            for row in file_rows:
+                cur = row.get("currency", "USD").upper()
+                fx = _usd_rate(cur, rates)
+                row["fx_rate"] = fx
+                row["usd_amount"] = round(float(row.get("source_amount", 0)) * fx, 2)
+                row["id"] = f"{time.time()}_{len(all_rows)}"
+
+            all_rows.extend(file_rows)
+
+        except Exception as e:
+            print(f"[EXPENSE EXTRACT] Error on {filename}: {e}")
+            import traceback; traceback.print_exc()
+
+    return {"rows": all_rows, "fx_rates": {k: _usd_rate(k, rates) for k in rates}}
+
+
+@app.post("/api/expenses/export-excel")
+async def expenses_export_excel(request: FARequest):
+    """
+    Generate an .xlsx expense report matching the Kurt Bosse template.
+    Body: { metadata: {...}, rows: [...] }
+    """
+    payload = await request.json()
+    xlsx_bytes = _make_expense_excel(payload)
+    meta = payload.get('metadata', {})
+    name = meta.get('name', 'Report').replace(' ', '_')
+    period = meta.get('period', datetime.now().strftime('%Y-%m')).replace('/', '-').replace(' ', '_')
+    filename = f"Expenses_{name}_{period}.xlsx"
+    return StreamingResponse(
+        BytesIO(xlsx_bytes),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
+
+
+@app.post("/api/expenses/export-pdf")
+async def expenses_export_pdf(request: FARequest):
+    """
+    Generate a PDF expense report matching the Kurt Bosse template.
+    Body: { metadata: {...}, rows: [...] }
+    """
+    payload = await request.json()
+    pdf_bytes = _make_expense_pdf(payload)
+    meta = payload.get('metadata', {})
+    name = meta.get('name', 'Report').replace(' ', '_')
+    period = meta.get('period', datetime.now().strftime('%Y-%m')).replace('/', '-').replace(' ', '_')
+    filename = f"Expenses_{name}_{period}.pdf"
+    return StreamingResponse(
+        BytesIO(pdf_bytes),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
+
+
+@app.post("/api/invoice/export-excel")
+async def invoice_export_excel(request: FARequest):
+    """
+    Generate an .xlsx invoice matching the Kurt Bosse invoice template.
+    Body: { consultant: {...}, invoice: {...}, line_items: [...], reimbursables: [...], payment_terms: str }
+    """
+    payload = await request.json()
+    xlsx_bytes = _make_invoice_excel(payload)
+    inv = payload.get('invoice', {})
+    inv_no = inv.get('invoice_no', 'INV').replace('/', '-')
+    client = inv.get('client_name', 'Client').replace(' ', '_')
+    filename = f"Invoice_{inv_no}_{client}.xlsx"
+    return StreamingResponse(
+        BytesIO(xlsx_bytes),
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
+
+
+@app.post("/api/invoice/export-pdf")
+async def invoice_export_pdf(request: FARequest):
+    """
+    Generate a PDF invoice matching the Kurt Bosse invoice template.
+    Body: { consultant: {...}, invoice: {...}, line_items: [...], reimbursables: [...], payment_terms: str }
+    """
+    payload = await request.json()
+    pdf_bytes = _make_invoice_pdf(payload)
+    inv = payload.get('invoice', {})
+    inv_no = inv.get('invoice_no', 'INV').replace('/', '-')
+    client = inv.get('client_name', 'Client').replace(' ', '_')
+    filename = f"Invoice_{inv_no}_{client}.pdf"
+    return StreamingResponse(
+        BytesIO(pdf_bytes),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'}
+    )
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)

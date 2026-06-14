@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Assistant | KU Automation</title>
+    <link rel="canonical" href="https://www.ku-automation.com/technical-assistant">
+    <meta name="description" content="AI admin for engineering consultants. Track expenses, generate invoices, draft memos, log meeting minutes — all from one dashboard.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.ku-automation.com/technical-assistant">
+    <meta property="og:title" content="Technical Assistant | KU Automation">
+    <meta property="og:description" content="AI admin for engineering consultants — expenses, invoices, timesheets, memos, minutes, more.">
+    <meta property="og:image" content="https://www.ku-automation.com/assets/og-image.png">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe',
+                            300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1',
+                            600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 50%, #dc2626 100%);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+        }
+        /* Tab bar */
+        .tab-btn { transition: all 0.2s ease; }
+        .tab-btn.active {
+            background: #4f46e5; color: white;
+            box-shadow: 0 4px 14px rgba(79,70,229,0.3);
+        }
+        .tab-btn:not(.active):hover { background: #f1f5f9; color: #374151; }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Drop zone */
+        .drop-zone { transition: all 0.3s ease; }
+        .drop-zone.drag-over { border-color: #4f46e5; background: #eef2ff; transform: scale(1.01); }
+
+        /* Editable table */
+        .expense-table td input, .expense-table td select {
+            background: transparent; border: none; outline: none; width: 100%;
+            font-size: 0.875rem; padding: 0; color: #374151;
+        }
+        .expense-table td input:focus, .expense-table td select:focus {
+            background: #eef2ff; border-radius: 4px; padding: 1px 4px;
+        }
+        .expense-table tr:hover { background: #f8fafc; }
+
+        /* Invoice preview */
+        .invoice-preview { font-family: 'Inter', sans-serif; }
+        .preview-label { font-size: 0.7rem; font-weight: 700; color: #6b7280; text-transform: uppercase; letter-spacing: 0.05em; }
+        .preview-value { font-size: 0.875rem; color: #111827; }
+        .preview-table th { background: #1e3a5f; color: white; font-size: 0.75rem; padding: 8px 10px; }
+        .preview-table td { font-size: 0.8rem; padding: 6px 10px; border-bottom: 1px solid #e5e7eb; }
+
+        /* Soon badge */
+        .soon-badge { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+
+        /* Progress bar */
+        .progress-bar-inner { transition: width 0.4s ease; }
+
+        /* Scrollable tab bar on mobile */
+        .tab-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+        .tab-scroll::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+
+    <!-- Navigation (sticky, matching demos.html) -->
+    <nav class="bg-white border-b border-gray-100 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <a href="index.html" class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
+                    <span class="font-semibold text-lg">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="index.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Home</a>
+                    <a href="demos.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Demos</a>
+                    <a href="index.html#pricing" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Pricing</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Use Cases</a>
+                </div>
+                <a href="https://calendly.com/kingsley-uzowulu/30min"
+                   onclick="gtag('event','book_demo',{'event_category':'conversion','event_label':'tech_assistant_nav'}); return true;"
+                   target="_blank"
+                   class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                    Book Demo
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="py-16 bg-gradient-to-b from-white to-gray-50">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 border border-amber-100 rounded-full text-amber-700 text-sm font-medium mb-6">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                AI Admin for Engineering Consultants
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">
+                <span class="gradient-text">Technical Assistant</span>
+            </h1>
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-6">
+                AI admin for engineering consultants — expenses, invoices, timesheets, memos, minutes, more.
+            </p>
+            <div class="flex items-center justify-center gap-6 text-sm text-gray-500">
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                    2 tools live today
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 bg-amber-400 rounded-full"></span>
+                    7 more coming July 2026
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-primary-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                    Save 5+ hours/week
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tab Bar -->
+    <div class="bg-white border-b border-gray-200 sticky top-[73px] z-40">
+        <div class="max-w-7xl mx-auto px-4 md:px-6">
+            <div class="tab-scroll">
+                <div class="flex gap-1 py-3 min-w-max" id="tabBar">
+                    <!-- Tab 1: Expenses (LIVE) -->
+                    <button class="tab-btn active flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-white whitespace-nowrap" data-tab="expenses">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+                        </svg>
+                        Expenses
+                        <span class="px-1.5 py-0.5 bg-green-400 text-white text-[10px] font-bold rounded-full leading-none">LIVE</span>
+                    </button>
+                    <!-- Tab 2: Invoice (LIVE) -->
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="invoice">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                        </svg>
+                        Invoice
+                        <span class="px-1.5 py-0.5 bg-green-400 text-white text-[10px] font-bold rounded-full leading-none">LIVE</span>
+                    </button>
+                    <!-- Tabs 3-9: Coming Soon -->
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="timesheet">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Timesheet
+                    </button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="minutes">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"/>
+                        </svg>
+                        Meeting Minutes
+                    </button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="memo">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+                        </svg>
+                        Technical Memo
+                    </button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="dailyreport">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                        Daily Report
+                    </button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="transmittal">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                        </svg>
+                        Transmittal
+                    </button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="standards">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+                        </svg>
+                        Standards Lookup
+                    </button>
+                    <button class="tab-btn flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-gray-600 whitespace-nowrap" data-tab="mto">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/>
+                        </svg>
+                        MTO / BoQ Cleanup
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tab Content -->
+    <main class="max-w-7xl mx-auto px-4 md:px-6 py-8">
+
+        <!-- ============================== TAB 1: EXPENSES (LIVE) ============================== -->
+        <div id="tab-expenses" class="tab-panel active">
+            <!-- Metadata panel -->
+            <div class="bg-white rounded-2xl border border-gray-200 p-6 mb-6">
+                <h2 class="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                    </svg>
+                    Report Details
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">Full Name</label>
+                        <input type="text" id="exp-name" placeholder="Kurt Bosse"
+                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">Employee ID <span class="text-gray-400">(optional)</span></label>
+                        <input type="text" id="exp-empid" placeholder="EMP-001"
+                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-gray-500 mb-1">Period Covered</label>
+                        <input type="month" id="exp-period"
+                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none">
+                    </div>
+                    <div class="md:col-span-2">
+                        <label class="block text-xs font-medium text-gray-500 mb-1">Purpose</label>
+                        <input type="text" id="exp-purpose" placeholder="Travel Expenses CNG Project"
+                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main split layout -->
+            <div class="flex flex-col lg:flex-row gap-6">
+
+                <!-- Left: Upload + Controls -->
+                <div class="lg:w-72 flex-shrink-0 space-y-4">
+                    <!-- Drop zone -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-5">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3">Upload Receipts</h3>
+                        <div id="exp-dropzone"
+                             class="drop-zone border-2 border-dashed border-gray-200 rounded-xl p-6 text-center cursor-pointer hover:border-primary-400 hover:bg-primary-50 transition-all"
+                             onclick="document.getElementById('exp-file-input').click()"
+                             ondragover="handleDragOver(event,'exp-dropzone')"
+                             ondragleave="handleDragLeave('exp-dropzone')"
+                             ondrop="handleDrop(event,'exp-dropzone')">
+                            <input type="file" id="exp-file-input" multiple accept=".pdf,.jpg,.jpeg,.png,.webp" class="hidden" onchange="handleFileSelect(event)">
+                            <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
+                            </svg>
+                            <p class="text-xs text-gray-500 font-medium">Drop receipts here or click to browse</p>
+                            <p class="text-xs text-gray-400 mt-1">PDF, JPG, PNG, WebP — multiple files OK</p>
+                        </div>
+
+                        <!-- Progress bar (hidden by default) -->
+                        <div id="exp-progress" class="hidden mt-3">
+                            <div class="flex justify-between text-xs text-gray-500 mb-1">
+                                <span id="exp-progress-label">Extracting...</span>
+                                <span id="exp-progress-pct">0%</span>
+                            </div>
+                            <div class="h-2 bg-gray-100 rounded-full overflow-hidden">
+                                <div id="exp-progress-bar" class="progress-bar-inner h-full bg-primary-500 rounded-full" style="width:0%"></div>
+                            </div>
+                        </div>
+
+                        <button onclick="extractFromReceipts()"
+                                class="mt-3 w-full py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.347.346a1.94 1.94 0 01-2.746 0A5 5 0 016.464 16.9z"/>
+                            </svg>
+                            Extract from Receipts
+                        </button>
+
+                        <div id="exp-status" class="mt-2 text-xs text-center text-gray-400"></div>
+                    </div>
+
+                    <!-- Summary cards -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-5">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3">Expenses at a Glance</h3>
+                        <div class="space-y-2">
+                            <div class="flex justify-between items-center py-1.5 border-b border-gray-100">
+                                <span class="text-xs text-gray-600 flex items-center gap-1.5">
+                                    <span class="w-2 h-2 bg-blue-500 rounded-full"></span>Flights & Hotels
+                                </span>
+                                <span class="text-xs font-semibold text-gray-900" id="sum-flights">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-gray-100">
+                                <span class="text-xs text-gray-600 flex items-center gap-1.5">
+                                    <span class="w-2 h-2 bg-emerald-500 rounded-full"></span>Transport
+                                </span>
+                                <span class="text-xs font-semibold text-gray-900" id="sum-transport">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-gray-100">
+                                <span class="text-xs text-gray-600 flex items-center gap-1.5">
+                                    <span class="w-2 h-2 bg-orange-400 rounded-full"></span>Meals
+                                </span>
+                                <span class="text-xs font-semibold text-gray-900" id="sum-meals">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center py-1.5 border-b border-gray-100">
+                                <span class="text-xs text-gray-600 flex items-center gap-1.5">
+                                    <span class="w-2 h-2 bg-purple-400 rounded-full"></span>Other
+                                </span>
+                                <span class="text-xs font-semibold text-gray-900" id="sum-other">$0.00</span>
+                            </div>
+                            <div class="flex justify-between items-center pt-2">
+                                <span class="text-sm font-bold text-gray-900">Total USD</span>
+                                <span class="text-sm font-bold text-primary-700" id="sum-total">$0.00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Export buttons -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-5">
+                        <h3 class="text-sm font-semibold text-gray-700 mb-3">Export</h3>
+                        <button onclick="exportExpenses('excel')"
+                                class="w-full py-2.5 mb-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Download Excel
+                        </button>
+                        <button onclick="exportExpenses('pdf')"
+                                class="w-full py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                            </svg>
+                            Download PDF
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Right: Editable Table -->
+                <div class="flex-1 bg-white rounded-2xl border border-gray-200 overflow-hidden">
+                    <div class="flex items-center justify-between px-6 py-4 border-b border-gray-100">
+                        <h3 class="text-base font-semibold text-gray-900">Expense Rows</h3>
+                        <button onclick="addExpenseRow()"
+                                class="flex items-center gap-1.5 px-4 py-2 text-sm font-medium bg-primary-50 hover:bg-primary-100 text-primary-700 rounded-lg transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                            </svg>
+                            Add Row
+                        </button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full expense-table text-sm" id="expense-table">
+                            <thead>
+                                <tr class="bg-gray-50 border-b border-gray-100">
+                                    <th class="text-left px-3 py-3 text-xs font-semibold text-gray-600 whitespace-nowrap">Date</th>
+                                    <th class="text-left px-3 py-3 text-xs font-semibold text-gray-600">Description</th>
+                                    <th class="text-left px-3 py-3 text-xs font-semibold text-gray-600 whitespace-nowrap">Currency</th>
+                                    <th class="text-right px-3 py-3 text-xs font-semibold text-gray-600 whitespace-nowrap">Source Amt</th>
+                                    <th class="text-right px-3 py-3 text-xs font-semibold text-gray-600 whitespace-nowrap">FX Rate</th>
+                                    <th class="text-right px-3 py-3 text-xs font-semibold text-gray-600 whitespace-nowrap">USD Amt</th>
+                                    <th class="text-left px-3 py-3 text-xs font-semibold text-gray-600">Category</th>
+                                    <th class="px-3 py-3 text-xs font-semibold text-gray-600 w-8"></th>
+                                </tr>
+                            </thead>
+                            <tbody id="expense-tbody">
+                                <!-- rows inserted by JS -->
+                            </tbody>
+                        </table>
+                        <div id="expense-empty" class="py-16 text-center text-gray-400">
+                            <svg class="w-12 h-12 mx-auto mb-3 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+                            </svg>
+                            <p class="text-sm font-medium text-gray-400">No expenses yet</p>
+                            <p class="text-xs text-gray-300 mt-1">Upload receipts or click "Add Row" to start</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================== TAB 2: INVOICE (LIVE) ============================== -->
+        <div id="tab-invoice" class="tab-panel">
+            <div class="flex flex-col xl:flex-row gap-6">
+
+                <!-- Left: Form -->
+                <div class="xl:w-[480px] flex-shrink-0 space-y-5">
+
+                    <!-- Consultant Profile (collapsible) -->
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden" id="consultant-section">
+                        <button onclick="toggleSection('consultant-body','consultant-chevron')"
+                                class="w-full flex items-center justify-between px-6 py-4 bg-gray-50 hover:bg-gray-100 transition-colors">
+                            <span class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                Consultant Profile
+                            </span>
+                            <svg id="consultant-chevron" class="w-4 h-4 text-gray-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                            </svg>
+                        </button>
+                        <div id="consultant-body" class="p-6 space-y-4">
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="col-span-2">
+                                    <label class="block text-xs font-medium text-gray-500 mb-1">Full Name</label>
+                                    <input type="text" id="cons-name" placeholder="Kurt Bosse" oninput="saveConsultant(); updatePreview();"
+                                           class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-xs font-medium text-gray-500 mb-1">Address</label>
+                                    <textarea id="cons-address" rows="3" placeholder="Apt 505 Azure Building&#10;Dubai Marina, Dubai, UAE" oninput="saveConsultant(); updatePreview();"
+                                              class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none resize-none"></textarea>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-500 mb-1">Email</label>
+                                    <input type="email" id="cons-email" placeholder="name@email.com" oninput="saveConsultant(); updatePreview();"
+                                           class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-500 mb-1">Phone</label>
+                                    <input type="text" id="cons-phone" placeholder="+971 55 664 1966" oninput="saveConsultant(); updatePreview();"
+                                           class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                                </div>
+                            </div>
+                            <div class="border-t border-gray-100 pt-4">
+                                <p class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">Bank Details</p>
+                                <div class="space-y-3">
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-xs font-medium text-gray-500 mb-1">Account Holder</label>
+                                            <input type="text" id="bank-holder" placeholder="Kurt Bosse" oninput="saveConsultant(); updatePreview();"
+                                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-gray-500 mb-1">Bank Name</label>
+                                            <input type="text" id="bank-name" placeholder="RAKBank" oninput="saveConsultant(); updatePreview();"
+                                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-500 mb-1">IBAN</label>
+                                        <input type="text" id="bank-iban" placeholder="AE22 0400 0002 9298 5561 001" oninput="saveConsultant(); updatePreview();"
+                                               class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500 outline-none">
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-3">
+                                        <div>
+                                            <label class="block text-xs font-medium text-gray-500 mb-1">Account Number</label>
+                                            <input type="text" id="bank-accno" placeholder="02 9298 5561 001" oninput="saveConsultant(); updatePreview();"
+                                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500 outline-none">
+                                        </div>
+                                        <div>
+                                            <label class="block text-xs font-medium text-gray-500 mb-1">SWIFT</label>
+                                            <input type="text" id="bank-swift" placeholder="NRAKAEAK" oninput="saveConsultant(); updatePreview();"
+                                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm font-mono focus:ring-2 focus:ring-primary-500 outline-none">
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-medium text-gray-500 mb-1">Bank Address</label>
+                                        <textarea id="bank-address" rows="2" placeholder="RAKBANK Head Office, P.O.Box 5300, Ras Al Khaimah, UAE" oninput="saveConsultant(); updatePreview();"
+                                                  class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none resize-none"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Invoice Details -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6 space-y-4">
+                        <h3 class="text-sm font-semibold text-gray-800">Invoice Details</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Invoice No</label>
+                                <input type="text" id="inv-no" oninput="updatePreview();"
+                                       class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-500 mb-1">Date</label>
+                                <input type="date" id="inv-date" oninput="updatePreview();"
+                                       class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">Client Name</label>
+                            <input type="text" id="inv-client-name" placeholder="Gasmeth Energy Limited" oninput="updatePreview();"
+                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">Client Address</label>
+                            <textarea id="inv-client-address" rows="2" placeholder="KN7 Avenue, Kigali, Rwanda" oninput="updatePreview();"
+                                      class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none resize-none"></textarea>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-gray-500 mb-1">Reference</label>
+                            <input type="text" id="inv-reference" placeholder="Services provided according to Consultancy Agreement dated..." oninput="updatePreview();"
+                                   class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none">
+                        </div>
+                    </div>
+
+                    <!-- Line Items -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-semibold text-gray-800">Line Items</h3>
+                            <button onclick="addInvoiceRow()"
+                                    class="flex items-center gap-1 text-xs font-medium bg-primary-50 hover:bg-primary-100 text-primary-700 px-3 py-1.5 rounded-lg transition-colors">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                </svg>
+                                Add Row
+                            </button>
+                        </div>
+                        <div class="space-y-2" id="invoice-line-items">
+                            <!-- rows here -->
+                        </div>
+                    </div>
+
+                    <!-- Reimbursable Travel -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-semibold text-gray-800">Reimbursable Travel</h3>
+                            <div class="flex gap-2">
+                                <button onclick="pullFromExpenses()"
+                                        class="flex items-center gap-1 text-xs font-medium bg-amber-50 hover:bg-amber-100 text-amber-700 px-3 py-1.5 rounded-lg transition-colors">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4"/>
+                                    </svg>
+                                    Pull from Expenses
+                                </button>
+                                <button onclick="addReimbursableRow()"
+                                        class="flex items-center gap-1 text-xs font-medium bg-primary-50 hover:bg-primary-100 text-primary-700 px-3 py-1.5 rounded-lg transition-colors">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                                    </svg>
+                                    Add Row
+                                </button>
+                            </div>
+                        </div>
+                        <div class="space-y-2" id="invoice-reimbursables">
+                            <!-- rows here -->
+                        </div>
+                    </div>
+
+                    <!-- Payment Terms -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <label class="block text-xs font-medium text-gray-500 mb-2">Payment Terms</label>
+                        <textarea id="inv-payment" rows="2" oninput="updatePreview();"
+                                  class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-primary-500 outline-none resize-none"></textarea>
+                    </div>
+
+                    <!-- Export buttons -->
+                    <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                        <h3 class="text-sm font-semibold text-gray-800 mb-4">Export Invoice</h3>
+                        <div class="flex gap-3">
+                            <button onclick="exportInvoice('excel')"
+                                    class="flex-1 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                                Excel
+                            </button>
+                            <button onclick="exportInvoice('pdf')"
+                                    class="flex-1 py-2.5 bg-rose-600 hover:bg-rose-700 text-white rounded-xl text-sm font-semibold transition-all flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                                </svg>
+                                PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Live Preview -->
+                <div class="flex-1">
+                    <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden sticky top-[130px]">
+                        <div class="flex items-center justify-between px-6 py-4 bg-gray-50 border-b border-gray-100">
+                            <h3 class="text-sm font-semibold text-gray-800 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                Live Preview
+                            </h3>
+                            <span class="text-xs text-gray-400">Updates as you type</span>
+                        </div>
+                        <div class="p-6 invoice-preview" id="invoice-preview">
+                            <!-- Rendered in JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================== SOON TABS (3-9) ============================== -->
+
+        <!-- Timesheet -->
+        <div id="tab-timesheet" class="tab-panel">
+            <div class="coming-soon-panel" data-feature="Timesheet Generator" data-icon="⏱️"
+                 data-bullets='["Generate monthly timesheets with project codes and daily entries (date · activity · hours · project code) — formatted exactly to client requirements","Signature blocks for consultant and client approval, with automatic roll-up into invoice line items","Supports multiple projects per month, overtime flagging, and public holiday handling"]'
+                 data-date="July 2026"></div>
+        </div>
+
+        <!-- Meeting Minutes -->
+        <div id="tab-minutes" class="tab-panel">
+            <div class="coming-soon-panel" data-feature="Meeting Minutes" data-icon="📝"
+                 data-bullets='["Paste a meeting transcript or upload an audio file (MP3/M4A/WAV) — AI structures it into Attendees · Agenda · Decisions · Actions · Next meeting","Each action item includes an owner, due date, and priority — exportable as an Excel action log for follow-up tracking","Draft goes out in under 60 seconds; Word download ready for client submission"]'
+                 data-date="July 2026"></div>
+        </div>
+
+        <!-- Technical Memo -->
+        <div id="tab-memo" class="tab-panel">
+            <div class="coming-soon-panel" data-feature="Technical Memo" data-icon="✍️"
+                 data-bullets='["Input topic, basis of design, applicable standards (ASME B31.3, API 650, etc.) and key parameters — AI drafts a structured engineering memo","Sections: Title · Purpose · Basis of Design · Calculations · Results · Conclusions · References — professionally formatted","Downloadable as Word document; editable before client submission or archive"]'
+                 data-date="July 2026"></div>
+        </div>
+
+        <!-- Daily Report -->
+        <div id="tab-dailyreport" class="tab-panel">
+            <div class="coming-soon-panel" data-feature="Daily Progress Report" data-icon="📊"
+                 data-bullets='["Site engineer enters day summary: activities, manpower headcount, equipment deployed, weather conditions, HSE incidents — AI compiles a formatted DPR","Photo attachment support and automatic sequence numbering for multi-week site reports","PDF download formatted to industry standard daily report layout for client submittal"]'
+                 data-date="August 2026"></div>
+        </div>
+
+        <!-- Transmittal -->
+        <div id="tab-transmittal" class="tab-panel">
+            <div class="coming-soon-panel" data-feature="Document Transmittal" data-icon="📨"
+                 data-bullets='["Log outgoing and incoming engineering documents — document number, revision, date, status (IFA/IFC/AFC), recipient, and response required date","Generates a formatted transmittal sheet that can be sent with document packages to clients and EPC contractors","Excel download with auto-running reference numbers; searchable log of all transmittals for a project"]'
+                 data-date="August 2026"></div>
+        </div>
+
+        <!-- Standards Lookup -->
+        <div id="tab-standards" class="tab-panel">
+            <div class="coming-soon-panel" data-feature="Standards Lookup" data-icon="📚"
+                 data-bullets='["Type a clause reference (e.g. ASME B31.3 §304.1.2, API 650 §5.6) or a plain-English question — AI returns the relevant clause text with cross-references","Covers ASME, API, ISO, ASTM, and IEC standards commonly used in oil & gas, piping, pressure vessels, and instrumentation","Results include interpretation notes and links to the full standard — designed as a rapid desk reference for design engineers"]'
+                 data-date="September 2026"></div>
+        </div>
+
+        <!-- MTO / BoQ -->
+        <div id="tab-mto" class="tab-panel">
+            <div class="coming-soon-panel" data-feature="MTO / BoQ Cleanup" data-icon="🧮"
+                 data-bullets='["Upload a messy MTO (Material Take-Off) or BoQ Excel — AI normalises descriptions, standardises units, deduplicates line items, and groups by line class or system","Handles common issues: inconsistent naming (3\" vs DN80), mixed unit systems, vendor-specific codes — outputs a clean, client-ready BoQ","Export as Excel with original and cleaned columns side-by-side for review and sign-off"]'
+                 data-date="September 2026"></div>
+        </div>
+
+    </main>
+
+    <!-- Footer CTA -->
+    <section class="py-16 bg-gradient-to-br from-gray-900 to-primary-900 mt-16">
+        <div class="max-w-3xl mx-auto px-6 text-center">
+            <h2 class="text-2xl md:text-3xl font-bold text-white mb-4">
+                Ready to save 5+ hours a week on admin?
+            </h2>
+            <p class="text-gray-300 mb-8">
+                Book a 30-minute demo and we'll show you how the Technical Assistant fits into your consulting workflow.
+            </p>
+            <a href="https://calendly.com/kingsley-uzowulu/30min"
+               onclick="gtag('event','book_demo',{'event_category':'conversion','event_label':'tech_assistant_footer'}); return true;"
+               target="_blank"
+               class="inline-flex items-center gap-2 px-8 py-4 bg-white text-primary-700 hover:bg-gray-50 rounded-full font-bold text-lg transition-all hover:shadow-2xl">
+                Book a Free Demo →
+            </a>
+        </div>
+    </section>
+
+    <script>
+    // ============================================================
+    // CONFIG
+    // ============================================================
+    const API_URL = 'https://ku-automation-production.up.railway.app';
+    const CALENDLY = 'https://calendly.com/kingsley-uzowulu/30min';
+
+    // ============================================================
+    // TAB SWITCHING
+    // ============================================================
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // ============================================================
+    // COMING SOON PANELS — auto-render from data attributes
+    // ============================================================
+    document.querySelectorAll('.coming-soon-panel').forEach(el => {
+        const feature = el.dataset.feature;
+        const icon = el.dataset.icon;
+        const bullets = JSON.parse(el.dataset.bullets);
+        const date = el.dataset.date;
+        el.innerHTML = `
+        <div class="flex flex-col items-center justify-center min-h-[400px] py-12">
+            <div class="bg-white rounded-3xl border border-gray-200 shadow-sm max-w-xl w-full mx-auto p-10 text-center">
+                <div class="text-5xl mb-4">${icon}</div>
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 border border-amber-100 rounded-full text-amber-700 text-xs font-semibold mb-4">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Available ${date}
+                </div>
+                <h2 class="text-2xl font-bold text-gray-900 mb-3">${feature}</h2>
+                <ul class="text-left space-y-3 mb-8">
+                    ${bullets.map(b => `
+                    <li class="flex gap-3 text-sm text-gray-600">
+                        <svg class="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                        </svg>
+                        <span>${b}</span>
+                    </li>`).join('')}
+                </ul>
+                <a href="${CALENDLY}" target="_blank"
+                   onclick="gtag('event','early_access',{'event_category':'conversion','event_label':'${feature}'});"
+                   class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Get early access
+                </a>
+            </div>
+        </div>`;
+    });
+
+    // ============================================================
+    // SECTION TOGGLE (consultant profile)
+    // ============================================================
+    function toggleSection(bodyId, chevronId) {
+        const body = document.getElementById(bodyId);
+        const chevron = document.getElementById(chevronId);
+        if (body.style.display === 'none') {
+            body.style.display = '';
+            chevron.style.transform = '';
+        } else {
+            body.style.display = 'none';
+            chevron.style.transform = 'rotate(-90deg)';
+        }
+    }
+
+    // ============================================================
+    // DRAG AND DROP
+    // ============================================================
+    function handleDragOver(e, zoneId) {
+        e.preventDefault();
+        document.getElementById(zoneId).classList.add('drag-over');
+    }
+    function handleDragLeave(zoneId) {
+        document.getElementById(zoneId).classList.remove('drag-over');
+    }
+    function handleDrop(e, zoneId) {
+        e.preventDefault();
+        document.getElementById(zoneId).classList.remove('drag-over');
+        const files = Array.from(e.dataTransfer.files);
+        pendingFiles.push(...files);
+        setStatus(`${pendingFiles.length} file(s) ready`);
+    }
+    function handleFileSelect(e) {
+        const files = Array.from(e.target.files);
+        pendingFiles.push(...files);
+        setStatus(`${pendingFiles.length} file(s) ready`);
+    }
+
+    // ============================================================
+    // EXPENSES — state
+    // ============================================================
+    let expenseRows = [];
+    let pendingFiles = [];
+    let cachedFxRates = {};
+
+    function setStatus(msg) {
+        document.getElementById('exp-status').textContent = msg;
+    }
+    function setProgress(pct, label) {
+        const prog = document.getElementById('exp-progress');
+        prog.classList.remove('hidden');
+        document.getElementById('exp-progress-bar').style.width = pct + '%';
+        document.getElementById('exp-progress-pct').textContent = pct + '%';
+        document.getElementById('exp-progress-label').textContent = label;
+        if (pct >= 100) setTimeout(() => prog.classList.add('hidden'), 1500);
+    }
+
+    async function extractFromReceipts() {
+        if (pendingFiles.length === 0) { setStatus('Please drop or select receipt files first.'); return; }
+        setProgress(10, 'Uploading...');
+        setStatus('Extracting with AI...');
+
+        const formData = new FormData();
+        pendingFiles.forEach(f => formData.append('files', f));
+        pendingFiles = [];
+
+        try {
+            setProgress(30, 'Sending to AI...');
+            const resp = await fetch(`${API_URL}/api/expenses/extract`, { method: 'POST', body: formData });
+            if (!resp.ok) throw new Error(`Server error: ${resp.status}`);
+            setProgress(80, 'Parsing results...');
+            const data = await resp.json();
+            if (data.fx_rates) cachedFxRates = data.fx_rates;
+            (data.rows || []).forEach(r => {
+                r.id = r.id || Date.now() + Math.random();
+                expenseRows.push(r);
+            });
+            renderExpenseTable();
+            updateSummary();
+            saveDraft();
+            setProgress(100, 'Done!');
+            setStatus(`${(data.rows||[]).length} expense(s) extracted.`);
+        } catch(e) {
+            setProgress(0,'');
+            document.getElementById('exp-progress').classList.add('hidden');
+            setStatus('Error: ' + e.message);
+        }
+    }
+
+    function addExpenseRow() {
+        expenseRows.push({
+            id: Date.now(),
+            date: new Date().toISOString().slice(0,10),
+            description: '',
+            currency: 'USD',
+            source_amount: 0,
+            fx_rate: 1.0,
+            usd_amount: 0,
+            category: 'Other'
+        });
+        renderExpenseTable();
+        updateSummary();
+        saveDraft();
+    }
+
+    function deleteExpenseRow(id) {
+        expenseRows = expenseRows.filter(r => r.id != id);
+        renderExpenseTable();
+        updateSummary();
+        saveDraft();
+    }
+
+    function updateRow(id, field, value) {
+        const row = expenseRows.find(r => r.id == id);
+        if (!row) return;
+        row[field] = value;
+        if (field === 'currency') {
+            row.fx_rate = cachedFxRates[value.toUpperCase()] || 1.0;
+            row.usd_amount = Math.round(parseFloat(row.source_amount || 0) * row.fx_rate * 100) / 100;
+        }
+        if (field === 'source_amount' || field === 'fx_rate') {
+            row.usd_amount = Math.round(parseFloat(row.source_amount || 0) * parseFloat(row.fx_rate || 1) * 100) / 100;
+        }
+        if (field === 'usd_amount') {
+            row.usd_amount = parseFloat(value) || 0;
+        }
+        updateSummary();
+        saveDraft();
+        // Re-render only affected cells
+        const usdCell = document.getElementById(`row-usd-${id}`);
+        const fxCell = document.getElementById(`row-fx-${id}`);
+        if (usdCell && field !== 'usd_amount') usdCell.value = row.usd_amount.toFixed(2);
+        if (fxCell && field === 'currency') fxCell.value = row.fx_rate.toFixed(6);
+    }
+
+    const CATEGORIES = ['Flights & Hotels', 'Transport', 'Meals', 'Other'];
+
+    function renderExpenseTable() {
+        const tbody = document.getElementById('expense-tbody');
+        const empty = document.getElementById('expense-empty');
+        if (expenseRows.length === 0) {
+            tbody.innerHTML = '';
+            empty.style.display = '';
+            return;
+        }
+        empty.style.display = 'none';
+        tbody.innerHTML = expenseRows.map((r, i) => `
+        <tr class="border-b border-gray-50 ${i%2===0?'bg-white':'bg-gray-50/50'}">
+            <td class="px-3 py-2 whitespace-nowrap">
+                <input type="date" value="${r.date||''}" class="text-xs" style="min-width:120px"
+                       onchange="updateRow(${r.id},'date',this.value)">
+            </td>
+            <td class="px-3 py-2">
+                <input type="text" value="${escHtml(r.description||'')}" placeholder="Description" class="min-w-[140px]"
+                       onchange="updateRow(${r.id},'description',this.value)">
+            </td>
+            <td class="px-3 py-2">
+                <input type="text" value="${escHtml(r.currency||'USD')}" placeholder="USD" style="width:50px;text-transform:uppercase"
+                       onchange="updateRow(${r.id},'currency',this.value.toUpperCase())">
+            </td>
+            <td class="px-3 py-2 text-right">
+                <input type="number" value="${parseFloat(r.source_amount||0).toFixed(2)}" step="0.01" style="width:90px;text-align:right"
+                       onchange="updateRow(${r.id},'source_amount',this.value)">
+            </td>
+            <td class="px-3 py-2 text-right">
+                <input id="row-fx-${r.id}" type="number" value="${parseFloat(r.fx_rate||1).toFixed(6)}" step="0.000001" style="width:80px;text-align:right"
+                       onchange="updateRow(${r.id},'fx_rate',this.value)">
+            </td>
+            <td class="px-3 py-2 text-right font-medium text-gray-700">
+                <input id="row-usd-${r.id}" type="number" value="${parseFloat(r.usd_amount||0).toFixed(2)}" step="0.01" style="width:90px;text-align:right"
+                       onchange="updateRow(${r.id},'usd_amount',this.value)">
+            </td>
+            <td class="px-3 py-2">
+                <select onchange="updateRow(${r.id},'category',this.value)" style="min-width:130px">
+                    ${CATEGORIES.map(c=>`<option value="${c}" ${r.category===c?'selected':''}>${c}</option>`).join('')}
+                </select>
+            </td>
+            <td class="px-3 py-2">
+                <button onclick="deleteExpenseRow(${r.id})" class="text-gray-300 hover:text-red-500 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+            </td>
+        </tr>`).join('');
+    }
+
+    function updateSummary() {
+        const cats = {'Flights & Hotels':0, 'Transport':0, 'Meals':0, 'Other':0};
+        expenseRows.forEach(r => { cats[r.category] = (cats[r.category]||0) + parseFloat(r.usd_amount||0); });
+        const total = Object.values(cats).reduce((a,b)=>a+b,0);
+        document.getElementById('sum-flights').textContent = '$'+cats['Flights & Hotels'].toFixed(2);
+        document.getElementById('sum-transport').textContent = '$'+cats['Transport'].toFixed(2);
+        document.getElementById('sum-meals').textContent = '$'+cats['Meals'].toFixed(2);
+        document.getElementById('sum-other').textContent = '$'+cats['Other'].toFixed(2);
+        document.getElementById('sum-total').textContent = '$'+total.toFixed(2);
+    }
+
+    async function exportExpenses(format) {
+        const meta = {
+            name: document.getElementById('exp-name').value || 'Employee',
+            employee_id: document.getElementById('exp-empid').value,
+            period: document.getElementById('exp-period').value,
+            purpose: document.getElementById('exp-purpose').value,
+            date_prepared: new Date().toLocaleDateString('en-GB')
+        };
+        const payload = { metadata: meta, rows: expenseRows };
+        const endpoint = format === 'excel' ? '/api/expenses/export-excel' : '/api/expenses/export-pdf';
+        const mimeType = format === 'excel'
+            ? 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            : 'application/pdf';
+        const ext = format === 'excel' ? 'xlsx' : 'pdf';
+
+        try {
+            const resp = await fetch(`${API_URL}${endpoint}`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(payload)
+            });
+            if (!resp.ok) throw new Error(`Server error: ${resp.status}`);
+            const blob = await resp.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Expenses_${meta.name.replace(/\s/g,'_')}_${meta.period}.${ext}`;
+            a.click();
+            URL.revokeObjectURL(url);
+        } catch(e) {
+            alert('Export failed: ' + e.message);
+        }
+    }
+
+    // ============================================================
+    // INVOICE — state
+    // ============================================================
+    let invoiceLineItems = [];
+    let invoiceReimbursables = [];
+
+    function getConsultantData() {
+        return {
+            name: document.getElementById('cons-name')?.value || '',
+            address: document.getElementById('cons-address')?.value || '',
+            email: document.getElementById('cons-email')?.value || '',
+            phone: document.getElementById('cons-phone')?.value || '',
+            bank: {
+                account_holder: document.getElementById('bank-holder')?.value || '',
+                bank_name: document.getElementById('bank-name')?.value || '',
+                iban: document.getElementById('bank-iban')?.value || '',
+                account_number: document.getElementById('bank-accno')?.value || '',
+                swift: document.getElementById('bank-swift')?.value || '',
+                bank_address: document.getElementById('bank-address')?.value || ''
+            }
+        };
+    }
+
+    function saveConsultant() {
+        localStorage.setItem('ku_ta_consultant_profile', JSON.stringify(getConsultantData()));
+    }
+
+    function loadConsultant() {
+        try {
+            const saved = JSON.parse(localStorage.getItem('ku_ta_consultant_profile') || 'null');
+            if (!saved) return;
+            document.getElementById('cons-name').value = saved.name || '';
+            document.getElementById('cons-address').value = saved.address || '';
+            document.getElementById('cons-email').value = saved.email || '';
+            document.getElementById('cons-phone').value = saved.phone || '';
+            if (saved.bank) {
+                document.getElementById('bank-holder').value = saved.bank.account_holder || '';
+                document.getElementById('bank-name').value = saved.bank.bank_name || '';
+                document.getElementById('bank-iban').value = saved.bank.iban || '';
+                document.getElementById('bank-accno').value = saved.bank.account_number || '';
+                document.getElementById('bank-swift').value = saved.bank.swift || '';
+                document.getElementById('bank-address').value = saved.bank.bank_address || '';
+            }
+        } catch(e) {}
+    }
+
+    function addInvoiceRow(desc='', units='', rate='') {
+        const id = Date.now() + Math.random();
+        invoiceLineItems.push({ id, description: desc, units: parseFloat(units)||0, daily_rate: parseFloat(rate)||0, total: (parseFloat(units)||0)*(parseFloat(rate)||0) });
+        renderInvoiceRows();
+        updatePreview();
+        saveInvoiceDraft();
+    }
+
+    function addReimbursableRow(desc='', units=1, rate=0) {
+        const id = Date.now() + Math.random();
+        invoiceReimbursables.push({ id, description: desc, units: parseFloat(units)||1, daily_rate: parseFloat(rate)||0, total: (parseFloat(units)||1)*(parseFloat(rate)||0) });
+        renderReimbursableRows();
+        updatePreview();
+        saveInvoiceDraft();
+    }
+
+    function deleteInvRow(id) {
+        invoiceLineItems = invoiceLineItems.filter(r => r.id != id);
+        renderInvoiceRows();
+        updatePreview();
+        saveInvoiceDraft();
+    }
+    function deleteReimbRow(id) {
+        invoiceReimbursables = invoiceReimbursables.filter(r => r.id != id);
+        renderReimbursableRows();
+        updatePreview();
+        saveInvoiceDraft();
+    }
+
+    function updateInvRow(id, field, val) {
+        const row = invoiceLineItems.find(r => r.id == id);
+        if (!row) return;
+        row[field] = parseFloat(val)||val;
+        row.total = parseFloat(row.units||0) * parseFloat(row.daily_rate||0);
+        renderInvoiceRows();
+        updatePreview();
+        saveInvoiceDraft();
+    }
+    function updateReimbRow(id, field, val) {
+        const row = invoiceReimbursables.find(r => r.id == id);
+        if (!row) return;
+        row[field] = parseFloat(val)||val;
+        row.total = parseFloat(row.units||1) * parseFloat(row.daily_rate||0);
+        renderReimbursableRows();
+        updatePreview();
+        saveInvoiceDraft();
+    }
+
+    function lineItemRowHtml(r, onUpdateFn, onDeleteFn) {
+        return `<div class="grid grid-cols-12 gap-1.5 items-center" id="lirow-${r.id}">
+            <input class="col-span-6 px-2 py-1.5 border border-gray-200 rounded-lg text-xs focus:ring-1 focus:ring-primary-500 outline-none"
+                   placeholder="Description" value="${escHtml(r.description||'')}"
+                   oninput="${onUpdateFn}(${r.id},'description',this.value)">
+            <input class="col-span-2 px-2 py-1.5 border border-gray-200 rounded-lg text-xs text-right focus:ring-1 focus:ring-primary-500 outline-none"
+                   type="number" placeholder="Units" value="${r.units||''}" step="0.5"
+                   oninput="${onUpdateFn}(${r.id},'units',this.value)">
+            <input class="col-span-2 px-2 py-1.5 border border-gray-200 rounded-lg text-xs text-right focus:ring-1 focus:ring-primary-500 outline-none"
+                   type="number" placeholder="Rate" value="${r.daily_rate||''}" step="0.01"
+                   oninput="${onUpdateFn}(${r.id},'daily_rate',this.value)">
+            <div class="col-span-1 text-xs font-semibold text-gray-700 text-right">$${(r.total||0).toFixed(0)}</div>
+            <button onclick="${onDeleteFn}(${r.id})" class="col-span-1 text-gray-300 hover:text-red-500 flex items-center justify-center">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>`;
+    }
+
+    function renderInvoiceRows() {
+        const container = document.getElementById('invoice-line-items');
+        if (!container) return;
+        if (invoiceLineItems.length === 0) {
+            container.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">No line items yet — click Add Row</p>`;
+            return;
+        }
+        const grandLabel = `<div class="flex justify-between items-center pt-2 border-t border-gray-100">
+            <span class="text-xs font-semibold text-gray-700">Subtotal</span>
+            <span class="text-xs font-bold text-primary-700">$${invoiceLineItems.reduce((s,r)=>s+(r.total||0),0).toLocaleString('en-US',{minimumFractionDigits:2})}</span>
+        </div>`;
+        container.innerHTML = `<div class="grid grid-cols-12 gap-1.5 mb-1">
+            <div class="col-span-6 text-[10px] font-semibold text-gray-400 uppercase">Description</div>
+            <div class="col-span-2 text-[10px] font-semibold text-gray-400 uppercase text-right">Units</div>
+            <div class="col-span-2 text-[10px] font-semibold text-gray-400 uppercase text-right">Rate</div>
+            <div class="col-span-1 text-[10px] font-semibold text-gray-400 uppercase text-right">Total</div>
+            <div class="col-span-1"></div>
+        </div>` +
+        invoiceLineItems.map(r => lineItemRowHtml(r, 'updateInvRow', 'deleteInvRow')).join('') + grandLabel;
+    }
+
+    function renderReimbursableRows() {
+        const container = document.getElementById('invoice-reimbursables');
+        if (!container) return;
+        if (invoiceReimbursables.length === 0) {
+            container.innerHTML = `<p class="text-xs text-gray-400 text-center py-4">No reimbursables — click "Pull from Expenses" or Add Row</p>`;
+            return;
+        }
+        container.innerHTML = invoiceReimbursables.map(r => lineItemRowHtml(r, 'updateReimbRow', 'deleteReimbRow')).join('');
+    }
+
+    function pullFromExpenses() {
+        if (expenseRows.length === 0) {
+            alert('No expenses in the Expenses tab yet. Add some first.');
+            return;
+        }
+        expenseRows.forEach(r => {
+            const desc = `${r.description||'Expense'} ${r.currency||'USD'} ${parseFloat(r.source_amount||0).toFixed(2)}`;
+            addReimbursableRow(desc, 1, parseFloat(r.usd_amount||0).toFixed(2));
+        });
+    }
+
+    function updatePreview() {
+        const cons = getConsultantData();
+        const invNo = document.getElementById('inv-no')?.value || '';
+        const invDate = document.getElementById('inv-date')?.value || '';
+        const clientName = document.getElementById('inv-client-name')?.value || '';
+        const clientAddr = (document.getElementById('inv-client-address')?.value || '').replace(/\n/g,'<br>');
+        const ref = document.getElementById('inv-reference')?.value || '';
+        const payment = document.getElementById('inv-payment')?.value || '';
+
+        const liTotal = invoiceLineItems.reduce((s,r)=>s+(r.total||0),0);
+        const reimbTotal = invoiceReimbursables.reduce((s,r)=>s+(r.total||0),0);
+        const grandTotal = liTotal + reimbTotal;
+
+        const liRows = invoiceLineItems.map(r => `
+            <tr>
+                <td>${escHtml(r.description||'')}</td>
+                <td class="text-right">${(r.units||0).toFixed(2)}</td>
+                <td class="text-right">${(r.daily_rate||0).toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+                <td class="text-right font-semibold">${(r.total||0).toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+            </tr>`).join('');
+
+        const reimbRows = invoiceReimbursables.length ? `
+            <tr><td colspan="4" class="font-semibold text-gray-600 pt-2" style="font-size:0.7rem;background:#f9fafb">Travel expenses</td></tr>
+            ${invoiceReimbursables.map(r=>`
+            <tr>
+                <td>${escHtml(r.description||'')}</td>
+                <td class="text-right">${(r.units||1).toFixed(2)}</td>
+                <td class="text-right">${(r.daily_rate||0).toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+                <td class="text-right font-semibold">${(r.total||0).toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+            </tr>`).join('')}` : '';
+
+        const bankBlock = cons.bank.bank_name ? `
+        <div style="margin-top:12px;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;font-size:0.72rem">
+            <div style="background:#f3f4f6;padding:6px 10px;font-weight:600;color:#374151">Banking Details</div>
+            ${[
+                ['Account Holder', cons.bank.account_holder || cons.name],
+                ['Bank Name', cons.bank.bank_name],
+                ['IBAN', cons.bank.iban],
+                ['Account No', cons.bank.account_number],
+                ['SWIFT', cons.bank.swift],
+                ['Bank Address', cons.bank.bank_address]
+            ].filter(([,v])=>v).map(([l,v])=>`
+            <div style="display:flex;border-bottom:1px solid #f3f4f6;padding:4px 10px">
+                <span style="width:110px;color:#6b7280;font-weight:500">${l}</span>
+                <span style="color:#111827">${escHtml(v)}</span>
+            </div>`).join('')}
+        </div>` : '';
+
+        document.getElementById('invoice-preview').innerHTML = `
+        <div style="font-family:Inter,sans-serif;font-size:0.8rem;color:#111827;max-width:100%">
+            <!-- Header -->
+            <div style="text-align:center;font-size:1.4rem;font-weight:800;color:#1e3a5f;margin-bottom:16px;letter-spacing:-0.5px">INVOICE</div>
+
+            <!-- Consultant + Invoice No -->
+            <div style="display:flex;justify-content:space-between;margin-bottom:12px;gap:16px">
+                <div style="font-size:0.75rem;line-height:1.6;color:#374151">
+                    <strong style="font-size:0.85rem">${escHtml(cons.name)}</strong><br>
+                    ${escHtml(cons.address).replace(/\n/g,'<br>')}
+                    ${cons.email?`<br><span style="color:#2563eb">${escHtml(cons.email)}</span>`:''}
+                    ${cons.phone?`<br>${escHtml(cons.phone)}`:''}
+                </div>
+                <div style="text-align:right;flex-shrink:0">
+                    <div style="background:#dbeafe;border:1px solid #bfdbfe;border-radius:8px;padding:8px 12px;min-width:140px">
+                        <div style="color:#6b7280;font-size:0.68rem;font-weight:600;text-transform:uppercase">Invoice No</div>
+                        <div style="font-weight:700;font-size:0.95rem;color:#1e3a5f">${escHtml(invNo)}</div>
+                        <div style="color:#6b7280;font-size:0.68rem;font-weight:600;text-transform:uppercase;margin-top:4px">Date</div>
+                        <div style="font-weight:600;font-size:0.8rem">${escHtml(invDate)}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Invoice To + Reference -->
+            <div style="border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:12px;font-size:0.75rem">
+                <div style="display:flex;border-bottom:1px solid #e5e7eb">
+                    <div style="background:#f3f4f6;padding:8px 10px;font-weight:600;color:#374151;min-width:90px">Invoice to</div>
+                    <div style="padding:8px 10px;color:#111827"><strong>${escHtml(clientName)}</strong><br>${clientAddr}</div>
+                </div>
+                <div style="display:flex">
+                    <div style="background:#f3f4f6;padding:8px 10px;font-weight:600;color:#374151;min-width:90px">Reference</div>
+                    <div style="padding:8px 10px;color:#374151;font-style:italic">${escHtml(ref)}</div>
+                </div>
+            </div>
+
+            <!-- Line Items Table -->
+            <table class="preview-table" style="width:100%;border-collapse:collapse;margin-bottom:4px;font-size:0.75rem">
+                <thead>
+                    <tr>
+                        <th style="text-align:left;width:55%">Description</th>
+                        <th style="text-align:right;width:12%">Units</th>
+                        <th style="text-align:right;width:16%">Daily Rate USD</th>
+                        <th style="text-align:right;width:17%">Total USD</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${liRows}
+                    ${reimbRows}
+                    <tr style="background:#dbeafe;font-weight:700">
+                        <td colspan="3" style="text-align:right;padding:8px 10px">Total USD</td>
+                        <td style="text-align:right;padding:8px 10px">${grandTotal.toLocaleString('en-US',{minimumFractionDigits:2})}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div style="font-size:0.72rem;color:#374151;margin:10px 0 4px">
+                <strong>Signature:</strong> _________________________________
+            </div>
+
+            <!-- Payment -->
+            ${payment ? `<div style="margin-top:8px;border:1px solid #e5e7eb;border-radius:8px;padding:8px 10px;font-size:0.72rem;color:#374151">
+                <strong>Payment:</strong> ${escHtml(payment)}
+            </div>` : ''}
+
+            ${bankBlock}
+        </div>`;
+
+        saveInvoiceDraft();
+    }
+
+    async function exportInvoice(format) {
+        const payload = {
+            consultant: getConsultantData(),
+            invoice: {
+                invoice_no: document.getElementById('inv-no')?.value || '',
+                date: document.getElementById('inv-date')?.value || '',
+                client_name: document.getElementById('inv-client-name')?.value || '',
+                client_address: document.getElementById('inv-client-address')?.value || '',
+                reference: document.getElementById('inv-reference')?.value || ''
+            },
+            line_items: invoiceLineItems,
+            reimbursables: invoiceReimbursables,
+            payment_terms: document.getElementById('inv-payment')?.value || ''
+        };
+        const endpoint = format === 'excel' ? '/api/invoice/export-excel' : '/api/invoice/export-pdf';
+        const ext = format === 'excel' ? 'xlsx' : 'pdf';
+        try {
+            const resp = await fetch(`${API_URL}${endpoint}`, {
+                method: 'POST',
+                headers: {'Content-Type':'application/json'},
+                body: JSON.stringify(payload)
+            });
+            if (!resp.ok) throw new Error(`Server error: ${resp.status}`);
+            const blob = await resp.blob();
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Invoice_${(payload.invoice.invoice_no||'INV').replace('/','_')}_${(payload.invoice.client_name||'Client').replace(/\s/g,'_')}.${ext}`;
+            a.click();
+            URL.revokeObjectURL(url);
+        } catch(e) {
+            alert('Export failed: ' + e.message);
+        }
+    }
+
+    // ============================================================
+    // PERSISTENCE
+    // ============================================================
+    function saveDraft() {
+        try {
+            localStorage.setItem('ku_ta_expenses_draft', JSON.stringify({
+                rows: expenseRows,
+                meta: {
+                    name: document.getElementById('exp-name')?.value,
+                    employee_id: document.getElementById('exp-empid')?.value,
+                    period: document.getElementById('exp-period')?.value,
+                    purpose: document.getElementById('exp-purpose')?.value
+                }
+            }));
+        } catch(e) {}
+    }
+
+    function saveInvoiceDraft() {
+        try {
+            localStorage.setItem('ku_ta_invoice_draft', JSON.stringify({
+                line_items: invoiceLineItems,
+                reimbursables: invoiceReimbursables,
+                invoice: {
+                    invoice_no: document.getElementById('inv-no')?.value,
+                    date: document.getElementById('inv-date')?.value,
+                    client_name: document.getElementById('inv-client-name')?.value,
+                    client_address: document.getElementById('inv-client-address')?.value,
+                    reference: document.getElementById('inv-reference')?.value,
+                    payment_terms: document.getElementById('inv-payment')?.value
+                }
+            }));
+        } catch(e) {}
+    }
+
+    function loadDraft() {
+        try {
+            const d = JSON.parse(localStorage.getItem('ku_ta_expenses_draft') || 'null');
+            if (d) {
+                expenseRows = d.rows || [];
+                if (d.meta) {
+                    document.getElementById('exp-name').value = d.meta.name || '';
+                    document.getElementById('exp-empid').value = d.meta.employee_id || '';
+                    document.getElementById('exp-period').value = d.meta.period || '';
+                    document.getElementById('exp-purpose').value = d.meta.purpose || '';
+                }
+                renderExpenseTable();
+                updateSummary();
+            }
+        } catch(e) {}
+
+        try {
+            const d = JSON.parse(localStorage.getItem('ku_ta_invoice_draft') || 'null');
+            if (d) {
+                invoiceLineItems = d.line_items || [];
+                invoiceReimbursables = d.reimbursables || [];
+                if (d.invoice) {
+                    document.getElementById('inv-no').value = d.invoice.invoice_no || '';
+                    document.getElementById('inv-date').value = d.invoice.date || '';
+                    document.getElementById('inv-client-name').value = d.invoice.client_name || '';
+                    document.getElementById('inv-client-address').value = d.invoice.client_address || '';
+                    document.getElementById('inv-reference').value = d.invoice.reference || '';
+                    document.getElementById('inv-payment').value = d.invoice.payment_terms || '';
+                }
+                renderInvoiceRows();
+                renderReimbursableRows();
+            }
+        } catch(e) {}
+    }
+
+    // ============================================================
+    // UTILS
+    // ============================================================
+    function escHtml(s) {
+        if (!s) return '';
+        return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    (function init() {
+        // Set defaults
+        const now = new Date();
+        const monthStr = now.toISOString().slice(0,7);
+        document.getElementById('exp-period').value = monthStr;
+
+        // Invoice defaults
+        const invNo = `KB-${String(now.getMonth()+1).padStart(2,'0')}-${now.getFullYear()}`;
+        document.getElementById('inv-no').value = invNo;
+        document.getElementById('inv-date').value = now.toISOString().slice(0,10);
+        document.getElementById('inv-payment').value = 'Payment to be made within 30 days of receipt of invoice';
+
+        // Add one default line item if none
+        invoiceLineItems = [];
+        invoiceReimbursables = [];
+
+        // Load saved data
+        loadConsultant();
+        loadDraft();
+
+        // If still no invoice line items, add a placeholder
+        if (invoiceLineItems.length === 0) {
+            addInvoiceRow('Professional consultancy services — see attached timesheet', '', '920');
+        }
+
+        renderInvoiceRows();
+        renderReimbursableRows();
+        updatePreview();
+    })();
+    </script>
+</body>
+</html>
