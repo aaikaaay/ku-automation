@@ -2798,7 +2798,7 @@ async def expenses_extract(files: List[UploadFile] = File(...)):
 @app.post("/api/expenses/export-excel")
 async def expenses_export_excel(request: FARequest):
     """
-    Generate an .xlsx expense report matching the Kurt Bosse template.
+    Generate an .xlsx expense report in the consultant expense template layout.
     Body: { metadata: {...}, rows: [...] }
     """
     payload = await request.json()
@@ -2817,7 +2817,7 @@ async def expenses_export_excel(request: FARequest):
 @app.post("/api/expenses/export-pdf")
 async def expenses_export_pdf(request: FARequest):
     """
-    Generate a PDF expense report matching the Kurt Bosse template.
+    Generate a PDF expense report in the consultant expense template layout.
     Body: { metadata: {...}, rows: [...] }
     """
     payload = await request.json()
@@ -2836,7 +2836,7 @@ async def expenses_export_pdf(request: FARequest):
 @app.post("/api/invoice/export-excel")
 async def invoice_export_excel(request: FARequest):
     """
-    Generate an .xlsx invoice matching the Kurt Bosse invoice template.
+    Generate an .xlsx invoice in the consultant invoice template layout.
     Body: { consultant: {...}, invoice: {...}, line_items: [...], reimbursables: [...], payment_terms: str }
     """
     payload = await request.json()
@@ -2855,7 +2855,7 @@ async def invoice_export_excel(request: FARequest):
 @app.post("/api/invoice/export-pdf")
 async def invoice_export_pdf(request: FARequest):
     """
-    Generate a PDF invoice matching the Kurt Bosse invoice template.
+    Generate a PDF invoice in the consultant invoice template layout.
     Body: { consultant: {...}, invoice: {...}, line_items: [...], reimbursables: [...], payment_terms: str }
     """
     payload = await request.json()

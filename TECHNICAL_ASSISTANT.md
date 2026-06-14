@@ -73,20 +73,20 @@ All endpoints served from `https://ku-automation-production.up.railway.app`.
 ```json
 {
   "metadata": {
-    "name": "Kurt Bosse",
-    "employee_id": "KB-001",
+    "name": "Alex Mercer",
+    "employee_id": "AM-001",
     "period": "2026-05",
-    "purpose": "Travel Expenses CNG Project",
+    "purpose": "Site Visit — Northwind Pilot, Houston",
     "date_prepared": "01/06/2026"
   },
   "rows": [
     {
-      "date": "2026-04-26",
-      "description": "Train to Heathrow",
-      "currency": "GBP",
-      "source_amount": 49.60,
-      "fx_rate": 1.3544,
-      "usd_amount": 67.18,
+      "date": "2026-05-03",
+      "description": "Uber to DXB Airport",
+      "currency": "AED",
+      "source_amount": 220.00,
+      "fx_rate": 0.2723,
+      "usd_amount": 59.91,
       "category": "Transport"
     }
   ]
@@ -96,7 +96,7 @@ All endpoints served from `https://ku-automation-production.up.railway.app`.
 **Response:** `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`  
 **Filename:** `Expenses_{Name}_{Period}.xlsx`
 
-**Layout matches Kurt Bosse template:**
+**Layout (consultant expense template):**
 - Title: "Expense Summary" (blue header)
 - Header block: Date Prepared, Name, Employee ID, Period Covered, Purpose
 - Summary panel: "Expenses at a glance" — Flights & Hotels / Transport / Meals / Other / Total
@@ -121,31 +121,31 @@ Same JSON body as export-excel.
 ```json
 {
   "consultant": {
-    "name": "Mr K. Bosse",
-    "address": "Apt 505 Azure Building\nDubai Marina, Dubai, UAE",
-    "email": "kurt.bosse@ntlworld.com",
-    "phone": "+971 556641966",
+    "name": "Mr A. Mercer",
+    "address": "Suite 1402, Marina Heights\nJBR, Dubai, UAE",
+    "email": "alex.mercer@example.com",
+    "phone": "+971 50 123 4567",
     "bank": {
-      "account_holder": "Kurt Bosse",
-      "bank_name": "RAKBank",
-      "iban": "AE22 0400 0002 9298 5561 001",
-      "account_number": "02 9298 5561 001",
-      "swift": "NRAKAEAK",
-      "bank_address": "RAKBANK Head Office P.O.Box 5300, Ras Al Khaimah, UAE"
+      "account_holder": "Alex Mercer",
+      "bank_name": "Emirates NBD",
+      "iban": "AE07 0331 2345 6789 0123 456",
+      "account_number": "0123 456 789 012",
+      "swift": "EBILAEAD",
+      "bank_address": "Emirates NBD Head Office, P.O. Box 777, Dubai, UAE"
     }
   },
   "invoice": {
-    "invoice_no": "KB-05-2026",
-    "date": "2026-05-25",
-    "client_name": "Gasmeth Energy Limited",
-    "client_address": "KN7 Avenue\nKigali\nRwanda",
-    "reference": "Services provided according to Consultancy Agreement dated 15 December 2025"
+    "invoice_no": "INV-2026-0142",
+    "date": "2026-05-31",
+    "client_name": "Northwind Energy Corp",
+    "client_address": "2200 Energy Plaza\nHouston, TX 77002, USA",
+    "reference": "Services provided per Consultancy Agreement dated 12 January 2026 — Phase 2 Process Engineering"
   },
   "line_items": [
-    { "description": "Professional consultancy services", "units": 20.0, "daily_rate": 920.0, "total": 18400.0 }
+    { "description": "Professional consultancy services", "units": 18.0, "daily_rate": 980.0, "total": 17640.0 }
   ],
   "reimbursables": [
-    { "description": "Train to Heathrow GBP49.60", "units": 1.0, "daily_rate": 67.18, "total": 67.18 }
+    { "description": "Uber to DXB Airport AED 220.00", "units": 1.0, "daily_rate": 59.91, "total": 59.91 }
   ],
   "payment_terms": "Payment to be made within 30 days of receipt of invoice"
 }
@@ -154,7 +154,7 @@ Same JSON body as export-excel.
 **Response:** `application/vnd.openxmlformats-officedocument.spreadsheetml.sheet`  
 **Filename:** `Invoice_{InvoiceNo}_{ClientName}.xlsx`
 
-**Layout matches KB-05-2026 template:**
+**Layout (consultant invoice template):**
 - Title: "INVOICE" (large, centered)
 - Consultant header block (top-left) + Invoice No/Date box (top-right, light blue)
 - "Invoice to" + client address (bordered boxes)

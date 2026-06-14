@@ -83,47 +83,47 @@ def stop_test_server():
 
 SAMPLE_EXPENSE_PAYLOAD = {
     "metadata": {
-        "name": "Kurt Bosse",
-        "employee_id": "KB-001",
+        "name": "Alex Mercer",
+        "employee_id": "AM-001",
         "period": "2026-05",
-        "purpose": "Travel Expenses CNG Project",
+        "purpose": "Site Visit — Northwind Pilot, Houston",
         "date_prepared": "01/06/2026"
     },
     "rows": [
         {
-            "date": "2026-04-26",
-            "description": "Train to Heathrow",
-            "currency": "GBP",
-            "source_amount": 49.60,
-            "fx_rate": 1.3544,
-            "usd_amount": 67.18,
+            "date": "2026-05-03",
+            "description": "Uber to DXB Airport",
+            "currency": "AED",
+            "source_amount": 220.00,
+            "fx_rate": 0.2723,
+            "usd_amount": 59.91,
             "category": "Transport"
         },
         {
-            "date": "2026-04-27",
-            "description": "Rwanda Visa",
+            "date": "2026-05-04",
+            "description": "Marina Heights office printing",
             "currency": "USD",
-            "source_amount": 50.00,
+            "source_amount": 35.00,
             "fx_rate": 1.0,
-            "usd_amount": 50.00,
+            "usd_amount": 35.00,
             "category": "Other"
         },
         {
-            "date": "2026-05-10",
-            "description": "Car hire Amsterdam Schiphol",
-            "currency": "EUR",
-            "source_amount": 64.38,
-            "fx_rate": 1.1718,
-            "usd_amount": 75.44,
-            "category": "Transport"
+            "date": "2026-05-12",
+            "description": "Hotel Houston (1 night) — Northwind site visit",
+            "currency": "USD",
+            "source_amount": 189.00,
+            "fx_rate": 1.0,
+            "usd_amount": 189.00,
+            "category": "Flights & Hotels"
         },
         {
-            "date": "2026-05-11",
-            "description": "Train from Birmingham Airport",
+            "date": "2026-05-18",
+            "description": "Taxi Aberdeen office (training)",
             "currency": "GBP",
-            "source_amount": 18.60,
-            "fx_rate": 1.3525,
-            "usd_amount": 25.16,
+            "source_amount": 28.00,
+            "fx_rate": 1.27,
+            "usd_amount": 35.56,
             "category": "Transport"
         }
     ]
@@ -131,39 +131,39 @@ SAMPLE_EXPENSE_PAYLOAD = {
 
 SAMPLE_INVOICE_PAYLOAD = {
     "consultant": {
-        "name": "Mr K. Bosse",
-        "address": "Apt 505 Azure Building\nDubai Marina, Dubai, UAE",
-        "email": "kurt.bosse@ntlworld.com",
-        "phone": "+971 556641966",
+        "name": "Mr A. Mercer",
+        "address": "Suite 1402, Marina Heights\nJBR, Dubai, UAE",
+        "email": "alex.mercer@example.com",
+        "phone": "+971 50 123 4567",
         "bank": {
-            "account_holder": "Kurt Bosse",
-            "bank_name": "RAKBank",
-            "iban": "AE22 0400 0002 9298 5561 001",
-            "account_number": "02 9298 5561 001",
-            "swift": "NRAKAEAK",
-            "bank_address": "RAKBANK Head Office P.O.Box 5300, Ras Al Khaimah, UAE"
+            "account_holder": "Alex Mercer",
+            "bank_name": "Emirates NBD",
+            "iban": "AE07 0331 2345 6789 0123 456",
+            "account_number": "0123 456 789 012",
+            "swift": "EBILAEAD",
+            "bank_address": "Emirates NBD Head Office, P.O. Box 777, Dubai, UAE"
         }
     },
     "invoice": {
-        "invoice_no": "KB-05-2026",
-        "date": "2026-05-25",
-        "client_name": "Gasmeth Energy Limited",
-        "client_address": "KN7 Avenue\nKigali\nRwanda",
-        "reference": "Services provided according to Consultancy Agreement dated 15 December 2025"
+        "invoice_no": "INV-2026-0142",
+        "date": "2026-05-31",
+        "client_name": "Northwind Energy Corp",
+        "client_address": "2200 Energy Plaza\nHouston, TX 77002, USA",
+        "reference": "Services provided per Consultancy Agreement dated 12 January 2026 — Phase 2 Process Engineering"
     },
     "line_items": [
         {
             "description": "Professional consultancy services — see attached monthly timesheet",
-            "units": 20.0,
-            "daily_rate": 920.0,
-            "total": 18400.0
+            "units": 18.0,
+            "daily_rate": 980.0,
+            "total": 17640.0
         }
     ],
     "reimbursables": [
-        {"description": "Train to Heathrow GBP49.60", "units": 1.0, "daily_rate": 67.18, "total": 67.18},
-        {"description": "Rwanda Visa USD 50.00",       "units": 1.0, "daily_rate": 50.00, "total": 50.00},
-        {"description": "Car hire Amsterdam Euro 64.38","units": 1.0, "daily_rate": 75.44, "total": 75.44},
-        {"description": "Train from Birmingham GBP18.60","units": 1.0,"daily_rate": 25.16, "total": 25.16}
+        {"description": "Uber to DXB Airport AED 220.00",                "units": 1.0, "daily_rate": 59.91,  "total": 59.91},
+        {"description": "Marina Heights office printing USD 35.00",     "units": 1.0, "daily_rate": 35.00,  "total": 35.00},
+        {"description": "Hotel Houston (1 night) USD 189.00",           "units": 1.0, "daily_rate": 189.00, "total": 189.00},
+        {"description": "Taxi Aberdeen office GBP 28.00",               "units": 1.0, "daily_rate": 35.56,  "total": 35.56}
     ],
     "payment_terms": "Payment to be made within 30 days of receipt of invoice"
 }
@@ -238,19 +238,19 @@ class TestDirectHelpers(unittest.TestCase):
         print("  ✓ _usd_rate('XYZ' unknown) falls back to 1.0 ✅")
 
     def test_expense_totals_correct(self):
-        """Grand total of the sample payload should be 217.78."""
+        """Grand total of the sample payload should be 319.47."""
         rows = SAMPLE_EXPENSE_PAYLOAD["rows"]
         total = sum(float(r["usd_amount"]) for r in rows)
-        self.assertAlmostEqual(total, 217.78, places=1)
-        print(f"  ✓ Expense grand total = ${total:.2f} (expected $217.78) ✅")
+        self.assertAlmostEqual(total, 319.47, places=1)
+        print(f"  ✓ Expense grand total = ${total:.2f} (expected $319.47) ✅")
 
     def test_invoice_grand_total_correct(self):
-        """Invoice total: 18400 + 67.18 + 50 + 75.44 + 25.16 = 18617.78"""
+        """Invoice total: 17640.00 + 59.91 + 35.00 + 189.00 + 35.56 = 17959.47"""
         li_total = sum(float(i["total"]) for i in SAMPLE_INVOICE_PAYLOAD["line_items"])
         r_total = sum(float(r["total"]) for r in SAMPLE_INVOICE_PAYLOAD["reimbursables"])
         grand = li_total + r_total
-        self.assertAlmostEqual(grand, 18617.78, places=1)
-        print(f"  ✓ Invoice grand total = ${grand:,.2f} (expected $18,617.78) ✅")
+        self.assertAlmostEqual(grand, 17959.47, places=1)
+        print(f"  ✓ Invoice grand total = ${grand:,.2f} (expected $17,959.47) ✅")
 
 
 # ---------------------------------------------------------------------------
