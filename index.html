@@ -12,195 +12,207 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KU Automation | AI-Powered Engineering Solutions</title>
-    <meta name="description" content="Transform your engineering workflows with AI automation. Built by engineering professionals with decades of industry experience. Save 70% on document processing time.">
-    
-    <!-- Open Graph / LinkedIn -->
-    <!-- Canonical URL -->
+    <title>KU Automation | AI Engineering Reviews — On Demand</title>
+    <meta name="description" content="Upload a P&ID, isometric or datasheet. Get a principal-engineer-grade AI review in 5 minutes. CEng MIMechE supervised. From $15 per review. 13 reviewers live across piping, mechanical and civil.">
+
+    <!-- Canonical -->
     <link rel="canonical" href="https://www.ku-automation.com/">
-    
+
+    <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://www.ku-automation.com/">
-    <meta property="og:title" content="KU Automation | AI-Powered Engineering Solutions">
-    <meta property="og:description" content="Transform your engineering workflows with AI automation. Built by engineering professionals with decades of industry experience. Save 70% on document processing time.">
+    <meta property="og:title" content="KU Automation | Principal-Grade AI Engineering Reviews — On Demand">
+    <meta property="og:description" content="Upload a P&ID, isometric or datasheet. Get a CEng-supervised AI review in 5 minutes, from $15. 13 reviewers live across piping, mechanical and civil.">
     <meta property="og:image" content="https://www.ku-automation.com/assets/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    
+
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="KU Automation | AI-Powered Engineering Solutions">
-    <meta name="twitter:description" content="Transform your engineering workflows with AI automation. Built by engineering professionals with decades of industry experience.">
+    <meta name="twitter:title" content="KU Automation | Principal-Grade AI Engineering Reviews">
+    <meta name="twitter:description" content="Upload a P&ID, isometric or datasheet. Get a CEng-supervised AI review in 5 minutes, from $15.">
     <meta name="twitter:image" content="https://www.ku-automation.com/assets/og-image.png">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <!-- Favicon -->
+
+    <!-- Favicons -->
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
                     colors: {
-                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                        primary: {
+                            50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe',
+                            300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1',
+                            600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+                        }
                     }
                 }
             }
         }
     </script>
+
     <style>
         body { font-family: 'Inter', sans-serif; }
-        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
-        .gradient-border { background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef); }
-        .hero-gradient { background: linear-gradient(180deg, #f8fafc 0%, #ffffff 50%, #f1f5f9 100%); }
-        .card-gradient { background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%); }
-        .glow { box-shadow: 0 0 60px rgba(99, 102, 241, 0.15); }
+
+        /* Text gradients */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-text-amber {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #f97316 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Nav */
+        .nav-blur {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* Cards */
+        .feature-card { transition: all 0.25s ease; }
+        .feature-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+
+        .product-card { transition: all 0.25s ease; }
+        .product-card:hover { transform: translateY(-4px); box-shadow: 0 20px 48px rgba(99,102,241,0.18); }
+
+        /* Slide-up animation */
+        .slide-up { animation: slideUp 0.65s ease-out both; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Subtle float for hero floating cards */
         .float { animation: float 6s ease-in-out infinite; }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-        .slide-up { animation: slideUp 0.6s ease-out forwards; opacity: 0; }
-        @keyframes slideUp { to { opacity: 1; transform: translateY(0); } from { transform: translateY(30px); } }
-        .counter { font-variant-numeric: tabular-nums; }
-        .blob { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-        .testimonial-card { transition: all 0.3s ease; }
-        .testimonial-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
-        .feature-card { transition: all 0.3s ease; }
-        .feature-card:hover { transform: translateY(-2px); box-shadow: 0 12px 24px rgba(0,0,0,0.08); }
-        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
-        
-        /* 3D Floating Bubbles */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50%       { transform: translateY(-12px); }
+        }
+
+        /* Severity badge colours */
+        .badge-critical { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .badge-major    { background: #fff7ed; color: #c2410c; border: 1px solid #fdba74; }
+        .badge-minor    { background: #fefce8; color: #a16207; border: 1px solid #fde68a; }
+        .badge-obs      { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
+
+        /* Dark section */
+        .dark-section { background: #0f1117; color: #f8fafc; }
+
+        /* About section background image overlay */
+        .about-bg {
+            background-image: linear-gradient(to right, rgba(10,10,18,0.90) 0%, rgba(10,10,18,0.72) 55%, rgba(10,10,18,0.35) 100%),
+                              url('assets/ai-about-founder.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Hero bg */
+        .hero-bg {
+            background: linear-gradient(170deg, #f8fafc 0%, #ffffff 60%, #f1f5f9 100%);
+        }
+
+        /* Floating bubbles */
         .bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
         .bubble {
             position: absolute;
             border-radius: 50%;
             animation: floatBubble linear infinite;
-            /* 3D bubble base */
-            box-shadow: 
-                inset -8px -8px 20px rgba(255, 255, 255, 0.6),
-                inset 4px 4px 10px rgba(0, 0, 0, 0.1),
-                0 8px 32px rgba(0, 0, 0, 0.1);
+            box-shadow:
+                inset -8px -8px 20px rgba(255,255,255,0.6),
+                inset 4px 4px 10px rgba(0,0,0,0.1),
+                0 8px 32px rgba(0,0,0,0.06);
         }
         .bubble::before {
             content: '';
-            position: absolute;
-            top: 12%;
-            left: 18%;
-            width: 25%;
-            height: 20%;
+            position: absolute; top: 12%; left: 18%; width: 25%; height: 20%;
             background: radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            transform: rotate(-30deg);
+            border-radius: 50%; transform: rotate(-30deg);
         }
-        .bubble::after {
-            content: '';
-            position: absolute;
-            bottom: 15%;
-            right: 20%;
-            width: 15%;
-            height: 12%;
-            background: radial-gradient(ellipse, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-        }
-        
-        /* Indigo bubble */
-        .bubble-1 { 
-            width: 80px; height: 80px; left: 5%; 
-            background: radial-gradient(circle at 30% 30%, rgba(129, 140, 248, 0.7), rgba(99, 102, 241, 0.4) 50%, rgba(79, 70, 229, 0.3) 100%);
-            animation-duration: 25s; animation-delay: 0s; 
-        }
-        /* Purple-pink bubble */
-        .bubble-2 { 
-            width: 120px; height: 120px; left: 15%; 
-            background: radial-gradient(circle at 30% 30%, rgba(232, 121, 249, 0.6), rgba(217, 70, 239, 0.4) 50%, rgba(192, 38, 211, 0.3) 100%);
-            animation-duration: 30s; animation-delay: -5s; 
-        }
-        /* Violet bubble */
-        .bubble-3 { 
-            width: 60px; height: 60px; left: 35%; 
-            background: radial-gradient(circle at 30% 30%, rgba(196, 181, 253, 0.8), rgba(167, 139, 250, 0.5) 50%, rgba(139, 92, 246, 0.4) 100%);
-            animation-duration: 22s; animation-delay: -10s; 
-        }
-        /* Fuchsia bubble */
-        .bubble-4 { 
-            width: 100px; height: 100px; left: 50%; 
-            background: radial-gradient(circle at 30% 30%, rgba(240, 171, 252, 0.7), rgba(232, 121, 249, 0.45) 50%, rgba(217, 70, 239, 0.35) 100%);
-            animation-duration: 28s; animation-delay: -3s; 
-        }
-        /* Deep indigo bubble */
-        .bubble-5 { 
-            width: 70px; height: 70px; left: 70%; 
-            background: radial-gradient(circle at 30% 30%, rgba(165, 180, 252, 0.75), rgba(129, 140, 248, 0.5) 50%, rgba(99, 102, 241, 0.4) 100%);
-            animation-duration: 24s; animation-delay: -8s; 
-        }
-        /* Lavender bubble */
-        .bubble-6 { 
-            width: 90px; height: 90px; left: 85%; 
-            background: radial-gradient(circle at 30% 30%, rgba(221, 214, 254, 0.8), rgba(196, 181, 253, 0.5) 50%, rgba(167, 139, 250, 0.4) 100%);
-            animation-duration: 26s; animation-delay: -12s; 
-        }
-        /* Pink-purple bubble */
-        .bubble-7 { 
-            width: 50px; height: 50px; left: 25%; 
-            background: radial-gradient(circle at 30% 30%, rgba(249, 168, 212, 0.75), rgba(244, 114, 182, 0.5) 50%, rgba(236, 72, 153, 0.4) 100%);
-            animation-duration: 20s; animation-delay: -15s; 
-        }
-        /* Blue-violet bubble */
-        .bubble-8 { 
-            width: 110px; height: 110px; left: 60%; 
-            background: radial-gradient(circle at 30% 30%, rgba(199, 210, 254, 0.7), rgba(165, 180, 252, 0.45) 50%, rgba(129, 140, 248, 0.35) 100%);
-            animation-duration: 32s; animation-delay: -7s; 
-        }
-        
+        .bubble-1 { width: 70px; height: 70px; left: 5%;  background: radial-gradient(circle at 30% 30%, rgba(129,140,248,0.6), rgba(99,102,241,0.3) 60%); animation-duration: 25s; animation-delay: 0s; }
+        .bubble-2 { width: 110px; height: 110px; left: 18%; background: radial-gradient(circle at 30% 30%, rgba(232,121,249,0.5), rgba(217,70,239,0.3) 60%); animation-duration: 32s; animation-delay: -6s; }
+        .bubble-3 { width: 55px; height: 55px; left: 38%; background: radial-gradient(circle at 30% 30%, rgba(196,181,253,0.7), rgba(167,139,250,0.4) 60%); animation-duration: 22s; animation-delay: -11s; }
+        .bubble-4 { width: 90px; height: 90px; left: 55%; background: radial-gradient(circle at 30% 30%, rgba(240,171,252,0.6), rgba(232,121,249,0.35) 60%); animation-duration: 28s; animation-delay: -4s; }
+        .bubble-5 { width: 65px; height: 65px; left: 72%; background: radial-gradient(circle at 30% 30%, rgba(165,180,252,0.65), rgba(129,140,248,0.4) 60%); animation-duration: 24s; animation-delay: -9s; }
+        .bubble-6 { width: 80px; height: 80px; left: 87%; background: radial-gradient(circle at 30% 30%, rgba(221,214,254,0.7), rgba(196,181,253,0.4) 60%); animation-duration: 26s; animation-delay: -13s; }
         @keyframes floatBubble {
-            0% { transform: translateY(100vh) rotate(0deg) scale(1); opacity: 0; }
-            10% { opacity: 0.85; }
-            90% { opacity: 0.85; }
+            0%   { transform: translateY(100vh) rotate(0deg)   scale(1);   opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.7; }
             100% { transform: translateY(-100vh) rotate(360deg) scale(1.1); opacity: 0; }
         }
+
+        /* Scroll-reveal utility */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
+
 <body class="bg-white text-gray-900 antialiased">
-    <!-- Floating Bubbles Background -->
-    <div class="bubbles-container">
+
+    <!-- Floating Bubbles -->
+    <div class="bubbles-container" aria-hidden="true">
         <div class="bubble bubble-1"></div>
         <div class="bubble bubble-2"></div>
         <div class="bubble bubble-3"></div>
         <div class="bubble bubble-4"></div>
         <div class="bubble bubble-5"></div>
         <div class="bubble bubble-6"></div>
-        <div class="bubble bubble-7"></div>
-        <div class="bubble bubble-8"></div>
     </div>
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+
+    <!-- ═══════════════════════ NAV ═══════════════════════ -->
+    <nav id="main-nav" class="fixed w-full z-50 nav-blur bg-white/85 border-b border-gray-100 transition-shadow duration-200">
+        <div class="max-w-7xl mx-auto px-6 py-3.5">
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-3">
-                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
-                    <span class="font-semibold text-lg">KU Automation</span>
-                </div>
-                
-                <div class="hidden md:flex items-center gap-7">
-                    <a href="#services" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Services</a>
-                    <a href="https://services.ku-automation.com/services" onclick="gtag && gtag('event', 'view_ai_reviews', {'event_category': 'engagement'});" class="inline-flex items-center gap-1.5 text-primary-600 hover:text-primary-700 font-semibold transition-colors">
+
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation" class="w-10 h-10 rounded-lg object-contain">
+                    <span class="font-bold text-lg text-gray-900">KU Automation</span>
+                </a>
+
+                <!-- Desktop links -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="#services" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Services</a>
+                    <a href="https://services.ku-automation.com/services"
+                       onclick="gtag&&gtag('event','nav_ai_reviews',{'event_category':'engagement'});"
+                       class="inline-flex items-center gap-1.5 text-primary-600 hover:text-primary-700 font-semibold text-sm transition-colors">
                         AI Reviews
-                        <span class="text-[10px] font-bold bg-primary-100 text-primary-700 px-1.5 py-0.5 rounded">NEW</span>
+                        <span class="text-[9px] font-bold bg-primary-100 text-primary-700 px-1.5 py-0.5 rounded-full uppercase tracking-wide">NEW</span>
                     </a>
-                    <a href="use-cases.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Use Cases</a>
-                    <a href="#about" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">About</a>
-                    <a href="pricing.html" onclick="gtag('event', 'view_pricing', {'event_category': 'engagement'});" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Pricing</a>
-                    <a href="blog.html" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Blog</a>
-                    <a href="demos.html" onclick="gtag('event', 'try_demos', {'event_category': 'engagement'});" class="text-gray-600 hover:text-gray-900 font-medium transition-colors">Try Demos</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Use Cases</a>
+                    <a href="#about" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">About</a>
+                    <a href="pricing.html" onclick="gtag('event','nav_pricing',{'event_category':'engagement'});"
+                       class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Pricing</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Blog</a>
+                    <a href="demos.html" onclick="gtag('event','nav_demos',{'event_category':'engagement'});"
+                       class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Demos</a>
                 </div>
-                
+
+                <!-- Right CTAs -->
                 <div class="flex items-center gap-3">
-                    <a href="https://services.ku-automation.com" target="_blank" rel="noopener" class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2.5 border border-primary-600 text-primary-600 hover:bg-primary-50 rounded-full font-medium transition-all text-sm">
-                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0-1.1.9-2 2-2h4a2 2 0 012 2v6a2 2 0 01-2 2h-4a2 2 0 01-2-2v-6zM7 8V6a5 5 0 0110 0v2"/></svg>
+                    <a href="https://services.ku-automation.com"
+                       class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 border border-primary-200 text-primary-600 hover:bg-primary-50 rounded-full font-medium text-sm transition-all">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
                         Client Portal
                     </a>
-                    <a href="#contact" class="px-5 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-medium transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                    <a href="#contact"
+                       class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg hover:shadow-primary-500/25">
                         Get Started
                     </a>
                 </div>
@@ -208,88 +220,564 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero-gradient min-h-screen flex items-center pt-24 pb-20 overflow-hidden relative">
-        <!-- Background decorations -->
-        <div class="absolute top-20 right-0 w-[600px] h-[600px] bg-primary-100/50 rounded-full blur-3xl -z-10"></div>
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-100/50 rounded-full blur-3xl -z-10"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 w-full">
+    <!-- ═══════════════════════ HERO ═══════════════════════ -->
+    <section class="hero-bg min-h-screen flex items-center pt-20 pb-16 overflow-hidden relative">
+        <!-- Background orbs -->
+        <div class="absolute top-10 right-0 w-[700px] h-[700px] bg-primary-100/40 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-purple-100/40 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6 w-full relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div class="slide-up" style="animation-delay: 0.1s;">
-                    <!-- Badge -->
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-medium mb-6">
-                        <span class="w-2 h-2 bg-primary-500 rounded-full animate-pulse"></span>
-                        Built by Engineers, For Engineers
+
+                <!-- Left: copy -->
+                <div class="slide-up" style="animation-delay:0.05s">
+
+                    <!-- Eyebrow badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-emerald-50 border border-emerald-200 rounded-full text-emerald-800 text-sm font-semibold mb-7">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+                        </span>
+                        ⚡ New · 13 AI Reviewers Live
                     </div>
-                    
-                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.1] mb-6 tracking-tight">
-                        AI Automation for <span class="gradient-text">Engineering</span>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-[3.8rem] font-extrabold leading-[1.08] mb-5 tracking-tight">
+                        Principal-Grade AI<br>
+                        Engineering Reviews<br>
+                        <span class="gradient-text">— On Demand.</span>
                     </h1>
-                    
-                    <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-xl">
-                        Cut document processing time by <strong class="text-gray-900">80%</strong>. 
-                        Automate repetitive tasks. Built by engineering professionals with 
-                        <strong class="text-gray-900">decades of experience</strong> in oil & gas and EPC.
+
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-lg">
+                        Upload a P&amp;ID, isometric, datasheet or stress report. Get an owner's-engineering-grade review in
+                        <strong class="text-gray-900">under 5 minutes</strong>, from <strong class="text-gray-900">$15</strong>.
+                        CEng MIMechE supervised.
                     </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 mb-10">
-                        <a href="mailto:contact@ku-automation.com" onclick="gtag('event', 'contact_email', {'event_category': 'conversion'});" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-lg transition-all hover:shadow-xl hover:shadow-primary-500/30 text-center">
-                            Book Free Strategy Call
+
+                    <!-- CTAs -->
+                    <div class="flex flex-col sm:flex-row gap-4 mb-9">
+                        <a href="https://services.ku-automation.com/services"
+                           onclick="gtag&&gtag('event','hero_browse_reviews',{'event_category':'conversion'});"
+                           class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-bold text-base transition-all hover:shadow-xl hover:shadow-primary-500/30">
+                            Browse 13 AI Reviewers
+                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                         </a>
-                        <a href="#services" class="px-8 py-4 bg-white hover:bg-gray-50 border border-gray-200 rounded-full font-semibold text-lg transition-all text-center">
-                            See How It Works
+                        <a href="mailto:contact@ku-automation.com"
+                           onclick="gtag&&gtag('event','hero_strategy_call',{'event_category':'conversion'});"
+                           class="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white hover:bg-gray-50 border border-gray-200 rounded-full font-semibold text-base transition-all hover:border-gray-300 hover:shadow-md">
+                            Book a Strategy Call
                         </a>
                     </div>
-                    
-                    <!-- Trust Indicators -->
-                    <div class="flex flex-wrap gap-6 items-center">
-                        <div class="flex items-center gap-2 text-sm text-gray-500">
-                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            <span>Chartered Engineers</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-gray-500">
-                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            <span>Industry Veterans</span>
-                        </div>
-                        <div class="flex items-center gap-2 text-sm text-gray-500">
-                            <svg class="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                            <span>Oil & Gas Focus</span>
-                        </div>
+
+                    <!-- Trust pills -->
+                    <div class="flex flex-wrap gap-3">
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium text-gray-700">
+                            <svg class="w-3.5 h-3.5 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            CEng MIMechE supervised
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium text-gray-700">
+                            <svg class="w-3.5 h-3.5 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            30+ codes covered
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium text-gray-700">
+                            <svg class="w-3.5 h-3.5 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            Pay per review · No subscription
+                        </span>
+                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-100 rounded-full text-xs font-medium text-gray-700">
+                            <svg class="w-3.5 h-3.5 text-primary-500" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                            No signup required
+                        </span>
                     </div>
                 </div>
-                
-                <!-- Hero Image/Illustration -->
-                <div class="relative slide-up" style="animation-delay: 0.3s;">
-                    <div class="relative">
-                        <!-- Main Dashboard Image -->
-                        <div class="bg-white rounded-2xl shadow-2xl p-4 glow">
-                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" alt="AI Dashboard" class="rounded-xl w-full">
-                        </div>
-                        
-                        <!-- Floating Card 1 -->
-                        <div class="absolute -left-8 top-1/4 bg-white rounded-xl shadow-lg p-4 float" style="animation-delay: 0.5s;">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+
+                <!-- Right: hero image -->
+                <div class="relative slide-up" style="animation-delay:0.2s">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="assets/ai-hero-engineer.jpg" alt="Engineer reviewing P&ID with AI overlay" class="w-full object-cover" style="max-height:520px;">
+                        <!-- subtle dark vignette -->
+                        <div class="absolute inset-0 bg-gradient-to-t from-gray-900/30 via-transparent to-transparent pointer-events-none"></div>
+
+                        <!-- Floating finding card -->
+                        <div class="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur rounded-xl p-4 shadow-xl float" style="animation-delay:0.4s">
+                            <div class="flex items-start gap-3">
+                                <div class="flex-shrink-0">
+                                    <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-bold badge-critical">CRITICAL</span>
                                 </div>
-                                <div>
-                                    <div class="text-sm font-semibold">Document Processed</div>
-                                    <div class="text-xs text-gray-500">Saved 2.5 hours</div>
+                                <div class="min-w-0">
+                                    <p class="text-sm font-semibold text-gray-900 leading-tight">Relief valve PSV-1205 sizing reference missing</p>
+                                    <p class="text-xs text-gray-500 mt-0.5">P&ID Rev C · Line 8"-CS-1205-A1A — ASME B31.3 §304 · API 520</p>
+                                </div>
+                                <div class="flex-shrink-0 w-7 h-7 bg-primary-100 rounded-full flex items-center justify-center">
+                                    <span class="text-base">🔧</span>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Floating Card 2 -->
-                        <div class="absolute -right-4 bottom-1/4 bg-white rounded-xl shadow-lg p-4 float" style="animation-delay: 1s;">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                                    <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+
+                    <!-- Floating stat card -->
+                    <div class="absolute -right-4 top-8 bg-white rounded-xl shadow-lg px-5 py-4 float" style="animation-delay:1s">
+                        <div class="text-center">
+                            <div class="text-3xl font-extrabold gradient-text">5 min</div>
+                            <div class="text-xs text-gray-500 font-medium mt-0.5">Avg. review time</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ STATS BAR ═══════════════════════ -->
+    <section class="py-12 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 divide-y md:divide-y-0 md:divide-x divide-white/10">
+                <div class="text-center pt-4 md:pt-0">
+                    <div class="text-3xl md:text-4xl font-extrabold gradient-text">13</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">AI Reviewers Live</div>
+                </div>
+                <div class="text-center pt-4 md:pt-0">
+                    <div class="text-3xl md:text-4xl font-extrabold gradient-text">30+</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Codes Covered</div>
+                </div>
+                <div class="text-center pt-4 md:pt-0">
+                    <div class="text-3xl md:text-4xl font-extrabold gradient-text">5 min</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Turnaround</div>
+                </div>
+                <div class="text-center pt-4 md:pt-0">
+                    <div class="text-3xl md:text-4xl font-extrabold gradient-text">21 yrs</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Engineering DNA</div>
+                </div>
+                <div class="text-center pt-4 md:pt-0">
+                    <div class="text-3xl md:text-4xl font-extrabold gradient-text">$15</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Starting Price</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ MARKETPLACE SHOWCASE ═══════════════════════ -->
+    <section class="dark-section py-24" id="marketplace">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <!-- Header -->
+            <div class="text-center mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 border border-white/20 rounded-full text-sm font-semibold text-white/90 mb-5">
+                    <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span></span>
+                    Live Marketplace · services.ku-automation.com
+                </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-4">13 AI Engineering Reviewers</h2>
+                <p class="text-lg text-gray-400 max-w-2xl mx-auto">
+                    Production-ready today — owned, operated, and supervised by a Chartered Engineer.
+                    Upload. Review. Receive your PDF + Excel comment register.
+                </p>
+            </div>
+
+            <!-- Product grid — 13 live -->
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-8">
+
+                <!-- 1. P&ID Review -->
+                <a href="https://services.ku-automation.com/services/pid-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">🔧</div>
+                    <div class="font-bold text-white mb-1 text-base">P&amp;ID Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Principal Piping AI Engineer reviews your P&amp;ID in 4 minutes</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · API 520 · NACE MR0175</div>
+                </a>
+
+                <!-- 2. Piping Isometric -->
+                <a href="https://services.ku-automation.com/services/piping-isometric-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">📐</div>
+                    <div class="font-bold text-white mb-1 text-base">Piping Isometric Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">AI checks your isometric drawings against ASME B31.3 in minutes</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · B16.5 · B16.9 · B16.25</div>
+                </a>
+
+                <!-- 3. Line List -->
+                <a href="https://services.ku-automation.com/services/line-list-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">📋</div>
+                    <div class="font-bold text-white mb-1 text-base">Piping Line List Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Catch line spec errors &amp; missing data before detailed design freezes</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $15</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · B16.5 · API 6D</div>
+                </a>
+
+                <!-- 4. Caesar II -->
+                <a href="https://services.ku-automation.com/services/caesar-ii-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">⚙️</div>
+                    <div class="font-bold text-white mb-1 text-base">Caesar II Stress Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Independent owner's engineer check of your stress analysis report</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $29</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · B31.1 · NORSOK L-002</div>
+                </a>
+
+                <!-- 5. Piping GA -->
+                <a href="https://services.ku-automation.com/services/piping-ga-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">🗺️</div>
+                    <div class="font-bold text-white mb-1 text-base">Piping GA Drawing Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Clearances, access, maintenance envelopes &amp; layout checked against ISO 13705</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · ISO 13705 · API 686</div>
+                </a>
+
+                <!-- 6. Plot Plan -->
+                <a href="https://services.ku-automation.com/services/plot-plan-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">🗺️</div>
+                    <div class="font-bold text-white mb-1 text-base">Plot Plan Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Equipment spacing, hazard zoning &amp; escape routes — owner's engineering review</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">NFPA 30 · API 752 · API RP 521</div>
+                </a>
+
+                <!-- 7. Valve List -->
+                <a href="https://services.ku-automation.com/services/valve-list-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">🔩</div>
+                    <div class="font-bold text-white mb-1 text-base">Valve List Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Tag consistency, rating, materials, fire-safe &amp; fugitive emission compliance</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">API 6D · API 607 · ISO 15848 · NACE MR0175</div>
+                </a>
+
+                <!-- 8. PMS -->
+                <a href="https://services.ku-automation.com/services/piping-material-spec-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">📋</div>
+                    <div class="font-bold text-white mb-1 text-base">PMS Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Line class / PMS audit — materials, branch tables, gaskets, bolting against ASME B31.3</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · B16.5 · B16.34 · NACE MR0175</div>
+                </a>
+
+                <!-- 9. Class Sheet -->
+                <a href="https://services.ku-automation.com/services/piping-class-sheet-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">📑</div>
+                    <div class="font-bold text-white mb-1 text-base">Piping Class Sheet Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Individual piping class audit — components, dimensions, tolerances, allowable services</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · B16.5 · B16.9 · B36.10M</div>
+                </a>
+
+                <!-- 10. MTO/BoQ -->
+                <a href="https://services.ku-automation.com/services/mto-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">📊</div>
+                    <div class="font-bold text-white mb-1 text-base">Piping MTO / BoQ Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Quantity reconciliation, ISBL/OSBL split, contingency &amp; spare philosophy</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ASME B31.3 · AACE Class 1–5 Estimating</div>
+                </a>
+
+                <!-- 11. Pipe Support -->
+                <a href="https://services.ku-automation.com/services/pipe-support-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">🏗️</div>
+                    <div class="font-bold text-white mb-1 text-base">Pipe Support Drawing Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Support type selection, load calc, MSS-SP-58 detailing &amp; anchor design</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-blue-900/50 text-blue-300 px-2 py-0.5 rounded-full border border-blue-800/50">Piping</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">MSS-SP-58 · MSS-SP-69 · PIP STS03020 · ACI 318</div>
+                </a>
+
+                <!-- 12. Pump Datasheet -->
+                <a href="https://services.ku-automation.com/services/pump-datasheet-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">💧</div>
+                    <div class="font-bold text-white mb-1 text-base">Pump Datasheet Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">API 610 / ATEX compliance check on your pump datasheet in minutes</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $15</span>
+                        <span class="text-xs bg-purple-900/50 text-purple-300 px-2 py-0.5 rounded-full border border-purple-800/50">Mechanical</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">API 610 · API 682 · ATEX 2014/34/EU</div>
+                </a>
+
+                <!-- 13. Foundation Drawing -->
+                <a href="https://services.ku-automation.com/services/foundation-drawing-reviewer"
+                   class="product-card bg-white/5 hover:bg-white/10 border border-white/10 hover:border-primary-400/40 rounded-2xl p-5 block">
+                    <div class="text-3xl mb-3">🏗️</div>
+                    <div class="font-bold text-white mb-1 text-base">Foundation Drawing Review</div>
+                    <div class="text-gray-400 text-xs mb-3 leading-relaxed">Structural AI checks equipment foundation drawings for ACI 318 compliance</div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-primary-300 font-bold text-sm">from $19</span>
+                        <span class="text-xs bg-green-900/50 text-green-300 px-2 py-0.5 rounded-full border border-green-800/50">Civil</span>
+                    </div>
+                    <div class="text-[10px] text-gray-600 mt-2">ACI 318 · ASCE 7 · API 686 · IBC 2021</div>
+                </a>
+
+            </div>
+
+            <!-- Coming soon + CTA row -->
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
+                <div class="flex flex-wrap gap-2 items-center">
+                    <span class="text-gray-500 text-sm font-medium">Coming soon:</span>
+                    <span class="text-xs bg-white/5 border border-white/10 text-gray-400 px-3 py-1 rounded-full">🌀 Compressor Datasheet</span>
+                    <span class="text-xs bg-white/5 border border-white/10 text-gray-400 px-3 py-1 rounded-full">🔩 Steel Structure</span>
+                    <span class="text-xs bg-white/5 border border-white/10 text-gray-400 px-3 py-1 rounded-full">🏭 Pipe Rack Design</span>
+                </div>
+                <a href="https://services.ku-automation.com/services"
+                   onclick="gtag&&gtag('event','marketplace_see_all',{'event_category':'engagement'});"
+                   class="inline-flex items-center gap-2 px-6 py-3 bg-primary-600 hover:bg-primary-500 text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                    Open Full Catalogue
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ HOW IT WORKS ═══════════════════════ -->
+    <section class="py-24 bg-white" id="how-it-works">
+        <div class="max-w-7xl mx-auto px-6">
+
+            <div class="text-center mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-semibold mb-5">How It Works</div>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Upload. Review. Report.</h2>
+                <p class="text-lg text-gray-500 max-w-xl mx-auto">Three steps. Five minutes. A comment register that reads like a principal engineer wrote it — because a principal engineer designed it.</p>
+            </div>
+
+            <!-- Process flow image -->
+            <div class="relative rounded-2xl overflow-hidden shadow-xl mb-14 reveal">
+                <img src="assets/ai-process-flow.jpg" alt="Upload to AI Brain to Report — 3-stage process flow" class="w-full object-cover" style="max-height:420px; object-position:center;">
+                <div class="absolute inset-0 bg-gradient-to-t from-gray-900/60 via-gray-900/10 to-transparent pointer-events-none"></div>
+                <!-- Stage labels overlaid bottom -->
+                <div class="absolute bottom-0 left-0 right-0 px-8 py-6 flex justify-between">
+                    <div class="text-white text-center">
+                        <div class="text-xs font-bold uppercase tracking-widest text-white/60 mb-1">Stage 1</div>
+                        <div class="font-bold text-sm">Upload Document</div>
+                    </div>
+                    <div class="text-white text-center">
+                        <div class="text-xs font-bold uppercase tracking-widest text-white/60 mb-1">Stage 2</div>
+                        <div class="font-bold text-sm">AI Engineering Review</div>
+                    </div>
+                    <div class="text-white text-center">
+                        <div class="text-xs font-bold uppercase tracking-widest text-white/60 mb-1">Stage 3</div>
+                        <div class="font-bold text-sm">PDF + Excel Report</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Steps grid -->
+            <div class="grid md:grid-cols-3 gap-8 mb-12">
+                <div class="feature-card bg-gray-50 rounded-2xl p-7 border border-gray-100 reveal" style="transition-delay:0.05s">
+                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
+                        <span class="text-xl font-extrabold text-primary-600">1</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Upload your document</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">P&amp;ID, isometric, datasheet, stress report, valve list — any standard engineering deliverable. PDF or image accepted.</p>
+                </div>
+                <div class="feature-card bg-gray-50 rounded-2xl p-7 border border-gray-100 reveal" style="transition-delay:0.1s">
+                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
+                        <span class="text-xl font-extrabold text-primary-600">2</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">AI runs the review</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">The AI checks against the applicable codes — ASME B31.3, API 610, NACE MR0175, ACI 318 and more. Findings are tagged by severity: Critical, Major, Minor, Observation.</p>
+                </div>
+                <div class="feature-card bg-gray-50 rounded-2xl p-7 border border-gray-100 reveal" style="transition-delay:0.15s">
+                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-5">
+                        <span class="text-xl font-extrabold text-primary-600">3</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Receive your branded report</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">A PDF comment register + Excel workbook lands in your inbox. Every finding references the applicable clause, tells you what's wrong, and how to fix it.</p>
+                </div>
+            </div>
+
+            <!-- Sample finding card -->
+            <div class="max-w-2xl mx-auto bg-white rounded-2xl border border-gray-200 shadow-lg overflow-hidden reveal">
+                <div class="px-5 py-3 bg-gray-50 border-b border-gray-100 flex items-center gap-2">
+                    <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                    <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                    <div class="w-3 h-3 rounded-full bg-green-400"></div>
+                    <span class="ml-3 text-xs font-mono text-gray-400">KU-Review-P&amp;ID-RevC-findings.xlsx</span>
+                </div>
+                <div class="p-5 space-y-3">
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-red-50">
+                        <span class="flex-shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-bold badge-critical">CRITICAL</span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900">PSV-1205 relief device sizing reference missing from P&amp;ID</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Clause: ASME B31.3 §304 · API 520 Part I — Line 8"-CS-1205-A1A</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-orange-50">
+                        <span class="flex-shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-bold badge-major">MAJOR</span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900">Double-block-and-bleed not specified at pump suction tie-in</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Clause: API 600 §6.4 · Company isolation philosophy Rev 4</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-yellow-50">
+                        <span class="flex-shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-bold badge-minor">MINOR</span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900">Line class break location not indicated at HV-301 downstream flange</div>
+                            <div class="text-xs text-gray-500 mt-0.5">Clause: ASME B31.3 §302.2.2 — Spec break documentation</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-3 rounded-xl bg-blue-50">
+                        <span class="flex-shrink-0 inline-flex items-center px-2 py-0.5 rounded text-xs font-bold badge-obs">OBSERVATION</span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900">ISA 5.1 tag format inconsistency noted on FT-2104 vs FT-2105</div>
+                            <div class="text-xs text-gray-500 mt-0.5">ISA 5.1-2009 §5.2 — Instrument tag numbering convention</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="px-5 py-3 bg-gray-50 border-t border-gray-100 text-xs text-gray-400 flex items-center justify-between">
+                    <span>4 findings · Review time: 3 min 47 sec</span>
+                    <span class="text-primary-500 font-semibold">CEng MIMechE supervised ✓</span>
+                </div>
+            </div>
+
+            <!-- Pills -->
+            <div class="flex flex-wrap gap-3 justify-center mt-10">
+                <span class="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold border border-primary-100">5 minutes average</span>
+                <span class="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold border border-primary-100">From $15 per review</span>
+                <span class="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold border border-primary-100">No subscription</span>
+                <span class="px-4 py-2 bg-primary-50 text-primary-700 rounded-full text-sm font-semibold border border-primary-100">PDF + Excel output</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ DISCIPLINE COVERAGE ═══════════════════════ -->
+    <section class="py-24 bg-gray-50" id="disciplines">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+                <!-- Left: image -->
+                <div class="reveal">
+                    <img src="assets/ai-disciplines-grid.jpg" alt="Piping, Mechanical, Civil, Structural discipline coverage" class="w-full rounded-2xl shadow-xl object-cover">
+                </div>
+
+                <!-- Right: status cards -->
+                <div class="reveal" style="transition-delay:0.1s">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-semibold mb-5">
+                        Discipline Coverage
+                    </div>
+                    <h2 class="text-4xl font-extrabold mb-3">Built across the full EPC scope.</h2>
+                    <p class="text-gray-500 mb-8 leading-relaxed">
+                        Each reviewer is trained on the applicable codes for its discipline — not a generic engineering model.
+                        We started where the review volume is heaviest: piping.
+                    </p>
+
+                    <div class="space-y-4">
+                        <!-- Piping -->
+                        <div class="feature-card bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+                            <div class="flex items-start justify-between mb-2">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">🔧</span>
+                                    <div>
+                                        <div class="font-bold text-gray-900">Piping</div>
+                                        <div class="text-xs text-gray-500">ASME B31.3 · B16.5 · B16.34 · API 6D · NACE MR0175 · ISO 15848</div>
+                                    </div>
                                 </div>
-                                <div>
-                                    <div class="text-sm font-semibold">AI Analysis Complete</div>
-                                    <div class="text-xs text-gray-500">47 data points extracted</div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-bold">
+                                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                    11 Live
+                                </span>
+                            </div>
+                            <div class="flex flex-wrap gap-1.5 mt-2">
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">P&amp;ID</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">Isometric</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">Line List</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">Caesar II</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">GA Drawing</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">Plot Plan</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">Valve List</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">PMS</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">Class Sheet</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">MTO/BoQ</span>
+                                <span class="text-[10px] bg-gray-50 border border-gray-200 text-gray-600 px-2 py-0.5 rounded">Pipe Support</span>
+                            </div>
+                        </div>
+
+                        <!-- Mechanical -->
+                        <div class="feature-card bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">⚙️</span>
+                                    <div>
+                                        <div class="font-bold text-gray-900">Mechanical</div>
+                                        <div class="text-xs text-gray-500">API 610 · API 682 · API 617 · API 618 · API 670</div>
+                                    </div>
                                 </div>
+                                <div class="flex flex-col items-end gap-1">
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-bold">
+                                        <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                        1 Live
+                                    </span>
+                                    <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-50 text-amber-700 border border-amber-200 rounded-full text-xs font-bold">
+                                        <span class="w-1.5 h-1.5 bg-amber-400 rounded-full"></span>
+                                        1 Coming
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Civil -->
+                        <div class="feature-card bg-white rounded-2xl p-5 border border-gray-100 shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">🏗️</span>
+                                    <div>
+                                        <div class="font-bold text-gray-900">Civil</div>
+                                        <div class="text-xs text-gray-500">ACI 318 · ASCE 7 · IBC 2021 · API 686</div>
+                                    </div>
+                                </div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full text-xs font-bold">
+                                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full"></span>
+                                    1 Live
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Structural -->
+                        <div class="feature-card bg-white rounded-2xl p-5 border border-gray-100 shadow-sm opacity-70">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <span class="text-2xl">🔩</span>
+                                    <div>
+                                        <div class="font-bold text-gray-900">Structural</div>
+                                        <div class="text-xs text-gray-500">AISC 360 · EN 1993 · ASCE 7 · MSS SP-58/69/97</div>
+                                    </div>
+                                </div>
+                                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-500 border border-gray-200 rounded-full text-xs font-bold">
+                                    <span class="w-1.5 h-1.5 bg-gray-400 rounded-full"></span>
+                                    2 Coming
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -298,410 +786,362 @@
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="py-16 bg-gray-50 border-y border-gray-100">
+    <!-- ═══════════════════════ PROBLEM / WHY THIS EXISTS ═══════════════════════ -->
+    <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold gradient-text counter" data-target="70">70%</div>
-                    <div class="text-gray-600 mt-2">Time Saved</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold gradient-text">&lt;4wk</div>
-                    <div class="text-gray-600 mt-2">ROI Payback</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold gradient-text">21+</div>
-                    <div class="text-gray-600 mt-2">Years Experience</div>
-                </div>
-                <div class="text-center">
-                    <div class="text-4xl md:text-5xl font-bold gradient-text">24/7</div>
-                    <div class="text-gray-600 mt-2">AI Availability</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Problem Section -->
-    <section class="py-24">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-100 rounded-full text-red-700 text-sm font-medium mb-4">
+            <div class="text-center mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-50 border border-red-100 rounded-full text-red-700 text-sm font-semibold mb-5">
                     The Problem
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Engineering's Productivity Crisis</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Your engineers didn't spend years in university to copy data between spreadsheets.</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">EPCs deliver fast. Owners verify slow.</h2>
+                <p class="text-xl text-gray-500 max-w-2xl mx-auto">We close the gap.</p>
             </div>
-            
+
             <div class="grid md:grid-cols-3 gap-6">
-                <div class="feature-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+                <div class="feature-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm reveal" style="transition-delay:0.05s">
                     <div class="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mb-6">
                         <svg class="w-7 h-7 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">40% Time Lost</h3>
-                    <p class="text-gray-600">Engineers spend nearly half their day on documentation, data entry, and manual report generation.</p>
+                    <h3 class="text-xl font-bold mb-3">Manual Reviews Take Days</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">A single P&amp;ID review by an external consultant takes 3–5 business days and costs $400–$800. A project with 200 P&amp;IDs means months of review backlog.</p>
                 </div>
-                
-                <div class="feature-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+
+                <div class="feature-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm reveal" style="transition-delay:0.1s">
                     <div class="w-14 h-14 bg-orange-50 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-7 h-7 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M12 20a8 8 0 100-16 8 8 0 000 16z"/></svg>
+                        <svg class="w-7 h-7 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Generic AI Fails</h3>
-                    <p class="text-gray-600">ChatGPT doesn't understand P&IDs, datasheets, or engineering specifications. It wasn't built for your industry.</p>
+                    <h3 class="text-xl font-bold mb-3">Generic AI Gets It Wrong</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">ChatGPT doesn't know ASME B31.3 §304.1.2 from NACE MR0175 Table A3. It wasn't trained on engineering deliverables. Ours was.</p>
                 </div>
-                
-                <div class="feature-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm">
+
+                <div class="feature-card bg-white rounded-2xl p-8 border border-gray-100 shadow-sm reveal" style="transition-delay:0.15s">
                     <div class="w-14 h-14 bg-yellow-50 rounded-2xl flex items-center justify-center mb-6">
                         <svg class="w-7 h-7 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold mb-3">Compliance Risk</h3>
-                    <p class="text-gray-600">Manual processes lead to errors. HSE documentation mistakes cost thousands—or worse.</p>
+                    <h3 class="text-xl font-bold mb-3">Compliance Gaps Cost More Later</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">A missed relief valve specification or incorrect line class found during commissioning costs 50× more to fix than catching it at IFR. Prevention, not correction.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- AI Reviews Marketplace Banner -->
-    <section class="py-20 bg-gradient-to-br from-primary-600 via-primary-700 to-purple-700 text-white relative overflow-hidden">
-        <!-- Decorative blur orbs -->
-        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-400/20 rounded-full blur-3xl -z-0"></div>
-        <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-300/20 rounded-full blur-3xl -z-0"></div>
-        
-        <div class="max-w-7xl mx-auto px-6 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-12 items-center">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-3 py-1.5 bg-white/15 backdrop-blur-sm border border-white/30 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
-                        <span class="relative flex h-2 w-2">
-                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
-                        </span>
-                        New · Self-Serve
-                    </div>
-                    <h2 class="text-4xl md:text-5xl font-extrabold mb-6 leading-tight">
-                        AI Engineering Reviews,<br>
-                        <span class="bg-gradient-to-r from-amber-200 to-pink-200 bg-clip-text text-transparent">on demand.</span>
-                    </h2>
-                    <p class="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
-                        Upload a P&ID, isometric, datasheet, or stress report. Get a principal-engineer-grade review in under 5 minutes. Pay per review — no subscription, no login.
-                    </p>
-                    <div class="flex flex-wrap gap-3 mb-8 text-sm">
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">✓ From $15</span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">✓ No signup</span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">✓ PDF + Excel report</span>
-                        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full">✓ CEng MIMechE-supervised</span>
-                    </div>
-                    <div class="flex flex-wrap gap-4">
-                        <a href="https://services.ku-automation.com/services" onclick="gtag && gtag('event', 'cta_browse_reviews', {'event_category': 'conversion'});" class="inline-flex items-center gap-2 px-7 py-4 bg-white text-primary-700 hover:bg-amber-50 rounded-full font-bold transition-all hover:shadow-2xl hover:shadow-amber-200/50 hover:-translate-y-0.5">
-                            Browse Reviews
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-                        </a>
-                        <a href="https://services.ku-automation.com" onclick="gtag && gtag('event', 'cta_client_portal', {'event_category': 'engagement'});" class="inline-flex items-center gap-2 px-7 py-4 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/30 rounded-full font-semibold transition-all">
-                            B2B Login
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Right: deliverable showcase -->
-                <div class="grid grid-cols-2 gap-3">
-                    <a href="https://services.ku-automation.com/services/pid-reviewer" class="group bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl p-5 transition-all hover:-translate-y-1">
-                        <div class="text-3xl mb-3">🔧</div>
-                        <div class="font-bold text-white mb-1">P&ID Review</div>
-                        <div class="text-white/70 text-xs">from $19 · ASME B31.3</div>
-                    </a>
-                    <a href="https://services.ku-automation.com/services/piping-isometric-reviewer" class="group bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl p-5 transition-all hover:-translate-y-1">
-                        <div class="text-3xl mb-3">📐</div>
-                        <div class="font-bold text-white mb-1">Isometric</div>
-                        <div class="text-white/70 text-xs">from $19 · ASME B31.3</div>
-                    </a>
-                    <a href="https://services.ku-automation.com/services/caesar-ii-reviewer" class="group bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl p-5 transition-all hover:-translate-y-1">
-                        <div class="text-3xl mb-3">⚡</div>
-                        <div class="font-bold text-white mb-1">Caesar II Stress</div>
-                        <div class="text-white/70 text-xs">from $29 · ASME B31.3</div>
-                    </a>
-                    <a href="https://services.ku-automation.com/services/pump-datasheet-reviewer" class="group bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl p-5 transition-all hover:-translate-y-1">
-                        <div class="text-3xl mb-3">⚙️</div>
-                        <div class="font-bold text-white mb-1">Pump Datasheet</div>
-                        <div class="text-white/70 text-xs">from $15 · API 610</div>
-                    </a>
-                    <a href="https://services.ku-automation.com/services/foundation-drawing-reviewer" class="group bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-2xl p-5 transition-all hover:-translate-y-1">
-                        <div class="text-3xl mb-3">🏗️</div>
-                        <div class="font-bold text-white mb-1">Foundation</div>
-                        <div class="text-white/70 text-xs">from $19 · ACI 318</div>
-                    </a>
-                    <a href="https://services.ku-automation.com/services" class="group bg-amber-300/20 hover:bg-amber-300/30 backdrop-blur-sm border border-amber-200/40 rounded-2xl p-5 transition-all hover:-translate-y-1 flex flex-col justify-center items-center text-center">
-                        <div class="text-3xl mb-2">+</div>
-                        <div class="font-bold text-white mb-1">9 more</div>
-                        <div class="text-amber-100 text-xs">see catalogue →</div>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-24 bg-gray-50">
+    <!-- ═══════════════════════ INTERACTIVE DEMOS ═══════════════════════ -->
+    <section class="py-24 bg-gray-50" id="demos">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-medium mb-4">
-                    Solutions
+            <div class="text-center mb-12 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-semibold mb-5">
+                    Interactive Demos
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">AI That Understands Engineering</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Custom automation built for your specific workflows. No templates—everything tailored to how you work.</p>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">See it work.</h2>
+                <p class="text-lg text-gray-500 max-w-xl mx-auto">No sales call needed. Try the tools directly — each demo runs in your browser.</p>
             </div>
-            
-            <div class="grid md:grid-cols-2 gap-8">
-                <!-- Service 1 -->
-                <div class="feature-card card-gradient rounded-3xl p-8 border border-gray-100 shadow-sm">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-3">Document Processing</h3>
-                            <p class="text-gray-600 mb-4">AI that reads and extracts data from P&IDs, datasheets, specifications, and technical documents. Export to any format automatically.</p>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> P&ID data extraction</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> Equipment datasheet parsing</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-primary-500 rounded-full"></span> Specification comparison</li>
-                            </ul>
-                        </div>
+
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-8">
+                <!-- P&ID Parser -->
+                <a href="pid-parser.html" onclick="gtag&&gtag('event','demo_pid_parser',{'event_category':'engagement'});"
+                   class="feature-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm block hover:border-primary-200">
+                    <div class="text-3xl mb-4">🔧</div>
+                    <div class="font-bold text-gray-900 mb-2">P&amp;ID Parser</div>
+                    <div class="text-gray-500 text-sm leading-relaxed mb-4">Upload a P&amp;ID and extract instrument tags, line numbers, and equipment data automatically.</div>
+                    <div class="inline-flex items-center gap-1.5 text-primary-600 text-sm font-semibold">
+                        Try it live <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </div>
-                </div>
-                
-                <!-- Service 2 -->
-                <div class="feature-card card-gradient rounded-3xl p-8 border border-gray-100 shadow-sm">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-3">Technical Knowledge Bots</h3>
-                            <p class="text-gray-600 mb-4">Custom AI assistants trained on your technical manuals, standards, and procedures. Instant answers for your team, 24/7.</p>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> Trained on your documents</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> Engineering context-aware</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-purple-500 rounded-full"></span> Secure deployment options</li>
-                            </ul>
-                        </div>
+                </a>
+
+                <!-- Datasheet Parser -->
+                <a href="datasheet-parser.html" onclick="gtag&&gtag('event','demo_datasheet_parser',{'event_category':'engagement'});"
+                   class="feature-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm block hover:border-primary-200">
+                    <div class="text-3xl mb-4">📋</div>
+                    <div class="font-bold text-gray-900 mb-2">Datasheet Parser</div>
+                    <div class="text-gray-500 text-sm leading-relaxed mb-4">Drop in an equipment datasheet. The AI extracts operating conditions, materials, and mechanical data into a structured table.</div>
+                    <div class="inline-flex items-center gap-1.5 text-primary-600 text-sm font-semibold">
+                        Try it live <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </div>
-                </div>
-                
-                <!-- Service 3 -->
-                <div class="feature-card card-gradient rounded-3xl p-8 border border-gray-100 shadow-sm">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-3">Report Generation</h3>
-                            <p class="text-gray-600 mb-4">Turn raw data into polished engineering reports automatically. Daily progress, HSE summaries, project status—generated in minutes.</p>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Daily/weekly automation</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> HSE compliance reports</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-green-500 rounded-full"></span> Custom templates</li>
-                            </ul>
-                        </div>
+                </a>
+
+                <!-- RFQ Analyzer -->
+                <a href="rfq-analyzer.html" onclick="gtag&&gtag('event','demo_rfq_analyzer',{'event_category':'engagement'});"
+                   class="feature-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm block hover:border-primary-200">
+                    <div class="text-3xl mb-4">📊</div>
+                    <div class="font-bold text-gray-900 mb-2">RFQ Analyzer</div>
+                    <div class="text-gray-500 text-sm leading-relaxed mb-4">Upload vendor quotes. The AI scores them against your MR requirements and flags deviations automatically.</div>
+                    <div class="inline-flex items-center gap-1.5 text-primary-600 text-sm font-semibold">
+                        Try it live <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </div>
-                </div>
-                
-                <!-- Service 4 -->
-                <div class="feature-card card-gradient rounded-3xl p-8 border border-gray-100 shadow-sm">
-                    <div class="flex items-start gap-6">
-                        <div class="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center flex-shrink-0">
-                            <svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                        </div>
-                        <div>
-                            <h3 class="text-2xl font-bold mb-3">Workflow Automation</h3>
-                            <p class="text-gray-600 mb-4">Connect your existing tools with AI. Automate approvals, data transfers, notifications, and cross-system updates.</p>
-                            <ul class="space-y-2 text-sm text-gray-600">
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span> ERP integration</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span> Approval workflows</li>
-                                <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-orange-500 rounded-full"></span> Smart notifications</li>
-                            </ul>
-                        </div>
+                </a>
+
+                <!-- Knowledge Bot -->
+                <a href="knowledge-bot.html" onclick="gtag&&gtag('event','demo_knowledge_bot',{'event_category':'engagement'});"
+                   class="feature-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm block hover:border-primary-200">
+                    <div class="text-3xl mb-4">🤖</div>
+                    <div class="font-bold text-gray-900 mb-2">Engineering Knowledge Bot</div>
+                    <div class="text-gray-500 text-sm leading-relaxed mb-4">Ask code questions, get clause-referenced answers. Ask about ASME B31.3, API 610, or NACE MR0175.</div>
+                    <div class="inline-flex items-center gap-1.5 text-primary-600 text-sm font-semibold">
+                        Try it live <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </div>
-                </div>
+                </a>
+
+                <!-- Voice Booking Demo -->
+                <a href="voice-booking-demo.html" onclick="gtag&&gtag('event','demo_voice_booking',{'event_category':'engagement'});"
+                   class="feature-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm block hover:border-primary-200">
+                    <div class="text-3xl mb-4">🎙️</div>
+                    <div class="font-bold text-gray-900 mb-2">Voice Booking Agent</div>
+                    <div class="text-gray-500 text-sm leading-relaxed mb-4">AI voice agent that handles appointment booking for engineering consultations. Speak to it — it understands context.</div>
+                    <div class="inline-flex items-center gap-1.5 text-primary-600 text-sm font-semibold">
+                        Try it live <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </div>
+                </a>
+
+                <!-- Document Command Station -->
+                <a href="document-command-station.html" onclick="gtag&&gtag('event','demo_doc_command',{'event_category':'engagement'});"
+                   class="feature-card bg-white rounded-2xl p-6 border border-gray-100 shadow-sm block hover:border-primary-200">
+                    <div class="text-3xl mb-4">⚡</div>
+                    <div class="font-bold text-gray-900 mb-2">Document Command Station</div>
+                    <div class="text-gray-500 text-sm leading-relaxed mb-4">Command-line interface for bulk document processing: extract, compare, and summarise engineering packages at scale.</div>
+                    <div class="inline-flex items-center gap-1.5 text-primary-600 text-sm font-semibold">
+                        Try it live <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </div>
+                </a>
+            </div>
+
+            <div class="text-center">
+                <a href="demos.html" onclick="gtag&&gtag('event','demos_see_all',{'event_category':'engagement'});"
+                   class="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 font-semibold">
+                    See all demos, including Tender Demo and Technical Assistant →
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-24">
+    <!-- ═══════════════════════ CUSTOM AI BUILDS ═══════════════════════ -->
+    <section class="py-24 bg-white" id="services">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
-                <div>
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-primary-50 border border-primary-100 rounded-full text-primary-700 text-sm font-medium mb-6">
-                        About KU Automation
-                    </div>
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Built by Engineers Who've <span class="gradient-text">Been There</span></h2>
-                    <p class="text-xl text-gray-600 mb-6 leading-relaxed">
-                        Our team combines <strong class="text-gray-900">decades of hands-on engineering experience</strong> across 
-                        <strong class="text-gray-900">oil & gas, EPC, and industrial sectors</strong>.
-                    </p>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        We've managed piping, civils, and structural teams. We've dealt with the same document chaos, 
-                        the same manual processes, the same compliance headaches you're dealing with now.
-                    </p>
-                    <p class="text-gray-600 mb-8 leading-relaxed">
-                        Now we combine that experience with cutting-edge AI to build automation that actually fits 
-                        how engineering teams work. <strong class="text-gray-900">No tech-bro nonsense—just practical solutions.</strong>
-                    </p>
-                    
-                    <!-- Credentials Grid -->
-                    <div class="grid grid-cols-3 gap-6">
-                        <div class="text-center p-4 bg-gray-50 rounded-2xl">
-                            <div class="text-2xl font-bold gradient-text">50+</div>
-                            <div class="text-sm text-gray-600">Projects</div>
-                        </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-2xl">
-                            <div class="text-2xl font-bold gradient-text">CEng</div>
-                            <div class="text-sm text-gray-600">Chartered</div>
-                        </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-2xl">
-                            <div class="text-2xl font-bold gradient-text">70%</div>
-                            <div class="text-sm text-gray-600">Time Saved</div>
-                        </div>
-                    </div>
+            <div class="text-center mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 border border-gray-200 rounded-full text-gray-600 text-sm font-semibold mb-5">
+                    Bespoke Builds
                 </div>
-                
-                <div class="relative">
-                    <div class="bg-gradient-to-br from-primary-50 to-purple-50 rounded-3xl p-8">
-                        <h3 class="font-bold text-xl mb-6 text-gray-900">Our Expertise</h3>
-                        <div class="space-y-4">
-                            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center font-bold text-primary-600">⚡</div>
-                                    <div>
-                                        <div class="font-semibold">Oil & Gas Operations</div>
-                                        <div class="text-sm text-gray-500">Upstream, Midstream, FPSO</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center font-bold text-blue-600">🏗️</div>
-                                    <div>
-                                        <div class="font-semibold">EPC & Construction</div>
-                                        <div class="text-sm text-gray-500">Project Delivery & Management</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center font-bold text-purple-600">📄</div>
-                                    <div>
-                                        <div class="font-semibold">Document Automation</div>
-                                        <div class="text-sm text-gray-500">P&IDs, Datasheets, RFQs</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="bg-white rounded-2xl p-5 shadow-sm border border-gray-100">
-                                <div class="flex items-center gap-4">
-                                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center font-bold text-green-600">🤖</div>
-                                    <div>
-                                        <div class="font-semibold">AI Integration</div>
-                                        <div class="text-sm text-gray-500">Custom Solutions & Workflows</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Need more than a reviewer?</h2>
+                <p class="text-lg text-gray-500 max-w-xl mx-auto">
+                    We build custom AI automation for engineering teams — when off-the-shelf reviewers don't cover your specific workflow.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Document Processing -->
+                <a href="use-cases.html#document-processing"
+                   class="feature-card bg-gray-50 rounded-2xl p-6 border border-gray-100 block hover:border-primary-200 hover:bg-white reveal" style="transition-delay:0.05s">
+                    <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                     </div>
-                </div>
+                    <div class="font-bold text-gray-900 mb-2">Document Processing</div>
+                    <p class="text-gray-500 text-sm leading-relaxed">Custom extraction pipelines for P&amp;IDs, datasheets, MRQs, and specifications. Output to Excel, SharePoint, or your document management system.</p>
+                </a>
+
+                <!-- Knowledge Bots -->
+                <a href="use-cases.html#knowledge-bots"
+                   class="feature-card bg-gray-50 rounded-2xl p-6 border border-gray-100 block hover:border-primary-200 hover:bg-white reveal" style="transition-delay:0.1s">
+                    <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Technical Knowledge Bots</div>
+                    <p class="text-gray-500 text-sm leading-relaxed">AI assistants trained on your company procedures, project specs, and engineering codes. Deployed securely on your infrastructure or as a web app.</p>
+                </a>
+
+                <!-- Report Generation -->
+                <a href="use-cases.html#report-generation"
+                   class="feature-card bg-gray-50 rounded-2xl p-6 border border-gray-100 block hover:border-primary-200 hover:bg-white reveal" style="transition-delay:0.15s">
+                    <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Report Generation</div>
+                    <p class="text-gray-500 text-sm leading-relaxed">Daily progress, HSE summaries, punchlist digests — generated automatically from your live data. No more copy-paste reporting.</p>
+                </a>
+
+                <!-- Voice Agents -->
+                <a href="use-cases.html#voice-agents"
+                   class="feature-card bg-gray-50 rounded-2xl p-6 border border-gray-100 block hover:border-primary-200 hover:bg-white reveal" style="transition-delay:0.2s">
+                    <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Voice Agents</div>
+                    <p class="text-gray-500 text-sm leading-relaxed">AI voice bots for appointment booking, technical Q&amp;A, and client intake. Built on Retell AI — deployed in days, not months.</p>
+                </a>
+            </div>
+
+            <div class="text-center mt-10">
+                <a href="use-cases.html" onclick="gtag&&gtag('event','use_cases_view',{'event_category':'engagement'});"
+                   class="inline-flex items-center gap-2 px-7 py-3.5 border border-gray-200 hover:border-primary-300 hover:text-primary-600 rounded-full font-semibold text-sm transition-all">
+                    See bespoke use cases and case studies →
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-24 bg-gray-50">
+    <!-- ═══════════════════════ ABOUT ═══════════════════════ -->
+    <section class="about-bg py-28" id="about">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-100 rounded-full text-green-700 text-sm font-medium mb-4">
-                    Simple Pricing
+            <div class="max-w-2xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-full text-white/80 text-sm font-semibold mb-6">
+                    About
                 </div>
-                <h2 class="text-4xl md:text-5xl font-bold mb-4">Transparent Investment</h2>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto">No hidden fees. No long-term contracts. Most clients see ROI within 30 days.</p>
-            </div>
-            
-            <div class="max-w-3xl mx-auto bg-white rounded-3xl p-8 md:p-12 border border-gray-200 shadow-lg text-center">
-                <div class="text-sm font-medium text-primary-600 mb-2">STARTING FROM</div>
-                <div class="flex items-baseline justify-center gap-1 mb-4">
-                    <span class="text-6xl font-bold">$2,500</span>
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6 leading-tight">
+                    Built by a Chartered Engineer,<br>not a startup.
+                </h2>
+                <p class="text-white/80 text-lg leading-relaxed mb-5">
+                    Kingsley Uzowulu is a CEng MIMechE with 21 years in oil &amp; gas engineering — piping, mechanical, civil, and structural across ADNOC, Saudi Aramco-standard projects, FPSO, and EPC programmes.
+                </p>
+                <p class="text-white/70 leading-relaxed mb-5">
+                    He has sat on both sides of the review desk: as the EPC engineer issuing drawings for comment, and as the owner's engineer sending them back with 40-line comment registers. He knows where the errors hide, what a CRITICAL vs MAJOR finding actually means for schedule risk, and what it costs when a P&amp;ID gets to IFC with an unresolved relief philosophy gap.
+                </p>
+                <p class="text-white/70 leading-relaxed mb-8">
+                    KU Automation was built to encode that experience into AI reviewers that an owner's team can run at EPC speed — without hiring a consultant for every deliverable.
+                </p>
+
+                <!-- Credential chips -->
+                <div class="flex flex-wrap gap-3">
+                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-full text-white text-sm font-semibold">
+                        <svg class="w-4 h-4 text-primary-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        CEng MIMechE
+                    </span>
+                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-full text-white text-sm font-semibold">
+                        <svg class="w-4 h-4 text-primary-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        21+ Years Oil &amp; Gas
+                    </span>
+                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-full text-white text-sm font-semibold">
+                        <svg class="w-4 h-4 text-primary-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        ADNOC / Aramco-grade standards
+                    </span>
+                    <span class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-full text-white text-sm font-semibold">
+                        <svg class="w-4 h-4 text-primary-300" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        Owner's-engineer mindset
+                    </span>
                 </div>
-                <p class="text-xl text-gray-600 mb-8">One-time investment. No monthly fees. ROI in 30 days.</p>
-                
-                <div class="grid md:grid-cols-3 gap-6 mb-8 text-left">
-                    <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                        <span class="text-gray-600">Custom AI automations</span>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                        <span class="text-gray-600">Document training</span>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <svg class="w-6 h-6 text-green-500 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
-                        <span class="text-gray-600">Dedicated support</span>
-                    </div>
-                </div>
-                
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="pricing.html" onclick="gtag('event', 'view_pricing', {'event_category': 'engagement'});" class="px-8 py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold transition-all hover:shadow-lg hover:shadow-primary-500/25">
-                        View All Plans →
-                    </a>
-                    <a href="roi-calculator.html" onclick="gtag('event', 'use_roi_calculator', {'event_category': 'engagement'});" class="px-8 py-4 border-2 border-gray-200 hover:border-primary-500 hover:text-primary-600 rounded-full font-semibold transition-all">
-                        Calculate Your ROI
+
+                <div class="mt-10">
+                    <a href="mailto:kingsley.uzowulu@ku-automation.com"
+                       onclick="gtag&&gtag('event','about_contact',{'event_category':'engagement'});"
+                       class="inline-flex items-center gap-2 px-7 py-3.5 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/30 rounded-full text-white font-semibold transition-all">
+                        Email Kingsley directly
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
                     </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section id="contact" class="py-24">
+    <!-- ═══════════════════════ PRICING PATHS ═══════════════════════ -->
+    <section class="py-24 bg-gray-50" id="pricing">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12 reveal">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-green-50 border border-green-100 rounded-full text-green-700 text-sm font-semibold mb-5">Pricing</div>
+                <h2 class="text-4xl md:text-5xl font-extrabold mb-4">Two ways to work with us.</h2>
+                <p class="text-lg text-gray-500 max-w-xl mx-auto">Self-serve for instant reviews. Engagement-based for full-project AI builds.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Self-serve -->
+                <div class="feature-card bg-white rounded-2xl p-8 border-2 border-primary-200 shadow-lg reveal">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 text-primary-700 rounded-full text-xs font-bold uppercase tracking-wide mb-5">Self-Serve · Live Now</div>
+                    <h3 class="text-2xl font-extrabold mb-2">AI Review Marketplace</h3>
+                    <div class="flex items-baseline gap-1 mb-4">
+                        <span class="text-4xl font-extrabold gradient-text">$15</span>
+                        <span class="text-gray-500 text-base">per review — no subscription</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        Pick a reviewer, upload your document, pay. Receive your PDF + Excel comment register in under 5 minutes.
+                        13 reviewers available today.
+                    </p>
+                    <ul class="space-y-2.5 text-sm text-gray-600 mb-7">
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Quick review from $15 · Detailed from $39</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> No signup or account required</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> PDF comment register + Excel workbook</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> CEng MIMechE supervised</li>
+                    </ul>
+                    <a href="https://services.ku-automation.com/services"
+                       onclick="gtag&&gtag('event','pricing_browse_reviews',{'event_category':'conversion'});"
+                       class="block w-full text-center py-3.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                        Browse 13 Reviewers →
+                    </a>
+                </div>
+
+                <!-- Bespoke -->
+                <div class="feature-card bg-white rounded-2xl p-8 border border-gray-200 shadow-sm reveal" style="transition-delay:0.1s">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 text-gray-600 rounded-full text-xs font-bold uppercase tracking-wide mb-5">Bespoke · Engagement-Based</div>
+                    <h3 class="text-2xl font-extrabold mb-2">Custom AI Builds</h3>
+                    <div class="flex items-baseline gap-1 mb-4">
+                        <span class="text-4xl font-extrabold text-gray-900">Contact</span>
+                    </div>
+                    <p class="text-gray-600 text-sm leading-relaxed mb-6">
+                        Custom AI automation scoped to your specific project or workflow. Fixed-fee delivery.
+                        Most clients see ROI within 30 days of deployment.
+                    </p>
+                    <ul class="space-y-2.5 text-sm text-gray-600 mb-7">
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Document processing pipelines</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Knowledge bots trained on your docs</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Report automation &amp; workflow integration</li>
+                        <li class="flex items-center gap-2"><svg class="w-4 h-4 text-emerald-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg> Voice agents and ERP integration</li>
+                    </ul>
+                    <a href="pricing.html"
+                       onclick="gtag&&gtag('event','pricing_view_plans',{'event_category':'engagement'});"
+                       class="block w-full text-center py-3.5 border-2 border-gray-200 hover:border-primary-400 hover:text-primary-600 text-gray-700 rounded-xl font-bold transition-all">
+                        View plans &amp; examples →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ CTA / CONTACT ═══════════════════════ -->
+    <section class="py-24 bg-white" id="contact">
         <div class="max-w-4xl mx-auto px-6">
-            <div class="bg-gradient-to-br from-primary-600 to-purple-600 rounded-3xl p-12 text-center text-white relative overflow-hidden">
-                <!-- Background decoration -->
-                <div class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-                <div class="absolute bottom-0 left-0 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
-                
+            <div class="bg-gradient-to-br from-primary-600 via-primary-700 to-purple-700 rounded-3xl p-10 md:p-14 text-center text-white relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-72 h-72 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+                <div class="absolute bottom-0 left-0 w-72 h-72 bg-white/10 rounded-full blur-3xl pointer-events-none"></div>
+
                 <div class="relative z-10">
-                    <h2 class="text-4xl md:text-5xl font-bold mb-6">Ready to Transform Your Workflows?</h2>
-                    <p class="text-xl text-white/80 mb-8 max-w-2xl mx-auto">
-                        Book a free 30-minute strategy call. We'll identify your biggest time-wasters and show you exactly how AI can help.
+                    <h2 class="text-4xl md:text-5xl font-extrabold mb-5">Talk to a Chartered Engineer<br>about your AI needs.</h2>
+                    <p class="text-xl text-white/80 mb-3 max-w-2xl mx-auto">
+                        Tell us your workflow pain point. We'll tell you whether a marketplace reviewer covers it or whether a bespoke build makes more sense.
                     </p>
-                    
+                    <p class="text-white/60 mb-9 text-sm">
+                        Or skip the call — <a href="https://services.ku-automation.com/services" class="text-white underline underline-offset-2 hover:text-white/90">browse the marketplace directly →</a>
+                    </p>
+
                     <!-- Contact Form -->
-                    <form id="contactForm" action="https://formspree.io/f/mqelvqak" method="POST" class="bg-white rounded-2xl p-8 text-left text-gray-900 max-w-xl mx-auto">
+                    <form id="contactForm" action="https://formspree.io/f/mqelvqak" method="POST"
+                          class="bg-white rounded-2xl p-8 text-left text-gray-900 max-w-xl mx-auto">
                         <div class="grid md:grid-cols-2 gap-4 mb-4">
                             <div>
-                                <label class="block text-sm font-medium mb-2 text-gray-700">Your Name</label>
-                                <input type="text" name="name" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all" placeholder="John Smith">
+                                <label class="block text-sm font-semibold mb-1.5 text-gray-700">Name</label>
+                                <input type="text" name="name" required placeholder="Sarah Ali"
+                                       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all text-sm">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium mb-2 text-gray-700">Company</label>
-                                <input type="text" name="company" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all" placeholder="Your Company">
+                                <label class="block text-sm font-semibold mb-1.5 text-gray-700">Company</label>
+                                <input type="text" name="company" placeholder="ADNOC / Fluor / Technip"
+                                       class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all text-sm">
                             </div>
                         </div>
-                        
                         <div class="mb-4">
-                            <label class="block text-sm font-medium mb-2 text-gray-700">Email</label>
-                            <input type="email" name="email" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all" placeholder="john@company.com">
+                            <label class="block text-sm font-semibold mb-1.5 text-gray-700">Email</label>
+                            <input type="email" name="email" required placeholder="you@company.com"
+                                   class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all text-sm">
                         </div>
-                        
                         <div class="mb-6">
-                            <label class="block text-sm font-medium mb-2 text-gray-700">What's your biggest challenge?</label>
-                            <textarea name="challenge" rows="3" class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all resize-none" placeholder="Tell us about the manual processes eating up your team's time..."></textarea>
+                            <label class="block text-sm font-semibold mb-1.5 text-gray-700">What are you reviewing or building?</label>
+                            <textarea name="challenge" rows="3" placeholder="e.g. We need P&ID reviews on a 150-drawing FEED package, or: I want a knowledge bot trained on our piping specs..."
+                                      class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20 focus:outline-none transition-all resize-none text-sm"></textarea>
                         </div>
-                        
-                        <button type="submit" class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-semibold text-lg transition-all hover:shadow-lg hover:shadow-primary-500/25">
-                            Book Free Strategy Call →
+                        <button type="submit"
+                                class="w-full py-4 bg-primary-600 hover:bg-primary-700 text-white rounded-xl font-bold text-base transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                            Send Message →
                         </button>
-                        
-                        <p class="text-center text-sm text-gray-500 mt-4">No commitment. No sales pressure. Just a conversation.</p>
-                        
-                        <div class="text-center mt-6 pt-6 border-t border-gray-100">
-                            <p class="text-sm text-gray-500 mb-2">Or email us directly:</p>
-                            <a href="mailto:contact@ku-automation.com" onclick="gtag('event', 'contact_email', {'event_category': 'conversion'});" class="text-primary-600 hover:text-primary-700 font-semibold">contact@ku-automation.com</a>
+                        <p class="text-center text-xs text-gray-500 mt-3">No commitment. Just a conversation.</p>
+                        <div class="text-center mt-5 pt-5 border-t border-gray-100">
+                            <p class="text-xs text-gray-400 mb-1.5">Prefer email?</p>
+                            <a href="mailto:contact@ku-automation.com"
+                               onclick="gtag&&gtag('event','contact_email',{'event_category':'conversion'});"
+                               class="text-primary-600 hover:text-primary-700 font-semibold text-sm">contact@ku-automation.com</a>
                         </div>
                     </form>
                 </div>
@@ -709,122 +1149,115 @@
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
     <footer class="py-12 border-t border-gray-100">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div class="flex items-center gap-3">
-                    <img src="assets/logo.png" alt="KU Automation Logo" class="w-10 h-10 rounded-lg object-contain">
-                    <span class="font-semibold text-lg">KU Automation</span>
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="assets/logo.png" alt="KU Automation" class="w-10 h-10 rounded-lg object-contain">
+                        <span class="font-bold text-lg">KU Automation</span>
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed max-w-xs">
+                        Principal-grade AI engineering reviews. CEng MIMechE supervised. Built for the people who sign off the drawings.
+                    </p>
                 </div>
-                
-                <div class="flex items-center gap-8 text-sm text-gray-500">
-                    <a href="#services" class="hover:text-gray-900 transition-colors">Services</a>
-                    <a href="https://services.ku-automation.com/services" class="hover:text-primary-600 transition-colors">AI Reviews <span class="text-[10px] font-bold bg-primary-100 text-primary-700 px-1.5 py-0.5 rounded align-middle">NEW</span></a>
-                    <a href="https://services.ku-automation.com" class="hover:text-gray-900 transition-colors">Client Portal</a>
-                    <a href="use-cases.html" class="hover:text-gray-900 transition-colors">Use Cases</a>
-                    <a href="#pricing" class="hover:text-gray-900 transition-colors">Pricing</a>
-                    <a href="roi-calculator.html" onclick="gtag('event', 'use_roi_calculator', {'event_category': 'engagement'});" class="hover:text-gray-900 transition-colors">ROI Calculator</a>
-                    <a href="mailto:contact@ku-automation.com" onclick="gtag('event', 'contact_email', {'event_category': 'conversion'});" class="hover:text-gray-900 transition-colors">Contact</a>
+
+                <!-- Links -->
+                <div class="grid grid-cols-2 gap-2 text-sm text-gray-500">
+                    <a href="#services" class="hover:text-gray-900 transition-colors py-1">Services</a>
+                    <a href="https://services.ku-automation.com/services" class="hover:text-primary-600 transition-colors py-1 font-medium text-primary-600">
+                        AI Reviews <span class="text-[9px] font-bold bg-primary-100 text-primary-700 px-1.5 py-0.5 rounded-full uppercase tracking-wide ml-0.5">NEW</span>
+                    </a>
+                    <a href="https://services.ku-automation.com" class="hover:text-gray-900 transition-colors py-1">Client Portal</a>
+                    <a href="use-cases.html" class="hover:text-gray-900 transition-colors py-1">Use Cases</a>
+                    <a href="pricing.html" onclick="gtag&&gtag('event','footer_pricing',{'event_category':'engagement'});" class="hover:text-gray-900 transition-colors py-1">Pricing</a>
+                    <a href="roi-calculator.html" onclick="gtag&&gtag('event','footer_roi_calc',{'event_category':'engagement'});" class="hover:text-gray-900 transition-colors py-1">ROI Calculator</a>
+                    <a href="blog.html" class="hover:text-gray-900 transition-colors py-1">Blog</a>
+                    <a href="demos.html" onclick="gtag&&gtag('event','footer_demos',{'event_category':'engagement'});" class="hover:text-gray-900 transition-colors py-1">Demos</a>
+                    <a href="#contact" class="hover:text-gray-900 transition-colors py-1">Contact</a>
                 </div>
-                
-                <div class="text-center md:text-right">
-                    <a href="mailto:contact@ku-automation.com" onclick="gtag('event', 'contact_email', {'event_category': 'conversion'});" class="text-sm text-primary-600 hover:text-primary-700 font-medium">contact@ku-automation.com</a>
-                    <p class="text-sm text-gray-500 mt-1">© 2026 KU Automation. Built with engineering precision.</p>
+
+                <!-- Contact + copyright -->
+                <div class="text-sm text-gray-500">
+                    <a href="mailto:contact@ku-automation.com"
+                       onclick="gtag&&gtag('event','footer_email',{'event_category':'conversion'});"
+                       class="text-primary-600 hover:text-primary-700 font-semibold text-base block mb-1">contact@ku-automation.com</a>
+                    <p class="mb-4">Kingsley Uzowulu · CEng MIMechE</p>
+                    <p class="text-xs text-gray-400">© 2026 KU Automation. Built with engineering precision.</p>
+                    <p class="text-xs text-gray-400 mt-1">ASME · API · NACE · ACI · AISC · MSS · ISO standards coverage.</p>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
     <script>
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
 
-        // Form handling - Submit to Formspree then redirect to Calendly
+        // Nav shadow on scroll
+        const nav = document.querySelector('#main-nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('shadow-sm', window.scrollY > 40);
+        });
+
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // Contact form → Formspree
         document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             const form = this;
-            const submitBtn = form.querySelector('button[type="submit"]');
-            const originalText = submitBtn.textContent;
-            
-            // Show loading state
-            submitBtn.textContent = 'Submitting...';
-            submitBtn.disabled = true;
-            
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
+            const btn = form.querySelector('button[type="submit"]');
+            const orig = btn.textContent;
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
+
             try {
-                // Submit to Formspree
-                const response = await fetch(form.action, {
+                const res = await fetch(form.action, {
                     method: 'POST',
-                    body: formData,
-                    headers: { 'Accept': 'application/json' }
+                    body: new FormData(form),
+                    headers: { Accept: 'application/json' }
                 });
-                
-                if (response.ok) {
-                    // Track conversion
-                    gtag('event', 'form_submit', {
-                        'event_category': 'conversion',
-                        'event_label': 'contact_form'
-                    });
-                    
-                    // Build Calendly URL with prefilled data
-                    const calendlyUrl = new URL('mailto:contact@ku-automation.com');
-                    calendlyUrl.searchParams.set('name', data.name || '');
-                    calendlyUrl.searchParams.set('email', data.email || '');
-                    
-                    // Redirect to Calendly
-                    window.location.href = calendlyUrl.toString();
+                if (res.ok) {
+                    gtag && gtag('event', 'form_submit', { event_category: 'conversion', event_label: 'contact_form' });
+                    btn.textContent = '✓ Sent — we\'ll reply within 24h';
+                    btn.classList.add('bg-emerald-600');
+                    btn.classList.remove('bg-primary-600', 'hover:bg-primary-700');
                 } else {
-                    throw new Error('Form submission failed');
+                    throw new Error('failed');
                 }
-            } catch (error) {
-                console.error('Error:', error);
-                alert('Something went wrong. Please try again or email us directly.');
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            }
-        });
-
-        // Intersection Observer for animations
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('slide-up');
-                    entry.target.style.opacity = '1';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.feature-card, .testimonial-card').forEach(el => {
-            el.style.opacity = '0';
-            observer.observe(el);
-        });
-
-        // Nav background on scroll
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('shadow-sm');
-            } else {
-                nav.classList.remove('shadow-sm');
+            } catch {
+                alert('Something went wrong. Please email contact@ku-automation.com directly.');
+                btn.textContent = orig;
+                btn.disabled = false;
             }
         });
     </script>
 
-    <!-- Crisp Chat Widget -->
+    <!-- Crisp Chat -->
     <script type="text/javascript">
-      window.$crisp=[];window.CRISP_WEBSITE_ID="ff1e3b53-e433-4a21-9337-359aacb3932d";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
+      window.$crisp=[];window.CRISP_WEBSITE_ID="ff1e3b53-e433-4a21-9337-359aacb3932d";
+      (function(){var d=document,s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
     </script>
 </body>
 </html>
