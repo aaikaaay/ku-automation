@@ -1,6 +1,211 @@
 {
   "posts": [
     {
+      "slug": "two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable",
+      "title": "Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable",
+      "excerpt": "Most AI review tools stop at the first pass. Discover how a two-pass self-critique protocol culls weak findings, sharpens language, and produces code-grade engineering deliverables.",
+      "date": "2026-06-17",
+      "modified": "2026-06-17",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png",
+      "tags": [
+        "AI Engineering Reviews",
+        "Quality Assurance",
+        "Process Safety",
+        "Owner's Engineering",
+        "AI Review Methodology"
+      ],
+      "readTime": 8,
+      "wordCount": 1791,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour",
+      "title": "Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour",
+      "excerpt": "The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.",
+      "date": "2026-06-17",
+      "modified": "2026-06-17",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png",
+      "tags": [
+        "Process Safety",
+        "PSV Sizing",
+        "HAZOP",
+        "AI Engineering Reviews",
+        "API 520"
+      ],
+      "readTime": 9,
+      "wordCount": 2017,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation",
+      "title": "Streamlining Engineering Change Orders: AI-Powered Impact Analysis and Workflow Automation",
+      "excerpt": "Learn about streamlining engineering change orders: ai-powered impact analysis and workflow automation. Expert insights for engineering professionals.",
+      "date": "2026-06-17",
+      "modified": "2026-06-17",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.png",
+      "tags": [
+        "Change Order Management",
+        "AI in Engineering",
+        "Workflow Automation",
+        "Impact Analysis",
+        "Engineering Workflows"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "multi-agent-systems-for-proactive-risk-identification-in-engineering-projects",
+      "title": "Multi-Agent Systems for Proactive Risk Identification in Engineering Projects",
+      "excerpt": "Learn about multi-agent systems for proactive risk identification in engineering projects. Expert insights for engineering professionals.",
+      "date": "2026-06-15",
+      "modified": "2026-06-15",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.png",
+      "tags": [
+        "Multi-Agent Systems",
+        "Risk Management",
+        "Engineering Automation",
+        "AI Workflows"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "digital-twins-vibration-analytics-predictive-maintenance-for-rotating-equipment",
+      "title": "Digital Twins + Vibration Analytics: Predictive Maintenance for Rotating Equipment",
+      "excerpt": "Learn about digital twins + vibration analytics: predictive maintenance for rotating equipment. Expert insights for engineering professionals.",
+      "date": "2026-06-12",
+      "modified": "2026-06-12",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/digital-twins-vibration-analytics-predictive-maintenance-for-rotating-equipment.png",
+      "tags": [
+        "Digital Twins",
+        "Predictive Maintenance",
+        "Vibration Analysis",
+        "Rotating Equipment",
+        "AI in Engineering"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "automating-pid-revision-management-with-ai-detecting-changes-and-updating-tag-lists",
+      "title": "Automating P&ID Revision Management with AI: Detecting Changes and Updating Tag Lists",
+      "excerpt": "Learn about automating p&id revision management with ai: detecting changes and updating tag lists. Expert insights for engineering professionals.",
+      "date": "2026-06-10",
+      "modified": "2026-06-10",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/automating-pid-revision-management-with-ai-detecting-changes-and-updating-tag-lists.png",
+      "tags": [
+        "P&ID Automation",
+        "Revision Control",
+        "AI Engineering",
+        "Document Management"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "rag-systems-for-engineering-accelerating-hazop-study-lookups",
+      "title": "RAG Systems for Engineering: Accelerating HAZOP Study Lookups",
+      "excerpt": "Learn about rag systems for engineering: accelerating hazop study lookups. Expert insights for engineering professionals.",
+      "date": "2026-06-08",
+      "modified": "2026-06-08",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/rag-systems-for-engineering-accelerating-hazop-study-lookups.png",
+      "tags": [
+        "RAG",
+        "Knowledge Management",
+        "Engineering",
+        "HAZOP",
+        "AI Automation"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production",
+      "title": "Scaling AI in Engineering: Navigating Procurement Bottlenecks from Pilot to Production",
+      "excerpt": "Learn about scaling ai in engineering: navigating procurement bottlenecks from pilot to production. Expert insights for engineering professionals.",
+      "date": "2026-06-05",
+      "modified": "2026-06-05",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.png",
+      "tags": [
+        "AI Implementation",
+        "Procurement",
+        "Engineering Automation",
+        "Change Management"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-automation-for-engineering-companies-boosting-document-processing-in-oil-gas-and-epc-projects",
       "title": "AI Automation for Engineering Companies: Boosting Document Processing in Oil & Gas and EPC Projects",
       "excerpt": "Learn about ai automation for engineering companies: boosting document processing in oil & gas and epc projects. Expert insights for engineering professionals.",
