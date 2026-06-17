@@ -448,10 +448,16 @@
                 breaks: true,
                 headerIds: true
             });
-            
-            const html = marked.parse(markdown);
+
+            // Strip YAML frontmatter (the --- ... --- block at the top of the file).
+            // Without this strip, marked renders the YAML keys as a giant setext heading.
+            let body = markdown;
+            const fm = body.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]+/);
+            if (fm) body = body.slice(fm[0].length);
+
+            const html = marked.parse(body);
             document.getElementById('article-content').innerHTML = html;
-            
+
             // Generate TOC
             generateTOC();
         }
