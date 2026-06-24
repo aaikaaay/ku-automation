@@ -1,6 +1,6 @@
 # Post 03 — From 4 Hours to 4 Minutes (Document Review)
 
-**Blog URL:** https://www.ku-automation.com/blog/ai-document-review-engineering-comments
+**Blog URL (UTM-tagged):** https://www.ku-automation.com/blog/ai-document-review-engineering-comments?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_03_doc_review
 **Suggested time:** Monday (next week) 09:00 Dubai
 **Image to attach:** `assets/linkedin-hero-piping-1080.jpg`
 **Format:** Text + image
@@ -50,9 +50,9 @@
 
 ## 💬 FIRST COMMENT (from Kingsley's personal profile, within 30 min)
 
-> Full write-up + sample report PDF: https://www.ku-automation.com/blog/ai-document-review-engineering-comments
+> Full write-up + sample report PDF: https://www.ku-automation.com/blog/ai-document-review-engineering-comments?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_03_doc_review
 >
-> If you want to test it on one of your own P&IDs — 2 free reviews here, no card: https://services.ku-automation.com/services/pid-reviewer
+> If you want to test it on one of your own P&IDs — 2 free reviews here, no card: https://services.ku-automation.com/services/pid-reviewer?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_03_doc_review
 
 ---
 

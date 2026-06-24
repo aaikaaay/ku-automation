@@ -56,11 +56,28 @@ Backlog priority order (highest-value first):
 
 ## 📊 Track in ClickUp
 
-After each post, log in ClickUp list `📋 Engineering AI Reviews` (or create `📣 LinkedIn Posts`):
+After each post, log in ClickUp list **📣 LinkedIn Posts** (`901819004786`):
 - Post URL
 - Date published
 - Impressions @ 24h / 72h
-- Click-throughs (Bitly the blog URL if you want exact attribution)
-- Comments / engagement
+- Comments / reactions / shares
+- UTM clicks from GA4 (filter by `utm_source=linkedin`)
 
 Target metrics (per 2026-06-18 playbook): 200 website clicks / 30 days from LinkedIn.
+
+## 🔗 UTM tagging convention
+
+Every blog/portal URL in a LinkedIn post must carry:
+
+```
+?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_XX_<slug>
+```
+
+- `utm_source=linkedin` — always
+- `utm_medium=social` — always
+- `utm_campaign=blog_launch` for launch week, `blog_weekly` for the recurring schedule
+- `utm_content=post_XX_<short_slug>` — unique per post for attribution
+
+**Why:** GA4 (`G-BRQ8Q6W8N8`) automatically segments by these params → visible in Reports → Acquisition → Traffic acquisition → filter by Session source.
+
+See `projects/ai-automation-agency/linkedin/launch-kit/tracking-dashboard.md` for how to read the data.

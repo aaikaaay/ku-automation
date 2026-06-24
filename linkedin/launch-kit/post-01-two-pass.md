@@ -1,6 +1,6 @@
 # Post 01 — Two-Pass AI Engineering Reviews
 
-**Blog URL:** https://www.ku-automation.com/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable
+**Blog URL (UTM-tagged):** https://www.ku-automation.com/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_01_two_pass
 **Suggested time:** Tuesday 09:00 Dubai (best B2B reach for MENA + Europe morning)
 **Image to attach:** `assets/linkedin-hero-piping-1080.jpg` (or use the blog post's own hero)
 **Format:** Text + image (NOT link preview — links go in comments for max reach)
@@ -54,9 +54,9 @@
 
 ## 💬 FIRST COMMENT (from Kingsley's personal profile, within 30 min)
 
-> Full write-up here → https://www.ku-automation.com/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable
+> Full write-up here → https://www.ku-automation.com/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_01_two_pass
 >
-> If anyone wants to test it on one of their own deliverables, the portal gives 2 free reviews per signup: https://services.ku-automation.com/services
+> If anyone wants to test it on one of their own deliverables, the portal gives 2 free reviews per signup: https://services.ku-automation.com/services?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_01_two_pass
 
 ---
 

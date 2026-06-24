@@ -1,6 +1,6 @@
 # Post 02 — Process Safety AI (PSV / Blowdown / HAZOP)
 
-**Blog URL:** https://www.ku-automation.com/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour
+**Blog URL (UTM-tagged):** https://www.ku-automation.com/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_02_process_safety
 **Suggested time:** Thursday 09:00 Dubai
 **Image to attach:** `assets/linkedin-hero-process-1080.jpg`
 **Format:** Text + image
@@ -52,9 +52,9 @@
 
 ## 💬 FIRST COMMENT (from Kingsley's personal profile, within 30 min)
 
-> Full write-up: https://www.ku-automation.com/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour
+> Full write-up: https://www.ku-automation.com/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_02_process_safety
 >
-> If you want to try it on a real PSV datasheet of yours: 2 free reviews at https://services.ku-automation.com/services/psv-datasheet-reviewer (no card required)
+> If you want to try it on a real PSV datasheet of yours: 2 free reviews at https://services.ku-automation.com/services/psv-datasheet-reviewer?utm_source=linkedin&utm_medium=social&utm_campaign=blog_launch&utm_content=post_02_process_safety (no card required)
 
 ---
 
