@@ -6,7 +6,7 @@
   <!-- Main Pages -->
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -70,12 +70,57 @@
   <!-- Blog -->
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/blog.html</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-06-28</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Blog Posts -->
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com</loc>
+    <lastmod>2026-06-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-06-28</news:publication_date>
+      <news:title>Try Before You Buy: Two Free Code-Grade AI Engineering Reviews on services.ku-automation.com</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-06-17</news:publication_date>
+      <news:title>Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable</news:title>
+    </news:news>
+  </url>
+  
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour</loc>
+    <lastmod>2026-06-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-06-17</news:publication_date>
+      <news:title>Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour</news:title>
+    </news:news>
+  </url>
+  
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=ai-automation-for-engineering-companies-boosting-document-processing-in-oil-gas-and-epc-projects</loc>
     <lastmod>2026-06-03</lastmod>
