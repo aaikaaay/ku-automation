@@ -83,7 +83,7 @@ Focus on basic digital infrastructure first. We can help you build the foundatio
 
 Book a free 20-minute AI Assessment Call with Kingsley Uzowulu, CEng — 21+ years engineering experience, now helping firms like yours automate the tedious stuff.
 
-📧 kingsley.uzowulu@ku-automation.com
+📧 contact@ku-automation.com
 🌐 [ku-automation.com]
 
 *No sales pitch — just a quick review of your biggest automation opportunity.*

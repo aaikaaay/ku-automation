@@ -141,7 +141,7 @@ No hard feelings either way. Just want to make sure I'm not clogging your inbox.
 
 — Kingsley
 
-P.S. If you ever want to chat engineering + AI, I'm always up for it: kingsley.uzowulu@ku-automation.com
+P.S. If you ever want to chat engineering + AI, I'm always up for it: contact@ku-automation.com
 
 ---
 

@@ -84,7 +84,7 @@
 
 ### Ready to See Similar Results?
 
-📧 **kingsley.uzowulu@ku-automation.com**
+📧 **contact@ku-automation.com**
 🌐 **[ku-automation.com]**
 
 ---

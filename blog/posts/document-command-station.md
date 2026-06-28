@@ -139,7 +139,7 @@ This is version 1.0 of the Document Review Command Station. We're actively devel
 - **Slack/Teams notifications** — Meet reviewers where they work
 - **Mobile app** — Review status on the go
 
-If you're interested in a custom deployment for your organization, [get in touch](mailto:kingsley.uzowulu@ku-automation.com). We're working with select engineering companies to tailor the platform to their specific workflows.
+If you're interested in a custom deployment for your organization, [get in touch](mailto:contact@ku-automation.com). We're working with select engineering companies to tailor the platform to their specific workflows.
 
 ---
 

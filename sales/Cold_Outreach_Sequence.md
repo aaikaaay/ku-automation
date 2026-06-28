@@ -86,7 +86,7 @@ Would a brief 15-minute call be useful? If not, no problem — just thought it w
 Best regards,
 Kingsley Uzowulu, CEng, MIMechE
 KU Automation
-kingsley.uzowulu@ku-automation.com
+contact@ku-automation.com
 ```
 
 ---

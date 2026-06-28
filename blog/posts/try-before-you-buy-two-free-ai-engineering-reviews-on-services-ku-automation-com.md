@@ -81,7 +81,7 @@ Foundation Drawing · Concrete Structure
 **Structural (2 live reviewers):**
 Steel Structure · Pipe Rack
 
-Each reviewer ships with a Quick option (typically $19) and a Detailed option ($29–$79). Each reviewer has been validated end-to-end against a real reference deliverable before going live — for example, the Pump Datasheet reviewer was validated against a DNO Peshkabir charge pump datasheet (KU-TWK-40-ME-DTS-0215), where it correctly flagged five critical issues including an NPSH margin below API 610 minimum and a NACE MR0175 service-class mismatch still showing VTA at IFC.
+Each reviewer ships with a Quick option (typically $19) and a Detailed option ($29–$79). Each reviewer has been validated end-to-end against a representative reference deliverable before going live — for example, the Pump Datasheet reviewer was validated against a typical sour-gas charge pump datasheet from a client project (details anonymised), where it correctly flagged five critical issues including an NPSH margin below API 610 minimum and a NACE MR0175 service-class mismatch still showing VTA at IFC.
 
 ## What the Two-Review Limit Is Not
 
@@ -99,7 +99,7 @@ What the trial **does not** unlock is workflow automation. Recurring vendor-docu
 4. Choose Detailed. Submit.
 5. Receive the PDF report and Excel register in around 90 seconds.
 
-If the deliverable you want reviewed does not match any of the 21 live reviewers, send a description to **kingsley.uzowulu@ku-automation.com** and we will tell you which adjacent reviewer to use, or — if your discipline is in our active backlog — when the matching reviewer is going live. Coming soon: Electrical, Instrumentation, and HSE deliverable lines.
+If the deliverable you want reviewed does not match any of the 21 live reviewers, send a description to **contact@ku-automation.com** and we will tell you which adjacent reviewer to use, or — if your discipline is in our active backlog — when the matching reviewer is going live. Coming soon: Electrical, Instrumentation, and HSE deliverable lines.
 
 ## A Note for Owner's Engineers and Independent Reviewers
 

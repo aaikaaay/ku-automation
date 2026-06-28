@@ -70,7 +70,7 @@ https://ku-automation.com
 
 ### Email
 ```
-kingsley.uzowulu@ku-automation.com
+contact@ku-automation.com
 ```
 
 ---

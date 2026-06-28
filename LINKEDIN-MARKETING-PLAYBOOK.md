@@ -50,7 +50,7 @@ If you've ever had a junior engineer hand you an iso to sign off and felt the dr
 
 DM me with the deliverable you'd most love to review faster and I'll set up a free workflow demo on your actual document.
 
-kingsley.uzowulu@ku-automation.com
+contact@ku-automation.com
 ```
 
 ### 0.3 Engagement hygiene (daily, 10-15 min)

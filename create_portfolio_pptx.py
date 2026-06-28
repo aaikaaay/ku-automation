@@ -478,7 +478,7 @@ def create_presentation():
     contact_box.line.fill.background()
     
     add_text_box(slide, 3.7, 4.7, 5.9, 0.4, "Contact", 20, True, DARK, PP_ALIGN.CENTER)
-    add_text_box(slide, 4.0, 5.2, 5.5, 1.3, "👤  Kingsley Uzowulu\n📧  kingsley.uzowulu@ku-automation.com\n🌐  www.ku-automation.com\n📅  calendly.com/kingsley-uzowulu/30min", 11, False, DARK)
+    add_text_box(slide, 4.0, 5.2, 5.5, 1.3, "👤  Kingsley Uzowulu\n📧  contact@ku-automation.com\n🌐  www.ku-automation.com\n📅  calendly.com/kingsley-uzowulu/30min", 11, False, DARK)
     
     add_text_box(slide, 0, 6.9, 13.333, 0.3, "Thank you for your time and consideration.", 11, False, RGBColor(160, 160, 180), PP_ALIGN.CENTER)
     
