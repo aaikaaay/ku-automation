@@ -1,12 +1,12 @@
 # LinkedIn Blog Distribution — 2026-06 Rollup
 
-_Generated 2026-06-24 18:53 Asia/Dubai_
+_Generated 2026-07-01 09:00 Asia/Dubai_
 
 ---
 
 ## 📊 Top-line
 
-- **Posts published:** 3
+- **Posts published:** 4
 - **LinkedIn sessions to site (GA4):** manual entry needed
 - **GA4 conversions from LinkedIn:** manual entry needed
 - **Portal signups (total this month):** 2
@@ -18,6 +18,7 @@ _Generated 2026-06-24 18:53 Asia/Dubai_
 
 | Post | Status | Tags |
 |---|---|---|
+| LinkedIn: Multi-Agent AI for Integrated Engineering Design Reviews | to do |  |
 | LinkedIn Launch 3: 4 Hours to 4 Minutes (Doc Review) | to do | blog, launch, linkedin |
 | LinkedIn Launch 2: Process Safety AI (PSV/HAZOP) | to do | blog, launch, linkedin |
 | LinkedIn Launch 1: Two-Pass AI Engineering Reviews | to do | blog, launch, linkedin |
@@ -57,4 +58,4 @@ To enable live GA4 numbers:
 
 ---
 
-_Raw data: 3 ClickUp tasks, 0 GA4 rows, portal db OK._
+_Raw data: 4 ClickUp tasks, 0 GA4 rows, portal db OK._

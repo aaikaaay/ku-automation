@@ -1,9 +1,88 @@
 {
   "posts": [
     {
+      "slug": "ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support",
+      "title": "AI Safety Audits: Human-in-the-Loop Frameworks for Engineering Decision Support",
+      "excerpt": "Learn about ai safety audits: human-in-the-loop frameworks for engineering decision support. Expert insights for engineering professionals.",
+      "date": "2026-07-03",
+      "modified": "2026-07-03",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.png",
+      "tags": [
+        "AI Safety",
+        "AI Audits",
+        "Human-in-the-Loop",
+        "Engineering AI",
+        "Decision Support",
+        "Compliance"
+      ],
+      "readTime": 8,
+      "wordCount": 1900,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-driven-rfq-compliance-checks-automating-specification-adherence-in-procurement",
+      "title": "AI-Driven RFQ Compliance Checks: Automating Specification Adherence in Procurement",
+      "excerpt": "Learn about ai-driven rfq compliance checks: automating specification adherence in procurement. Expert insights for engineering professionals.",
+      "date": "2026-07-01",
+      "modified": "2026-07-01",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-driven-rfq-compliance-checks-automating-specification-adherence-in-procurement.png",
+      "tags": [
+        "RFQ Automation",
+        "Compliance",
+        "Procurement",
+        "AI in Engineering",
+        "Workflow Automation"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "voice-agents-for-streamlining-remote-site-inspections-in-epc-projects",
+      "title": "Voice Agents for Streamlining Remote Site Inspections in EPC Projects",
+      "excerpt": "Learn about voice agents for streamlining remote site inspections in epc projects. Expert insights for engineering professionals.",
+      "date": "2026-06-29",
+      "modified": "2026-06-29",
+      "published": false,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/voice-agents-for-streamlining-remote-site-inspections-in-epc-projects.png",
+      "tags": [
+        "Voice Agents",
+        "EPC",
+        "Remote Inspections",
+        "AI Automation",
+        "Engineering Workflows"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com",
       "title": "Try Before You Buy: Two Free Code-Grade AI Engineering Reviews on services.ku-automation.com",
-      "excerpt": "Every new account on the KU Automation reviewer marketplace now gets two free Detailed reviews — a no-risk way to test 21 live AI engineers against your own P&IDs, datasheets, isometrics, and structural drawings before you spend a dollar.",
+      "excerpt": "Every new account on the KU Automation reviewer marketplace now gets two free Detailed reviews \u2014 a no-risk way to test 21 live AI engineers against your own P&IDs, datasheets, isometrics, and structural drawings before you spend a dollar.",
       "date": "2026-06-28",
       "modified": "2026-06-28",
       "published": true,
@@ -161,7 +240,7 @@
     {
       "slug": "process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour",
       "title": "Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour",
-      "excerpt": "The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.",
+      "excerpt": "The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 \u2014 at $19\u2013$79 per review.",
       "date": "2026-06-17",
       "modified": "2026-06-17",
       "published": true,
@@ -575,7 +654,7 @@
     {
       "slug": "ai-document-review-engineering-comments",
       "title": "From 4 Hours to 4 Minutes: How AI is Revolutionizing Engineering Document Review",
-      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references—automatically.",
+      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references\u2014automatically.",
       "date": "2026-04-15",
       "modified": "2026-04-15",
       "published": true,
@@ -601,7 +680,7 @@
     {
       "slug": "stop-vendor-document-chaos-ai-powered-document-control-for-epc-projects",
       "title": "Stop Vendor Document Chaos: AI-Powered Document Control for EPC Projects",
-      "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control — revision comparison, checklist compliance checks, and automatic MDR updates.",
+      "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control \u2014 revision comparison, checklist compliance checks, and automatic MDR updates.",
       "date": "2026-03-25",
       "modified": "2026-03-25",
       "published": true,
@@ -727,7 +806,7 @@
     {
       "slug": "agentic-ai-for-engineering-autonomous-workflows-that-actually-work",
       "title": "Agentic AI for Engineering: Autonomous Workflows That Actually Work",
-      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows — from document processing to procurement — without constant human oversight.",
+      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows \u2014 from document processing to procurement \u2014 without constant human oversight.",
       "date": "2026-03-10",
       "modified": "2026-03-10",
       "published": true,
