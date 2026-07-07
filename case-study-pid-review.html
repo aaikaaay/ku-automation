@@ -1,0 +1,1261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Study: 22 Defects Caught on a Sour-Gas P&amp;ID Before IFC | KU Automation</title>
+    <meta name="description" content="How the Principal Piping AI Reviewer caught 11 critical, 8 major, and 3 minor findings on a Tier-1 EPC's sour-gas P&ID in 5 minutes — countersigned by a CEng MIMechE.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.ku-automation.com/case-study-pid-review.html">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/case-study-pid-review.html">
+    <meta property="og:title" content="Case Study: 22 Defects Caught on a Sour-Gas P&ID Before IFC | KU Automation">
+    <meta property="og:description" content="How the Principal Piping AI Reviewer caught 11 critical, 8 major, and 3 minor findings on a Tier-1 EPC's sour-gas P&ID in 5 minutes — countersigned by a CEng MIMechE.">
+    <meta property="og:image" content="/assets/ai-hero-engineer.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Case Study: 22 Defects Caught on a Sour-Gas P&ID Before IFC | KU Automation">
+    <meta name="twitter:description" content="11 critical, 8 major, 3 minor findings. Under 5 minutes. $0.18. Recommendation: REJECT.">
+    <meta name="twitter:image" content="/assets/ai-hero-engineer.jpg">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: {
+                            50:  '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe',
+                            300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1',
+                            600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+
+        /* Text gradients */
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Nav */
+        .nav-blur {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+
+        /* Cards */
+        .feature-card { transition: all 0.25s ease; }
+        .feature-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+
+        /* Slide-up animation */
+        .slide-up { animation: slideUp 0.65s ease-out both; }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Severity badges */
+        .badge-critical { background: #fef2f2; color: #b91c1c; border: 1px solid #fca5a5; }
+        .badge-major    { background: #fff7ed; color: #c2410c; border: 1px solid #fdba74; }
+        .badge-minor    { background: #eff6ff; color: #1d4ed8; border: 1px solid #93c5fd; }
+
+        /* Scroll reveal */
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Floating bubbles */
+        .bubbles-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: hidden; }
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            animation: floatBubble linear infinite;
+            box-shadow:
+                inset -8px -8px 20px rgba(255,255,255,0.6),
+                inset 4px 4px 10px rgba(0,0,0,0.1),
+                0 8px 32px rgba(0,0,0,0.06);
+        }
+        .bubble::before {
+            content: '';
+            position: absolute; top: 12%; left: 18%; width: 25%; height: 20%;
+            background: radial-gradient(ellipse, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%; transform: rotate(-30deg);
+        }
+        .bubble-1 { width: 70px;  height: 70px;  left: 5%;  background: radial-gradient(circle at 30% 30%, rgba(129,140,248,0.6),  rgba(99,102,241,0.3)  60%); animation-duration: 25s; animation-delay:   0s; }
+        .bubble-2 { width: 110px; height: 110px; left: 18%; background: radial-gradient(circle at 30% 30%, rgba(232,121,249,0.5),  rgba(217,70,239,0.3)  60%); animation-duration: 32s; animation-delay:  -6s; }
+        .bubble-3 { width: 55px;  height: 55px;  left: 38%; background: radial-gradient(circle at 30% 30%, rgba(196,181,253,0.7),  rgba(167,139,250,0.4) 60%); animation-duration: 22s; animation-delay: -11s; }
+        .bubble-4 { width: 90px;  height: 90px;  left: 55%; background: radial-gradient(circle at 30% 30%, rgba(240,171,252,0.6),  rgba(232,121,249,0.35) 60%); animation-duration: 28s; animation-delay:  -4s; }
+        .bubble-5 { width: 65px;  height: 65px;  left: 72%; background: radial-gradient(circle at 30% 30%, rgba(165,180,252,0.65), rgba(129,140,248,0.4) 60%); animation-duration: 24s; animation-delay:  -9s; }
+        .bubble-6 { width: 80px;  height: 80px;  left: 87%; background: radial-gradient(circle at 30% 30%, rgba(221,214,254,0.7),  rgba(196,181,253,0.4) 60%); animation-duration: 26s; animation-delay: -13s; }
+        @keyframes floatBubble {
+            0%   { transform: translateY(100vh) rotate(0deg)   scale(1);   opacity: 0; }
+            10%  { opacity: 0.7; }
+            90%  { opacity: 0.7; }
+            100% { transform: translateY(-100vh) rotate(360deg) scale(1.1); opacity: 0; }
+        }
+
+        /* Hero */
+        .hero-cs-bg {
+            background: linear-gradient(170deg, #f8fafc 0%, #ffffff 60%, #f1f5f9 100%);
+        }
+
+        /* Metric badge */
+        .metric-badge {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 1rem;
+            padding: 1.25rem 1.5rem;
+            min-width: 120px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+        }
+
+        /* Checklist section grid */
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            transition: all 0.2s;
+        }
+        .checklist-item:hover { border-color: #c7d2fe; background: #eef2ff; }
+
+        /* Findings bar */
+        .findings-bar-wrapper { background: #f8fafc; border-radius: 1rem; overflow: hidden; }
+        .findings-bar-fill { height: 14px; border-radius: 9999px; transition: width 1.2s cubic-bezier(.4,0,.2,1); }
+
+        /* Recommendation ladder */
+        .rec-rung {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.875rem 1.25rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            transition: all 0.2s;
+        }
+        .rec-rung.active {
+            border-color: #ef4444;
+            background: #fef2f2;
+            box-shadow: 0 4px 20px rgba(239,68,68,0.12);
+        }
+
+        /* CEng section */
+        .ceng-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
+        }
+
+        /* Outcome card */
+        .outcome-card {
+            background: linear-gradient(135deg, #eef2ff 0%, #f5f3ff 100%);
+            border: 1px solid #c7d2fe;
+            border-radius: 1.25rem;
+            padding: 2rem;
+        }
+
+        /* CTA section */
+        .cta-section {
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        }
+
+        /* Table styles */
+        table { width: 100%; border-collapse: collapse; }
+        thead tr { background: #f1f5f9; }
+        th { padding: 0.875rem 1rem; text-align: left; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #64748b; }
+        td { padding: 1rem; font-size: 0.875rem; color: #374151; vertical-align: top; border-bottom: 1px solid #f1f5f9; }
+        tr:last-child td { border-bottom: none; }
+        tr:hover td { background: #f8fafc; }
+
+        /* Print / article width */
+        .prose-max { max-width: 780px; margin: 0 auto; }
+
+        /* Section dividers */
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: #6366f1;
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            border-radius: 9999px;
+            padding: 0.25rem 0.875rem;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 antialiased">
+
+    <!-- Floating Bubbles -->
+    <div class="bubbles-container" aria-hidden="true">
+        <div class="bubble bubble-1"></div>
+        <div class="bubble bubble-2"></div>
+        <div class="bubble bubble-3"></div>
+        <div class="bubble bubble-4"></div>
+        <div class="bubble bubble-5"></div>
+        <div class="bubble bubble-6"></div>
+    </div>
+
+    <!-- ═══════════════════════ NAV ═══════════════════════ -->
+    <nav id="main-nav" class="fixed w-full z-50 nav-blur bg-white/85 border-b border-gray-100 transition-shadow duration-200">
+        <div class="max-w-7xl mx-auto px-6 py-3.5">
+            <div class="flex items-center justify-between">
+
+                <!-- Logo -->
+                <a href="/" class="flex items-center gap-3">
+                    <img src="assets/logo.png" alt="KU Automation" class="w-10 h-10 rounded-lg object-contain">
+                    <span class="font-bold text-lg text-gray-900">KU Automation</span>
+                </a>
+
+                <!-- Desktop links -->
+                <div class="hidden md:flex items-center gap-6">
+                    <a href="/#services" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Services</a>
+                    <a href="https://services.ku-automation.com/services"
+                       onclick="gtag&&gtag('event','nav_ai_reviews',{'event_category':'engagement'});"
+                       class="inline-flex items-center gap-1.5 text-primary-600 hover:text-primary-700 font-semibold text-sm transition-colors">
+                        AI Reviews
+                        <span class="text-[9px] font-bold bg-primary-100 text-primary-700 px-1.5 py-0.5 rounded-full uppercase tracking-wide">NEW</span>
+                    </a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Use Cases</a>
+                    <a href="/#about" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">About</a>
+                    <a href="pricing.html" onclick="gtag&&gtag('event','nav_pricing',{'event_category':'engagement'});"
+                       class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Pricing</a>
+                    <a href="blog.html" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Blog</a>
+                    <a href="demos.html" onclick="gtag&&gtag('event','nav_demos',{'event_category':'engagement'});"
+                       class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors">Demos</a>
+                </div>
+
+                <!-- Right CTAs -->
+                <div class="flex items-center gap-3">
+                    <a href="https://services.ku-automation.com"
+                       class="hidden sm:inline-flex items-center gap-1.5 px-4 py-2 border border-primary-200 text-primary-600 hover:bg-primary-50 rounded-full font-medium text-sm transition-all">
+                        <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+                        Client Portal
+                    </a>
+                    <a href="https://services.ku-automation.com/services/pid-review"
+                       onclick="gtag&&gtag('event','nav_get_started_cs',{'event_category':'conversion'});"
+                       class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-sm transition-all hover:shadow-lg hover:shadow-primary-500/25">
+                        Get Started
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ═══════════════════════ HERO ═══════════════════════ -->
+    <section class="hero-cs-bg pt-28 pb-16 overflow-hidden relative">
+        <!-- Background orbs -->
+        <div class="absolute top-10 right-0 w-[600px] h-[600px] bg-primary-100/40 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[350px] h-[350px] bg-purple-100/40 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative max-w-5xl mx-auto px-6">
+
+            <!-- Breadcrumb -->
+            <nav class="flex items-center gap-2 text-xs text-gray-400 mb-6" aria-label="Breadcrumb">
+                <a href="/" class="hover:text-primary-600 transition-colors">Home</a>
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <a href="use-cases.html" class="hover:text-primary-600 transition-colors">Case Studies</a>
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                <span class="text-gray-500">P&amp;ID Sour-Gas Review</span>
+            </nav>
+
+            <!-- Category label -->
+            <div class="section-label mb-4">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                Case Study · Principal Piping AI Reviewer
+            </div>
+
+            <!-- Title -->
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight mb-4 slide-up">
+                How the Principal Piping AI Reviewer<br class="hidden md:block">
+                <span class="gradient-text">Identified 22 Defects</span> on a Sour-Gas P&amp;ID<br class="hidden md:block">
+                Before Client Handover
+            </h1>
+            <p class="text-lg text-gray-500 leading-relaxed mb-10 max-w-2xl slide-up" style="animation-delay:0.1s">
+                A Tier-1 EPC contractor executing a sour-gas gathering facility for a National Oil Company in the Middle East uploaded a single IFC-revision P&amp;ID. Five minutes later, they had a 21-page signed engineering report — and a mandate to resubmit.
+            </p>
+
+            <!-- Metric Badges -->
+            <div class="flex flex-wrap gap-4 slide-up" style="animation-delay:0.2s">
+
+                <!-- 22 Findings -->
+                <div class="metric-badge bg-white border border-gray-200">
+                    <span class="text-3xl font-black text-gray-900">22</span>
+                    <span class="text-xs font-semibold text-gray-500 mt-0.5 text-center">Total<br>Findings</span>
+                </div>
+
+                <!-- 11 Critical -->
+                <div class="metric-badge bg-red-50 border border-red-200">
+                    <span class="text-3xl font-black text-red-600">11</span>
+                    <span class="text-xs font-semibold text-red-500 mt-0.5 text-center">CRITICAL<br>Findings</span>
+                </div>
+
+                <!-- Recommendation D -->
+                <div class="metric-badge bg-red-600">
+                    <span class="text-2xl font-black text-white">REJECT</span>
+                    <span class="text-[10px] font-bold text-red-200 mt-0.5 text-center">Recommendation D<br>Resubmit Required</span>
+                </div>
+
+                <!-- 5 minutes -->
+                <div class="metric-badge bg-primary-50 border border-primary-200">
+                    <span class="text-3xl font-black text-primary-600">&lt;5m</span>
+                    <span class="text-xs font-semibold text-primary-500 mt-0.5 text-center">Review<br>Delivered</span>
+                </div>
+
+                <!-- Cost -->
+                <div class="metric-badge bg-emerald-50 border border-emerald-200">
+                    <span class="text-3xl font-black text-emerald-600">$0.18</span>
+                    <span class="text-xs font-semibold text-emerald-500 mt-0.5 text-center">Detailed Review<br>Cost</span>
+                </div>
+
+            </div>
+
+            <!-- Meta line -->
+            <div class="flex flex-wrap items-center gap-4 mt-8 text-xs text-gray-400 border-t border-gray-100 pt-6">
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    5-minute AI review · 21-page signed report
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    Countersigned by Kingsley Uzowulu · CEng MIMechE
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-primary-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    Client anonymised · Published with permission
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ THE CHALLENGE ═══════════════════════ -->
+    <section class="py-20 bg-white relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="section-label">01 · The Challenge</div>
+                    <h2 class="text-3xl font-extrabold text-gray-900 mb-5">An IFC deadline. A bandwidth crisis. A sour-service P&amp;ID that had to be right.</h2>
+                    <p class="text-gray-500 leading-relaxed mb-4">
+                        The client — a Tier-1 EPC contractor executing a sour-gas gathering facility for a National Oil Company in the Middle East — was approaching an Issued-for-Construction (IFC) milestone under significant schedule pressure. A critical process P&amp;ID covering the sour-gas reception and separation train was due to the NOC for formal acceptance.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed mb-4">
+                        The challenge was not one of competence — it was one of capacity. The EPC's principal piping engineers were spread across multiple active deliverables. A formal inter-discipline check (IDC) had been conducted, but the throughput of the QA backlog meant that a deep, standards-referenced review against ASME, API, NACE, and client-specific specifications had not been completed. The document was on a trajectory to be issued — without that safety net.
+                    </p>
+                    <p class="text-gray-500 leading-relaxed">
+                        Sour-gas service is unforgiving. Hydrogen sulphide environments demand correct materials selection, rigorous SIL classification, correct relief and vent routing, and full code compliance across every tagged item. The cost of getting it wrong after IFC — with vendor packages committed, construction mobilised, and materials on order — is measured in weeks of delay and hundreds of thousands of dollars in rework. More importantly, in H₂S service, the cost of getting it wrong on site is measured in lives.
+                    </p>
+                </div>
+
+                <!-- Challenge stat cards -->
+                <div class="reveal grid grid-cols-1 gap-4">
+                    <div class="feature-card bg-white rounded-2xl border border-gray-200 p-5 flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-amber-100 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-1">IFC Deadline Pressure</div>
+                            <p class="text-sm text-gray-500 leading-relaxed">Document was on track to be issued as-is, with QA backlog preventing a full principal-engineer standards review before handover.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card bg-white rounded-2xl border border-gray-200 p-5 flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-red-100 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-1">Sour-Service Risk</div>
+                            <p class="text-sm text-gray-500 leading-relaxed">H₂S-laden process streams demand correct NACE MR0175 materials, SIL classification, and relief philosophy — errors have safety and regulatory consequences.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card bg-white rounded-2xl border border-gray-200 p-5 flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-primary-100 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-1">Principal Engineer Bandwidth</div>
+                            <p class="text-sm text-gray-500 leading-relaxed">Senior engineers were allocated across multiple workstreams. A thorough, code-referenced P&amp;ID review — typically 40+ hours — was not available within the schedule window.</p>
+                        </div>
+                    </div>
+
+                    <div class="feature-card bg-white rounded-2xl border border-gray-200 p-5 flex items-start gap-4">
+                        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <div>
+                            <div class="font-bold text-gray-900 mb-1">~150 Tagged Items</div>
+                            <p class="text-sm text-gray-500 leading-relaxed">The P&amp;ID covered a high-density process area with approximately 150 tagged instruments, valves, pressure safety devices, and piping elements — each requiring individual scrutiny.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ THE DELIVERABLE ═══════════════════════ -->
+    <section class="py-20 bg-gray-50 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal text-center mb-12">
+                <div class="section-label inline-flex">02 · The Deliverable</div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-4 mb-4">What Was Reviewed</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">The submitted document was a single process P&amp;ID at IFC revision, covering the sour-gas gathering and separation train of a greenfield Middle East facility.</p>
+            </div>
+
+            <div class="reveal grid md:grid-cols-3 gap-6">
+
+                <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                    <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2V9M9 21H5a2 2 0 01-2-2V9m0 0h18"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Document Type</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Sour-gas process P&amp;ID, Issued-for-Construction (IFC) revision. Single drawing covering the gas reception and separation train.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                    <div class="w-10 h-10 rounded-xl bg-amber-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Tag Count</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Approximately <strong class="text-gray-900">150 tags</strong> — instruments, control valves, pressure safety valves, isolation valves, inline equipment, and piping elements — all individually assessed.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                    <div class="w-10 h-10 rounded-xl bg-red-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Service</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Sour-gas service (H₂S-containing hydrocarbon streams). Wetted parts subject to NACE MR0175 requirements. SIL-rated safety loops present.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Standards Scope</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">ASME B31.3, API 520, API 521, API 610, NACE MR0175, IEC 61511, and project-specific ADNOC AGES-P specifications.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                    <div class="w-10 h-10 rounded-xl bg-purple-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-purple-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Review Mode</div>
+                    <p class="text-sm text-gray-500 leading-relaxed"><strong class="text-gray-900">Detailed Mode</strong> — the most comprehensive review tier, spanning all 14 checklist sections across process, mechanical, instrumentation, materials, and safety disciplines.</p>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-200 p-6">
+                    <div class="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    </div>
+                    <div class="font-bold text-gray-900 mb-2">Turnaround</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Under <strong class="text-gray-900">5 minutes</strong> from upload to delivery of the full 21-page PDF report and multi-sheet Excel comment register.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ THE AI REVIEW ENGINE ═══════════════════════ -->
+    <section class="py-20 bg-white relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal text-center mb-12">
+                <div class="section-label inline-flex">03 · The AI Review Engine</div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-4 mb-4">14-Section Structured Checklist</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                    The Principal Piping AI Reviewer applies a deterministic, multi-discipline checklist across 14 named sections (A–N). Every section maps to a discrete domain of engineering risk, with code-specific acceptance criteria.
+                </p>
+            </div>
+
+            <div class="reveal grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+
+                <!-- Section A -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">A</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Process Basis</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Operating envelopes, fluid classification, phase conditions, design temperatures and pressures vs. tag data.</div>
+                    </div>
+                </div>
+
+                <!-- Section B -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">B</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Mechanical Equipment</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Pressure vessel, pump, compressor, and rotating equipment symbol accuracy, drain/vent provisions, and API 610 compliance flags.</div>
+                    </div>
+                </div>
+
+                <!-- Section C -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">C</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Piping &amp; Line Classes</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Line class assignments, pipe spec breaks, battery limit identification, ASME B31.3 requirements for hydrocarbon and sour service.</div>
+                    </div>
+                </div>
+
+                <!-- Section D -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">D</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Valving &amp; Isolation</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Block valve placement, double-block-and-bleed requirements, ESD valve logic, and emergency isolation philosophy.</div>
+                    </div>
+                </div>
+
+                <!-- Section E -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">E</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Pressure Relief</div>
+                        <div class="text-xs text-gray-500 mt-0.5">PSV sizing basis, API 520/521 relief cases, disposal routing, header backpressure, and flare/relief system integration.</div>
+                    </div>
+                </div>
+
+                <!-- Section F -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">F</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Instrumentation</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Instrument symbol accuracy, measurement range suitability, transmitter redundancy, loop completeness, and signal tags vs. logic controllers.</div>
+                    </div>
+                </div>
+
+                <!-- Section G -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">G</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Safety Instrumented Systems</div>
+                        <div class="text-xs text-gray-500 mt-0.5">SIL ratings on P&amp;ID vs. SIL determination register, IEC 61511 compliance, SIS loop architecture, and final element specifications.</div>
+                    </div>
+                </div>
+
+                <!-- Section H -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">H</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Materials Selection</div>
+                        <div class="text-xs text-gray-500 mt-0.5">NACE MR0175 tagging completeness on wetted parts, corrosion allowance, H₂S service declarations, and corrosion-inhibitor injection points.</div>
+                    </div>
+                </div>
+
+                <!-- Section I -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">I</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Utility &amp; Drain Systems</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Closed drains, open drains, seal-pot connections, utility ties, and routing compliance with ASME B31.3 for hydrocarbon-containing drain lines.</div>
+                    </div>
+                </div>
+
+                <!-- Section J -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">J</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Vent &amp; Flare Routing</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Atmospheric vent acceptability, flare header connections, sour-gas disposal paths, and segregation of high-pressure and low-pressure relief systems.</div>
+                    </div>
+                </div>
+
+                <!-- Section K -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">K</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Control Philosophy</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Control loop consistency, override logic, cascade configurations, and control valve fail-safe position declarations across the P&amp;ID.</div>
+                    </div>
+                </div>
+
+                <!-- Section L -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">L</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Layout &amp; Constructability</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Maintenance access indicators, drain and vent valve positioning for constructability, and spatial notes for hazardous-area classified equipment.</div>
+                    </div>
+                </div>
+
+                <!-- Section M -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">M</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Standards Compliance</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Cross-check of all findings against applicable codes including ASME, API, NACE, IEC, and client-specific project specifications.</div>
+                    </div>
+                </div>
+
+                <!-- Section N -->
+                <div class="checklist-item">
+                    <div class="w-8 h-8 rounded-lg bg-primary-600 text-white flex items-center justify-center text-xs font-bold flex-shrink-0">N</div>
+                    <div>
+                        <div class="text-sm font-semibold text-gray-900">Documentation Integrity</div>
+                        <div class="text-xs text-gray-500 mt-0.5">Revision history completeness, tag numbering consistency, title block accuracy, notes and general arrangement cross-references.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Standards bar -->
+            <div class="reveal mt-10 bg-gray-50 rounded-2xl border border-gray-200 p-6">
+                <div class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Standards Referenced in This Review</div>
+                <div class="flex flex-wrap gap-2">
+                    <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">ASME B31.3</span>
+                    <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">API 520</span>
+                    <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">API 521</span>
+                    <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">API 610</span>
+                    <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">NACE MR0175</span>
+                    <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">IEC 61511</span>
+                    <span class="px-3 py-1.5 bg-white border border-gray-200 rounded-full text-xs font-semibold text-gray-700">ADNOC AGES-P Specs</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ FINDINGS BREAKDOWN ═══════════════════════ -->
+    <section class="py-20 bg-gray-50 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal text-center mb-12">
+                <div class="section-label inline-flex">04 · Findings Breakdown</div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-4 mb-4">22 Findings Across 14 Checklist Sections</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                    The Detailed-mode review returned findings across all three severity tiers. Every finding was individually justified with a code reference, description of the non-conformance, and a specific corrective action.
+                </p>
+            </div>
+
+            <!-- Visual severity breakdown -->
+            <div class="reveal grid md:grid-cols-3 gap-6 mb-12">
+
+                <!-- CRITICAL -->
+                <div class="bg-white rounded-2xl border-2 border-red-200 p-7 text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-red-500"></div>
+                    <div class="text-6xl font-black text-red-600 mb-1">11</div>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-red-100 text-red-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        Critical
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Non-conformances that would render the document non-issuable. Safety-critical, code-mandated, or construction-blocking defects requiring mandatory resolution before IFC.</p>
+                    <!-- Bar -->
+                    <div class="mt-5 bg-red-100 rounded-full h-2">
+                        <div class="bg-red-500 h-2 rounded-full" style="width: 50%"></div>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1.5">50% of total findings</div>
+                </div>
+
+                <!-- MAJOR -->
+                <div class="bg-white rounded-2xl border-2 border-amber-200 p-7 text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-amber-500"></div>
+                    <div class="text-6xl font-black text-amber-600 mb-1">8</div>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Major
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Significant engineering deficiencies that require action and re-check. Not immediately construction-blocking but represent a material risk to completeness or operability if unresolved.</p>
+                    <!-- Bar -->
+                    <div class="mt-5 bg-amber-100 rounded-full h-2">
+                        <div class="bg-amber-500 h-2 rounded-full" style="width: 36%"></div>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1.5">36% of total findings</div>
+                </div>
+
+                <!-- MINOR -->
+                <div class="bg-white rounded-2xl border-2 border-blue-200 p-7 text-center relative overflow-hidden">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-blue-500"></div>
+                    <div class="text-6xl font-black text-blue-600 mb-1">3</div>
+                    <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        Minor
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Documentation or presentation issues that do not block construction but should be corrected for document quality, clarity, or completeness at IFC standard.</p>
+                    <!-- Bar -->
+                    <div class="mt-5 bg-blue-100 rounded-full h-2">
+                        <div class="bg-blue-500 h-2 rounded-full" style="width: 14%"></div>
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1.5">14% of total findings</div>
+                </div>
+
+            </div>
+
+            <!-- Category summary -->
+            <div class="reveal bg-white rounded-2xl border border-gray-200 p-8">
+                <h3 class="font-bold text-gray-900 text-lg mb-6">What Each Category Caught</h3>
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
+                        <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mt-1.5"></span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900 mb-0.5">Pressure Relief (Sec. E)</div>
+                            <div class="text-xs text-gray-500">Multiple PSV sizing discrepancies — relief case basis not matching tag data. API 520 non-compliance flagged with code clause references.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
+                        <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mt-1.5"></span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900 mb-0.5">Materials Selection (Sec. H)</div>
+                            <div class="text-xs text-gray-500">NACE MR0175 declarations absent from multiple wetted-component tags in sour service — a safety-critical materials omission.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
+                        <span class="w-2 h-2 rounded-full bg-red-500 flex-shrink-0 mt-1.5"></span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900 mb-0.5">Safety Instrumented Systems (Sec. G)</div>
+                            <div class="text-xs text-gray-500">SIL classification conflicts between P&amp;ID tags and the SIL determination register — a critical cross-document inconsistency under IEC 61511.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0 mt-1.5"></span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900 mb-0.5">Piping &amp; Line Classes (Sec. C)</div>
+                            <div class="text-xs text-gray-500">Line class breaks absent at battery limits. Pipe spec transitions not clearly shown at system boundaries, creating procurement and construction ambiguity.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
+                        <span class="w-2 h-2 rounded-full bg-amber-500 flex-shrink-0 mt-1.5"></span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900 mb-0.5">Vent &amp; Flare Routing (Sec. J)</div>
+                            <div class="text-xs text-gray-500">Drain and vent routing inconsistencies for hydrocarbon service lines, flagged against ASME B31.3 requirements for containment and disposal paths.</div>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3 p-4 rounded-xl bg-gray-50 border border-gray-200">
+                        <span class="w-2 h-2 rounded-full bg-blue-500 flex-shrink-0 mt-1.5"></span>
+                        <div>
+                            <div class="text-sm font-semibold text-gray-900 mb-0.5">Documentation Integrity (Sec. N)</div>
+                            <div class="text-xs text-gray-500">Minor tag numbering inconsistencies and missing general arrangement cross-references — correctable but material to a fully coherent IFC package.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ TOP 5 CRITICAL FINDINGS ═══════════════════════ -->
+    <section class="py-20 bg-white relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal text-center mb-10">
+                <div class="section-label inline-flex">05 · Top 5 Critical Findings</div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-4 mb-4">The Findings That Would Have Reached the Client</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                    The following five findings are representative of the critical-severity items captured by the review. All are illustrative of the category and nature — specific tag identifiers are not published.
+                </p>
+            </div>
+
+            <!-- Table -->
+            <div class="reveal overflow-x-auto rounded-2xl border border-gray-200 shadow-sm">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:5%">#</th>
+                            <th style="width:32%">Finding</th>
+                            <th style="width:12%">Severity</th>
+                            <th style="width:18%">Code Reference</th>
+                            <th style="width:33%">Corrective Action Required</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="text-center font-bold text-gray-400 text-xs">01</td>
+                            <td>
+                                <div class="font-semibold text-gray-900 mb-1">PSV Sizing Basis Inconsistent with API 520 Relief Case</div>
+                                <div class="text-xs text-gray-400">Relief case documented in the process datasheet does not match the orifice area designation shown on the P&amp;ID tag. Tag capacity appears undersized for fire case scenario.</div>
+                            </td>
+                            <td>
+                                <span class="badge-critical inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> CRITICAL
+                                </span>
+                            </td>
+                            <td class="font-mono text-xs text-gray-600">API 520 Pt.I §3.6; API 521 §5.15</td>
+                            <td class="text-xs text-gray-600">Recalculate required orifice area for governing relief case. Reissue tag data sheet and update P&amp;ID designation before IFC.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center font-bold text-gray-400 text-xs">02</td>
+                            <td>
+                                <div class="font-semibold text-gray-900 mb-1">NACE MR0175 Service Declaration Missing on Wetted Parts</div>
+                                <div class="text-xs text-gray-400">Multiple tagged items in confirmed sour-service streams lack the mandatory NACE MR0175/ISO 15156 material declaration. Wetted alloy suitability cannot be verified without this notation.</div>
+                            </td>
+                            <td>
+                                <span class="badge-critical inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> CRITICAL
+                                </span>
+                            </td>
+                            <td class="font-mono text-xs text-gray-600">NACE MR0175/ISO 15156-2 §6</td>
+                            <td class="text-xs text-gray-600">Add NACE MR0175 service declaration to all applicable wetted-part tags. Issue updated materials selection record to support P&amp;ID revision.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center font-bold text-gray-400 text-xs">03</td>
+                            <td>
+                                <div class="font-semibold text-gray-900 mb-1">SIL Rating Conflict: SIL-2 on P&amp;ID vs. SIL-3 in SIL Register</div>
+                                <div class="text-xs text-gray-400">Safety loop shown with SIL-2 annotation on the P&amp;ID does not match the SIL-3 target defined in the SIL determination study. This misalignment invalidates the functional safety basis for the loop.</div>
+                            </td>
+                            <td>
+                                <span class="badge-critical inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> CRITICAL
+                                </span>
+                            </td>
+                            <td class="font-mono text-xs text-gray-600">IEC 61511-1 §9.2.3; §10</td>
+                            <td class="text-xs text-gray-600">Reconcile SIL classification between P&amp;ID and SIL determination record. Confirm with functional safety engineer before document reissue.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center font-bold text-gray-400 text-xs">04</td>
+                            <td>
+                                <div class="font-semibold text-gray-900 mb-1">Line Class Breaks Not Shown at Battery Limits</div>
+                                <div class="text-xs text-gray-400">Pipe specification changes at system battery limit tie-ins are not delineated on the drawing. Absence of class-break notation creates ambiguity for procurement, construction, and inspection.</div>
+                            </td>
+                            <td>
+                                <span class="badge-major inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span> MAJOR
+                                </span>
+                            </td>
+                            <td class="font-mono text-xs text-gray-600">ASME B31.3 §300.2; project P&amp;ID legend</td>
+                            <td class="text-xs text-gray-600">Add class-break symbols and pipe spec callouts at all battery limit tie-in points per project P&amp;ID symbology standard.</td>
+                        </tr>
+                        <tr>
+                            <td class="text-center font-bold text-gray-400 text-xs">05</td>
+                            <td>
+                                <div class="font-semibold text-gray-900 mb-1">Vent/Drain Routing Violates ASME B31.3 for Hydrocarbon Service</div>
+                                <div class="text-xs text-gray-400">Drain line from a hydrocarbon-bearing separator is shown routing to an open drain system. ASME B31.3 and project specifications require closed drain collection for Category D or sour-service lines.</div>
+                            </td>
+                            <td>
+                                <span class="badge-critical inline-flex items-center gap-1 text-xs font-bold px-2.5 py-1 rounded-full">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-red-600"></span> CRITICAL
+                                </span>
+                            </td>
+                            <td class="font-mono text-xs text-gray-600">ASME B31.3 §322; API 521 §5.4</td>
+                            <td class="text-xs text-gray-600">Reroute drain connection to closed drain header. Add appropriate isolation and blowdown provisions per project specifications before IFC.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <p class="text-xs text-gray-400 mt-4 text-center">Five illustrative representative findings shown. Full review report contained 22 findings with individual code references, corrective actions, and a multi-sheet Excel comment register.</p>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ RECOMMENDATION D — REJECT ═══════════════════════ -->
+    <section class="py-20 bg-gray-50 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal text-center mb-12">
+                <div class="section-label inline-flex">06 · The Recommendation</div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-4 mb-4">Recommendation D — <span class="text-red-600">REJECT</span></h2>
+                <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                    Every review concludes with a structured recommendation on the standard A–D engineering review ladder. The system does not soften findings — it applies the recommendation the data demands.
+                </p>
+            </div>
+
+            <div class="reveal grid md:grid-cols-2 gap-10 items-start">
+                <!-- Recommendation ladder -->
+                <div class="space-y-3">
+                    <h3 class="font-bold text-gray-900 mb-4">The A–D Recommendation Ladder</h3>
+
+                    <div class="rec-rung">
+                        <div class="w-10 h-10 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-base font-black flex-shrink-0">A</div>
+                        <div>
+                            <div class="font-semibold text-gray-900 text-sm">Accept</div>
+                            <div class="text-xs text-gray-500">Document meets all applicable requirements. No comments. Cleared for issue or construction without reservation.</div>
+                        </div>
+                    </div>
+
+                    <div class="rec-rung">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center text-base font-black flex-shrink-0">B</div>
+                        <div>
+                            <div class="font-semibold text-gray-900 text-sm">Accept with Comments</div>
+                            <div class="text-xs text-gray-500">Minor or administrative comments noted. Document may proceed subject to incorporation of comments at next revision — no re-review required.</div>
+                        </div>
+                    </div>
+
+                    <div class="rec-rung">
+                        <div class="w-10 h-10 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-base font-black flex-shrink-0">C</div>
+                        <div>
+                            <div class="font-semibold text-gray-900 text-sm">Revise and Resubmit</div>
+                            <div class="text-xs text-gray-500">Significant comments requiring document revision. May proceed after incorporation; a full re-review is recommended depending on the scope of changes.</div>
+                        </div>
+                    </div>
+
+                    <div class="rec-rung active">
+                        <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-base font-black flex-shrink-0">D</div>
+                        <div>
+                            <div class="font-semibold text-red-700 text-sm flex items-center gap-2">
+                                Reject — Resubmit Before IFC
+                                <span class="px-2 py-0.5 bg-red-600 text-white text-[10px] font-bold rounded-full uppercase">This Review</span>
+                            </div>
+                            <div class="text-xs text-gray-500">Document contains critical non-conformances that preclude issue. Must not be issued until all critical findings are resolved and the document has been re-reviewed. Construction must not proceed against this revision.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Why D was correct -->
+                <div class="bg-white rounded-2xl border border-red-200 p-7">
+                    <div class="flex items-center gap-3 mb-5">
+                        <div class="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center flex-shrink-0">
+                            <svg class="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        </div>
+                        <h3 class="font-bold text-gray-900">Why D Was the Correct Call</h3>
+                    </div>
+                    <div class="space-y-4 text-sm text-gray-600 leading-relaxed">
+                        <p>A Recommendation D is not issued lightly. It means the document, in its submitted state, <strong class="text-gray-900">must not be issued</strong>. It demands a full corrective cycle before the document re-enters the review gate.</p>
+                        <p>In this case, the volume and nature of the critical findings — spanning PSV sizing, NACE materials compliance, SIL classification conflicts, and improper drain routing — collectively rendered the P&amp;ID non-issuable. Any one of these categories, in isolation, would have been sufficient for a Recommendation C. Together, they mandated D.</p>
+                        <p>Critically, the recommendation was not made on cumulative quantity alone. The SIL classification conflict between the P&amp;ID and the SIL determination register is a single finding that, in a functional safety context, is independently sufficient to block IFC issue. The wrong SIL on a safety loop means the entire safety lifecycle verification for that function is invalidated.</p>
+                        <p>The system is calibrated to match industry norms. A Recommendation D reflects the same judgment a principal engineer would exercise after reviewing the same document — and no less.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ THE CENG COUNTERSIGN ═══════════════════════ -->
+    <section class="ceng-section py-20 relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal text-center mb-12">
+                <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-indigo-300 bg-indigo-900/60 border border-indigo-700 rounded-full px-4 py-1.5 mb-4">
+                    07 · The CEng Countersign
+                </div>
+                <h2 class="text-3xl font-extrabold text-white mt-4 mb-4">Raw AI Is Risky. AI + CEng = Defensible Engineering.</h2>
+                <p class="text-indigo-200 max-w-2xl mx-auto leading-relaxed">
+                    This is the differentiator that changes what you are buying. Anyone can run a document through a language model. What they cannot buy anywhere else is a signed engineering review.
+                </p>
+            </div>
+
+            <div class="reveal grid md:grid-cols-2 gap-10 items-center">
+                <!-- Left: the problem with raw AI -->
+                <div class="space-y-5">
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-red-500/20 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white mb-1">A ChatGPT Review</div>
+                                <p class="text-sm text-indigo-200 leading-relaxed">Generic output. No code-specific citations. No responsibility. No professional accountability. Cannot be submitted to an NOC, a client, or a safety authority as an engineering position. Cannot support a regulatory defence.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/5 border border-white/10 rounded-2xl p-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-amber-500/20 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-white mb-1">An Unchecked AI Review Tool</div>
+                                <p class="text-sm text-indigo-200 leading-relaxed">Faster than manual, but statistically unreliable in isolation. No engineer has accepted responsibility for the output. The moment something slips through, there is no professional accountability — and no chain of custody for the review decision.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-500/20 border border-indigo-400/30 rounded-2xl p-6">
+                        <div class="flex items-start gap-3">
+                            <div class="w-8 h-8 rounded-lg bg-indigo-400/30 flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            </div>
+                            <div>
+                                <div class="font-semibold text-indigo-100 mb-1">KU Automation: AI + CEng Review + Signed Report</div>
+                                <p class="text-sm text-indigo-200 leading-relaxed">The AI engine generates the structured finding set. Every report is then reviewed and countersigned by Kingsley Uzowulu — CEng MIMechE, 21+ years in oil and gas, sour-service specialist. The report carries a professional stamp. That is what makes it defensible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: credentials -->
+                <div class="bg-white/5 border border-white/10 rounded-2xl p-8">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0">
+                            <span class="text-2xl font-black text-white">KU</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white text-lg">Kingsley Uzowulu</div>
+                            <div class="text-indigo-300 text-sm">CEng MIMechE</div>
+                            <div class="text-indigo-400 text-xs mt-0.5">Sour-Service Specialist · 21+ Years Experience</div>
+                        </div>
+                    </div>
+                    <div class="space-y-3 text-sm text-indigo-200">
+                        <div class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            <span>Chartered Engineer, registered with the Engineering Council (UK)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            <span>Member, Institution of Mechanical Engineers (MIMechE)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            <span>21+ years in oil &amp; gas engineering, with deep sour-service and high-pressure system experience</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            <span>Standards fluency: ASME, API, NACE, IEC 61511, ADNOC AGES-P</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            <span>Every AI-generated review is reviewed and countersigned before the final PDF is issued to the client</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-indigo-400 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4"/></svg>
+                            <span>The signed report can be submitted to NOC clients, PMC teams, and regulatory bodies as a formal engineering review document</span>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-5 border-t border-white/10">
+                        <p class="text-xs text-indigo-300 italic leading-relaxed">
+                            "The value proposition is simple: you get AI speed at AI cost, with a principal engineer's name on the report. That combination does not exist anywhere else in the market."
+                        </p>
+                        <p class="text-xs text-indigo-500 mt-2">— Paraphrased from client engagement feedback</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ THE OUTCOME ═══════════════════════ -->
+    <section class="py-20 bg-white relative z-10">
+        <div class="max-w-5xl mx-auto px-6">
+            <div class="reveal text-center mb-12">
+                <div class="section-label inline-flex">08 · The Outcome</div>
+                <h2 class="text-3xl font-extrabold text-gray-900 mt-4 mb-4">The EPC Caught the Problems. Before the Client Did.</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto leading-relaxed">
+                    The consequence of catching 22 findings — including 11 critical — before IFC handover was not an embarrassment. It was an intervention. Here is what it meant in practice.
+                </p>
+            </div>
+
+            <div class="reveal grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+
+                <div class="outcome-card">
+                    <div class="text-3xl font-black text-primary-600 mb-2">~40 hrs</div>
+                    <div class="font-bold text-gray-900 mb-2">Principal Engineer Time Saved</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">A thorough, code-referenced P&amp;ID review of a 150-tag sour-gas drawing typically demands 40 or more hours of a principal engineer's time. The AI review delivered an equivalent output in under 5 minutes — with that engineer's time reserved for countersign, not the grind of raw checklist traversal.</p>
+                </div>
+
+                <div class="outcome-card">
+                    <div class="text-3xl font-black text-emerald-600 mb-2">Zero Rework</div>
+                    <div class="font-bold text-gray-900 mb-2">Post-IFC Rework Loop Avoided</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Had the document been issued as submitted, the NOC's own review team — or worse, the construction contractor on site — would have raised the same critical findings. At IFC stage, each finding returned by a client triggers a formal comment register, a delay to material orders, and a potential construction hold. That loop was broken before it started.</p>
+                </div>
+
+                <div class="outcome-card">
+                    <div class="text-3xl font-black text-indigo-600 mb-2">$0.18</div>
+                    <div class="font-bold text-gray-900 mb-2">Cost of the Review</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">The Detailed-mode review that caught 22 findings — including a SIL classification conflict and multiple NACE non-conformances in sour-gas service — cost eighteen cents and was in the inbox in under five minutes. The cost of the principal engineer rework it prevented was orders of magnitude higher.</p>
+                </div>
+
+                <div class="outcome-card">
+                    <div class="text-3xl font-black text-red-600 mb-2">+21 Pages</div>
+                    <div class="font-bold text-gray-900 mb-2">Formal Deliverable Produced</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">The review produced a 21-page formal PDF report with structured findings, code references, and corrective actions — plus a multi-sheet Excel comment register formatted for direct use in the EPC's document control system. Not a summary note. A complete engineering deliverable.</p>
+                </div>
+
+                <div class="outcome-card">
+                    <div class="text-3xl font-black text-amber-600 mb-2">14 Sections</div>
+                    <div class="font-bold text-gray-900 mb-2">Every Discipline Covered</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">Process, mechanical, instrumentation, safety, materials, and documentation — all 14 review sections were traversed in a single pass. The EPC's internal IDC had covered process and instrumentation. The AI review extended coverage to materials selection, SIS compliance, and vent/drain routing — the gaps that had been left.</p>
+                </div>
+
+                <div class="outcome-card">
+                    <div class="text-3xl font-black text-gray-900 mb-2">Before Client</div>
+                    <div class="font-bold text-gray-900 mb-2">Reputation Protected</div>
+                    <p class="text-sm text-gray-500 leading-relaxed">The EPC's engineering management team was briefed on the findings before any submission was made to the National Oil Company client. The document was revised, re-reviewed, and issued clean. The EPC maintained its professional standing. The client received a compliant IFC package — first time.</p>
+                </div>
+
+            </div>
+
+            <!-- Pull quote -->
+            <div class="reveal bg-gray-50 border border-gray-200 rounded-2xl p-8 text-center max-w-2xl mx-auto">
+                <svg class="w-8 h-8 text-primary-300 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
+                <p class="text-lg text-gray-700 font-medium leading-relaxed italic mb-4">
+                    "The EPC engineering team described the experience as having a second principal engineer check your work — one who never got tired, never skipped a section, and had every code clause memorised."
+                </p>
+                <p class="text-sm text-gray-400">Paraphrased feedback from post-review engagement</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ CTA ═══════════════════════ -->
+    <section id="contact" class="cta-section py-20 relative z-10 overflow-hidden">
+        <!-- Background orbs -->
+        <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute bottom-0 left-0 w-[300px] h-[300px] bg-purple-400/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="relative max-w-4xl mx-auto px-6 text-center">
+            <div class="reveal">
+                <div class="inline-flex items-center gap-2 text-xs font-bold tracking-widest uppercase text-indigo-200 bg-white/10 border border-white/20 rounded-full px-4 py-1.5 mb-6">
+                    Get Your P&amp;ID Reviewed
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-4 leading-tight">
+                    Get a P&amp;ID Reviewed in 5 Minutes<br>
+                    <span class="text-indigo-200 font-semibold text-2xl">From $15. Countersigned by a CEng MIMechE.</span>
+                </h2>
+                <p class="text-indigo-200 text-lg leading-relaxed mb-8 max-w-2xl mx-auto">
+                    Upload your P&amp;ID. Select your review depth. The AI reviewer runs the 14-section checklist, generates the PDF report and Excel register, and it hits your inbox in under five minutes — signed by a principal engineer with 21 years of sour-service experience.
+                </p>
+
+                <!-- Value props -->
+                <div class="grid sm:grid-cols-3 gap-4 mb-10 text-left max-w-2xl mx-auto">
+                    <div class="bg-white/10 border border-white/20 rounded-xl p-4">
+                        <div class="font-bold text-white mb-1 text-sm">Detailed Review</div>
+                        <div class="text-indigo-200 text-xs leading-relaxed">All 14 sections · Full code references · PDF + Excel · CEng signed</div>
+                    </div>
+                    <div class="bg-white/10 border border-white/20 rounded-xl p-4">
+                        <div class="font-bold text-white mb-1 text-sm">From $15</div>
+                        <div class="text-indigo-200 text-xs leading-relaxed">Per review. No retainer. No subscription required. Pay per document.</div>
+                    </div>
+                    <div class="bg-white/10 border border-white/20 rounded-xl p-4">
+                        <div class="font-bold text-white mb-1 text-sm">Under 5 Minutes</div>
+                        <div class="text-indigo-200 text-xs leading-relaxed">Upload now. Results delivered to your inbox before you finish your coffee.</div>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <a href="https://services.ku-automation.com/services/pid-review"
+                       onclick="gtag&&gtag('event','cta_case_study_pid_review',{'event_category':'conversion','event_label':'sour_gas_case_study'});"
+                       class="inline-flex items-center gap-2.5 px-8 py-4 bg-white text-primary-700 hover:bg-indigo-50 rounded-full font-bold text-base transition-all shadow-xl hover:shadow-2xl hover:scale-105">
+                        <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Review My P&amp;ID Now
+                    </a>
+                    <a href="mailto:contact@ku-automation.com"
+                       onclick="gtag&&gtag('event','cta_email_case_study',{'event_category':'conversion'});"
+                       class="inline-flex items-center gap-2 px-6 py-4 border border-white/30 text-white hover:bg-white/10 rounded-full font-semibold text-sm transition-all">
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                        Talk to the Engineer First
+                    </a>
+                </div>
+
+                <p class="text-indigo-300 text-xs mt-6">
+                    Questions? Email <a href="mailto:contact@ku-automation.com" class="text-white underline underline-offset-2 hover:text-indigo-100">contact@ku-automation.com</a>
+                    · Kingsley Uzowulu · CEng MIMechE · Sour-Service Specialist
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+    <footer class="py-12 border-t border-gray-100 relative z-10 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 items-start">
+
+                <!-- Brand -->
+                <div>
+                    <div class="flex items-center gap-3 mb-3">
+                        <img src="assets/logo.png" alt="KU Automation" class="w-10 h-10 rounded-lg object-contain">
+                        <span class="font-bold text-lg">KU Automation</span>
+                    </div>
+                    <p class="text-sm text-gray-500 leading-relaxed max-w-xs">
+                        Principal-grade AI engineering reviews. CEng MIMechE supervised. Built for the people who sign off the drawings.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div class="grid grid-cols-2 gap-2 text-sm text-gray-500">
+                    <a href="/#services" class="hover:text-gray-900 transition-colors py-1">Services</a>
+                    <a href="https://services.ku-automation.com/services" class="hover:text-primary-600 transition-colors py-1 font-medium text-primary-600">
+                        AI Reviews <span class="text-[9px] font-bold bg-primary-100 text-primary-700 px-1.5 py-0.5 rounded-full uppercase tracking-wide ml-0.5">NEW</span>
+                    </a>
+                    <a href="https://services.ku-automation.com" class="hover:text-gray-900 transition-colors py-1">Client Portal</a>
+                    <a href="use-cases.html" class="hover:text-gray-900 transition-colors py-1">Use Cases</a>
+                    <a href="pricing.html" onclick="gtag&&gtag('event','footer_pricing',{'event_category':'engagement'});" class="hover:text-gray-900 transition-colors py-1">Pricing</a>
+                    <a href="roi-calculator.html" onclick="gtag&&gtag('event','footer_roi_calc',{'event_category':'engagement'});" class="hover:text-gray-900 transition-colors py-1">ROI Calculator</a>
+                    <a href="blog.html" class="hover:text-gray-900 transition-colors py-1">Blog</a>
+                    <a href="demos.html" onclick="gtag&&gtag('event','footer_demos',{'event_category':'engagement'});" class="hover:text-gray-900 transition-colors py-1">Demos</a>
+                    <a href="mailto:contact@ku-automation.com" class="hover:text-gray-900 transition-colors py-1">Contact</a>
+                </div>
+
+                <!-- Contact + copyright -->
+                <div class="text-sm text-gray-500">
+                    <a href="mailto:contact@ku-automation.com"
+                       onclick="gtag&&gtag('event','footer_email',{'event_category':'conversion'});"
+                       class="text-primary-600 hover:text-primary-700 font-semibold text-base block mb-1">contact@ku-automation.com</a>
+                    <p class="mb-4">Kingsley Uzowulu · CEng MIMechE</p>
+                    <p class="text-xs text-gray-400">© 2026 KU Automation. Built with engineering precision.</p>
+                    <p class="text-xs text-gray-400 mt-1">ASME · API · NACE · ACI · AISC · MSS · ISO standards coverage.</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ═══════════════════════ SCRIPTS ═══════════════════════ -->
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                if (href === '#') return;
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // Nav shadow on scroll
+        const nav = document.getElementById('main-nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('shadow-md', window.scrollY > 20);
+        }, { passive: true });
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+        revealEls.forEach(el => observer.observe(el));
+
+        // Animate findings bars on scroll
+        const bars = document.querySelectorAll('.findings-bar-fill');
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const width = entry.target.dataset.width;
+                    entry.target.style.width = width;
+                    barObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+        bars.forEach(bar => barObserver.observe(bar));
+    </script>
+
+</body>
+</html>

@@ -8,7 +8,7 @@
       "modified": "2026-07-03",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.png",
+      "image": "/assets/blog/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.png",
       "tags": [
         "AI Safety",
         "AI Audits",
@@ -22,7 +22,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -35,7 +35,7 @@
       "modified": "2026-07-01",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-driven-rfq-compliance-checks-automating-specification-adherence-in-procurement.png",
+      "image": "/assets/blog/ai-driven-rfq-compliance-checks-automating-specification-adherence-in-procurement.png",
       "tags": [
         "RFQ Automation",
         "Compliance",
@@ -48,7 +48,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -61,7 +61,7 @@
       "modified": "2026-06-29",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/voice-agents-for-streamlining-remote-site-inspections-in-epc-projects.png",
+      "image": "/assets/blog/voice-agents-for-streamlining-remote-site-inspections-in-epc-projects.png",
       "tags": [
         "Voice Agents",
         "EPC",
@@ -74,7 +74,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -87,7 +87,7 @@
       "modified": "2026-06-28",
       "published": true,
       "featured": true,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com.png",
+      "image": "/assets/blog/try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com.png",
       "tags": [
         "AI Engineering Reviews",
         "Free Trial",
@@ -101,7 +101,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -114,7 +114,7 @@
       "modified": "2026-06-26",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/securing-ai-in-engineering-your-nist-ai-rmf-quickstart-for-robust-implementations.png",
+      "image": "/assets/blog/securing-ai-in-engineering-your-nist-ai-rmf-quickstart-for-robust-implementations.png",
       "tags": [
         "AI Safety",
         "NIST AI RMF",
@@ -127,7 +127,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -140,7 +140,7 @@
       "modified": "2026-06-24",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/accelerating-engineering-change-order-impact-assessments-with-ai-for-enhanced-project-certainty.png",
+      "image": "/assets/blog/accelerating-engineering-change-order-impact-assessments-with-ai-for-enhanced-project-certainty.png",
       "tags": [
         "Change Order Management",
         "AI Automation",
@@ -154,7 +154,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -167,7 +167,7 @@
       "modified": "2026-06-22",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/multi-agent-ai-for-integrated-engineering-design-reviews-a-new-paradigm-for-compliance-and-efficiency.png",
+      "image": "/assets/blog/multi-agent-ai-for-integrated-engineering-design-reviews-a-new-paradigm-for-compliance-and-efficiency.png",
       "tags": [
         "Multi-Agent Systems",
         "Engineering Design Review",
@@ -180,7 +180,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -193,7 +193,7 @@
       "modified": "2026-07-07",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms.png",
+      "image": "/assets/blog/implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms.png",
       "tags": [
         "AI Governance",
         "ISO 42001",
@@ -206,7 +206,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -219,7 +219,7 @@
       "modified": "2026-06-17",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png",
+      "image": "/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png",
       "tags": [
         "AI Engineering Reviews",
         "Quality Assurance",
@@ -232,7 +232,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -245,7 +245,7 @@
       "modified": "2026-06-17",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png",
+      "image": "/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png",
       "tags": [
         "Process Safety",
         "PSV Sizing",
@@ -258,7 +258,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -271,7 +271,7 @@
       "modified": "2026-06-17",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.png",
+      "image": "/assets/blog/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.png",
       "tags": [
         "Change Order Management",
         "AI in Engineering",
@@ -284,7 +284,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -297,7 +297,7 @@
       "modified": "2026-06-15",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.png",
+      "image": "",
       "tags": [
         "Multi-Agent Systems",
         "Risk Management",
@@ -309,7 +309,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -322,7 +322,7 @@
       "modified": "2026-06-12",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/digital-twins-vibration-analytics-predictive-maintenance-for-rotating-equipment.png",
+      "image": "",
       "tags": [
         "Digital Twins",
         "Predictive Maintenance",
@@ -335,7 +335,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -348,7 +348,7 @@
       "modified": "2026-06-10",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/automating-pid-revision-management-with-ai-detecting-changes-and-updating-tag-lists.png",
+      "image": "",
       "tags": [
         "P&ID Automation",
         "Revision Control",
@@ -360,7 +360,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -373,7 +373,7 @@
       "modified": "2026-06-08",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/rag-systems-for-engineering-accelerating-hazop-study-lookups.png",
+      "image": "",
       "tags": [
         "RAG",
         "Knowledge Management",
@@ -386,7 +386,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -399,7 +399,7 @@
       "modified": "2026-06-05",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.png",
+      "image": "",
       "tags": [
         "AI Implementation",
         "Procurement",
@@ -411,7 +411,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -424,7 +424,7 @@
       "modified": "2026-06-03",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-for-engineering-companies-boosting-document-processing-in-oil-gas-and-epc-projects.png",
+      "image": "/assets/blog/ai-automation-for-engineering-companies-boosting-document-processing-in-oil-gas-and-epc-projects.png",
       "tags": [
         "AI automation",
         "engineering",
@@ -437,7 +437,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -450,7 +450,7 @@
       "modified": "2026-06-01",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-in-engineering-real-world-document-processing-for-oil-gas-and-epc-projects.png",
+      "image": "/assets/blog/ai-automation-in-engineering-real-world-document-processing-for-oil-gas-and-epc-projects.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -463,7 +463,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -476,7 +476,7 @@
       "modified": "2026-05-22",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-in-engineering-real-world-document-processing-solutions-for-oil-gas-epc-projects.png",
+      "image": "/assets/blog/ai-automation-in-engineering-real-world-document-processing-solutions-for-oil-gas-epc-projects.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -489,7 +489,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -502,7 +502,7 @@
       "modified": "2026-05-20",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-for-engineering-companies-practical-guide-to-document-processing.png",
+      "image": "/assets/blog/ai-automation-for-engineering-companies-practical-guide-to-document-processing.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -515,7 +515,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -528,7 +528,7 @@
       "modified": "2026-05-15",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects.png",
+      "image": "/assets/blog/ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -541,7 +541,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -554,7 +554,7 @@
       "modified": "2026-05-06",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-powered-document-processing-for-engineering-boost-efficiency-in-oil-gas-and-epc-projects.png",
+      "image": "/assets/blog/ai-powered-document-processing-for-engineering-boost-efficiency-in-oil-gas-and-epc-projects.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -567,7 +567,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }
@@ -620,7 +620,7 @@
       "author": {
         "name": "Kingsley Uzowulu",
         "title": "Founder & Lead Engineer, CEng MIMechE",
-        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "avatar": "/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
       }

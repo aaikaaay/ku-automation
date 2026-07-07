@@ -432,9 +432,13 @@
         // Render featured image
         function renderFeaturedImage(post) {
             if (post.image) {
-                document.getElementById('featured-image').innerHTML = `
-                    <img src="${post.image}" alt="${post.title}" class="w-full h-64 md:h-96 object-cover">
-                `;
+                const img = document.createElement('img');
+                img.src = post.image;
+                img.alt = post.title;
+                img.className = 'w-full h-64 md:h-96 object-cover';
+                img.onerror = () => document.getElementById('featured-image').classList.add('hidden');
+                document.getElementById('featured-image').innerHTML = '';
+                document.getElementById('featured-image').appendChild(img);
             } else {
                 document.getElementById('featured-image').classList.add('hidden');
             }
@@ -454,6 +458,9 @@
             let body = markdown;
             const fm = body.match(/^---\s*[\r\n]+([\s\S]*?)[\r\n]+---\s*[\r\n]+/);
             if (fm) body = body.slice(fm[0].length);
+
+            // Strip leading H1 if it duplicates the post title already shown in the header.
+            body = body.replace(/^#\s+.+\n?/, '');
 
             const html = marked.parse(body);
             document.getElementById('article-content').innerHTML = html;
