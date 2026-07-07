@@ -4,7 +4,7 @@ title: Streamlining Engineering Change Orders: AI-Powered Impact Analysis and Wo
 excerpt: Discover how AI is revolutionizing engineering change order management by automating impact analysis, accelerating approvals, and ensuring compliance. Learn how to cut cycle times and reduce project risks.
 date: 2026-06-17
 modified: 2026-06-17
-published: false
+published: true
 featured: false
 image: /assets/blog/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.png
 tags:

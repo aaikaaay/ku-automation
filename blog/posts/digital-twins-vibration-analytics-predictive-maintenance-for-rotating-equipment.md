@@ -4,7 +4,7 @@ title: Digital Twins + Vibration Analytics: Predictive Maintenance for Rotating 
 excerpt: Leverage digital twins and AI-powered vibration analytics for real-time predictive maintenance, reducing downtime and costs in critical rotating equipment.
 date: 2026-06-12
 modified: 2026-06-12
-published: false
+published: true
 featured: false
 image: /assets/blog/digital-twins-vibration-analytics-predictive-maintenance-for-rotating-equipment.png
 tags:

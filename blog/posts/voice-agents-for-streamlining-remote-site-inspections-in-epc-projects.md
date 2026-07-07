@@ -4,7 +4,7 @@ title: Voice Agents for Streamlining Remote Site Inspections in EPC Projects
 excerpt: "Discover how AI-powered voice agents are revolutionizing remote site inspections in Engineering, Procurement, and Construction (EPC) projects, enhancing efficiency, accuracy, and safety."
 date: 2026-06-29
 modified: 2026-06-29
-published: false
+published: true
 featured: false
 image: /assets/blog/voice-agents-for-streamlining-remote-site-inspections-in-epc-projects.png
 tags:

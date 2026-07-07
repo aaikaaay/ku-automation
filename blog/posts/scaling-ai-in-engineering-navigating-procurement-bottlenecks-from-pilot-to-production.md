@@ -4,7 +4,7 @@ title: Scaling AI in Engineering: Navigating Procurement Bottlenecks from Pilot 
 excerpt: Overcome the procurement hurdles in scaling AI from successful pilots to full production in engineering. Learn strategies for vendor selection, contracting, and change management.
 date: 2026-06-05
 modified: 2026-06-05
-published: false
+published: true
 featured: false
 image: /assets/blog/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.png
 tags:

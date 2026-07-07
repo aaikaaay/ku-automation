@@ -3,8 +3,8 @@ slug: implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms
 title: Implementing ISO 42001: An AI Governance Playbook for Engineering Firms
 excerpt: A practical playbook for engineering firms to implement ISO 42001, focusing on AI governance, risk management, and ethical deployment for measurable outcomes.
 date: 2026-06-19
-modified: 2026-06-19
-published: false
+modified: 2026-07-07
+published: true
 featured: false
 image: /assets/blog/implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms.png
 tags:

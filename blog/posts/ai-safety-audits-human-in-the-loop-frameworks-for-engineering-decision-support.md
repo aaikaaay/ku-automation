@@ -4,7 +4,7 @@ title: "AI Safety Audits: Human-in-the-Loop Frameworks for Engineering Decision 
 excerpt: "Explore human-in-the-loop frameworks for AI safety audits in engineering. Learn how to ensure reliable, compliant AI decision support with practical implementation strategies and real-world examples."
 date: 2026-07-03
 modified: 2026-07-03
-published: false
+published: true
 featured: false
 image: /assets/blog/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.png
 tags:

@@ -4,7 +4,7 @@ title: RAG Systems for Engineering: Accelerating HAZOP Study Lookups
 excerpt: Discover how Retrieval-Augmented Generation (RAG) systems are revolutionizing HAZOP studies in engineering, drastically cutting down research time and enhancing safety outcomes.
 date: 2026-06-08
 modified: 2026-06-08
-published: false
+published: true
 featured: false
 image: /assets/blog/rag-systems-for-engineering-accelerating-hazop-study-lookups.png
 tags:

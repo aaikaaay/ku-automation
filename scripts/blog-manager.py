@@ -115,14 +115,14 @@ Ready to learn more? [Schedule a consultation](/index.html#contact) to discuss y
     with open(md_path, 'w') as f:
         f.write(template)
     
-    # Add to posts.json (unpublished by default)
+    # Add to posts.json (published by default — cron generator relies on this)
     new_post = {
         "slug": slug,
         "title": title,
         "excerpt": excerpt or f"Learn about {title.lower()}. Expert insights for engineering professionals.",
         "date": date,
         "modified": date,
-        "published": False,
+        "published": True,
         "featured": False,
         "image": f"{BASE_URL}/assets/blog/{slug}.png",
         "tags": tags,

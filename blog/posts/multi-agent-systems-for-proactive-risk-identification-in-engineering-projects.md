@@ -4,7 +4,7 @@ title: Multi-Agent Systems for Proactive Risk Identification in Engineering Proj
 excerpt: Discover how multi-agent systems are revolutionizing proactive risk identification in complex engineering projects, leading to enhanced safety and significant cost savings.
 date: 2026-06-15
 modified: 2026-06-15
-published: false
+published: true
 featured: false
 image: /assets/blog/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.png
 tags:
