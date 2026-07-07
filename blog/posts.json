@@ -297,7 +297,7 @@
       "modified": "2026-06-15",
       "published": true,
       "featured": false,
-      "image": "",
+      "image": "/assets/blog/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.png",
       "tags": [
         "Multi-Agent Systems",
         "Risk Management",
@@ -322,7 +322,7 @@
       "modified": "2026-06-12",
       "published": true,
       "featured": false,
-      "image": "",
+      "image": "/assets/blog/digital-twins-vibration-analytics-predictive-maintenance-for-rotating-equipment.png",
       "tags": [
         "Digital Twins",
         "Predictive Maintenance",
@@ -348,7 +348,7 @@
       "modified": "2026-06-10",
       "published": true,
       "featured": false,
-      "image": "",
+      "image": "/assets/blog/automating-pid-revision-management-with-ai-detecting-changes-and-updating-tag-lists.png",
       "tags": [
         "P&ID Automation",
         "Revision Control",
@@ -373,7 +373,7 @@
       "modified": "2026-06-08",
       "published": true,
       "featured": false,
-      "image": "",
+      "image": "/assets/blog/rag-systems-for-engineering-accelerating-hazop-study-lookups.png",
       "tags": [
         "RAG",
         "Knowledge Management",
@@ -399,7 +399,7 @@
       "modified": "2026-06-05",
       "published": true,
       "featured": false,
-      "image": "",
+      "image": "/assets/blog/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.png",
       "tags": [
         "AI Implementation",
         "Procurement",
