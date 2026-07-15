@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>KU Automation — Portfolio &amp; Capabilities · July 2026</title>
+<link rel="icon" href="assets/favicon.png" />
+<style>
+  :root{
+    --primary:#4F46E5;
+    --primary-dark:#312E81;
+    --accent:#8B5CF6;
+    --ink:#111827;
+    --gray:#6B7280;
+    --gray-light:#9CA3AF;
+    --line:#E5E7EB;
+    --bg:#FFFFFF;
+    --tint:#F9FAFB;
+    --tint-2:#EEF2FF;
+    --amber:#F59E0B;
+    --green:#16A34A;
+    --red:#DC2626;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,Roboto,'Helvetica Neue',Arial,sans-serif;
+    color:var(--ink);
+    background:#F3F4F6;
+    line-height:1.55;
+    font-size:15px;
+  }
+
+  /* Nav */
+  .topnav{
+    position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.95);
+    backdrop-filter:blur(12px);border-bottom:1px solid var(--line);
+    padding:12px 24px;display:flex;align-items:center;gap:16px;
+  }
+  .topnav .logo{
+    width:36px;height:36px;border-radius:8px;
+    background:linear-gradient(135deg,var(--primary),var(--accent));
+    display:flex;align-items:center;justify-content:center;
+    color:white;font-weight:800;font-size:15px;
+  }
+  .topnav .brand{font-weight:700;font-size:15px}
+  .topnav .brand small{display:block;font-weight:400;font-size:12px;color:var(--gray)}
+  .topnav .spacer{flex:1}
+  .topnav a{
+    color:var(--primary);text-decoration:none;font-weight:600;font-size:13px;
+    padding:6px 12px;border-radius:6px;transition:background 0.15s;
+  }
+  .topnav a:hover{background:var(--tint-2)}
+  .topnav .btn{background:var(--primary);color:white}
+  .topnav .btn:hover{background:var(--primary-dark)}
+
+  /* Slide container */
+  .deck{max-width:1280px;margin:32px auto;padding:0 24px}
+  .slide{
+    background:white;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.06);
+    margin-bottom:32px;overflow:hidden;position:relative;
+    aspect-ratio:16/9;display:flex;flex-direction:column;
+  }
+  .slide-inner{
+    padding:56px 64px;flex:1;display:flex;flex-direction:column;
+    position:relative;overflow:hidden;
+  }
+
+  /* Slide theme variants */
+  .slide.dark{background:var(--primary-dark);color:white}
+  .slide.dark h1,.slide.dark h2,.slide.dark h3{color:white}
+  .slide.dark .eyebrow{color:#A5B4FC}
+  .slide.dark p{color:rgba(255,255,255,0.85)}
+  .slide.light-bg{background:var(--tint)}
+  .slide.ink-bg{background:var(--ink);color:white}
+  .slide.ink-bg h1,.slide.ink-bg h2,.slide.ink-bg h3{color:white}
+  .slide.ink-bg .eyebrow{color:#A5B4FC}
+  .slide.ink-bg p{color:rgba(255,255,255,0.85)}
+
+  /* Cover slide */
+  .cover{
+    background:linear-gradient(135deg,var(--primary-dark) 0%,#4338CA 100%);
+    color:white;justify-content:center;align-items:center;text-align:center;
+    padding:0;
+  }
+  .cover-inner{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    height:100%;padding:56px;
+  }
+  .cover .logo-box{
+    width:120px;height:120px;border-radius:24px;background:white;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:32px;color:var(--primary);font-weight:900;font-size:56px;letter-spacing:-2px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.2);
+  }
+  .cover h1{font-size:64px;font-weight:900;letter-spacing:-2px;margin-bottom:20px;color:white}
+  .cover .divider{width:100px;height:3px;background:var(--accent);margin:24px auto;border-radius:2px}
+  .cover .tagline{font-size:24px;font-weight:400;color:rgba(255,255,255,0.9);margin-bottom:16px}
+  .cover .subtitle{font-size:16px;color:rgba(255,255,255,0.7);margin-bottom:8px}
+  .cover .date{font-size:14px;color:rgba(255,255,255,0.6)}
+
+  /* Slide headers */
+  .eyebrow{
+    font-size:11px;font-weight:800;letter-spacing:2.5px;
+    color:var(--primary);text-transform:uppercase;margin-bottom:12px;
+  }
+  h1.slide-title{font-size:44px;font-weight:800;letter-spacing:-1px;line-height:1.1;margin-bottom:8px;color:var(--ink)}
+  .slide-subtitle{font-size:16px;color:var(--gray);margin-bottom:32px}
+  .slide.dark .slide-subtitle,.slide.ink-bg .slide-subtitle{color:rgba(255,255,255,0.7)}
+
+  /* Layout helpers */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:24px;flex:1}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;flex:1}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .grid-5{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+  .grid-6{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:repeat(2,1fr);gap:18px}
+
+  .card{
+    background:var(--tint);border-radius:14px;padding:24px;
+    display:flex;flex-direction:column;gap:8px;
+  }
+  .card.white{background:white;border:1px solid var(--line)}
+  .card.dark{background:#1E293B;color:white;border:1px solid #374151}
+  .card.dark p{color:rgba(255,255,255,0.75)}
+  .card.tint2{background:var(--tint-2)}
+  .card.primary{background:var(--primary);color:white}
+  .card.primary p{color:rgba(255,255,255,0.85)}
+  .card.ink{background:var(--ink);color:white}
+  .card.ink p{color:rgba(255,255,255,0.75)}
+
+  .card-icon{font-size:28px;margin-bottom:4px}
+  .card-title{font-size:17px;font-weight:700;color:inherit;margin-bottom:4px}
+  .card p{font-size:13px;color:var(--gray);margin:0;line-height:1.5}
+  .card-metric{font-size:36px;font-weight:800;letter-spacing:-1px}
+  .card ul{padding-left:16px;font-size:13px;color:inherit}
+  .card ul li{margin-bottom:4px}
+
+  /* Stat pill */
+  .stat-num{font-size:52px;font-weight:800;letter-spacing:-1.5px;line-height:1;margin-bottom:8px}
+  .stat-label{font-size:13px;color:inherit;opacity:0.85}
+
+  /* Quote */
+  .quote-box{
+    background:var(--tint-2);border-left:5px solid var(--primary);
+    padding:20px 24px;border-radius:0 12px 12px 0;margin:12px 0;
+    font-size:16px;font-style:italic;color:var(--primary-dark);font-weight:500;
+  }
+
+  /* Badge */
+  .badge{
+    display:inline-block;padding:4px 12px;border-radius:20px;font-size:10px;
+    font-weight:800;letter-spacing:1.5px;text-transform:uppercase;
+  }
+  .badge-primary{background:var(--primary);color:white}
+  .badge-accent{background:var(--accent);color:white}
+  .badge-tint{background:var(--tint-2);color:var(--primary)}
+  .badge-green{background:#DCFCE7;color:var(--green)}
+  .badge-amber{background:#FEF3C7;color:#78350F}
+
+  /* Discipline card */
+  .disc-card{
+    background:white;border:2px solid var(--line);border-radius:14px;
+    padding:20px;display:flex;flex-direction:column;
+  }
+  .disc-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+  .disc-count{
+    background:var(--primary);color:white;padding:2px 8px;border-radius:12px;
+    font-size:10px;font-weight:800;letter-spacing:0.5px;
+  }
+  .disc-name{font-weight:700;font-size:15px}
+  .disc-list{list-style:none;padding:0;font-size:11.5px;color:var(--gray);line-height:1.7}
+  .disc-list li::before{content:"→ ";color:var(--primary);font-weight:700}
+
+  /* Numbered step */
+  .step{display:flex;gap:16px;align-items:flex-start;padding:14px 20px;background:white;border-radius:12px;box-shadow:0 1px 3px rgba(0,0,0,0.04)}
+  .step-num{
+    width:40px;height:40px;border-radius:20px;background:var(--primary);color:white;
+    display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;flex-shrink:0;
+  }
+  .step-num.done{background:var(--green)}
+  .step-content h4{font-size:15px;font-weight:700;margin-bottom:2px}
+  .step-content .when{font-size:11px;font-weight:700;color:var(--primary);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+  .step-content p{font-size:12px;color:var(--gray);margin:0}
+
+  /* Link */
+  a.linky{
+    color:var(--primary);text-decoration:none;font-weight:600;
+    border-bottom:2px solid transparent;transition:border 0.15s;
+  }
+  a.linky:hover{border-bottom-color:var(--primary)}
+  .slide.dark a.linky,.slide.ink-bg a.linky{color:#A5B4FC}
+  .slide.dark a.linky:hover,.slide.ink-bg a.linky:hover{border-bottom-color:#A5B4FC}
+
+  /* CTA row */
+  .cta-row{
+    display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;
+  }
+  .cta{
+    background:white;color:var(--primary);padding:10px 18px;border-radius:24px;
+    font-weight:700;font-size:13px;text-decoration:none;
+    border:1.5px solid var(--primary);transition:all 0.15s;
+  }
+  .cta:hover{background:var(--primary);color:white}
+  .cta.solid{background:var(--primary);color:white}
+  .cta.solid:hover{background:var(--primary-dark);border-color:var(--primary-dark)}
+  .slide.dark .cta,.slide.ink-bg .cta{border-color:white;color:white;background:transparent}
+  .slide.dark .cta:hover,.slide.ink-bg .cta:hover{background:white;color:var(--primary-dark)}
+
+  /* Slide number + logo watermark */
+  .slide-footer{
+    position:absolute;bottom:16px;left:0;right:0;padding:0 32px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:11px;color:var(--gray-light);
+  }
+  .slide.dark .slide-footer,.slide.ink-bg .slide-footer,.cover .slide-footer{color:rgba(255,255,255,0.5)}
+  .slide-num{font-weight:700;letter-spacing:1px}
+  .watermark{opacity:0.35;font-weight:700}
+
+  /* Section navigation */
+  .toc{
+    max-width:1280px;margin:32px auto;padding:0 24px;
+  }
+  .toc-inner{
+    background:white;border-radius:16px;padding:24px 32px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.04);
+  }
+  .toc h3{font-size:14px;color:var(--gray);letter-spacing:1px;text-transform:uppercase;font-weight:700;margin-bottom:14px}
+  .toc-links{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+  .toc-links a{
+    color:var(--ink);text-decoration:none;font-size:13px;padding:6px 10px;border-radius:6px;
+    display:flex;align-items:baseline;gap:8px;transition:background 0.15s;
+  }
+  .toc-links a:hover{background:var(--tint-2);color:var(--primary)}
+  .toc-links a .n{color:var(--gray-light);font-size:11px;font-weight:700;min-width:20px}
+
+  /* Print styles for PDF export */
+  @media print{
+    body{background:white}
+    .topnav,.toc{display:none}
+    .deck{margin:0;padding:0;max-width:none}
+    .slide{
+      page-break-after:always;page-break-inside:avoid;
+      margin:0;border-radius:0;box-shadow:none;
+      aspect-ratio:auto;width:100vw;height:100vh;
+      display:flex;flex-direction:column;
+    }
+    .slide-inner{padding:40px 56px}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+
+  @media (max-width:900px){
+    .deck{padding:0 12px}
+    .slide-inner{padding:32px 24px}
+    .cover h1{font-size:44px}
+    h1.slide-title{font-size:30px}
+    .grid-3,.grid-4,.grid-5{grid-template-columns:1fr 1fr}
+    .grid-6{grid-template-columns:1fr 1fr;grid-template-rows:auto}
+    .toc-links{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="logo">KU</div>
+  <div class="brand">KU Automation<small>Portfolio &amp; Capabilities · July 2026</small></div>
+  <div class="spacer"></div>
+  <a href="https://services.ku-automation.com" target="_blank">Marketplace ↗</a>
+  <a href="tel:+17402652849" class="btn">📞 Call KU Voice Demo</a>
+  <a href="KU_Automation_Portfolio_v2_Jul2026.pdf" class="btn" download>Download PDF ↓</a>
+</nav>
+
+<div class="toc">
+  <div class="toc-inner">
+    <h3>Contents</h3>
+    <div class="toc-links">
+      <a href="#s1"><span class="n">01</span> Cover</a>
+      <a href="#s2"><span class="n">02</span> About Us</a>
+      <a href="#s3"><span class="n">03</span> The Problem</a>
+      <a href="#s4"><span class="n">04</span> Three Product Lines</a>
+      <a href="#s5"><span class="n">05</span> Review Portal Overview</a>
+      <a href="#s6"><span class="n">06</span> Discipline Coverage</a>
+      <a href="#s7"><span class="n">07</span> Review Deliverables</a>
+      <a href="#s8"><span class="n">08</span> Codes &amp; Standards</a>
+      <a href="#s9"><span class="n">09</span> KU Voice</a>
+      <a href="#s10"><span class="n">10</span> Bespoke Automation</a>
+      <a href="#s11"><span class="n">11</span> Live Demos</a>
+      <a href="#s12"><span class="n">12</span> Deployment</a>
+      <a href="#s13"><span class="n">13</span> Security &amp; Compliance</a>
+      <a href="#s14"><span class="n">14</span> Support &amp; Governance</a>
+      <a href="#s15"><span class="n">15</span> Engagement Model</a>
+      <a href="#s16"><span class="n">16</span> Results &amp; Cases</a>
+      <a href="#s17"><span class="n">17</span> Pricing</a>
+      <a href="#s18"><span class="n">18</span> BD Opportunity</a>
+      <a href="#s19"><span class="n">19</span> Next Steps</a>
+    </div>
+  </div>
+</div>
+
+<div class="deck">
+
+<!-- ═══════════════ SLIDE 1 — COVER ═══════════════ -->
+<section class="slide cover" id="s1">
+  <div class="cover-inner">
+    <div class="logo-box">KU</div>
+    <h1>KU Automation</h1>
+    <div class="divider"></div>
+    <div class="tagline">AI-Powered Owner's Engineering, Automation &amp; Voice</div>
+    <div class="subtitle">Corporate Portfolio &amp; Capabilities</div>
+    <div class="date">July 2026</div>
+  </div>
+  <div class="slide-footer"><span class="slide-num">01 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 2 — ABOUT ═══════════════ -->
+<section class="slide" id="s2">
+<div class="slide-inner">
+  <div class="eyebrow">01 — About Us</div>
+  <h1 class="slide-title">Who We Are</h1>
+  <div class="grid-2" style="margin-top:16px">
+    <div>
+      <div class="card white" style="border:1px solid var(--line)">
+        <div style="font-weight:700;font-size:22px;color:var(--ink)">Kingsley Uzowulu</div>
+        <div style="color:var(--primary);font-weight:600;font-size:14px;margin-bottom:8px">Founder &amp; Principal Engineer</div>
+        <p style="font-size:14px;color:var(--gray)">Chartered Engineer (CEng MIMechE) with 21+ years of experience in oil &amp; gas, EPC projects, and manufacturing across the UK, Europe, and Middle East.</p>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
+          <span class="badge badge-tint">Chartered Engineer</span>
+          <span class="badge badge-tint">MIMechE</span>
+          <span class="badge badge-tint">AI/ML Specialist</span>
+        </div>
+      </div>
+      <div class="quote-box" style="margin-top:16px">"We bridge the gap between cutting-edge AI and practical engineering workflows."</div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="card"><div class="card-title">🎯 Our Mission</div><p>Transform engineering productivity through AI automation that actually works in real-world project environments.</p></div>
+      <div class="card"><div class="card-title">🏭 Industries Served</div><p>Oil &amp; Gas (Upstream · Midstream · Downstream) · EPC Contractors &amp; Engineering Consultancies · Chemical · Power Generation · Manufacturing</p></div>
+      <div class="card"><div class="card-title">🌍 Geographic Coverage</div><p>UK · Europe · Middle East · Global remote support</p></div>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">02 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 3 — PROBLEM ═══════════════ -->
+<section class="slide ink-bg" id="s3">
+<div class="slide-inner">
+  <div class="eyebrow">02 — The Challenge</div>
+  <h1 class="slide-title">The Problem We Solve</h1>
+  <div class="grid-3" style="margin-top:20px;flex:0 0 auto">
+    <div class="card dark"><div class="stat-num" style="color:#F87171">60%</div><div class="stat-label">of senior engineer time spent on document admin</div></div>
+    <div class="card dark"><div class="stat-num" style="color:#FBBF24">$400–800</div><div class="stat-label">typical consultant cost per deliverable review</div></div>
+    <div class="card dark"><div class="stat-num" style="color:#FB923C">4–6 hrs</div><div class="stat-label">to manually review a single tech spec</div></div>
+  </div>
+  <div class="card dark" style="margin-top:20px">
+    <div class="card-title">Common Pain Points We Address</div>
+    <div class="grid-2" style="margin-top:8px">
+      <ul style="list-style:none;padding:0;color:rgba(255,255,255,0.85);font-size:13.5px;line-height:2">
+        <li>✗ Manual document review bottlenecks</li>
+        <li>✗ Inconsistent data extraction from drawings</li>
+        <li>✗ Delayed RFQ responses losing contracts</li>
+      </ul>
+      <ul style="list-style:none;padding:0;color:rgba(255,255,255,0.85);font-size:13.5px;line-height:2">
+        <li>✗ Knowledge trapped in experts' heads</li>
+        <li>✗ Contractor deliverable review backlog</li>
+        <li>✗ Compliance documentation burden</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">03 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 4 — THREE PRODUCT LINES ═══════════════ -->
+<section class="slide" id="s4">
+<div class="slide-inner">
+  <div class="eyebrow">03 — Product Lines</div>
+  <h1 class="slide-title">Three Product Lines</h1>
+  <div class="slide-subtitle">One agency, three distinct AI service verticals</div>
+  <div class="grid-3" style="margin-top:8px">
+    <div class="card" style="border:2px solid var(--primary)">
+      <div class="card-icon">🔍</div>
+      <div class="card-title">KU Review Portal</div>
+      <p style="margin-bottom:10px">AI Owner's Engineer for <strong>22 engineering deliverable types</strong>. Principal-level review delivered in minutes.</p>
+      <span class="badge badge-green" style="align-self:flex-start">🟢 LIVE</span>
+      <a class="linky" href="https://services.ku-automation.com" target="_blank" style="font-size:13px;margin-top:8px">→ services.ku-automation.com</a>
+    </div>
+    <div class="card" style="border:2px solid var(--accent)">
+      <div class="card-icon">☎️</div>
+      <div class="card-title">KU Voice</div>
+      <p style="margin-bottom:10px">AI voice agents that handle <strong>real inbound &amp; outbound calls</strong>. Booking, orders, lead qualification, reception.</p>
+      <span class="badge badge-green" style="align-self:flex-start">🟢 LIVE DEMO LINE</span>
+      <a class="linky" href="tel:+17402652849" style="font-size:13px;margin-top:8px">→ Call +1 (740) 265-2849</a>
+    </div>
+    <div class="card" style="border:2px solid var(--gray)">
+      <div class="card-icon">⚙️</div>
+      <div class="card-title">Bespoke AI Automation</div>
+      <p style="margin-bottom:10px">Custom pipelines: P&amp;ID extraction, datasheet parsers, RFQ analysers, engineering chatbots.</p>
+      <span class="badge badge-tint" style="align-self:flex-start">💼 CUSTOM</span>
+      <a class="linky" href="https://www.ku-automation.com" target="_blank" style="font-size:13px;margin-top:8px">→ www.ku-automation.com</a>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">04 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 5 — REVIEW PORTAL OVERVIEW ═══════════════ -->
+<section class="slide light-bg" id="s5">
+<div class="slide-inner">
+  <div class="eyebrow">04 — KU Review Portal</div>
+  <h1 class="slide-title">Principal-Level Engineering Review</h1>
+  <div class="slide-subtitle">Delivered by AI in minutes, not weeks</div>
+  <div class="grid-4" style="margin-top:16px;flex:0 0 auto">
+    <div class="card white"><div class="stat-num" style="color:var(--primary)">22</div><div class="stat-label">Live AI reviewers</div></div>
+    <div class="card white"><div class="stat-num" style="color:var(--primary)">5</div><div class="stat-label">Engineering disciplines</div></div>
+    <div class="card white"><div class="stat-num" style="color:var(--primary)">4 min</div><div class="stat-label">Typical turnaround</div></div>
+    <div class="card white"><div class="stat-num" style="color:var(--primary)">$19+</div><div class="stat-label">From, pay-per-review</div></div>
+  </div>
+  <div class="card white" style="margin-top:20px">
+    <div class="card-title" style="margin-bottom:12px">How it works</div>
+    <div class="grid-4" style="gap:12px">
+      <div style="text-align:center"><div style="font-size:24px">📤</div><div style="font-weight:700;margin-top:4px;font-size:13px">1. Upload PDF</div><p style="font-size:11.5px">Any deliverable (PDF, drawing, datasheet)</p></div>
+      <div style="text-align:center"><div style="font-size:24px">🤖</div><div style="font-weight:700;margin-top:4px;font-size:13px">2. AI Reviews</div><p style="font-size:11.5px">Against ASME, API, NACE, ACI, AISC, ISO codes</p></div>
+      <div style="text-align:center"><div style="font-size:24px">👀</div><div style="font-weight:700;margin-top:4px;font-size:13px">3. Free Preview</div><p style="font-size:11.5px">See 5 findings before paying</p></div>
+      <div style="text-align:center"><div style="font-size:24px">📊</div><div style="font-weight:700;margin-top:4px;font-size:13px">4. PDF + Excel</div><p style="font-size:11.5px">Full report + sortable comment register</p></div>
+    </div>
+  </div>
+  <div style="margin-top:16px;text-align:center">
+    <a class="cta solid" href="https://services.ku-automation.com" target="_blank">Try live at services.ku-automation.com ↗</a>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">05 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 6 — DISCIPLINE COVERAGE ═══════════════ -->
+<section class="slide" id="s6">
+<div class="slide-inner">
+  <div class="eyebrow">05 — Discipline Coverage</div>
+  <h1 class="slide-title">22 Live Reviewers Across 5 Disciplines</h1>
+  <div class="grid-5" style="margin-top:20px">
+    <div class="disc-card">
+      <div class="disc-head"><span style="font-size:20px">🔧</span><span class="disc-name">Piping</span><span class="disc-count">11 LIVE</span></div>
+      <ul class="disc-list">
+        <li>P&amp;ID</li><li>Isometric</li><li>Line List</li><li>Caesar II Stress</li>
+        <li>GA Drawing</li><li>Plot Plan</li><li>Valve List</li><li>PMS</li>
+        <li>Piping Class Sheet</li><li>MTO / BoQ</li><li>Pipe Support</li>
+      </ul>
+    </div>
+    <div class="disc-card">
+      <div class="disc-head"><span style="font-size:20px">🔬</span><span class="disc-name">Process</span><span class="disc-count">4 LIVE</span></div>
+      <ul class="disc-list">
+        <li>P&amp;ID</li><li>PFD</li><li>Calcs &amp; Sizing</li><li>Reports &amp; Philosophies</li>
+      </ul>
+    </div>
+    <div class="disc-card">
+      <div class="disc-head"><span style="font-size:20px">⚙️</span><span class="disc-name">Mechanical</span><span class="disc-count">2 LIVE</span></div>
+      <ul class="disc-list">
+        <li>Pump Datasheet</li><li>Compressor Datasheet</li>
+      </ul>
+    </div>
+    <div class="disc-card">
+      <div class="disc-head"><span style="font-size:20px">🏗️</span><span class="disc-name">Civil</span><span class="disc-count">2 LIVE</span></div>
+      <ul class="disc-list">
+        <li>Foundation Drawing</li><li>Concrete Structure</li>
+      </ul>
+    </div>
+    <div class="disc-card">
+      <div class="disc-head"><span style="font-size:20px">🔩</span><span class="disc-name">Structural</span><span class="disc-count">2 LIVE</span></div>
+      <ul class="disc-list">
+        <li>Steel Structure</li><li>Pipe Rack</li>
+      </ul>
+    </div>
+  </div>
+  <div style="margin-top:24px;text-align:center">
+    <a class="cta" href="https://services.ku-automation.com/services" target="_blank">Full catalogue at services.ku-automation.com/services ↗</a>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">06 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 7 — WHAT EACH REVIEW DELIVERS ═══════════════ -->
+<section class="slide light-bg" id="s7">
+<div class="slide-inner">
+  <div class="eyebrow">06 — Anatomy of a Review</div>
+  <h1 class="slide-title">What Every Review Delivers</h1>
+  <div class="grid-2" style="margin-top:16px">
+    <div class="card white">
+      <div class="card-title">📋 Sample Review Output</div>
+      <p style="font-size:13px">A representative <strong>P&amp;ID review</strong> from an EPC client project:</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:8px">
+        <div style="background:#FEE2E2;padding:10px;border-radius:8px;text-align:center"><div style="font-weight:800;font-size:22px;color:var(--red)">11</div><div style="font-size:10px;font-weight:700;color:var(--red)">CRITICAL</div></div>
+        <div style="background:#FEF3C7;padding:10px;border-radius:8px;text-align:center"><div style="font-weight:800;font-size:22px;color:#B45309">8</div><div style="font-size:10px;font-weight:700;color:#B45309">MAJOR</div></div>
+        <div style="background:#DBEAFE;padding:10px;border-radius:8px;text-align:center"><div style="font-weight:800;font-size:22px;color:#1E40AF">3</div><div style="font-size:10px;font-weight:700;color:#1E40AF">MINOR</div></div>
+      </div>
+      <p style="font-size:12px;margin-top:10px">Recommendation <strong>D (Reject)</strong> · 21-page PDF · Multi-sheet Excel comment register · Delivered in 4 minutes · $0.18 AI cost</p>
+    </div>
+    <div class="card white">
+      <div class="card-title">✓ Included in every review</div>
+      <ul style="list-style:none;padding:0;font-size:13px;line-height:2">
+        <li>✓ <strong>Severity ratings</strong> — CRITICAL / MAJOR / MINOR / OBSERVATION</li>
+        <li>✓ <strong>Code references</strong> — ASME, API, NACE, ACI, AISC, ISO, IEC, NFPA</li>
+        <li>✓ <strong>Explicit recommendation</strong> — A / B / C / D</li>
+        <li>✓ <strong>Professional PDF report</strong> — engineer-ready formatting</li>
+        <li>✓ <strong>Excel comment register</strong> — multi-sheet, sortable</li>
+        <li>✓ <strong>Free 5-finding preview</strong> — see quality before you pay</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">07 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 8 — CODES & STANDARDS ═══════════════ -->
+<section class="slide" id="s8">
+<div class="slide-inner">
+  <div class="eyebrow">07 — Codes &amp; Standards</div>
+  <h1 class="slide-title">Standards We Enforce</h1>
+  <div class="slide-subtitle">Every finding references the exact code clause — traceable, auditable, defensible</div>
+  <div class="grid-2" style="margin-top:12px;grid-template-columns:repeat(2,1fr);gap:14px">
+    <div class="card"><div class="card-title" style="font-size:14px;color:var(--primary-dark)">🔧 Piping &amp; Mechanical</div><p style="font-size:11.5px;line-height:1.7">ASME B31.3 · B31.1 · B16.5 · B16.9 · B16.11 · B16.20 · B16.34 · API 6D · API 520/521/526 · API 600/602/607 · API 610/617/618/619/670/671/682/692 · ISO 15848</p></div>
+    <div class="card"><div class="card-title" style="font-size:14px;color:var(--primary-dark)">🔬 Process &amp; Safety</div><p style="font-size:11.5px;line-height:1.7">API RP 14C/14E · API 520/521 · API 752/753 · API RP 754 · IEC 61508/61511/62443 · ISA 5.1 · ISA 18.2 · HAZOP/LOPA/SIL frameworks</p></div>
+    <div class="card"><div class="card-title" style="font-size:14px;color:var(--primary-dark)">🏗️ Structural &amp; Civil</div><p style="font-size:11.5px;line-height:1.7">AISC 360/341 · ASCE 7 · ACI 318 · ACI 224R · ACI 360R · AWS D1.1 · EN 1992-1-1 · EN 1993-1-1 · IBC 2021 · UFC 3-340-02</p></div>
+    <div class="card"><div class="card-title" style="font-size:14px;color:var(--primary-dark)">🧪 Materials &amp; Corrosion</div><p style="font-size:11.5px;line-height:1.7">NACE MR0175 / ISO 15156 · ASTM G88 · API 941 · MSS-SP-44 / 58 / 69 / 75 / 97</p></div>
+    <div class="card" style="grid-column:span 2"><div class="card-title" style="font-size:14px;color:var(--primary-dark)">🔥 Fire, Layout &amp; Regional</div><p style="font-size:11.5px;line-height:1.7">NFPA 30 · NFPA 2 · NFPA 58 · IP 19 / EI Model Code · OISD 116 (India) · API 2218 · ADNOC / Aramco / QP company standards on request</p></div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">08 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 9 — KU VOICE ═══════════════ -->
+<section class="slide dark" id="s9">
+<div class="slide-inner">
+  <div class="eyebrow">08 — KU Voice</div>
+  <h1 class="slide-title">AI Voice Agents That Actually Handle Calls</h1>
+  <div class="slide-subtitle">Sub-second latency · Natural voice · Multilingual · Interruption-aware</div>
+  <div class="grid-2" style="margin-top:16px">
+    <div>
+      <div class="card dark">
+        <div class="card-title">📞 Live Demo Line</div>
+        <p style="margin-bottom:14px">Call <strong>+1 (740) 265-2849</strong> right now and speak to <em>Willa</em> — the AI host at "Mythos Kouzina," a modern Greek restaurant in Dubai. Real menu, real order flow, real Arabic + English handling.</p>
+        <a class="cta solid" href="tel:+17402652849" style="background:var(--accent);border-color:var(--accent)">📞 Call +1 (740) 265-2849</a>
+      </div>
+      <div style="margin-top:16px;padding:16px 20px;background:rgba(139,92,246,0.15);border-left:4px solid var(--accent);border-radius:0 12px 12px 0">
+        <div style="color:#C4B5FD;font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px">Market Positioning</div>
+        <p style="color:white;font-size:14px;font-weight:500">$500B global call-centre market. Voice is the fastest-growing AI category in 2026.</p>
+      </div>
+    </div>
+    <div>
+      <div class="card dark"><div class="card-title">✓ Use Cases</div>
+        <ul style="list-style:none;padding:0;font-size:13px;line-height:2;color:rgba(255,255,255,0.85)">
+          <li>→ Restaurant order-taking &amp; reservations</li>
+          <li>→ Appointment booking &amp; qualification</li>
+          <li>→ Lead qualification &amp; call routing</li>
+          <li>→ After-hours reception</li>
+          <li>→ Front-desk assistant &amp; concierge</li>
+        </ul>
+      </div>
+      <div class="card dark" style="margin-top:14px"><div class="card-title">⚡ Technical Features</div>
+        <ul style="list-style:none;padding:0;font-size:12.5px;line-height:1.9;color:rgba(255,255,255,0.85)">
+          <li>→ ElevenLabs "Willa" voice (natural British female)</li>
+          <li>→ Multilingual — Arabic + English handling</li>
+          <li>→ Understands accents &amp; interruptions</li>
+          <li>→ Streams to CRM / Google Sheets / webhook</li>
+          <li>→ Retell AI + Twilio + custom LLM</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">09 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 10 — BESPOKE AUTOMATION ═══════════════ -->
+<section class="slide light-bg" id="s10">
+<div class="slide-inner">
+  <div class="eyebrow">09 — Bespoke AI Automation</div>
+  <h1 class="slide-title">Custom AI Pipelines for Enterprise</h1>
+  <div class="slide-subtitle">When off-the-shelf doesn't fit — we build for you</div>
+  <div class="grid-6" style="margin-top:16px">
+    <div class="card white"><div class="card-icon">📊</div><div class="card-title" style="font-size:14px">P&amp;ID Data Extraction</div><p style="font-size:11.5px">Equipment, valves, instruments → structured Excel</p></div>
+    <div class="card white"><div class="card-icon">📄</div><div class="card-title" style="font-size:14px">Datasheet Parser</div><p style="font-size:11.5px">85% accuracy gain vs manual parsing</p></div>
+    <div class="card white"><div class="card-icon">⚡</div><div class="card-title" style="font-size:14px">RFQ / Tender Analyzer</div><p style="font-size:11.5px">3× faster response, catches missed line items</p></div>
+    <div class="card white"><div class="card-icon">🤖</div><div class="card-title" style="font-size:14px">Engineering Chatbot</div><p style="font-size:11.5px">RAG on your standards &amp; past projects · 24/7</p></div>
+    <div class="card white"><div class="card-icon">🧠</div><div class="card-title" style="font-size:14px">Knowledge Extraction</div><p style="font-size:11.5px">Turn expert know-how into a queryable KB</p></div>
+    <div class="card white"><div class="card-icon">🔌</div><div class="card-title" style="font-size:14px">Custom Integrations</div><p style="font-size:11.5px">SharePoint · SAP · AVEVA / Hexagon · REST APIs</p></div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">10 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 11 — LIVE DEMOS ═══════════════ -->
+<section class="slide" id="s11">
+<div class="slide-inner">
+  <div class="eyebrow">10 — Live Demos</div>
+  <h1 class="slide-title">See It Live — Right Now</h1>
+  <div class="slide-subtitle">Everything below is live and can be shown in your meeting today</div>
+  <div class="grid-2" style="margin-top:16px">
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <a href="https://services.ku-automation.com" target="_blank" class="card white" style="text-decoration:none;color:inherit;transition:all 0.15s"><div class="card-title" style="color:var(--primary)">🛒 services.ku-automation.com</div><p>Full marketplace — 22 live AI reviewers</p></a>
+      <a href="https://www.ku-automation.com" target="_blank" class="card white" style="text-decoration:none;color:inherit"><div class="card-title" style="color:var(--primary)">🌐 www.ku-automation.com</div><p>Corporate site + 38+ engineering AI blog posts</p></a>
+      <a href="https://www.ku-automation.com/demos" target="_blank" class="card white" style="text-decoration:none;color:inherit"><div class="card-title" style="color:var(--primary)">🎬 www.ku-automation.com/demos</div><p>Interactive demos — P&amp;ID parser, datasheet parser, RFQ analyzer</p></a>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px">
+      <a href="tel:+17402652849" class="card white" style="text-decoration:none;color:inherit;border:2px solid var(--accent)"><div class="card-title" style="color:var(--accent)">📞 +1 (740) 265-2849</div><p><strong>KU Voice live demo</strong> — call and speak to the Greek restaurant AI</p></a>
+      <a href="https://www.ku-automation.com/blog" target="_blank" class="card white" style="text-decoration:none;color:inherit"><div class="card-title" style="color:var(--primary)">📰 www.ku-automation.com/blog</div><p>38+ published articles on AI for engineering</p></a>
+      <a href="https://www.ku-automation.com/portfolio-presentation.html" target="_blank" class="card white" style="text-decoration:none;color:inherit"><div class="card-title" style="color:var(--primary)">📊 Portfolio (web version)</div><p>Corporate deck — this document, online</p></a>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">11 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 12 — DEPLOYMENT ═══════════════ -->
+<section class="slide light-bg" id="s12">
+<div class="slide-inner">
+  <div class="eyebrow">11 — Deployment</div>
+  <h1 class="slide-title">Flexible Deployment Options</h1>
+  <div class="grid-3" style="margin-top:16px">
+    <div class="card white" style="border:2px solid var(--primary);position:relative">
+      <span class="badge badge-primary" style="position:absolute;top:-10px;left:20px">MOST POPULAR</span>
+      <div class="card-icon">☁️</div><div class="card-title">Cloud SaaS</div>
+      <p style="margin-bottom:10px">Fully managed on secure cloud</p>
+      <ul style="font-size:12px;list-style:none;padding:0;line-height:1.9;color:var(--gray)">
+        <li>✓ No IT infrastructure required</li>
+        <li>✓ Automatic updates &amp; maintenance</li>
+        <li>✓ Web browser access</li>
+        <li>✓ API integration available</li>
+        <li>✓ 99.9% uptime SLA</li>
+      </ul>
+    </div>
+    <div class="card white" style="border:2px solid var(--accent)">
+      <div class="card-icon">🔐</div><div class="card-title">Private Cloud</div>
+      <p style="margin-bottom:10px">Dedicated instance on your cloud</p>
+      <ul style="font-size:12px;list-style:none;padding:0;line-height:1.9;color:var(--gray)">
+        <li>✓ Dedicated resources</li>
+        <li>✓ Data stays in your region (UK / EU / UAE)</li>
+        <li>✓ VPC integration</li>
+        <li>✓ Custom security policies</li>
+        <li>✓ SSO / SAML support</li>
+      </ul>
+    </div>
+    <div class="card ink">
+      <div class="card-icon">🏢</div><div class="card-title">On-Premise</div>
+      <p style="margin-bottom:10px;color:rgba(255,255,255,0.85)">Full deployment in your data centre</p>
+      <ul style="font-size:12px;list-style:none;padding:0;line-height:1.9;color:rgba(255,255,255,0.85)">
+        <li>✓ Complete data control</li>
+        <li>✓ Air-gapped option available</li>
+        <li>✓ Integrate with existing systems</li>
+        <li>✓ Custom hardware specs</li>
+        <li>✓ Perpetual licence option</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card tint2" style="margin-top:16px"><p style="text-align:center;color:var(--primary-dark);font-weight:600">🔌 Integrations: SharePoint · SAP · AVEVA / Hexagon · REST API · Custom integrations</p></div>
+</div>
+<div class="slide-footer"><span class="slide-num">12 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 13 — SECURITY ═══════════════ -->
+<section class="slide ink-bg" id="s13">
+<div class="slide-inner">
+  <div class="eyebrow">12 — Security &amp; Compliance</div>
+  <h1 class="slide-title">Enterprise-Grade Security</h1>
+  <div class="grid-2" style="margin-top:16px">
+    <div class="card dark"><div class="card-title" style="font-size:18px">🔒 Data Protection</div>
+      <ul style="list-style:none;padding:0;font-size:13px;line-height:2;color:#BBF7D0">
+        <li>✓ AES-256 encryption at rest</li>
+        <li>✓ TLS 1.3 in transit</li>
+        <li>✓ Tenant-isolated databases</li>
+        <li>✓ Configurable no-retention policy</li>
+        <li>✓ Data residency (UK · EU · UAE)</li>
+        <li>✓ Zero training on client data</li>
+        <li>✓ Isolated compute per tenant</li>
+      </ul>
+    </div>
+    <div class="card dark"><div class="card-title" style="font-size:18px">👤 Access Control</div>
+      <ul style="list-style:none;padding:0;font-size:13px;line-height:2;color:#BBF7D0">
+        <li>✓ SSO — SAML, OAuth 2.0, Azure AD</li>
+        <li>✓ Role-based permissions (granular)</li>
+        <li>✓ Multi-factor authentication required</li>
+        <li>✓ Full audit logs (immutable)</li>
+        <li>✓ IP allowlisting available</li>
+        <li>✓ Configurable session timeouts</li>
+        <li>✓ BYOK — customer-managed keys</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card dark" style="margin-top:16px;background:rgba(79,70,229,0.15);border-color:var(--primary)">
+    <div style="font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#A5B4FC;margin-bottom:8px">IP &amp; Data Handling Statement</div>
+    <p style="color:white;font-size:13.5px">Your drawings never leave secure infrastructure. AI providers are configured with zero-data-retention endpoints. <strong>You own all inputs and outputs.</strong> Full data sovereignty on request.</p>
+  </div>
+  <div class="card dark" style="margin-top:12px;text-align:center;padding:14px">
+    <p style="color:white;font-size:14px">🇬🇧 UK GDPR &nbsp;·&nbsp; 🔐 ISO 27001 (in progress) &nbsp;·&nbsp; ☁️ SOC 2 Type II (in progress) &nbsp;·&nbsp; 🇦🇪 UAE PDPL &nbsp;·&nbsp; 🏭 Industry Standards</p>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">13 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 14 — SUPPORT & GOVERNANCE ═══════════════ -->
+<section class="slide" id="s14">
+<div class="slide-inner">
+  <div class="eyebrow">13 — Support &amp; Governance</div>
+  <h1 class="slide-title">Three Tiers of Support</h1>
+  <div class="grid-3" style="margin-top:16px">
+    <div class="card"><div class="card-title">Standard</div><p style="color:var(--gray);font-size:12px;margin-bottom:8px">Included with all plans</p>
+      <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9">
+        <li>✓ Email support (24hr response)</li>
+        <li>✓ Documentation &amp; knowledge base</li>
+        <li>✓ Quarterly software updates</li>
+        <li>✓ Bug fixes &amp; security patches</li>
+      </ul>
+    </div>
+    <div class="card tint2" style="border:2px solid var(--primary)"><div class="card-title">Priority</div><p style="color:var(--gray);font-size:12px;margin-bottom:8px">Recommended for production</p>
+      <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9">
+        <li>✓ 4-hour response time</li>
+        <li>✓ Phone &amp; video call support</li>
+        <li>✓ Dedicated account manager</li>
+        <li>✓ Monthly check-in calls</li>
+        <li>✓ Priority feature requests</li>
+      </ul>
+    </div>
+    <div class="card ink"><div class="card-title">Enterprise</div><p style="color:rgba(255,255,255,0.7);font-size:12px;margin-bottom:8px">Mission-critical deployments</p>
+      <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9;color:rgba(255,255,255,0.9)">
+        <li>✓ 1-hour response (24/7)</li>
+        <li>✓ On-site support available</li>
+        <li>✓ Custom SLA agreements</li>
+        <li>✓ Dedicated engineering team</li>
+        <li>✓ Quarterly business reviews</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card tint2" style="margin-top:16px">
+    <div class="card-title" style="color:var(--primary-dark)">📋 Documented Governance — SOP-01 to SOP-08</div>
+    <p style="font-size:12.5px;color:var(--gray);line-height:1.7">Eight documented Standard Operating Procedures govern: model selection · prompt versioning · data handling · incident response · audit trail · disclosure to end users · hallucination checks · code-reference validation. Available for enterprise review.</p>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">14 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 15 — ENGAGEMENT MODEL ═══════════════ -->
+<section class="slide light-bg" id="s15">
+<div class="slide-inner">
+  <div class="eyebrow">14 — Engagement Model</div>
+  <h1 class="slide-title">How We Work Together</h1>
+  <div class="slide-subtitle">From first call to production in 8 weeks</div>
+  <div style="display:flex;flex-direction:column;gap:14px;margin-top:16px">
+    <div class="step"><div class="step-num">1</div><div class="step-content"><div class="when">Week 1–2</div><h4>Discovery &amp; Assessment</h4><p>Understand workflows, review sample deliverables, IT infrastructure assessment</p></div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-content"><div class="when">Week 3–4</div><h4>Proof of Concept</h4><p>Configure with your data, run pilot on real deliverables, measure results against ROI baseline</p></div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-content"><div class="when">Week 5–8</div><h4>Production Deployment</h4><p>Full deployment, system integration, user training, go-live with support</p></div></div>
+    <div class="step"><div class="step-num done">✓</div><div class="step-content"><div class="when">Ongoing</div><h4>Continuous Support</h4><p>Monthly check-ins, quarterly updates, scale to more use cases as value proves out</p></div></div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">15 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 16 — RESULTS ═══════════════ -->
+<section class="slide" id="s16">
+<div class="slide-inner">
+  <div class="eyebrow">15 — Results</div>
+  <h1 class="slide-title">Typical Results</h1>
+  <div class="grid-4" style="margin-top:16px;flex:0 0 auto">
+    <div class="card primary"><div class="stat-num">70%</div><div class="stat-label">Reduction in doc processing time</div></div>
+    <div class="card" style="background:var(--green);color:white"><div class="stat-num">85%</div><div class="stat-label">Improvement in data accuracy</div></div>
+    <div class="card" style="background:var(--accent);color:white"><div class="stat-num">3×</div><div class="stat-label">Faster RFQ response times</div></div>
+    <div class="card" style="background:var(--amber);color:white"><div class="stat-num">&lt;4wk</div><div class="stat-label">Typical ROI payback period</div></div>
+  </div>
+  <div class="grid-2" style="margin-top:20px">
+    <div class="card"><div class="card-title">📋 Case A — P&amp;ID Review (anonymised)</div>
+      <p style="font-size:13px">Charge pump P&amp;ID from a sour-gas project. AI flagged <strong>NPSH margin 0.3 m below API 610 minimum</strong>, 3 missing NACE material specs, and 4 relief-routing issues in <strong>4 minutes</strong>.</p>
+      <p style="font-size:12px;color:var(--gray);margin-top:6px"><strong>Consultant equivalent:</strong> 6 hours / $400</p>
+    </div>
+    <div class="card"><div class="card-title">📐 Case B — Bulk Isometric Review</div>
+      <p style="font-size:13px"><strong>50 isometrics:</strong> was 25–50 engineer-hours across a week; now <strong>4–5 hours</strong> total with the portal. 95%+ include ASME B31.3 references. Standardised comments across all documents.</p>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">16 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 17 — PRICING ═══════════════ -->
+<section class="slide light-bg" id="s17">
+<div class="slide-inner">
+  <div class="eyebrow">16 — Investment</div>
+  <h1 class="slide-title">Flexible Pricing Models</h1>
+  <div class="grid-3" style="margin-top:16px">
+    <div class="card white"><div class="card-title">Pay-Per-Review</div><p style="color:var(--gray);font-size:12px">Self-serve, no commitment</p>
+      <div class="stat-num" style="color:var(--ink);margin-top:8px">From $15</div>
+      <p style="font-size:11px;color:var(--gray)">Quick review · $39 Detailed</p>
+      <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9;margin-top:8px">
+        <li>✓ No commitment</li>
+        <li>✓ Best for testing</li>
+        <li>✓ Free 5-finding preview</li>
+        <li>✓ All 22 disciplines available</li>
+      </ul>
+    </div>
+    <div class="card primary" style="position:relative">
+      <span class="badge badge-amber" style="position:absolute;top:-10px;left:20px;background:#FCD34D;color:#7C2D12">MOST POPULAR</span>
+      <div class="card-title">Team Subscription</div><p style="color:rgba(255,255,255,0.75);font-size:12px">Best value for active projects</p>
+      <div class="stat-num" style="color:white;margin-top:8px">$2,900/mo</div>
+      <p style="font-size:11px;color:rgba(255,255,255,0.75)">Unlimited reviews</p>
+      <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9;margin-top:8px;color:rgba(255,255,255,0.9)">
+        <li>✓ Unlimited reviews · 5 users</li>
+        <li>✓ Priority review queue</li>
+        <li>✓ All 22 disciplines</li>
+        <li>✓ Priority support</li>
+      </ul>
+    </div>
+    <div class="card ink"><div class="card-title">Enterprise</div><p style="color:rgba(255,255,255,0.75);font-size:12px">Fully custom deployment</p>
+      <div class="stat-num" style="color:white;margin-top:8px">Custom</div>
+      <p style="font-size:11px;color:rgba(255,255,255,0.75)">Talk to us</p>
+      <ul style="list-style:none;padding:0;font-size:12px;line-height:1.9;margin-top:8px;color:rgba(255,255,255,0.9)">
+        <li>✓ Dedicated tenant · SSO</li>
+        <li>✓ On-prem / private cloud</li>
+        <li>✓ Custom disciplines</li>
+        <li>✓ Unlimited seats · SLA</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card tint2" style="margin-top:14px;text-align:center;padding:14px">
+    <p style="color:var(--primary-dark);font-weight:600;font-size:13px">🛠️ <strong>Bespoke Projects:</strong> Custom AI automation pipelines from £5K pilots to £75K+ annual programmes.</p>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">17 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 18 — BD OPPORTUNITY ═══════════════ -->
+<section class="slide dark" id="s18">
+<div class="slide-inner">
+  <div class="eyebrow">17 — Market Opportunity</div>
+  <h1 class="slide-title">The Middle East AI Services Market</h1>
+  <div class="slide-subtitle">Growing 40%+ YoY · Distribution wide open · Uncapped upside</div>
+  <div class="grid-2" style="margin-top:16px">
+    <div>
+      <div class="card dark"><div class="card-title">📈 Market Size</div>
+        <div class="stat-num" style="color:#FCD34D;margin:8px 0">$2B+</div>
+        <p style="color:rgba(255,255,255,0.85);font-size:13px">Middle East EPC + NOC AI services market, addressable today. Growing 40%+ YoY.</p>
+      </div>
+      <div class="card dark" style="margin-top:14px"><div class="card-title">🏗️ What KU Has Today</div>
+        <ul style="list-style:none;padding:0;font-size:13px;line-height:1.9;color:rgba(255,255,255,0.85)">
+          <li>→ 22 productised AI reviewers (LIVE)</li>
+          <li>→ KU Voice — voice-agent capability (LIVE)</li>
+          <li>→ Bespoke pipeline delivery (PROVEN)</li>
+          <li>→ 38+ published thought-leadership pieces</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="card dark"><div class="card-title">🎯 Target Accounts (Wide Open)</div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-top:8px">
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">ADNOC</span>
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">Saudi Aramco</span>
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">QatarEnergy</span>
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">PDO</span>
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">KOC</span>
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">Sonatrach</span>
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">TAQA</span>
+          <span class="badge" style="background:rgba(139,92,246,0.25);color:#DDD6FE">EGA</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">Petrofac</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">Worley</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">Wood</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">TR</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">McDermott</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">L&amp;T</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">JGC</span>
+          <span class="badge" style="background:rgba(79,70,229,0.35);color:#C7D2FE">Chiyoda</span>
+        </div>
+      </div>
+      <div class="card" style="margin-top:14px;background:linear-gradient(135deg,#7C2D12,#B45309);color:white">
+        <div class="card-title" style="color:#FDE68A">💡 Current Distribution</div>
+        <p style="color:rgba(255,255,255,0.9);font-size:13.5px">LinkedIn + inbound web only. No BD headcount in-region. <strong style="color:#FDE68A">Partnership = uncapped upside.</strong></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="slide-footer"><span class="slide-num">18 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+<!-- ═══════════════ SLIDE 19 — NEXT STEPS ═══════════════ -->
+<section class="slide" id="s19" style="background:linear-gradient(135deg,var(--primary-dark),#4338CA);color:white">
+<div class="slide-inner">
+  <div class="eyebrow" style="color:#A5B4FC">Let's Get Started</div>
+  <h1 class="slide-title" style="color:white;text-align:center;font-size:52px;margin-top:8px">Next Steps</h1>
+  <div class="grid-3" style="margin-top:24px;flex:0 0 auto">
+    <div style="text-align:center">
+      <div style="width:64px;height:64px;border-radius:32px;background:var(--primary);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:28px;color:white">1</div>
+      <div style="font-weight:700;font-size:17px;color:white;margin-bottom:6px">Discovery Call</div>
+      <p style="color:rgba(255,255,255,0.75);font-size:13px">30-minute call to understand your needs</p>
+    </div>
+    <div style="text-align:center">
+      <div style="width:64px;height:64px;border-radius:32px;background:var(--primary);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:28px;color:white">2</div>
+      <div style="font-weight:700;font-size:17px;color:white;margin-bottom:6px">Custom Demo</div>
+      <p style="color:rgba(255,255,255,0.75);font-size:13px">See our tools with your actual documents</p>
+    </div>
+    <div style="text-align:center">
+      <div style="width:64px;height:64px;border-radius:32px;background:var(--primary);margin:0 auto 14px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:28px;color:white">3</div>
+      <div style="font-weight:700;font-size:17px;color:white;margin-bottom:6px">Proposal</div>
+      <p style="color:rgba(255,255,255,0.75);font-size:13px">Detailed scope, timeline &amp; investment</p>
+    </div>
+  </div>
+  <div style="background:white;color:var(--ink);padding:24px 32px;border-radius:16px;margin-top:28px;max-width:720px;margin-left:auto;margin-right:auto">
+    <div style="text-align:center;font-weight:800;font-size:22px;margin-bottom:16px;color:var(--ink)">Contact</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;font-size:13.5px">
+      <div>👤 <strong>Kingsley Uzowulu</strong><br/><span style="color:var(--gray)">Founder &amp; Principal Engineer</span></div>
+      <div>📧 <a class="linky" href="mailto:contact@ku-automation.com">contact@ku-automation.com</a></div>
+      <div>🌐 <a class="linky" href="https://www.ku-automation.com" target="_blank">www.ku-automation.com</a></div>
+      <div>🛒 <a class="linky" href="https://services.ku-automation.com" target="_blank">services.ku-automation.com</a></div>
+      <div>📞 <a class="linky" href="tel:+17402652849">+1 (740) 265-2849</a> <span style="color:var(--gray);font-size:12px">(KU Voice demo)</span></div>
+      <div>📅 <a class="linky" href="https://calendly.com/kingsley-uzowulu/30min" target="_blank">calendly.com/kingsley-uzowulu/30min</a></div>
+    </div>
+  </div>
+  <p style="text-align:center;color:#A5B4FC;font-size:18px;font-style:italic;font-weight:500;margin-top:24px">"Let's build something in the Gulf."</p>
+</div>
+<div class="slide-footer"><span class="slide-num">19 / 19</span><span class="watermark">KU</span></div>
+</section>
+
+</div>
+
+</body>
+</html>
