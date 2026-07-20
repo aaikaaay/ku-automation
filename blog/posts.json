@@ -1,6 +1,58 @@
 {
   "posts": [
     {
+      "slug": "multi-agent-systems-for-complex-problem-solving-in-engineering-a-knowledge-management-approach",
+      "title": "Multi-Agent Systems for Complex Problem Solving in Engineering: A Knowledge Management Approach",
+      "excerpt": "Learn about multi-agent systems for complex problem solving in engineering: a knowledge management approach. Expert insights for engineering professionals.",
+      "date": "2026-07-20",
+      "modified": "2026-07-20",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/multi-agent-systems-for-complex-problem-solving-in-engineering-a-knowledge-management-approach.png",
+      "tags": [
+        "Multi-Agent Systems",
+        "Knowledge Management",
+        "Engineering AI",
+        "Problem Solving",
+        "RAG"
+      ],
+      "readTime": 5,
+      "wordCount": 1650,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "from-raw-to-ready-a-data-readiness-playbook-for-ai-implementation-in-engineering",
+      "title": "From Raw to Ready: A Data Readiness Playbook for AI Implementation in Engineering",
+      "excerpt": "Learn about from raw to ready: a data readiness playbook for ai implementation in engineering. Expert insights for engineering professionals.",
+      "date": "2026-07-17",
+      "modified": "2026-07-17",
+      "published": true,
+      "featured": false,
+      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/from-raw-to-ready-a-data-readiness-playbook-for-ai-implementation-in-engineering.png",
+      "tags": [
+        "AI Implementation",
+        "Data Readiness",
+        "Engineering AI",
+        "Playbook",
+        "Change Management"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-powered-vendor-document-transmittal-generation-for-faster-project-starts",
       "title": "AI-Powered Vendor Document Transmittal Generation for Faster Project Starts",
       "excerpt": "Discover how AI automation streamlines vendor document transmittal generation, accelerating project starts, reducing errors, and enhancing compliance in EPC projects.",
@@ -187,7 +239,7 @@
     {
       "slug": "try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com",
       "title": "Try Before You Buy: Two Free Code-Grade AI Engineering Reviews on services.ku-automation.com",
-      "excerpt": "Every new account on the KU Automation reviewer marketplace now gets two free Detailed reviews — a no-risk way to test 21 live AI engineers against your own P&IDs, datasheets, isometrics, and structural drawings before you spend a dollar.",
+      "excerpt": "Every new account on the KU Automation reviewer marketplace now gets two free Detailed reviews \u2014 a no-risk way to test 21 live AI engineers against your own P&IDs, datasheets, isometrics, and structural drawings before you spend a dollar.",
       "date": "2026-06-28",
       "modified": "2026-06-28",
       "published": true,
@@ -345,7 +397,7 @@
     {
       "slug": "process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour",
       "title": "Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour",
-      "excerpt": "The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.",
+      "excerpt": "The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 \u2014 at $19\u2013$79 per review.",
       "date": "2026-06-17",
       "modified": "2026-06-17",
       "published": true,
@@ -759,7 +811,7 @@
     {
       "slug": "ai-document-review-engineering-comments",
       "title": "From 4 Hours to 4 Minutes: How AI is Revolutionizing Engineering Document Review",
-      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references—automatically.",
+      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references\u2014automatically.",
       "date": "2026-04-15",
       "modified": "2026-04-15",
       "published": true,
@@ -785,7 +837,7 @@
     {
       "slug": "stop-vendor-document-chaos-ai-powered-document-control-for-epc-projects",
       "title": "Stop Vendor Document Chaos: AI-Powered Document Control for EPC Projects",
-      "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control — revision comparison, checklist compliance checks, and automatic MDR updates.",
+      "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control \u2014 revision comparison, checklist compliance checks, and automatic MDR updates.",
       "date": "2026-03-25",
       "modified": "2026-03-25",
       "published": true,
@@ -911,7 +963,7 @@
     {
       "slug": "agentic-ai-for-engineering-autonomous-workflows-that-actually-work",
       "title": "Agentic AI for Engineering: Autonomous Workflows That Actually Work",
-      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows — from document processing to procurement — without constant human oversight.",
+      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows \u2014 from document processing to procurement \u2014 without constant human oversight.",
       "date": "2026-03-10",
       "modified": "2026-03-10",
       "published": true,
