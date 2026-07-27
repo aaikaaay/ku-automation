@@ -1,6 +1,87 @@
 {
   "posts": [
     {
+      "slug": "real-time-troubleshooting-with-rag-ai-powered-diagnostics-for-complex-equipment-failures",
+      "title": "Real-Time Troubleshooting with RAG: AI-Powered Diagnostics for Complex Equipment Failures",
+      "excerpt": "Learn about real-time troubleshooting with rag: ai-powered diagnostics for complex equipment failures. Expert insights for engineering professionals.",
+      "date": "2026-07-27",
+      "modified": "2026-07-27",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/real-time-troubleshooting-with-rag-ai-powered-diagnostics-for-complex-equipment-failures.png",
+      "tags": [
+        "RAG Systems",
+        "AI Diagnostics",
+        "Equipment Failure",
+        "Predictive Maintenance",
+        "Engineering AI",
+        "Troubleshooting",
+        "Knowledge Management"
+      ],
+      "readTime": 9,
+      "wordCount": 1857,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "beyond-checklists-building-a-proactive-ai-safety-framework-for-engineering-projects",
+      "title": "Beyond Checklists: Building a Proactive AI Safety Framework for Engineering Projects",
+      "excerpt": "Learn about beyond checklists: building a proactive ai safety framework for engineering projects. Expert insights for engineering professionals.",
+      "date": "2026-07-24",
+      "modified": "2026-07-24",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/beyond-checklists-building-a-proactive-ai-safety-framework-for-engineering-projects.png",
+      "tags": [
+        "AI Safety",
+        "AI Governance",
+        "Risk Management",
+        "Engineering AI",
+        "Compliance",
+        "Framework"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "automating-vendor-document-mdr-updates-with-ai-powered-revision-diffing",
+      "title": "Automating Vendor Document MDR Updates with AI-Powered Revision Diffing",
+      "excerpt": "Learn about automating vendor document mdr updates with ai-powered revision diffing. Expert insights for engineering professionals.",
+      "date": "2026-07-22",
+      "modified": "2026-07-22",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/automating-vendor-document-mdr-updates-with-ai-powered-revision-diffing.png",
+      "tags": [
+        "Vendor Document Control",
+        "MDR Automation",
+        "AI in Engineering",
+        "Revision Management",
+        "Workflow Automation"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "multi-agent-systems-for-complex-problem-solving-in-engineering-a-knowledge-management-approach",
       "title": "Multi-Agent Systems for Complex Problem Solving in Engineering: A Knowledge Management Approach",
       "excerpt": "Learn about multi-agent systems for complex problem solving in engineering: a knowledge management approach. Expert insights for engineering professionals.",
@@ -32,7 +113,7 @@
       "excerpt": "Learn about from raw to ready: a data readiness playbook for ai implementation in engineering. Expert insights for engineering professionals.",
       "date": "2026-07-17",
       "modified": "2026-07-17",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/from-raw-to-ready-a-data-readiness-playbook-for-ai-implementation-in-engineering.png",
       "tags": [
@@ -50,7 +131,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "stub-placeholder-2026-07-20"
     },
     {
       "slug": "ai-powered-vendor-document-transmittal-generation-for-faster-project-starts",
@@ -85,7 +167,7 @@
       "excerpt": "Learn about ai chatbots for engineering: instant knowledge retrieval and project data access. Expert insights for engineering professionals.",
       "date": "2026-07-13",
       "modified": "2026-07-13",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-chatbots-for-engineering-instant-knowledge-retrieval-and-project-data-access.png",
       "tags": [
@@ -103,7 +185,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "stub-placeholder-2026-07-20"
     },
     {
       "slug": "from-reactive-to-proactive-building-an-ai-safety-culture-in-engineering-firms",
@@ -111,7 +194,7 @@
       "excerpt": "Learn about from reactive to proactive: building an ai safety culture in engineering firms. Expert insights for engineering professionals.",
       "date": "2026-07-10",
       "modified": "2026-07-10",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/from-reactive-to-proactive-building-an-ai-safety-culture-in-engineering-firms.png",
       "tags": [
@@ -129,7 +212,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "stub-placeholder-2026-07-20"
     },
     {
       "slug": "digitalizing-pid-validation-computer-vision-for-discrepancy-detection",
@@ -139,7 +223,7 @@
       "modified": "2026-07-08",
       "published": true,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/digitalizing-pid-validation-computer-vision-for-discrepancy-detection.png",
+      "image": "/assets/blog/digitalizing-pid-validation-computer-vision-for-discrepancy-detection.jpg",
       "tags": [
         "P&ID Validation",
         "Computer Vision",
@@ -190,7 +274,7 @@
       "excerpt": "Learn about ai-driven rfq compliance checks: automating specification adherence in procurement. Expert insights for engineering professionals.",
       "date": "2026-07-01",
       "modified": "2026-07-01",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "/assets/blog/ai-driven-rfq-compliance-checks-automating-specification-adherence-in-procurement.png",
       "tags": [
@@ -208,7 +292,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "stub-placeholder-2026-07-20"
     },
     {
       "slug": "voice-agents-for-streamlining-remote-site-inspections-in-epc-projects",
@@ -269,7 +354,7 @@
       "excerpt": "Learn about securing ai in engineering: your nist ai rmf quickstart for robust implementations. Expert insights for engineering professionals.",
       "date": "2026-06-26",
       "modified": "2026-06-26",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "/assets/blog/securing-ai-in-engineering-your-nist-ai-rmf-quickstart-for-robust-implementations.png",
       "tags": [
@@ -287,7 +372,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "validator-2026-07-20"
     },
     {
       "slug": "accelerating-engineering-change-order-impact-assessments-with-ai-for-enhanced-project-certainty",
@@ -295,7 +381,7 @@
       "excerpt": "Learn about accelerating engineering change order impact assessments with ai for enhanced project certainty. Expert insights for engineering professionals.",
       "date": "2026-06-24",
       "modified": "2026-06-24",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "/assets/blog/accelerating-engineering-change-order-impact-assessments-with-ai-for-enhanced-project-certainty.png",
       "tags": [
@@ -314,7 +400,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "validator-2026-07-20"
     },
     {
       "slug": "multi-agent-ai-for-integrated-engineering-design-reviews-a-new-paradigm-for-compliance-and-efficiency",
@@ -322,7 +409,7 @@
       "excerpt": "Learn about multi-agent ai for integrated engineering design reviews: a new paradigm for compliance and efficiency. Expert insights for engineering professionals.",
       "date": "2026-06-22",
       "modified": "2026-06-22",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "/assets/blog/multi-agent-ai-for-integrated-engineering-design-reviews-a-new-paradigm-for-compliance-and-efficiency.png",
       "tags": [
@@ -340,7 +427,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "validator-2026-07-20"
     },
     {
       "slug": "implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms",
@@ -503,7 +591,7 @@
       "excerpt": "Learn about automating p&id revision management with ai: detecting changes and updating tag lists. Expert insights for engineering professionals.",
       "date": "2026-06-10",
       "modified": "2026-06-10",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "/assets/blog/automating-pid-revision-management-with-ai-detecting-changes-and-updating-tag-lists.png",
       "tags": [
@@ -520,7 +608,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "validator-2026-07-20"
     },
     {
       "slug": "rag-systems-for-engineering-accelerating-hazop-study-lookups",
@@ -657,7 +746,7 @@
       "excerpt": "Learn about ai automation for engineering companies: practical guide to document processing. Expert insights for engineering professionals.",
       "date": "2026-05-20",
       "modified": "2026-05-20",
-      "published": true,
+      "published": false,
       "featured": false,
       "image": "/assets/blog/ai-automation-for-engineering-companies-practical-guide-to-document-processing.png",
       "tags": [
@@ -675,7 +764,8 @@
         "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
         "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
         "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
-      }
+      },
+      "unpublishReason": "validator-2026-07-20"
     },
     {
       "slug": "ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects",
