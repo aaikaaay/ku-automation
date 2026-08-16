@@ -17,6 +17,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from datetime import datetime
 from pathlib import Path
 import argparse
@@ -115,16 +116,18 @@ Ready to learn more? [Schedule a consultation](/index.html#contact) to discuss y
     with open(md_path, 'w') as f:
         f.write(template)
     
-    # Add to posts.json (published by default — cron generator relies on this)
+    # Add to posts.json — DRAFT by default. Never publish until content + image are ready.
+    # (Old behavior auto-published stubs, which put broken posts on the live site.
+    #  Fixed 2026-07-20 after 4 stub July posts leaked to production.)
     new_post = {
         "slug": slug,
         "title": title,
         "excerpt": excerpt or f"Learn about {title.lower()}. Expert insights for engineering professionals.",
         "date": date,
         "modified": date,
-        "published": True,
+        "published": False,
         "featured": False,
-        "image": f"{BASE_URL}/assets/blog/{slug}.png",
+        "image": f"/assets/blog/{slug}.png",
         "tags": tags,
         "readTime": 5,
         "wordCount": 0,
@@ -158,10 +161,30 @@ def list_posts():
         print()
 
 
-def publish_post(slug: str):
-    """Publish a post (set published=True and update metadata)."""
+def publish_post(slug: str, force: bool = False):
+    """Publish a post (set published=True and update metadata).
+
+    Runs validate_posts.py first and REFUSES to publish if the post fails
+    quality gates (stub content, missing image, external image URL, etc.).
+    Override with --force only if you know what you're doing.
+    """
+    # Pre-flight quality gate
+    if not force:
+        validator = Path(__file__).parent / "validate_posts.py"
+        result = subprocess.run(
+            ["python3", str(validator), "--slug", slug, "--include-unpublished"],
+            capture_output=True, text=True,
+        )
+        if result.returncode != 0:
+            print(f"❌ Publish blocked — {slug} failed quality gates:\n")
+            print(result.stdout)
+            if result.stderr:
+                print(result.stderr)
+            print("\n   Fix the issues above, or pass --force to override.")
+            return
+
     data = load_posts()
-    
+
     for post in data["posts"]:
         if post["slug"] == slug:
             # Read markdown to update metadata
@@ -171,19 +194,21 @@ def publish_post(slug: str):
                     content = f.read()
                 post["readTime"] = estimate_read_time(content)
                 post["wordCount"] = count_words(content)
-            
+
             post["published"] = True
             post["modified"] = datetime.now().strftime("%Y-%m-%d")
+            # Clear any prior auto-unpublish marker
+            post.pop("unpublishReason", None)
             save_posts(data)
-            
+
             print(f"✅ Published: {post['title']}")
             print(f"   🕐 Read time: {post['readTime']} min")
             print(f"   📊 Word count: {post['wordCount']}")
-            
+
             # Prompt to update sitemap
             print(f"\n   ➡️  Update sitemap: python blog-manager.py sitemap")
             return
-    
+
     print(f"❌ Post not found: {slug}")
 
 
@@ -333,10 +358,25 @@ def update_sitemap():
     print(f"   📄 {published_count} blog posts included")
 
 
-def deploy():
-    """Commit and push changes to trigger Vercel deployment."""
+def deploy(skip_validate: bool = False):
+    """Commit and push changes to trigger Vercel deployment.
+
+    Runs validate_posts.py as a pre-deploy gate. Refuses to deploy if any
+    published post is broken. Use --skip-validate to override in emergencies.
+    """
     project_dir = Path(__file__).parent.parent
-    
+
+    # Pre-deploy quality gate
+    if not skip_validate:
+        validator = Path(__file__).parent / "validate_posts.py"
+        print("🔍 Running pre-deploy validation...")
+        result = subprocess.run(["python3", str(validator)], capture_output=True, text=True)
+        print(result.stdout)
+        if result.returncode != 0:
+            print("❌ Deploy blocked — published posts have quality issues (see above).")
+            print("   Fix them, run `python blog-manager.py validate --auto-fix`, or pass --skip-validate.")
+            return
+
     try:
         # Check for changes
         result = subprocess.run(
@@ -389,16 +429,27 @@ def main():
     # Publish
     pub_parser = subparsers.add_parser("publish", help="Publish a post")
     pub_parser.add_argument("slug", help="Post slug")
-    
+    pub_parser.add_argument("--force", action="store_true",
+                            help="Skip validator gate (use only when you're sure).")
+
     # Unpublish
     unpub_parser = subparsers.add_parser("unpublish", help="Unpublish a post")
     unpub_parser.add_argument("slug", help="Post slug")
-    
+
+    # Validate
+    val_parser = subparsers.add_parser("validate", help="Check published posts for quality issues")
+    val_parser.add_argument("--auto-fix", action="store_true",
+                            help="Unpublish (published=False) any failing post.")
+    val_parser.add_argument("--include-unpublished", action="store_true",
+                            help="Also validate drafts.")
+
     # Sitemap
     subparsers.add_parser("sitemap", help="Update sitemap.xml")
-    
+
     # Deploy
-    subparsers.add_parser("deploy", help="Commit and push to deploy")
+    dep_parser = subparsers.add_parser("deploy", help="Commit and push to deploy")
+    dep_parser.add_argument("--skip-validate", action="store_true",
+                            help="Bypass pre-deploy validator (emergency only).")
     
     args = parser.parse_args()
     
@@ -408,13 +459,21 @@ def main():
     elif args.command == "list":
         list_posts()
     elif args.command == "publish":
-        publish_post(args.slug)
+        publish_post(args.slug, force=args.force)
     elif args.command == "unpublish":
         unpublish_post(args.slug)
+    elif args.command == "validate":
+        validator = Path(__file__).parent / "validate_posts.py"
+        cmd = ["python3", str(validator)]
+        if args.auto_fix:
+            cmd.append("--auto-fix")
+        if args.include_unpublished:
+            cmd.append("--include-unpublished")
+        sys.exit(subprocess.call(cmd))
     elif args.command == "sitemap":
         update_sitemap()
     elif args.command == "deploy":
-        deploy()
+        deploy(skip_validate=args.skip_validate)
     else:
         parser.print_help()
 
