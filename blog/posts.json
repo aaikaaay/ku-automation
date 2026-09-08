@@ -1,6 +1,267 @@
 {
   "posts": [
     {
+      "slug": "voice-agents-for-automated-pressure-relief-valve-study-walkthroughs",
+      "title": "Voice Agents for Automated Pressure Relief Valve Study Walkthroughs",
+      "excerpt": "Learn about voice agents for automated pressure relief valve study walkthroughs. Expert insights for engineering professionals.",
+      "date": "2026-09-08",
+      "modified": "2026-09-08",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/voice-agents-for-automated-pressure-relief-valve-study-walkthroughs.png",
+      "tags": [
+        "Voice Agents",
+        "Process Safety",
+        "PRV Studies",
+        "AI Automation",
+        "Engineering Workflows"
+      ],
+      "readTime": 6,
+      "wordCount": 1219,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "operationalizing-nist-ai-rmf-practical-steps-for-engineering-ai-safety",
+      "title": "Operationalizing NIST AI RMF: Practical Steps for Engineering AI Safety",
+      "excerpt": "Learn about operationalizing nist ai rmf: practical steps for engineering ai safety. Expert insights for engineering professionals.",
+      "date": "2026-09-04",
+      "modified": "2026-09-04",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/operationalizing-nist-ai-rmf-practical-steps-for-engineering-ai-safety.png",
+      "tags": [
+        "AI Governance",
+        "NIST AI RMF",
+        "AI Safety",
+        "Engineering Implementation",
+        "Risk Management"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-assisted-material-take-off-from-3d-models-and-point-clouds-enhancing-accuracy-and-efficiency",
+      "title": "AI-Assisted Material Take-Off from 3D Models and Point Clouds: Enhancing Accuracy and Efficiency",
+      "excerpt": "Learn about ai-assisted material take-off from 3d models and point clouds: enhancing accuracy and efficiency. Expert insights for engineering professionals.",
+      "date": "2026-09-02",
+      "modified": "2026-09-02",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/ai-assisted-material-take-off-from-3d-models-and-point-clouds-enhancing-accuracy-and-efficiency.png",
+      "tags": [
+        "MTO Automation",
+        "3D Models",
+        "Point Clouds",
+        "AI in Engineering",
+        "Quantity Surveying"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-chatbots-for-engineering-procurement-automating-rfi-responses-and-vendor-inquiries",
+      "title": "AI Chatbots for Engineering Procurement: Automating RFI Responses and Vendor Inquiries",
+      "excerpt": "Learn about ai chatbots for engineering procurement: automating rfi responses and vendor inquiries. Expert insights for engineering professionals.",
+      "date": "2026-08-31",
+      "modified": "2026-08-31",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/ai-chatbots-for-engineering-procurement-automating-rfi-responses-and-vendor-inquiries.png",
+      "tags": [
+        "AI Chatbots",
+        "Engineering Procurement",
+        "RFI Automation",
+        "Vendor Management",
+        "Knowledge Management"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "a-90-day-pilot-template-for-ai-in-epc-engineering",
+      "title": "A 90-day Pilot Template for AI in EPC Engineering",
+      "excerpt": "Learn about a 90-day pilot template for ai in epc engineering. Expert insights for engineering professionals.",
+      "date": "2026-08-28",
+      "modified": "2026-08-28",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/a-90-day-pilot-template-for-ai-in-epc-engineering.png",
+      "tags": [
+        "AI Implementation",
+        "Pilot Programs",
+        "EPC Engineering",
+        "Change Management",
+        "Data Readiness"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "ai-driven-pid-tag-reconciliation-eliminating-manual-errors-in-spi-data",
+      "title": "AI-Driven P&ID Tag Reconciliation: Eliminating Manual Errors in SPI Data",
+      "excerpt": "Learn about ai-driven p&id tag reconciliation: eliminating manual errors in spi data. Expert insights for engineering professionals.",
+      "date": "2026-08-26",
+      "modified": "2026-08-26",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/ai-driven-pid-tag-reconciliation-eliminating-manual-errors-in-spi-data.png",
+      "tags": [
+        "P&ID Automation",
+        "SPI Data",
+        "Tag Reconciliation",
+        "AI in Engineering",
+        "Data Quality"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "voice-agents-for-real-time-safety-briefings-enhancing-construction-site-compliance",
+      "title": "Voice Agents for Real-Time Safety Briefings: Enhancing Construction Site Compliance",
+      "excerpt": "Learn about voice agents for real-time safety briefings: enhancing construction site compliance. Expert insights for engineering professionals.",
+      "date": "2026-08-24",
+      "modified": "2026-08-24",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/voice-agents-for-real-time-safety-briefings-enhancing-construction-site-compliance.png",
+      "tags": [
+        "Voice Agents",
+        "AI Automation",
+        "Construction Safety",
+        "Compliance",
+        "Engineering Workflows"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "beyond-tech-mastering-change-management-for-ai-data-readiness-in-engineering",
+      "title": "Beyond Tech: Mastering Change Management for AI Data Readiness in Engineering",
+      "excerpt": "Learn about beyond tech: mastering change management for ai data readiness in engineering. Expert insights for engineering professionals.",
+      "date": "2026-08-21",
+      "modified": "2026-08-21",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/beyond-tech-mastering-change-management-for-ai-data-readiness-in-engineering.png",
+      "tags": [
+        "AI Implementation",
+        "Change Management",
+        "Data Readiness",
+        "Engineering AI",
+        "Digital Transformation"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "intelligent-task-routing-automating-complex-engineering-approval-workflows-with-ai",
+      "title": "Intelligent Task Routing: Automating Complex Engineering Approval Workflows with AI",
+      "excerpt": "Learn about intelligent task routing: automating complex engineering approval workflows with ai. Expert insights for engineering professionals.",
+      "date": "2026-08-19",
+      "modified": "2026-08-19",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/intelligent-task-routing-automating-complex-engineering-approval-workflows-with-ai.png",
+      "tags": [
+        "Engineering Workflows",
+        "AI Automation",
+        "Approval Processes",
+        "Task Routing",
+        "Workflow Optimization"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "voice-agents-for-on-site-equipment-fault-diagnosis-reducing-downtime-with-conversational-ai",
+      "title": "Voice Agents for On-Site Equipment Fault Diagnosis: Reducing Downtime with Conversational AI",
+      "excerpt": "Learn about voice agents for on-site equipment fault diagnosis: reducing downtime with conversational ai. Expert insights for engineering professionals.",
+      "date": "2026-08-17",
+      "modified": "2026-08-17",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/voice-agents-for-on-site-equipment-fault-diagnosis-reducing-downtime-with-conversational-ai.png",
+      "tags": [
+        "Voice Agents",
+        "AI Automation",
+        "Fault Diagnosis",
+        "Predictive Maintenance",
+        "Conversational AI",
+        "Engineering Workflows"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "extracting-equipment-lists-from-issued-for-construction-datasheets-ai-powered-quantity-specification-reconciliation",
       "title": "Extracting Equipment Lists from Issued-for-Construction Datasheets: AI-Powered Quantity & Specification Reconciliation",
       "excerpt": "Learn about extracting equipment lists from issued-for-construction datasheets: ai-powered quantity & specification reconciliation. Expert insights for engineering professionals.",
