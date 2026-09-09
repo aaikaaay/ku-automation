@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "automating-pipe-spool-mto-from-isometric-drawings-ai-powered-quantity-and-specification-extraction",
+      "title": "Automating Pipe Spool MTO from Isometric Drawings: AI-Powered Quantity and Specification Extraction",
+      "excerpt": "Learn about automating pipe spool mto from isometric drawings: ai-powered quantity and specification extraction. Expert insights for engineering professionals.",
+      "date": "2026-09-09",
+      "modified": "2026-09-09",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/automating-pipe-spool-mto-from-isometric-drawings-ai-powered-quantity-and-specification-extraction.png",
+      "tags": [
+        "MTO Automation",
+        "Isometric Drawings",
+        "Datasheet Parsing",
+        "AI in Engineering",
+        "Procurement Workflows"
+      ],
+      "readTime": 7,
+      "wordCount": 1488,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "voice-agents-for-automated-pressure-relief-valve-study-walkthroughs",
       "title": "Voice Agents for Automated Pressure Relief Valve Study Walkthroughs",
       "excerpt": "Learn about voice agents for automated pressure relief valve study walkthroughs. Expert insights for engineering professionals.",
