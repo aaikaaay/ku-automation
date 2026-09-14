@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "voice-agents-for-vendor-rfi-clarification-calls-automating-procurement-conversations",
+      "title": "Voice Agents for Vendor RFI Clarification Calls: Automating Procurement Conversations",
+      "excerpt": "Learn about voice agents for vendor rfi clarification calls: automating procurement conversations. Expert insights for engineering professionals.",
+      "date": "2026-09-14",
+      "modified": "2026-09-14",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/voice-agents-for-vendor-rfi-clarification-calls-automating-procurement-conversations.png",
+      "tags": [
+        "Voice Agents",
+        "RFI Automation",
+        "Procurement",
+        "AI Chatbots",
+        "Engineering Workflows"
+      ],
+      "readTime": 7,
+      "wordCount": 1461,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "automating-pipe-spool-mto-from-isometric-drawings-ai-powered-quantity-and-specification-extraction",
       "title": "Automating Pipe Spool MTO from Isometric Drawings: AI-Powered Quantity and Specification Extraction",
       "excerpt": "Learn about automating pipe spool mto from isometric drawings: ai-powered quantity and specification extraction. Expert insights for engineering professionals.",
