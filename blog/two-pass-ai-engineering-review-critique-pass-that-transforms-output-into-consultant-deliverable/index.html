@@ -1,0 +1,308 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable | KU Automation Blog</title>
+    <meta name="description" content="Most AI review tools stop at the first pass. Discover how a two-pass self-critique protocol culls weak findings, sharpens language, and produces code-grade engineering deliverables.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable">
+    <meta property="og:title" content="Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable">
+    <meta property="og:description" content="Most AI review tools stop at the first pass. Discover how a two-pass self-critique protocol culls weak findings, sharpens language, and produces code-grade engineering deliverables.">
+    <meta property="og:image" content="https://www.ku-automation.com/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable">
+    <meta name="twitter:description" content="Most AI review tools stop at the first pass. Discover how a two-pass self-critique protocol culls weak findings, sharpens language, and produces code-grade engineering deliverables.">
+    <meta name="twitter:image" content="https://www.ku-automation.com/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .prose { max-width: 65ch; margin: 0 auto; }
+        .prose h1 { color: #111827; font-size: 2.25rem; margin-top: 0; margin-bottom: 2rem; font-weight: 800; }
+        .prose h2 { color: #1f2937; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .prose h3 { color: #374151; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .prose p { color: #4b5563; margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+        .prose li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose a { color: #4f46e5; text-decoration: underline; }
+        .prose a:hover { color: #4338ca; }
+        .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; margin-left: 0; margin-right: 0; font-style: italic; color: #6b7280; }
+        .prose code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .prose pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .prose pre code { background: transparent; padding: 0; color: inherit; }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable","description":"Most AI review tools stop at the first pass. Discover how a two-pass self-critique protocol culls weak findings, sharpens language, and produces code-grade engineering deliverables.","image":"https://www.ku-automation.com/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png","datePublished":"2026-06-17T00:00:00.000Z","dateModified":"2026-06-17T00:00:00.000Z","author":{"@type":"Person","name":"Kingsley Uzowulu","url":"https://linkedin.com/in/kingsleyuzowulu"},"publisher":{"@type":"Organization","name":"KU Automation","logo":{"@type":"ImageObject","url":"https://www.ku-automation.com/assets/favicon-32x32.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.ku-automation.com/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable"}}</script></head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 mb-4"><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">AI Engineering Reviews</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Quality Assurance</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Process Safety</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Owner's Engineering</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">AI Review Methodology</span></div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable</h1>
+                <div class="flex items-center justify-between text-gray-500 text-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                            <p>Founder &amp; Lead Engineer, CEng MIMechE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p>Wed Jun 17 2026 04:00:00 GMT+0400 (Gulf Standard Time)</p>
+                        <p>8 min read</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            <img src="https://www.ku-automation.com/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png" alt="Two-Pass AI Engineering Reviews: The Critique Pass That Turns AI Output Into a Real Consultant Deliverable" class="w-full rounded-xl mb-12">
+            
+            <!-- Content -->
+            <div class="prose"><p>There is a credibility gap sitting at the heart of every AI engineering review tool on the market today. Ask most platforms to check a P&amp;ID or a pump datasheet, and you will get output. Plenty of output. Findings padded with hedging language, code citations that look plausible but cannot be traced back to an actual clause number, and location references so vague they are useless on a live drawing — "the heat exchanger area may potentially have a concern."</p>
+<p>That is not a consultant deliverable. That is a first draft that a junior engineer would be embarrassed to send.</p>
+<p>The difference between an AI tool that generates findings and one that produces something a senior engineer would actually sign off on comes down to a single architectural decision: does the system review its own work?</p>
+<p>At KU Automation, we shipped a two-pass self-critique protocol on 17 June 2026 as a mandatory part of every Detailed-and-above review on the marketplace at <a href="https://services.ku-automation.com">services.ku-automation.com</a>. This article explains exactly how it works, why it matters, and what the output difference looks like in practice — using real numbers from validation runs against a live electrostatic coalescer P&amp;ID.</p>
+<h2 id="why-a-single-pass-ai-review-is-not-enough">Why a Single-Pass AI Review Is Not Enough</h2>
+<p>A single-pass LLM review runs one prompt: "act as a senior engineer, review this document against the following checklist, return findings." The model does its best. But three failure modes are endemic to this architecture.</p>
+<p><strong>Hallucinated code citations.</strong> LLMs will confidently cite "API 520 §7.4.2" or "IEC 61511 §9.3.1.4" when those clause numbers are incorrect, do not exist, or refer to a different topic entirely. An engineer relying on a fabricated citation to justify a design decision faces a serious liability exposure.</p>
+<p><strong>Weak, hedged findings.</strong> The default LLM register is cautious and passive. "It is observed that the pressure relief arrangement may potentially not be in full conformance with the applicable standard" tells an engineer nothing actionable. It cannot be assigned a severity. It cannot be closed out.</p>
+<p><strong>Vague location anchors.</strong> "On the compressor suction line" is useless on a P&amp;ID with eight compressor trains across four sheets. A finding without a precise sheet-and-zone reference, or a section-and-paragraph reference in a report, cannot be acted on in the field.</p>
+<p>These are not edge cases. They appear in every single-pass AI engineering review we have tested, including our own early builds. The critique pass was designed specifically to eliminate them.</p>
+<h2 id="the-two-pass-architecture-draft-then-challenge">The Two-Pass Architecture: Draft, Then Challenge</h2>
+<p>Every Detailed-and-above review on the KU Automation marketplace now runs two sequential Claude calls against the uploaded document.</p>
+<h3 id="pass-1-senior-engineer-draft">Pass 1: Senior-Engineer Draft</h3>
+<p>The first call runs the document against the full discipline-specific checklist. For a P&amp;ID review, that checklist covers items drawn from ISA 5.1 (symbology), ISA 18.2 (alarm management), API RP 14C (surface safety systems for offshore), IEC 61511 (functional safety), and applicable process-specific codes. For a process calculation, the checklist spans the governing equation, input assumptions, contingency factors, and code method selection.</p>
+<p>Pass 1 is deliberately unconstrained. The model is instructed to find everything that could be a finding. Over-detection is acceptable at this stage. The output is an internal draft, not the deliverable.</p>
+<h3 id="pass-2-lead-reviewer-critique">Pass 2: Lead-Reviewer Critique</h3>
+<p>The second call receives the Pass 1 draft and a critique instruction set. The critique model's job is adversarial. It is explicitly instructed to:</p>
+<ul>
+<li><strong>Cull weak findings.</strong> Any finding that cannot be linked to a specific code clause or project specification requirement is removed. Findings based on "best practice" alone, without a citable basis, are also removed unless the discipline checklist explicitly includes them.</li>
+<li><strong>Sharpen language.</strong> Every passive or hedged construction is rewritten in direct, declarative engineering language. "It appears that the NPSH margin may potentially be insufficient" becomes a specific finding with numbers: "Datasheet shows NPSH-A 3.5 m vs NPSH-R 3.2 m — margin 0.3 m, below API 610 §6.1.11 minimum 1.0 m for hydrocarbon service. Critical."</li>
+<li><strong>Verify code citations.</strong> The critique pass checks that every cited clause is consistent with the code's structure. If a clause number is inconsistent with the standard's known numbering format, the finding is flagged and the citation is either corrected or removed entirely.</li>
+<li><strong>Enforce mandatory location anchors.</strong> Every finding must carry a precise location reference. For a P&amp;ID: sheet number plus zone (e.g., "Sheet 2, Zone D–E/3–4"). For a process report: section number plus paragraph or table reference. Findings without anchors are sent back to Pass 1 logic for re-extraction or removed.</li>
+<li><strong>Re-rate severity.</strong> Severity assignments from Pass 1 are reviewed against the actual consequence of each finding. A vague observation inflated to "Major" is downgraded. A specific finding with clear safety implications that was logged as "Minor" is escalated.</li>
+<li><strong>Add 1–2 positive observations.</strong> The critique pass is not purely subtractive. Where the document demonstrates good engineering practice — a well-specified high-integrity protection layer, a conservative approach to corrosion allowance, a clearly documented HOLD — it records that. Balanced reviews build credibility.</li>
+<li><strong>Sharpen the executive summary.</strong> The summary is rewritten to reflect only the culled, sharpened findings, with a clear statement of the most critical items requiring action before approval.</li>
+</ul>
+<p><strong>Measurable Outcome:</strong> In internal testing across 12 review runs, the critique pass culled an average of 22% of Pass 1 findings as insufficiently substantiated, revised the language of 67% of retained findings, and corrected or removed fabricated code citations in 100% of cases where they appeared.</p>
+<h2 id="before-and-after-language-transformation-in-practice">Before and After: Language Transformation in Practice</h2>
+<p>The clearest way to demonstrate the value of the critique pass is side-by-side comparison. These examples are drawn from the validation run against the electrostatic coalescer P&amp;ID conducted on 17 June 2026.</p>
+<p><strong>NPSH margin finding:</strong></p>
+<ul>
+<li><em>Pass 1 output:</em> "It is observed that the NPSH available for the coalescer feed pump may potentially not be adequate considering the system operating conditions. Consideration should be given to verifying the NPSH margin against API requirements."</li>
+<li><em>Pass 2 output:</em> "Coalescer feed pump — datasheet shows NPSH-A 3.5 m vs NPSH-R 3.2 m at rated flow. Margin 0.3 m. API 610 §6.1.11 requires minimum 1.0 m margin for hydrocarbon service. Current margin is inadequate. Severity: Critical. Sheet 1, Zone C/4–5."</li>
+</ul>
+<p><strong>Control loop finding:</strong></p>
+<ul>
+<li><em>Pass 1 output:</em> "The DP control loop in the coalescer section may have some issues related to its configuration that could potentially affect process performance under certain operating conditions."</li>
+<li><em>Pass 2 output:</em> "DP control loop (FIC-201) — no low-flow cut-off or override interlock shown on P&amp;ID. ISA 18.2 §6.4.3 requires rationalization documentation for process-critical control loops; no note shown linking to alarm rationalization register. Severity: Major. Sheet 2, Zone D–E/3–4."</li>
+</ul>
+<p>The difference is not cosmetic. The Pass 2 finding has a tag number, a code clause, a precise location, and a severity that can be entered directly into a project action register.</p>
+<h2 id="validation-electrostatic-coalescer-pid-end-to-end">Validation: Electrostatic Coalescer P&amp;ID, End-to-End</h2>
+<p>The two-pass protocol was validated end-to-end against a real electrostatic coalescer P&amp;ID on 17 June 2026. The results:</p>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Count</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Critical</td>
+<td>5</td>
+</tr>
+<tr>
+<td>Major</td>
+<td>7</td>
+</tr>
+<tr>
+<td>Minor</td>
+<td>6</td>
+</tr>
+<tr>
+<td>Observation</td>
+<td>3</td>
+</tr>
+</tbody></table>
+<p>Every finding carried a sheet-and-zone anchor. Zero fabricated code citations appeared in the final output. The total AI compute cost for both passes was <strong>$0.64</strong>. Elapsed time from upload to final report: <strong>10 minutes</strong>.</p>
+<p>A comparable independent senior review from an external consultant would typically cost £1,200–£2,500 per review day, with turnaround measured in weeks during peak project phases.</p>
+<p><strong>Measurable Outcome:</strong> 21 substantiated, anchored, severity-rated findings at $0.64 compute cost and 10 minutes elapsed time. No invented clause numbers. No unlocated findings.</p>
+<h2 id="universal-voice-and-register-rules">Universal Voice and Register Rules</h2>
+<p>The critique pass enforces a mandatory list of banned AI-tell phrases across every review. These are constructions that immediately signal to an experienced engineer that they are reading machine output, not professional advice:</p>
+<ul>
+<li>"It is observed that…"</li>
+<li>"It is noted that…"</li>
+<li>"Consideration should be given to…"</li>
+<li>"It appears that…"</li>
+<li>"…may potentially…"</li>
+<li>"…could possibly…"</li>
+<li>"It is recommended that consideration be given to…"</li>
+</ul>
+<p>Every finding must open with either the affected equipment tag, the drawing reference, or the document section — not a passive observation construction. The register is the same one a chartered engineer uses when writing a peer review comment: direct, referenced, actionable.</p>
+<p>This matters because findings that read like AI output are ignored. Engineers are busy. If a finding does not tell them exactly what is wrong, exactly where it is, and exactly what code requires differently, it goes into the "AI hallucinated something" pile and the value of the review is lost.</p>
+<h2 id="what-this-means-for-engineering-managers-evaluating-ai-review-tools">What This Means for Engineering Managers Evaluating AI Review Tools</h2>
+<p>If you are evaluating AI review tools for your organisation, the single most important question to ask is: does the system review its own work?</p>
+<p>A one-pass tool will give you volume. A two-pass tool gives you signal. The distinction becomes critical on high-stakes reviews — FEED packages, IFC drawing sets, HAZOP-linked P&amp;IDs, or safety case documentation — where a finding that cannot be verified and located is worse than no finding at all, because it wastes engineer time and erodes trust in the tool.</p>
+<p>The two-pass architecture is now live across all Detailed and above review tiers on the KU Automation marketplace at <a href="https://services.ku-automation.com">services.ku-automation.com</a>. Disciplines covered include Piping (11 specialist reviewers), Process (P&amp;ID, PFD, process calculations, design philosophies), Mechanical (pump datasheets), and Civil (foundation drawings) — 17 live products in total, priced from $19 for a Quick Review to $79 for a Detailed Review.</p>
+<p>If you want to see the protocol in action on one of your own documents, request a free pilot review via the marketplace. Upload a P&amp;ID, a process calculation, or a design philosophy document and we will return the full two-pass output — including the internal Pass 1 draft alongside the final critique-refined deliverable — so you can judge the delta for yourself.</p>
+<p>The gap between AI output and a professional engineering deliverable is real. The two-pass critique pass is how we close it.</p>
+<hr>
+</div>
+            
+            <!-- Author Bio -->
+            <div class="mt-16 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div class="flex items-start space-x-4">
+                    <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-16 h-16 rounded-full">
+                    <div>
+                        <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                        <p class="text-gray-500 mb-4">Chartered Engineer with 21+ years of experience in oil &amp; gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.</p>
+                        <a href="https://linkedin.com/in/kingsleyuzowulu" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Connect on LinkedIn
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="mt-16 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Automate Your Engineering Workflows?</h3>
+                <p class="mb-6 text-primary-100">Book a free consultation to discuss your specific needs and see AI automation in action.</p>
+                <a href="index.html#contact" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Schedule Demo</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>contact@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+<script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script></body></html>

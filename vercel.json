@@ -1,4 +1,5 @@
 {
+  "buildCommand": "node scripts/build-blog-posts.js",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [

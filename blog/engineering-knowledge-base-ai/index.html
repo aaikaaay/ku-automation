@@ -1,0 +1,458 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building an AI-Powered Engineering Knowledge Base | KU Automation Blog</title>
+    <meta name="description" content="Create an intelligent knowledge management system for your engineering organization. Learn how to capture, organize, and leverage tribal knowledge with AI.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/blog/engineering-knowledge-base-ai">
+    <meta property="og:title" content="Building an AI-Powered Engineering Knowledge Base">
+    <meta property="og:description" content="Create an intelligent knowledge management system for your engineering organization. Learn how to capture, organize, and leverage tribal knowledge with AI.">
+    <meta property="og:image" content="https://www.ku-automation.com/blog/images/knowledge-base.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Building an AI-Powered Engineering Knowledge Base">
+    <meta name="twitter:description" content="Create an intelligent knowledge management system for your engineering organization. Learn how to capture, organize, and leverage tribal knowledge with AI.">
+    <meta name="twitter:image" content="https://www.ku-automation.com/blog/images/knowledge-base.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .prose { max-width: 65ch; margin: 0 auto; }
+        .prose h1 { color: #111827; font-size: 2.25rem; margin-top: 0; margin-bottom: 2rem; font-weight: 800; }
+        .prose h2 { color: #1f2937; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .prose h3 { color: #374151; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .prose p { color: #4b5563; margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+        .prose li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose a { color: #4f46e5; text-decoration: underline; }
+        .prose a:hover { color: #4338ca; }
+        .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; margin-left: 0; margin-right: 0; font-style: italic; color: #6b7280; }
+        .prose code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .prose pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .prose pre code { background: transparent; padding: 0; color: inherit; }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Building an AI-Powered Engineering Knowledge Base","description":"Create an intelligent knowledge management system for your engineering organization. Learn how to capture, organize, and leverage tribal knowledge with AI.","image":"https://www.ku-automation.com/blog/images/knowledge-base.png","datePublished":"2026-03-03","dateModified":"2026-03-03","author":{"@type":"Person","name":"Kingsley Uzowulu","url":"https://linkedin.com/in/kingsleyuzowulu"},"publisher":{"@type":"Organization","name":"KU Automation","logo":{"@type":"ImageObject","url":"https://www.ku-automation.com/assets/favicon-32x32.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.ku-automation.com/blog/engineering-knowledge-base-ai"}}</script></head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 mb-4"><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Knowledge Management</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">AI Implementation</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Engineering</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Best Practices</span></div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Building an AI-Powered Engineering Knowledge Base</h1>
+                <div class="flex items-center justify-between text-gray-500 text-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                            <p>Founder &amp; Lead Engineer, CEng MIMechE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p>2026-03-03</p>
+                        <p>7 min read</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            <img src="https://www.ku-automation.com/blog/images/knowledge-base.png" alt="Building an AI-Powered Engineering Knowledge Base" class="w-full rounded-xl mb-12">
+            
+            <!-- Content -->
+            <div class="prose"><p>Every engineering organization sits on a goldmine of knowledge—specifications, design calculations, lessons learned, vendor data, project reports. Yet when engineers need information, they spend hours searching shared drives, emailing colleagues, or worse, recreating work that's already been done.</p>
+<p>An AI-powered knowledge base changes this equation. Here's how to build one that actually gets used.</p>
+<h2 id="the-engineering-knowledge-problem">The Engineering Knowledge Problem</h2>
+<p>Sound familiar?</p>
+<ul>
+<li>"I know we did something similar on the Kuwait project... let me dig through my emails"</li>
+<li>"Where's the latest revision of that specification?"</li>
+<li>"Who worked on the heat exchanger sizing for the LNG project?"</li>
+<li>"The vendor's technical manual says one thing, but what did we actually learn during commissioning?"</li>
+</ul>
+<p><strong>The cost of poor knowledge management:</strong></p>
+<ul>
+<li>20% of engineering time spent searching for information</li>
+<li>Repeated mistakes from lessons not shared</li>
+<li>Knowledge walks out the door when experienced staff retire</li>
+<li>Inconsistent design decisions across projects</li>
+</ul>
+<h2 id="what-makes-an-ai-knowledge-base-different">What Makes an AI Knowledge Base Different?</h2>
+<p>Traditional document management: Organized folders + search keywords
+AI knowledge base: <strong>Understands content, context, and relationships</strong></p>
+<table>
+<thead>
+<tr>
+<th>Capability</th>
+<th>Traditional</th>
+<th>AI-Powered</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Search</td>
+<td>Keywords only</td>
+<td>Natural language questions</td>
+</tr>
+<tr>
+<td>Answers</td>
+<td>List of documents</td>
+<td>Direct answers with sources</td>
+</tr>
+<tr>
+<td>Relationships</td>
+<td>Manual tagging</td>
+<td>Auto-discovered connections</td>
+</tr>
+<tr>
+<td>Updates</td>
+<td>Manual curation</td>
+<td>Continuous learning</td>
+</tr>
+<tr>
+<td>Access</td>
+<td>Find document → read → find info</td>
+<td>Ask question → get answer</td>
+</tr>
+</tbody></table>
+<h3 id="example-traditional-vs-ai-search">Example: Traditional vs AI Search</h3>
+<p><strong>Engineer's question:</strong> "What's the maximum allowable velocity for seawater in carbon steel pipes?"</p>
+<p><strong>Traditional search results:</strong></p>
+<ol>
+<li>Piping_Spec_Rev12.pdf</li>
+<li>Seawater_System_Design.docx</li>
+<li>Project_A_Lessons_Learned.xlsx</li>
+<li>... 47 more documents</li>
+</ol>
+<p><strong>AI knowledge base response:</strong></p>
+<blockquote>
+<p>"Maximum seawater velocity in carbon steel pipes should be limited to 2.5 m/s per NACE RP0189. However, your Project A lessons learned (2024) recommend 2.0 m/s maximum based on erosion-corrosion observed at the offshore platform. The lower velocity was incorporated into Spec EP-4521 Rev 3, Section 5.2.1."</p>
+<p><em>Sources: [NACE RP0189], [Project A Lessons Learned], [EP-4521 Rev 3]</em></p>
+</blockquote>
+<h2 id="building-your-engineering-knowledge-base">Building Your Engineering Knowledge Base</h2>
+<h3 id="step-1-content-inventory">Step 1: Content Inventory</h3>
+<p>What knowledge do you have?</p>
+<p><strong>Structured data:</strong></p>
+<ul>
+<li>Equipment databases</li>
+<li>Material specifications</li>
+<li>Standard calculations</li>
+<li>Approved vendor lists</li>
+</ul>
+<p><strong>Semi-structured documents:</strong></p>
+<ul>
+<li>Design guides and standards</li>
+<li>Project specifications</li>
+<li>Technical datasheets</li>
+<li>Training materials</li>
+</ul>
+<p><strong>Unstructured content:</strong></p>
+<ul>
+<li>Emails and correspondence</li>
+<li>Meeting notes</li>
+<li>Lessons learned</li>
+<li>Trip reports and site observations</li>
+</ul>
+<h3 id="step-2-ingestion-and-processing">Step 2: Ingestion and Processing</h3>
+<p>AI processes your content to make it searchable:</p>
+<pre><code class="hljs language-plaintext">Document: Heat_Exchanger_Design_Guide.pdf
+
+Processing Results:
+├── Text extraction: 45 pages, 12,500 words
+├── Structure identification: 8 chapters, 23 tables
+├── Technical entities: 156 (equipment types, materials, codes)
+├── Relationships: 34 cross-references identified
+├── Embedding generation: 89 semantic chunks created
+└── Metadata: Author, date, revision, project tags</code></pre><h3 id="step-3-knowledge-graph-creation">Step 3: Knowledge Graph Creation</h3>
+<p>AI builds relationships between information:</p>
+<ul>
+<li>"ASME B31.3" → referenced by → [15 specifications, 8 calculations]</li>
+<li>"Pump P-101" → installed at → "Project ABC" → lessons learned → [3 documents]</li>
+<li>"John Smith" → expert in → "rotating equipment" → authored → [12 technical notes]</li>
+</ul>
+<h3 id="step-4-query-interface">Step 4: Query Interface</h3>
+<p>Multiple ways to access knowledge:</p>
+<ol>
+<li><strong>Natural language search</strong> — Ask questions in plain English</li>
+<li><strong>Filtered browse</strong> — Navigate by project, discipline, date</li>
+<li><strong>Similar document finder</strong> — "Show me documents like this one"</li>
+<li><strong>Expert identifier</strong> — "Who knows about cryogenic piping?"</li>
+</ol>
+<h2 id="practical-implementation">Practical Implementation</h2>
+<h3 id="quick-start-searchable-document-library-2-4-weeks">Quick Start: Searchable Document Library (2-4 weeks)</h3>
+<p>Minimum viable knowledge base:</p>
+<ol>
+<li>Ingest your most-used documents (specs, standards, guides)</li>
+<li>Enable natural language search</li>
+<li>Return relevant passages with source links</li>
+</ol>
+<p><strong>Value:</strong> Engineers find information 5x faster</p>
+<h3 id="enhanced-intelligent-qa-1-2-months">Enhanced: Intelligent Q&amp;A (1-2 months)</h3>
+<p>Add question-answering capability:</p>
+<ol>
+<li>AI synthesizes answers from multiple sources</li>
+<li>Cites sources for verification</li>
+<li>Handles follow-up questions</li>
+<li>Learns from user feedback</li>
+</ol>
+<p><strong>Value:</strong> Engineers get answers, not just documents</p>
+<h3 id="advanced-connected-knowledge-3-6-months">Advanced: Connected Knowledge (3-6 months)</h3>
+<p>Full knowledge graph:</p>
+<ol>
+<li>Relationships between documents, projects, people</li>
+<li>Automatic categorization of new content</li>
+<li>Proactive recommendations ("You might also need...")</li>
+<li>Integration with engineering tools</li>
+</ol>
+<p><strong>Value:</strong> Knowledge becomes a competitive advantage</p>
+<h2 id="content-that-delivers-high-roi">Content That Delivers High ROI</h2>
+<p>Prioritize ingesting:</p>
+<h3 id="high-value">High Value</h3>
+<ul>
+<li><strong>Design standards and guides</strong> — Used daily, high search volume</li>
+<li><strong>Lessons learned databases</strong> — Prevent repeated mistakes</li>
+<li><strong>Equipment specifications</strong> — Reference for every project</li>
+<li><strong>Vendor technical data</strong> — Hard to find when needed</li>
+</ul>
+<h3 id="medium-value">Medium Value</h3>
+<ul>
+<li><strong>Project documentation</strong> — Useful for similar future work</li>
+<li><strong>Training materials</strong> — Onboarding and skill development</li>
+<li><strong>Technical papers</strong> — Background knowledge</li>
+</ul>
+<h3 id="lower-priority-for-now">Lower Priority (for now)</h3>
+<ul>
+<li><strong>Email archives</strong> — Noisy, privacy concerns</li>
+<li><strong>Draft documents</strong> — May conflict with final versions</li>
+<li><strong>Administrative files</strong> — Low technical value</li>
+</ul>
+<h2 id="measuring-success">Measuring Success</h2>
+<p>Track these metrics:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Baseline</th>
+<th>Target</th>
+<th>How to Measure</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Time to find information</td>
+<td>30 min average</td>
+<td>&lt;5 min</td>
+<td>User surveys, usage logs</td>
+</tr>
+<tr>
+<td>Questions answered by KB</td>
+<td>0%</td>
+<td>70%+</td>
+<td>Track queries resolved</td>
+</tr>
+<tr>
+<td>Repeat mistakes</td>
+<td>Track incidents</td>
+<td>50% reduction</td>
+<td>Lessons learned compliance</td>
+</tr>
+<tr>
+<td>New engineer productivity</td>
+<td>6 months to effective</td>
+<td>3 months</td>
+<td>Performance reviews</td>
+</tr>
+<tr>
+<td>Knowledge contribution</td>
+<td>2 docs/engineer/year</td>
+<td>10+</td>
+<td>Submission tracking</td>
+</tr>
+</tbody></table>
+<h2 id="common-pitfalls-to-avoid">Common Pitfalls to Avoid</h2>
+<h3 id="pitfall-1-boil-the-ocean-approach">Pitfall 1: "Boil the ocean" approach</h3>
+<p><strong>Mistake:</strong> Trying to ingest everything at once
+<strong>Better:</strong> Start with 100-200 high-value documents, prove value, expand</p>
+<h3 id="pitfall-2-no-quality-control">Pitfall 2: No quality control</h3>
+<p><strong>Mistake:</strong> Garbage in, garbage out
+<strong>Better:</strong> Curate initial content, establish quality standards, retire outdated docs</p>
+<h3 id="pitfall-3-technology-over-adoption">Pitfall 3: Technology over adoption</h3>
+<p><strong>Mistake:</strong> Building sophisticated system nobody uses
+<strong>Better:</strong> Focus on user experience, integrate into existing workflows, get champions</p>
+<h3 id="pitfall-4-one-time-project">Pitfall 4: One-time project</h3>
+<p><strong>Mistake:</strong> Building KB then neglecting it
+<strong>Better:</strong> Assign ownership, incentivize contributions, regular reviews</p>
+<h2 id="integration-with-engineering-workflows">Integration with Engineering Workflows</h2>
+<p>The knowledge base should be where engineers already work:</p>
+<ul>
+<li><strong>Email plugin</strong> — Search KB from Outlook/Gmail</li>
+<li><strong>CAD integration</strong> — Access specs from within design tools</li>
+<li><strong>Browser extension</strong> — Quick access from any application</li>
+<li><strong>Mobile app</strong> — Field access for site engineers</li>
+<li><strong>Chat interface</strong> — Natural conversation with your knowledge</li>
+</ul>
+<h2 id="getting-started-with-ku-automation">Getting Started with KU Automation</h2>
+<p>We help engineering companies build practical AI knowledge bases:</p>
+<ol>
+<li><strong>Assessment</strong> — Review your existing documentation and identify high-value content</li>
+<li><strong>Pilot</strong> — Build searchable KB with your top 200 documents in 2-3 weeks</li>
+<li><strong>Expand</strong> — Add Q&amp;A capability, more content, integrations</li>
+<li><strong>Optimize</strong> — Continuous improvement based on usage patterns</li>
+</ol>
+<hr>
+<p>Ready to unlock your engineering knowledge? <a href="/knowledge-bot.html">Try our Knowledge Bot demo</a> or <a href="/index.html#contact">schedule a consultation</a>.</p>
+</div>
+            
+            <!-- Author Bio -->
+            <div class="mt-16 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div class="flex items-start space-x-4">
+                    <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-16 h-16 rounded-full">
+                    <div>
+                        <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                        <p class="text-gray-500 mb-4">Chartered Engineer with 21+ years of experience in oil &amp; gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.</p>
+                        <a href="https://linkedin.com/in/kingsleyuzowulu" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Connect on LinkedIn
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="mt-16 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Automate Your Engineering Workflows?</h3>
+                <p class="mb-6 text-primary-100">Book a free consultation to discuss your specific needs and see AI automation in action.</p>
+                <a href="index.html#contact" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Schedule Demo</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>contact@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+<script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script></body></html>

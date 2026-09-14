@@ -1,0 +1,336 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour | KU Automation Blog</title>
+    <meta name="description" content="The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour">
+    <meta property="og:title" content="Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour">
+    <meta property="og:description" content="The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.">
+    <meta property="og:image" content="https://www.ku-automation.com/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour">
+    <meta name="twitter:description" content="The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.">
+    <meta name="twitter:image" content="https://www.ku-automation.com/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .prose { max-width: 65ch; margin: 0 auto; }
+        .prose h1 { color: #111827; font-size: 2.25rem; margin-top: 0; margin-bottom: 2rem; font-weight: 800; }
+        .prose h2 { color: #1f2937; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .prose h3 { color: #374151; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .prose p { color: #4b5563; margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+        .prose li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose a { color: #4f46e5; text-decoration: underline; }
+        .prose a:hover { color: #4338ca; }
+        .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; margin-left: 0; margin-right: 0; font-style: italic; color: #6b7280; }
+        .prose code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .prose pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .prose pre code { background: transparent; padding: 0; color: inherit; }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour","description":"The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.","image":"https://www.ku-automation.com/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png","datePublished":"2026-06-17T00:00:00.000Z","dateModified":"2026-06-17T00:00:00.000Z","author":{"@type":"Person","name":"Kingsley Uzowulu","url":"https://linkedin.com/in/kingsleyuzowulu"},"publisher":{"@type":"Organization","name":"KU Automation","logo":{"@type":"ImageObject","url":"https://www.ku-automation.com/assets/favicon-32x32.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.ku-automation.com/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour"}}</script></head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 mb-4"><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Process Safety</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">PSV Sizing</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">HAZOP</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">AI Engineering Reviews</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">API 520</span></div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour</h1>
+                <div class="flex items-center justify-between text-gray-500 text-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                            <p>Founder &amp; Lead Engineer, CEng MIMechE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p>Wed Jun 17 2026 04:00:00 GMT+0400 (Gulf Standard Time)</p>
+                        <p>9 min read</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            <img src="https://www.ku-automation.com/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png" alt="Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour" class="w-full rounded-xl mb-12">
+            
+            <!-- Content -->
+            <div class="prose"><p>Process safety documentation is where errors cost lives. A PSV undersized by 15% because the governing case was misidentified, a blowdown study that ignores liquid accumulation at the base of a flare header, a HAZOP report that records a safeguard as "existing" without verifying it is functional — these are not hypothetical failures. They appear in real projects, they pass internal reviews, and they sit in safety cases until an incident forces a retrospective audit.</p>
+<p>The problem is not a shortage of codes. API 520, API 521, API 526, API 537, IEC 61511, IEC 61508, CCPS guidelines, and project-specific design philosophies define what a competent process safety review looks like in exhaustive detail. The problem is bandwidth. Senior process engineers with the depth to spot a missing Kb back-pressure correction or an SIL assignment that does not trace back to a PHA recommendation are expensive, fully loaded, and rarely available at the pace a project demands.</p>
+<p>On 17 June 2026, KU Automation launched the Principal Process AI Engineer on the marketplace at <a href="https://services.ku-automation.com">services.ku-automation.com</a>. This article walks through what the reviewer actually checks, with concrete examples from each deliverable type, and explains why process safety documentation in particular benefits from a code-explicit AI review discipline.</p>
+<h2 id="what-the-principal-process-ai-engineer-covers">What the Principal Process AI Engineer Covers</h2>
+<p>The launch adds four deliverable types to the KU review marketplace:</p>
+<ol>
+<li><strong>Process P&amp;ID</strong> — ISA 5.1 symbology, ISA 18.2 alarm rationalisation, API RP 14C/14E for surface safety, IEC 61511 SIL assignment traceability, NACE MR0175 material service conditions</li>
+<li><strong>Process Flow Diagram (PFD)</strong> — mass and energy balance consistency, stream data completeness, equipment duty alignment with process design basis</li>
+<li><strong>Process Calculations &amp; Sizing</strong> — PSV sizing (API 520 Parts I and II), blowdown and depressurisation studies (API 521), pump hydraulics, heat exchanger duty calculations, vessel sizing</li>
+<li><strong>Process Reports &amp; Design Philosophies</strong> — HAZOP reports, safety concept documents, cause-and-effect matrices, design basis memoranda</li>
+</ol>
+<p>Pricing runs from $19 (Quick Review — code compliance sweep) to $79 (Detailed Review — full two-pass critique with executive summary and action register). Reviews join 13 existing live products across Piping, Mechanical, and Civil disciplines, bringing the marketplace total to 17 live products.</p>
+<h2 id="psv-sizing-what-a-code-grade-review-actually-checks">PSV Sizing: What a Code-Grade Review Actually Checks</h2>
+<p>Relief valve sizing is one of the highest-consequence calculations in process engineering. API 520 Part I §5 defines the sizing methodology; API 526 defines standard orifice areas; API 521 governs the selection of the governing relief case. Most calculation packages get the basic equation right. The errors appear in the surrounding judgement calls.</p>
+<p>A Principal Process AI review of a PSV sizing calculation checks the following, in sequence:</p>
+<p><strong>Governing case identification.</strong> Has the engineer identified all credible overpressure scenarios per API 521 §5? Common omissions include fire case for vessels with liquid inventory above the minimum liquid level, blocked outlet where discharge isolation is possible, and utility failure scenarios. The review cross-references the scenario list against the HAZOP deviation register if one is provided.</p>
+<p><strong>API 520 method selection.</strong> For gas/vapour service, is the compressible flow equation applied with the correct compressibility factor Z at the relieving conditions? For two-phase relief, has the designer applied the Omega method (API 520 Part I Appendix C) or alternatively cited a justified alternative? Applying the vapour-only equation to a two-phase stream undersizes the device.</p>
+<p><strong>Relieving conditions.</strong> Is the relieving temperature calculated correctly for each scenario? Fire case relieving temperature for a liquid-filled vessel follows API 521 §5.15.1.2 — using the storage temperature rather than the bubble point at relieving pressure is a common and unconservative error.</p>
+<p><strong>Contingency factor.</strong> API 520 Part I §5.4.2 recommends a 10% area margin between the calculated required area and the selected standard orifice. This is frequently missing in projects that are trying to squeeze down to a smaller orifice letter.</p>
+<p><strong>Kb back-pressure correction.</strong> For conventional PSVs with superimposed or built-up back pressure exceeding 10% of set pressure, API 520 Part I §5.5.2 requires the Kb correction factor to be applied. Balanced bellows valves have a different Kb profile. The review checks that the valve type and Kb application are consistent.</p>
+<p><strong>Inlet and outlet pressure drop.</strong> API 520 Part I §3.3 limits inlet pressure drop to 3% of set pressure for conventional spring-loaded PSVs (to prevent chatter) and outlet pressure drop to 10% of set pressure for conventional valves. These limits are stated in the code; they are frequently not verified in the calculation package.</p>
+<p><strong>PSV summary table cross-check.</strong> Where a PSV schedule or summary table accompanies the calculation, the review verifies that the orifice designation, set pressure, back pressure, and service fluid are consistent between the calculation and the schedule.</p>
+<p><strong>Measurable Outcome:</strong> In pilot reviews of PSV calculation packages from three separate EPC projects, the Principal Process AI reviewer identified at least one governing-case omission in two of three packages, and missing Kb correction in one. Average review cost: $49. Average senior process engineer charge-out rate for equivalent manual check: £450–£650 per calculation.</p>
+<h2 id="blowdown-and-depressurisation-studies-the-api-521-framework">Blowdown and Depressurisation Studies: The API 521 Framework</h2>
+<p>Blowdown studies are complex — they require dynamic simulation or simplified hand calculation methods, and the API 521 §4.4 framework leaves significant engineering judgement to the designer. The review therefore focuses on the documented basis, not the simulation itself.</p>
+<p>Key checks include:</p>
+<p><strong>Segment definition.</strong> Is the blowdown segment bounded by correctly specified isolation valves (manual, automated, or check valves as appropriate)? Is the maximum inventory per segment consistent with the P&amp;ID?</p>
+<p><strong>Blowdown target.</strong> API 521 §4.4.3.4 requires that pressurised equipment in hydrocarbon service be depressurised to 6.9 barg (100 psig) or 50% of design pressure, whichever is lower, within 15 minutes for fire exposure scenarios. The review checks that the target and timeframe are documented and met.</p>
+<p><strong>Liquid handling.</strong> Where blowdown of a liquid-containing system is assessed, has the study accounted for liquid carry-over to the flare header? Liquid slugs in flare headers are a recurring root cause of structural failures and flare tip damage.</p>
+<p><strong>Minimum metal temperature (MMT).</strong> Rapid depressurisation causes temperature drop due to Joule-Thomson cooling. The review checks that the minimum metal temperature during blowdown has been evaluated against the MDMT (minimum design metal temperature) for all components in the segment, referencing ASME VIII Div 1 UCS-66 or equivalent.</p>
+<p><strong>Flare header capacity.</strong> Has the blowdown flow been included in the overall flare header hydraulic study? Simultaneous blowdown of multiple segments is a design scenario that overloads headers not sized for it.</p>
+<p><strong>Measurable Outcome:</strong> A Detailed Review of a blowdown study returns a structured action register with each gap referenced to the specific API 521 clause, severity-rated, and anchored to the relevant section of the study document.</p>
+<h2 id="hazop-reports-what-the-ai-reviewer-checks">HAZOP Reports: What the AI Reviewer Checks</h2>
+<p>HAZOP report review is a different discipline from calculation review. The output of a HAZOP is qualitative: it records deviations, consequences, safeguards, and actions. The quality of the report lies in whether the safeguards are real, the actions are closed or tracked, and the SIL recommendations are traceable.</p>
+<p>The Principal Process AI reviewer applies the following checks to a HAZOP report:</p>
+<p><strong>Safeguard independence.</strong> A safeguard recorded against a High Pressure consequence must be independent of the initiating cause. If the HAZOP records "process operator response" as a safeguard for a scenario whose initiating cause is operator error, that safeguard is not independent and should not receive credit per IEC 61511 §9.2.2.</p>
+<p><strong>SIL assignment traceability.</strong> Where a safety instrumented function (SIF) is identified, the HAZOP should document the required SIL or refer to a separate SIL determination study. The review checks that every SIF recommendation has a documented PFD (probability of failure on demand) target and a reference to the applicable IEC 61511 §10 lifecycle phase.</p>
+<p><strong>Action status.</strong> Are outstanding actions from the HAZOP clearly numbered, assigned, and tracked? HAZOP actions that are not formally closed or deferred with justification are a regulatory exposure.</p>
+<p><strong>Node completeness.</strong> Has every P&amp;ID node referenced in the scope been covered? Missing nodes are flagged with a reference to the absent P&amp;ID document number.</p>
+<p><strong>Consequence severity alignment.</strong> Where consequences are recorded as "Major" or "Catastrophic," has the HAZOP team applied a consistent severity matrix? Inconsistent severity ratings across nodes undermine the risk ranking that downstream SIL assignments rely on.</p>
+<p><strong>CCPS and IEC 61511 alignment.</strong> For process safety studies in scope of IEC 61511 (functional safety), the review checks that the HAZOP methodology is consistent with the requirements of IEC 61511 §8 (hazard and risk assessment) and references CCPS Layer of Protection Analysis (LOPA) methodology where quantitative risk targets are applied.</p>
+<p><strong>Measurable Outcome:</strong> HAZOP report reviews at the Detailed tier return findings categorised by node reference and HAZOP action number, making them directly usable as input to a project action register without reformatting.</p>
+<h2 id="the-codes-behind-the-discipline">The Codes Behind the Discipline</h2>
+<p>The Principal Process AI Engineer is configured against the following codes and standards, which are embedded in the discipline checklist and cited explicitly in every finding:</p>
+<table>
+<thead>
+<tr>
+<th>Code</th>
+<th>Application</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>API 520 Parts I &amp; II</td>
+<td>PSV sizing methodology and installation</td>
+</tr>
+<tr>
+<td>API 521</td>
+<td>Pressure-relieving and depressurisation systems</td>
+</tr>
+<tr>
+<td>API 526</td>
+<td>Flanged steel pressure relief valves (standard orifices)</td>
+</tr>
+<tr>
+<td>API 537</td>
+<td>Flare details and design</td>
+</tr>
+<tr>
+<td>API RP 14C</td>
+<td>Surface safety systems for offshore facilities</td>
+</tr>
+<tr>
+<td>API RP 14E</td>
+<td>Offshore piping erosional velocity</td>
+</tr>
+<tr>
+<td>IEC 61508</td>
+<td>Functional safety — generic standard</td>
+</tr>
+<tr>
+<td>IEC 61511</td>
+<td>Functional safety for the process industry sector</td>
+</tr>
+<tr>
+<td>IEC 62443</td>
+<td>Industrial cybersecurity (for SIS network architecture)</td>
+</tr>
+<tr>
+<td>ISA 5.1</td>
+<td>P&amp;ID symbology</td>
+</tr>
+<tr>
+<td>ISA 18.2</td>
+<td>Management of alarm systems</td>
+</tr>
+<tr>
+<td>GPSA Engineering Data Book</td>
+<td>Gas processing calculations</td>
+</tr>
+<tr>
+<td>CCPS Guidelines</td>
+<td>Layer of Protection Analysis, inherently safer design</td>
+</tr>
+<tr>
+<td>NACE MR0175 / ISO 15156</td>
+<td>Sour service material selection</td>
+</tr>
+</tbody></table>
+<p>Code citations in every finding include section and clause numbers. No fabricated citations. Where a clause number cannot be verified with certainty, the finding states the code name and the principle only, and flags it for engineer confirmation.</p>
+<h2 id="who-this-is-for">Who This Is For</h2>
+<p>The Principal Process AI Engineer is built for three audiences:</p>
+<p><strong>Owner's engineering teams</strong> reviewing EPC contractor deliverables before acceptance. A Detailed Review of a contractor's PSV sizing package at $49 per calculation, returning a findings register with specific code references, is a materially different value proposition from a spreadsheet tracker and a manual senior engineer review backlog.</p>
+<p><strong>Independent verification and validation (IV&amp;V) consultants</strong> who need to scale their review throughput on FEED and HAZOP deliverables without proportional headcount increase.</p>
+<p><strong>Process engineers on EPC projects</strong> who want a rapid first-pass code compliance check before submitting a calculation for formal IDC review. Catching a missing Kb correction or a wrong relieving temperature before the IDC round saves an entire revision cycle.</p>
+<p>All 17 live products on the marketplace are accessible at <a href="https://services.ku-automation.com">services.ku-automation.com</a>. Request a free pilot review to see the full output format — including the two-pass draft and final report — before committing to a subscription or bulk review package. Upload your next PSV sizing calculation, blowdown study, or HAZOP action register and receive a code-referenced findings report within the hour.</p>
+<p>Process safety documentation does not forgive errors quietly. An AI review that cites real clauses, anchors every finding to a specific location, and applies the same judgement framework a senior process engineer would use is no longer a future aspiration. It is live today.</p>
+<hr>
+</div>
+            
+            <!-- Author Bio -->
+            <div class="mt-16 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div class="flex items-start space-x-4">
+                    <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-16 h-16 rounded-full">
+                    <div>
+                        <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                        <p class="text-gray-500 mb-4">Chartered Engineer with 21+ years of experience in oil &amp; gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.</p>
+                        <a href="https://linkedin.com/in/kingsleyuzowulu" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Connect on LinkedIn
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="mt-16 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Automate Your Engineering Workflows?</h3>
+                <p class="mb-6 text-primary-100">Book a free consultation to discuss your specific needs and see AI automation in action.</p>
+                <a href="index.html#contact" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Schedule Demo</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>contact@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+<script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script></body></html>

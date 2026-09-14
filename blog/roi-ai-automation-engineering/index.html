@@ -1,0 +1,627 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculating ROI for AI Automation in Engineering | KU Automation Blog</title>
+    <meta name="description" content="A practical framework for calculating and maximizing ROI on AI automation investments in engineering companies. Includes real case studies and ROI calculator.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/blog/roi-ai-automation-engineering">
+    <meta property="og:title" content="Calculating ROI for AI Automation in Engineering">
+    <meta property="og:description" content="A practical framework for calculating and maximizing ROI on AI automation investments in engineering companies. Includes real case studies and ROI calculator.">
+    <meta property="og:image" content="https://www.ku-automation.com/blog/images/roi-calculation.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Calculating ROI for AI Automation in Engineering">
+    <meta name="twitter:description" content="A practical framework for calculating and maximizing ROI on AI automation investments in engineering companies. Includes real case studies and ROI calculator.">
+    <meta name="twitter:image" content="https://www.ku-automation.com/blog/images/roi-calculation.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .prose { max-width: 65ch; margin: 0 auto; }
+        .prose h1 { color: #111827; font-size: 2.25rem; margin-top: 0; margin-bottom: 2rem; font-weight: 800; }
+        .prose h2 { color: #1f2937; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .prose h3 { color: #374151; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .prose p { color: #4b5563; margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+        .prose li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose a { color: #4f46e5; text-decoration: underline; }
+        .prose a:hover { color: #4338ca; }
+        .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; margin-left: 0; margin-right: 0; font-style: italic; color: #6b7280; }
+        .prose code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .prose pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .prose pre code { background: transparent; padding: 0; color: inherit; }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Calculating ROI for AI Automation in Engineering","description":"A practical framework for calculating and maximizing ROI on AI automation investments in engineering companies. Includes real case studies and ROI calculator.","image":"https://www.ku-automation.com/blog/images/roi-calculation.png","datePublished":"2026-03-03","dateModified":"2026-03-03","author":{"@type":"Person","name":"Kingsley Uzowulu","url":"https://linkedin.com/in/kingsleyuzowulu"},"publisher":{"@type":"Organization","name":"KU Automation","logo":{"@type":"ImageObject","url":"https://www.ku-automation.com/assets/favicon-32x32.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.ku-automation.com/blog/roi-ai-automation-engineering"}}</script></head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 mb-4"><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">ROI</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">AI Investment</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Engineering</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Business Case</span></div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Calculating ROI for AI Automation in Engineering</h1>
+                <div class="flex items-center justify-between text-gray-500 text-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                            <p>Founder &amp; Lead Engineer, CEng MIMechE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p>2026-03-03</p>
+                        <p>6 min read</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            <img src="https://www.ku-automation.com/blog/images/roi-calculation.png" alt="Calculating ROI for AI Automation in Engineering" class="w-full rounded-xl mb-12">
+            
+            <!-- Content -->
+            <div class="prose"><p>You know AI can help your engineering team work more efficiently. The challenge? Convincing stakeholders to invest. This guide provides a practical framework for calculating and presenting the ROI of AI automation in engineering workflows.</p>
+<h2 id="the-roi-challenge">The ROI Challenge</h2>
+<p>Engineering leaders often struggle to justify AI investments because:</p>
+<ul>
+<li>Benefits seem intangible ("efficiency improvement")</li>
+<li>Costs are upfront, benefits are ongoing</li>
+<li>Risk of failed technology projects</li>
+<li>Difficulty measuring current state baseline</li>
+</ul>
+<p>Let's make it concrete.</p>
+<h2 id="step-1-identify-high-impact-processes">Step 1: Identify High-Impact Processes</h2>
+<p>Not all processes are equal. Focus on workflows that are:</p>
+<table>
+<thead>
+<tr>
+<th>Criteria</th>
+<th>Why It Matters</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>High volume</td>
+<td>More transactions = more savings</td>
+</tr>
+<tr>
+<td>Time-intensive</td>
+<td>Bigger per-unit improvement</td>
+</tr>
+<tr>
+<td>Error-prone</td>
+<td>Quality costs add up</td>
+</tr>
+<tr>
+<td>Bottleneck</td>
+<td>Delays affect downstream work</td>
+</tr>
+<tr>
+<td>Repetitive</td>
+<td>AI handles repetition well</td>
+</tr>
+</tbody></table>
+<h3 id="engineering-processes-ranked-by-ai-potential">Engineering Processes Ranked by AI Potential</h3>
+<table>
+<thead>
+<tr>
+<th>Process</th>
+<th>Volume</th>
+<th>Time/Unit</th>
+<th>Error Impact</th>
+<th>AI Suitability</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Document extraction</td>
+<td>High</td>
+<td>Medium</td>
+<td>Medium</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td>RFQ response</td>
+<td>Medium</td>
+<td>High</td>
+<td>High</td>
+<td>★★★★★</td>
+</tr>
+<tr>
+<td>Drawing review</td>
+<td>Medium</td>
+<td>High</td>
+<td>High</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td>Report generation</td>
+<td>High</td>
+<td>Medium</td>
+<td>Low</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td>Data entry/transfer</td>
+<td>High</td>
+<td>Low</td>
+<td>High</td>
+<td>★★★★☆</td>
+</tr>
+<tr>
+<td>Technical calculations</td>
+<td>Low</td>
+<td>High</td>
+<td>Very High</td>
+<td>★★★☆☆</td>
+</tr>
+</tbody></table>
+<h2 id="step-2-baseline-current-costs">Step 2: Baseline Current Costs</h2>
+<p>You can't prove improvement without knowing where you started.</p>
+<h3 id="direct-labor-costs">Direct Labor Costs</h3>
+<p>Calculate time spent on target processes:</p>
+<pre><code class="hljs language-plaintext">Document Processing Example:
+- RFQs processed: 50/month
+- Average time per RFQ: 8 hours
+- Loaded labor rate: $125/hour
+- Monthly cost: 50 × 8 × $125 = $50,000
+- Annual cost: $600,000</code></pre><h3 id="indirect-costs">Indirect Costs</h3>
+<p>Don't forget hidden expenses:</p>
+<ul>
+<li><strong>Rework from errors</strong> — Corrections, reissues, customer complaints</li>
+<li><strong>Opportunity cost</strong> — What else could engineers be doing?</li>
+<li><strong>Delay costs</strong> — Late deliverables, penalties, lost bids</li>
+<li><strong>Training costs</strong> — Onboarding time for repetitive tasks</li>
+</ul>
+<h3 id="quality-costs">Quality Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Error Type</th>
+<th>Frequency</th>
+<th>Cost per Error</th>
+<th>Annual Impact</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Data entry mistake</td>
+<td>5/month</td>
+<td>$500</td>
+<td>$30,000</td>
+</tr>
+<tr>
+<td>Missed specification</td>
+<td>2/month</td>
+<td>$2,000</td>
+<td>$48,000</td>
+</tr>
+<tr>
+<td>Late bid submission</td>
+<td>1/month</td>
+<td>$10,000</td>
+<td>$120,000</td>
+</tr>
+<tr>
+<td>Compliance issue</td>
+<td>0.5/month</td>
+<td>$25,000</td>
+<td>$150,000</td>
+</tr>
+</tbody></table>
+<h2 id="step-3-estimate-ai-improvement">Step 3: Estimate AI Improvement</h2>
+<p>Conservative estimates are more credible than optimistic projections.</p>
+<h3 id="typical-improvements-by-process">Typical Improvements by Process</h3>
+<table>
+<thead>
+<tr>
+<th>Process</th>
+<th>Time Reduction</th>
+<th>Error Reduction</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Document extraction</td>
+<td>50-70%</td>
+<td>80-90%</td>
+<td>Industry benchmarks</td>
+</tr>
+<tr>
+<td>RFQ response</td>
+<td>40-60%</td>
+<td>60-70%</td>
+<td>KU Automation pilots</td>
+</tr>
+<tr>
+<td>Report generation</td>
+<td>60-80%</td>
+<td>70-80%</td>
+<td>Published case studies</td>
+</tr>
+<tr>
+<td>Data validation</td>
+<td>70-90%</td>
+<td>90-95%</td>
+<td>Automation standards</td>
+</tr>
+</tbody></table>
+<h3 id="apply-to-your-numbers">Apply to Your Numbers</h3>
+<pre><code class="hljs language-plaintext">Document Processing with AI:
+- Time per RFQ: 8 hours → 3 hours (62% reduction)
+- Monthly cost: 50 × 3 × $125 = $18,750
+- Annual cost: $225,000
+- Annual savings: $600,000 - $225,000 = $375,000</code></pre><h2 id="step-4-calculate-total-investment">Step 4: Calculate Total Investment</h2>
+<p>Be comprehensive about costs:</p>
+<h3 id="initial-costs">Initial Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Typical Range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Software/platform</td>
+<td>$15,000 - $100,000</td>
+</tr>
+<tr>
+<td>Implementation services</td>
+<td>$10,000 - $50,000</td>
+</tr>
+<tr>
+<td>Integration development</td>
+<td>$5,000 - $30,000</td>
+</tr>
+<tr>
+<td>Training</td>
+<td>$2,000 - $10,000</td>
+</tr>
+<tr>
+<td><strong>Total Initial</strong></td>
+<td><strong>$32,000 - $190,000</strong></td>
+</tr>
+</tbody></table>
+<h3 id="ongoing-costs">Ongoing Costs</h3>
+<table>
+<thead>
+<tr>
+<th>Item</th>
+<th>Annual Range</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Software subscription</td>
+<td>$12,000 - $60,000</td>
+</tr>
+<tr>
+<td>Support and maintenance</td>
+<td>$5,000 - $20,000</td>
+</tr>
+<tr>
+<td>Continuous improvement</td>
+<td>$5,000 - $15,000</td>
+</tr>
+<tr>
+<td><strong>Total Annual</strong></td>
+<td><strong>$22,000 - $95,000</strong></td>
+</tr>
+</tbody></table>
+<h2 id="step-5-build-the-business-case">Step 5: Build the Business Case</h2>
+<h3 id="simple-roi-calculation">Simple ROI Calculation</h3>
+<pre><code class="hljs language-plaintext">Year 1:
+  Benefits: $375,000 (labor savings) + $150,000 (quality improvement)
+  Costs: $80,000 (initial) + $40,000 (ongoing)
+  Net benefit: $405,000
+  ROI: ($405,000 / $120,000) × 100 = 338%
+
+Payback period: $120,000 / $525,000 = 2.7 months</code></pre><h3 id="three-year-npv-analysis">Three-Year NPV Analysis</h3>
+<table>
+<thead>
+<tr>
+<th>Year</th>
+<th>Benefits</th>
+<th>Costs</th>
+<th>Net</th>
+<th>Discounted (10%)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>$0</td>
+<td>$80,000</td>
+<td>-$80,000</td>
+<td>-$80,000</td>
+</tr>
+<tr>
+<td>1</td>
+<td>$525,000</td>
+<td>$40,000</td>
+<td>$485,000</td>
+<td>$440,909</td>
+</tr>
+<tr>
+<td>2</td>
+<td>$525,000</td>
+<td>$40,000</td>
+<td>$485,000</td>
+<td>$400,826</td>
+</tr>
+<tr>
+<td>3</td>
+<td>$525,000</td>
+<td>$40,000</td>
+<td>$485,000</td>
+<td>$364,388</td>
+</tr>
+<tr>
+<td><strong>Total</strong></td>
+<td></td>
+<td></td>
+<td></td>
+<td><strong>$1,126,123</strong></td>
+</tr>
+</tbody></table>
+<p><strong>3-Year NPV: $1.13M</strong></p>
+<h2 id="step-6-address-risk-and-uncertainty">Step 6: Address Risk and Uncertainty</h2>
+<p>Stakeholders will ask about risks. Be prepared.</p>
+<h3 id="sensitivity-analysis">Sensitivity Analysis</h3>
+<p>What if benefits are lower than expected?</p>
+<table>
+<thead>
+<tr>
+<th>Scenario</th>
+<th>Benefit Reduction</th>
+<th>Year 1 ROI</th>
+<th>Payback</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Base case</td>
+<td>0%</td>
+<td>338%</td>
+<td>2.7 months</td>
+</tr>
+<tr>
+<td>Conservative</td>
+<td>-30%</td>
+<td>207%</td>
+<td>4.0 months</td>
+</tr>
+<tr>
+<td>Pessimistic</td>
+<td>-50%</td>
+<td>119%</td>
+<td>5.5 months</td>
+</tr>
+</tbody></table>
+<p>Even with 50% lower benefits, the investment pays back in under 6 months.</p>
+<h3 id="risk-mitigation">Risk Mitigation</h3>
+<table>
+<thead>
+<tr>
+<th>Risk</th>
+<th>Mitigation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Technology doesn't work</td>
+<td>Start with pilot, prove before scaling</td>
+</tr>
+<tr>
+<td>User adoption fails</td>
+<td>Executive sponsorship, change management</td>
+</tr>
+<tr>
+<td>Costs exceed budget</td>
+<td>Fixed-price implementation, phase approach</td>
+</tr>
+<tr>
+<td>Vendor dependency</td>
+<td>Ensure data portability, avoid lock-in</td>
+</tr>
+</tbody></table>
+<h2 id="presenting-to-stakeholders">Presenting to Stakeholders</h2>
+<h3 id="executive-summary-format">Executive Summary Format</h3>
+<blockquote>
+<p><strong>Recommendation:</strong> Implement AI document processing for RFQ response</p>
+<p><strong>Investment:</strong> $120,000 Year 1 ($80K initial + $40K ongoing)</p>
+<p><strong>Return:</strong> $525,000 annual benefit (labor + quality)</p>
+<p><strong>ROI:</strong> 338% Year 1, $1.1M NPV over 3 years</p>
+<p><strong>Payback:</strong> 2.7 months</p>
+<p><strong>Risk:</strong> Low — proven technology, phased implementation, 50% benefit sensitivity still profitable</p>
+</blockquote>
+<h3 id="supporting-evidence">Supporting Evidence</h3>
+<p>Include:</p>
+<ul>
+<li>Industry benchmarks and case studies</li>
+<li>Vendor references (companies like yours)</li>
+<li>Pilot results if available</li>
+<li>Competitive pressure ("Competitor X has implemented...")</li>
+</ul>
+<h2 id="quick-start-roi-templates">Quick-Start ROI Templates</h2>
+<h3 id="template-1-document-processing">Template 1: Document Processing</h3>
+<pre><code class="hljs language-plaintext">Current state:
+- Documents processed/month: ___
+- Hours per document: ___
+- Labor rate: $___/hour
+- Current monthly cost: $___
+
+With AI (60% time reduction):
+- Hours per document: ___ × 0.4 = ___
+- New monthly cost: $___
+- Monthly savings: $___
+- Annual savings: $___</code></pre><h3 id="template-2-rfq-response">Template 2: RFQ Response</h3>
+<pre><code class="hljs language-plaintext">Current state:
+- RFQs per month: ___
+- Average response time: ___ hours
+- Win rate: ___%
+- Labor cost per RFQ: $___
+
+With AI (50% faster, +5% win rate):
+- New response time: ___ × 0.5 = ___ hours
+- New win rate: ___%
+- Labor savings/month: $___
+- Revenue from improved wins: $___</code></pre><h2 id="getting-started">Getting Started</h2>
+<p>We help engineering companies build ROI-justified AI implementations:</p>
+<ol>
+<li><strong>Free ROI assessment</strong> — We'll help you build your business case</li>
+<li><strong>Pilot project</strong> — Prove ROI with real data before full investment</li>
+<li><strong>Measured implementation</strong> — Track benefits vs. projections</li>
+</ol>
+<hr>
+<p>Ready to build your AI automation business case? <a href="/roi-calculator.html">Use our ROI Calculator</a> or <a href="/index.html#contact">schedule a consultation</a> to discuss your specific situation.</p>
+</div>
+            
+            <!-- Author Bio -->
+            <div class="mt-16 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div class="flex items-start space-x-4">
+                    <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-16 h-16 rounded-full">
+                    <div>
+                        <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                        <p class="text-gray-500 mb-4">Chartered Engineer with 21+ years of experience in oil &amp; gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.</p>
+                        <a href="https://linkedin.com/in/kingsleyuzowulu" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Connect on LinkedIn
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="mt-16 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Automate Your Engineering Workflows?</h3>
+                <p class="mb-6 text-primary-100">Book a free consultation to discuss your specific needs and see AI automation in action.</p>
+                <a href="index.html#contact" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Schedule Demo</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>contact@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+<script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script></body></html>
