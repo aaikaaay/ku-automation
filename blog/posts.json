@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "automating-equipment-datasheet-cross-reference-validation-in-procurement",
+      "title": "Automating Equipment Datasheet Cross-Reference Validation in Procurement",
+      "excerpt": "Learn about automating equipment datasheet cross-reference validation in procurement. Expert insights for engineering professionals.",
+      "date": "2026-09-16",
+      "modified": "2026-09-16",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/automating-equipment-datasheet-cross-reference-validation-in-procurement.png",
+      "tags": [
+        "Datasheet Parsing",
+        "Procurement Automation",
+        "Equipment Validation",
+        "AI in Engineering",
+        "RFQ Automation"
+      ],
+      "readTime": 7,
+      "wordCount": 1469,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "voice-agents-for-vendor-rfi-clarification-calls-automating-procurement-conversations",
       "title": "Voice Agents for Vendor RFI Clarification Calls: Automating Procurement Conversations",
       "excerpt": "Learn about voice agents for vendor rfi clarification calls: automating procurement conversations. Expert insights for engineering professionals.",
