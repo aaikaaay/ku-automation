@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "why-most-ai-pilots-stall-at-procurement-and-the-fix",
+      "title": "Why Most AI Pilots Stall at Procurement \u2014 And the Fix",
+      "excerpt": "Learn about why most ai pilots stall at procurement \u2014 and the fix. Expert insights for engineering professionals.",
+      "date": "2026-09-18",
+      "modified": "2026-09-18",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/why-most-ai-pilots-stall-at-procurement-and-the-fix.png",
+      "tags": [
+        "AI Implementation",
+        "Procurement Blockers",
+        "Pilot Programs",
+        "Change Management",
+        "Engineering"
+      ],
+      "readTime": 8,
+      "wordCount": 1657,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "automating-equipment-datasheet-cross-reference-validation-in-procurement",
       "title": "Automating Equipment Datasheet Cross-Reference Validation in Procurement",
       "excerpt": "Learn about automating equipment datasheet cross-reference validation in procurement. Expert insights for engineering professionals.",
