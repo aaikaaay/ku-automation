@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "agentic-ai-workflows-for-hazop-incident-triage-and-escalation-routing",
+      "title": "Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing",
+      "excerpt": "Learn about agentic ai workflows for hazop incident triage and escalation routing. Expert insights for engineering professionals.",
+      "date": "2026-09-21",
+      "modified": "2026-09-21",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/agentic-ai-workflows-for-hazop-incident-triage-and-escalation-routing.png",
+      "tags": [
+        "Agentic AI",
+        "HAZOP",
+        "Incident Management",
+        "Workflow Automation",
+        "Multi-Agent Systems"
+      ],
+      "readTime": 7,
+      "wordCount": 1388,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "why-most-ai-pilots-stall-at-procurement-and-the-fix",
       "title": "Why Most AI Pilots Stall at Procurement \u2014 And the Fix",
       "excerpt": "Learn about why most ai pilots stall at procurement \u2014 and the fix. Expert insights for engineering professionals.",
