@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "voice-agents-for-live-fmea-session-facilitation-automating-risk-analysis-workflows",
+      "title": "Voice Agents for Live FMEA Session Facilitation: Automating Risk Analysis Workflows",
+      "excerpt": "Learn about voice agents for live fmea session facilitation: automating risk analysis workflows. Expert insights for engineering professionals.",
+      "date": "2026-09-28",
+      "modified": "2026-09-28",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/voice-agents-for-live-fmea-session-facilitation-automating-risk-analysis-workflows.png",
+      "tags": [
+        "Voice Agents",
+        "FMEA",
+        "Risk Analysis",
+        "AI Automation",
+        "Engineering Workflows"
+      ],
+      "readTime": 6,
+      "wordCount": 1268,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "predicting-your-ai-roi-a-4-quarter-financial-model-for-engineering-automation",
       "title": "Predicting Your AI ROI: A 4-Quarter Financial Model for Engineering Automation",
       "excerpt": "Learn about predicting your ai roi: a 4-quarter financial model for engineering automation. Expert insights for engineering professionals.",
