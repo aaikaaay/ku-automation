@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "vibroacoustic-monitoring-for-centrifugal-pump-failures-building-a-predictive-digital-twin-for-epc-rotating-equipment",
+      "title": "Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment",
+      "excerpt": "Learn about vibroacoustic monitoring for centrifugal pump failures: building a predictive digital twin for epc rotating equipment. Expert insights for engineering professionals.",
+      "date": "2026-10-02",
+      "modified": "2026-10-02",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/vibroacoustic-monitoring-for-centrifugal-pump-failures-building-a-predictive-digital-twin-for-epc-rotating-equipment.png",
+      "tags": [
+        "Digital Twins",
+        "Predictive Maintenance",
+        "Vibroacoustics",
+        "Rotating Equipment",
+        "Reliability Engineering"
+      ],
+      "readTime": 7,
+      "wordCount": 1328,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "automating-change-order-review-cycles-ai-powered-impact-assessment-and-stakeholder-routing",
       "title": "Automating Change Order Review Cycles: AI-Powered Impact Assessment and Stakeholder Routing",
       "excerpt": "Learn about automating change order review cycles: ai-powered impact assessment and stakeholder routing. Expert insights for engineering professionals.",
