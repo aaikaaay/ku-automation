@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "voice-agents-for-instrumentation-loop-checkout-hands-free-field-verification-for-commissioning-teams",
+      "title": "Voice Agents for Instrumentation Loop Checkout: Hands-Free Field Verification for Commissioning Teams",
+      "excerpt": "Learn about voice agents for instrumentation loop checkout: hands-free field verification for commissioning teams. Expert insights for engineering professionals.",
+      "date": "2026-10-05",
+      "modified": "2026-10-05",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/voice-agents-for-instrumentation-loop-checkout-hands-free-field-verification-for-commissioning-teams.png",
+      "tags": [
+        "Voice Agents",
+        "Instrumentation",
+        "Commissioning",
+        "AI Automation",
+        "Field Operations"
+      ],
+      "readTime": 6,
+      "wordCount": 1112,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "vibroacoustic-monitoring-for-centrifugal-pump-failures-building-a-predictive-digital-twin-for-epc-rotating-equipment",
       "title": "Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment",
       "excerpt": "Learn about vibroacoustic monitoring for centrifugal pump failures: building a predictive digital twin for epc rotating equipment. Expert insights for engineering professionals.",
