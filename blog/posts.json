@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "rfq-response-parsing-and-equipment-spec-reconciliation-catching-missing-line-items-before-purchase",
+      "title": "RFQ Response Parsing and Equipment Spec Reconciliation: Catching Missing Line Items Before Purchase",
+      "excerpt": "Learn about rfq response parsing and equipment spec reconciliation: catching missing line items before purchase. Expert insights for engineering professionals.",
+      "date": "2026-10-07",
+      "modified": "2026-10-07",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/rfq-response-parsing-and-equipment-spec-reconciliation-catching-missing-line-items-before-purchase.png",
+      "tags": [
+        "RFQ Automation",
+        "Equipment Specifications",
+        "Procurement",
+        "AI in Engineering",
+        "Vendor Management"
+      ],
+      "readTime": 7,
+      "wordCount": 1410,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "voice-agents-for-instrumentation-loop-checkout-hands-free-field-verification-for-commissioning-teams",
       "title": "Voice Agents for Instrumentation Loop Checkout: Hands-Free Field Verification for Commissioning Teams",
       "excerpt": "Learn about voice agents for instrumentation loop checkout: hands-free field verification for commissioning teams. Expert insights for engineering professionals.",
