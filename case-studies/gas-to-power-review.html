@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gas-to-Power Trial: Independent JT Review | KU Automation Case Study</title>
+    <meta name="description" content="A European EPC asked us to independently review the Joule-Thomson behaviour of a $1.25M gas-to-power trial package. We delivered a 4-page branded PDF with 12 CoolProp scenarios in under 2 hours.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://www.ku-automation.com/case-studies/gas-to-power-review.html">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../assets/apple-touch-icon.png">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: {
+                            50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe',
+                            300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1',
+                            600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-blur {
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+        }
+        .feature-card { transition: all 0.25s ease; }
+        .feature-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.10); }
+        .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Code block */
+        .code-block {
+            background: #0f1117;
+            border: 1px solid #1e2430;
+            border-radius: 12px;
+            padding: 1.5rem;
+            font-family: 'Menlo', 'Consolas', monospace;
+            font-size: 0.8125rem;
+            line-height: 1.7;
+            color: #e2e8f0;
+            overflow-x: auto;
+        }
+        .code-comment { color: #64748b; }
+        .code-keyword { color: #818cf8; }
+        .code-string { color: #34d399; }
+        .code-number { color: #fb923c; }
+
+        /* Data table */
+        .data-table th { background: #f1f5f9; }
+        .data-table tr:hover { background: #f8fafc; }
+    </style>
+</head>
+
+<body class="bg-white text-gray-900 antialiased">
+
+    <!-- NAV -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/85 border-b border-gray-100 transition-shadow duration-200">
+        <div class="max-w-7xl mx-auto px-6 py-3.5">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center gap-3">
+                    <img src="../assets/logo.png" alt="KU Automation" class="w-10 h-10 rounded-lg object-contain">
+                    <span class="font-bold text-lg text-gray-900">KU Automation</span>
+                </a>
+                <div class="flex items-center gap-4">
+                    <a href="/#products" class="text-gray-600 hover:text-gray-900 font-medium text-sm transition-colors hidden sm:block">← All Products</a>
+                    <a href="mailto:contact@ku-automation.com"
+                       class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-full font-semibold text-sm transition-all">
+                        Contact Us
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="pt-28 pb-16 bg-gradient-to-b from-gray-50 to-white">
+        <div class="max-w-4xl mx-auto px-6">
+
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 text-sm text-gray-500 mb-8">
+                <a href="/" class="hover:text-gray-700">KU Automation</a>
+                <span>/</span>
+                <a href="/#products" class="hover:text-gray-700">Case Studies</a>
+                <span>/</span>
+                <span class="text-gray-900 font-medium">Gas-to-Power JT Review</span>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 mb-6">
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-primary-50 text-primary-700 border border-primary-100 rounded-full text-xs font-semibold">Technical Analysis</span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">Gas Processing</span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">Joule-Thomson</span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">Pre-FEED Review</span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1 bg-gray-100 text-gray-700 rounded-full text-xs font-semibold">Oct 2026</span>
+            </div>
+
+            <h1 class="text-4xl md:text-5xl font-extrabold leading-tight mb-6">
+                Gas-to-Power Trial:<br>
+                <span class="gradient-text">Independent JT Review</span>
+            </h1>
+
+            <p class="text-xl text-gray-600 leading-relaxed mb-8 max-w-3xl">
+                A European EPC asked us to independently review the Joule-Thomson behaviour of a gas-to-power trial package proposed to one of their energy clients. Brief received. Real computation done. Branded PDF delivered. Client feedback: <strong class="text-gray-900">"Very excited, looking forward to great collaboration."</strong>
+            </p>
+
+            <!-- Key numbers bar -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 bg-gray-900 text-white rounded-2xl p-6">
+                <div class="text-center">
+                    <div class="text-2xl md:text-3xl font-extrabold gradient-text">&lt;2h</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Brief to Delivery</div>
+                </div>
+                <div class="text-center border-l border-white/10">
+                    <div class="text-2xl md:text-3xl font-extrabold gradient-text">12</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">JT Scenarios</div>
+                </div>
+                <div class="text-center border-l border-white/10">
+                    <div class="text-2xl md:text-3xl font-extrabold gradient-text">$1.25M</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Package Value</div>
+                </div>
+                <div class="text-center border-l border-white/10">
+                    <div class="text-2xl md:text-3xl font-extrabold gradient-text">6</div>
+                    <div class="text-xs text-gray-400 mt-1 font-medium uppercase tracking-wide">Critical Comments</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <article class="py-16">
+        <div class="max-w-4xl mx-auto px-6">
+
+            <!-- ANONYMISATION NOTICE -->
+            <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-12 flex items-start gap-3">
+                <svg class="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div>
+                    <p class="text-sm font-semibold text-amber-800">Anonymised case study</p>
+                    <p class="text-sm text-amber-700 mt-0.5">Client names, project references, and proprietary technical data have been removed. The methodology, timescales, and client response are real. The full case study PDF is available on request — contact us to discuss your project first.</p>
+                </div>
+            </div>
+
+            <!-- THE CHALLENGE -->
+            <div class="mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-red-50 border border-red-100 text-red-700 rounded-full text-xs font-semibold mb-5 uppercase tracking-wide">The Challenge</div>
+                <h2 class="text-3xl font-extrabold mb-5">A $1.25M concept package. One engineering question. Two hours to answer.</h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    A European EPC was reviewing a <strong>$1.25M gas-to-power trial package</strong> proposed by a process equipment supplier to one of their energy major clients. The concept centred on conditioning natural gas from a wellhead through pressure letdown stages before feeding a power generation unit.
+                </p>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    The EPC's engineer had a specific technical concern: <em>"What is the JT effect on pressure drop and resulting temperature decrease? Can you produce a table profile? Or do we need simulation software?"</em>
+                </p>
+                <p class="text-gray-600 leading-relaxed">
+                    What looked like a one-line question was actually a pre-FEED independent review request. The concept proposal contained a two-stage pressure letdown from three possible source conditions, two gas compositions, and a downstream trim-heater whose sizing rationale was entirely absent. Answering correctly required real thermodynamic computation — not a handbook estimate.
+                </p>
+            </div>
+
+            <!-- WHAT WE DID -->
+            <div class="mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 border border-primary-100 text-primary-700 rounded-full text-xs font-semibold mb-5 uppercase tracking-wide">What We Did</div>
+                <h2 class="text-3xl font-extrabold mb-5">Real computation. 12 scenarios. Branded PDF in under 90 minutes.</h2>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-3">Scenario matrix</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed mb-3">We computed 12 JT scenarios across a full parameter matrix:</p>
+                        <ul class="text-sm text-gray-600 space-y-1.5">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>2 gas compositions</strong> — sweet natural gas + rich associated gas</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>3 source pressures</strong> — 14, 27, and 41 barg</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>2 cooler outlet temperatures</strong> — 25°C and 40°C ambient cases</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                        <h3 class="font-bold text-gray-900 mb-3">Tools used</h3>
+                        <ul class="text-sm text-gray-600 space-y-1.5">
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>CoolProp</strong> with Peng-Robinson EOS — μ_JT computed at each letdown stage</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>Python / ReportLab</strong> — automated tabular output + phase envelope plots</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>Matplotlib</strong> — P-T phase envelope with two-stage letdown trajectories</span>
+                            </li>
+                            <li class="flex items-center gap-2">
+                                <svg class="w-4 h-4 text-primary-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                <span><strong>KU Automation branded PDF template</strong> — assumptions appendix + comment register</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Sample results table -->
+                <div class="overflow-x-auto rounded-2xl border border-gray-100 shadow-sm mb-6">
+                    <table class="data-table w-full text-sm">
+                        <caption class="text-xs text-gray-500 text-left px-4 py-2 border-b border-gray-100 bg-gray-50 font-semibold">
+                            Illustrative JT temperature profile — sweet gas, two-stage letdown (anonymised values)
+                        </caption>
+                        <thead>
+                            <tr class="text-left text-xs font-bold text-gray-600 uppercase tracking-wide">
+                                <th class="px-4 py-3 border-b border-gray-200">Source P (barg)</th>
+                                <th class="px-4 py-3 border-b border-gray-200">Stage 1 ΔT (°C)</th>
+                                <th class="px-4 py-3 border-b border-gray-200">Stage 2 ΔT (°C)</th>
+                                <th class="px-4 py-3 border-b border-gray-200">Total ΔT (°C)</th>
+                                <th class="px-4 py-3 border-b border-gray-200">μ_JT avg (°C/bar)</th>
+                                <th class="px-4 py-3 border-b border-gray-200">Heater Required?</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-700">
+                            <tr class="border-b border-gray-50">
+                                <td class="px-4 py-3 font-medium">14</td>
+                                <td class="px-4 py-3">−3.9</td>
+                                <td class="px-4 py-3">−3.1</td>
+                                <td class="px-4 py-3 font-semibold text-gray-900">−7.0</td>
+                                <td class="px-4 py-3 font-mono text-xs">0.46</td>
+                                <td class="px-4 py-3"><span class="text-emerald-600 font-semibold">Likely no</span></td>
+                            </tr>
+                            <tr class="border-b border-gray-50">
+                                <td class="px-4 py-3 font-medium">27</td>
+                                <td class="px-4 py-3">−7.5</td>
+                                <td class="px-4 py-3">−4.0</td>
+                                <td class="px-4 py-3 font-semibold text-gray-900">−11.5</td>
+                                <td class="px-4 py-3 font-mono text-xs">0.49</td>
+                                <td class="px-4 py-3"><span class="text-amber-600 font-semibold">Assess vs dew point</span></td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-3 font-medium">41</td>
+                                <td class="px-4 py-3">−12.4</td>
+                                <td class="px-4 py-3">−6.1</td>
+                                <td class="px-4 py-3 font-semibold text-red-700">−18.5</td>
+                                <td class="px-4 py-3 font-mono text-xs">0.52</td>
+                                <td class="px-4 py-3"><span class="text-red-600 font-semibold">Yes — dew point crossed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p class="text-[10px] text-gray-400 px-4 py-2 bg-gray-50 border-t border-gray-100">Values anonymised. Actual figures computed per CoolProp/PR EOS at specific compositions provided in the brief. ±10% scoping accuracy.</p>
+                </div>
+
+                <!-- Technical insight -->
+                <div class="bg-primary-50 border border-primary-100 rounded-xl p-6 mb-6">
+                    <h4 class="font-bold text-primary-900 mb-2">Key technical finding</h4>
+                    <p class="text-sm text-primary-800 leading-relaxed">
+                        The richer associated gas composition cooled <em>more</em> than sweet gas at higher source pressures — counterintuitive at first glance, but consistent with CoolProp/PR EOS. The latent-heat moderation effect (which reduces JT cooling for rich gas) only kicks in very close to the phase boundary; at our operating conditions, the heavier C<sub>3</sub>+ components simply increased μ_JT. This distinction mattered for the EH-203 trim-heater sizing question: the GATTI proposal listed the heater as "optional if required," which we identified as an inadequately justified position for the 41 barg case.
+                    </p>
+                </div>
+            </div>
+
+            <!-- WHAT WE DELIVERED -->
+            <div class="mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-green-50 border border-green-100 text-green-700 rounded-full text-xs font-semibold mb-5 uppercase tracking-wide">What We Delivered</div>
+                <h2 class="text-3xl font-extrabold mb-5">A 4-page branded PDF. Not a Slack message.</h2>
+                <p class="text-gray-600 leading-relaxed mb-6">
+                    The deliverable was a 4-page branded PDF — not an email, not a back-of-envelope note. This signalled to the client from first touch: <em>this is how we work</em>.
+                </p>
+                <div class="grid sm:grid-cols-2 gap-4 mb-8">
+                    <div class="feature-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+                        <div class="w-10 h-10 bg-primary-100 rounded-lg flex items-center justify-center mb-3">
+                            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-1">Full scenario table</h4>
+                        <p class="text-sm text-gray-500">12-scenario JT profile matrix with per-stage ΔT, μ_JT, and trim-heater assessment for each case</p>
+                    </div>
+                    <div class="feature-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+                        <div class="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center mb-3">
+                            <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-1">Phase envelope plot</h4>
+                        <p class="text-sm text-gray-500">Matplotlib P-T phase envelope for both compositions with two-stage letdown trajectories overlaid</p>
+                    </div>
+                    <div class="feature-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+                        <div class="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center mb-3">
+                            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-1">Full assumptions appendix</h4>
+                        <p class="text-sm text-gray-500">Every input stated explicitly — compositions, source pressures, EOS choice, accuracy basis, data gaps flagged</p>
+                    </div>
+                    <div class="feature-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm">
+                        <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mb-3">
+                            <svg class="w-5 h-5 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+                        </div>
+                        <h4 class="font-bold text-gray-900 mb-1">6 critical concept comments</h4>
+                        <p class="text-sm text-gray-500">Professionally framed comments on the supplier's concept — areas benefiting from closer scrutiny before acceptance</p>
+                    </div>
+                </div>
+
+                <!-- Timeline -->
+                <div class="relative pl-6 border-l-2 border-primary-100 space-y-6">
+                    <div>
+                        <div class="absolute -left-[9px] w-4 h-4 bg-primary-600 rounded-full border-2 border-white shadow"></div>
+                        <div class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">T+0 min</div>
+                        <div class="font-semibold text-gray-900">Brief received</div>
+                        <div class="text-sm text-gray-500">Concept proposal PDF forwarded with the JT question</div>
+                    </div>
+                    <div>
+                        <div class="absolute -left-[9px] w-4 h-4 bg-primary-400 rounded-full border-2 border-white shadow"></div>
+                        <div class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">T+30 min</div>
+                        <div class="font-semibold text-gray-900">v1 PDF delivered</div>
+                        <div class="text-sm text-gray-500">Initial scenario table + phase envelope. CoolProp computation complete.</div>
+                    </div>
+                    <div>
+                        <div class="absolute -left-[9px] w-4 h-4 bg-primary-300 rounded-full border-2 border-white shadow"></div>
+                        <div class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">T+45 min</div>
+                        <div class="font-semibold text-gray-900">v2 PDF delivered</div>
+                        <div class="text-sm text-gray-500">ΔP breakdown table added to assumptions appendix. Sign direction correction acknowledged cleanly.</div>
+                    </div>
+                    <div>
+                        <div class="absolute -left-[9px] w-4 h-4 bg-emerald-500 rounded-full border-2 border-white shadow"></div>
+                        <div class="text-xs font-bold text-gray-500 uppercase tracking-wide mb-1">T+2h 10min</div>
+                        <div class="font-semibold text-gray-900 text-emerald-700">"Very excited about our effort this morning"</div>
+                        <div class="text-sm text-gray-500">Client response — looking forward to collaboration on DWSim-grade detailed design if awarded</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- WHAT WORKED -->
+            <div class="mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-gray-100 border border-gray-200 text-gray-600 rounded-full text-xs font-semibold mb-5 uppercase tracking-wide">What Worked</div>
+                <h2 class="text-3xl font-extrabold mb-5">Three things that made the difference.</h2>
+
+                <div class="space-y-5">
+                    <div class="flex gap-5 items-start">
+                        <div class="w-10 h-10 bg-primary-100 rounded-xl flex-shrink-0 flex items-center justify-center">
+                            <span class="text-primary-700 font-extrabold text-sm">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-1">Real computation, not hand-waving</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">CoolProp with Peng-Robinson EOS. μ_JT values computed at the actual mixture composition and operating conditions. Numbers defensible to ±10% — appropriate for a scoping study. No fabricated decimals, no "approximately 0.5°C/bar."</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 items-start">
+                        <div class="w-10 h-10 bg-primary-100 rounded-xl flex-shrink-0 flex items-center justify-center">
+                            <span class="text-primary-700 font-extrabold text-sm">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-1">Branded PDF, not a chat message</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">A professional document dropped into the conversation instead of an informal reply. Signalled "this is how we do work" from first touch. The PDF became a reference document the client could forward internally.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 items-start">
+                        <div class="w-10 h-10 bg-primary-100 rounded-xl flex-shrink-0 flex items-center justify-center">
+                            <span class="text-primary-700 font-extrabold text-sm">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 mb-1">Turned a technical answer into a scoping prompt</h4>
+                            <p class="text-sm text-gray-600 leading-relaxed">Finished the response by anchoring three specific asks — actual separator discharge pressure, gauge vs. absolute basis, PCV intermediate setpoint. Gave the client a reason to come back to us with data, rather than a dead-end "thanks." Positions us for DWSim-grade detailed design if the package is awarded.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POSITIONING QUOTE -->
+            <div class="bg-gray-900 rounded-2xl p-10 text-center mb-14 reveal">
+                <p class="text-2xl font-bold text-white leading-relaxed mb-4">
+                    "We turn vague client requirements into actionable spec.<br class="hidden md:block"> We rerun the numbers when yours change.<br class="hidden md:block"> We don't fake certainty."
+                </p>
+                <p class="text-gray-400 text-sm">— Kingsley Uzowulu, CEng MIMechE · KU Automation</p>
+            </div>
+
+            <!-- WHAT COMES NEXT -->
+            <div class="mb-14 reveal">
+                <div class="inline-flex items-center gap-2 px-3 py-1 bg-primary-50 border border-primary-100 text-primary-700 rounded-full text-xs font-semibold mb-5 uppercase tracking-wide">What Comes Next</div>
+                <h2 class="text-3xl font-extrabold mb-5">The scoping study was the opening move.</h2>
+                <p class="text-gray-600 leading-relaxed mb-4">
+                    The JT scoping study positions KU Automation for detailed design engagement if the package is awarded. The next step is a DWSim simulation once three data points are confirmed from the client's side:
+                </p>
+                <ul class="space-y-3 mb-6">
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        <span class="text-gray-600 text-sm">Actual separator discharge pressure — normal, minimum, and maximum operating range</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        <span class="text-gray-600 text-sm">Gauge vs. absolute basis confirmed for all pressure data in the original proposal</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <svg class="w-5 h-5 text-primary-500 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                        <span class="text-gray-600 text-sm">PCV intermediate setpoint firmed up — determines whether EH-203 trim-heater is required or optional</span>
+                    </li>
+                </ul>
+                <p class="text-gray-500 text-sm italic">Once those are confirmed, the JT profile resolves to a single operating point and the EH-203 sizing decision becomes deterministic.</p>
+            </div>
+
+            <!-- REQUEST THE PDF -->
+            <div class="bg-gradient-to-br from-primary-600 to-purple-700 rounded-2xl p-10 text-center reveal">
+                <h3 class="text-2xl font-extrabold text-white mb-3">Full case study PDF available on request.</h3>
+                <p class="text-white/80 mb-6 max-w-lg mx-auto">
+                    We share the detailed PDF with engineering teams who are evaluating a similar scope. Tell us your project context — we'll tell you if it's a useful reference.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                    <a href="mailto:contact@ku-automation.com?subject=Gas-to-Power%20Case%20Study%20PDF%20Request"
+                       class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white text-primary-700 rounded-full font-bold text-sm transition-all hover:shadow-lg">
+                        Request the case study PDF
+                        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                    <a href="mailto:contact@ku-automation.com?subject=JT%20Scoping%20Study%20Enquiry"
+                       class="inline-flex items-center justify-center gap-2 px-7 py-3.5 bg-white/10 hover:bg-white/20 border border-white/30 text-white rounded-full font-semibold text-sm transition-all">
+                        Discuss a similar scope
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </article>
+
+    <!-- FOOTER -->
+    <footer class="py-10 border-t border-gray-100 mt-8">
+        <div class="max-w-4xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+            <div>
+                <a href="/" class="font-semibold text-gray-900 hover:text-primary-600">KU Automation</a>
+                <span class="mx-2">·</span>
+                <span>Kingsley Uzowulu, CEng MIMechE · IMechE (UK)</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="mailto:contact@ku-automation.com" class="text-primary-600 hover:text-primary-700 font-medium">contact@ku-automation.com</a>
+                <a href="/#products" class="hover:text-gray-700">← All Case Studies</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Nav shadow on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('shadow-sm', window.scrollY > 40);
+        });
+
+        // Scroll reveal
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

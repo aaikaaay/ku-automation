@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "agentic-ai-for-automated-field-inspection-scheduling-coordinating-multi-site-equipment-audits",
+      "title": "Agentic AI for Automated Field Inspection Scheduling: Coordinating Multi-Site Equipment Audits",
+      "excerpt": "Learn about agentic ai for automated field inspection scheduling: coordinating multi-site equipment audits. Expert insights for engineering professionals.",
+      "date": "2026-10-12",
+      "modified": "2026-10-12",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/agentic-ai-for-automated-field-inspection-scheduling-coordinating-multi-site-equipment-audits.png",
+      "tags": [
+        "Agentic AI",
+        "Field Operations",
+        "Inspection Automation",
+        "Multi-Agent Systems",
+        "Scheduling"
+      ],
+      "readTime": 6,
+      "wordCount": 1113,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "rfq-response-parsing-and-equipment-spec-reconciliation-catching-missing-line-items-before-purchase",
       "title": "RFQ Response Parsing and Equipment Spec Reconciliation: Catching Missing Line Items Before Purchase",
       "excerpt": "Learn about rfq response parsing and equipment spec reconciliation: catching missing line items before purchase. Expert insights for engineering professionals.",
