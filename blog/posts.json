@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "automating-pid-redline-consolidation-ai-powered-marked-up-drawing-integration-into-master-baselines",
+      "title": "Automating P&ID Redline Consolidation: AI-Powered Marked-Up Drawing Integration into Master Baselines",
+      "excerpt": "Learn about automating p&id redline consolidation: ai-powered marked-up drawing integration into master baselines. Expert insights for engineering professionals.",
+      "date": "2026-10-14",
+      "modified": "2026-10-14",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/automating-pid-redline-consolidation-ai-powered-marked-up-drawing-integration-into-master-baselines.png",
+      "tags": [
+        "P&ID Automation",
+        "Drawing Management",
+        "AI in Engineering",
+        "Workflow Automation",
+        "Engineering Workflows"
+      ],
+      "readTime": 7,
+      "wordCount": 1485,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "agentic-ai-for-automated-field-inspection-scheduling-coordinating-multi-site-equipment-audits",
       "title": "Agentic AI for Automated Field Inspection Scheduling: Coordinating Multi-Site Equipment Audits",
       "excerpt": "Learn about agentic ai for automated field inspection scheduling: coordinating multi-site equipment audits. Expert insights for engineering professionals.",

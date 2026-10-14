@@ -6,7 +6,7 @@
   <!-- Main Pages -->
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -70,12 +70,27 @@
   <!-- Blog -->
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/blog.html</loc>
-    <lastmod>2026-10-12</lastmod>
+    <lastmod>2026-10-14</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   
   <!-- Blog Posts -->
+  <url>
+    <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=automating-pid-redline-consolidation-ai-powered-marked-up-drawing-integration-into-master-baselines</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <news:news>
+      <news:publication>
+        <news:name>KU Automation Blog</news:name>
+        <news:language>en</news:language>
+      </news:publication>
+      <news:publication_date>2026-10-14</news:publication_date>
+      <news:title>Automating P&amp;ID Redline Consolidation: AI-Powered Marked-Up Drawing Integration into Master Baselines</news:title>
+    </news:news>
+  </url>
+  
   <url>
     <loc>https://ai-automation-agency-gilt.vercel.app/blog-post.html?slug=agentic-ai-for-automated-field-inspection-scheduling-coordinating-multi-site-equipment-audits</loc>
     <lastmod>2026-10-12</lastmod>
