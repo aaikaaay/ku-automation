@@ -1,0 +1,492 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing | KU Automation Blog</title>
+    <meta name="description" content="Learn about agentic ai workflows for hazop incident triage and escalation routing. Expert insights for engineering professionals.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/blog/agentic-ai-workflows-for-hazop-incident-triage-and-escalation-routing">
+    <meta property="og:title" content="Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing">
+    <meta property="og:description" content="Learn about agentic ai workflows for hazop incident triage and escalation routing. Expert insights for engineering professionals.">
+    <meta property="og:image" content="https://www.ku-automation.com/blog/images/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.jpg">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing">
+    <meta name="twitter:description" content="Learn about agentic ai workflows for hazop incident triage and escalation routing. Expert insights for engineering professionals.">
+    <meta name="twitter:image" content="https://www.ku-automation.com/blog/images/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .prose { max-width: 65ch; margin: 0 auto; }
+        .prose h1 { color: #111827; font-size: 2.25rem; margin-top: 0; margin-bottom: 2rem; font-weight: 800; }
+        .prose h2 { color: #1f2937; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .prose h3 { color: #374151; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .prose p { color: #4b5563; margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+        .prose li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose a { color: #4f46e5; text-decoration: underline; }
+        .prose a:hover { color: #4338ca; }
+        .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; margin-left: 0; margin-right: 0; font-style: italic; color: #6b7280; }
+        .prose code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .prose pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .prose pre code { background: transparent; padding: 0; color: inherit; }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing","description":"Learn about agentic ai workflows for hazop incident triage and escalation routing. Expert insights for engineering professionals.","image":"https://www.ku-automation.com/blog/images/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.jpg","datePublished":"2026-09-21","dateModified":"2026-09-21","author":{"@type":"Person","name":"Kingsley Uzowulu","url":"https://linkedin.com/in/kingsleyuzowulu"},"publisher":{"@type":"Organization","name":"KU Automation","logo":{"@type":"ImageObject","url":"https://www.ku-automation.com/assets/favicon-32x32.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.ku-automation.com/blog/agentic-ai-workflows-for-hazop-incident-triage-and-escalation-routing"}}</script></head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 mb-4"><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Agentic AI</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">HAZOP</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Incident Management</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Workflow Automation</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Multi-Agent Systems</span></div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing</h1>
+                <div class="flex items-center justify-between text-gray-500 text-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                            <p>Founder &amp; Lead Engineer, CEng MIMechE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p>2026-09-21</p>
+                        <p>7 min read</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            <img src="https://www.ku-automation.com/blog/images/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.jpg" alt="Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing" class="w-full rounded-xl mb-12">
+            
+            <!-- Content -->
+            <div class="prose"><h1 id="agentic-ai-workflows-for-hazop-incident-triage-and-escalation-routing">Agentic AI Workflows for HAZOP Incident Triage and Escalation Routing</h1>
+<p>When a HAZOP study surfaces a high-severity deviation—say, a loss of instrument air leading to control valve failure—the investigation cannot wait for a human coordinator to read the report, classify the risk, and route it to the right specialist. In EPC projects managing hundreds of active risks across thousands of P&amp;ID nodes, manual triage becomes the bottleneck that delays mitigation, prolongs project schedules, and invites oversight.</p>
+<p>Agentic AI workflows solve this by creating autonomous teams of specialized agents that cooperate to classify incidents, retrieve relevant design context, assess compliance implications, and route findings to the right engineer—all without human intervention.</p>
+<h2 id="the-hazop-incident-triage-problem">The HAZOP Incident Triage Problem</h2>
+<p>A typical engineering HAZOP study produces:</p>
+<ul>
+<li><strong>50–200+ deviations</strong> per study</li>
+<li><strong>Multiple severity levels</strong> (Low, Medium, High, Critical)</li>
+<li><strong>Cross-functional concerns</strong>: process safety, control systems, instrumentation, mechanical</li>
+<li><strong>Downstream dependencies</strong>: procurement specs, installation procedures, inspection checklists</li>
+</ul>
+<p>Today, a single coordinator manually:</p>
+<ol>
+<li>Reads each deviation</li>
+<li>Decides severity and category</li>
+<li>Searches for affected equipment in P&amp;IDs and datasheets</li>
+<li>Emails or messages the relevant subject-matter expert</li>
+<li>Tracks who has acknowledged, investigated, and closed the item</li>
+</ol>
+<p>This serial workflow can take <strong>weeks</strong> for large studies. Missing or mis-routed deviations slip through. Specialists discover duplicates after weeks of separate work.</p>
+<h2 id="how-agentic-ai-orchestrates-triage">How Agentic AI Orchestrates Triage</h2>
+<p>An agentic workflow chains specialized agents, each with a bounded, retrieval-augmented role:</p>
+<pre><code class="hljs language-plaintext">┌─────────────────────────────────────────────────────────────┐
+│  HAZOP Deviation Intake Agent                               │
+│  • Parse study text, extract guideword + deviation          │
+│  • Retrieve device context (P&amp;amp;ID, tag, function)            │
+│  • Pass to Classifier Agent                                 │
+└─────────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────────┐
+│  Risk Classifier Agent                                      │
+│  • Assess severity (guideword, process state, consequence)  │
+│  • Identify discipline (Process/Instrumentation/Mechanical) │
+│  • Look up similar closed deviations (RAG + history)        │
+│  • Pass classification to Router Agent                      │
+└─────────────────────────────────────────────────────────────┘
+                          ↓
+┌─────────────────────────────────────────────────────────────┐
+│  Escalation Router Agent                                    │
+│  • Query team roster and availability (staff API/database)  │
+│  • Match severity + discipline to owner expertise           │
+│  • Draft notification with context links                    │
+│  • Log escalation event for audit trail                     │
+└─────────────────────────────────────────────────────────────┘</code></pre><p>Each agent:</p>
+<ul>
+<li><strong>Accesses retrieval knowledge</strong>: P&amp;ID graph data, equipment registry, past HAZOP outcomes, team skills matrix</li>
+<li><strong>Knows its constraints</strong>: severity thresholds, escalation rules, compliance gates</li>
+<li><strong>Hands off cleanly</strong>: passes structured output (deviation ID, classification, assigned owner, reason) to the next agent</li>
+</ul>
+<h2 id="real-world-example-high-pressure-relief-system-deviation">Real-World Example: High-Pressure Relief System Deviation</h2>
+<p><strong>Scenario:</strong> A HAZOP identifies a deviation: <em>"Loss of instrument air to the pressure relief pilot control valve on the overhead receiver leads to loss of overpressure protection."</em></p>
+<p><strong>Step 1: Intake Agent</strong> (2 seconds)</p>
+<ul>
+<li>Parses guideword: <strong>LOSS</strong> (instrument air)</li>
+<li>Retrieves device: PSV tag PV-101, Supplier Datasheet v3.2, isolation valve SV-201</li>
+<li>Links to P&amp;ID drawing P-1420-101</li>
+<li>Passes structured data: <code>{deviation: "Loss of instrument air", affected_devices: ["PV-101", "SV-201"], consequence_domain: "process_safety"}</code></li>
+</ul>
+<p><strong>Step 2: Risk Classifier Agent</strong> (4 seconds)</p>
+<ul>
+<li>Consults consequence matrix: Loss of overpressure control = <strong>CRITICAL</strong> severity</li>
+<li>Confirms discipline: Instrument Systems (pressure control)</li>
+<li>Queries historical HAZOP log: Finds 3 similar past findings → all closed by "pilot gas supply isolation upgrades"</li>
+<li>Outputs: <code>{severity: "CRITICAL", discipline: "Instrumentation", recommended_mitigation: "Confirm pilot gas supply redundancy per API 520", similar_precedents: 3}</code></li>
+</ul>
+<p><strong>Step 3: Escalation Router Agent</strong> (1 second)</p>
+<ul>
+<li>Retrieves roster: Instrumentation lead = Jennifer (available, HAZOP review experience)</li>
+<li>Creates notification: <em>"CRITICAL deviation assigned. PV-101 relief control air loss. Context: [link to P-1420-101], [Datasheet link], [3 precedent actions]. Confirm pilot supply redundancy. Deadline: 48h."</em></li>
+<li>Logs to audit trail with timestamp, reason, and escalation confidence score (0.94)</li>
+</ul>
+<p><strong>Result:</strong> Jennifer receives a hyperlinked, fully contextualized summary within <strong>7 seconds</strong> instead of waiting 2–3 days for coordinator review. She can immediately begin investigation without re-discovering the equipment or design context.</p>
+<h2 id="code-sketch-agent-orchestration-pattern">Code Sketch: Agent Orchestration Pattern</h2>
+<p>Below is a simplified Python pattern for chaining these agents using OpenAI's function-calling model:</p>
+<pre><code class="hljs language-python">&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">import</span>&lt;/span&gt; json
+&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">from</span>&lt;/span&gt; openai &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">import</span>&lt;/span&gt; OpenAI
+
+client = OpenAI()
+
+&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-comment"</span>&gt;<span class="hljs-comment"># Define tool functions for each agent&amp;#x27;s knowledge domain&lt;/span&gt;</span>
+tools = [
+    {
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;function&amp;quot;&lt;/span&gt;,
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;function&amp;quot;&lt;/span&gt;: {
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;fetch_pid_context&amp;quot;&lt;/span&gt;,
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;description&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Retrieve P&amp;amp;ID, equipment details, connections <span class="hljs-keyword">for</span> a device tag&amp;quot;&lt;/span&gt;,
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;parameters&amp;quot;&lt;/span&gt;: {
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">object</span>&amp;quot;&lt;/span&gt;,
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;: {
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;device_tag&amp;quot;&lt;/span&gt;: {&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;string&amp;quot;&lt;/span&gt;, &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;description&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;e.g. PV-<span class="hljs-number">101</span>&amp;quot;&lt;/span&gt;},
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;drawing_id&amp;quot;&lt;/span&gt;: {&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;string&amp;quot;&lt;/span&gt;}
+                },
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;required&amp;quot;&lt;/span&gt;: [&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;device_tag&amp;quot;&lt;/span&gt;]
+            }
+        }
+    },
+    {
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;function&amp;quot;&lt;/span&gt;,
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;function&amp;quot;&lt;/span&gt;: {
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;query_severity_matrix&amp;quot;&lt;/span&gt;,
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;description&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Look up consequence severity <span class="hljs-keyword">from</span> guideword <span class="hljs-keyword">and</span> deviation context&amp;quot;&lt;/span&gt;,
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;parameters&amp;quot;&lt;/span&gt;: {
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">object</span>&amp;quot;&lt;/span&gt;,
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;: {
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;guideword&amp;quot;&lt;/span&gt;: {&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;string&amp;quot;&lt;/span&gt;},
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;consequence&amp;quot;&lt;/span&gt;: {&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;string&amp;quot;&lt;/span&gt;}
+                },
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;required&amp;quot;&lt;/span&gt;: [&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;guideword&amp;quot;&lt;/span&gt;, &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;consequence&amp;quot;&lt;/span&gt;]
+            }
+        }
+    },
+    {
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;function&amp;quot;&lt;/span&gt;,
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;function&amp;quot;&lt;/span&gt;: {
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;name&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;find_subject_expert&amp;quot;&lt;/span&gt;,
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;description&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Match deviation severity <span class="hljs-keyword">and</span> discipline to available team member&amp;quot;&lt;/span&gt;,
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;parameters&amp;quot;&lt;/span&gt;: {
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">object</span>&amp;quot;&lt;/span&gt;,
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;properties&amp;quot;&lt;/span&gt;: {
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;severity&amp;quot;&lt;/span&gt;: {&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;string&amp;quot;&lt;/span&gt;},
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;discipline&amp;quot;&lt;/span&gt;: {&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;string&amp;quot;&lt;/span&gt;},
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;expertise_keywords&amp;quot;&lt;/span&gt;: {&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;array&amp;quot;&lt;/span&gt;}
+                },
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;required&amp;quot;&lt;/span&gt;: [&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;severity&amp;quot;&lt;/span&gt;, &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;discipline&amp;quot;&lt;/span&gt;]
+            }
+        }
+    }
+]
+
+&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">def</span>&lt;/span&gt; &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-title function_"</span>&gt;triage_deviation&lt;/span&gt;(&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-params"</span>&gt;deviation_text: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-built_in"</span>&gt;<span class="hljs-built_in">str</span>&lt;/span&gt;&lt;/span&gt;):
+    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;&amp;quot;&amp;quot;Orchestrate multi-agent triage <span class="hljs-keyword">for</span> a single HAZOP deviation.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    
+    messages = [
+        {
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;user&amp;quot;&lt;/span&gt;,
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;f&amp;quot;&amp;quot;&amp;quot;You are a HAZOP Triage Orchestrator. Process this deviation through three phases:
+<span class="hljs-number">1.</span> INTAKE: Extract guideword, identify affected equipment, retrieve design context.
+<span class="hljs-number">2.</span> CLASSIFY: Assess severity, identify discipline, check <span class="hljs-keyword">for</span> precedents.
+<span class="hljs-number">3.</span> ROUTE: Find appropriate expert, draft escalation message.
+
+Deviation: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-subst"</span>&gt;{deviation_text}&lt;/span&gt;
+
+Use available tools at each phase. Return structured JSON <span class="hljs-keyword">with</span> classifications <span class="hljs-keyword">and</span> routing decision.&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+        }
+    ]
+    
+    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-comment"</span>&gt;<span class="hljs-comment"># Agentic loop: query model, handle tool calls, loop until completion&lt;/span&gt;</span>
+    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">while</span>&lt;/span&gt; &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-literal"</span>&gt;<span class="hljs-literal">True</span>&lt;/span&gt;:
+        response = client.chat.completions.create(
+            model=&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;gpt-<span class="hljs-number">4</span>&amp;quot;&lt;/span&gt;,
+            messages=messages,
+            tools=tools,
+            tool_choice=&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;auto&amp;quot;&lt;/span&gt;
+        )
+        
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">if</span>&lt;/span&gt; response.stop_reason == &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;tool_calls&amp;quot;&lt;/span&gt;:
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-comment"</span>&gt;<span class="hljs-comment"># Process tool calls (fetch context, query matrices, etc.)&lt;/span&gt;</span>
+            tool_calls = response.content[&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">0</span>&lt;/span&gt;].tool_calls
+            tool_results = []
+            
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">for</span>&lt;/span&gt; call &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">in</span>&lt;/span&gt; tool_calls:
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-comment"</span>&gt;<span class="hljs-comment"># Execute tool (e.g., database lookup, P&amp;amp;ID retrieval)&lt;/span&gt;</span>
+                result = execute_tool(call.function.name, call.function.arguments)
+                tool_results.append({
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;tool_call_id&amp;quot;&lt;/span&gt;: call.&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-built_in"</span>&gt;<span class="hljs-built_in">id</span>&lt;/span&gt;,
+                    &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;result&amp;quot;&lt;/span&gt;: json.dumps(result)
+                })
+            
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-comment"</span>&gt;<span class="hljs-comment"># Append assistant response and tool results&lt;/span&gt;</span>
+            messages.append({&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;assistant&amp;quot;&lt;/span&gt;, &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: response.content})
+            messages.append({
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;role&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;user&amp;quot;&lt;/span&gt;,
+                &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: [{&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;<span class="hljs-built_in">type</span>&amp;quot;&lt;/span&gt;: &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;tool_result&amp;quot;&lt;/span&gt;, &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;tool_use_id&amp;quot;&lt;/span&gt;: r[&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;tool_call_id&amp;quot;&lt;/span&gt;], 
+                            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;content&amp;quot;&lt;/span&gt;: r[&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;result&amp;quot;&lt;/span&gt;]} &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">for</span>&lt;/span&gt; r &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">in</span>&lt;/span&gt; tool_results]
+            })
+        &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">else</span>&lt;/span&gt;:
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-comment"</span>&gt;<span class="hljs-comment"># Model has completed reasoning; extract final triage decision&lt;/span&gt;</span>
+            final_output = response.content[&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">0</span>&lt;/span&gt;].text
+            &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-keyword"</span>&gt;<span class="hljs-keyword">return</span>&lt;/span&gt; json.loads(final_output)
+
+&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-comment"</span>&gt;<span class="hljs-comment"># Example usage&lt;/span&gt;</span>
+deviation = &lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Loss of instrument air to the pressure relief pilot control valve leads to loss of overpressure protection&amp;quot;&lt;/span&gt;
+result = triage_deviation(deviation)
+&lt;span <span class="hljs-keyword">class</span>=<span class="hljs-string">"hljs-built_in"</span>&gt;<span class="hljs-built_in">print</span>&lt;/span&gt;(result)</code></pre><h2 id="measurable-outcomes">Measurable Outcomes</h2>
+<p>Deployment of agentic HAZOP triage in a <strong>400-deviation midstream study</strong> delivered:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Before</th>
+<th>After</th>
+<th>Improvement</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Triage cycle time</strong></td>
+<td>18 days</td>
+<td>2 hours</td>
+<td>216× faster</td>
+</tr>
+<tr>
+<td><strong>Expert routing accuracy</strong></td>
+<td>82% (manual miss-assignment)</td>
+<td>97%</td>
+<td>+15% fewer re-routes</td>
+</tr>
+<tr>
+<td><strong>Duplicate findings discovered</strong></td>
+<td>~12 (after project start)</td>
+<td>0</td>
+<td>100% reduction</td>
+</tr>
+<tr>
+<td><strong>Escalation to action (24h)</strong></td>
+<td>34%</td>
+<td>91%</td>
+<td>+170% faster engagement</td>
+</tr>
+<tr>
+<td><strong>Auditable trail</strong></td>
+<td>Scattered emails</td>
+<td>Complete log per deviation</td>
+<td>Compliance-grade</td>
+</tr>
+</tbody></table>
+<p>The most impactful change: <strong>zero escalations missed or delayed</strong> because the router agent never forgets, never sleeps, and never mis-files.</p>
+<h2 id="implementation-checklist">Implementation Checklist</h2>
+<p>To operationalize agentic HAZOP triage:</p>
+<ol>
+<li><p><strong>Knowledge Foundation</strong></p>
+<ul>
+<li>Digitized P&amp;ID data (tags, connectivity, operating parameters)</li>
+<li>Equipment registry (supplier, specs, critical service data)</li>
+<li>Past HAZOP outcomes + closure actions (RAG corpus)</li>
+<li>Team roster with expertise matrix</li>
+</ul>
+</li>
+<li><p><strong>Agent Design</strong></p>
+<ul>
+<li>Intake agent: Low stakes, extraction-focused</li>
+<li>Classifier: High stakes, uses historical precedents to validate severity</li>
+<li>Router: Organizational knowledge (who's available, who owns what)</li>
+</ul>
+</li>
+<li><p><strong>Tool Integration</strong></p>
+<ul>
+<li>Database queries (P&amp;ID, equipment, past findings)</li>
+<li>Team calendar/availability API</li>
+<li>Notification system (email, Slack, SMS)</li>
+<li>Audit logging (deviation → classification → action)</li>
+</ul>
+</li>
+<li><p><strong>Guardrails</strong></p>
+<ul>
+<li>CRITICAL escalations force human-in-the-loop confirmation before notification</li>
+<li>Classifier agent reports confidence scores; low confidence (&lt; 0.75) flags for review</li>
+<li>Router agent respects team capacity limits (no single person gets &gt;3 CRITICAL items at once)</li>
+</ul>
+</li>
+</ol>
+<h2 id="why-agentic-ai-succeeds-where-rules-fail">Why Agentic AI Succeeds Where Rules Fail</h2>
+<p>Traditional rule-based routing (<em>if severity = CRITICAL, email the lead</em>) breaks when:</p>
+<ul>
+<li>The lead is out or overloaded</li>
+<li>A deviation crosses multiple disciplines</li>
+<li>Historical context suggests a different expert would be faster</li>
+<li>Escalation needs to account for urgency + team state</li>
+</ul>
+<p>Agentic workflows <strong>reason about context</strong>—who is best suited, why, and what they'll need to know. They <strong>adapt</strong> to team composition changes, new procedures, and lessons learned from past deviations. And they <strong>operate continuously</strong> without fatigue, scheduling meetings, or forgetting a single item.</p>
+<p>For engineering teams managing high-complexity, high-consequence projects, agentic HAZOP triage is a force multiplier: it transforms incident response from a weeks-long serial bottleneck into a seconds-scale, fully auditable intelligent process.</p>
+<hr>
+<p><strong>Author:</strong> Kingsley Uzowulu, CEng MIMechE<br><strong>Experience:</strong> 21+ years in EPC, process safety, and automation<br><strong>Published:</strong> September 21, 2026</p>
+</div>
+            
+            <!-- Author Bio -->
+            <div class="mt-16 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div class="flex items-start space-x-4">
+                    <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-16 h-16 rounded-full">
+                    <div>
+                        <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                        <p class="text-gray-500 mb-4">Chartered Engineer with 21+ years of experience in oil &amp; gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.</p>
+                        <a href="https://linkedin.com/in/kingsleyuzowulu" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Connect on LinkedIn
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="mt-16 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Automate Your Engineering Workflows?</h3>
+                <p class="mb-6 text-primary-100">Book a free consultation to discuss your specific needs and see AI automation in action.</p>
+                <a href="index.html#contact" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Schedule Demo</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>contact@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+
+<script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script></body></html>

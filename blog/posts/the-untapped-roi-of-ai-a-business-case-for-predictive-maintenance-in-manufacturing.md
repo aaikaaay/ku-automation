@@ -6,7 +6,7 @@ date: 2026-07-31
 modified: 2026-07-31
 published: false
 featured: false
-image: /assets/blog/the-untapped-roi-of-ai-a-business-case-for-predictive-maintenance-in-manufacturing.png
+image: /blog/images/2026-03-28-digital-twins-predictive-maintenance.png
 tags:
   - ROI
   - AI Investment

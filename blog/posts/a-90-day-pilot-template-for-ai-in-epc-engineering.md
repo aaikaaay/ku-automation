@@ -6,7 +6,7 @@ date: 2026-08-28
 modified: 2026-08-28
 published: false
 featured: false
-image: /assets/blog/a-90-day-pilot-template-for-ai-in-epc-engineering.png
+image: /blog/images/ai-document-processing.png
 tags:
   - AI Implementation
   - Pilot Programs

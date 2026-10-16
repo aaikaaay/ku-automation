@@ -6,7 +6,7 @@ date: 2026-09-02
 modified: 2026-09-02
 published: false
 featured: false
-image: /assets/blog/ai-assisted-material-take-off-from-3d-models-and-point-clouds-enhancing-accuracy-and-efficiency.png
+image: /blog/images/2026-05-01-ai-material-takeoff-mto.jpg
 tags:
   - MTO Automation
   - 3D Models

@@ -6,7 +6,7 @@ date: 2026-08-17
 modified: 2026-08-17
 published: false
 featured: false
-image: /assets/blog/voice-agents-for-on-site-equipment-fault-diagnosis-reducing-downtime-with-conversational-ai.png
+image: /blog/images/ai-voice-agents.png
 tags:
   - Voice Agents
   - AI Automation

@@ -6,7 +6,7 @@ date: 2026-08-19
 modified: 2026-08-19
 published: false
 featured: false
-image: /assets/blog/intelligent-task-routing-automating-complex-engineering-approval-workflows-with-ai.png
+image: /blog/images/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.jpg
 tags:
   - Engineering Workflows
   - AI Automation

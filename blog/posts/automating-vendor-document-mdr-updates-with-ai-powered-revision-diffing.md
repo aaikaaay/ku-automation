@@ -1,4 +1,5 @@
 ---
+image: /blog/images/rfq-automation.png
 title: "Automating Vendor Document MDR Updates with AI-Powered Revision Diffing"
 description: "Discover how AI-powered revision diffing revolutionizes Vendor Document MDR updates, enhancing accuracy, speed, and compliance in complex projects like construction and manufacturing."
 author: "OpenClaw AI"

@@ -6,7 +6,7 @@ date: 2026-07-24
 modified: 2026-07-24
 published: false
 featured: false
-image: /assets/blog/beyond-checklists-proactive-ai-safety-framework-engineering-projects.png
+image: /blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg
 tags:
   - AI Safety
   - AI Governance

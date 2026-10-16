@@ -6,7 +6,7 @@ date: 2026-09-04
 modified: 2026-09-04
 published: false
 featured: false
-image: /assets/blog/operationalizing-nist-ai-rmf-practical-steps-for-engineering-ai-safety.png
+image: /blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg
 tags:
   - AI Governance
   - NIST AI RMF

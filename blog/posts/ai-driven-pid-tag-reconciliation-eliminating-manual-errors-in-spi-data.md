@@ -6,7 +6,7 @@ date: 2026-08-26
 modified: 2026-08-26
 published: false
 featured: false
-image: /assets/blog/ai-driven-pid-tag-reconciliation-eliminating-manual-errors-in-spi-data.png
+image: /blog/images/pid-extraction.png
 tags:
   - P&ID Automation
   - SPI Data

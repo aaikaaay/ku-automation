@@ -6,7 +6,7 @@ date: 2026-07-29
 modified: 2026-07-29
 published: false
 featured: false
-image: /assets/blog/ai-driven-pid-to-instrument-index-reconciliation-bridging-data-gaps-for-epc-projects.png
+image: /blog/images/pid-extraction.png
 tags:
   - P&ID Automation
   - Instrument Index

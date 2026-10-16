@@ -6,7 +6,7 @@ date: 2026-08-05
 modified: 2026-08-05
 published: false
 featured: false
-image: /assets/blog/ai-powered-pid-symbol-recognition-and-data-tagging-accelerating-engineering-workflows.png
+image: /blog/images/pid-extraction.png
 tags:
   - P&ID Automation
   - Symbol Recognition

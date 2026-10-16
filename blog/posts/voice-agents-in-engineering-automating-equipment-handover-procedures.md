@@ -6,7 +6,7 @@ date: 2026-08-04
 modified: 2026-08-04
 published: false
 featured: false
-image: /assets/blog/voice-agents-in-engineering-automating-equipment-handover-procedures.png
+image: /blog/images/ai-voice-agents.png
 tags:
   - Voice Agents
   - AI Automation

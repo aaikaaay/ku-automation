@@ -8,7 +8,7 @@
       "modified": "2026-10-16",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/quantifying-safety-roi-how-ai-risk-mitigation-drives-business-value-in-high-consequence-engineering.png",
+      "image": "/blog/images/roi-calculation.png",
       "tags": [
         "AI Safety",
         "ROI",
@@ -60,7 +60,7 @@
       "modified": "2026-10-12",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/agentic-ai-for-automated-field-inspection-scheduling-coordinating-multi-site-equipment-audits.png",
+      "image": "/blog/images/agentic-ai-engineering.jpg",
       "tags": [
         "Agentic AI",
         "Field Operations",
@@ -86,7 +86,7 @@
       "modified": "2026-10-07",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/rfq-response-parsing-and-equipment-spec-reconciliation-catching-missing-line-items-before-purchase.png",
+      "image": "/blog/images/rfq-automation.png",
       "tags": [
         "RFQ Automation",
         "Equipment Specifications",
@@ -112,7 +112,7 @@
       "modified": "2026-10-05",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/voice-agents-for-instrumentation-loop-checkout-hands-free-field-verification-for-commissioning-teams.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "Instrumentation",
@@ -138,7 +138,7 @@
       "modified": "2026-10-02",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/vibroacoustic-monitoring-for-centrifugal-pump-failures-building-a-predictive-digital-twin-for-epc-rotating-equipment.png",
+      "image": "/blog/images/2026-03-28-digital-twins-predictive-maintenance.png",
       "tags": [
         "Digital Twins",
         "Predictive Maintenance",
@@ -164,7 +164,7 @@
       "modified": "2026-09-30",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/automating-change-order-review-cycles-ai-powered-impact-assessment-and-stakeholder-routing.png",
+      "image": "/blog/images/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.jpg",
       "tags": [
         "Change Management",
         "Engineering Automation",
@@ -216,7 +216,7 @@
       "modified": "2026-09-25",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/predicting-your-ai-roi-a-4-quarter-financial-model-for-engineering-automation.png",
+      "image": "/blog/images/roi-calculation.png",
       "tags": [
         "ROI",
         "AI Implementation",
@@ -268,7 +268,7 @@
       "modified": "2026-09-21",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/agentic-ai-workflows-for-hazop-incident-triage-and-escalation-routing.png",
+      "image": "/blog/images/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.jpg",
       "tags": [
         "Agentic AI",
         "HAZOP",
@@ -288,8 +288,8 @@
     },
     {
       "slug": "why-most-ai-pilots-stall-at-procurement-and-the-fix",
-      "title": "Why Most AI Pilots Stall at Procurement \u2014 And the Fix",
-      "excerpt": "Learn about why most ai pilots stall at procurement \u2014 and the fix. Expert insights for engineering professionals.",
+      "title": "Why Most AI Pilots Stall at Procurement — And the Fix",
+      "excerpt": "Learn about why most ai pilots stall at procurement — and the fix. Expert insights for engineering professionals.",
       "date": "2026-09-18",
       "modified": "2026-09-18",
       "published": true,
@@ -320,7 +320,7 @@
       "modified": "2026-09-16",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/automating-equipment-datasheet-cross-reference-validation-in-procurement.png",
+      "image": "/blog/images/2026-03-20-datasheet-ai-analysis.png",
       "tags": [
         "Datasheet Parsing",
         "Procurement Automation",
@@ -424,7 +424,7 @@
       "modified": "2026-09-04",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/operationalizing-nist-ai-rmf-practical-steps-for-engineering-ai-safety.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "AI Governance",
         "NIST AI RMF",
@@ -450,7 +450,7 @@
       "modified": "2026-09-02",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/ai-assisted-material-take-off-from-3d-models-and-point-clouds-enhancing-accuracy-and-efficiency.png",
+      "image": "/blog/images/2026-05-01-ai-material-takeoff-mto.jpg",
       "tags": [
         "MTO Automation",
         "3D Models",
@@ -476,7 +476,7 @@
       "modified": "2026-08-31",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/ai-chatbots-for-engineering-procurement-automating-rfi-responses-and-vendor-inquiries.png",
+      "image": "/blog/images/rfq-automation.png",
       "tags": [
         "AI Chatbots",
         "Engineering Procurement",
@@ -502,7 +502,7 @@
       "modified": "2026-08-28",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/a-90-day-pilot-template-for-ai-in-epc-engineering.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI Implementation",
         "Pilot Programs",
@@ -528,7 +528,7 @@
       "modified": "2026-08-26",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/ai-driven-pid-tag-reconciliation-eliminating-manual-errors-in-spi-data.png",
+      "image": "/blog/images/pid-extraction.png",
       "tags": [
         "P&ID Automation",
         "SPI Data",
@@ -554,7 +554,7 @@
       "modified": "2026-08-24",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/voice-agents-for-real-time-safety-briefings-enhancing-construction-site-compliance.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "AI Automation",
@@ -580,7 +580,7 @@
       "modified": "2026-08-21",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/beyond-tech-mastering-change-management-for-ai-data-readiness-in-engineering.png",
+      "image": "/blog/images/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.jpg",
       "tags": [
         "AI Implementation",
         "Change Management",
@@ -606,7 +606,7 @@
       "modified": "2026-08-19",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/intelligent-task-routing-automating-complex-engineering-approval-workflows-with-ai.png",
+      "image": "/blog/images/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.jpg",
       "tags": [
         "Engineering Workflows",
         "AI Automation",
@@ -632,7 +632,7 @@
       "modified": "2026-08-17",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/voice-agents-for-on-site-equipment-fault-diagnosis-reducing-downtime-with-conversational-ai.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "AI Automation",
@@ -685,7 +685,7 @@
       "modified": "2026-08-14",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/iso-42001-for-engineering-a-practical-readiness-checklist-for-ai-implementation.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "AI Governance",
         "ISO 42001",
@@ -711,7 +711,7 @@
       "modified": "2026-08-10",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/agentic-ai-for-automated-specification-compliance-in-engineering-design.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "Agentic AI",
         "Engineering Design",
@@ -737,7 +737,7 @@
       "modified": "2026-08-07",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/the-roi-of-digital-twins-in-predictive-maintenance-a-case-study-in-reducing-downtime.png",
+      "image": "/blog/images/2026-03-28-digital-twins-predictive-maintenance.png",
       "tags": [
         "ROI",
         "Digital Twins",
@@ -765,7 +765,7 @@
       "modified": "2026-08-05",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/ai-powered-pid-symbol-recognition-and-data-tagging-accelerating-engineering-workflows.png",
+      "image": "/blog/images/pid-extraction.png",
       "tags": [
         "P&ID Automation",
         "Symbol Recognition",
@@ -791,7 +791,7 @@
       "modified": "2026-08-03",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/voice-agents-in-engineering-automating-equipment-handover-procedures.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "AI Automation",
@@ -817,7 +817,7 @@
       "modified": "2026-07-31",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/the-untapped-roi-of-ai-a-business-case-for-predictive-maintenance-in-manufacturing.png",
+      "image": "/blog/images/2026-03-28-digital-twins-predictive-maintenance.png",
       "tags": [
         "ROI",
         "AI Investment",
@@ -843,7 +843,7 @@
       "modified": "2026-07-29",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/ai-driven-pid-to-instrument-index-reconciliation-bridging-data-gaps-for-epc-projects.png",
+      "image": "/blog/images/pid-extraction.png",
       "tags": [
         "P&ID Automation",
         "Instrument Index",
@@ -898,7 +898,7 @@
       "modified": "2026-07-24",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/beyond-checklists-building-a-proactive-ai-safety-framework-for-engineering-projects.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "AI Safety",
         "AI Governance",
@@ -925,7 +925,7 @@
       "modified": "2026-07-22",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/automating-vendor-document-mdr-updates-with-ai-powered-revision-diffing.png",
+      "image": "/blog/images/rfq-automation.png",
       "tags": [
         "Vendor Document Control",
         "MDR Automation",
@@ -977,7 +977,7 @@
       "modified": "2026-07-17",
       "published": false,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/from-raw-to-ready-a-data-readiness-playbook-for-ai-implementation-in-engineering.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI Implementation",
         "Data Readiness",
@@ -1031,7 +1031,7 @@
       "modified": "2026-07-13",
       "published": false,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/ai-chatbots-for-engineering-instant-knowledge-retrieval-and-project-data-access.png",
+      "image": "/blog/images/knowledge-base.png",
       "tags": [
         "AI Chatbots",
         "Knowledge Management",
@@ -1058,7 +1058,7 @@
       "modified": "2026-07-10",
       "published": false,
       "featured": false,
-      "image": "https://ai-automation-agency-gilt.vercel.app/assets/blog/from-reactive-to-proactive-building-an-ai-safety-culture-in-engineering-firms.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "AI Safety",
         "AI Governance",
@@ -1138,7 +1138,7 @@
       "modified": "2026-07-01",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/ai-driven-rfq-compliance-checks-automating-specification-adherence-in-procurement.png",
+      "image": "/blog/images/rfq-automation.png",
       "tags": [
         "RFQ Automation",
         "Compliance",
@@ -1186,7 +1186,7 @@
     {
       "slug": "try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com",
       "title": "Try Before You Buy: Two Free Code-Grade AI Engineering Reviews on services.ku-automation.com",
-      "excerpt": "Every new account on the KU Automation reviewer marketplace now gets two free Detailed reviews \u2014 a no-risk way to test 21 live AI engineers against your own P&IDs, datasheets, isometrics, and structural drawings before you spend a dollar.",
+      "excerpt": "Every new account on the KU Automation reviewer marketplace now gets two free Detailed reviews — a no-risk way to test 21 live AI engineers against your own P&IDs, datasheets, isometrics, and structural drawings before you spend a dollar.",
       "date": "2026-06-28",
       "modified": "2026-06-28",
       "published": true,
@@ -1218,7 +1218,7 @@
       "modified": "2026-06-26",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/securing-ai-in-engineering-your-nist-ai-rmf-quickstart-for-robust-implementations.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "AI Safety",
         "NIST AI RMF",
@@ -1245,7 +1245,7 @@
       "modified": "2026-06-24",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/accelerating-engineering-change-order-impact-assessments-with-ai-for-enhanced-project-certainty.png",
+      "image": "/blog/images/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.jpg",
       "tags": [
         "Change Order Management",
         "AI Automation",
@@ -1273,7 +1273,7 @@
       "modified": "2026-06-22",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/multi-agent-ai-for-integrated-engineering-design-reviews-a-new-paradigm-for-compliance-and-efficiency.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "Multi-Agent Systems",
         "Engineering Design Review",
@@ -1347,7 +1347,7 @@
     {
       "slug": "process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour",
       "title": "Process Safety AI: Reviewing PSV Sizing, Blowdown Studies, and HAZOP Reports with Code-Grade Rigour",
-      "excerpt": "The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 \u2014 at $19\u2013$79 per review.",
+      "excerpt": "The KU Principal Process AI Engineer reviews PSV sizing calculations, blowdown studies, and HAZOP documentation against API 520, API 521, and IEC 61511 — at $19–$79 per review.",
       "date": "2026-06-17",
       "modified": "2026-06-17",
       "published": true,
@@ -1455,7 +1455,7 @@
       "modified": "2026-06-10",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/automating-pid-revision-management-with-ai-detecting-changes-and-updating-tag-lists.png",
+      "image": "/blog/images/pid-extraction.png",
       "tags": [
         "P&ID Automation",
         "Revision Control",
@@ -1610,7 +1610,7 @@
       "modified": "2026-05-20",
       "published": false,
       "featured": false,
-      "image": "/assets/blog/ai-automation-for-engineering-companies-practical-guide-to-document-processing.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -1763,7 +1763,7 @@
     {
       "slug": "ai-document-review-engineering-comments",
       "title": "From 4 Hours to 4 Minutes: How AI is Revolutionizing Engineering Document Review",
-      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references\u2014automatically.",
+      "excerpt": "Client engineering teams spend 60% of their time reviewing contractor deliverables. Here's how AI document review tools generate professional engineering comments with code references—automatically.",
       "date": "2026-04-15",
       "modified": "2026-04-15",
       "published": true,
@@ -1789,7 +1789,7 @@
     {
       "slug": "stop-vendor-document-chaos-ai-powered-document-control-for-epc-projects",
       "title": "Stop Vendor Document Chaos: AI-Powered Document Control for EPC Projects",
-      "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control \u2014 revision comparison, checklist compliance checks, and automatic MDR updates.",
+      "excerpt": "A practical, engineer-friendly workflow for using AI to stabilize vendor document control — revision comparison, checklist compliance checks, and automatic MDR updates.",
       "date": "2026-03-25",
       "modified": "2026-03-25",
       "published": true,
@@ -1915,7 +1915,7 @@
     {
       "slug": "agentic-ai-for-engineering-autonomous-workflows-that-actually-work",
       "title": "Agentic AI for Engineering: Autonomous Workflows That Actually Work",
-      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows \u2014 from document processing to procurement \u2014 without constant human oversight.",
+      "excerpt": "Agentic AI is reshaping how engineering teams operate. Learn how autonomous AI agents can handle complex multi-step workflows — from document processing to procurement — without constant human oversight.",
       "date": "2026-03-10",
       "modified": "2026-03-10",
       "published": true,

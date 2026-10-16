@@ -1,0 +1,350 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment | KU Automation Blog</title>
+    <meta name="description" content="Learn about vibroacoustic monitoring for centrifugal pump failures: building a predictive digital twin for epc rotating equipment. Expert insights for engineering professionals.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/blog/vibroacoustic-monitoring-for-centrifugal-pump-failures-building-a-predictive-digital-twin-for-epc-rotating-equipment">
+    <meta property="og:title" content="Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment">
+    <meta property="og:description" content="Learn about vibroacoustic monitoring for centrifugal pump failures: building a predictive digital twin for epc rotating equipment. Expert insights for engineering professionals.">
+    <meta property="og:image" content="https://www.ku-automation.com/blog/images/2026-03-28-digital-twins-predictive-maintenance.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment">
+    <meta name="twitter:description" content="Learn about vibroacoustic monitoring for centrifugal pump failures: building a predictive digital twin for epc rotating equipment. Expert insights for engineering professionals.">
+    <meta name="twitter:image" content="https://www.ku-automation.com/blog/images/2026-03-28-digital-twins-predictive-maintenance.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .prose { max-width: 65ch; margin: 0 auto; }
+        .prose h1 { color: #111827; font-size: 2.25rem; margin-top: 0; margin-bottom: 2rem; font-weight: 800; }
+        .prose h2 { color: #1f2937; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .prose h3 { color: #374151; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .prose p { color: #4b5563; margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+        .prose li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose a { color: #4f46e5; text-decoration: underline; }
+        .prose a:hover { color: #4338ca; }
+        .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; margin-left: 0; margin-right: 0; font-style: italic; color: #6b7280; }
+        .prose code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .prose pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .prose pre code { background: transparent; padding: 0; color: inherit; }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment","description":"Learn about vibroacoustic monitoring for centrifugal pump failures: building a predictive digital twin for epc rotating equipment. Expert insights for engineering professionals.","image":"https://www.ku-automation.com/blog/images/2026-03-28-digital-twins-predictive-maintenance.png","datePublished":"2026-10-02","dateModified":"2026-10-02","author":{"@type":"Person","name":"Kingsley Uzowulu","url":"https://linkedin.com/in/kingsleyuzowulu"},"publisher":{"@type":"Organization","name":"KU Automation","logo":{"@type":"ImageObject","url":"https://www.ku-automation.com/assets/favicon-32x32.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.ku-automation.com/blog/vibroacoustic-monitoring-for-centrifugal-pump-failures-building-a-predictive-digital-twin-for-epc-rotating-equipment"}}</script></head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 mb-4"><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Digital Twins</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Predictive Maintenance</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Vibroacoustics</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Rotating Equipment</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Reliability Engineering</span></div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment</h1>
+                <div class="flex items-center justify-between text-gray-500 text-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                            <p>Founder &amp; Lead Engineer, CEng MIMechE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p>2026-10-02</p>
+                        <p>7 min read</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            <img src="https://www.ku-automation.com/blog/images/2026-03-28-digital-twins-predictive-maintenance.png" alt="Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment" class="w-full rounded-xl mb-12">
+            
+            <!-- Content -->
+            <div class="prose"><h1 id="vibroacoustic-monitoring-for-centrifugal-pump-failures-building-a-predictive-digital-twin-for-epc-rotating-equipment">Vibroacoustic Monitoring for Centrifugal Pump Failures: Building a Predictive Digital Twin for EPC Rotating Equipment</h1>
+<p>Centrifugal pumps are the heart of any processing plant—moving liquids through pipes, pressurizing lines, and feeding critical subsystems. When a pump fails unannounced, it costs more than the pump itself: lost production, emergency contractor calls, expedited parts, schedule delay penalties, and potential safety incidents.</p>
+<p>Most EPC projects rely on reactive maintenance. Engineers size the pump, vendors provide a datasheet, and the plant operates until something breaks. By then, the damage is done.</p>
+<p>A predictive digital twin—built on vibroacoustic data—changes that equation. This post walks through how to collect, interpret, and act on vibration and acoustic signals from centrifugal pumps during detailed design and construction phases, then hand over a validated baseline model to operations. The result: a 12–18 month window to catch bearing wear, cavitation, and seal degradation before they become unplanned downtime.</p>
+<h2 id="why-vibroacoustics-matter-for-centrifugal-pumps">Why Vibroacoustics Matter for Centrifugal Pumps</h2>
+<p>Centrifugal pumps generate repeatable vibration signatures. A healthy pump hums at characteristic frequencies tied to shaft speed, blade pass frequency, and bearing natural frequencies. When bearing races degrade, seal leakage begins, or cavitation occurs, those frequencies shift in amplitude and phase.</p>
+<p><strong>Three key failure modes show up in vibration data:</strong></p>
+<ol>
+<li><strong>Bearing degradation</strong> – Spalling and wear increase vibration amplitude at bearing natural frequencies (typically 2–10 kHz) and generate impulsive "hits" that envelope detectors catch.</li>
+<li><strong>Cavitation</strong> – Vapor bubbles collapsing create broadband acoustic noise (typically 500 Hz – 5 kHz) and elevated RMS acceleration. Early-stage cavitation is audible before hydraulic performance drops.</li>
+<li><strong>Seal leakage</strong> – Worn seals increase radial runout and asymmetric loading, raising vibration at 1X shaft frequency and harmonics.</li>
+</ol>
+<p>Traditional condition monitoring waits for these signals to reach ISO 20816 alarm thresholds. By then, the pump is in the danger zone. A digital twin does something smarter: it learns the baseline during commissioning, predicts degradation rates, and alerts 6–12 weeks in advance.</p>
+<h2 id="the-commissioning-data-collection-protocol">The Commissioning Data Collection Protocol</h2>
+<p>During FAT (Factory Acceptance Test) and SAT (Site Acceptance Test), capture three data layers:</p>
+<h3 id="layer-1-broadband-acceleration-120-khz">Layer 1: Broadband Acceleration (1–20 kHz)</h3>
+<ul>
+<li>Mount MEMS accelerometers (±4g, 24-bit) on the pump housing, motor feet, and discharge nozzle.</li>
+<li>Sample at 51.2 kHz (Nyquist ≥ 25.6 kHz; plenty of headroom for impulsive bearing signatures).</li>
+<li>Capture 60-second blocks at steady state: rated speed, rated flow, varying discharge pressures (50%, 75%, 100%).</li>
+<li>Log pump power (kW), fluid temperature, discharge pressure, and suction pressure with each block.</li>
+</ul>
+<p><strong>Output:</strong> RMS velocity, peak acceleration, crest factor, and kurtosis for each point. Plot trending charts showing velocity vs. flow and pressure.</p>
+<h3 id="layer-2-acoustic-emission-50-khz--1-mhz">Layer 2: Acoustic Emission (50 kHz – 1 MHz)</h3>
+<ul>
+<li>Use a high-frequency acoustic sensor on the pump volute (optional but powerful for cavitation and early bearing wear detection).</li>
+<li>Sample at 2 MHz; bandpass filter 50–500 kHz.</li>
+<li>Envelope analysis: detect impulsive hits and their arrival times.</li>
+<li>Capture 10-second blocks under cavitation-prone conditions (high flow, low suction pressure).</li>
+</ul>
+<p><strong>Output:</strong> Acoustic Impact Count (AIC), peak amplitude, and envelope spectrum. Baseline: &lt;100 impacts/10s at rated conditions.</p>
+<h3 id="layer-3-temperature-and-flow-correlation">Layer 3: Temperature and Flow Correlation</h3>
+<ul>
+<li>Infrared thermography on bearing housings and motor frame (baseline thermal image during SAT).</li>
+<li>Fluid temperature at inlet and outlet (delta T indicates power dissipation, correlates with seal leakage).</li>
+<li>Vibration-to-flow efficiency curve (specific energy, kW per m³/h).</li>
+</ul>
+<h2 id="building-the-digital-twin-the-ai-role">Building the Digital Twin: The AI Role</h2>
+<p><strong>Baseline model creation</strong> (Commissioning Engineer + AI):</p>
+<ol>
+<li>Aggregate 50–100 vibration snapshots (RMS, peak, envelopes, spectral peaks) from FAT/SAT.</li>
+<li>Use AI to fit a multi-variable regression: <em>Expected Vibration ~ f(speed, flow, pressure, temperature, time-in-service)</em>.</li>
+<li>Calculate residuals; set alarm thresholds at mean + 2σ (95% confidence).</li>
+<li>Document the baseline in a structured JSON schema (pump model, serial, fluid, speed, baseline RMS, alarm thresholds, commissioning date).</li>
+</ol>
+<p><strong>Operational monitoring</strong> (AI + Maintenance Engineer):</p>
+<ul>
+<li>Monthly pump monitoring reports (acquisition, trending, alert flags).</li>
+<li>AI predicts time-to-failure (TTF) by fitting historical degradation curves (Weibull, exponential) to monthly RMS or envelope peaks.</li>
+<li>When TTF drops below 90 days, flag for bearing inspection. When TTF &lt; 30 days, plan replacement.</li>
+</ul>
+<p><strong>Real-world example:</strong> A 150 kW boiler feed pump in an oil &amp; gas project:</p>
+<ul>
+<li>Commissioning RMS: 2.8 mm/s (healthy baseline).</li>
+<li>Month 6: RMS = 3.1 mm/s (+11%, within alarm band).</li>
+<li>Month 12: RMS = 3.9 mm/s (+39%, approaching limit).</li>
+<li>Month 18: RMS = 5.2 mm/s; envelope analysis shows bearing spalling signature (10 kHz peak growing).</li>
+<li><strong>AI prediction: TTF = 45 days.</strong> Maintenance scheduled pump replacement in 30 days, preventing failure.</li>
+<li><strong>Actual failure avoided.</strong> (Without monitoring, the pump would have failed at month 20, causing 10-day emergency downtime and $85k expedite cost.)</li>
+</ul>
+<h2 id="roi-snapshot-quantifying-the-benefit">ROI Snapshot: Quantifying the Benefit</h2>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Without DT</th>
+<th>With Digital Twin</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unplanned pump failures (10-year window)</td>
+<td>2–3</td>
+<td>0–1</td>
+</tr>
+<tr>
+<td>Average downtime per failure</td>
+<td>7–14 days</td>
+<td>0 (prevented)</td>
+</tr>
+<tr>
+<td>Cost per unplanned outage</td>
+<td>$50–120k</td>
+<td>$0</td>
+</tr>
+<tr>
+<td>Annual monitoring cost</td>
+<td>$0</td>
+<td>$1.5–2.5k</td>
+</tr>
+<tr>
+<td>Maintenance labor (inspections/replacements)</td>
+<td>Reactive, higher</td>
+<td>Planned, lower</td>
+</tr>
+<tr>
+<td><strong>10-year NPV</strong></td>
+<td>Baseline</td>
+<td><strong>+$180–280k</strong></td>
+</tr>
+</tbody></table>
+<p>For a mid-size EPC plant (5–10 critical pumps), the digital twin pays for itself within 18–24 months through prevented downtime alone. Regulatory and spare-parts inventory benefits add further.</p>
+<h2 id="implementation-checklist-for-epc-contractors">Implementation Checklist for EPC Contractors</h2>
+<ol>
+<li><strong>Design phase:</strong> Specify accelerometer pads (M10 threaded bosses) on pump housings in procurement drawings.</li>
+<li><strong>FAT scope:</strong> Include vibration baselines and acoustic capture in vendor test protocols.</li>
+<li><strong>SAT activities:</strong> Collect baseline under full load; document anomalies; establish alarm thresholds.</li>
+<li><strong>Handover documentation:</strong> Deliver baseline spectral plots, alarm thresholds, sensor locations, and commissioning data in a structured digital format.</li>
+<li><strong>Ops transition:</strong> Train the plant team on monthly trending; set up automated alerts at 80% of alarm threshold.</li>
+<li><strong>Predictive model:</strong> Hand over the fitted degradation model and TTF algorithm; re-fit annually with new data.</li>
+</ol>
+<h2 id="common-pitfalls-and-how-ai-helps-avoid-them">Common Pitfalls and How AI Helps Avoid Them</h2>
+<ul>
+<li><strong>Sensor placement too close to motor coupling:</strong> Masks pump-only signatures. <em>AI fix: Automatic feature extraction and signal decomposition to isolate pump-sourced frequencies.</em></li>
+<li><strong>Single baseline snapshot:</strong> Doesn't account for normal seasonal/operational variation. <em>AI fix: Multi-variable regression with confounding factors (flow, pressure, temperature) baked in.</em></li>
+<li><strong>Alarm thresholds set too high:</strong> Misses early degradation. <em>AI fix: Anomaly detection (Isolation Forest, LSTM autoencoders) flags subtle deviations before they hit ISO thresholds.</em></li>
+<li><strong>Silent failures that show up only in envelope analysis:</strong> Traditional RMS trending misses them. <em>AI fix: Automated envelope extraction and kurtosis trending.</em></li>
+</ul>
+<h2 id="getting-started-no-massive-investment-required">Getting Started: No Massive Investment Required</h2>
+<p>You don't need to retrofit every pump on an existing facility. Start with:</p>
+<ol>
+<li><strong>One critical pump</strong> (highest consequence of failure): Deploy three MEMS accelerometers (<del>$300 total), sample at 51.2 kHz with a USB data-logger (</del>$500), and capture monthly 60-second snapshots.</li>
+<li><strong>Cloud-based trend tracking:</strong> Use a simple Python script to fit baseline, compute residuals, and email alerts. Or leverage existing IIoT platforms (Maximo, Zenith, Senseye) that already have pump models.</li>
+<li><strong>Spreadsheet-driven TTF prediction:</strong> Plot RMS vs. month; fit a trend line; extrapolate to your alarm threshold.</li>
+</ol>
+<p>Even this minimal setup catches bearing degradation 8–12 weeks early, saving 90% of emergency repair costs.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>A digital twin for rotating equipment is no longer a "nice-to-have" in EPC. It's a competitive differentiator: lower downtime risk, faster handover, and a documented baseline that ops teams value. For pump-intensive projects, vibroacoustic monitoring is the fastest path to predictive maintenance without replacing hardware or disrupting operations.</p>
+<p>Start with your next FAT. Specify accelerometer pads, collect baseline data, and hand ops a validated model. The ROI conversation then becomes simple: <em>"No surprises. We predicted every problem before it happened."</em></p>
+<hr>
+<p><strong>About the author:</strong> Kingsley Uzowulu is a Chartered Mechanical Engineer with 21+ years in oil &amp; gas, EPC, and manufacturing. He leads AI-driven solutions for engineering automation at KU Automation, including condition monitoring, predictive asset models, and handover documentation systems for critical rotating equipment.</p>
+</div>
+            
+            <!-- Author Bio -->
+            <div class="mt-16 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div class="flex items-start space-x-4">
+                    <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-16 h-16 rounded-full">
+                    <div>
+                        <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                        <p class="text-gray-500 mb-4">Chartered Engineer with 21+ years of experience in oil &amp; gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.</p>
+                        <a href="https://linkedin.com/in/kingsleyuzowulu" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Connect on LinkedIn
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="mt-16 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Automate Your Engineering Workflows?</h3>
+                <p class="mb-6 text-primary-100">Book a free consultation to discuss your specific needs and see AI automation in action.</p>
+                <a href="index.html#contact" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Schedule Demo</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>contact@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+
+<script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script></body></html>

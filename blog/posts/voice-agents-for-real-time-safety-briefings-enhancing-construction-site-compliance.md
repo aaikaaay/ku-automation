@@ -6,7 +6,7 @@ date: 2026-08-24
 modified: 2026-08-24
 published: false
 featured: false
-image: /assets/blog/voice-agents-for-real-time-safety-briefings-enhancing-construction-site-compliance.png
+image: /blog/images/ai-voice-agents.png
 tags:
   - Voice Agents
   - AI Automation

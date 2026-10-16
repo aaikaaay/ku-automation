@@ -6,7 +6,7 @@ date: 2026-08-31
 modified: 2026-08-31
 published: false
 featured: false
-image: /assets/blog/ai-chatbots-for-engineering-procurement-automating-rfi-responses-and-vendor-inquiries.png
+image: /blog/images/rfq-automation.png
 tags:
   - AI Chatbots
   - Engineering Procurement

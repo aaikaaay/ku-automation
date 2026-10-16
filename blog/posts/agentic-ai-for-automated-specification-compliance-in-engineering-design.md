@@ -6,7 +6,7 @@ date: 2026-08-10
 modified: 2026-08-10
 published: false
 featured: false
-image: /assets/blog/agentic-ai-for-automated-specification-compliance-in-engineering-design.png
+image: /blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg
 tags:
   - Agentic AI
   - Engineering Design

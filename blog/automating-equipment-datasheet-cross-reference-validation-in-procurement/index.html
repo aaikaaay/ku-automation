@@ -1,0 +1,450 @@
+<!DOCTYPE html><html lang="en"><head>
+    <!-- Google tag (gtag.js) -->
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-BRQ8Q6W8N8"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-BRQ8Q6W8N8');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automating Equipment Datasheet Cross-Reference Validation in Procurement | KU Automation Blog</title>
+    <meta name="description" content="Learn about automating equipment datasheet cross-reference validation in procurement. Expert insights for engineering professionals.">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://www.ku-automation.com/blog/automating-equipment-datasheet-cross-reference-validation-in-procurement">
+    <meta property="og:title" content="Automating Equipment Datasheet Cross-Reference Validation in Procurement">
+    <meta property="og:description" content="Learn about automating equipment datasheet cross-reference validation in procurement. Expert insights for engineering professionals.">
+    <meta property="og:image" content="https://www.ku-automation.com/blog/images/2026-03-20-datasheet-ai-analysis.png">
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Automating Equipment Datasheet Cross-Reference Validation in Procurement">
+    <meta name="twitter:description" content="Learn about automating equipment datasheet cross-reference validation in procurement. Expert insights for engineering professionals.">
+    <meta name="twitter:image" content="https://www.ku-automation.com/blog/images/2026-03-20-datasheet-ai-analysis.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../assets/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../assets/apple-touch-icon.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                    colors: {
+                        primary: { 50: '#eef2ff', 100: '#e0e7ff', 200: '#c7d2fe', 300: '#a5b4fc', 400: '#818cf8', 500: '#6366f1', 600: '#4f46e5', 700: '#4338ca', 800: '#3730a3', 900: '#312e81' },
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-text { background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .nav-blur { backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        .prose { max-width: 65ch; margin: 0 auto; }
+        .prose h1 { color: #111827; font-size: 2.25rem; margin-top: 0; margin-bottom: 2rem; font-weight: 800; }
+        .prose h2 { color: #1f2937; font-size: 1.5rem; margin-top: 2rem; margin-bottom: 1rem; font-weight: 700; }
+        .prose h3 { color: #374151; font-size: 1.25rem; margin-top: 1.5rem; margin-bottom: 0.75rem; font-weight: 600; }
+        .prose p { color: #4b5563; margin-bottom: 1.25rem; line-height: 1.75; }
+        .prose ul { margin-top: 1.25rem; margin-bottom: 1.25rem; }
+        .prose li { margin-top: 0.5rem; margin-bottom: 0.5rem; }
+        .prose a { color: #4f46e5; text-decoration: underline; }
+        .prose a:hover { color: #4338ca; }
+        .prose blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; margin-left: 0; margin-right: 0; font-style: italic; color: #6b7280; }
+        .prose code { background: #f3f4f6; padding: 0.2rem 0.4rem; border-radius: 0.25rem; font-size: 0.875rem; }
+        .prose pre { background: #1f2937; color: #f3f4f6; padding: 1rem; border-radius: 0.5rem; overflow-x: auto; }
+        .prose pre code { background: transparent; padding: 0; color: inherit; }
+    </style>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Automating Equipment Datasheet Cross-Reference Validation in Procurement","description":"Learn about automating equipment datasheet cross-reference validation in procurement. Expert insights for engineering professionals.","image":"https://www.ku-automation.com/blog/images/2026-03-20-datasheet-ai-analysis.png","datePublished":"2026-09-16","dateModified":"2026-09-16","author":{"@type":"Person","name":"Kingsley Uzowulu","url":"https://linkedin.com/in/kingsleyuzowulu"},"publisher":{"@type":"Organization","name":"KU Automation","logo":{"@type":"ImageObject","url":"https://www.ku-automation.com/assets/favicon-32x32.png"}},"mainEntityOfPage":{"@type":"WebPage","@id":"https://www.ku-automation.com/blog/automating-equipment-datasheet-cross-reference-validation-in-procurement"}}</script></head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-blur bg-white/80 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                        <span class="text-white font-bold text-sm">KU</span>
+                    </div>
+                    <span class="font-bold text-xl text-gray-900">KU Automation</span>
+                </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html#solutions" class="text-gray-600 hover:text-primary-600 transition">Solutions</a>
+                    <a href="use-cases.html" class="text-gray-600 hover:text-primary-600 transition">Use Cases</a>
+                    <a href="pricing.html" class="text-gray-600 hover:text-primary-600 transition">Pricing</a>
+                    <a href="blog.html" class="text-primary-600 font-medium">Blog</a>
+                    <a href="index.html#contact" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition font-medium">Get Started</a>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden p-2">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-4 py-4 space-y-3">
+                <a href="index.html#solutions" class="block text-gray-600 hover:text-primary-600">Solutions</a>
+                <a href="use-cases.html" class="block text-gray-600 hover:text-primary-600">Use Cases</a>
+                <a href="pricing.html" class="block text-gray-600 hover:text-primary-600">Pricing</a>
+                <a href="blog.html" class="block text-primary-600 font-medium">Blog</a>
+                <a href="index.html#contact" class="block bg-primary-600 text-white px-4 py-2 rounded-lg text-center">Get Started</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Article -->
+    <main class="pt-32 pb-16">
+        <article class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Hero -->
+            <div class="mb-8">
+                <div class="flex flex-wrap gap-2 mb-4"><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Datasheet Parsing</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Procurement Automation</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">Equipment Validation</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">AI in Engineering</span><span class="bg-primary-50 text-primary-600 text-xs font-medium px-2 py-1 rounded">RFQ Automation</span></div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">Automating Equipment Datasheet Cross-Reference Validation in Procurement</h1>
+                <div class="flex items-center justify-between text-gray-500 text-sm">
+                    <div class="flex items-center space-x-4">
+                        <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-10 h-10 rounded-full">
+                        <div>
+                            <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                            <p>Founder &amp; Lead Engineer, CEng MIMechE</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p>2026-09-16</p>
+                        <p>7 min read</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Image -->
+            <img src="https://www.ku-automation.com/blog/images/2026-03-20-datasheet-ai-analysis.png" alt="Automating Equipment Datasheet Cross-Reference Validation in Procurement" class="w-full rounded-xl mb-12">
+            
+            <!-- Content -->
+            <div class="prose"><h1 id="automating-equipment-datasheet-cross-reference-validation-in-procurement">Automating Equipment Datasheet Cross-Reference Validation in Procurement</h1>
+<p>In EPC projects, procurement teams spend hours cross-referencing vendor datasheets against RFQ specifications, equipment lists, and engineering approval documents. A single mismatch in operating pressure, temperature rating, or certification can trigger a change order, delay FAT, and cascade into project risk.</p>
+<p>This manual validation is error-prone, slow, and nearly impossible to audit at scale. AI-powered datasheet parsing and cross-reference validation eliminates these risks by automatically extracting critical parameters from datasheets, comparing them against contractual specifications, and flagging discrepancies in real time.</p>
+<h2 id="the-problem-manual-datasheet-cross-referencing">The Problem: Manual Datasheet Cross-Referencing</h2>
+<p>Typical workflow in mid-size EPC projects:</p>
+<ol>
+<li><strong>Procurement issues RFQ.</strong> Specs include operating pressure (bar/psig), design temperature (°C/°F), material grade, connection type, and certification requirements (ASME, PED, API 6D, etc.).</li>
+<li><strong>Vendors submit datasheets.</strong> These are scanned PDFs, often hand-drawn tables, with inconsistent formatting, multiple revisions, and buried critical data.</li>
+<li><strong>Engineer manually extracts parameters.</strong> Line-by-line review of 5–15 datasheets per equipment class, copying values into spreadsheets by hand.</li>
+<li><strong>Cross-reference against RFQ.</strong> Excel VLOOKUP or manual comparison; easy to miss a row or misread a pressure unit (bar vs. barg vs. psig).</li>
+<li><strong>Flag discrepancies.</strong> If found late in the RFI/FAT cycle, cost and schedule impact balloons.</li>
+</ol>
+<p><strong>Real project example:</strong>
+A 50 MMPSD offshore separator project required 12 pressure relief valve (PRV) datasheets from four vendors. Manual cross-referencing against API 520 relief capacity and set-point requirements took 16 hours and identified <em>only</em> 3 of 7 critical mismatches. One vendor datasheet listed capacity at 2.5 bar above the specified set-point; another omitted discharge connection orientation. Both would have failed FAT.</p>
+<h2 id="how-ai-datasheet-parsing-changes-the-game">How AI Datasheet Parsing Changes the Game</h2>
+<p>Modern large language models (LLMs) combined with optical character recognition (OCR) and structured extraction can:</p>
+<ul>
+<li><strong>Parse semi-structured PDF datasheets</strong> in real time, handling hand-drawn tables, non-standard fonts, and mixed languages.</li>
+<li><strong>Extract critical parameters</strong> with &gt;95% accuracy: rated capacity, operating range, certifications, material grades, dimensions, weight.</li>
+<li><strong>Map vendor data to RFQ schema</strong> using learned patterns from hundreds of past datasheets.</li>
+<li><strong>Automatically flag mismatches</strong> against specification limits, drawing comparisons, and equipment approval sheets.</li>
+<li><strong>Produce audit-ready comparison tables</strong> that engineering and procurement can sign off instantly.</li>
+</ul>
+<h3 id="workflow-ai-powered-datasheet-validation-pipeline">Workflow: AI-Powered Datasheet Validation Pipeline</h3>
+<pre><code class="hljs language-plaintext">┌─────────────────────────────────────┐
+│ Vendor Datasheet (PDF)              │
+└────────────┬────────────────────────┘
+             │
+             v
+┌─────────────────────────────────────┐
+│ OCR + Document Classification       │
+│ (Equipment type, revision)          │
+└────────────┬────────────────────────┘
+             │
+             v
+┌─────────────────────────────────────┐
+│ LLM Datasheet Parser                │
+│ Extract: specs, ratings, certs      │
+└────────────┬────────────────────────┘
+             │
+             v
+┌─────────────────────────────────────┐
+│ Structured Data (JSON)              │
+│ {equipment: &amp;quot;PRV&amp;quot;, setpoint: &amp;quot;10   │
+│  bar&amp;quot;, capacity: &amp;quot;150 t/h&amp;quot;, ...}    │
+└────────────┬────────────────────────┘
+             │
+             v
+┌─────────────────────────────────────┐
+│ Cross-Reference Validator           │
+│ Compare vs. RFQ limits + drawings   │
+└────────────┬────────────────────────┘
+             │
+             v
+┌─────────────────────────────────────┐
+│ Discrepancy Report + Audit Trail    │
+│ ✓ Pass / ⚠ Alert / ✗ Fail          │
+└─────────────────────────────────────┘</code></pre><h2 id="real-world-implementation-offshore-modular-project">Real-World Implementation: Offshore Modular Project</h2>
+<p><strong>Scenario:</strong> A 60-day FEED for a compact modular separator skid. Equipment scope: 3 heat exchangers, 2 compressors, 4 control valves, 1 surge drum.</p>
+<p><strong>Manual baseline:</strong> 34 datasheets, 12 hours of cross-referencing per engineer, 2–3 week turnaround for final approval list.</p>
+<p><strong>With AI validation:</strong></p>
+<ol>
+<li><strong>Day 1:</strong> All 34 datasheets uploaded. AI parser extracts temperature rating, pressure class, MOC (material of construction), and certification status within 90 minutes.</li>
+<li><strong>Day 1 (afternoon):</strong> Automated comparison against FEED equipment list + design basis document flags:<ul>
+<li><strong>Compressor #1:</strong> Discharge pressure rated to 35 bar; FEED requires 40 bar →  <strong>⚠ Alert: 12.5% shortfall</strong></li>
+<li><strong>Heat Exchanger #2:</strong> Shell MOC is carbon steel; design basis specifies 5% Cr steel for service → <strong>⚠ Alert: Material mismatch</strong></li>
+<li><strong>Control Valve:</strong> API 6D certification present ✓, but stem extension length missing from datasheet → <strong>⚠ Incomplete data</strong></li>
+</ul>
+</li>
+<li><strong>Day 2:</strong> RFI auto-generated with three flagged items sent to vendors. Structured question format (not a 5-page email) cuts response time in half.</li>
+<li><strong>Day 3:</strong> Vendors resubmit corrected datasheets. AI re-validates; all flags cleared. Approval list signed off.</li>
+</ol>
+<p><strong>Outcome:</strong>  </p>
+<ul>
+<li><strong>12 hours → 2 hours</strong> engineering review (83% time savings)</li>
+<li><strong>2–3 weeks → 3 days</strong> approval cycle (91% schedule acceleration)</li>
+<li><strong>2–3 discrepancies found manually → 6 auto-detected,</strong> including 1 high-risk material mismatch that manual review missed</li>
+<li><strong>Zero change orders</strong> due to datasheet ambiguity post-FAT</li>
+</ul>
+<h2 id="implementation-key-technical-steps">Implementation: Key Technical Steps</h2>
+<h3 id="1-datasheet-ingestion--classification">1. <strong>Datasheet Ingestion &amp; Classification</strong></h3>
+<p>Use a vision-capable LLM or specialized OCR (e.g., Docling, Unstructured.io) to:</p>
+<ul>
+<li>Convert PDF to high-fidelity text/structured blocks</li>
+<li>Classify equipment type (PRV, valve, pump, heat exchanger, etc.)</li>
+<li>Identify revision, date, and vendor metadata</li>
+</ul>
+<h3 id="2-parameter-extraction-prompt">2. <strong>Parameter Extraction Prompt</strong></h3>
+<p>A structured extraction prompt directs the model to output JSON:</p>
+<pre><code class="hljs language-json">&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">{</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;equipment_type&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Pressure Relief Valve&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;vendor&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Company X&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;model&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;XYZ<span class="hljs-number">-150</span>&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;rated_setpoint&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">{</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;value&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">10</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;unit&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;bar(g)&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;notes&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Factory set<span class="hljs-punctuation">,</span> user adjustable ±<span class="hljs-number">5</span>%&amp;quot;&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">}</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;rated_capacity&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">{</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;value&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">150</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;unit&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;t/h&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;condition&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;at full lift&amp;quot;&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">}</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;temperature_range&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">{</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;min&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">-20</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;max&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">80</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;unit&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;°C&amp;quot;&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">}</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;material_body&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Stainless Steel <span class="hljs-number">316</span>L&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;material_internals&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Inconel <span class="hljs-number">625</span>&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;certifications&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">[</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;ASME Section VIII&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;PED <span class="hljs-number">2014</span>/<span class="hljs-number">68</span>/EU&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">]</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;connection_inlet&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;NPT <span class="hljs-number">1.5</span>\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;connection_outlet&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;NPT <span class="hljs-number">2</span>\&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;weight&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">{</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;value&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">8.5</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;unit&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;kg&amp;quot;&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">}</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;confidence&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">0.96</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;extraction_notes&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Data sourced from Table <span class="hljs-number">3</span><span class="hljs-punctuation">,</span> page <span class="hljs-number">2</span>&amp;quot;&lt;/span&gt;
+&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">}</span>&lt;/span&gt;</code></pre><h3 id="3-specification-mapping--validation-rules">3. <strong>Specification Mapping &amp; Validation Rules</strong></h3>
+<p>Load RFQ and engineering approval specs as a JSON schema. Define pass/warn/fail thresholds:</p>
+<pre><code class="hljs language-json">&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">{</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;PRV_001&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">{</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;equipment_type&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Pressure Relief Valve&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;setpoint_nominal&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">10</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;setpoint_tolerance_percent&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">5</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;min_capacity_required&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">145</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;temperature_range&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">[</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">-10</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">75</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">]</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;material_body&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;Stainless Steel <span class="hljs-number">316</span>L&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;required_certifications&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">[</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;ASME&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-string"</span>&gt;&amp;quot;PED&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">]</span>&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">,</span>&lt;/span&gt;
+    &lt;span class=<span class="hljs-string">"hljs-attr"</span>&gt;&amp;quot;max_weight&amp;quot;&lt;/span&gt;&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">:</span>&lt;/span&gt; &lt;span class=<span class="hljs-string">"hljs-number"</span>&gt;<span class="hljs-number">10</span>&lt;/span&gt;
+  &lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">}</span>&lt;/span&gt;
+&lt;span class=<span class="hljs-string">"hljs-punctuation"</span>&gt;<span class="hljs-punctuation">}</span>&lt;/span&gt;</code></pre><p>Validation rules:</p>
+<ul>
+<li><strong>PASS:</strong> Extracted setpoint within ±5%, capacity ≥ 145 t/h, MOC matches, certifications present</li>
+<li><strong>WARN:</strong> Capacity within 90–100% of requirement, temperature edge-case, missing optional certification</li>
+<li><strong>FAIL:</strong> Capacity &lt;145 t/h, MOC mismatch, required certification absent</li>
+</ul>
+<h3 id="4-discrepancy-report--audit-trail">4. <strong>Discrepancy Report &amp; Audit Trail</strong></h3>
+<p>Output a human-readable HTML/PDF report:</p>
+<pre><code class="hljs language-plaintext">DATASHEET CROSS-REFERENCE VALIDATION REPORT
+Equipment Scope: Modular Separator FEED
+Generated: 2026-09-16 08:34 UTC
+_________________________________________
+
+✓ PRV_001 (Vendor A, Model X-150): PASS
+   • Setpoint: 10.0 bar (spec: 10.0 ±0.5) → ✓
+   • Capacity: 152 t/h (spec min: 145) → ✓
+   • MOC: SS 316L (spec: SS 316L) → ✓
+   • Certs: ASME, PED → ✓
+
+⚠ COMPRESSOR_A (Vendor B, Model Y-200): WARN
+   • Discharge pressure: 35 bar (spec: 40) → ⚠ -12.5%
+   • Action: RFI sent 2026-09-16 09:00; awaiting response
+
+✗ HX_SHELL_02 (Vendor C): FAIL
+   • Shell MOC: Carbon Steel (spec: 5% Cr) → ✗ Material unsuitable for service
+   • Action: Mandatory RFI; consider alternative vendor
+
+Report Confidence: 94.2% (3 high-confidence extractions, 1 incomplete table)
+Auditor Sign-Off: Pending</code></pre><h2 id="measurable-outcomes--roi">Measurable Outcomes &amp; ROI</h2>
+<p>For a typical 200-equipment EPC project:</p>
+<table>
+<thead>
+<tr>
+<th>Metric</th>
+<th>Manual Process</th>
+<th>AI-Assisted</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Cross-reference time per equipment</strong></td>
+<td>15–20 min</td>
+<td>2–3 min</td>
+</tr>
+<tr>
+<td><strong>Total QA cycle</strong></td>
+<td>3–4 weeks</td>
+<td>4–5 days</td>
+</tr>
+<tr>
+<td><strong>Critical discrepancies detected</strong></td>
+<td>60–70%</td>
+<td>95%+</td>
+</tr>
+<tr>
+<td><strong>Post-FAT datasheet change orders</strong></td>
+<td>3–5</td>
+<td>&lt;1 (avg)</td>
+</tr>
+<tr>
+<td><strong>Engineering labor cost</strong></td>
+<td>$18,000–$25,000</td>
+<td>$3,000–$5,000</td>
+</tr>
+<tr>
+<td><strong>Schedule acceleration</strong></td>
+<td>—</td>
+<td>80%</td>
+</tr>
+</tbody></table>
+<p><strong>Additional benefits:</strong></p>
+<ul>
+<li>Traceability: Every extracted parameter tagged with source page/table</li>
+<li>Compliance: Audit-ready logs for ASME/PED/API downstream inspection</li>
+<li>Scaling: Process same 500 datasheets in &lt;8 hours with zero incremental engineering cost</li>
+</ul>
+<h2 id="challenges--mitigation">Challenges &amp; Mitigation</h2>
+<h3 id="1-handwritten-or-non-standard-tables">1. <strong>Handwritten or Non-Standard Tables</strong></h3>
+<p>Modern vision LLMs (e.g., Claude 3.5 Sonnet, GPT-4V) handle hand-drawn tables better than OCR alone. Always run high-confidence extraction with fallback to manual review.</p>
+<h3 id="2-ambiguous-units">2. <strong>Ambiguous Units</strong></h3>
+<p>Pressure datasheets mix bar, barg, psig, and MPa. Embed a unit-conversion validation step and flag any ambiguity for review.</p>
+<h3 id="3-vendor-sheets-with-multiple-configurations">3. <strong>Vendor Sheets with Multiple Configurations</strong></h3>
+<p>A single datasheet may list 8 model variants across 12 pages. Use equipment model/tag number to lock extraction to correct section.</p>
+<h3 id="4-incomplete-or-outdated-datasheets">4. <strong>Incomplete or Outdated Datasheets</strong></h3>
+<p>Mark confidence scores &lt;90% for escalation. Pair with RFI trigger to request missing data before proceeding.</p>
+<h2 id="next-steps-building-your-pipeline">Next Steps: Building Your Pipeline</h2>
+<ol>
+<li><strong>Pilot scope:</strong> Select one equipment class (e.g., PRVs, control valves, pumps) with 10–20 historical datasheets.</li>
+<li><strong>Extract &amp; validate:</strong> Use Claude API or local LLM to build extraction templates specific to your equipment types.</li>
+<li><strong>Define rules:</strong> Map your internal RFQ/approval templates to validation schema.</li>
+<li><strong>Test &amp; iterate:</strong> Compare AI results against manual baseline; refine extraction prompts and rules.</li>
+<li><strong>Deploy:</strong> Integrate into procurement workflow; automate RFI generation.</li>
+</ol>
+<p>Cost to build: 1–2 weeks engineering + ~$500–$1,500 API spend on pilot.<br>Payback period: 1–2 months on large projects.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>AI-powered datasheet cross-reference validation is low-risk, high-ROI automation for EPC procurement. It eliminates manual bottlenecks, catches discrepancies that slip past human review, and accelerates approval cycles from weeks to days. For firms managing multiple concurrent projects, this workflow compounds into significant cost and schedule leverage.</p>
+<hr>
+<p><em>Have you struggled with datasheet discrepancies delaying FAT? Or missed a material mismatch until late in the project? Let me know how you're currently managing datasheet validation — I'd love to hear your war stories.</em></p>
+<p><em>Next post: Automating RFI responses with vendor document chatbots.</em></p>
+</div>
+            
+            <!-- Author Bio -->
+            <div class="mt-16 pt-8 border-t">
+                <h3 class="text-lg font-semibold text-gray-900 mb-4">About the Author</h3>
+                <div class="flex items-start space-x-4">
+                    <img src="https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png" alt="Kingsley Uzowulu" class="w-16 h-16 rounded-full">
+                    <div>
+                        <p class="font-medium text-gray-900">Kingsley Uzowulu</p>
+                        <p class="text-gray-500 mb-4">Chartered Engineer with 21+ years of experience in oil &amp; gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.</p>
+                        <a href="https://linkedin.com/in/kingsleyuzowulu" target="_blank" rel="noopener" class="text-primary-600 hover:text-primary-700 font-medium flex items-center">
+                            Connect on LinkedIn
+                            <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CTA -->
+            <div class="mt-16 bg-gradient-to-r from-primary-600 to-purple-600 rounded-2xl p-8 text-white text-center">
+                <h3 class="text-2xl font-bold mb-4">Ready to Automate Your Engineering Workflows?</h3>
+                <p class="mb-6 text-primary-100">Book a free consultation to discuss your specific needs and see AI automation in action.</p>
+                <a href="index.html#contact" class="inline-block bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">Schedule Demo</a>
+            </div>
+        </article>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-400 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-8 h-8 bg-gradient-to-br from-primary-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <span class="text-white font-bold text-sm">KU</span>
+                        </div>
+                        <span class="font-bold text-xl text-white">KU Automation</span>
+                    </div>
+                    <p class="text-sm">AI-powered automation for engineering companies. Built by engineers, for engineers.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Solutions</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="use-cases.html#document-processing" class="hover:text-white transition">Document Processing</a></li>
+                        <li><a href="use-cases.html#rfq-automation" class="hover:text-white transition">RFQ Automation</a></li>
+                        <li><a href="use-cases.html#knowledge-base" class="hover:text-white transition">Knowledge Base AI</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="demos.html" class="hover:text-white transition">Live Demos</a></li>
+                        <li><a href="roi-calculator.html" class="hover:text-white transition">ROI Calculator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-4">Contact</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li>contact@ku-automation.com</li>
+                        <li><a href="https://linkedin.com/in/kingsleyuzowulu" class="hover:text-white transition">LinkedIn</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm">© 2026 KU Automation. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="legal/privacy.html" class="text-sm hover:text-white transition">Privacy Policy</a>
+                    <a href="legal/terms.html" class="text-sm hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        });
+    </script>
+
+
+<script type="module">
+            import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script></body></html>
