@@ -1,6 +1,32 @@
 {
   "posts": [
     {
+      "slug": "quantifying-safety-roi-how-ai-risk-mitigation-drives-business-value-in-high-consequence-engineering",
+      "title": "Quantifying Safety ROI: How AI Risk Mitigation Drives Business Value in High-Consequence Engineering",
+      "excerpt": "Learn about quantifying safety roi: how ai risk mitigation drives business value in high-consequence engineering. Expert insights for engineering professionals.",
+      "date": "2026-10-16",
+      "modified": "2026-10-16",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/quantifying-safety-roi-how-ai-risk-mitigation-drives-business-value-in-high-consequence-engineering.png",
+      "tags": [
+        "AI Safety",
+        "ROI",
+        "Risk Management",
+        "Engineering Economics",
+        "AI Implementation"
+      ],
+      "readTime": 7,
+      "wordCount": 1495,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "automating-pid-redline-consolidation-ai-powered-marked-up-drawing-integration-into-master-baselines",
       "title": "Automating P&ID Redline Consolidation: AI-Powered Marked-Up Drawing Integration into Master Baselines",
       "excerpt": "Learn about automating p&id redline consolidation: ai-powered marked-up drawing integration into master baselines. Expert insights for engineering professionals.",
