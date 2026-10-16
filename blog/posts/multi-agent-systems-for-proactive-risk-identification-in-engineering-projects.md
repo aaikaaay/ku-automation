@@ -6,7 +6,7 @@ date: 2026-06-15
 modified: 2026-06-15
 published: true
 featured: false
-image: /assets/blog/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.png
+image: /blog/images/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.jpg
 tags:
   - Multi-Agent Systems
   - Risk Management

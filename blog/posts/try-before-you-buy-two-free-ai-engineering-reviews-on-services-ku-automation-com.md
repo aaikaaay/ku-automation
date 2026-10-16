@@ -6,7 +6,7 @@ date: 2026-06-28
 modified: 2026-06-28
 published: true
 featured: true
-image: /assets/blog/try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com.png
+image: /blog/images/try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com.jpg
 tags:
   - AI Engineering Reviews
   - Free Trial

@@ -34,7 +34,7 @@
       "modified": "2026-10-14",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/automating-pid-redline-consolidation-ai-powered-marked-up-drawing-integration-into-master-baselines.png",
+      "image": "/blog/images/pid-extraction.png",
       "tags": [
         "P&ID Automation",
         "Drawing Management",
@@ -190,7 +190,7 @@
       "modified": "2026-09-28",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/voice-agents-for-live-fmea-session-facilitation-automating-risk-analysis-workflows.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "FMEA",
@@ -242,7 +242,7 @@
       "modified": "2026-09-23",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-powered-loop-diagrams-automating-instrumentation-and-control-system-extraction.png",
+      "image": "/blog/images/pid-extraction.png",
       "tags": [
         "Loop Diagrams",
         "Instrumentation Automation",
@@ -294,7 +294,7 @@
       "modified": "2026-09-18",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/why-most-ai-pilots-stall-at-procurement-and-the-fix.png",
+      "image": "/blog/images/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.jpg",
       "tags": [
         "AI Implementation",
         "Procurement Blockers",
@@ -346,7 +346,7 @@
       "modified": "2026-09-14",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/voice-agents-for-vendor-rfi-clarification-calls-automating-procurement-conversations.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "RFI Automation",
@@ -372,7 +372,7 @@
       "modified": "2026-09-09",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/automating-pipe-spool-mto-from-isometric-drawings-ai-powered-quantity-and-specification-extraction.png",
+      "image": "/blog/images/2026-05-01-ai-material-takeoff-mto.jpg",
       "tags": [
         "MTO Automation",
         "Isometric Drawings",
@@ -398,7 +398,7 @@
       "modified": "2026-09-08",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/voice-agents-for-automated-pressure-relief-valve-study-walkthroughs.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "Process Safety",
@@ -659,7 +659,7 @@
       "modified": "2026-08-16",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/extracting-equipment-lists-from-issued-for-construction-datasheets-ai-powered-quantity-specification-reconciliation.png",
+      "image": "/blog/images/2026-03-20-datasheet-ai-analysis.png",
       "tags": [
         "Datasheet Automation",
         "Equipment Lists",
@@ -870,7 +870,7 @@
       "modified": "2026-07-27",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/real-time-troubleshooting-with-rag-ai-powered-diagnostics-for-complex-equipment-failures.png",
+      "image": "/blog/images/real-time-troubleshooting-with-rag-ai-powered-diagnostics-for-complex-equipment-failures.jpg",
       "tags": [
         "RAG Systems",
         "AI Diagnostics",
@@ -951,7 +951,7 @@
       "modified": "2026-07-20",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/multi-agent-systems-for-complex-problem-solving-in-engineering-a-knowledge-management-approach.png",
+      "image": "/blog/images/knowledge-base.png",
       "tags": [
         "Multi-Agent Systems",
         "Knowledge Management",
@@ -1004,7 +1004,7 @@
       "modified": "2026-07-15",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-powered-vendor-document-transmittal-generation-for-faster-project-starts.png",
+      "image": "/blog/images/2026-03-25-vendor-document-control-ai.webp",
       "tags": [
         "Vendor Document Control",
         "AI Automation",
@@ -1085,7 +1085,7 @@
       "modified": "2026-07-08",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/digitalizing-pid-validation-computer-vision-for-discrepancy-detection.jpg",
+      "image": "/blog/images/pid-extraction.png",
       "tags": [
         "P&ID Validation",
         "Computer Vision",
@@ -1111,7 +1111,7 @@
       "modified": "2026-07-03",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.png",
+      "image": "/blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg",
       "tags": [
         "AI Safety",
         "AI Audits",
@@ -1165,7 +1165,7 @@
       "modified": "2026-06-29",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/voice-agents-for-streamlining-remote-site-inspections-in-epc-projects.png",
+      "image": "/blog/images/ai-voice-agents.png",
       "tags": [
         "Voice Agents",
         "EPC",
@@ -1191,7 +1191,7 @@
       "modified": "2026-06-28",
       "published": true,
       "featured": true,
-      "image": "/assets/blog/try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com.png",
+      "image": "/blog/images/try-before-you-buy-two-free-ai-engineering-reviews-on-services-ku-automation-com.jpg",
       "tags": [
         "AI Engineering Reviews",
         "Free Trial",
@@ -1300,7 +1300,7 @@
       "modified": "2026-07-07",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms.png",
+      "image": "/blog/images/implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms.jpg",
       "tags": [
         "AI Governance",
         "ISO 42001",
@@ -1326,7 +1326,7 @@
       "modified": "2026-06-17",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png",
+      "image": "/blog/images/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.jpg",
       "tags": [
         "AI Engineering Reviews",
         "Quality Assurance",
@@ -1352,7 +1352,7 @@
       "modified": "2026-06-17",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png",
+      "image": "/blog/images/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.jpg",
       "tags": [
         "Process Safety",
         "PSV Sizing",
@@ -1378,7 +1378,7 @@
       "modified": "2026-06-17",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.png",
+      "image": "/blog/images/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.jpg",
       "tags": [
         "Change Order Management",
         "AI in Engineering",
@@ -1404,7 +1404,7 @@
       "modified": "2026-06-15",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.png",
+      "image": "/blog/images/multi-agent-systems-for-proactive-risk-identification-in-engineering-projects.jpg",
       "tags": [
         "Multi-Agent Systems",
         "Risk Management",
@@ -1429,7 +1429,7 @@
       "modified": "2026-06-12",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/digital-twins-vibration-analytics-predictive-maintenance-for-rotating-equipment.png",
+      "image": "/blog/images/2026-03-28-digital-twins-predictive-maintenance.png",
       "tags": [
         "Digital Twins",
         "Predictive Maintenance",
@@ -1481,7 +1481,7 @@
       "modified": "2026-06-08",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/rag-systems-for-engineering-accelerating-hazop-study-lookups.png",
+      "image": "/blog/images/rag-systems-for-engineering-accelerating-hazop-study-lookups.jpg",
       "tags": [
         "RAG",
         "Knowledge Management",
@@ -1507,7 +1507,7 @@
       "modified": "2026-06-05",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.png",
+      "image": "/blog/images/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.jpg",
       "tags": [
         "AI Implementation",
         "Procurement",
@@ -1532,7 +1532,7 @@
       "modified": "2026-06-03",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-automation-for-engineering-companies-boosting-document-processing-in-oil-gas-and-epc-projects.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI automation",
         "engineering",
@@ -1558,7 +1558,7 @@
       "modified": "2026-06-01",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-automation-in-engineering-real-world-document-processing-for-oil-gas-and-epc-projects.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -1584,7 +1584,7 @@
       "modified": "2026-05-22",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-automation-in-engineering-real-world-document-processing-solutions-for-oil-gas-epc-projects.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -1637,7 +1637,7 @@
       "modified": "2026-05-15",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-automation-in-engineering-transforming-document-processing-for-oil-gas-epc-projects.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -1663,7 +1663,7 @@
       "modified": "2026-05-06",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-powered-document-processing-for-engineering-boost-efficiency-in-oil-gas-and-epc-projects.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI Automation",
         "Engineering",
@@ -1716,7 +1716,7 @@
       "modified": "2026-05-04",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/ai-document-processing.png",
+      "image": "/blog/images/ai-document-processing.png",
       "tags": [
         "AI",
         "Engineering",
@@ -1819,7 +1819,7 @@
       "modified": "2026-03-21",
       "published": true,
       "featured": false,
-      "image": "/images/2026-03-21-engineering-approvals-ai.png",
+      "image": "/blog/images/2026-03-21-engineering-approvals-ai.jpg",
       "tags": [
         "Workflow Automation",
         "Engineering",
@@ -1920,7 +1920,7 @@
       "modified": "2026-03-10",
       "published": true,
       "featured": false,
-      "image": "/assets/blog/agentic-ai-engineering.png",
+      "image": "/blog/images/agentic-ai-engineering.jpg",
       "tags": [
         "Agentic AI",
         "Engineering",

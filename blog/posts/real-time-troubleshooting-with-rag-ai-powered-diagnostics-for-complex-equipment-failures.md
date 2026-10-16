@@ -6,7 +6,7 @@ date: 2026-07-27
 modified: 2026-07-27
 published: true
 featured: false
-image: /assets/blog/real-time-troubleshooting-with-rag-ai-powered-diagnostics-for-complex-equipment-failures.png
+image: /blog/images/real-time-troubleshooting-with-rag-ai-powered-diagnostics-for-complex-equipment-failures.jpg
 tags:
   - RAG Systems
   - AI Diagnostics

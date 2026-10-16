@@ -6,7 +6,7 @@ date: 2026-06-12
 modified: 2026-06-12
 published: true
 featured: false
-image: /assets/blog/digital-twins-vibration-analytics-predictive-maintenance-for-rotating-equipment.png
+image: /blog/images/2026-03-28-digital-twins-predictive-maintenance.png
 tags:
   - Digital Twins
   - Predictive Maintenance

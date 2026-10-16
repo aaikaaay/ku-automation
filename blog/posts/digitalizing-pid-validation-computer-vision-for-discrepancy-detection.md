@@ -6,7 +6,7 @@ date: 2026-07-08
 modified: 2026-07-08
 published: false
 featured: false
-image: /assets/blog/digitalizing-pid-validation-computer-vision-for-discrepancy-detection.png
+image: /blog/images/pid-extraction.png
 tags:
   - P&ID Validation
   - Computer Vision

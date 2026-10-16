@@ -6,7 +6,7 @@ date: 2026-06-17
 modified: 2026-06-17
 published: true
 featured: false
-image: /assets/blog/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.png
+image: /blog/images/process-safety-ai-reviewing-psv-sizing-blowdown-studies-and-hazop-reports-with-code-grade-rigour.jpg
 tags:
   - Process Safety
   - PSV Sizing

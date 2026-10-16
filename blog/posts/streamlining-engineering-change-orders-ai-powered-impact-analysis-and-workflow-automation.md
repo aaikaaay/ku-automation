@@ -6,7 +6,7 @@ date: 2026-06-17
 modified: 2026-06-17
 published: true
 featured: false
-image: /assets/blog/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.png
+image: /blog/images/streamlining-engineering-change-orders-ai-powered-impact-analysis-and-workflow-automation.jpg
 tags:
   - Change Order Management
   - AI in Engineering

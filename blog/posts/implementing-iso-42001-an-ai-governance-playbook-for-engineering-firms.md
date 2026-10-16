@@ -6,7 +6,7 @@ date: 2026-06-19
 modified: 2026-07-07
 published: true
 featured: false
-image: /assets/blog/implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms.png
+image: /blog/images/implementing-iso-42001-an-ai-governance-playbook-for-engineering-firms.jpg
 tags:
   - AI Governance
   - ISO 42001

@@ -6,7 +6,7 @@ date: 2026-06-17
 modified: 2026-06-17
 published: true
 featured: false
-image: /assets/blog/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.png
+image: /blog/images/two-pass-ai-engineering-review-critique-pass-that-transforms-output-into-consultant-deliverable.jpg
 tags:
   - AI Engineering Reviews
   - Quality Assurance

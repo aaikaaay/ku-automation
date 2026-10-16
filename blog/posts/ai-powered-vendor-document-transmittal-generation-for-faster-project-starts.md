@@ -6,7 +6,7 @@ date: 2026-07-15
 modified: 2026-07-15
 published: false
 featured: false
-image: /assets/blog/ai-powered-vendor-document-transmittal-generation-for-faster-project-starts.png
+image: /blog/images/2026-03-25-vendor-document-control-ai.webp
 tags:
   - Vendor Document Control
   - AI Automation

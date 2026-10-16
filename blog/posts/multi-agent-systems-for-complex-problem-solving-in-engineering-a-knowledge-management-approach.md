@@ -6,7 +6,7 @@ date: 2026-07-20
 modified: 2026-07-20
 published: false
 featured: false
-image: /assets/blog/multi-agent-systems-for-complex-problem-solving-in-engineering-a-knowledge-management-approach.png
+image: /blog/images/knowledge-base.png
 tags:
   - Multi-Agent Systems
   - Knowledge Management

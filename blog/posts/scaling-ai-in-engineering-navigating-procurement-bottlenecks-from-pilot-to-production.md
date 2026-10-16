@@ -6,7 +6,7 @@ date: 2026-06-05
 modified: 2026-06-05
 published: true
 featured: false
-image: /assets/blog/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.png
+image: /blog/images/scaling-ai-in-engineering-navigating-procurement-bottlenecks-from-pilot-to-production.jpg
 tags:
   - AI Implementation
   - Procurement

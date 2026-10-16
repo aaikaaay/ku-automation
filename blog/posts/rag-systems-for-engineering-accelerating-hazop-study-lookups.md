@@ -6,7 +6,7 @@ date: 2026-06-08
 modified: 2026-06-08
 published: true
 featured: false
-image: /assets/blog/rag-systems-for-engineering-accelerating-hazop-study-lookups.png
+image: /blog/images/rag-systems-for-engineering-accelerating-hazop-study-lookups.jpg
 tags:
   - RAG
   - Knowledge Management

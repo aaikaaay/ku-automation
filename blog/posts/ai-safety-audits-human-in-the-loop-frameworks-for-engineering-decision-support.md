@@ -6,7 +6,7 @@ date: 2026-07-03
 modified: 2026-07-03
 published: true
 featured: false
-image: /assets/blog/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.png
+image: /blog/images/ai-safety-audits-human-in-the-loop-frameworks-for-engineering-decision-support.jpg
 tags:
   - AI Safety
   - AI Audits

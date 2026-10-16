@@ -6,7 +6,7 @@ date: 2026-06-29
 modified: 2026-06-29
 published: true
 featured: false
-image: /assets/blog/voice-agents-for-streamlining-remote-site-inspections-in-epc-projects.png
+image: /blog/images/ai-voice-agents.png
 tags:
   - Voice Agents
   - EPC
