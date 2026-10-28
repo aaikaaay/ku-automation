@@ -1,6 +1,59 @@
 {
   "posts": [
     {
+      "slug": "ai-driven-material-take-off-for-brownfield-projects-enhancing-accuracy-from-as-built-drawings",
+      "title": "AI-Driven Material Take-Off for Brownfield Projects: Enhancing Accuracy from As-Built Drawings",
+      "excerpt": "Learn about ai-driven material take-off for brownfield projects: enhancing accuracy from as-built drawings. Expert insights for engineering professionals.",
+      "date": "2026-10-28",
+      "modified": "2026-10-28",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/ai-driven-material-take-off-for-brownfield-projects-enhancing-accuracy-from-as-built-drawings.png",
+      "tags": [
+        "MTO Automation",
+        "Brownfield Projects",
+        "As-Built Drawings",
+        "AI in Engineering",
+        "Quantity Surveying"
+      ],
+      "readTime": 9,
+      "wordCount": 1747,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "multi-agent-systems-for-advanced-asset-lifecycle-management-predictive-maintenance-and-optimization-in-real-time",
+      "title": "Multi-Agent Systems for Advanced Asset Lifecycle Management: Predictive Maintenance and Optimization in Real-Time",
+      "excerpt": "Learn about multi-agent systems for advanced asset lifecycle management: predictive maintenance and optimization in real-time. Expert insights for engineering professionals.",
+      "date": "2026-10-26",
+      "modified": "2026-10-26",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/multi-agent-systems-for-advanced-asset-lifecycle-management-predictive-maintenance-and-optimization-in-real-time.png",
+      "tags": [
+        "Multi-Agent Systems",
+        "Asset Management",
+        "Predictive Maintenance",
+        "Optimization",
+        "Real-Time AI",
+        "Engineering Workflows"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "embedding-ai-safety-from-design-to-deployment-a-secure-implementation-playbook-for-engineering-firms",
       "title": "Embedding AI Safety from Design to Deployment: A Secure Implementation Playbook for Engineering Firms",
       "excerpt": "Learn about embedding ai safety from design to deployment: a secure implementation playbook for engineering firms. Expert insights for engineering professionals.",
