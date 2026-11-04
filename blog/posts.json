@@ -1,6 +1,85 @@
 {
   "posts": [
     {
+      "slug": "ai-for-legacy-datasheet-digitalization-bridging-analog-data-to-modern-digital-twins",
+      "title": "AI for Legacy Datasheet Digitalization: Bridging Analog Data to Modern Digital Twins",
+      "excerpt": "Learn about ai for legacy datasheet digitalization: bridging analog data to modern digital twins. Expert insights for engineering professionals.",
+      "date": "2026-11-04",
+      "modified": "2026-11-04",
+      "published": true,
+      "featured": false,
+      "image": "/assets/blog/ai-for-legacy-datasheet-digitalization-bridging-analog-data-to-modern-digital-twins.png",
+      "tags": [
+        "Datasheet Parsing",
+        "Digital Twins",
+        "Legacy Data",
+        "AI Automation",
+        "Digital Transformation",
+        "Engineering Workflows"
+      ],
+      "readTime": 9,
+      "wordCount": 1857,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "rag-systems-for-engineering-standards-compliance-accelerating-project-reviews",
+      "title": "RAG Systems for Engineering Standards Compliance: Accelerating Project Reviews",
+      "excerpt": "Learn about rag systems for engineering standards compliance: accelerating project reviews. Expert insights for engineering professionals.",
+      "date": "2026-11-02",
+      "modified": "2026-11-02",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/rag-systems-for-engineering-standards-compliance-accelerating-project-reviews.png",
+      "tags": [
+        "RAG Systems",
+        "Engineering Standards",
+        "Compliance",
+        "Project Reviews",
+        "AI Automation"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
+      "slug": "digital-twins-for-real-time-process-optimization-a-practical-guide-for-engineering-operations",
+      "title": "Digital Twins for Real-Time Process Optimization: A Practical Guide for Engineering Operations",
+      "excerpt": "Learn about digital twins for real-time process optimization: a practical guide for engineering operations. Expert insights for engineering professionals.",
+      "date": "2026-10-30",
+      "modified": "2026-10-30",
+      "published": false,
+      "featured": false,
+      "image": "/assets/blog/digital-twins-for-real-time-process-optimization-a-practical-guide-for-engineering-operations.png",
+      "tags": [
+        "Digital Twins",
+        "Process Optimization",
+        "Real-Time AI",
+        "Engineering Operations",
+        "Operational Efficiency"
+      ],
+      "readTime": 5,
+      "wordCount": 0,
+      "author": {
+        "name": "Kingsley Uzowulu",
+        "title": "Founder & Lead Engineer, CEng MIMechE",
+        "avatar": "https://ai-automation-agency-gilt.vercel.app/assets/avatar-kingsley.png",
+        "bio": "Chartered Engineer with 21+ years of experience in oil & gas, EPC, and manufacturing. Passionate about applying AI to solve real engineering challenges.",
+        "linkedin": "https://linkedin.com/in/kingsleyuzowulu"
+      }
+    },
+    {
       "slug": "ai-driven-material-take-off-for-brownfield-projects-enhancing-accuracy-from-as-built-drawings",
       "title": "AI-Driven Material Take-Off for Brownfield Projects: Enhancing Accuracy from As-Built Drawings",
       "excerpt": "Learn about ai-driven material take-off for brownfield projects: enhancing accuracy from as-built drawings. Expert insights for engineering professionals.",
